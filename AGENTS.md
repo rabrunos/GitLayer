@@ -34,6 +34,7 @@ npm.cmd run dev
 
 - Reproduza em um repositório descartável. Registre comando, entrada, comportamento esperado e observado antes de corrigir.
 - Prefira testes Node e Playwright diretamente no Electron. Não use controle visual do PC para investigar o aplicativo quando esses instrumentos resolverem a verificação. `test:unit` é o ciclo rápido; a suíte de integração mantém Git real.
+- Ao verificar abertura pelo Dev/Debug/Abrir, confira também a janela nativa visível (`BrowserWindow.isVisible()` ou handle visível do Windows). DOM e screenshot de renderer podem existir em uma janela oculta. Não use `windowsHide: true` ao lançar a GUI Electron; mantenha essa opção apenas nos auxiliares de console.
 - O botão Debug inicia o modo de observação com inspectors. Use **Workshop: conectar ao botão Debug** para anexar main/Core e renderer sem abrir outra instância. Dev preserva buffers como rascunhos antes de reiniciar. Fechar a janela encerra a tarefa.
 - Use F5 e as configurações fornecidas no workspace para o processo principal/Core, CLI ou conexão ao renderer. `npm.cmd run workshop:debug` abre o inspector do processo principal em `127.0.0.1:9229`; acrescente `-- --renderer` para habilitar também a conexão ao renderer em `127.0.0.1:9222`. As fontes de depuração ficam em `dist-debug/`, separadas de `dist/` de produção.
 - Depois de alterar fontes, recompile com `npm.cmd run build:debug` e reinicie a sessão de depuração. Um breakpoint deve vincular à fonte `.ts`/`.tsx`; se ficar pendente, verifique o build e o processo selecionado.

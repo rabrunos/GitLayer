@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-18T16:18:42.971Z",
+  "files": {
+    "scripts/dev.mjs": "44a598235ab75ff7562e5ff8cadbc396bdea9d459aaec88348caf8710b8b74c0",
+    "scripts/development-inputs.mjs": "fd9fff2f6b28fdc5f5211c1a1fcb20db0921df8b5dce7d802577bcb24a9b78cc",
+    "scripts/verify-dev.mjs": "b6585f585f93b0992203ef998f45fd60d6ea34987aa94893db8f9aa7c14e7c23",
+    "scripts/workshop.mjs": "f63415c3a263d9e3427bfab360b138b2e8051e4ed87e42f2a93bede94333f198",
+    "src/desktop/main/index.ts": "71d88cbf9d5877d1d1560c701138b64add65065789e4ae90ce69e5e4323a724e",
+    "tests/unit/development-inputs.test.mjs": "907f375e3b26a0011d21a98baf1304e2999183704747f5dc663f13c2bd20a576"
+  }
+}

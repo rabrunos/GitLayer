@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { buildProject } from './build.mjs';
 import { ensureWorkshopDemo, parseWorkshopArguments } from './workshop.mjs';
 import { ensureNoDevelopmentSession, recordDevelopmentSession, clearDevelopmentSession } from './development-session.mjs';
+import { DEVELOPMENT_INPUTS, developmentInputFingerprint } from './development-inputs.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 process.chdir(root);
@@ -24,10 +25,29 @@ if (debug) for (const port of [9229, 9222]) await new Promise((resolve, reject) 
 const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !['ELECTRON_RUN_AS_NODE', 'NODE_OPTIONS'].includes(key.toUpperCase())));
 let child, stopping = false, rebuilding = false, pending = false, timer;
 const watchers = [];
+let lastInputs = await developmentInputFingerprint(root);
 function launch() {
-  child = spawn(executable, [...(debug ? ['--inspect=127.0.0.1:9229', '--remote-debugging-address=127.0.0.1', '--remote-debugging-port=9222'] : []), path.join(root, 'dist-debug'), '--repo=' + repo, '--lab-profile=' + profile], { cwd: root, env, windowsHide: true, stdio: ['inherit', 'inherit', 'inherit', 'ipc'] });
+  let ready = false;
+  // On Windows SW_HIDE also hides Electron's first GUI window, even though
+  // BrowserWindow defaults to show:true. Only console helpers use windowsHide.
+  child = spawn(executable, [...(debug ? ['--inspect=127.0.0.1:9229', '--remote-debugging-address=127.0.0.1', '--remote-debugging-port=9222'] : []), path.join(root, 'dist-debug'), '--repo=' + repo, '--lab-profile=' + profile], { cwd: root, env, windowsHide: false, stdio: ['inherit', 'inherit', 'inherit', 'ipc'] });
+  child.on('spawn', () => console.log(`Iniciando Electron (PID ${child.pid})...`));
+  child.on('message', message => {
+    if (!message || message.type !== 'lab:development-ready') return;
+    ready = message.visible === true;
+    if (ready) console.log(`Editor aberto: ${repo}`);
+    else {
+      console.error('O Electron carregou a interface, mas a janela não está visível.');
+      void stop(1);
+    }
+  });
   child.on('error', error => { console.error(error); void stop(1); });
-  child.on('close', code => { if (!rebuilding && !stopping) void stop(code ?? 1); });
+  child.on('close', code => {
+    if (!rebuilding && !stopping) {
+      if (!ready) console.error(`O Electron encerrou antes de abrir a janela (código ${code ?? 'desconhecido'}).`);
+      void stop(ready ? code ?? 1 : 1);
+    }
+  });
 }
 async function closeApp() {
   if (!child || child.exitCode !== null) return;
@@ -43,8 +63,11 @@ async function rebuild() {
   rebuilding = true; pending = false;
   const started = Date.now();
   try {
+    const inputs = await developmentInputFingerprint(root);
+    if (inputs === lastInputs && child?.exitCode === null && child?.signalCode === null) return;
     await closeApp();
     await buildProject({ debug: true, incremental: true });
+    lastInputs = inputs;
     if (!stopping) launch();
     console.log(`Atualizado em ${Date.now() - started} ms. Fontes TypeScript em dist-debug; aguardando alterações.`);
   } catch (error) { console.error(error.stack ?? error); }
@@ -58,7 +81,7 @@ async function stop(code = 0) {
   process.exitCode = code;
   await clearDevelopmentSession(root);
 }
-for (const target of ['src', 'vite.config.ts', 'tsconfig.json', 'tsconfig.debug.json']) {
+for (const target of DEVELOPMENT_INPUTS) {
   watchers.push(watch(target, { recursive: target === 'src' }, () => {
     clearTimeout(timer); timer = setTimeout(() => void rebuild(), 300);
   }));

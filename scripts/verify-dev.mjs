@@ -33,6 +33,16 @@ try {
   await connectPage();
   phase('main-breakpoint');
   inspector = await connectInspector(endpoint.webSocketDebuggerUrl);
+  // A rendered page/screenshot can exist in an invisible native window.
+  // Verify the exact Dev launcher, not merely the renderer's DOM.
+  const visibility = await inspector.command('Runtime.evaluate', {
+    expression: `process.getBuiltinModule('module').createRequire(process.cwd() + '/package.json')('electron').BrowserWindow.getAllWindows().map(window => ({ visible: window.isVisible(), minimized: window.isMinimized(), url: window.webContents.getURL() }))`,
+    returnByValue: true,
+  });
+  assert.equal(visibility.exceptionDetails, undefined);
+  evidence.windows = visibility.result.value;
+  assert.ok(evidence.windows.some(window => window.visible && !window.minimized && window.url.startsWith('gitlayers://')), 'Dev must open a visible native Electron window');
+  evidence.checks.push('development-launcher-native-window-visible');
   await inspector.command('Debugger.enable');
   const main = await readFile(path.join(root, 'dist-debug/desktop/main/index.js'), 'utf8');
   const lineNumber = main.split('\n').findIndex(line => line.startsWith('function ready()')) + 1;

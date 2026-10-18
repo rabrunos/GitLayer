@@ -375,8 +375,10 @@ app.whenReady().then(async () => {
       else app.quit();
     }
   });
+  if (!app.isPackaged && process.send) process.send({ type: 'lab:development-ready', visible: win.isVisible() });
   await watchWorkspace();
 }).catch(error => {
+  console.error('Falha ao iniciar o editor:', error);
   dialog.showErrorBox('Git Layers Lab — falha ao iniciar', `${(error as Error).message ?? String(error)}\n\nExtraia a pasta completa do ZIP antes de abrir git-layers-lab.exe. Consulte docs/WINDOWS.md.`);
   app.quit();
 });

@@ -34,12 +34,12 @@ export function parseWorkshopArguments(argv) {
   return result;
 }
 
-export async function runProcess(executable, args, { root = PROJECT_ROOT, env = process.env, capture = false } = {}) {
+export async function runProcess(executable, args, { root = PROJECT_ROOT, env = process.env, capture = false, windowsHide = true } = {}) {
   return await new Promise(resolve => {
     const started = Date.now();
     const output = [], errors = [];
     let failure;
-    const child = spawn(executable, args, { cwd: root, env, shell: false, windowsHide: true, stdio: ['inherit', 'pipe', 'pipe'] });
+    const child = spawn(executable, args, { cwd: root, env, shell: false, windowsHide, stdio: ['inherit', 'pipe', 'pipe'] });
     child.stdout.on('data', chunk => { output.push(chunk); if (!capture) process.stdout.write(chunk); });
     child.stderr.on('data', chunk => { errors.push(chunk); if (!capture) process.stderr.write(chunk); });
     child.on('error', error => { failure = error.message; });
@@ -196,7 +196,7 @@ export async function launchWorkshop(root, options) {
   args.push(path.join(root, 'dist-debug'), '--repo=' + repo, '--lab-profile=' + profile);
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => key.toUpperCase() !== 'ELECTRON_RUN_AS_NODE'));
   env.ELECTRON_ENABLE_LOGGING = '1';
-  const outcome = await runProcess(executable, args, { root, env });
+  const outcome = await runProcess(executable, args, { root, env, windowsHide: false });
   const { stdout, stderr, ...summary } = outcome;
   const reports = path.join(root, '.workshop', 'reports');
   await mkdir(reports, { recursive: true });

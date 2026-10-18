@@ -18,6 +18,8 @@ Cada tarefa usa um processo Node com argumentos separados e diretório na raiz. 
 
 Fechar a janela encerra o modo Dev. A preparação recusa iniciar outra sessão Dev/Debug enquanto a sessão deste workshop estiver viva. Não use builds concorrentes sobre `dist-debug`. Uma falha de compilação mantém o observador ativo; corrija a fonte e salve novamente. A distribuição `dist/` e o portátil só mudam nas tarefas de produção/empacotamento.
 
+Ao iniciar Dev/Debug, o terminal informa `Iniciando Electron (PID ...)` e, após a interface carregar com janela visível, `Editor aberto: C:\Dev\GitLayerTest`. Os lançadores da GUI não usam `windowsHide`, que pode ocultar a primeira janela no Windows. O observador compara nomes e conteúdo das fontes para ignorar notificações repetidas de uma mesma gravação, preservando mudanças reais durante o build.
+
 ## F5 e inspectors
 
 Depois do botão **Debug**, selecione **Workshop: conectar ao botão Debug** e pressione F5. Essa configuração conecta main/Core e renderer à instância existente. Não execute uma configuração de lançamento para se conectar a uma janela já aberta. Depois de um reinício por alteração de fonte, reconecte o debug se a sessão tiver terminado.

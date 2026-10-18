@@ -1,0 +1,28 @@
+{
+  "status": "failed",
+  "platform": "win32",
+  "at": "2026-10-18T16:13:21.493Z",
+  "checks": [
+    "development-launcher-native-window-visible",
+    "actual-main-inspector-breakpoint-pause-resume",
+    "actual-renderer-inspector-pause-resume"
+  ],
+  "phase": "watch-restart-and-draft",
+  "windows": [
+    {
+      "visible": true,
+      "minimized": false,
+      "url": "gitlayers://app/index.html"
+    }
+  ],
+  "mainBreakpoint": {
+    "functionName": "ready",
+    "url": "",
+    "line": 2644
+  },
+  "error": {
+    "message": "locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByTestId('workspace') to be visible\u001b[22m\n",
+    "stack": "locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByTestId('workspace') to be visible\u001b[22m\n\n    at connectPage (C:\\Dev\\GitLayer\\scripts\\verify-dev.mjs:23:39)\n    at async file:///C:/Dev/GitLayer/scripts/verify-dev.mjs:74:26"
+  },
+  "cleanupError": "Development process did not exit"
+}

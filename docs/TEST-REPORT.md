@@ -2,6 +2,23 @@
 
 Executado em **C:\Dev\GitLayer**, com as fontes atuais. O [relatório anterior](history/TEST-REPORT-WORKSHOP-PRE-WINDOWS.md) foi preservado como histórico; ele não comprova esta execução.
 
+## Complemento: janela oculta ao usar Dev
+
+Após o relato do usuário sobre o botão **Dev**, a execução exata `node scripts/dev.mjs` reproduziu Electron e renderer ativos sem janela visível. O inspector confirmou `BrowserWindow.isVisible() === false`, mesmo com a página `gitlayers://app/index.html` carregada. **Os testes anteriores de DOM e screenshot não detectavam esse defeito na abertura pelo lançador.**
+
+O lançador usava `windowsHide: true`, que neste Windows ocultava também a primeira janela gráfica. Dev/Debug e Abrir passaram a lançar a GUI com `windowsHide: false`; auxiliares de console continuam ocultos. Dev/Debug agora informam o PID na partida e `Editor aberto: ...` somente após a confirmação de uma janela visível enviada pelo main. Erros de inicialização também são escritos no terminal.
+
+O primeiro reteste confirmou a visibilidade e os inspectors, mas falhou no cenário de atualização: notificações repetidas de uma gravação causavam dois reinícios, encerrando a página durante a reconexão. O observador agora compara nomes e bytes das entradas de build para descartar notificações sem alteração de conteúdo. A falha e seu log foram preservados.
+
+Resultados após as duas correções:
+
+- **Dev normal e Abrir:** comandos exatos executados com `C:\Dev\GitLayerTest`; ambos criaram janela nativa com título e handle visível no Windows. Fechar cada janela encerrou a respectiva tarefa com código 0.
+- **Debug/atualização:** `verify:dev` aprovado, incluindo a nova asserção `BrowserWindow.isVisible()`, inspectors main/renderer, um reinício, rascunho recuperado sem alterar o disco e encerramento do pai ao fechar a janela.
+- **Regressões rápidas:** 41 casos, 40 aprovados, um skip Bash, zero falhas. O novo teste distingue conteúdo idêntico, alteração do mesmo tamanho, inclusão/exclusão de fonte e mudança de configuração.
+- **Typecheck e mapas:** aprovados. Nenhuma dependência ou configuração de sandbox foi alterada.
+
+As evidências adicionais estão em [startup](evidence/windows-2026-10-18/startup/README.md). A suíte completa, o pacote e o E2E amplo não foram repetidos neste complemento; seus resultados anteriores abaixo mantêm o escopo original.
+
 ## Ambiente confirmado
 
 | Componente | Versão e caminho efetivos |
