@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "appVersion": "0.1.2",
+  "maps": 41,
+  "rendererMaps": 20,
+  "embeddedSources": 1565,
+  "projectSources": 20,
+  "monacoWorkersWithMaps": 5,
+  "nativeGuiExecuted": false
+}

@@ -1,0 +1,16 @@
+{
+  "name": "workshop:ui",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "scripts/workshop-ui.mjs",
+    "--no-build"
+  ],
+  "cwd": "C:\\Dev\\GitLayer\\",
+  "startedAt": "2026-10-18T14:39:03.297Z",
+  "finishedAt": "2026-10-18T14:40:35.041Z",
+  "platform": "win32",
+  "arch": "x64",
+  "exitCode": 0,
+  "signal": null,
+  "durationMs": 91742
+}

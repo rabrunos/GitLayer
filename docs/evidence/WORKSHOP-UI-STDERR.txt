@@ -1,0 +1,4 @@
+Error: Teste da interface falhou: código 1. Consulte ui-evidence.json e os logs.
+    at runWorkshopUi (file:///tmp/git-layers-workshop-a97qrfke/git-layers-lab-workshop/scripts/workshop-ui.mjs:53:73)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///tmp/git-layers-workshop-a97qrfke/git-layers-lab-workshop/scripts/workshop-ui.mjs:71:29

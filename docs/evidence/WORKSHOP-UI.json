@@ -1,0 +1,28 @@
+{
+  "status": "failed",
+  "startedAt": "2026-10-18T12:21:12.242Z",
+  "platform": "linux",
+  "arch": "x64",
+  "phase": "desktop-e2e",
+  "sandboxDisabled": false,
+  "stages": [
+    {
+      "name": "desktop-e2e",
+      "exitCode": 1,
+      "signal": null,
+      "durationMs": 2768
+    }
+  ],
+  "output": {
+    "stdout": ".workshop/reports/ui.stdout.log",
+    "stderr": ".workshop/reports/ui.stderr.log",
+    "evidence": ".workshop/reports/ui-evidence.json"
+  },
+  "error": {
+    "name": "Error",
+    "message": "Teste da interface falhou: código 1. Consulte ui-evidence.json e os logs.",
+    "stack": "Error: Teste da interface falhou: código 1. Consulte ui-evidence.json e os logs.\n    at runWorkshopUi (file:///tmp/git-layers-workshop-a97qrfke/git-layers-lab-workshop/scripts/workshop-ui.mjs:53:73)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///tmp/git-layers-workshop-a97qrfke/git-layers-lab-workshop/scripts/workshop-ui.mjs:71:29"
+  },
+  "exitCode": 1,
+  "finishedAt": "2026-10-18T12:21:15.016Z"
+}

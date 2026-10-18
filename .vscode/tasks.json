@@ -1,0 +1,239 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "cwd": "${workspaceFolder}"
+  },
+  "presentation": {
+    "reveal": "always",
+    "panel": "dedicated",
+    "clear": false,
+    "showReuseMessage": true
+  },
+  "tasks": [
+    {
+      "label": "Workshop: Dev",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/dev.mjs"
+      ],
+      "dependsOn": "Workshop: Preparar",
+      "problemMatcher": [],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Preparar",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "workshop:setup"
+      ],
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Abrir",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/workshop.mjs",
+        "start",
+        "--no-build"
+      ],
+      "dependsOn": "Workshop: Preparar",
+      "problemMatcher": [],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Debug",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/dev.mjs",
+        "--debug"
+      ],
+      "dependsOn": "Workshop: Preparar",
+      "problemMatcher": [],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Diagnosticar",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "workshop:doctor"
+      ],
+      "problemMatcher": [],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Smoke",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "workshop:smoke",
+        "--no-build"
+      ],
+      "dependsOn": "Workshop: Preparar",
+      "problemMatcher": [],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Testes",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "test"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Interface",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "workshop:ui",
+        "--no-build"
+      ],
+      "dependsOn": "Workshop: Preparar",
+      "options": {
+        "env": {
+          "LAB_E2E_SCREENSHOTS": "1"
+        }
+      },
+      "problemMatcher": [],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Typecheck",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "typecheck"
+      ],
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Build debug",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "build:debug"
+      ],
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Build produção",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "build"
+      ],
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Pacote Windows",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "package:windows"
+      ],
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Verificar mapas",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "verify:maps"
+      ],
+      "problemMatcher": [],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Verificar tudo",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "workshop:verify"
+      ],
+      "problemMatcher": [],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Workshop: Testes rápidos",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "scripts/run-check.mjs",
+        "test:unit"
+      ],
+      "problemMatcher": [],
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    }
+  ]
+}

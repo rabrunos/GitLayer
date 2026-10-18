@@ -1,0 +1,15 @@
+{
+  "name": "package:windows",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "scripts/build-windows.mjs"
+  ],
+  "cwd": "C:\\Dev\\GitLayer\\",
+  "startedAt": "2026-10-18T14:26:09.560Z",
+  "finishedAt": "2026-10-18T14:26:25.674Z",
+  "platform": "win32",
+  "arch": "x64",
+  "exitCode": 0,
+  "signal": null,
+  "durationMs": 16110
+}

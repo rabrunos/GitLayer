@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dist-debug/
+artifacts/
+.workshop/
+.local-bin/
+__pycache__/
+*.tsbuildinfo
+*.zip
+*.log
+

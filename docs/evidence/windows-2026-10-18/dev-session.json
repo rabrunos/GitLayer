@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "platform": "win32",
+  "at": "2026-10-18T14:34:57.485Z",
+  "checks": [
+    "actual-main-inspector-breakpoint-pause-resume",
+    "actual-renderer-inspector-pause-resume",
+    "source-watch-build-restart-draft-restored-disk-unchanged",
+    "window-close-stops-development-parent"
+  ],
+  "phase": "complete",
+  "mainBreakpoint": {
+    "functionName": "ready",
+    "url": "",
+    "line": 2644
+  }
+}

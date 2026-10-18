@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "platform": "linux",
+  "node": "24.19.0",
+  "nativeWindowsValidated": false,
+  "guiExecuted": false,
+  "debugger": "Node inspector over 127.0.0.1 WebSocket",
+  "realCliStatus": true,
+  "breakpointHit": true,
+  "functionName": "GitLayers.open",
+  "localVariableInspected": true,
+  "sourceMapResolvesTo": "../../src/core/index.ts",
+  "originalLine": 29,
+  "exitCode": 0,
+  "note": "Checks actual pause/inspect/resume in the host Node debugger. Does not prove native VS Code F5 or Windows execution."
+}

@@ -1,0 +1,67 @@
+{
+  "name": "git-layers-lab",
+  "version": "0.1.2",
+  "description": "Laboratório desktop de branches Git locais e Layers independentes",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "dist/desktop/main/index.js",
+  "bin": {
+    "git-layer": "dist/cli/index.js"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test --test-concurrency=2 --test-timeout=180000 tests/unit/*.test.ts tests/unit/*.test.mjs tests/integration/*.test.ts tests/integration/*.test.mjs",
+    "test:e2e": "node --test tests/e2e/*.test.mjs",
+    "desktop": "electron .",
+    "cli": "node dist/cli/index.js",
+    "demo": "node --import tsx scripts/demo.ts",
+    "package": "node scripts/package.mjs",
+    "package:windows": "node scripts/build-windows.mjs",
+    "verify:extracted": "node scripts/verify-extracted.mjs",
+    "cli:enable": "node scripts/local-cli.mjs",
+    "postinstall": "node node_modules/electron/install.js",
+    "build:debug": "node scripts/build-debug.mjs",
+    "workshop:doctor": "node scripts/workshop.mjs doctor",
+    "workshop:prepare": "node scripts/workshop.mjs prepare",
+    "workshop:start": "node scripts/workshop.mjs start",
+    "workshop:debug": "node scripts/workshop.mjs debug",
+    "workshop:smoke": "node scripts/workshop.mjs smoke",
+    "workshop:verify": "node scripts/workshop.mjs verify",
+    "workshop:ui": "node scripts/workshop-ui.mjs",
+    "verify:package": "node scripts/verify-workshop-package.mjs",
+    "dev": "node scripts/dev.mjs",
+    "workshop:setup": "node scripts/setup.mjs",
+    "test:unit": "node --import tsx --test tests/unit/*.test.ts tests/unit/*.test.mjs",
+    "test:integration": "node --import tsx --test --test-concurrency=2 --test-timeout=180000 tests/integration/*.test.ts tests/integration/*.test.mjs",
+    "test:desktop": "node scripts/workshop-ui.mjs",
+    "verify:dev": "node scripts/verify-dev.mjs",
+    "verify:maps": "node scripts/verify-debug-build.mjs"
+  },
+  "dependencies": {
+    "@xterm/addon-fit": "0.11.0",
+    "@xterm/xterm": "6.0.0",
+    "monaco-editor": "0.57.0",
+    "node-pty": "1.1.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@electron-internal/extract-zip": "1.0.5",
+    "@electron/packager": "20.3.0",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "electron": "44.9.0",
+    "esbuild": "0.28.2",
+    "playwright": "1.64.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vite": "8.3.4"
+  }
+}

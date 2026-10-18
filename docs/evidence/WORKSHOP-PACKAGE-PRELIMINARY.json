@@ -1,0 +1,229 @@
+{
+  "version": "0.1.2",
+  "platform": "win32",
+  "arch": "x64",
+  "validation": "Static file/PE/ASAR inspection and byte comparison. Native Windows execution was not performed.",
+  "asar": {
+    "bytes": 15059291,
+    "sha256": "9cde4e433b339b541459ef6c40f20da66ab76ae4c5c250b9d56782a1c84689df",
+    "entries": 121,
+    "main": "dist/desktop/main/index.js",
+    "executableIntegrity": {
+      "file": "resources\\app.asar",
+      "alg": "SHA256",
+      "value": "e0dd8301298bb084527cfc0a641fca3579b99544483f1660f0d6b39656073186"
+    }
+  },
+  "production": {
+    "filesComparedWithSourceDist": 76,
+    "portableCliFilesCompared": 18,
+    "monacoWorkers": [
+      "renderer/assets/css.worker-Cd_B-Eon.js",
+      "renderer/assets/editor.worker-C8DPLl6p.js",
+      "renderer/assets/html.worker-CXKNUpD_.js",
+      "renderer/assets/json.worker-DPB3pmmH.js",
+      "renderer/assets/ts.worker-D8WFnhyJ.js"
+    ]
+  },
+  "debug": {
+    "files": 98,
+    "maps": 40,
+    "embeddedSources": 1563
+  },
+  "terminal": {
+    "package": "node-pty",
+    "version": "1.1.0",
+    "nativeApi": "Node-API",
+    "unpacked": true,
+    "files": [
+      {
+        "path": "resources/app.asar.unpacked/node_modules/node-pty/prebuilds/win32-x64/conpty.node",
+        "bytes": 312320,
+        "sha256": "ee8f4e6f4dad71939eecfda11de249400e34bfefe4c8b48af13f3b5476f4035b",
+        "machine": "AMD64",
+        "format": "PE32+"
+      },
+      {
+        "path": "resources/app.asar.unpacked/node_modules/node-pty/prebuilds/win32-x64/pty.node",
+        "bytes": 303104,
+        "sha256": "ae323edd0835ee7b9e18cc96a7b2bb4b8173ff768317d178af2788406feb71ff",
+        "machine": "AMD64",
+        "format": "PE32+"
+      },
+      {
+        "path": "resources/app.asar.unpacked/node_modules/node-pty/prebuilds/win32-x64/conpty_console_list.node",
+        "bytes": 134656,
+        "sha256": "879dd94cfc79f1e263a00077597ae9448a5394b7d193381aaa50d992a1f91090",
+        "machine": "AMD64",
+        "format": "PE32+"
+      },
+      {
+        "path": "resources/app.asar.unpacked/node_modules/node-pty/prebuilds/win32-x64/winpty.dll",
+        "bytes": 256000,
+        "sha256": "e1cb26d868c954ba26817bedf3e4a5744e4ca2030adf51a7156e5ff2fadb881b",
+        "machine": "AMD64",
+        "format": "PE32+"
+      },
+      {
+        "path": "resources/app.asar.unpacked/node_modules/node-pty/prebuilds/win32-x64/winpty-agent.exe",
+        "bytes": 307712,
+        "sha256": "0c4834a0ab2a4f8c855a2f1db9b21fa6e5fc324ae8e3c82addd53d503d999825",
+        "machine": "AMD64",
+        "format": "PE32+"
+      },
+      {
+        "path": "resources/app.asar.unpacked/node_modules/node-pty/prebuilds/win32-x64/conpty/conpty.dll",
+        "bytes": 109600,
+        "sha256": "7c7430632052ff703540b68371ec43821820aa1335d8e11dfbcd9ff00e9daaed",
+        "machine": "AMD64",
+        "format": "PE32+"
+      },
+      {
+        "path": "resources/app.asar.unpacked/node_modules/node-pty/prebuilds/win32-x64/conpty/OpenConsole.exe",
+        "bytes": 1148448,
+        "sha256": "d1fe7faa62f9e955e2ac2371f95d7e5513df4d496255097158f979c94782c5fc",
+        "machine": "AMD64",
+        "format": "PE32+"
+      }
+    ],
+    "upstreamFilesCompared": [
+      {
+        "file": "LICENSE",
+        "bytes": 3326,
+        "sha256": "a3d60eaf32d2fb09c9d82ef39f14bd6e2c0f3ca7de30daa827486c0d6f8b6e9f"
+      },
+      {
+        "file": "README.md",
+        "bytes": 8182,
+        "sha256": "8ac7af3316becca42a14da45df467fef29d05f21914ba0e5eb09438dcdb62167"
+      },
+      {
+        "file": "deps/winpty/LICENSE",
+        "bytes": 1085,
+        "sha256": "c39e428064b4f3e4fe81a975bf0fd3b845922b431bc4d9a7ffc8bfb091981836"
+      },
+      {
+        "file": "lib/conpty_console_list_agent.js",
+        "bytes": 721,
+        "sha256": "0d010879bb6680a0253d44363183d53e631f42972594eb6dcb1fb842c8c85e52"
+      },
+      {
+        "file": "lib/eventEmitter2.js",
+        "bytes": 1600,
+        "sha256": "f1c14613aa90c10def4ca7238329270871997eb26f919f7074dc25533e3e75dd"
+      },
+      {
+        "file": "lib/index.js",
+        "bytes": 2008,
+        "sha256": "c1b82c92c4c63aaa8e8441fc5a291c4727cd3f3550666d2fec7250e0f6d4b173"
+      },
+      {
+        "file": "lib/interfaces.js",
+        "bytes": 233,
+        "sha256": "56e4173f09aad26173f9d4c79800fda0b808c34424f987ef8d671cc931119a0a"
+      },
+      {
+        "file": "lib/shared/conout.js",
+        "bytes": 348,
+        "sha256": "6ae3b0532616da11aa2a11b4506bb89b0d40be005a9ea9fb369fb59eefdbda47"
+      },
+      {
+        "file": "lib/terminal.js",
+        "bytes": 7454,
+        "sha256": "5ed5cd66a766afba4a04093284e999f8516d41936501839055800b10eca5d304"
+      },
+      {
+        "file": "lib/types.js",
+        "bytes": 228,
+        "sha256": "408bf8287717b6322cc380ea66caf1b5e366dcf697707ae2f3cc454e08f3b151"
+      },
+      {
+        "file": "lib/unixTerminal.js",
+        "bytes": 13372,
+        "sha256": "a62e3a60c3bc1b0e7261f58284856df748dcee6761a2bc7a5a5ba98b22660473"
+      },
+      {
+        "file": "lib/utils.js",
+        "bytes": 1548,
+        "sha256": "f75ad341c13fbf1a9a6605d7ee42dff5bbc5d43b7b381e413fb97eb1b8300beb"
+      },
+      {
+        "file": "lib/windowsConoutConnection.js",
+        "bytes": 6119,
+        "sha256": "1440f70908fb1f55911ac8e936a1230f68a9c00c03096fcef6788eac6aad9d62"
+      },
+      {
+        "file": "lib/windowsPtyAgent.js",
+        "bytes": 12388,
+        "sha256": "8636d16b38266112204061a22b135734177c242837982fd3a4055be726efa64a"
+      },
+      {
+        "file": "lib/windowsTerminal.js",
+        "bytes": 7852,
+        "sha256": "c3a65716f53fed0135a8a633373d5f9c2ab092544d651f27ef0a67096dd3bcd9"
+      },
+      {
+        "file": "lib/worker/conoutSocketWorker.js",
+        "bytes": 848,
+        "sha256": "3e4bac095ac3870c3248a7302f5d10217de625f30c32b7000fe48a34788e47ac"
+      },
+      {
+        "file": "package.json",
+        "bytes": 1615,
+        "sha256": "f8b6a14f7022c14f1cd5d109486f5dacd32bffb63a9a63e38eced37dacb47439"
+      },
+      {
+        "file": "prebuilds/win32-x64/conpty.node",
+        "bytes": 312320,
+        "sha256": "ee8f4e6f4dad71939eecfda11de249400e34bfefe4c8b48af13f3b5476f4035b"
+      },
+      {
+        "file": "prebuilds/win32-x64/conpty/OpenConsole.exe",
+        "bytes": 1148448,
+        "sha256": "d1fe7faa62f9e955e2ac2371f95d7e5513df4d496255097158f979c94782c5fc"
+      },
+      {
+        "file": "prebuilds/win32-x64/conpty/conpty.dll",
+        "bytes": 109600,
+        "sha256": "7c7430632052ff703540b68371ec43821820aa1335d8e11dfbcd9ff00e9daaed"
+      },
+      {
+        "file": "prebuilds/win32-x64/conpty_console_list.node",
+        "bytes": 134656,
+        "sha256": "879dd94cfc79f1e263a00077597ae9448a5394b7d193381aaa50d992a1f91090"
+      },
+      {
+        "file": "prebuilds/win32-x64/pty.node",
+        "bytes": 303104,
+        "sha256": "ae323edd0835ee7b9e18cc96a7b2bb4b8173ff768317d178af2788406feb71ff"
+      },
+      {
+        "file": "prebuilds/win32-x64/winpty-agent.exe",
+        "bytes": 307712,
+        "sha256": "0c4834a0ab2a4f8c855a2f1db9b21fa6e5fc324ae8e3c82addd53d503d999825"
+      },
+      {
+        "file": "prebuilds/win32-x64/winpty.dll",
+        "bytes": 256000,
+        "sha256": "e1cb26d868c954ba26817bedf3e4a5744e4ca2030adf51a7156e5ff2fadb881b"
+      }
+    ]
+  },
+  "windowsExecutable": {
+    "bytes": 247185408,
+    "sha256": "53c5a92626b2907c5460310102d933bd405e3a4f69c421b4d7e2ba94eb14f89e",
+    "machine": "AMD64",
+    "format": "PE32+",
+    "versionMetadata": {
+      "CompanyName": "Git Layers Lab",
+      "FileDescription": "Git Layers Lab — editor e Git Layers local",
+      "FileVersion": "0.1.2",
+      "InternalName": "git-layers-lab",
+      "LegalCopyright": "Copyright (C) 2015 GitHub, Inc. All rights reserved.",
+      "OriginalFilename": "git-layers-lab.exe",
+      "ProductName": "Git Layers Lab",
+      "ProductVersion": "0.1.2",
+      "SquirrelAwareVersion": "1"
+    }
+  }
+}

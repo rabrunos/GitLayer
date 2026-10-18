@@ -1,0 +1,23 @@
+{
+  "name": "test",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-concurrency=2",
+    "--test-timeout=180000",
+    "tests/unit/*.test.ts",
+    "tests/unit/*.test.mjs",
+    "tests/integration/*.test.ts",
+    "tests/integration/*.test.mjs"
+  ],
+  "cwd": "C:\\Dev\\GitLayer\\",
+  "startedAt": "2026-10-18T14:40:45.542Z",
+  "finishedAt": "2026-10-18T15:07:32.714Z",
+  "platform": "win32",
+  "arch": "x64",
+  "exitCode": 1,
+  "signal": null,
+  "durationMs": 1607168
+}

@@ -1,0 +1,167 @@
+HOST-ONLY SOURCE EXTRACTION VERIFICATION — NOT WINDOWS EXECUTION
+Command: npm run verify:extracted -- /tmp/git-layers-windows-source-precheck-yt8a0oso/git-layers-lab-source-precheck.zip
+Started: 2026-10-18T07:09:47.691434+00:00
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> git-layers-lab@0.1.1 verify:extracted
+> node scripts/verify-extracted.mjs /tmp/git-layers-windows-source-precheck-yt8a0oso/git-layers-lab-source-precheck.zip
+
+
+Verificação: npm ci a partir do lockfile entregue
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> git-layers-lab@0.1.1 postinstall
+> node node_modules/electron/install.js
+
+
+added 85 packages in 5s
+
+Verificação: build da cópia extraída
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> git-layers-lab@0.1.1 build
+> node scripts/build.mjs
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 1120 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/renderer/index.html                                  0.67 kB │ gzip:   0.39 kB
+dist/renderer/assets/codicon-DF1abBS2.ttf               153.22 kB
+dist/renderer/assets/editor.worker-C8DPLl6p.js          303.84 kB
+dist/renderer/assets/json.worker-DPB3pmmH.js            433.21 kB
+dist/renderer/assets/html.worker-CXKNUpD_.js            743.46 kB
+dist/renderer/assets/css.worker-Cd_B-Eon.js           1,078.36 kB
+dist/renderer/assets/ts.worker-D8WFnhyJ.js            6,928.10 kB
+dist/renderer/assets/workers-B4Fy8dVy.css                62.52 kB │ gzip:  10.09 kB
+dist/renderer/assets/index-C5t_Lf1a.css                 141.37 kB │ gzip:  21.63 kB
+dist/renderer/assets/javascript-BtjYBCIh.js               0.68 kB │ gzip:   0.40 kB
+dist/renderer/assets/shell-CC2rA5mh.js                    2.81 kB │ gzip:   1.16 kB
+dist/renderer/assets/cssMode-BtEsQDDx.js                  2.96 kB │ gzip:   1.13 kB
+dist/renderer/assets/htmlMode-D9KJux2d.js                 3.42 kB │ gzip:   1.24 kB
+dist/renderer/assets/python-BopRYeoY.js                   3.45 kB │ gzip:   1.42 kB
+dist/renderer/assets/yaml-BSXiIK41.js                     3.53 kB │ gzip:   1.28 kB
+dist/renderer/assets/markdown-Cimd5fb3.js                 3.63 kB │ gzip:   1.34 kB
+dist/renderer/assets/css-DIMkf-bt.js                      4.36 kB │ gzip:   1.33 kB
+dist/renderer/assets/html-85zEk6wK.js                     4.51 kB │ gzip:   1.15 kB
+dist/renderer/assets/typescript-f1T-Rhny.js               4.67 kB │ gzip:   1.93 kB
+dist/renderer/assets/jsonMode-V6qX86TE.js                12.19 kB │ gzip:   4.44 kB
+dist/renderer/assets/tsMode-CMo3PUxh.js                  21.83 kB │ gzip:   6.12 kB
+dist/renderer/assets/lspLanguageFeatures-C8En_19q.js     28.21 kB │ gzip:   7.16 kB
+dist/renderer/assets/workers-D3A3iEIC.js                987.84 kB │ gzip: 252.82 kB
+dist/renderer/assets/index-e29OGLqt.js                3,216.94 kB │ gzip: 839.18 kB
+
+✓ built in 3.52s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[33m[PLUGIN_TIMINGS] [0mJavaScript callbacks ran for 2.7s of this 3.5s build (78%).
+3 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - plugin vite:worker load (5 calls)
+  - plugin vite:worker-import-meta-url transform (4 calls)
+  - plugin vite:css transform (101 calls)
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+
+Build concluído: Core/CLI, Electron e renderer local com workers Monaco.
+
+Verificação: ajuda da CLI compilada
+Git Layers Lab — git-layer
+
+Uso: git layer [--cwd <repositório>] <comando> [--json]
+     npm run cli -- [--cwd <repositório>] <comando>
+Ajuda: git layer -h | git layer help | git-layer --help
+
+  init                             Inicializa Git Layers neste repositório
+  list                             Lista Layers registradas
+  create <nome>                    Cria uma Layer com histórico independente
+  register <nome>                  Valida e registra uma branch layer/<nome>
+  on <nome>                        Ativa uma Layer registrada
+  off <nome> [--park]               Desativa; --park guarda staging e disco
+  status [<nome>]                  Estado real da base, Layers e não rastreados
+  add <nome> -- <caminho>...        Atribui/prepara somente arquivos autorizados
+  unstage <nome> -- <caminho>...    Desfaz staging; preserva reservas e disco
+  diff <nome> [--staged] [-- <caminho>...]
+  commit <nome> -m <mensagem>       Commit somente do índice dessa Layer
+  log [<nome>]                     Histórico da Layer (ou da base)
+  show <revisão>                   Detalhes de um commit local
+  restore <nome> [--yes] -- <caminho>...
+                                   Restaura DISCO a partir do ÍNDICE, com backup.
+                                   Não limpa staging. Confirma em terminal;
+                                   sem terminal exige --yes explícito.
+  release <nome> -- <caminho>...    Libera reserva nunca commitada; mantém disco
+  capture <nome> [--path <pasta>]   q abre revisão; Ctrl+C cancela sem apagar
+  capture-start <nome> [--path <pasta>]
+  capture-review                   Revisa a sessão compartilhada CLI/desktop
+  capture-confirm -- <caminho>...   Confirma/prepara só os candidatos indicados
+  capture-cancel                   Cancela sem excluir arquivos físicos
+  switch <branch>                  Troca a branch tradicional com segurança
+  doctor [--fsck]                  Verifica refs, índices e composição reais
+  recover                          Inspeciona/recupera journals interrompidos
+  recovery-export <pasta-nova>      Exporta cópias para revisão manual
+
+Fluxo da branch tradicional:
+  base-add -- <caminho>...          Stage na base, rejeitando arquivos de Layers
+  base-unstage -- <caminho>...      Unstage na base
+  base-commit -m <mensagem>         Commit na branch tradicional
+  branches                         Lista branches tradicionais
+  branch-create <nome>             Cria branch tradicional local
+  branch-delete <nome>             Exclui somente branch integrada e não atual
+  hunks <base|nome> -- <arquivo>    Lista hunks e token do estado do índice
+  stage-hunk <base|nome> --hunk <n> --token <token> -- <arquivo>
+
+Todos os caminhos devem vir depois de --. Use aspas do seu terminal para
+espaços e acentos. Não existe --force para contornar verificações.
+--json produz { ok, result } ou { ok, error: { code, message, details } }.
+Códigos: 0 sucesso; 2 uso inválido; 3 segurança/estado; 4 Git/IO;
+         5 recuperação necessária; 130 captura cancelada por Ctrl+C.
+Nenhum comando de rede, push, pull ou fetch é disponibilizado.
+
+Verificação: gerar launchers locais sem instalação global
+Launchers locais criados em /tmp/git-layers-extracted-dXI3GL/git-layers-lab/.local-bin
+Neste terminal: export PATH='/tmp/git-layers-extracted-dXI3GL/git-layers-lab/.local-bin':"$PATH"
+Depois: git layer -h (ou git-layer --help)
+Nenhuma instalação global foi feita.
+
+Verificação: demonstração real descartável
+{
+  "root": "/tmp/git-layers-extracted-dXI3GL/demo",
+  "head": "main",
+  "layers": [
+    {
+      "id": "93cf9b4f-0f7c-4dc4-a524-9ec960655da3",
+      "name": "ai",
+      "ref": "refs/heads/layer/ai",
+      "oid": "35a924378c20dfbd90aecabed5dc6cd785ed6883",
+      "indexBase": "35a924378c20dfbd90aecabed5dc6cd785ed6883",
+      "state": "active",
+      "reservations": []
+    },
+    {
+      "id": "ecff4627-96b1-41a2-9cd1-8407771522aa",
+      "name": "scripts",
+      "ref": "refs/heads/layer/scripts",
+      "oid": "9f8afa5ff8aa498d910dc16ff69e1db080880866",
+      "indexBase": "9f8afa5ff8aa498d910dc16ff69e1db080880866",
+      "state": "active",
+      "reservations": []
+    }
+  ],
+  "guide": "Abra esta pasta no Git Layers Lab. Consulte docs/DEMO.md para edição, staging, captura, shelves e colisão."
+}
+{"ok":true,"result":{"safe":true,"checks":[{"name":"HEAD e recursos suportados","ok":true,"detail":{"head":"7fcddbacc51f173d75e9e19918447315e5b1512d","branch":"main","gitDir":"/tmp/git-layers-extracted-dXI3GL/demo/.git"}},{"name":"Metadados, refs, índices, propriedade e exclusões","ok":true,"detail":{"layers":2,"paths":7}},{"name":"Índice principal","ok":true,"detail":{"paths":3,"fingerprint":{"hash":"626c39d38aa2f272e23ea033eb95d6bfd03082a6a174b52a4191135bac8ba606","mode":420,"exists":true}}},{"name":"Layer ai: objetos e checkpoint","ok":true,"detail":{"ref":"refs/heads/layer/ai","oid":"35a924378c20dfbd90aecabed5dc6cd785ed6883","tree":"51f9a9b1921280f1d5d825ca15bcb157d865f6fe","checkpoint":"51f9a9b1921280f1d5d825ca15bcb157d865f6fe","state":"active","reservations":[]}},{"name":"Layer scripts: objetos e checkpoint","ok":true,"detail":{"ref":"refs/heads/layer/scripts","oid":"9f8afa5ff8aa498d910dc16ff69e1db080880866","tree":"52c06b68807f2ecd86984b269836de05463d752f","checkpoint":"52c06b68807f2ecd86984b269836de05463d752f","state":"active","reservations":[]}},{"name":"Journals","ok":true,"detail":{"pending":0}}],"transactions":[],"spaceBytes":91243,"capture":null}}
+
+{
+  "ok": true,
+  "milestones": [
+    "npm ci a partir do lockfile entregue",
+    "build da cópia extraída",
+    "ajuda da CLI compilada",
+    "gerar launchers locais sem instalação global",
+    "demonstração real descartável",
+    "git layer doctor --json com PATH local e Git real"
+  ],
+  "gui": "Não executada por este script; utilize npm run test:e2e em sessão gráfica com sandbox."
+}

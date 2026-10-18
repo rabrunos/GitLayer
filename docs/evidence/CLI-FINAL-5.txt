@@ -1,0 +1,13 @@
+✔ CLI help and JSON usage errors have stable exit codes (453.572366ms)
+✔ CLI commits a real Layer with literal accented paths and leaves HEAD/base index intact (4332.620849ms)
+✔ CLI restore requires explicit noninteractive confirmation and preserves index plus recovery copy (4044.950361ms)
+✔ CLI shared capture selects new paths only and cancellation preserves bytes (6636.90604ms)
+✔ demo script creates genuine branches/Layers and refuses a nonempty destination (4966.897008ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20724.554632

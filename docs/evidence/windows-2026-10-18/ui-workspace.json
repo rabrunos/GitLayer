@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "platform": "win32",
+  "checks": [
+    "open-non-git-refuses-without-initialization",
+    "explicit-ui-initialize-preserves-existing-bytes",
+    "ui-opens-existing-git-folder"
+  ],
+  "dialogSelection": "stubbed only OS folder picker; real window, IPC, filesystem and Git"
+}

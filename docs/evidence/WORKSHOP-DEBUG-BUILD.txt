@@ -1,0 +1,47 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> git-layers-lab@0.1.2 build:debug
+> node scripts/build-debug.mjs
+
+vite v8.3.4 building client environment for workshop-debug...
+transforming...
+✓ 1128 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-debug/renderer/index.html                                   0.67 kB │ gzip:     0.39 kB
+dist-debug/renderer/assets/codicon-DF1abBS2.ttf                153.22 kB
+dist-debug/renderer/assets/editor.worker-BAuUCu_S.js           583.65 kB
+dist-debug/renderer/assets/json.worker-DS2oOGl9.js             856.15 kB
+dist-debug/renderer/assets/html.worker-BnN2uh9t.js           1,206.76 kB
+dist-debug/renderer/assets/css.worker-Bf2wnZi-.js            1,684.69 kB
+dist-debug/renderer/assets/ts.worker-BLcjJ46-.js            11,452.21 kB
+dist-debug/renderer/assets/workers-CyDft1Tr.css                 81.30 kB │ gzip:    12.19 kB
+dist-debug/renderer/assets/index-B7EkZvD6.css                  196.05 kB │ gzip:    32.14 kB
+dist-debug/renderer/assets/javascript-D9IwrVQz.js                1.24 kB │ gzip:     0.57 kB │ map:      2.13 kB
+dist-debug/renderer/assets/shell-D_QsW6SA.js                     4.19 kB │ gzip:     1.38 kB │ map:      7.82 kB
+dist-debug/renderer/assets/yaml-VU2z4oWH.js                      4.68 kB │ gzip:     1.52 kB │ map:      9.34 kB
+dist-debug/renderer/assets/markdown-t5CK9nzS.js                  5.08 kB │ gzip:     1.63 kB │ map:     10.48 kB
+dist-debug/renderer/assets/cssMode-v84Zku1Z.js                   5.27 kB │ gzip:     1.49 kB │ map:      9.11 kB
+dist-debug/renderer/assets/python-9BO3Vqmu.js                    5.42 kB │ gzip:     1.70 kB │ map:     10.58 kB
+dist-debug/renderer/assets/css-CExYsIB1.js                       5.87 kB │ gzip:     1.60 kB │ map:     10.76 kB
+dist-debug/renderer/assets/htmlMode-C0ZKbvs6.js                  6.19 kB │ gzip:     1.56 kB │ map:     10.34 kB
+dist-debug/renderer/assets/html-CGwC0HNg.js                      6.26 kB │ gzip:     1.43 kB │ map:     12.34 kB
+dist-debug/renderer/assets/typescript-3QW9lG2e.js                6.64 kB │ gzip:     2.22 kB │ map:     12.62 kB
+dist-debug/renderer/assets/jsonMode-ErNcbSUi.js                 26.11 kB │ gzip:     6.12 kB │ map:     70.89 kB
+dist-debug/renderer/assets/tsMode-Cozkn4V0.js                   36.02 kB │ gzip:     7.56 kB │ map:     64.97 kB
+dist-debug/renderer/assets/lspLanguageFeatures-nS5C0ORz.js      74.84 kB │ gzip:    14.51 kB │ map:    129.09 kB
+dist-debug/renderer/assets/workers-DwbhnL0U.js               1,791.68 kB │ gzip:   358.82 kB │ map:  3,823.93 kB
+dist-debug/renderer/assets/index-Cj7XzWWI.js                 6,526.69 kB │ gzip: 1,334.48 kB │ map: 12,918.02 kB
+
+✓ built in 5.07s
+[33m[PLUGIN_TIMINGS] [0mJavaScript callbacks ran for 4.3s of this 5.1s build (85%).
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin vite:build-import-analysis generateBundle (23%, 1.2s, 1 call)
+Additional callback time came from the callbacks below and from callbacks under 1s.
+3 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - plugin vite:css transform (103 calls)
+  - plugin vite:worker load (5 calls)
+  - plugin vite:worker-import-meta-url transform (4 calls)
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+
+Build de debug concluído em dist-debug: Core/CLI, Electron e renderer local com workers Monaco.

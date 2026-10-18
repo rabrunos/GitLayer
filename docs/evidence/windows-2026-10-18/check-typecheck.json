@@ -1,0 +1,16 @@
+{
+  "name": "typecheck",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "node_modules/typescript/bin/tsc",
+    "--noEmit"
+  ],
+  "cwd": "C:\\Dev\\GitLayer\\",
+  "startedAt": "2026-10-18T14:24:45.313Z",
+  "finishedAt": "2026-10-18T14:24:49.318Z",
+  "platform": "win32",
+  "arch": "x64",
+  "exitCode": 0,
+  "signal": null,
+  "durationMs": 4001
+}

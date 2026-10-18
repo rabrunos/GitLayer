@@ -1,0 +1,34 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> git-layers-lab@0.1.0 test:e2e
+> node --test tests/e2e/*.test.mjs
+
+✖ desktop empacotado: Monaco local, Git real, limites IPC e conteúdo inerte (2046.268207ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2518.968614
+
+✖ failing tests:
+
+test at tests/e2e/desktop.test.mjs:13:1
+✖ desktop empacotado: Monaco local, Git real, limites IPC e conteúdo inerte (2046.268207ms)
+  AssertionError [ERR_ASSERTION]: O runtime Electron não pôde iniciar com sandbox preservada: [1018/133042.049143:FATAL:electron/shell/app/electron_main_delegate.cc:227] Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
+  
+  
+  null !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/c7ba59945782/git-layers-lab/tests/e2e/desktop.test.mjs:32:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
