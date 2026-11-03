@@ -227,6 +227,11 @@ async function request(action: string, input: unknown): Promise<unknown> {
       clipboard.writeText(command);
       return { command };
     }
+    case 'copyRelativePath': {
+      const copiedPath = a.path === '' ? '.' : relative(a.path);
+      clipboard.writeText(copiedPath);
+      return { path: copiedPath };
+    }
     case 'enableLayers': return c.init();
     case 'snapshot': {
       const [layers, files, status, branches, candidates] = await Promise.all([c.list(), c.files(), c.status(), c.branches(), c.candidates()]);
@@ -320,7 +325,7 @@ ipcMain.handle('lab:request', (event, action: unknown, args: unknown): Promise<A
   // These synchronous operations touch only the current PTY/clipboard. Input
   // and Ctrl+C must not wait behind filesystem scans or Git/fsck subprocesses.
   // Session creation, closing and workspace changes remain serialized.
-  if (typeof action === 'string' && ['terminalWrite', 'terminalResize', 'terminalState', 'copyCommand'].includes(action)) return execute();
+  if (typeof action === 'string' && ['terminalWrite', 'terminalResize', 'terminalState', 'copyCommand', 'copyRelativePath'].includes(action)) return execute();
   const job = queue.then(execute);
   queue = job.catch(() => undefined);
   return job;

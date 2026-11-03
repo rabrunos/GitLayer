@@ -1,0 +1,258 @@
+{
+  "schema": 1,
+  "kind": "infrastructure-correction-observations",
+  "archiveTool": {
+    "scope": "Ferramenta pública de arquivamento e filesystem real em fixtures; não é alteração de Core/CLI nem prova de limpeza do checkout.",
+    "runs": [
+      {
+        "id": "destination-before",
+        "description": "Contraprova real anterior à correção; falha preservada.",
+        "command": "node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern=destination junction tests/unit/archive-local-evidence.test.mjs",
+        "exitCode": 1,
+        "signal": null,
+        "started": "2026-11-03T00:21:29.996Z",
+        "finished": "2026-11-03T00:21:30.173Z",
+        "durationMs": 175,
+        "counts": {
+          "tests": 1,
+          "pass": 0,
+          "fail": 1,
+          "skipped": 0,
+          "cancelled": 0
+        },
+        "sourceUnchanged": true,
+        "sourceManifestBefore": [
+          {
+            "path": "scripts/archive-local-evidence.mjs",
+            "bytes": 6917,
+            "sha256": "4f1e31115441ac16b9aa8bf897f89c964b4de43f23bd3d11e7619f3588a23fe1"
+          },
+          {
+            "path": "tests/unit/archive-local-evidence.test.mjs",
+            "bytes": 5575,
+            "sha256": "89d478af6d3d254b6599a896ead43fc246ef5ae7a326629698917f8cb76b04a0"
+          }
+        ],
+        "sourceManifestAfter": [
+          {
+            "path": "scripts/archive-local-evidence.mjs",
+            "bytes": 6917,
+            "sha256": "4f1e31115441ac16b9aa8bf897f89c964b4de43f23bd3d11e7619f3588a23fe1"
+          },
+          {
+            "path": "tests/unit/archive-local-evidence.test.mjs",
+            "bytes": 5575,
+            "sha256": "89d478af6d3d254b6599a896ead43fc246ef5ae7a326629698917f8cb76b04a0"
+          }
+        ],
+        "rawResultSHA256": "73b9b06fa07249376dd609b7eb5ae4e32b1bea90838b50f61ea4882fa160cc16",
+        "rawStdoutSHA256": "489da273c05be19b354884b726b4d8491adbace3957ab640c57822de25a60b1a"
+      },
+      {
+        "id": "both-junctions-before",
+        "description": "Contraprova real anterior à correção; falha preservada.",
+        "command": "node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern=junction tests/unit/archive-local-evidence.test.mjs",
+        "exitCode": 1,
+        "signal": null,
+        "started": "2026-11-03T00:22:20.908Z",
+        "finished": "2026-11-03T00:22:21.094Z",
+        "durationMs": 184,
+        "counts": {
+          "tests": 2,
+          "pass": 0,
+          "fail": 2,
+          "skipped": 0,
+          "cancelled": 0
+        },
+        "sourceUnchanged": true,
+        "sourceManifestBefore": [
+          {
+            "path": "scripts/archive-local-evidence.mjs",
+            "bytes": 6917,
+            "sha256": "4f1e31115441ac16b9aa8bf897f89c964b4de43f23bd3d11e7619f3588a23fe1"
+          },
+          {
+            "path": "tests/unit/archive-local-evidence.test.mjs",
+            "bytes": 6984,
+            "sha256": "391993d0d2e8e32cfab0df141159982a0b36d5a9db70069d4cd82ee79d558920"
+          }
+        ],
+        "sourceManifestAfter": [
+          {
+            "path": "scripts/archive-local-evidence.mjs",
+            "bytes": 6917,
+            "sha256": "4f1e31115441ac16b9aa8bf897f89c964b4de43f23bd3d11e7619f3588a23fe1"
+          },
+          {
+            "path": "tests/unit/archive-local-evidence.test.mjs",
+            "bytes": 6984,
+            "sha256": "391993d0d2e8e32cfab0df141159982a0b36d5a9db70069d4cd82ee79d558920"
+          }
+        ],
+        "rawResultSHA256": "a7025d3f2103b46dc7b7b6d9677b359dc4591f41a538af2207f36d7d5331a515",
+        "rawStdoutSHA256": "0a149e60b0660745cb8e36928fe640ee5e4f45090a1c6070d92c2cae15398eb8"
+      },
+      {
+        "id": "complete-unit-after",
+        "description": "Arquivo de testes completo após a correção da infraestrutura de arquivo.",
+        "command": "node --test --test-concurrency=1 --test-reporter=tap tests/unit/archive-local-evidence.test.mjs",
+        "exitCode": 0,
+        "signal": null,
+        "started": "2026-11-03T00:22:58.443Z",
+        "finished": "2026-11-03T00:22:58.709Z",
+        "durationMs": 264,
+        "counts": {
+          "tests": 6,
+          "pass": 6,
+          "fail": 0,
+          "skipped": 0,
+          "cancelled": 0
+        },
+        "sourceUnchanged": true,
+        "sourceManifestBefore": [
+          {
+            "path": "scripts/archive-local-evidence.mjs",
+            "bytes": 7113,
+            "sha256": "f78b903f751886b407132f3eae1e610ae5e6ad7096ad6a2ed093afc7d570a5f2"
+          },
+          {
+            "path": "tests/unit/archive-local-evidence.test.mjs",
+            "bytes": 6984,
+            "sha256": "391993d0d2e8e32cfab0df141159982a0b36d5a9db70069d4cd82ee79d558920"
+          }
+        ],
+        "sourceManifestAfter": [
+          {
+            "path": "scripts/archive-local-evidence.mjs",
+            "bytes": 7113,
+            "sha256": "f78b903f751886b407132f3eae1e610ae5e6ad7096ad6a2ed093afc7d570a5f2"
+          },
+          {
+            "path": "tests/unit/archive-local-evidence.test.mjs",
+            "bytes": 6984,
+            "sha256": "391993d0d2e8e32cfab0df141159982a0b36d5a9db70069d4cd82ee79d558920"
+          }
+        ],
+        "rawResultSHA256": "aff77a1df807d995b9ac52cea8d9e8762f41b67af0b2300fa600355a621d6066",
+        "rawStdoutSHA256": "d219e1b0cea6c642292872e280623511987fbc80e96c4195063eb9f53723eeff"
+      }
+    ],
+    "syntheticObservations": {
+      "destinationBefore": {
+        "refused": true,
+        "sourceUnchanged": true,
+        "outsideNames": [
+          "existing.txt",
+          "new-parent"
+        ],
+        "operationRecords": 2
+      },
+      "operationsBefore": {
+        "refused": false,
+        "sourcePresent": false,
+        "destinationPresent": true,
+        "outsideFiles": 3
+      },
+      "destinationAfter": {
+        "refused": true,
+        "sourceUnchanged": true,
+        "outsideNames": [
+          "existing.txt"
+        ],
+        "operationRecords": 0
+      },
+      "operationsAfter": {
+        "refused": true,
+        "sourcePresent": true,
+        "destinationPresent": false,
+        "outsideFiles": 1
+      }
+    },
+    "fixedSources": [
+      {
+        "path": "scripts/archive-local-evidence.mjs",
+        "bytes": 7113,
+        "sha256": "f78b903f751886b407132f3eae1e610ae5e6ad7096ad6a2ed093afc7d570a5f2"
+      },
+      {
+        "path": "tests/unit/archive-local-evidence.test.mjs",
+        "bytes": 6984,
+        "sha256": "391993d0d2e8e32cfab0df141159982a0b36d5a9db70069d4cd82ee79d558920"
+      }
+    ],
+    "qualification": "Seis testes passaram juntos após o fix. O resultado anterior de quatro testes pertence a outro snapshot; não é somado nem reescrito. Fixtures sintéticas com nonce; nenhuma migração real ou modificação global de Git."
+  },
+  "compatibilityDirectedR2": {
+    "status": "PASS",
+    "runId": "run-2026-11-03T00-24-05-691Z-af667918",
+    "command": "node scripts/git-compat/runner.mjs --suite all --module native-optional,recovery-observed,harness-extra,revision --id TOOLS-011,RECOVERY-005,RECOVERY-006,HARNESS-021,HARNESS-025 --jobs 1 --seed 20261102 --out <NEW_EVIDENCE_DIRECTORY>",
+    "exitCode": 0,
+    "selected": 7,
+    "passed": 7,
+    "failed": 0,
+    "environmentBlocked": 0,
+    "durationMs": 83724,
+    "recordedHarnessCommands": 163,
+    "sourceFingerprint": "41c28c7186257d5d81b619a7b4f983a89334a8ff2c27c05d485e4ecab98355da",
+    "runnerFingerprint": "82899488f3236d900a00fe44d77cbc216cb2c5d598c153261ec39be3a0047133",
+    "sourceUnchanged": true,
+    "runnerUnchanged": true,
+    "summarySHA256": "a418dca009b567c7d7df8c5c994d77854e82b58114bc2cffde9708c70ca256b0",
+    "resultsSHA256": "8a2c6abbd0b6cc84fedbf0d3549be778247bf818f9925a385a62fc39755ae663",
+    "rawValidationSHA256": "5da5ce4c66d0dc56ee78b3c217dcd4dbc66199f1e7ba2613e5b3a8c050f28840",
+    "variants": [
+      {
+        "id": "TOOLS-011",
+        "variant": "native-optional-powershell",
+        "status": "PASS",
+        "assertionCount": 10,
+        "commandCount": 32
+      },
+      {
+        "id": "TOOLS-011",
+        "variant": "native-optional-cmd",
+        "status": "PASS",
+        "assertionCount": 10,
+        "commandCount": 32
+      },
+      {
+        "id": "TOOLS-011",
+        "variant": "native-optional-bash",
+        "status": "PASS",
+        "assertionCount": 10,
+        "commandCount": 32
+      },
+      {
+        "id": "RECOVERY-005",
+        "variant": "real-death-after-backup-before-unlink",
+        "status": "PASS",
+        "assertionCount": 24,
+        "commandCount": 30
+      },
+      {
+        "id": "RECOVERY-006",
+        "variant": "real-death-after-layer-ref-publication",
+        "status": "PASS",
+        "assertionCount": 25,
+        "commandCount": 36
+      },
+      {
+        "id": "HARNESS-021",
+        "variant": "portable-and-selection",
+        "status": "PASS",
+        "assertionCount": 28,
+        "commandCount": 0
+      },
+      {
+        "id": "HARNESS-025",
+        "variant": "selection-and-expectation-evolution",
+        "status": "PASS",
+        "assertionCount": 2,
+        "commandCount": 1
+      }
+    ],
+    "qualification": "Sete variantes dirigidas executaram após corrigir a infraestrutura. Não transformam o broad anterior em aprovado nem substituem a nova seleção ampla. RECOVERY-005/006 observam morte abrupta real; recover conserva o lock órfão e retorna LOCKED, sem certificar recuperação automática."
+  },
+  "followingValidation": "Full02 concluiu 229 casos (225 PASS/quatro SKIP); infra02 passou 111/111. Broad2 concluiu 355 PASS, seis ENV_BLOCKED, zero FAIL em 361 selecionadas; fontes/runner estáveis. Arquivo e publicação reais continuam pendentes.",
+  "dataPolicy": "Provas compactas sintéticas e hashes, sem paths pessoais ou stdout integral."
+}

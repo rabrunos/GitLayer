@@ -117,7 +117,7 @@ test('Layer stage and commit preserve base staging and the other Layer index byt
   const main = f.git('rev-parse', 'main');
   const records = await f.app.list();
   const other = records.find(record => record.name === 'scripts')!;
-  const otherIndexPath = path.join(f.root, '.git', 'git-layers', 'indexes', `${other.id}.index`);
+  const otherIndexPath = path.join(f.app.dir, 'indexes', `${other.id}.index`);
   const otherIndex = readFileSync(otherIndexPath);
   f.write('AGENTS.md', 'changed ai\n');
   await f.app.add('ai', ['AGENTS.md']);
@@ -240,7 +240,7 @@ test('ignore negation blocks assignment and is not mistaken for effective exclus
   assert.equal(f.git('ls-tree', '-r', '--name-only', 'layer/ai'), '');
 });
 
-test('park and reactivation preserve staged, unstaged, reserved and deleted files', async t => {
+test('GL16 deactivation refuses pending changes and explicit discard restores committed state', async t => {
   const f = await fixture(t);
   await f.layer('scripts', 'scripts/a.py', 'original A\n');
   f.write('scripts/deleted.py', 'delete later\n');
@@ -254,20 +254,19 @@ test('park and reactivation preserve staged, unstaged, reserved and deleted file
   await f.app.add('scripts', ['scripts/new.py']);
   await f.app.unstage('scripts', ['scripts/new.py']);
   await assert.rejects(() => f.app.off('scripts'));
-  await f.app.off('scripts', true);
-  assert.equal(existsSync(path.join(f.root, 'scripts/a.py')), false, JSON.stringify({layers:await f.app.list(),status:await f.app.status()}));
-  assert.equal((await f.app.list()).find(item => item.name === 'scripts')!.state, 'parked');
-  await f.app.on('scripts');
+  await assert.rejects(() => f.app.off('scripts', true), { code: 'AUTO_PARK_REMOVED' });
   assert.equal(f.read('scripts/a.py'), 'unstaged A\n');
-  assert.equal(f.read('scripts/new.py'), 'new staged\n');
-  assert.equal(existsSync(path.join(f.root, 'scripts/deleted.py')), false);
+  await f.app.deactivate('scripts', { discard: true });
+  assert.equal(existsSync(path.join(f.root, 'scripts/a.py')), false);
+  assert.equal((await f.app.list()).find(item => item.name === 'scripts')!.state, 'inactive');
+  await f.app.on('scripts');
+  assert.equal(f.read('scripts/a.py'), 'original A\n');
+  assert.equal(existsSync(path.join(f.root, 'scripts/new.py')), false);
+  assert.equal(f.read('scripts/deleted.py'), 'delete later\n');
   const record = (await f.app.status()).layers.find(item => item.name === 'scripts')!;
-  assert.ok(changed(record.staged, 'scripts/a.py'));
-  assert.ok(changed(record.unstaged, 'scripts/a.py'));
-  assert.ok(changed(record.unstaged, 'scripts/deleted.py'));
-  assert.ok(record.reservations.includes('scripts/new.py'));
-  await f.app.commit('scripts', 'Preserved stage');
-  assert.equal(f.git('show', 'layer/scripts:scripts/a.py'), 'staged A');
+  assert.equal(record.staged.length, 0); assert.equal(record.unstaged.length, 0); assert.equal(record.reservations.length, 0);
+  assert.equal(existsSync(path.join(f.app.dir, 'shelves')), false);
+
 });
 
 test('deactivation removes only Layer files in a shared directory', async t => {
@@ -279,6 +278,76 @@ test('deactivation removes only Layer files in a shared directory', async t => {
   await f.app.off('ai');
   assert.equal(f.read('shared/base.txt'), 'base owner\n');
   assert.equal(existsSync(path.join(f.root, 'shared/ai.txt')), false);
+});
+
+test('deactivation prunes empty Layer directories and activation recreates them', async t => {
+  const f = await fixture(t);
+  await f.layer('scripts', 'scripts/nested/run.ps1', 'Write-Output original\n');
+  const head = f.git('rev-parse', 'HEAD');
+  const index = f.index();
+  await f.app.off('scripts');
+  assert.equal(existsSync(path.join(f.root, 'scripts')), false, 'Empty Layer ancestors must leave the physical workspace');
+  assert.equal(f.index(), index);
+  assert.equal(f.git('rev-parse', 'HEAD'), head);
+  await f.app.on('scripts');
+  assert.equal(f.read('scripts/nested/run.ps1'), 'Write-Output original\n');
+  f.write('scripts/nested/run.ps1', 'Write-Output parked\n');
+  await f.app.deactivate('scripts', { discard: true });
+  assert.equal(existsSync(path.join(f.root, 'scripts')), false, 'Explicit discard must prune empty ancestors too');
+  await f.app.on('scripts');
+  assert.equal(f.read('scripts/nested/run.ps1'), 'Write-Output original\n');
+});
+
+test('deactivation prunes no Base directories, active Layer ancestors or local contents', async t => {
+  const f = await fixture(t);
+  f.write('base-head/base.txt', 'tracked in HEAD\n');
+  f.write('.gitignore', 'ignored/local.txt\n');
+  await f.app.baseStage(['base-head/base.txt', '.gitignore']);
+  await f.app.baseCommit('Protected Base directories');
+  await f.layer('other', 'other-shared/other.txt');
+  await f.app.create('scripts'); await f.app.on('scripts');
+  const paths = ['base-head/layer.txt', 'base-index/layer.txt', 'other-shared/layer.txt', 'local/layer.txt', 'ignored/layer.txt', 'local-empty/layer.txt', 'scripts/only.txt'];
+  for (const p of paths) f.write(p, 'Layer content\n');
+  await f.app.add('scripts', paths); await f.app.commit('scripts', 'Layer directories');
+  f.write('base-index/base.txt', 'only in Base index\n');
+  await f.app.baseStage(['base-index/base.txt']);
+  unlinkSync(path.join(f.root, 'base-head/base.txt'));
+  await f.app.baseStage(['base-head/base.txt']);
+  unlinkSync(path.join(f.root, 'base-index/base.txt'));
+  unlinkSync(path.join(f.root, 'other-shared/other.txt'));
+  f.write('local/local.txt', 'untracked local bytes\n');
+  f.write('ignored/local.txt', 'ignored local bytes\n');
+  mkdirSync(path.join(f.root, 'local-empty/personal-empty'));
+  mkdirSync(path.join(f.root, 'unrelated-empty'));
+  const index = f.index();
+  await f.app.off('scripts');
+  for (const folder of ['base-head', 'base-index', 'other-shared', 'local', 'ignored', 'local-empty/personal-empty', 'unrelated-empty']) assert.equal(lstatSync(path.join(f.root, folder)).isDirectory(), true, `Preserve ${folder}`);
+  assert.equal(f.read('local/local.txt'), 'untracked local bytes\n');
+  assert.equal(f.read('ignored/local.txt'), 'ignored local bytes\n');
+  assert.equal(existsSync(path.join(f.root, 'scripts')), false);
+  assert.equal(f.index(), index);
+  await f.app.deactivate('other', { discard: true });
+  assert.equal(existsSync(path.join(f.root, 'other-shared')), false, 'The last active owner releases a shared empty directory');
+});
+
+test('deactivation directory pruning is recoverable after an interruption', async t => {
+  const f = await fixture(t);
+  await f.layer('scripts', 'scripts/nested/run.ps1', 'recoverable bytes\n');
+  f.write('deleted-only/gone.txt', 'delete this file later\n');
+  await f.app.add('scripts', ['deleted-only/gone.txt']); await f.app.commit('scripts', 'Deleted-only directory');
+  unlinkSync(path.join(f.root, 'deleted-only/gone.txt'));
+  process.env.GIT_LAYERS_FAILPOINT = 'after-deactivate-directories';
+  await assert.rejects(() => f.app.deactivate('scripts', { discard: true }), { code: 'INJECTED_FAILURE' });
+  delete process.env.GIT_LAYERS_FAILPOINT;
+  assert.equal(existsSync(path.join(f.root, 'scripts')), false);
+  assert.equal(existsSync(path.join(f.root, 'deleted-only')), false);
+  const reopened = await GitLayers.open(f.root);
+  await reopened.recover();
+  assert.equal(f.read('scripts/nested/run.ps1'), 'recoverable bytes\n');
+  assert.equal(lstatSync(path.join(f.root, 'deleted-only')).isDirectory(), true, 'Restore even a directory whose Layer file was already deleted');
+  assert.equal(existsSync(path.join(f.root, 'deleted-only/gone.txt')), false);
+  assert.equal((await reopened.list()).find(layer => layer.name === 'scripts')!.state, 'active');
+  assert.equal((await reopened.doctor()).safe, true);
 });
 
 test('managed switch preserves dirty Layer state and rejects colliding branch', async t => {
@@ -423,7 +492,7 @@ test('base and Layer partial staging select one hunk and reject a stale token', 
 
 test('future metadata schema is refused without replacing the original file', async t => {
   const f = await fixture(t);
-  const file = path.join(f.root, '.git', 'git-layers', 'registry.json');
+  const file = path.join(f.app.dir, 'registry.json');
   const parsed = JSON.parse(readFileSync(file, 'utf8')) as Record<string, unknown>;
   parsed.schema = 999;
   const bytes = JSON.stringify(parsed);
@@ -434,7 +503,7 @@ test('future metadata schema is refused without replacing the original file', as
 
 test('malformed metadata fails safely instead of reinitializing the registry', async t => {
   const f = await fixture(t);
-  const file = path.join(f.root, '.git', 'git-layers', 'registry.json');
+  const file = path.join(f.app.dir, 'registry.json');
   writeFileSync(file, '{ definitely invalid JSON');
   await assert.rejects(() => GitLayers.open(f.root));
   assert.equal(readFileSync(file, 'utf8'), '{ definitely invalid JSON');
@@ -469,13 +538,13 @@ test('concurrent Core writers are serialized or one fails without corrupting ref
   f.git('fsck', '--no-reflogs');
 });
 
-test('existing layer-prefixed branches are not activated or registered implicitly', async t => {
+test('GL04 existing layer-prefixed branches are recognized without activation', async t => {
   const f = await fixture(t);
   const tree = f.git('mktree');
   const rootCommit = f.git('commit-tree', tree, '-m', 'Independent existing candidate');
   f.git('update-ref', 'refs/heads/layer/candidate', rootCommit);
   const reopened = await GitLayers.open(f.root);
-  assert.ok(!(await reopened.list()).some(item => item.name === 'candidate'));
+  assert.ok((await reopened.list()).some(item => item.name === 'candidate' && item.state === 'inactive' && !item.id));
   await reopened.register('candidate');
   const candidate = (await reopened.list()).find(item => item.name === 'candidate')!;
   assert.equal(candidate.oid, rootCommit);
@@ -533,7 +602,7 @@ test('the local exclude block preserves preexisting rules outside it', async t =
 
 test('an existing coordinator lock is refused and never removed automatically', async t => {
   const f = await fixture(t);
-  const lock = path.join(f.root, '.git', 'git-layers', 'locks', 'coordinator');
+  const lock = path.join(f.app.dir, 'locks', 'coordinator');
   mkdirSync(lock, { recursive: true });
   const evidence = path.join(lock, 'external-owner.txt');
   writeFileSync(evidence, 'Do not remove an existing lock');
@@ -781,7 +850,7 @@ test('future reservation metadata schema aborts mutation and preserves its exact
   const f = await fixture(t);
   await f.layer('ai', 'AGENTS.md');
   const record = (await f.app.list()).find(item => item.name === 'ai')!;
-  const file = path.join(f.root, '.git', 'git-layers', 'reservations', `${record.id}.json`);
+  const file = path.join(f.app.dir, 'reservations', `${record.id}.json`);
   const original = JSON.parse(readFileSync(file, 'utf8')) as Record<string, unknown>;
   original.schema = 999;
   const bytes = JSON.stringify(original);

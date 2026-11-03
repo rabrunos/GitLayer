@@ -5,19 +5,31 @@ import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import { GitLayers } from '../core/index.js';
 import { workspaceInputPath } from '../core/platform.js';
+import { doctorRepository, exportRepositoryRecovery } from '../core/rescue.js';
+import { migrateLayerLayout } from '../core/layout.js';
+import { enableBranchProtection, disableBranchProtection } from '../core/branch-protection.js';
 
-const HELP = `Git Layers Lab — git-layer
+const HELP = `Git Layer — Core/CLI
 
 Uso: git layer [--cwd <repositório>] <comando> [--json]
-     npm run cli -- [--cwd <repositório>] <comando>
+     npm run cli:core -- [--cwd <repositório>] <comando>
 Ajuda: git layer -h | git layer help | git-layer --help
 
   init                             Inicializa Git Layers neste repositório
-  list                             Lista Layers registradas
+  list                             Reconhece Layers locais/remotas sem ativar
   create <nome>                    Cria uma Layer com histórico independente
-  register <nome>                  Valida e registra uma branch layer/<nome>
-  on <nome>                        Ativa uma Layer registrada
-  off <nome> [--park]               Desativa; --park guarda staging e disco
+  register <nome>                  Registra Layer local ou tracking remoto único
+  on <nome>                        Ativa uma Layer
+  off <nome> [--discard --yes]      Desativa limpa; descarte exige escolha explícita
+  edit <nome>                      Escolhe destino para arquivos novos
+  edit-end                         Encerra o destino sem desativar a Layer
+  rename <nome> <novo-nome>         Renomeia ref e identidade local da Layer
+  remove <nome> [--discard] --yes   Remove localmente; descarte é opção separada
+  preview <on|off|remove> <nome>    Mostra efeitos/impedimentos sem aplicar ação
+  open-branch <nome>               Abre deliberadamente a Layer como branch
+  migrate --yes                    Copia layout legado para layers e preserva origem
+  protect                          Reserva branches Layer em worktrees locais
+  unprotect                        Remove somente reservas comprovadamente próprias
   status [<nome>]                  Estado real da base, Layers e não rastreados
   add <nome> -- <caminho>...        Atribui/prepara somente arquivos autorizados
   unstage <nome> -- <caminho>...    Desfaz staging; preserva reservas e disco
@@ -35,7 +47,9 @@ Ajuda: git layer -h | git layer help | git-layer --help
   capture-review                   Revisa a sessão compartilhada CLI/desktop
   capture-confirm -- <caminho>...   Confirma/prepara só os candidatos indicados
   capture-cancel                   Cancela sem excluir arquivos físicos
-  switch <branch>                  Troca a branch tradicional com segurança
+  switch <branch> [--off-current-layer]
+                                   Troca preservando as Layers compatíveis; a opção
+                                   não retoma a Layer que era branch de trabalho
   doctor [--fsck]                  Verifica refs, índices e composição reais
   recover                          Inspeciona/recupera journals interrompidos
   recovery-export <pasta-nova>      Exporta cópias para revisão manual
@@ -55,7 +69,10 @@ espaços e acentos. Não existe --force para contornar verificações.
 --json produz { ok, result } ou { ok, error: { code, message, details } }.
 Códigos: 0 sucesso; 2 uso inválido; 3 segurança/estado; 4 Git/IO;
          5 recuperação necessária; 130 captura cancelada por Ctrl+C.
-Nenhum comando de rede, push, pull ou fetch é disponibilizado.
+Use o Git oficial para push/fetch de refs/heads/layer/<nome>.
+--park foi removido: pendências exigem commit, descarte explícito ou cancelamento.
+O destino de edição é reconciliado nas consultas/comandos; não intercepta Git externo.
+Comandos Git diretos têm limites próprios; consulte docs/IMPLEMENTATION-2026-11-02.md.
 `;
 
 class CliUsageError extends Error {
@@ -73,11 +90,13 @@ interface Parsed {
 }
 
 const COMMAND_FLAGS: Record<string, string[]> = {
-  init: [], list: [], create: [], register: [], on: [], off: ['park'],
+  init: [], list: [], create: [], register: [], on: [], off: ['discard', 'yes', 'park'],
+  edit: [], 'edit-end': [], rename: [], remove: ['discard', 'yes'], preview: [],
+  'open-branch': [], migrate: ['yes'], protect: [], unprotect: [],
   status: [], add: [], unstage: [], diff: ['staged'], commit: ['message'], log: [],
   show: [], restore: ['yes'], release: [], capture: ['path'],
   'capture-start': ['path'], 'capture-review': [], 'capture-confirm': [],
-  'capture-cancel': [], switch: [], doctor: ['fsck'], recover: [],
+  'capture-cancel': [], switch: ['off-current-layer'], doctor: ['fsck'], recover: [],
   'recovery-export': [], 'base-add': [], 'base-unstage': [], 'base-commit': ['message'],
   branches: [], 'branch-create': [], 'branch-delete': [], hunks: [],
   'stage-hunk': ['hunk', 'token'],
@@ -171,6 +190,23 @@ async function confirmRestore(layer: string, selected: string[], json: boolean):
     process.removeListener('SIGINT', onInterrupt);
     rl.close();
   }
+}
+
+async function confirmLayerAction(action: 'off' | 'remove', layer: string, preview: unknown, discard: boolean, json: boolean): Promise<boolean> {
+  const operation = action === 'remove' ? 'Remover a referência local e o registro' : 'Desativar';
+  const warning = discard ? ' As alterações pendentes dessa Layer serão descartadas.' : ' Não há autorização para descartar alterações pendentes.';
+  if (!stdin.isTTY || !stdout.isTTY || json) {
+    throw new CliUsageError(`${operation} ${layer}.${warning} Revise preview ${action} ${layer} e use --yes explicitamente para confirmar.`);
+  }
+  stdout.write(`${operation} ${layer}.${warning} Nenhuma exclusão remota será enviada.\n${JSON.stringify(preview, null, 2)}\n`);
+  const rl = createInterface({ input: stdin, output: stdout });
+  const abort = new AbortController();
+  const onInterrupt = () => abort.abort();
+  rl.once('SIGINT', onInterrupt);
+  process.once('SIGINT', onInterrupt);
+  try { return (await rl.question('Confirmar? Digite sim: ', { signal: abort.signal })).trim().toLocaleLowerCase('pt-BR') === 'sim'; }
+  catch (error) { if (abort.signal.aborted) return false; throw error; }
+  finally { process.removeListener('SIGINT', onInterrupt); rl.close(); }
 }
 
 type CaptureCandidate = { path: string; ignored: boolean };
@@ -275,6 +311,22 @@ async function dispatch(p: Parsed): Promise<{ result: unknown; exitCode: number 
   if (p.command === 'help') return { result: HELP, exitCode: 0 };
   const pathCommands = new Set(['add', 'unstage', 'diff', 'restore', 'release', 'capture-confirm', 'base-add', 'base-unstage', 'hunks', 'stage-hunk']);
   if (p.paths.length && !pathCommands.has(p.command)) throw new CliUsageError(`O comando ${p.command} não aceita caminhos depois de --.`);
+  // Rescue deliberately bypasses normal metadata loading, which may be broken.
+  if (p.command === 'doctor') { arity(p, 0); const result = await doctorRepository(p.cwd, p.flags.has('fsck')); return { result, exitCode: result.safe === false ? 3 : 0 }; }
+  if (p.command === 'recovery-export') { arity(p, 1); return { result: await exportRepositoryRecovery(p.cwd, resolve(argument(p, 0, 'pasta nova de destino'))), exitCode: 0 }; }
+  if (p.command === 'protect') { arity(p, 0); return { result: await enableBranchProtection(p.cwd), exitCode: 0 }; }
+  if (p.command === 'unprotect') { arity(p, 0); return { result: await disableBranchProtection(p.cwd), exitCode: 0 }; }
+  if (p.command === 'migrate') {
+    arity(p, 0);
+    if (!p.flags.has('yes')) throw new CliUsageError('migrate exige --yes explícito. A operação copia o layout legado git-layers para layers, preserva a origem e recusa um destino desconhecido. Teste uma cópia antes de usar em dados reais.');
+    return { result: await migrateLayerLayout(p.cwd, { confirm: true }), exitCode: 0 };
+  }
+  if (p.command === 'off' && p.flags.has('park')) {
+    throw new CliUsageError('--park foi removido por GL-16: faça commit, cancele a desativação ou escolha off <nome> --discard --yes para descartar pendências. Shelves legadas permanecem preservadas.');
+  }
+  if (p.command === 'off' && p.flags.has('yes') && !p.flags.has('discard')) {
+    throw new CliUsageError('--yes em off exige --discard; para uma Layer limpa use off <nome>.');
+  }
   if (p.command === 'init') {
     arity(p, 0);
     await GitLayers.init(p.cwd);
@@ -288,7 +340,33 @@ async function dispatch(p: Parsed): Promise<{ result: unknown; exitCode: number 
     case 'create': arity(p, 1); result = await core.create(argument(p, 0, 'nome da Layer')); break;
     case 'register': arity(p, 1); result = await core.register(argument(p, 0, 'nome da Layer')); break;
     case 'on': arity(p, 1); result = await core.on(argument(p, 0, 'nome da Layer')); break;
-    case 'off': arity(p, 1); result = await core.off(argument(p, 0, 'nome da Layer'), p.flags.has('park')); break;
+    case 'off': {
+      arity(p, 1);
+      const name = argument(p, 0, 'nome da Layer');
+      const discard = p.flags.has('discard');
+      if (discard && !p.flags.has('yes') && !await confirmLayerAction('off', name, await core.preview('off', name), true, p.json)) return { result: { cancelled: true }, exitCode: 0 };
+      result = await core.deactivate(name, { discard });
+      break;
+    }
+    case 'edit': arity(p, 1); result = await core.target(argument(p, 0, 'nome da Layer')); break;
+    case 'edit-end': arity(p, 0); result = await core.target(); break;
+    case 'rename': arity(p, 2); result = await core.renameLayer(argument(p, 0, 'nome da Layer'), argument(p, 1, 'novo nome da Layer')); break;
+    case 'remove': {
+      arity(p, 1);
+      const name = argument(p, 0, 'nome da Layer');
+      const discard = p.flags.has('discard');
+      if (!p.flags.has('yes') && !await confirmLayerAction('remove', name, await core.preview('remove', name), discard, p.json)) return { result: { cancelled: true }, exitCode: 0 };
+      result = await core.removeLayer(name, { discard });
+      break;
+    }
+    case 'preview': {
+      arity(p, 2);
+      const action = argument(p, 0, 'ação (on, off ou remove)');
+      if (action !== 'on' && action !== 'off' && action !== 'remove') throw new CliUsageError('preview aceita somente on, off ou remove.');
+      result = await core.preview(action, argument(p, 1, 'nome da Layer'));
+      break;
+    }
+    case 'open-branch': arity(p, 1); result = await core.openLayerBranch(argument(p, 0, 'nome da Layer')); break;
     case 'status': arity(p, 0, 1); result = await core.status(p.args[0]); break;
     case 'add': arity(p, 1); result = await core.add(argument(p, 0, 'nome da Layer'), paths(p)); break;
     case 'unstage': arity(p, 1); result = await core.unstage(argument(p, 0, 'nome da Layer'), paths(p)); break;
@@ -313,10 +391,8 @@ async function dispatch(p: Parsed): Promise<{ result: unknown; exitCode: number 
     case 'capture-review': arity(p, 0); result = await core.captureReview(); break;
     case 'capture-confirm': arity(p, 0); result = await core.captureConfirm(paths(p)); break;
     case 'capture-cancel': arity(p, 0); result = await core.captureCancel(); break;
-    case 'switch': arity(p, 1); result = await core.switch(argument(p, 0, 'branch tradicional')); break;
-    case 'doctor': arity(p, 0); result = await core.doctor(p.flags.has('fsck')); break;
+    case 'switch': arity(p, 1); result = await core.switch(argument(p, 0, 'branch de destino'), { resumeLayer: !p.flags.has('off-current-layer') }); break;
     case 'recover': arity(p, 0); result = await core.recover(); break;
-    case 'recovery-export': arity(p, 1); result = await core.exportRecovery(resolve(argument(p, 0, 'pasta nova de destino'))); break;
     case 'base-add': arity(p, 0); result = await core.baseStage(paths(p)); break;
     case 'base-unstage': arity(p, 0); result = await core.baseUnstage(paths(p)); break;
     case 'base-commit': arity(p, 0); result = await core.baseCommit(flagValue(p, 'message')); break;

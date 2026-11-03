@@ -1,0 +1,1581 @@
+{
+  "schema": 2,
+  "kind": "published-headless-closure-validation",
+  "state": "LOCAL_VALIDATION_COMPLETE_FRESH_ARCHIVE_PUBLICATION_PENDING",
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v24.14.1",
+    "git": "git version 2.53.0.windows.2",
+    "gitObserver": "Executável oficial instalado, chamado por caminho absoluto e argv registrados na evidência bruta retida; caminhos pessoais omitidos."
+  },
+  "sourceFingerprintDomain": "src/**; tests/unit/**; tests/integration/**; package.json; package-lock.json; tsconfig.json. Os 61 arquivos abaixo pertencem a um domínio do produto, distinto dos manifests de fonte/runner do harness de compatibilidade.",
+  "sourceManifest": [
+    {
+      "path": "package-lock.json",
+      "size": 71753,
+      "sha256": "59f4af4a6d472c2af4334ffd53a7f2a44229080f8906b2bad3ce58c73a16ef7f"
+    },
+    {
+      "path": "package.json",
+      "size": 3185,
+      "sha256": "f5988df1936bf516d79677c00056bc641501f1dbe4a72cdc10f3f50c09dbe4d3"
+    },
+    {
+      "path": "src/cli/index.ts",
+      "size": 25534,
+      "sha256": "73d46cb67989c52eb08ec6bce548573f0a6248898684788f25afd4f021328978"
+    },
+    {
+      "path": "src/core/branch-protection.ts",
+      "size": 17364,
+      "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+    },
+    {
+      "path": "src/core/demo.ts",
+      "size": 6303,
+      "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+    },
+    {
+      "path": "src/core/errors.ts",
+      "size": 467,
+      "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+    },
+    {
+      "path": "src/core/git.ts",
+      "size": 21199,
+      "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+    },
+    {
+      "path": "src/core/ignore.ts",
+      "size": 3269,
+      "sha256": "9e44e2a5e55cac69e154eb62c5a20e16b6038bc110a25318440a056b90d10f2a"
+    },
+    {
+      "path": "src/core/index.ts",
+      "size": 82411,
+      "sha256": "dfa57f964eee9b92cf3783acdba1917ce3cd084e1bc5a2c70b45ffdccad9e42e"
+    },
+    {
+      "path": "src/core/layer-rename.ts",
+      "size": 19188,
+      "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+    },
+    {
+      "path": "src/core/layout.ts",
+      "size": 16173,
+      "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+    },
+    {
+      "path": "src/core/paths.ts",
+      "size": 7365,
+      "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+    },
+    {
+      "path": "src/core/platform.ts",
+      "size": 5247,
+      "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+    },
+    {
+      "path": "src/core/recovery.ts",
+      "size": 13233,
+      "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0"
+    },
+    {
+      "path": "src/core/rescue.ts",
+      "size": 20964,
+      "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d"
+    },
+    {
+      "path": "src/core/storage.ts",
+      "size": 17064,
+      "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+    },
+    {
+      "path": "src/desktop/commands.ts",
+      "size": 11061,
+      "sha256": "09a1145959c4054212f43f733c758748ff9d01006068bccfec2f06a54658fb71"
+    },
+    {
+      "path": "src/desktop/main/index.ts",
+      "size": 24028,
+      "sha256": "d3a57294e06b9f98f34cd0cbd95eba0bbaa219e913398d76fba9b231b57bd9c7"
+    },
+    {
+      "path": "src/desktop/main/terminal-runtime.ts",
+      "size": 1666,
+      "sha256": "ceba6a444a5fb7a26d7515ccb788bbe863ba6d9e6656278945d80b4890559601"
+    },
+    {
+      "path": "src/desktop/main/terminal.ts",
+      "size": 13119,
+      "sha256": "6565a4ba60b78c1cc7f23726829f48b68a294efcbb27e2556a46bc0300fc2c52"
+    },
+    {
+      "path": "src/desktop/preload/index.ts",
+      "size": 2268,
+      "sha256": "92721a2d46925666159be1ce649646bbb437321b21bbd3645aa76aacaf76515b"
+    },
+    {
+      "path": "src/desktop/renderer/App.tsx",
+      "size": 51564,
+      "sha256": "ff6e78ccaa578b748a07fbfe7d90078259135813e3a0d6974fea4e1729db06f1"
+    },
+    {
+      "path": "src/desktop/renderer/CommandPanel.tsx",
+      "size": 5585,
+      "sha256": "46d732e169c31914ba3eff98c51a8e061b5997c010c146c5203ef23dc043f3b4"
+    },
+    {
+      "path": "src/desktop/renderer/Editor.tsx",
+      "size": 6624,
+      "sha256": "efb64c55a217173da63fa9b5d81feda9a494cfbf93d88c5cb91e18caccbb776e"
+    },
+    {
+      "path": "src/desktop/renderer/FileExplorer.tsx",
+      "size": 17691,
+      "sha256": "1884071e0c5405263bc8f1cc5574b1ac8a94eeed8c99922a4146a9e0f67a9d53"
+    },
+    {
+      "path": "src/desktop/renderer/FileIcon.tsx",
+      "size": 1732,
+      "sha256": "15afc7ab5d01be1e6cfdcfbd927aa06b766e39f15fbfb4586516572f82ed86b1"
+    },
+    {
+      "path": "src/desktop/renderer/TerminalPanel.tsx",
+      "size": 8183,
+      "sha256": "4dc3f5a48b4d3bd9f66867b6b41f2794b4fe655f8b9e16376fbed437369398f6"
+    },
+    {
+      "path": "src/desktop/renderer/explorer-tree.ts",
+      "size": 2804,
+      "sha256": "5f867f21842f2901e13222615fcecb8aab7be530800ab147a1bfdd39128fbd75"
+    },
+    {
+      "path": "src/desktop/renderer/explorer.css",
+      "size": 11118,
+      "sha256": "c1ed313e643057aa73226be6c5c38d79172e6c9a0516c963a496c05360bd6f8c"
+    },
+    {
+      "path": "src/desktop/renderer/file-decorations.ts",
+      "size": 2782,
+      "sha256": "96ef5ca7a8ce4ff1b1103b120256365560c6d14deee75cfed793b10995b78474"
+    },
+    {
+      "path": "src/desktop/renderer/index.html",
+      "size": 566,
+      "sha256": "1e2c5916b70a2823f1ccf35442e2fb9954abf2ca895d2170bacab81d8ba2ac1b"
+    },
+    {
+      "path": "src/desktop/renderer/index.tsx",
+      "size": 1120,
+      "sha256": "31ea30c611445f095c42d2c5166f5dd1a91ae6f8d896768b7bc7527cecaaba9c"
+    },
+    {
+      "path": "src/desktop/renderer/style.css",
+      "size": 19043,
+      "sha256": "4ef542b1e41717bb5c54e52f25db4b840486716d80ce4d9f6521bef8ce07438b"
+    },
+    {
+      "path": "src/desktop/renderer/terminal.css",
+      "size": 3635,
+      "sha256": "f9d35c8a37eec94b8ef4a257d9612359f5a1d9da733d80ca68e40888eb9fa670"
+    },
+    {
+      "path": "src/desktop/renderer/vite-env.d.ts",
+      "size": 38,
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    {
+      "path": "src/desktop/shared.ts",
+      "size": 2270,
+      "sha256": "066d050eee90eee62d49978e2edf202cea21622e6060913acf6d043dd1db514b"
+    },
+    {
+      "path": "tests/integration/branch-protection.test.ts",
+      "size": 12986,
+      "sha256": "5d27f0c0ae2862ccfbc25a95ed6574e9725cfa9a2ce89312de48a8cb60c73921"
+    },
+    {
+      "path": "tests/integration/cli.test.ts",
+      "size": 9371,
+      "sha256": "aa5a7e7ded5bfedfd5155c74b8183f52cb2357a0a68921c6416b8028f53170cc"
+    },
+    {
+      "path": "tests/integration/core.test.ts",
+      "size": 43966,
+      "sha256": "ba72ca0e898156d6e96a18f37559eb9be440f56ee7c8dfb0eb48e4f03d4594b1"
+    },
+    {
+      "path": "tests/integration/editor.test.ts",
+      "size": 7987,
+      "sha256": "651b5fc226a99bc7c60fa0332622fb6e582b89746037cf0f970d02a746f2956b"
+    },
+    {
+      "path": "tests/integration/layout-rescue.test.ts",
+      "size": 27430,
+      "sha256": "c2efa89c16c8a000465b4310ba563b3144522c7404f3ff72d49ebfe0772947a8"
+    },
+    {
+      "path": "tests/integration/product-v1.test.ts",
+      "size": 49695,
+      "sha256": "66634ebe1307358b0712cdcc05392b68bb9c9b128f4710b04082665d2b0aeb90"
+    },
+    {
+      "path": "tests/integration/recovery.test.ts",
+      "size": 7548,
+      "sha256": "290178554347eb5fda52469bd2e55b3d3d48a05233e1f84f3a7649cc960722b7"
+    },
+    {
+      "path": "tests/integration/review-rename.test.ts",
+      "size": 18585,
+      "sha256": "41be4e09a34b5bff366ed0e122b7fac5ee457984ee655db58c1662a9ae5d6ecc"
+    },
+    {
+      "path": "tests/integration/review-target-preview.test.ts",
+      "size": 11129,
+      "sha256": "750c52f8b085c02d55371d52ee694332e67df8ee0a6c383679f365c2391318a2"
+    },
+    {
+      "path": "tests/integration/storage.test.ts",
+      "size": 8172,
+      "sha256": "e366e9c90f964e98694a24d39a68fd18b27decb1fa1db5de04033ffd11eb11a1"
+    },
+    {
+      "path": "tests/integration/terminal-runtime.test.mjs",
+      "size": 1391,
+      "sha256": "4d4d88f179218df1130f6e6c68ccbfed57d863cb67611cc4600ac44b8ed9d877"
+    },
+    {
+      "path": "tests/integration/windows-compat.test.ts",
+      "size": 8020,
+      "sha256": "02c71adece946b6ef88ede3de2f4001030b74308608dd03d7559356bafcca722"
+    },
+    {
+      "path": "tests/unit/archive-local-evidence.test.mjs",
+      "size": 6984,
+      "sha256": "391993d0d2e8e32cfab0df141159982a0b36d5a9db70069d4cd82ee79d558920"
+    },
+    {
+      "path": "tests/unit/development-inputs.test.mjs",
+      "size": 1681,
+      "sha256": "907f375e3b26a0011d21a98baf1304e2999183704747f5dc663f13c2bd20a576"
+    },
+    {
+      "path": "tests/unit/e2e-wait.test.mjs",
+      "size": 484,
+      "sha256": "4018025c0637d3df26c6085b8ff8ad50943700a4ff3e90751d6cfbb58503165f"
+    },
+    {
+      "path": "tests/unit/explorer-tree.test.ts",
+      "size": 2165,
+      "sha256": "088dfdc1ed4bcb167045f7cf64699a7d7b7236f3feae6288ca03ea4204608af8"
+    },
+    {
+      "path": "tests/unit/file-decorations.test.ts",
+      "size": 3200,
+      "sha256": "d2399ae3287010f84eb37e9590ef3159247eb856d305833b258dc11a43179f6c"
+    },
+    {
+      "path": "tests/unit/implementation-cli.test.mjs",
+      "size": 2585,
+      "sha256": "a89332cf0b964f323c0a3a9bbfe153f4cd699050daa6d00ffeda1299c308c6c6"
+    },
+    {
+      "path": "tests/unit/paths.test.ts",
+      "size": 3524,
+      "sha256": "cce671c168a0b2ae671405412c787bb43e2be8bb21396366d36a62f124140c0e"
+    },
+    {
+      "path": "tests/unit/platform.test.ts",
+      "size": 4262,
+      "sha256": "9cdc4ca86ff15c20b03ccf636d6eb357c1f8c36aa80b3ba05519e802fece6463"
+    },
+    {
+      "path": "tests/unit/terminal-commands.test.ts",
+      "size": 5721,
+      "sha256": "fe72720b40a0c47ff88d4ed71ac9bb441ac6d98309d11df49ccd78a85b30a1ce"
+    },
+    {
+      "path": "tests/unit/terminal.test.ts",
+      "size": 9645,
+      "sha256": "314e922dd7b5f9d986b58ef354118286c95a9f0c87cddbd4e6b29ce31774ecc2"
+    },
+    {
+      "path": "tests/unit/windows-package.test.mjs",
+      "size": 7055,
+      "sha256": "f872eeace1024f03fd0db7366ca88765ffcfc62b959af191b03e4c193aae9cb7"
+    },
+    {
+      "path": "tests/unit/workshop-ui.test.mjs",
+      "size": 1868,
+      "sha256": "a20c465cc80a3ea7a79874419b3b58f325b3a4c16b9762a10fc23c0db272fa10"
+    },
+    {
+      "path": "tsconfig.json",
+      "size": 531,
+      "sha256": "6eba14f6b676de3b3ae28516f6c37d88f63eaa4618c1743dae7f4eb10af4be50"
+    }
+  ],
+  "sourceManifestRole": "Snapshot de full-final-02; o histórico ce8f abaixo conserva seu manifesto próprio.",
+  "sourceManifestSharedByRuns": true,
+  "runs": [
+    {
+      "id": "typecheck-final-02",
+      "command": "npm.cmd run typecheck",
+      "exitCode": 0,
+      "durationMs": 2751,
+      "sourceFingerprint": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6",
+      "sourceFingerprintAfter": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6",
+      "sourceUnchanged": true,
+      "rawResultSHA256": "52c910b07e538c2536102ebf7a734eb74b87bd435c0b514e95b0d061c34140c6",
+      "manifestSHA256": "3b55af6bce70b1558ff7f15aa3b3992e8aad1fccd92e57f78c48ea94118dd49a",
+      "afterManifestSHA256": "3b55af6bce70b1558ff7f15aa3b3992e8aad1fccd92e57f78c48ea94118dd49a",
+      "wrapperSHA256": "cf6fb69e941f3b7c1d64d068a56603ecc628c63bb57ba0e6d28abeceb7410da5"
+    },
+    {
+      "id": "full-final-02",
+      "command": "npm.cmd test",
+      "process": {
+        "executableRole": "Node/npm pelo processador de comandos Windows; caminho absoluto privado omitido.",
+        "argv": [
+          "/d",
+          "/s",
+          "/c",
+          "npm.cmd test"
+        ],
+        "cwd": "<PROJECT>",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false,
+        "timeoutMs": 2400000,
+        "outputTruncated": false,
+        "started": "2026-11-03T00:28:00.234Z",
+        "finished": "2026-11-03T00:56:56.266Z",
+        "durationMs": 1736013
+      },
+      "counts": {
+        "tests": 229,
+        "passed": 225,
+        "failed": 0,
+        "skipped": 4,
+        "cancelled": 0,
+        "todo": 0
+      },
+      "nodeReportedDurationMs": 1735498.6694,
+      "sourceFingerprint": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6",
+      "sourceFingerprintAfter": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6",
+      "sourceUnchanged": true,
+      "sourceFiles": 61,
+      "wrapperSHA256": "cf6fb69e941f3b7c1d64d068a56603ecc628c63bb57ba0e6d28abeceb7410da5",
+      "manifestSHA256": "3b55af6bce70b1558ff7f15aa3b3992e8aad1fccd92e57f78c48ea94118dd49a",
+      "afterManifestSHA256": "3b55af6bce70b1558ff7f15aa3b3992e8aad1fccd92e57f78c48ea94118dd49a",
+      "rawResultSHA256": "babc24a002a123f1ed861b743419793308eaf4bd4b738a009f7fcfecbb9d9f09",
+      "rawStdoutSHA256": "f68b7c2a20176b0ac8c0605d332e34c161970663daf7d905a76b752c121a6474",
+      "fixtureRetained": false
+    },
+    {
+      "id": "infra-final-02",
+      "command": "npm.cmd run compat:infra",
+      "process": {
+        "executableRole": "Node/npm pelo processador de comandos Windows; caminho absoluto privado omitido.",
+        "argv": [
+          "/d",
+          "/s",
+          "/c",
+          "npm.cmd run compat:infra"
+        ],
+        "cwd": "<PROJECT>",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false,
+        "timeoutMs": 2400000,
+        "outputTruncated": false,
+        "started": "2026-11-03T00:58:18.733Z",
+        "finished": "2026-11-03T00:59:44.442Z",
+        "durationMs": 85691
+      },
+      "counts": {
+        "tests": 111,
+        "passed": 111,
+        "failed": 0,
+        "skipped": 0,
+        "cancelled": 0,
+        "todo": 0
+      },
+      "nodeReportedDurationMs": 85143.9393,
+      "sourceFingerprint": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6",
+      "sourceFingerprintAfter": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6",
+      "sourceUnchanged": true,
+      "sourceFiles": 61,
+      "wrapperSHA256": "cf6fb69e941f3b7c1d64d068a56603ecc628c63bb57ba0e6d28abeceb7410da5",
+      "manifestSHA256": "3b55af6bce70b1558ff7f15aa3b3992e8aad1fccd92e57f78c48ea94118dd49a",
+      "afterManifestSHA256": "3b55af6bce70b1558ff7f15aa3b3992e8aad1fccd92e57f78c48ea94118dd49a",
+      "rawResultSHA256": "ae9d02db7aea4b25b81f6ace076ebb7df5b968e552ddc2a082832db2b97bee4c",
+      "rawStdoutSHA256": "ec8024bba85f628d541aaad1da3b6bcafbec6d472b40141517e3afc80e94abc4",
+      "fixtureRetained": false
+    }
+  ],
+  "skips": [
+    {
+      "test": "symlink file and paths through symlink directories are never adopted",
+      "status": "SKIP",
+      "durationMs": 6960.5364,
+      "reportedReason": "Windows account cannot create symlinks; junction coverage runs separately.",
+      "classification": "WINDOWS_SYMLINK_CREATION_PERMISSION_EPERM",
+      "qualification": "A conta não pôde criar o symlink; junctions têm verificação separada."
+    },
+    {
+      "test": "recovery cannot overwrite journals, arbitrary Git internals or symlink targets",
+      "status": "SKIP",
+      "durationMs": 184.2677,
+      "reportedReason": "Windows account cannot create symlinks.",
+      "classification": "WINDOWS_SYMLINK_CREATION_PERMISSION_EPERM",
+      "qualification": "A conta não pôde criar o symlink; junctions têm verificação separada."
+    },
+    {
+      "test": "storage refuses symlink sources, destinations and parent directories",
+      "status": "SKIP",
+      "durationMs": 4.0386,
+      "reportedReason": "Windows account cannot create symlinks.",
+      "classification": "WINDOWS_SYMLINK_CREATION_PERMISSION_EPERM",
+      "qualification": "A conta não pôde criar o symlink; junctions têm verificação separada."
+    },
+    {
+      "test": "terminal: Bash real preserva argumentos e não avalia metacaracteres da mensagem",
+      "status": "SKIP",
+      "durationMs": 0.0955,
+      "reportedReason": "Roundtrip Bash do host; o fluxo PowerShell tem verificação separada.",
+      "classification": "OMITTED_BY_WIN32_PLATFORM_PROFILE_NOT_MISSING_EXECUTABLE",
+      "qualification": "O teste omite o roundtrip em win32; Git Bash existe. Não é ausência do executável."
+    }
+  ],
+  "reviewCoverage": {
+    "R05": {
+      "source": "tests/integration/review-rename.test.ts",
+      "tests": [
+        {
+          "test": "R05 branch rename preserves upstream description custom config and complete reflog",
+          "status": "PASS",
+          "durationMs": 11299.0439,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 occupied destination ref config empty section reflog and config lock are refused without effects",
+          "status": "PASS",
+          "durationMs": 21278.692,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 active editing destination staged index and protection retain ownership and other active layers",
+          "status": "PASS",
+          "durationMs": 44922.6982,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 working branch and external branch config scopes are refused before rename effects",
+          "status": "PASS",
+          "durationMs": 14370.4085,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 interruption after-rename-copy restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 34353.4652,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 interruption after-rename-retire restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 34671.3325,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 interruption after-rename-config restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 35421.1857,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 interruption after-layer-ref-change restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 34381.8593,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 interruption after-layer-rename-protection restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 36396.4725,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 interruption after-layer-rename-metadata restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 36716.4862,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 interruption before durable copied snapshot conservatively preserves both branches and backups",
+          "status": "PASS",
+          "durationMs": 9683.8097,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 recovery preserves later external config and CAS never deletes advanced source",
+          "status": "PASS",
+          "durationMs": 10626.0131,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 recovery preserves later external target-ref and CAS never deletes advanced source",
+          "status": "PASS",
+          "durationMs": 10455.2424,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 recovery preserves later external source-ref and CAS never deletes advanced source",
+          "status": "PASS",
+          "durationMs": 11056.4351,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 recovery preserves later external target-reflog and CAS never deletes advanced source",
+          "status": "PASS",
+          "durationMs": 10608.1279,
+          "reportedReason": null
+        },
+        {
+          "test": "R05 nested Unicode rename preserves native absence of config section and disabled reflog",
+          "status": "PASS",
+          "durationMs": 11461.6119,
+          "reportedReason": null
+        }
+      ],
+      "qualification": "16/16 PASS juntos em full-final-02, sem soma de snapshots."
+    },
+    "R02R03": {
+      "source": "tests/integration/review-target-preview.test.ts",
+      "tests": [
+        {
+          "test": "R02 target preserves ignored intention from info",
+          "status": "PASS",
+          "durationMs": 30252.7579,
+          "reportedReason": null
+        },
+        {
+          "test": "R02 target preserves ignored intention from global",
+          "status": "PASS",
+          "durationMs": 29600.0362,
+          "reportedReason": null
+        },
+        {
+          "test": "R02 target preserves ignored intention from gitignore",
+          "status": "PASS",
+          "durationMs": 29779.7182,
+          "reportedReason": null
+        },
+        {
+          "test": "R03 preview off includes target newcomers without synchronizing metadata",
+          "status": "PASS",
+          "durationMs": 22794.6866,
+          "reportedReason": null
+        },
+        {
+          "test": "R03 preview remove includes target newcomers without synchronizing metadata",
+          "status": "PASS",
+          "durationMs": 21824.0387,
+          "reportedReason": null
+        },
+        {
+          "test": "R02 native ignore evaluation preserves negations, hierarchy and last-rule priority",
+          "status": "PASS",
+          "durationMs": 9803.9742,
+          "reportedReason": null
+        }
+      ],
+      "qualification": "6/6 PASS juntos em full-final-02, sem soma de snapshots."
+    },
+    "archiveTool": {
+      "source": "tests/unit/archive-local-evidence.test.mjs",
+      "tests": [
+        {
+          "test": "archive inventory is read-only; atomic move preserves exact file bytes and identities",
+          "status": "PASS",
+          "durationMs": 39.953,
+          "reportedReason": null
+        },
+        {
+          "test": "archive refuses protected source, occupied destination, traversal and overlap before any move",
+          "status": "PASS",
+          "durationMs": 21.2088,
+          "reportedReason": null
+        },
+        {
+          "test": "archive refuses unowned nested Git data; recognizes explicit nonce ancestry for owned fixtures",
+          "status": "PASS",
+          "durationMs": 39.3021,
+          "reportedReason": null
+        },
+        {
+          "test": "archive refuses symlinks and archive inside project without following data",
+          "status": "PASS",
+          "durationMs": 10.4379,
+          "reportedReason": null
+        },
+        {
+          "test": "archive rejects destination junction before creating paths or operation records",
+          "status": "PASS",
+          "durationMs": 11.2184,
+          "reportedReason": null
+        },
+        {
+          "test": "archive rejects operation-record junction before writes or source moves",
+          "status": "PASS",
+          "durationMs": 13.6648,
+          "reportedReason": null
+        }
+      ],
+      "observations": [
+        {
+          "linkedDestinationRefused": true,
+          "sourceUnchanged": true,
+          "outsideNames": [
+            "existing.txt"
+          ],
+          "operationRecords": 0
+        },
+        {
+          "recordDestinationRefused": true,
+          "sourcePresent": true,
+          "destinationPresent": false,
+          "outsideFiles": 1
+        }
+      ],
+      "qualification": "6/6 PASS juntos, incluindo os dois controles reais de junction. Isso não comprova limpeza do checkout."
+    },
+    "R01Directed": {
+      "runId": "run-2026-11-02T22-47-07-078Z-7bc1dcdb",
+      "command": "node scripts/git-compat/runner.mjs --suite all --module product,product-extra,additional,implementation --id COMMIT-014,LAYER-010,LAYER-015,LAYER-016,RECOVERY-009,MODEL-003,MODEL-006,MODEL-007,MODEL-009,LAYOUT-012,IMPL-004 --jobs 1 --seed 20261102 --out <NEW_EVIDENCE_DIRECTORY>",
+      "exitCode": 0,
+      "selectedVariants": 15,
+      "passed": 15,
+      "executedScenarioIds": 11,
+      "durationMs": 518081,
+      "recordedHarnessCommands": 834,
+      "commandCountQualification": "834 são comandos registrados pelo harness, não a contagem de todos os processos Git internos de cada chamada CLI.",
+      "sourceFingerprint": "41c28c7186257d5d81b619a7b4f983a89334a8ff2c27c05d485e4ecab98355da",
+      "runnerFingerprint": "41dc2a804478757dc1e7e3f316d55d6ba2d466f9ac9314ba697d7de8e280a50b",
+      "sourceUnchanged": true,
+      "runnerUnchanged": true,
+      "summarySHA256": "503d68fc0c27352e390029b23a799a15b316eb86c419c4d9332ae4f5ada7c2d6",
+      "resultsSHA256": "d5196e8ed3bd23cac37192b22f16b92afa4403d536fa3e97e387170727bd45f4",
+      "interactiveVariant": "IMPL-004/interactive-newcomer-preview-cancel-confirm",
+      "interactiveObserved": "Cancelamento ConPTY real preservou metadata/exclude/config/refs/índices físicos e semânticos/worktree; a confirmação explícita posterior retirou apenas a Layer selecionada e o newcomer, preservando outras origens."
+    }
+  },
+  "historicalSnapshots": [
+    {
+      "id": "full-final-01-related-runs",
+      "sourceManifest": [
+        {
+          "path": "package-lock.json",
+          "size": 71753,
+          "sha256": "59f4af4a6d472c2af4334ffd53a7f2a44229080f8906b2bad3ce58c73a16ef7f"
+        },
+        {
+          "path": "package.json",
+          "size": 3185,
+          "sha256": "f5988df1936bf516d79677c00056bc641501f1dbe4a72cdc10f3f50c09dbe4d3"
+        },
+        {
+          "path": "src/cli/index.ts",
+          "size": 25534,
+          "sha256": "73d46cb67989c52eb08ec6bce548573f0a6248898684788f25afd4f021328978"
+        },
+        {
+          "path": "src/core/branch-protection.ts",
+          "size": 17364,
+          "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+        },
+        {
+          "path": "src/core/demo.ts",
+          "size": 6303,
+          "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+        },
+        {
+          "path": "src/core/errors.ts",
+          "size": 467,
+          "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+        },
+        {
+          "path": "src/core/git.ts",
+          "size": 21199,
+          "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+        },
+        {
+          "path": "src/core/ignore.ts",
+          "size": 3269,
+          "sha256": "9e44e2a5e55cac69e154eb62c5a20e16b6038bc110a25318440a056b90d10f2a"
+        },
+        {
+          "path": "src/core/index.ts",
+          "size": 82411,
+          "sha256": "dfa57f964eee9b92cf3783acdba1917ce3cd084e1bc5a2c70b45ffdccad9e42e"
+        },
+        {
+          "path": "src/core/layer-rename.ts",
+          "size": 19188,
+          "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+        },
+        {
+          "path": "src/core/layout.ts",
+          "size": 16173,
+          "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+        },
+        {
+          "path": "src/core/paths.ts",
+          "size": 7365,
+          "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+        },
+        {
+          "path": "src/core/platform.ts",
+          "size": 5247,
+          "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "size": 13233,
+          "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0"
+        },
+        {
+          "path": "src/core/rescue.ts",
+          "size": 20964,
+          "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d"
+        },
+        {
+          "path": "src/core/storage.ts",
+          "size": 17064,
+          "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+        },
+        {
+          "path": "src/desktop/commands.ts",
+          "size": 11061,
+          "sha256": "09a1145959c4054212f43f733c758748ff9d01006068bccfec2f06a54658fb71"
+        },
+        {
+          "path": "src/desktop/main/index.ts",
+          "size": 24028,
+          "sha256": "d3a57294e06b9f98f34cd0cbd95eba0bbaa219e913398d76fba9b231b57bd9c7"
+        },
+        {
+          "path": "src/desktop/main/terminal-runtime.ts",
+          "size": 1666,
+          "sha256": "ceba6a444a5fb7a26d7515ccb788bbe863ba6d9e6656278945d80b4890559601"
+        },
+        {
+          "path": "src/desktop/main/terminal.ts",
+          "size": 13119,
+          "sha256": "6565a4ba60b78c1cc7f23726829f48b68a294efcbb27e2556a46bc0300fc2c52"
+        },
+        {
+          "path": "src/desktop/preload/index.ts",
+          "size": 2268,
+          "sha256": "92721a2d46925666159be1ce649646bbb437321b21bbd3645aa76aacaf76515b"
+        },
+        {
+          "path": "src/desktop/renderer/App.tsx",
+          "size": 51564,
+          "sha256": "ff6e78ccaa578b748a07fbfe7d90078259135813e3a0d6974fea4e1729db06f1"
+        },
+        {
+          "path": "src/desktop/renderer/CommandPanel.tsx",
+          "size": 5585,
+          "sha256": "46d732e169c31914ba3eff98c51a8e061b5997c010c146c5203ef23dc043f3b4"
+        },
+        {
+          "path": "src/desktop/renderer/Editor.tsx",
+          "size": 6624,
+          "sha256": "efb64c55a217173da63fa9b5d81feda9a494cfbf93d88c5cb91e18caccbb776e"
+        },
+        {
+          "path": "src/desktop/renderer/FileExplorer.tsx",
+          "size": 17691,
+          "sha256": "1884071e0c5405263bc8f1cc5574b1ac8a94eeed8c99922a4146a9e0f67a9d53"
+        },
+        {
+          "path": "src/desktop/renderer/FileIcon.tsx",
+          "size": 1732,
+          "sha256": "15afc7ab5d01be1e6cfdcfbd927aa06b766e39f15fbfb4586516572f82ed86b1"
+        },
+        {
+          "path": "src/desktop/renderer/TerminalPanel.tsx",
+          "size": 8183,
+          "sha256": "4dc3f5a48b4d3bd9f66867b6b41f2794b4fe655f8b9e16376fbed437369398f6"
+        },
+        {
+          "path": "src/desktop/renderer/explorer-tree.ts",
+          "size": 2804,
+          "sha256": "5f867f21842f2901e13222615fcecb8aab7be530800ab147a1bfdd39128fbd75"
+        },
+        {
+          "path": "src/desktop/renderer/explorer.css",
+          "size": 11118,
+          "sha256": "c1ed313e643057aa73226be6c5c38d79172e6c9a0516c963a496c05360bd6f8c"
+        },
+        {
+          "path": "src/desktop/renderer/file-decorations.ts",
+          "size": 2782,
+          "sha256": "96ef5ca7a8ce4ff1b1103b120256365560c6d14deee75cfed793b10995b78474"
+        },
+        {
+          "path": "src/desktop/renderer/index.html",
+          "size": 566,
+          "sha256": "1e2c5916b70a2823f1ccf35442e2fb9954abf2ca895d2170bacab81d8ba2ac1b"
+        },
+        {
+          "path": "src/desktop/renderer/index.tsx",
+          "size": 1120,
+          "sha256": "31ea30c611445f095c42d2c5166f5dd1a91ae6f8d896768b7bc7527cecaaba9c"
+        },
+        {
+          "path": "src/desktop/renderer/style.css",
+          "size": 19043,
+          "sha256": "4ef542b1e41717bb5c54e52f25db4b840486716d80ce4d9f6521bef8ce07438b"
+        },
+        {
+          "path": "src/desktop/renderer/terminal.css",
+          "size": 3635,
+          "sha256": "f9d35c8a37eec94b8ef4a257d9612359f5a1d9da733d80ca68e40888eb9fa670"
+        },
+        {
+          "path": "src/desktop/renderer/vite-env.d.ts",
+          "size": 38,
+          "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+        },
+        {
+          "path": "src/desktop/shared.ts",
+          "size": 2270,
+          "sha256": "066d050eee90eee62d49978e2edf202cea21622e6060913acf6d043dd1db514b"
+        },
+        {
+          "path": "tests/integration/branch-protection.test.ts",
+          "size": 12986,
+          "sha256": "5d27f0c0ae2862ccfbc25a95ed6574e9725cfa9a2ce89312de48a8cb60c73921"
+        },
+        {
+          "path": "tests/integration/cli.test.ts",
+          "size": 9371,
+          "sha256": "aa5a7e7ded5bfedfd5155c74b8183f52cb2357a0a68921c6416b8028f53170cc"
+        },
+        {
+          "path": "tests/integration/core.test.ts",
+          "size": 43966,
+          "sha256": "ba72ca0e898156d6e96a18f37559eb9be440f56ee7c8dfb0eb48e4f03d4594b1"
+        },
+        {
+          "path": "tests/integration/editor.test.ts",
+          "size": 7987,
+          "sha256": "651b5fc226a99bc7c60fa0332622fb6e582b89746037cf0f970d02a746f2956b"
+        },
+        {
+          "path": "tests/integration/layout-rescue.test.ts",
+          "size": 27430,
+          "sha256": "c2efa89c16c8a000465b4310ba563b3144522c7404f3ff72d49ebfe0772947a8"
+        },
+        {
+          "path": "tests/integration/product-v1.test.ts",
+          "size": 49695,
+          "sha256": "66634ebe1307358b0712cdcc05392b68bb9c9b128f4710b04082665d2b0aeb90"
+        },
+        {
+          "path": "tests/integration/recovery.test.ts",
+          "size": 7548,
+          "sha256": "290178554347eb5fda52469bd2e55b3d3d48a05233e1f84f3a7649cc960722b7"
+        },
+        {
+          "path": "tests/integration/review-rename.test.ts",
+          "size": 18585,
+          "sha256": "41be4e09a34b5bff366ed0e122b7fac5ee457984ee655db58c1662a9ae5d6ecc"
+        },
+        {
+          "path": "tests/integration/review-target-preview.test.ts",
+          "size": 11129,
+          "sha256": "750c52f8b085c02d55371d52ee694332e67df8ee0a6c383679f365c2391318a2"
+        },
+        {
+          "path": "tests/integration/storage.test.ts",
+          "size": 8172,
+          "sha256": "e366e9c90f964e98694a24d39a68fd18b27decb1fa1db5de04033ffd11eb11a1"
+        },
+        {
+          "path": "tests/integration/terminal-runtime.test.mjs",
+          "size": 1391,
+          "sha256": "4d4d88f179218df1130f6e6c68ccbfed57d863cb67611cc4600ac44b8ed9d877"
+        },
+        {
+          "path": "tests/integration/windows-compat.test.ts",
+          "size": 8020,
+          "sha256": "02c71adece946b6ef88ede3de2f4001030b74308608dd03d7559356bafcca722"
+        },
+        {
+          "path": "tests/unit/archive-local-evidence.test.mjs",
+          "size": 4031,
+          "sha256": "3c7f071be7c781b04b0b3607020f2d9fb457967931b6b0ccef1d27d4da427663"
+        },
+        {
+          "path": "tests/unit/development-inputs.test.mjs",
+          "size": 1681,
+          "sha256": "907f375e3b26a0011d21a98baf1304e2999183704747f5dc663f13c2bd20a576"
+        },
+        {
+          "path": "tests/unit/e2e-wait.test.mjs",
+          "size": 484,
+          "sha256": "4018025c0637d3df26c6085b8ff8ad50943700a4ff3e90751d6cfbb58503165f"
+        },
+        {
+          "path": "tests/unit/explorer-tree.test.ts",
+          "size": 2165,
+          "sha256": "088dfdc1ed4bcb167045f7cf64699a7d7b7236f3feae6288ca03ea4204608af8"
+        },
+        {
+          "path": "tests/unit/file-decorations.test.ts",
+          "size": 3200,
+          "sha256": "d2399ae3287010f84eb37e9590ef3159247eb856d305833b258dc11a43179f6c"
+        },
+        {
+          "path": "tests/unit/implementation-cli.test.mjs",
+          "size": 2585,
+          "sha256": "a89332cf0b964f323c0a3a9bbfe153f4cd699050daa6d00ffeda1299c308c6c6"
+        },
+        {
+          "path": "tests/unit/paths.test.ts",
+          "size": 3524,
+          "sha256": "cce671c168a0b2ae671405412c787bb43e2be8bb21396366d36a62f124140c0e"
+        },
+        {
+          "path": "tests/unit/platform.test.ts",
+          "size": 4262,
+          "sha256": "9cdc4ca86ff15c20b03ccf636d6eb357c1f8c36aa80b3ba05519e802fece6463"
+        },
+        {
+          "path": "tests/unit/terminal-commands.test.ts",
+          "size": 5721,
+          "sha256": "fe72720b40a0c47ff88d4ed71ac9bb441ac6d98309d11df49ccd78a85b30a1ce"
+        },
+        {
+          "path": "tests/unit/terminal.test.ts",
+          "size": 9645,
+          "sha256": "314e922dd7b5f9d986b58ef354118286c95a9f0c87cddbd4e6b29ce31774ecc2"
+        },
+        {
+          "path": "tests/unit/windows-package.test.mjs",
+          "size": 7055,
+          "sha256": "f872eeace1024f03fd0db7366ca88765ffcfc62b959af191b03e4c193aae9cb7"
+        },
+        {
+          "path": "tests/unit/workshop-ui.test.mjs",
+          "size": 1868,
+          "sha256": "a20c465cc80a3ea7a79874419b3b58f325b3a4c16b9762a10fc23c0db272fa10"
+        },
+        {
+          "path": "tsconfig.json",
+          "size": 531,
+          "sha256": "6eba14f6b676de3b3ae28516f6c37d88f63eaa4618c1743dae7f4eb10af4be50"
+        }
+      ],
+      "runs": [
+        {
+          "id": "typecheck-final-01",
+          "command": "npm.cmd run typecheck",
+          "process": {
+            "executableRole": "Node/npm pelo processador de comandos Windows; caminho absoluto do host retido na evidência bruta privada",
+            "argv": [
+              "/d",
+              "/s",
+              "/c",
+              "npm.cmd run typecheck"
+            ],
+            "cwd": "<PROJECT>",
+            "exitCode": 0,
+            "signal": null,
+            "timedOut": false,
+            "timeoutMs": 2400000,
+            "outputTruncated": false,
+            "started": "2026-11-02T22:44:54.613Z",
+            "finished": "2026-11-02T22:44:57.907Z",
+            "durationMs": 3272
+          },
+          "counts": {
+            "tests": null,
+            "passed": null,
+            "failed": null,
+            "skipped": null,
+            "cancelled": null,
+            "todo": null
+          },
+          "sourceFingerprint": "ce8f35a75b2a24d7177fe2bb3845a2d729aec768acbd92b0d2a0f2bfe407e718",
+          "sourceFingerprintAfter": "ce8f35a75b2a24d7177fe2bb3845a2d729aec768acbd92b0d2a0f2bfe407e718",
+          "sourceUnchanged": true,
+          "wrapperSHA256": "cf6fb69e941f3b7c1d64d068a56603ecc628c63bb57ba0e6d28abeceb7410da5",
+          "manifestSHA256": "18a76ffdd24583efbc0d86c84250bd5a439a7e2bf6838cf4a44458c06f4b18e2",
+          "afterManifestSHA256": "18a76ffdd24583efbc0d86c84250bd5a439a7e2bf6838cf4a44458c06f4b18e2",
+          "rawResultSHA256": "3377a1dbca8c087bbe08a4bd2647ac04fc905a2cf5ba1b2b08eab70ce5ee25e0",
+          "rawStdoutSHA256": "ecb81c9c522dec2248cc36080a909806788ded89cdff6e2b474af21e693c9d8a",
+          "sourceFiles": 61,
+          "fixtureRetained": false
+        },
+        {
+          "id": "full-final-01",
+          "command": "npm.cmd test",
+          "process": {
+            "executableRole": "Node/npm pelo processador de comandos Windows; caminho absoluto do host retido na evidência bruta privada",
+            "argv": [
+              "/d",
+              "/s",
+              "/c",
+              "npm.cmd test"
+            ],
+            "cwd": "<PROJECT>",
+            "exitCode": 0,
+            "signal": null,
+            "timedOut": false,
+            "timeoutMs": 2400000,
+            "outputTruncated": false,
+            "started": "2026-11-02T22:56:22.595Z",
+            "finished": "2026-11-02T23:26:03.263Z",
+            "durationMs": 1780650
+          },
+          "counts": {
+            "tests": 227,
+            "passed": 223,
+            "failed": 0,
+            "skipped": 4,
+            "cancelled": 0,
+            "todo": 0
+          },
+          "sourceFingerprint": "ce8f35a75b2a24d7177fe2bb3845a2d729aec768acbd92b0d2a0f2bfe407e718",
+          "sourceFingerprintAfter": "ce8f35a75b2a24d7177fe2bb3845a2d729aec768acbd92b0d2a0f2bfe407e718",
+          "sourceUnchanged": true,
+          "wrapperSHA256": "cf6fb69e941f3b7c1d64d068a56603ecc628c63bb57ba0e6d28abeceb7410da5",
+          "manifestSHA256": "18a76ffdd24583efbc0d86c84250bd5a439a7e2bf6838cf4a44458c06f4b18e2",
+          "afterManifestSHA256": "18a76ffdd24583efbc0d86c84250bd5a439a7e2bf6838cf4a44458c06f4b18e2",
+          "rawResultSHA256": "e264d99269f07261401b9e1a3d1fd2531e1ecfb2518a7a5d742e758511c8e561",
+          "rawStdoutSHA256": "6b856a48fd704aed668db82e8a8d1e11955f95999f3a5a754cab515876887b7c",
+          "sourceFiles": 61,
+          "fixtureRetained": false
+        },
+        {
+          "id": "infra-final-01",
+          "command": "npm.cmd run compat:infra",
+          "process": {
+            "executableRole": "Node/npm pelo processador de comandos Windows; caminho absoluto do host retido na evidência bruta privada",
+            "argv": [
+              "/d",
+              "/s",
+              "/c",
+              "npm.cmd run compat:infra"
+            ],
+            "cwd": "<PROJECT>",
+            "exitCode": 0,
+            "signal": null,
+            "timedOut": false,
+            "timeoutMs": 2400000,
+            "outputTruncated": false,
+            "started": "2026-11-02T23:26:46.997Z",
+            "finished": "2026-11-02T23:28:13.494Z",
+            "durationMs": 86479
+          },
+          "counts": {
+            "tests": 108,
+            "passed": 108,
+            "failed": 0,
+            "skipped": 0,
+            "cancelled": 0,
+            "todo": 0
+          },
+          "sourceFingerprint": "ce8f35a75b2a24d7177fe2bb3845a2d729aec768acbd92b0d2a0f2bfe407e718",
+          "sourceFingerprintAfter": "ce8f35a75b2a24d7177fe2bb3845a2d729aec768acbd92b0d2a0f2bfe407e718",
+          "sourceUnchanged": true,
+          "wrapperSHA256": "cf6fb69e941f3b7c1d64d068a56603ecc628c63bb57ba0e6d28abeceb7410da5",
+          "manifestSHA256": "18a76ffdd24583efbc0d86c84250bd5a439a7e2bf6838cf4a44458c06f4b18e2",
+          "afterManifestSHA256": "18a76ffdd24583efbc0d86c84250bd5a439a7e2bf6838cf4a44458c06f4b18e2",
+          "rawResultSHA256": "9bc222193b97f8e42c38daab2541b9122f8df563690b50b1c32b1a0e0aeab5d1",
+          "rawStdoutSHA256": "9585994bbf4e0aaf3f079923a7a27ba77073e90bc0dd1e066c5e4fd32d0e5477",
+          "sourceFiles": 61,
+          "fixtureRetained": false
+        }
+      ],
+      "skips": [
+        {
+          "test": "symlink file and paths through symlink directories are never adopted",
+          "reportedDurationMs": 7100.7978,
+          "reportedReason": "Windows account cannot create symlinks; junction coverage runs separately.",
+          "classification": "WINDOWS_SYMLINK_CREATION_PERMISSION_EPERM",
+          "scope": "A conta Windows não pôde criar o symlink necessário. Junctions foram verificadas separadamente; isso não certifica suporte a symlinks."
+        },
+        {
+          "test": "recovery cannot overwrite journals, arbitrary Git internals or symlink targets",
+          "reportedDurationMs": 138.3442,
+          "reportedReason": "Windows account cannot create symlinks.",
+          "classification": "WINDOWS_SYMLINK_CREATION_PERMISSION_EPERM",
+          "scope": "A conta Windows não pôde criar o symlink necessário. Junctions foram verificadas separadamente; isso não certifica suporte a symlinks."
+        },
+        {
+          "test": "storage refuses symlink sources, destinations and parent directories",
+          "reportedDurationMs": 3.3828,
+          "reportedReason": "Windows account cannot create symlinks.",
+          "classification": "WINDOWS_SYMLINK_CREATION_PERMISSION_EPERM",
+          "scope": "A conta Windows não pôde criar o symlink necessário. Junctions foram verificadas separadamente; isso não certifica suporte a symlinks."
+        },
+        {
+          "test": "terminal: Bash real preserva argumentos e não avalia metacaracteres da mensagem",
+          "reportedDurationMs": 0.1061,
+          "reportedReason": "Roundtrip Bash do host; o fluxo PowerShell tem verificação separada.",
+          "classification": "OMITTED_BY_WIN32_PLATFORM_PROFILE_NOT_MISSING_EXECUTABLE",
+          "scope": "O perfil omite esse roundtrip Bash em win32. Git Bash existe; esse skip não comprova ausência do executável. PowerShell/ConPTY é uma rota separada executada."
+        }
+      ],
+      "reviewCoverage": {
+        "R05": {
+          "source": "tests/integration/review-rename.test.ts",
+          "tests": [
+            {
+              "test": "R05 branch rename preserves upstream description custom config and complete reflog",
+              "status": "PASS",
+              "durationMs": 10948.4625
+            },
+            {
+              "test": "R05 occupied destination ref config empty section reflog and config lock are refused without effects",
+              "status": "PASS",
+              "durationMs": 21126.9964
+            },
+            {
+              "test": "R05 active editing destination staged index and protection retain ownership and other active layers",
+              "status": "PASS",
+              "durationMs": 44980.6323
+            },
+            {
+              "test": "R05 working branch and external branch config scopes are refused before rename effects",
+              "status": "PASS",
+              "durationMs": 13628.6152
+            },
+            {
+              "test": "R05 interruption after-rename-copy restores exact config reflog refs roles and private stage",
+              "status": "PASS",
+              "durationMs": 33429.608
+            },
+            {
+              "test": "R05 interruption after-rename-retire restores exact config reflog refs roles and private stage",
+              "status": "PASS",
+              "durationMs": 32956.3097
+            },
+            {
+              "test": "R05 interruption after-rename-config restores exact config reflog refs roles and private stage",
+              "status": "PASS",
+              "durationMs": 34672.7438
+            },
+            {
+              "test": "R05 interruption after-layer-ref-change restores exact config reflog refs roles and private stage",
+              "status": "PASS",
+              "durationMs": 33489.4556
+            },
+            {
+              "test": "R05 interruption after-layer-rename-protection restores exact config reflog refs roles and private stage",
+              "status": "PASS",
+              "durationMs": 35858.4105
+            },
+            {
+              "test": "R05 interruption after-layer-rename-metadata restores exact config reflog refs roles and private stage",
+              "status": "PASS",
+              "durationMs": 35459.3855
+            },
+            {
+              "test": "R05 interruption before durable copied snapshot conservatively preserves both branches and backups",
+              "status": "PASS",
+              "durationMs": 9403.5698
+            },
+            {
+              "test": "R05 recovery preserves later external config and CAS never deletes advanced source",
+              "status": "PASS",
+              "durationMs": 10091.6634
+            },
+            {
+              "test": "R05 recovery preserves later external target-ref and CAS never deletes advanced source",
+              "status": "PASS",
+              "durationMs": 10154.8051
+            },
+            {
+              "test": "R05 recovery preserves later external source-ref and CAS never deletes advanced source",
+              "status": "PASS",
+              "durationMs": 10729.0985
+            },
+            {
+              "test": "R05 recovery preserves later external target-reflog and CAS never deletes advanced source",
+              "status": "PASS",
+              "durationMs": 9933.6935
+            },
+            {
+              "test": "R05 nested Unicode rename preserves native absence of config section and disabled reflog",
+              "status": "PASS",
+              "durationMs": 11039.4648
+            }
+          ],
+          "qualification": "Os 16 casos passaram juntos em full-final-01. Isso não soma after-03 e after-05 nem aprova o próximo snapshot após correções de infraestrutura."
+        },
+        "R02R03": {
+          "source": "tests/integration/review-target-preview.test.ts",
+          "tests": [
+            {
+              "test": "R02 target preserves ignored intention from info",
+              "status": "PASS",
+              "durationMs": 30106.2756
+            },
+            {
+              "test": "R02 target preserves ignored intention from global",
+              "status": "PASS",
+              "durationMs": 28966.5686
+            },
+            {
+              "test": "R02 target preserves ignored intention from gitignore",
+              "status": "PASS",
+              "durationMs": 29433.4905
+            },
+            {
+              "test": "R02 native ignore evaluation preserves negations, hierarchy and last-rule priority",
+              "status": "PASS",
+              "durationMs": 9827.8637
+            },
+            {
+              "test": "R03 preview off includes target newcomers without synchronizing metadata",
+              "status": "PASS",
+              "durationMs": 26539.508
+            },
+            {
+              "test": "R03 preview remove includes target newcomers without synchronizing metadata",
+              "status": "PASS",
+              "durationMs": 21768.4026
+            }
+          ],
+          "qualification": "Estes seis casos passaram juntos em full-final-01; as provas anteriores/dirigidas continuam separadas. A nova suíte após correções de infraestrutura ainda está pendente."
+        },
+        "R01Directed": {
+          "runId": "run-2026-11-02T22-47-07-078Z-7bc1dcdb",
+          "command": "node scripts/git-compat/runner.mjs --suite all --module product,product-extra,additional,implementation --id COMMIT-014,LAYER-010,LAYER-015,LAYER-016,RECOVERY-009,MODEL-003,MODEL-006,MODEL-007,MODEL-009,LAYOUT-012,IMPL-004 --jobs 1 --seed 20261102 --out <NEW_EVIDENCE_DIRECTORY>",
+          "exitCode": 0,
+          "selectedVariants": 15,
+          "passed": 15,
+          "executedScenarioIds": 11,
+          "durationMs": 518081,
+          "recordedHarnessCommands": 834,
+          "commandCountQualification": "834 são comandos registrados pelo harness, não a contagem de todos os processos Git internos de cada chamada CLI.",
+          "sourceFingerprint": "41c28c7186257d5d81b619a7b4f983a89334a8ff2c27c05d485e4ecab98355da",
+          "runnerFingerprint": "41dc2a804478757dc1e7e3f316d55d6ba2d466f9ac9314ba697d7de8e280a50b",
+          "sourceUnchanged": true,
+          "runnerUnchanged": true,
+          "summarySHA256": "503d68fc0c27352e390029b23a799a15b316eb86c419c4d9332ae4f5ada7c2d6",
+          "resultsSHA256": "d5196e8ed3bd23cac37192b22f16b92afa4403d536fa3e97e387170727bd45f4",
+          "interactiveVariant": "IMPL-004/interactive-newcomer-preview-cancel-confirm",
+          "interactiveObserved": "Cancelamento ConPTY real preservou metadata/exclude/config/refs/índices físicos e semânticos/worktree; a confirmação explícita posterior retirou apenas a Layer selecionada e o newcomer, preservando outras origens."
+        }
+      },
+      "archiveTool": {
+        "command": "node --test tests/unit/archive-local-evidence.test.mjs",
+        "started": "2026-11-02T22:20:26.140Z",
+        "finished": "2026-11-02T22:20:26.384Z",
+        "exitCode": 0,
+        "signal": null,
+        "counts": {
+          "tests": 4,
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0
+        },
+        "sources": [
+          {
+            "path": "scripts/archive-local-evidence.mjs",
+            "sha256": "9c1d4272acb928998e66f220744bdbc8b019335668b571280c157b6a249d3ab8"
+          },
+          {
+            "path": "tests/unit/archive-local-evidence.test.mjs",
+            "sha256": "3c7f071be7c781b04b0b3607020f2d9fb457967931b6b0ccef1d27d4da427663"
+          }
+        ],
+        "rawResultSHA256": "43e645cf4329aa72fc31a1df09f3f715b2a29d7b8a6b2e03818f5a3fd22b67bc",
+        "rawStdoutSHA256": "e25b08ff73673a8c9eb59a14885853babccf9c13dcd8bca3e2a89b411392b5ee",
+        "tests": [
+          "archive inventory is read-only; atomic move preserves exact file bytes and identities",
+          "archive refuses protected source, occupied destination, traversal and overlap before any move",
+          "archive refuses unowned nested Git data; recognizes explicit nonce ancestry for owned fixtures",
+          "archive refuses symlinks and archive inside project without following data"
+        ],
+        "qualification": "Quatro controles reais de filesystem em fixtures descartáveis; isso não comprova que o arquivamento ou a limpeza do checkout de desenvolvimento já ocorreram."
+      },
+      "qualification": "Snapshot ce8f anterior, preservado integralmente como evidência histórica própria; não substitui o novo full02."
+    }
+  ],
+  "compatibilityBroadAttempts": [
+    {
+      "id": "run-2026-11-02T23-30-09-895Z-f8f19b3b",
+      "attempt": "matrix-broad-final-01",
+      "command": "node scripts/git-compat/runner.mjs --suite broad --jobs 1 --seed 20261102 --out <NEW_EVIDENCE_DIRECTORY>",
+      "exitCode": 1,
+      "signal": null,
+      "durationMs": 2954329,
+      "selected": 361,
+      "execution": {
+        "ENV_BLOCKED": 6,
+        "FAIL": 7,
+        "NOT_RUN": 25,
+        "PASS": 348
+      },
+      "selection": {
+        "NOT_SELECTED": 5,
+        "OUT_OF_SCOPE_CURRENT_PHASE": 20,
+        "SELECTED": 361
+      },
+      "implementation": {
+        "IMPLEMENTED": 366,
+        "SPEC_ONLY": 20
+      },
+      "recordedHarnessCommands": 12941,
+      "commandCountQualification": "Comandos registrados pelo harness; não é a contagem de todos os processos Git internos iniciados pela CLI.",
+      "sourceFingerprint": "41c28c7186257d5d81b619a7b4f983a89334a8ff2c27c05d485e4ecab98355da",
+      "runnerFingerprint": "41dc2a804478757dc1e7e3f316d55d6ba2d466f9ac9314ba697d7de8e280a50b",
+      "runnerFingerprintEnd": "41dc2a804478757dc1e7e3f316d55d6ba2d466f9ac9314ba697d7de8e280a50b",
+      "sourceUnchanged": true,
+      "runnerUnchanged": true,
+      "summarySHA256": "57c3417aea8001420f0d456dd443a245ca5767f545f45237c767d2be0402b13c",
+      "resultsSHA256": "a36d112473797c053d3517e46bdbb054dab923134576353a96b7e7ea24cf2c08",
+      "wrapperResultSHA256": "482ec4a13038206bb271580021c9e056ef1e9c7d3083e1f523872843a44c26d3",
+      "failures": [
+        {
+          "id": "TOOLS-011",
+          "variant": "native-optional-powershell",
+          "status": "FAIL"
+        },
+        {
+          "id": "TOOLS-011",
+          "variant": "native-optional-cmd",
+          "status": "FAIL"
+        },
+        {
+          "id": "TOOLS-011",
+          "variant": "native-optional-bash",
+          "status": "FAIL"
+        },
+        {
+          "id": "RECOVERY-005",
+          "variant": "real-death-after-backup-before-unlink",
+          "status": "FAIL"
+        },
+        {
+          "id": "RECOVERY-006",
+          "variant": "real-death-after-layer-ref-publication",
+          "status": "FAIL"
+        },
+        {
+          "id": "HARNESS-021",
+          "variant": "portable-and-selection",
+          "status": "FAIL"
+        },
+        {
+          "id": "HARNESS-025",
+          "variant": "selection-and-expectation-evolution",
+          "status": "FAIL"
+        }
+      ],
+      "environmentBlocked": [
+        {
+          "id": "INDEX-018",
+          "variant": "native-advanced",
+          "status": "ENV_BLOCKED",
+          "reason": "Git add -h efetivo não anuncia --resolved; essa operação não foi executada."
+        },
+        {
+          "id": "BRANCH-015",
+          "variant": "native-advanced",
+          "status": "ENV_BLOCKED",
+          "reason": "Git branch efetivo não anuncia --delete-merged; nenhuma exclusão foi certificada."
+        },
+        {
+          "id": "REWRITE-015",
+          "variant": "native-advanced",
+          "status": "ENV_BLOCKED",
+          "reason": "Builtin history ausente da lista efetiva do Git oficial; nenhum comando externo equivalente foi iniciado."
+        },
+        {
+          "id": "REMOTE-014",
+          "variant": "native-advanced",
+          "status": "ENV_BLOCKED",
+          "reason": "Builtin url-parse ausente no Git efetivo; não foi substituído por parser externo."
+        },
+        {
+          "id": "PROTO-007",
+          "variant": "native",
+          "status": "ENV_BLOCKED",
+          "reason": "git-shell ausente dos caminhos inspecionados na instalação efetiva; não se afirma ausência em todo o computador."
+        },
+        {
+          "id": "TOOLS-003",
+          "variant": "legacy-transport",
+          "status": "ENV_BLOCKED",
+          "reason": "Gitweb CGI ausente dos caminhos padrão/configurados da instalação efetiva; nenhum navegador ou servidor foi iniciado."
+        }
+      ],
+      "diagnosis": "Sete falhas de infraestrutura: três expectativas antigas de help de shells, dois localizadores de debugger (zero/três matches antes do filho), um literal histórico de AGENTS e um cwd incorreto em HARNESS-025. A rodada terminou com falha real exit 1; correções e nova execução permanecem pendentes.",
+      "qualification": "348 PASS não aprovam a seleção inteira. Os seis bloqueios de recurso mantêm suas razões; não são os quatro SKIP da suíte npm. Nenhuma falha é convertida em skip ou apagada."
+    },
+    {
+      "id": "run-2026-11-03T01-04-32-968Z-96a7aaf6",
+      "attempt": "matrix-broad-final-02",
+      "command": "node scripts/git-compat/runner.mjs --suite broad --jobs 2 --seed 20261102 --out <NEW_EVIDENCE_DIRECTORY>",
+      "exitCode": 0,
+      "signal": null,
+      "started": "2026-11-03T01:04:32.968Z",
+      "finished": "2026-11-03T01:31:49.229Z",
+      "durationMs": 1636261,
+      "selected": 361,
+      "execution": {
+        "PASS": 355,
+        "FAIL": 0,
+        "ENV_BLOCKED": 6,
+        "NOT_RUN": 25
+      },
+      "selection": {
+        "NOT_SELECTED": 5,
+        "OUT_OF_SCOPE_CURRENT_PHASE": 20,
+        "SELECTED": 361
+      },
+      "implementation": {
+        "IMPLEMENTED": 366,
+        "SPEC_ONLY": 20
+      },
+      "catalog": {
+        "scenarioIds": 358,
+        "rows": 386,
+        "implemented": 366,
+        "specOnly": 20,
+        "knownNone": 386
+      },
+      "recordedHarnessCommands": 12995,
+      "commandCountQualification": "12995 comandos registrados pelo harness; não é a contagem de cada processo Git interno de chamadas CLI.",
+      "sourceFingerprint": "41c28c7186257d5d81b619a7b4f983a89334a8ff2c27c05d485e4ecab98355da",
+      "runnerFingerprint": "e6fbb13d52fdccf8e4d7428fc159f606a5bd6ec1ef841cfb90742c79b14db91f",
+      "runnerFingerprintEnd": "e6fbb13d52fdccf8e4d7428fc159f606a5bd6ec1ef841cfb90742c79b14db91f",
+      "sourceUnchanged": true,
+      "runnerUnchanged": true,
+      "productDelta": {
+        "added": [],
+        "removed": [],
+        "changed": []
+      },
+      "runnerDelta": {
+        "added": [],
+        "removed": [],
+        "changed": []
+      },
+      "summarySHA256": "fa6d6a0fb5fda5efe15cebd1a724e2df68013959a00fc631f1ce7fef4fb5d7cc",
+      "resultsSHA256": "3fce5fb30cf2cd015114d47262da03a0ef62fa10bbae78d6faab96b378f299a0",
+      "wrapperResultSHA256": "abd9d7d4ccf345f344289b60fbe83e5c646b4352a4e2d3ea191b1ee25f0f2b41",
+      "stdoutSHA256": "c40b95a283efcc13c42f27a87eb3ae8a6d28c6f1f089e9bd2f8d7a33220efb4d",
+      "environmentBlocked": [
+        {
+          "id": "INDEX-018",
+          "variant": "native-advanced",
+          "status": "ENV_BLOCKED",
+          "reason": "Git add -h efetivo não anuncia --resolved; essa operação não foi executada."
+        },
+        {
+          "id": "BRANCH-015",
+          "variant": "native-advanced",
+          "status": "ENV_BLOCKED",
+          "reason": "Git branch efetivo não anuncia --delete-merged; nenhuma exclusão foi certificada."
+        },
+        {
+          "id": "REWRITE-015",
+          "variant": "native-advanced",
+          "status": "ENV_BLOCKED",
+          "reason": "Builtin history ausente da lista efetiva do Git oficial; nenhum comando externo equivalente foi iniciado."
+        },
+        {
+          "id": "REMOTE-014",
+          "variant": "native-advanced",
+          "status": "ENV_BLOCKED",
+          "reason": "Builtin url-parse ausente no Git efetivo; não foi substituído por parser externo."
+        },
+        {
+          "id": "PROTO-007",
+          "variant": "native",
+          "status": "ENV_BLOCKED",
+          "reason": "git-shell ausente dos caminhos inspecionados na instalação efetiva; não se afirma ausência em todo o computador."
+        },
+        {
+          "id": "TOOLS-003",
+          "variant": "legacy-transport",
+          "status": "ENV_BLOCKED",
+          "reason": "Gitweb CGI ausente dos caminhos padrão/configurados da instalação efetiva; nenhum navegador ou servidor foi iniciado."
+        }
+      ],
+      "qualification": "355 variantes PASS e seis recursos bloqueados compõem as 361 selecionadas. Os 25 NOT_RUN do catálogo são cinco omitidas e 20 SPEC_ONLY fora do escopo; não são falhas ocultas nem casos executados. Suporte continua distinto de execução. A primeira broad exit1 permanece histórica."
+    }
+  ],
+  "functionalInputFreeze": {
+    "reference": "docs/evidence/closure-2026-11-02/functional-inputs.json",
+    "files": 173,
+    "fingerprint": "084267c2e9660a22fb79df668fbf84416d839d98382de45caac9c694a45133c2",
+    "qualification": "Manifesto antes das execuções; igualdade depois da campanha ainda depende da verificação final.",
+    "afterValidation": {
+      "files": 173,
+      "fingerprint": "084267c2e9660a22fb79df668fbf84416d839d98382de45caac9c694a45133c2",
+      "manifestSHA256": "96a95bf9f902dca36331b492cf44902dd0e6acf106d04f55387b07196c2ff9ed",
+      "equalToBefore": true
+    }
+  },
+  "buildSmoke": {
+    "status": "PASS",
+    "reference": "docs/evidence/closure-2026-11-02/build-smoke.json",
+    "wrapperCommands": 3,
+    "smokeFlows": 7,
+    "smokeRecordedCommands": 82
+  },
+  "infrastructureCorrections": {
+    "reference": "docs/evidence/closure-2026-11-02/infrastructure-corrections.json",
+    "archiveUnitPassedTogether": 6,
+    "compatibilityDirectedPassedTogether": 7
+  },
+  "pending": {
+    "infraFinal02": "PASS_111_111",
+    "compatibilityBroad02": "PASS_355_6_ENV_BLOCKED_0_FAIL",
+    "freshCommittedCopy": "NOT_RECORDED_YET",
+    "archivalAndCleanup": "AWAITING_VERIFIED_RECORD",
+    "mainSynchronization": "NOT_RECORDED_YET"
+  },
+  "rawRetention": {
+    "archiveId": "closure-2026-11-02-eba4a209",
+    "policy": "Reter resultados/manifests brutos fora do checkout com inventário verificado antes de retirar originais. Este candidato público contém somente metadados sintéticos selecionados e hashes, sem stdout integral ou valores de configuração."
+  },
+  "limits": [
+    "As duas suítes completas conservam manifests e contagens próprios; resultados de snapshots diferentes não são somados.",
+    "Os quatro skips não certificam symlinks nem comprovam ausência de Bash.",
+    "O domínio de 61 arquivos da suíte é diferente do manifesto funcional de 173 e dos fingerprints do harness.",
+    "Os JSONs detalhados R05/R02/R03 dirigidos anteriores mantêm sua origem; o wrapper full usa GL_IMPLEMENTATION_EVIDENCE e comprova os casos atuais por assertivas reais, fontes e saída terminal.",
+    "Build/smoke local não é instalação limpa, publicação nem cópia nova do commit.",
+    "Infra-final-02 concluiu 111/111 PASS; broad2 concluiu 355 PASS, seis ENV_BLOCKED, zero FAIL. Os bloqueios não certificam operações ausentes."
+  ],
+  "references": {
+    "buildSmoke": "docs/evidence/closure-2026-11-02/build-smoke.json",
+    "functionalInputs": "docs/evidence/closure-2026-11-02/functional-inputs.json",
+    "infrastructureCorrections": "docs/evidence/closure-2026-11-02/infrastructure-corrections.json",
+    "firstBroad": "docs/evidence/closure-2026-11-02/matrix-broad-first.json",
+    "finalBroad": "docs/evidence/closure-2026-11-02/matrix-broad.json"
+  },
+  "compatibilityBroadFinal": {
+    "id": "run-2026-11-03T01-04-32-968Z-96a7aaf6",
+    "selected": 361,
+    "passed": 355,
+    "failed": 0,
+    "environmentBlocked": 6,
+    "exitCode": 0,
+    "publicReference": "docs/evidence/closure-2026-11-02/matrix-broad.json"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "policy": "Exact failed-assertion signature and source fingerprint only. No active waiver: product gaps are passing characterizations with explicit PRODUCT_GAP, never hidden regressions.",
+  "issues": []
+}

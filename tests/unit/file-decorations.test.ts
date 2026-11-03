@@ -7,7 +7,8 @@ test('Explorer: arquivo limpo não recebe mudança Git ou badge de base; Layer t
   assert.deepEqual(fileDecoration('main.ts', undefined), { git: '', title: 'Git: sem alterações.', bufferDirty: false });
   assert.equal(layerOwnership('base'), null);
   assert.equal(layerOwnership(null), null);
-  assert.equal(layerOwnership('scripts'), 'Layer scripts');
+  assert.equal(layerOwnership('scripts'), 'layer/scripts');
+  assert.equal(layerOwnership('feature/tools'), 'layer/feature/tools');
 });
 
 test('Explorer: badges refletem Git real e distinguem staging, disco, novos e buffer não salvo', () => {
@@ -35,6 +36,6 @@ test('Explorer: deletados ausentes do disco permanecem na árvore com proprietá
   const files = explorerFiles(workspace);
   assert.deepEqual(files, [{ path: 'clean.ts', owner: 'base' }, { path: 'base-deleted.ts', owner: 'base' }, { path: 'layer-deleted.ts', owner: 'ai' }, { path: 'new.ts', owner: null }]);
   assert.equal(fileDecoration('layer-deleted.ts', workspace.status).git, 'D');
-  assert.equal(layerOwnership(files.find(file => file.path === 'layer-deleted.ts')?.owner), 'Layer ai');
+  assert.equal(layerOwnership(files.find(file => file.path === 'layer-deleted.ts')?.owner), 'layer/ai');
   assert.equal(workspace.files.length, 1, 'A decoração não altera o snapshot original.');
 });

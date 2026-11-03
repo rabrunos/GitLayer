@@ -1,8 +1,24 @@
-# Git Layers Lab 0.1.2 — Workshop Windows
+# Git Layer — Core e CLI
 
-Esta pasta reúne **o aplicativo portátil e o projeto completo** para abrir no VS Code e trabalhar com o Codex: fontes TypeScript/React, Git local real, CLI, testes, scripts, configuração de debug e sourcemaps.
+[Estado atual e relatório de fechamento](docs/STATUS.md) · [Contribuição](CONTRIBUTING.md)
 
-**Experimental parcial.** Consulte [TEST-REPORT.md](docs/TEST-REPORT.md) para as novas verificações nativas Windows e seus limites. Os complementos amend, tags mutáveis, stash de escrita, merge, cherry-pick e revert continuam incompletos.
+O produto principal é o **Core e a CLI**, que usam o Git oficial local. O workshop Electron é um laboratório manual separado. A implementação de 02/11/2026 acrescenta destino explícito de edição, ciclo de vida de Layers, prévias, abertura deliberada como branch, migração/resgate e build independente. O [relatório público de fechamento](docs/reports/2026-11-02-closure/REPORT.md) e a [matriz dos 27 requisitos](docs/reports/2026-11-02-closure/requirements.json) distinguem 20 implementados, sete parciais, execuções e limites; não há certificação automática de compatibilidade universal.
+
+```powershell
+npm.cmd run build:core
+node dist-core/cli/index.js --help
+node dist-core/cli/index.js --cwd 'C:\caminho\repositorio' status --json
+```
+
+Requer Node.js 22.12+, Git oficial e `esbuild` do lockfile para compilar. Com dependências ainda ausentes, `npm.cmd ci --ignore-scripts` evita executar o postinstall do Electron. Nenhum comando acima abre GUI ou prepara a demonstração; `dist/` e `dist-debug/` são preservados. O fluxo está em [CLI](docs/CLI.md) e os contratos/limites em [implementação de 02/11](docs/IMPLEMENTATION-2026-11-02.md).
+
+A renomeação Core/CLI exige a feature `git rev-parse --show-ref-format`, presente na fonte oficial desde 2.44; sem ela, recusa com `RENAME_UNSUPPORTED`. Este fechamento executou Git 2.53.0.windows.2, sem campanha runtime em 2.44 ou 2.43. O requisito 2.43+ nas instruções do laboratório abaixo é histórico e não certifica essa nova operação. Veja o [envelope GL-20 e as fontes oficiais](docs/reports/2026-11-02-closure/REPORT.md#gl-20-preservação-nativa-e-envelope-restante).
+
+As proteções do produto têm alcance explícito: `protect` reserva branches Layer em worktrees locais para impedir a seleção nativa padrão, com bypass `--ignore-other-worktrees`; `git add -f` e comandos destrutivos continuam tendo sua semântica Git. O destino de edição reconcilia propriedade nos comandos/consultas; enquanto aberto, exclusões gerenciadas protegem novos caminhos contra preparação nativa comum antes dessa observação, preservando arquivos anteriores sem dono. Force e regras do usuário de maior prioridade continuam podendo contornar essa proteção. Não se promete interceptação universal do Git.
+
+O material abaixo descreve o workshop manual existente. Não foi aberto nem revalidado nesta implementação; suas evidências gráficas anteriores são históricas.
+
+**Experimental parcial.** Consulte [TEST-REPORT.md](docs/TEST-REPORT.md) para as verificações históricas do workshop no Windows e seus limites. Os complementos amend, tags mutáveis, stash de escrita, merge, cherry-pick e revert continuam incompletos.
 
 ## Abrir o aplicativo pronto
 
@@ -62,9 +78,9 @@ O Codex deve começar por **AGENTS.md** e [WORKSHOP.md](docs/WORKSHOP.md). Pode 
 
 ## Arquitetura e alcance
 
-O editor e a CLI compartilham um Core TypeScript. Layers são branches Git reais refs/heads/layer/<nome>, com índices alternativos e commits independentes. O HEAD permanece na branch tradicional. Não existe Git simulado.
+O editor e a CLI compartilham um Core TypeScript. Layers são branches Git reais refs/heads/layer/<nome>, com índices alternativos e commits independentes. No uso normal o HEAD permanece na branch tradicional; `open-branch` permite uma Layer como branch de trabalho por escolha explícita. Não existe Git simulado.
 
-Estão implementados arquivos UTF-8/EOL, Monaco, stage/unstage, hunks suportados, commits, histórico/diff, branches, composição de Layers, captura, shelves e recuperação conservadora. Nenhum novo recurso incompleto foi apresentado como comando funcional no catálogo.
+Estão implementados arquivos UTF-8/EOL, Monaco, stage/unstage, hunks suportados, commits, histórico/diff, branches, composição de Layers, captura legada e recuperação conservadora. Auto-park foi retirado do novo fluxo; shelves anteriores são preservadas. Nenhum novo recurso incompleto foi apresentado como comando funcional no catálogo.
 
 O aplicativo não oferece sincronização Git remota automática. Os assets são locais. Um terminal real permite ao usuário executar comandos e ferramentas do computador, inclusive fora dessas operações gerenciadas; o Core não intercepta comandos externos destrutivos.
 

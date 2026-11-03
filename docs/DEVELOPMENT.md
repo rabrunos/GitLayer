@@ -1,6 +1,6 @@
 # Desenvolvimento e testes locais
 
-Abra `Git-Layers-Lab.code-workspace` no VS Code. Requisitos: Windows 10 1903+/11 x64, Node.js 22.12+ com npm e Git for Windows 2.43+. A extensão **Task Buttons** (`spencerwmiles.vscode-task-buttons`) usa os botões definidos no arquivo de workspace e os nomes de `.vscode/tasks.json`. As mesmas definições estão em `.vscode/settings.json` para abrir apenas a pasta; configurações da janela precisam estar no arquivo de workspace quando ele é usado.
+Abra `Git-Layers-Lab.code-workspace` no VS Code. Requisitos históricos do laboratório: Windows 10 1903+/11 x64, Node.js 22.12+ com npm e Git for Windows 2.43+. Para o Core/CLI atual, a renomeação exige `--show-ref-format`, disponível na fonte Git 2.44; o fechamento foi executado com Git 2.53.0.windows.2, sem certificar runtime 2.44/2.43. Consulte o [envelope GL-20](reports/2026-11-02-closure/REPORT.md#gl-20-preservação-nativa-e-envelope-restante). A extensão **Task Buttons** (`spencerwmiles.vscode-task-buttons`) usa os botões definidos no arquivo de workspace e os nomes de `.vscode/tasks.json`. As mesmas definições estão em `.vscode/settings.json` para abrir apenas a pasta; configurações da janela precisam estar no arquivo de workspace quando ele é usado.
 
 ## Barra de status
 

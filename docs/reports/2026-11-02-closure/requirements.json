@@ -1,0 +1,2349 @@
+{
+  "schema": 2,
+  "kind": "git-layer-closure-requirements",
+  "date": "2026-11-02",
+  "state": "LOCAL_VALIDATION_COMPLETE_FRESH_ARCHIVE_PUBLICATION_PENDING",
+  "authority": [
+    "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+    "docs/decisions/implementation-2026-11-02/03-RESPOSTAS-ORIGINAIS.json",
+    "docs/decisions/implementation-2026-11-02/04-AUTORIZACAO-ATUAL-E-ITEM-14.txt",
+    "docs/decisions/2026-11-02-closure.md"
+  ],
+  "dimensions": {
+    "support": "Implementação no envelope declarado; independente da seleção executada.",
+    "test": "Somente execuções terminais com manifests congelados contam; snapshots não são somados.",
+    "publication": "Commit e confronto real do servidor são dimensões distintas do suporte do produto."
+  },
+  "counts": {
+    "total": 27,
+    "implemented": 20,
+    "partial": 7
+  },
+  "baseline": {
+    "closureVerifiedFiles": 324,
+    "firstImplementationCopies": 301,
+    "initialHead": "37887aad107bd751a3687bc660a6644ef5d90c54",
+    "initialBranch": "main",
+    "priorChangesAreInputs": true
+  },
+  "requirements": [
+    {
+      "id": "GL-01",
+      "title": "O Git tradicional continua sendo o padrão",
+      "status": "partial",
+      "implementedBehavior": "Git oficial, índices nativos e proteção de preparação por origem.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/git.ts",
+        "src/core/ignore.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-05 recognized inactive layers preserve native default flow"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-08 two active layers isolate native add and commit"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-09 target excludes new external files before observation and preserves prior unassigned flow"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GAP GL01-09 higher priority ignore negation can bypass target protection in native add"
+        },
+        {
+          "sourcePath": "tests/integration/review-target-preview.test.ts",
+          "name": "R02 target preserves ignored intention from info"
+        }
+      ],
+      "limitations": [
+        "Hooks/assinatura/filtros e topologias fora do envelope continuam limitados.",
+        "Force, ignore de maior prioridade e comandos nativos destrutivos têm efeitos próprios; proteção gerenciada não é universal."
+      ],
+      "execution": {
+        "directedPublicEvidence": [
+          "docs/evidence/closure-2026-11-02/review-target-preview.json"
+        ],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL01-05 recognized inactive layers preserve native default flow",
+            "status": "PASS"
+          },
+          {
+            "name": "GL01-08 two active layers isolate native add and commit",
+            "status": "PASS"
+          },
+          {
+            "name": "GL01-09 target excludes new external files before observation and preserves prior unassigned flow",
+            "status": "PASS"
+          },
+          {
+            "name": "GAP GL01-09 higher priority ignore negation can bypass target protection in native add",
+            "status": "PASS"
+          },
+          {
+            "name": "R02 target preserves ignored intention from info",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-01",
+        "behavior": "O Git Layer acrescenta camadas ao Git oficial; não é um Git substituto. Preserve o significado dos comandos nativos e o fluxo normal de quem não escolheu usar Layers. Ter branches Layer no repositório não exige mudar o trabalho habitual. Os comandos específicos do produto direcionam operações às Layers sem redefinir silenciosamente git add, git commit, git switch, git push ou outros comandos existentes.",
+        "observableCriteria": [
+          "Comparar o fluxo nativo de um repositório de controle com zero Layers e com Layers reconhecidas mas inativas.",
+          "Com Layers ativas, demonstrar que git add . e o commit nativo não incorporam acidentalmente arquivos das camadas à branch de trabalho.",
+          "Distinguir operações nativas executadas diretamente das operações mediadas pela CLI do produto; não declarar proteção da primeira por testar somente a segunda."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-02",
+      "title": "A branch tradicional continua selecionada",
+      "status": "implemented",
+      "implementedBehavior": "Branch de trabalho/papel deliberado distintos de Layer ativa.",
+      "sourcePaths": [
+        "src/core/index.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-05 recognized inactive layers preserve native default flow"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL22 deliberate Layer branch maintains other layers and returns coherently"
+        }
+      ],
+      "limitations": [
+        "Suporte limitado ao envelope validado; não extrapolar cenários não executados."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL01-05 recognized inactive layers preserve native default flow",
+            "status": "PASS"
+          },
+          {
+            "name": "GL22 deliberate Layer branch maintains other layers and returns coherently",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-02",
+        "behavior": "No uso normal, uma branch tradicional — main, develop ou qualquer outra escolhida pelo usuário — continua sendo a branch de trabalho. As Layers a complementam. A exceção aprovada em GL-22 permite uma Layer como branch de trabalho quando aberta deliberadamente; não imponha a antiga proibição absoluta desse estado.",
+        "observableCriteria": [
+          "Ativar/editar/commitar uma Layer não deve trocar involuntariamente a branch de trabalho.",
+          "Diferenciar branch de trabalho, Layer ativa e destino de edição na consulta do estado."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-03",
+      "title": "Arquivos novos seguem o fluxo normal por padrão",
+      "status": "implemented",
+      "implementedBehavior": "Sem target, novos arquivos seguem o fluxo tradicional.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/ignore.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-05 recognized inactive layers preserve native default flow"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL03-09-10-18 explicit edit intervals reserve without staging or adopting old files"
+        },
+        {
+          "sourcePath": "tests/integration/review-target-preview.test.ts",
+          "name": "R02 target preserves ignored intention from info"
+        }
+      ],
+      "limitations": [
+        "Suporte limitado ao envelope validado; não extrapolar cenários não executados."
+      ],
+      "execution": {
+        "directedPublicEvidence": [
+          "docs/evidence/closure-2026-11-02/review-target-preview.json"
+        ],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL01-05 recognized inactive layers preserve native default flow",
+            "status": "PASS"
+          },
+          {
+            "name": "GL03-09-10-18 explicit edit intervals reserve without staging or adopting old files",
+            "status": "PASS"
+          },
+          {
+            "name": "R02 target preserves ignored intention from info",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-03",
+        "behavior": "Sem um destino de edição de Layer escolhido, novos arquivos seguem o fluxo normal de adicionar e fazer commit na branch de trabalho. Apenas criar um arquivo não o commita nem o atribui silenciosamente a uma Layer. Uma Layer ativa, mesmo sendo a única, não captura novos arquivos por isso.",
+        "observableCriteria": [
+          "Criar arquivos com nenhuma, uma e várias Layers ativas sem target: continuam no fluxo normal.",
+          "Não absorver retroativamente arquivos preexistentes quando o usuário escolhe um destino de edição."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-04",
+      "title": "Reconhecer Layers pelo nome",
+      "status": "implemented",
+      "implementedBehavior": "Reconhecimento local/remoto por prefixo e tracking único explícito no uso.",
+      "sourcePaths": [
+        "src/core/index.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-05 recognized inactive layers preserve native default flow"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL04-22-ROLE recognizing a native control-bearing branch does not authorize projection"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL04-20 native prefixed identity can be renamed and removed without manual registration"
+        }
+      ],
+      "limitations": [
+        "Múltiplas candidatas remotas do mesmo nome exigem escolha Git explícita.",
+        "Reconhecer não ativa nem transforma conteúdo incompatível em projeção válida."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL01-05 recognized inactive layers preserve native default flow",
+            "status": "PASS"
+          },
+          {
+            "name": "GL04-22-ROLE recognizing a native control-bearing branch does not authorize projection",
+            "status": "PASS"
+          },
+          {
+            "name": "GL04-20 native prefixed identity can be renamed and removed without manual registration",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-04",
+        "behavior": "Reconheça branches com o padrão layer/<nome> como Layers. Exemplos: layer/scripts, layer/ia e layer/testes. Reconhecer, disponibilizar para escolha e ativar são ações distintas: não ative apenas porque uma branch foi criada, encontrada ou recebida. Uma etapa interna de registro não deve obrigar o usuário a classificar manualmente uma branch cujo prefixo já a identifica.",
+        "observableCriteria": [
+          "Descobrir uma branch com o prefixo criada tanto pelo produto quanto pelo Git oficial, sem ativá-la automaticamente.",
+          "Após receber referências pelo Git, identificar as candidatas corretamente sem sobrescrever arquivos ou descartar conteúdo incompatível."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-05",
+      "title": "Ter a função “Criar Layer”",
+      "status": "implemented",
+      "implementedBehavior": "Layer criada como ref/commit Git real e começa inativa.",
+      "sourcePaths": [
+        "src/core/index.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-05 recognized inactive layers preserve native default flow"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-08 two active layers isolate native add and commit"
+        }
+      ],
+      "limitations": [
+        "Suporte limitado ao envelope validado; não extrapolar cenários não executados."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL01-05 recognized inactive layers preserve native default flow",
+            "status": "PASS"
+          },
+          {
+            "name": "GL01-08 two active layers isolate native add and commit",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-05",
+        "behavior": "Ofereça a função Criar Layer. Na representação aprovada, ela cria uma branch real com o prefixo acordado e permite que a Layer tenha seus próprios arquivos e histórico. O conceito deve permanecer claro, sem depender de uma interface gráfica ou de futura adoção pelo Git oficial.",
+        "observableCriteria": [
+          "Criar uma Layer utilizável sem trocar acidentalmente a branch de trabalho e sem misturar arquivos da base em seu conteúdo.",
+          "A criação não ativa implicitamente o conteúdo contra a vontade do usuário; os estados devem ser claros."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-06",
+      "title": "Ativar e desativar Layers",
+      "status": "implemented",
+      "implementedBehavior": "Ativação física e desativação restrita aos caminhos próprios.",
+      "sourcePaths": [
+        "src/core/index.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-08 two active layers isolate native add and commit"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL16 dirty off refuses then explicit discard never resurrects edits"
+        },
+        {
+          "sourcePath": "tests/integration/windows-compat.test.ts",
+          "name": "GL16 Git CRLF projection and explicit discard preserve binary data and the main index in accented paths"
+        }
+      ],
+      "limitations": [
+        "Suporte limitado ao envelope validado; não extrapolar cenários não executados."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL01-08 two active layers isolate native add and commit",
+            "status": "PASS"
+          },
+          {
+            "name": "GL16 dirty off refuses then explicit discard never resurrects edits",
+            "status": "PASS"
+          },
+          {
+            "name": "GL16 Git CRLF projection and explicit discard preserve binary data and the main index in accented paths",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-06",
+        "behavior": "Ativar disponibiliza os arquivos da Layer fisicamente no projeto. Desativar retira somente seus arquivos do conjunto de trabalho, preservando seu histórico. A desativação respeita GL-16: alterações pendentes devem ser resolvidas antes, não guardadas automaticamente para reativação.",
+        "observableCriteria": [
+          "Arquivos ativados podem ser lidos e editados por ferramentas externas comuns, sem o editor de laboratório.",
+          "Desativar uma Layer limpa preserva os arquivos da base e de outras Layers, inclusive em diretórios compartilhados.",
+          "Reativar uma Layer limpa recupera seu conteúdo versionado e não apaga arquivos locais conflitantes."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-07",
+      "title": "Usar várias Layers ao mesmo tempo",
+      "status": "implemented",
+      "implementedBehavior": "Várias Layers ativas e índices/históricos independentes.",
+      "sourcePaths": [
+        "src/core/index.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-08 two active layers isolate native add and commit"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL15 managed compatible switch keeps another layer staged and dirty"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL22 deliberate Layer branch maintains other layers and returns coherently"
+        }
+      ],
+      "limitations": [
+        "Suporte limitado ao envelope validado; não extrapolar cenários não executados."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL01-08 two active layers isolate native add and commit",
+            "status": "PASS"
+          },
+          {
+            "name": "GL15 managed compatible switch keeps another layer staged and dirty",
+            "status": "PASS"
+          },
+          {
+            "name": "GL22 deliberate Layer branch maintains other layers and returns coherently",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-07",
+        "behavior": "Permita zero, uma ou várias Layers ativas simultaneamente. Elas convivem com a branch de trabalho, preservando a separação de arquivos e históricos e respeitando os conflitos. Ativar uma não desliga outra por conveniência.",
+        "observableCriteria": [
+          "Com duas Layers distintas, editar e commitar uma não modifica o trabalho preparado ou os arquivos da outra.",
+          "A ordem de ativação não cria uma prioridade de sobrescrita entre origens."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-08",
+      "title": "Enxergar um único projeto",
+      "status": "implemented",
+      "implementedBehavior": "Workspace físico único sem fusão de históricos.",
+      "sourcePaths": [
+        "src/core/index.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-08 two active layers isolate native add and commit"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL22 deliberate Layer branch maintains other layers and returns coherently"
+        }
+      ],
+      "limitations": [
+        "Suporte limitado ao envelope validado; não extrapolar cenários não executados."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL01-08 two active layers isolate native add and commit",
+            "status": "PASS"
+          },
+          {
+            "name": "GL22 deliberate Layer branch maintains other layers and returns coherently",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-08",
+        "behavior": "O projeto em uso é a união física dos arquivos da branch de trabalho e das Layers ativas. Não é preciso alternar de projeto ou de editor para acessá-los. Essa união de arquivos não é fusão de históricos nem um commit conjunto.",
+        "observableCriteria": [
+          "Ler no filesystem os arquivos de todas as origens ativas e conferir a ausência dos arquivos exclusivos das Layers desligadas.",
+          "A interface de consulta distingue as origens sem alterar a forma de abrir os arquivos em ferramentas comuns."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-09",
+      "title": "Escolher o destino de edição",
+      "status": "partial",
+      "implementedBehavior": "Target explícito com exclusão antecipada e propriedade reconciliada por comando. A intenção de ignore do usuário é avaliada sem o bloco temporário gerenciado; regras locais/globais e negações mantêm o significado Git, com scratch externo exclusivo e sem escrita no repositório.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/cli/index.ts",
+        "src/core/ignore.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL03-09-10-18 explicit edit intervals reserve without staging or adopting old files"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL09 target skips control files and explicit release remains released"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-09 target excludes new external files before observation and preserves prior unassigned flow"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GAP GL01-09 higher priority ignore negation can bypass target protection in native add"
+        },
+        {
+          "sourcePath": "tests/integration/review-target-preview.test.ts",
+          "name": "R02 target preserves ignored intention from info"
+        }
+      ],
+      "limitations": [
+        "Propriedade reconcilia nos comandos; add comum é protegido antes da observação.",
+        "git add -f e negações de ignore de maior prioridade contornam a proteção; não é ACL."
+      ],
+      "execution": {
+        "directedPublicEvidence": [
+          "docs/evidence/closure-2026-11-02/review-target-preview.json"
+        ],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL03-09-10-18 explicit edit intervals reserve without staging or adopting old files",
+            "status": "PASS"
+          },
+          {
+            "name": "GL09 target skips control files and explicit release remains released",
+            "status": "PASS"
+          },
+          {
+            "name": "GL01-09 target excludes new external files before observation and preserves prior unassigned flow",
+            "status": "PASS"
+          },
+          {
+            "name": "GAP GL01-09 higher priority ignore negation can bypass target protection in native add",
+            "status": "PASS"
+          },
+          {
+            "name": "R02 target preserves ignored intention from info",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-09",
+        "behavior": "Separe ativação de destino de edição. Pode haver várias Layers ativas e, no máximo, uma escolhida como destino dos novos arquivos daquele trabalho. Sem escolha, vale a branch de trabalho. Encerrar o modo de edição volta ao padrão sem desativar automaticamente a Layer. A escolha não transfere arquivos já pertencentes à base ou a outra Layer.",
+        "observableCriteria": [
+          "Entrar, trocar e sair do modo de edição por comandos; verificar o destino dos arquivos novos em cada intervalo.",
+          "Manter a origem dos arquivos existentes e não adotar automaticamente os que já estavam sem atribuição antes da escolha.",
+          "Mostrar de forma inequívoca qual destino está valendo; não depender de um editor aberto para funcionar."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-10",
+      "title": "Preservar a origem de cada arquivo",
+      "status": "implemented",
+      "implementedBehavior": "Propriedade persistente, atribuição explícita de arquivo anterior e reserva após unstage.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/ignore.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL03-09-10-18 explicit edit intervals reserve without staging or adopting old files"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL20 rename active layer retains ownership target and staged bytes"
+        },
+        {
+          "sourcePath": "tests/integration/review-target-preview.test.ts",
+          "name": "R02 target preserves ignored intention from info"
+        }
+      ],
+      "limitations": [
+        "Suporte limitado ao envelope validado; não extrapolar cenários não executados."
+      ],
+      "execution": {
+        "directedPublicEvidence": [
+          "docs/evidence/closure-2026-11-02/review-target-preview.json"
+        ],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL03-09-10-18 explicit edit intervals reserve without staging or adopting old files",
+            "status": "PASS"
+          },
+          {
+            "name": "GL20 rename active layer retains ownership target and staged bytes",
+            "status": "PASS"
+          },
+          {
+            "name": "R02 target preserves ignored intention from info",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-10",
+        "behavior": "Cada arquivo atribuído conserva sua origem. Editar um arquivo, ativar outra Layer ou escolher outro destino não transfere a propriedade. Um arquivo já existente no workspace e ainda não atribuído pode ser destinado explicitamente a uma Layer. Na composição ativa, o mesmo caminho não pertence simultaneamente à branch de trabalho e a uma Layer, nem a duas Layers.",
+        "observableCriteria": [
+          "Atribuir a uma Layer um arquivo local preexistente e ainda não rastreado, sem exigir recriá-lo.",
+          "Recusar mistura de proprietários sem preparar parte indevida de um lote.",
+          "Conservar a propriedade após desfazer a preparação, quando aplicável ao novo contrato, sem vazamento acidental à base."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-11",
+      "title": "Preparar alterações separadamente",
+      "status": "implemented",
+      "implementedBehavior": "Staging Git real separado por origem; B no índice e C no disco.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/git.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL11-12-14 staged B commit preserves disk C and independent base stage"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL11-14-ROLE named unstage and restore preserve B index semantics on working Layer"
+        }
+      ],
+      "limitations": [
+        "Preparação parcial tem envelope de texto/patch suportado e token ainda válido."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL11-12-14 staged B commit preserves disk C and independent base stage",
+            "status": "PASS"
+          },
+          {
+            "name": "GL11-14-ROLE named unstage and restore preserve B index semantics on working Layer",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-11",
+        "behavior": "Cada origem mantém suas alterações preparadas para commit separadas. Preparar ou retirar da preparação trabalho de uma Layer não altera o trabalho preparado da base nem de outra Layer. Use as possibilidades reais do Git; não modele stage como um simples indicador booleano de arquivo alterado.",
+        "observableCriteria": [
+          "Preparar A na base e B em uma Layer; operações em B preservam A.",
+          "Preparar uma versão B de um arquivo e depois editar o disco para C: os estados continuam distinguíveis e nenhum deles é silenciosamente substituído."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-12",
+      "title": "Fazer commits independentes",
+      "status": "implemented",
+      "implementedBehavior": "Commit Git real independente com atualização condicionada ao OID.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/git.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL11-12-14 staged B commit preserves disk C and independent base stage"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL22-ROLE named add of tracked working Layer uses the main native index"
+        }
+      ],
+      "limitations": [
+        "Comandos gerenciados mantêm envelope conservador de hooks/assinatura."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL11-12-14 staged B commit preserves disk C and independent base stage",
+            "status": "PASS"
+          },
+          {
+            "name": "GL22-ROLE named add of tracked working Layer uses the main native index",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-12",
+        "behavior": "Os commits das Layers são commits Git reais, independentes dos da branch de trabalho e das outras Layers. Cada commit contém somente o trabalho corretamente selecionado para sua origem. Não há commit conjunto automático nem criação paralela de um histórico proprietário.",
+        "observableCriteria": [
+          "Inspecionar árvore/conteúdo do commit com Git oficial, não só a resposta da CLI.",
+          "Conferir que o commit de uma Layer não avança a branch de trabalho nem a outra Layer.",
+          "Edição posterior à preparação não entra automaticamente no commit já delimitado pela preparação."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-13",
+      "title": "Consultar o histórico de cada Layer",
+      "status": "implemented",
+      "implementedBehavior": "Histórico/diff por origem e ref real atual.",
+      "sourcePaths": [
+        "src/core/index.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL13 log observes native Layer branch commit without prior status"
+        }
+      ],
+      "limitations": [
+        "Suporte limitado ao envelope validado; não extrapolar cenários não executados."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL13 log observes native Layer branch commit without prior status",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-13",
+        "behavior": "Permita consultar o histórico e as diferenças de cada Layer separadamente, usando o histórico real do Git. O conjunto de arquivos visíveis não deve aparecer artificialmente como uma única origem de alterações.",
+        "observableCriteria": [
+          "Consultar commits e diferenças de duas Layers e da base, conferindo que os resultados correspondem à origem escolhida.",
+          "Manter coerência do histórico ao desligar, reativar, renomear e receber atualizações da Layer."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-14",
+      "title": "Escolher quais mudanças entram no commit",
+      "status": "implemented",
+      "implementedBehavior": "Preparar tudo e um commit; hunks opcionais; sem divisão automática.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/git.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL11-12-14 staged B commit preserves disk C and independent base stage"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL14 optional native patch application keeps unselected changes"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL11-14-ROLE named unstage and restore preserve B index semantics on working Layer"
+        }
+      ],
+      "limitations": [
+        "Hunks são opcionais e não suportam todos os binários/criações/remoções/modos."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL11-12-14 staged B commit preserves disk C and independent base stage",
+            "status": "PASS"
+          },
+          {
+            "name": "GL14 optional native patch application keeps unselected changes",
+            "status": "PASS"
+          },
+          {
+            "name": "GL11-14-ROLE named unstage and restore preserve B index semantics on working Layer",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-14",
+        "behavior": "Resolução final: preservar a semântica nativa de preparação e commit do Git. Preparar todas as alterações desejadas de um arquivo e registrá-las juntas é um fluxo normal; preparar somente determinados trechos também é uma opção nativa. Não tornar essa opção obrigatória, não dividir commits automaticamente e não criar um novo tipo de commit. O filtro de propriedade das Layers limita a origem do conteúdo; não muda o significado de preparação, commit ou histórico. O arquivo inteiro continua pertencendo à mesma origem, mesmo quando só algumas de suas alterações são preparadas.",
+        "observableCriteria": [
+          "Fluxo simples: preparar todas as mudanças do arquivo e fazer um único commit.",
+          "Fluxo opcional nativo: preparar um trecho, fazer commit e conferir que as demais mudanças permanecem no disco, na mesma origem.",
+          "Preparar B, editar para C e fazer commit: o resultado deve respeitar a semântica da forma de commit utilizada, sem capturar C indevidamente."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-15",
+      "title": "Trocar a branch sem desligar Layers",
+      "status": "partial",
+      "implementedBehavior": "Troca gerenciada conserva Layers compatíveis e recusa colisões.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/git.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL15 managed compatible switch keeps another layer staged and dirty"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL17 collision branch refuses before physical effects"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL22 deliberate Layer branch maintains other layers and returns coherently"
+        }
+      ],
+      "limitations": [
+        "Rota Git direta pode sobrescrever projeções ignoradas; recusa do wrapper não certifica prevenção nativa."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL15 managed compatible switch keeps another layer staged and dirty",
+            "status": "PASS"
+          },
+          {
+            "name": "GL17 collision branch refuses before physical effects",
+            "status": "PASS"
+          },
+          {
+            "name": "GL22 deliberate Layer branch maintains other layers and returns coherently",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-15",
+        "behavior": "Trocar a branch de trabalho não deve desligar as Layers por si só. Na troca compatível, elas continuam ativas. Na incompatível, apresente o impedimento sem sobrescrita, perda de trabalho ou desativação silenciosa. O mesmo princípio de manter as outras Layers se aplica ao modo explícito de GL-22.",
+        "observableCriteria": [
+          "Trocar entre duas branches compatíveis mantendo Layers e suas alterações separadas.",
+          "Trocar para uma branch que ocupa um caminho de Layer: observar e reportar o comportamento real, sem alegar segurança apenas pelo código de saída.",
+          "Verificar separadamente troca pelo Git oficial e eventual fluxo próprio; demonstrar os limites de cada rota."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-16",
+      "title": "Resolver pendências antes de desativar",
+      "status": "implemented",
+      "implementedBehavior": "Sem novo auto-park; commit, cancelamento ou descarte explícito.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/cli/index.ts",
+        "src/core/ignore.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL16 dirty off refuses then explicit discard never resurrects edits"
+        },
+        {
+          "sourcePath": "tests/integration/windows-compat.test.ts",
+          "name": "GL16 Git CRLF projection and explicit discard preserve binary data and the main index in accented paths"
+        },
+        {
+          "sourcePath": "tests/integration/review-target-preview.test.ts",
+          "name": "R02 target preserves ignored intention from info"
+        }
+      ],
+      "limitations": [
+        "Shelves legadas são preservadas; cópias técnicas não são novo auto-park.",
+        "Descarte exige escolha explícita; --yes de remoção não o implica."
+      ],
+      "execution": {
+        "directedPublicEvidence": [
+          "docs/evidence/closure-2026-11-02/review-target-preview.json"
+        ],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL16 dirty off refuses then explicit discard never resurrects edits",
+            "status": "PASS"
+          },
+          {
+            "name": "GL16 Git CRLF projection and explicit discard preserve binary data and the main index in accented paths",
+            "status": "PASS"
+          },
+          {
+            "name": "R02 target preserves ignored intention from info",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-16",
+        "behavior": "Antes de desativar uma Layer com pendências, avisar e exigir que o usuário resolva. Ele pode registrar o trabalho em commit, descartar deliberadamente o que não quer manter ou cancelar a desativação. Não implementar o antigo fluxo de guardar automaticamente edições para reaparecerem na próxima ativação, seja por shelf, stash automático ou outro nome. Avisar não autoriza descartar. Um arquivo salvo no disco pode continuar pendente no Git.",
+        "observableCriteria": [
+          "Desativar com alterações preparadas, não preparadas, remoções e novos arquivos atribuídos: não perder nem guardar silenciosamente o trabalho.",
+          "Cancelar conserva o estado. Descartar exige escolha explícita e alcance claro. Commit parcial não elimina uma pendência que ainda existe.",
+          "Desativar depois de resolver as pendências e reativar: não ressuscitar automaticamente edições descartadas."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-17",
+      "title": "Detectar conflitos sem sobrescrita silenciosa",
+      "status": "implemented",
+      "implementedBehavior": "Colisões/paths/propriedade revalidados sem escolher origem vencedora.",
+      "sourcePaths": [
+        "src/core/index.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL17 collision branch refuses before physical effects"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL27 preview is read-only and apply revalidates a new collision"
+        }
+      ],
+      "limitations": [
+        "Suporte limitado ao envelope validado; não extrapolar cenários não executados."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL17 collision branch refuses before physical effects",
+            "status": "PASS"
+          },
+          {
+            "name": "GL27 preview is read-only and apply revalidates a new collision",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-17",
+        "behavior": "Detecte incompatibilidades entre arquivos da branch e das Layers e entre as próprias Layers. Não escolha silenciosamente uma origem vencedora, não sobrescreva o conteúdo de outra e não resolva a colisão ativando/desativando algo sem informar. Conflitos de composição não autorizam criar uma função de merge entre Layers.",
+        "observableCriteria": [
+          "Cobrir colisão de caminho, arquivo/diretório e grafias relevantes à plataforma, inclusive conteúdo idêntico com origens diferentes.",
+          "Conservar arquivos locais preexistentes, inclusive ignorados, e informar quais origens impedem a operação.",
+          "Erro de uma operação deve ser acompanhado de inspeção dos efeitos reais e de recuperação quando necessária."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-18",
+      "title": "Não obrigar a manter a captura atual",
+      "status": "partial",
+      "implementedBehavior": "Criação externa com target; captura legada é opcional.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/ignore.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL03-09-10-18 explicit edit intervals reserve without staging or adopting old files"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL01-09 target excludes new external files before observation and preserves prior unassigned flow"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GAP GL01-09 higher priority ignore negation can bypass target protection in native add"
+        },
+        {
+          "sourcePath": "tests/integration/review-target-preview.test.ts",
+          "name": "R02 target preserves ignored intention from info"
+        }
+      ],
+      "limitations": [
+        "Exclusão antecipada protege add comum; overrides e force continuam bypass.",
+        "Não há watcher universal nem dependência de editor."
+      ],
+      "execution": {
+        "directedPublicEvidence": [
+          "docs/evidence/closure-2026-11-02/review-target-preview.json"
+        ],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL03-09-10-18 explicit edit intervals reserve without staging or adopting old files",
+            "status": "PASS"
+          },
+          {
+            "name": "GL01-09 target excludes new external files before observation and preserves prior unassigned flow",
+            "status": "PASS"
+          },
+          {
+            "name": "GAP GL01-09 higher priority ignore negation can bypass target protection in native add",
+            "status": "PASS"
+          },
+          {
+            "name": "R02 target preserves ignored intention from info",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-18",
+        "behavior": "O requisito é direcionar corretamente os novos arquivos ao destino explícito. O mecanismo antigo de captura não é obrigatório. Substituí-lo, integrá-lo ao modo de edição ou removê-lo é permitido, desde que os comportamentos de GL-03, GL-09 e GL-10 sejam atendidos e não haja atribuição indevida.",
+        "observableCriteria": [
+          "Criar arquivos por ferramenta externa durante o modo de edição e verificar a atribuição correta.",
+          "Encerrar/cancelar o modo não apaga novos arquivos por surpresa nem mantém uma captura invisível.",
+          "Não exigir que o usuário crie o arquivo por um comando especial ou pelo editor de laboratório."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-19",
+      "title": "Restaurar e recuperar com clareza",
+      "status": "partial",
+      "implementedBehavior": "Doctor/export independentes e recuperação conservadora com journals/backups/refs.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/recovery.ts",
+        "src/core/layout.ts",
+        "src/core/rescue.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 rename interrupted after ref update recovers without loss"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 explicit branch transition failpoint recovers role and other projection"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 leaving Layer branch interrupted after switch restores resumed projection"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19-26 abandoned lock is visible in status and doctor without deletion"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19-20 interrupted remove retains full commit through aggressive GC"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 oversized switch journal fails before withdrawing large projection"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19-ROLE interrupted commit of working Layer recovers metadata without duplicate history"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL19: doctor and export preserve invalid registry, invalid journal and live/stale locks independently of normal open"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL19: export requires a new external destination, refuses linked ancestors and records source junction without following it"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL19: recovery validates both discovered layouts without permitting arbitrary metadata roots"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL19/GL25: public Core/CLI use new layout; CLI rescues invalid metadata and migrates a separate legacy fixture"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL19: diagnostic distinguishes deliberate branch mode main index from retained private Layer index"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL19: real Windows exclusive file lock aborts export with incomplete manifest and unchanged source"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL19: semantic registry/workspace damage and missing retention checkpoint are unsafe without resetting any bytes"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL19: namespace export cannot bypass workspace or Git-directory ancestry"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL19: doctor independently diagnoses missing protection holders after native Git returns to one worktree"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19-26 Core doctor accepts real working Layer index while retaining its private checkpoint"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19-ROLE external private index modification refuses return without overwriting either index"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 recovery validates optional prior workspace roles and editing before any metadata write"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19-ROLE recover without pending journals acknowledges native branch-role commit and preserves main stage"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 main index lock prevents Layer mutation before effects"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19-26 doctor rejects malformed editing baseline independently of normal open"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 independent doctor validates workspace role coherence without rewriting optional return hints"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 external private index lock is unsafe and refuses mutation without removing lock"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 external private index lock and main lock refuse recovery before journal effects"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 external private index lock for journal-only registration prevents rollback effects"
+        }
+      ],
+      "limitations": [
+        "Exportação não copia todos os objetos Git nem o worktree inteiro e não é restauração automática.",
+        "Locks brutos e metadados inválidos são preservados, não removidos para silenciar bloqueio.",
+        "Desligamento do host não certifica resiliência a queda de energia; campanha de interrupção/concorrência não é exaustiva."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL19 rename interrupted after ref update recovers without loss",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 explicit branch transition failpoint recovers role and other projection",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 leaving Layer branch interrupted after switch restores resumed projection",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19-26 abandoned lock is visible in status and doctor without deletion",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19-20 interrupted remove retains full commit through aggressive GC",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 oversized switch journal fails before withdrawing large projection",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19-ROLE interrupted commit of working Layer recovers metadata without duplicate history",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19: doctor and export preserve invalid registry, invalid journal and live/stale locks independently of normal open",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19: export requires a new external destination, refuses linked ancestors and records source junction without following it",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19: recovery validates both discovered layouts without permitting arbitrary metadata roots",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19/GL25: public Core/CLI use new layout; CLI rescues invalid metadata and migrates a separate legacy fixture",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19: diagnostic distinguishes deliberate branch mode main index from retained private Layer index",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19: real Windows exclusive file lock aborts export with incomplete manifest and unchanged source",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19: semantic registry/workspace damage and missing retention checkpoint are unsafe without resetting any bytes",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19: namespace export cannot bypass workspace or Git-directory ancestry",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19: doctor independently diagnoses missing protection holders after native Git returns to one worktree",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19-26 Core doctor accepts real working Layer index while retaining its private checkpoint",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19-ROLE external private index modification refuses return without overwriting either index",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 recovery validates optional prior workspace roles and editing before any metadata write",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19-ROLE recover without pending journals acknowledges native branch-role commit and preserves main stage",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 main index lock prevents Layer mutation before effects",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19-26 doctor rejects malformed editing baseline independently of normal open",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 independent doctor validates workspace role coherence without rewriting optional return hints",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 external private index lock is unsafe and refuses mutation without removing lock",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 external private index lock and main lock refuse recovery before journal effects",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 external private index lock for journal-only registration prevents rollback effects",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-19",
+        "behavior": "Ofereça restauração clara, confirmação de descarte e diagnóstico/recuperação após falhas. Preserve o que for recuperável e não declare sucesso quando a operação continua bloqueada ou inconsistente. Recuperação não é promessa de recuperar bytes nunca persistidos ou já destruídos sem evidência. A segurança não deve depender de conseguir abrir normalmente todos os metadados.",
+        "observableCriteria": [
+          "Reproduzir falhas reais de exportação, metadados e locks conhecidas; comprovar a correção ou a substituição do mecanismo com oráculo independente.",
+          "Interromper operações em pontos relevantes, reabrir e recuperar sem sobrescrever trabalho posterior nem duplicar commit.",
+          "Distinguir bloqueio real, operação incompleta e diagnóstico saudável; exportar evidências sem exigir metadados já coerentes quando isso impediria o resgate."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-20",
+      "title": "Renomear e remover Layers",
+      "status": "partial",
+      "implementedBehavior": "Renomeação local preserva configuração branch, upstream, descrição, multivalores e histórico do reflog usando cópia nativa Git, CAS e publicação conservadora do config local, mantendo commits, índice, propriedade e arquivos. Nenhuma alteração remota é enviada. A remoção local recusa pendências sem descarte explícito, retira somente a origem escolhida e mantém o commit removido por referência técnica de recuperação.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/cli/index.ts",
+        "src/core/layer-rename.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL20 rename active layer retains ownership target and staged bytes"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL20 removal refuses pending then explicit discard preserves other origin"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19-20 interrupted remove retains full commit through aggressive GC"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL04-20 native prefixed identity can be renamed and removed without manual registration"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 branch rename preserves upstream description custom config and complete reflog"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 occupied destination ref config empty section reflog and config lock are refused without effects"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 active editing destination staged index and protection retain ownership and other active layers"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 working branch and external branch config scopes are refused before rename effects"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 interruption after-rename-copy restores exact config reflog refs roles and private stage"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 interruption after-rename-retire restores exact config reflog refs roles and private stage"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 interruption after-rename-config restores exact config reflog refs roles and private stage"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 interruption after-layer-ref-change restores exact config reflog refs roles and private stage"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 interruption after-layer-rename-protection restores exact config reflog refs roles and private stage"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 interruption after-layer-rename-metadata restores exact config reflog refs roles and private stage"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 interruption before durable copied snapshot conservatively preserves both branches and backups"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 recovery preserves later external config and CAS never deletes advanced source"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 recovery preserves later external target-ref and CAS never deletes advanced source"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 recovery preserves later external source-ref and CAS never deletes advanced source"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 recovery preserves later external target-reflog and CAS never deletes advanced source"
+        },
+        {
+          "sourcePath": "tests/integration/review-rename.test.ts",
+          "name": "R05 nested Unicode rename preserves native absence of config section and disabled reflog"
+        }
+      ],
+      "limitations": [
+        "O suporte permanece parcial: Layer usada como branch de trabalho, config de branch fora do config local principal, aliases de caixa/Unicode, nomes ancestrais, worktrees externos e backend distinto de files são recusados.",
+        "Na janela entre a cópia Git e o primeiro snapshot durável, a recuperação preserva ambas as refs/config/histórico/backups e exige inspeção, sem adivinhar rollback.",
+        "O reflog registra o evento nativo verdadeiro de cópia; não se fabrica o evento de git branch -m.",
+        "A feature --show-ref-format está presente na fonte e documentação oficiais do Git 2.44.0 e ausente no handler 2.43.0; sua ausência provoca RENAME_UNSUPPORTED antes dos efeitos. A execução desta rodada usou Git 2.53.0.windows.2, sem campanha runtime 2.44.",
+        "Uma recusa pode criar journal, backup ou ref técnica de retenção; o oráculo preserva todas as refs preexistentes e valida cada adição contra checkpoint/journal/identidade, sem prometer ausência de qualquer escrita."
+      ],
+      "execution": {
+        "directedPublicEvidence": [
+          "docs/evidence/closure-2026-11-02/R05-RENAME.json",
+          "docs/evidence/closure-2026-11-02/validation.json"
+        ],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "currentFullRenameCases": {
+          "run": "full-final-01",
+          "tests": 16,
+          "passed": 16,
+          "failed": 0,
+          "qualification": "Executados juntos na suíte227, sem somar after03 e after05."
+        },
+        "headlessReferencedTests": [
+          {
+            "name": "GL20 rename active layer retains ownership target and staged bytes",
+            "status": "PASS"
+          },
+          {
+            "name": "GL20 removal refuses pending then explicit discard preserves other origin",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19-20 interrupted remove retains full commit through aggressive GC",
+            "status": "PASS"
+          },
+          {
+            "name": "GL04-20 native prefixed identity can be renamed and removed without manual registration",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 branch rename preserves upstream description custom config and complete reflog",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 occupied destination ref config empty section reflog and config lock are refused without effects",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 active editing destination staged index and protection retain ownership and other active layers",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 working branch and external branch config scopes are refused before rename effects",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 interruption after-rename-copy restores exact config reflog refs roles and private stage",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 interruption after-rename-retire restores exact config reflog refs roles and private stage",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 interruption after-rename-config restores exact config reflog refs roles and private stage",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 interruption after-layer-ref-change restores exact config reflog refs roles and private stage",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 interruption after-layer-rename-protection restores exact config reflog refs roles and private stage",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 interruption after-layer-rename-metadata restores exact config reflog refs roles and private stage",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 interruption before durable copied snapshot conservatively preserves both branches and backups",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 recovery preserves later external config and CAS never deletes advanced source",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 recovery preserves later external target-ref and CAS never deletes advanced source",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 recovery preserves later external source-ref and CAS never deletes advanced source",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 recovery preserves later external target-reflog and CAS never deletes advanced source",
+            "status": "PASS"
+          },
+          {
+            "name": "R05 nested Unicode rename preserves native absence of config section and disabled reflog",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-20",
+        "behavior": "Permita renomear e remover Layers com familiaridade de branches. Considere o estado ativo, o destino de edição e alterações pendentes. Não apague trabalho nem mude a origem de arquivos silenciosamente. “Reorganizar” não é requisito adicional. Preserve o significado dos comandos nativos e trate alterações externas de nome/remoção de modo consistente com a segurança do produto.",
+        "observableCriteria": [
+          "Renomear uma Layer preserva histórico e mantém referências de uso coerentes, ou informa bloqueio antes de agir.",
+          "Remover uma Layer não remove arquivos de outras origens nem envia exclusão remota implicitamente.",
+          "Renomeação/remoção pelo Git direto é diagnosticada/reconciliada sem reset destrutivo de dados ou falsa situação saudável."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-21",
+      "title": "Compartilhar pelo Git normal",
+      "status": "implemented",
+      "implementedBehavior": "Históricos e refs usam transporte Git normal e remotos bare locais de teste.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/git.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/git-compat/cases/implementation.mjs",
+          "scenarioId": "IMPL-010",
+          "name": "share-local-bare-and-recognize-clone"
+        }
+      ],
+      "limitations": [
+        "Remoto local não certifica todos os provedores, contas ou autenticação.",
+        "Receber/reconhecer não ativa; refs e históricos Layer não são privados do Git.",
+        "Não há sincronização remota automática: avanço externo de uma ref já registrada pode exigir resolução explícita; o Core não reinicializa o índice ou os arquivos para esconder a divergência."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [],
+        "notPartOfNpmTest": [
+          "share-local-bare-and-recognize-clone"
+        ],
+        "headlessEvidenceState": "NO_REFERENCED_TEST_IN_NPM_TEST",
+        "compatibilityReferencedVariants": [
+          {
+            "id": "IMPL-010",
+            "variant": "share-local-bare-and-recognize-clone",
+            "status": "PASS",
+            "runId": "run-2026-11-03T01-04-32-968Z-96a7aaf6",
+            "qualification": "Caso executado na broad2; compartilhamento local não certifica todos os provedores."
+          }
+        ],
+        "headlessHistoricalRun": "full-final-01",
+        "compatibilityHistoricalVariants": [
+          {
+            "id": "IMPL-010",
+            "variant": "share-local-bare-and-recognize-clone",
+            "status": "PASS",
+            "runId": "run-2026-11-02T23-30-09-895Z-f8f19b3b",
+            "qualification": "Caso aprovado nesta rodada; a seleção ampla completa terminou exit 1 por outras falhas e será reexecutada."
+          }
+        ]
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-21",
+        "behavior": "Use Git oficial, seus commits, referências e transportes para compartilhar Layers com GitHub, GitLab e outros servidores Git compatíveis. Não crie serviço de hospedagem obrigatório ou outro sistema de histórico. Recursos adicionais devem ser somente os específicos do Git Layer. Compartilhamento de histórico é diferente de ativação e estado de edição local.",
+        "observableCriteria": [
+          "Em remotos locais descartáveis, enviar, clonar/receber, reconhecer e usar uma Layer sem transportar por engano alterações não commitadas.",
+          "Atualizar seu histórico preservando ou explicitamente resolvendo trabalho local; não reinicializar índice/arquivos para esconder divergências.",
+          "Documentar o alcance real de envio de branches e de opções abrangentes do Git; não prometer que históricos de Layers são privados ou invisíveis ao Git."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-22",
+      "title": "Abrir deliberadamente a Layer como branch",
+      "status": "partial",
+      "implementedBehavior": "Entrada deliberada, outras Layers compatíveis e proteção nativa padrão opt-in.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/branch-protection.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL22 deliberate Layer branch maintains other layers and returns coherently"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL22-ROLE named add of tracked working Layer uses the main native index"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL22-ROLE new working Layer file commits without a ghost reservation on return"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL22-ROLE explicit exit without resuming control-bearing Layer preserves other pending Layer"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL04-22-ROLE recognizing a native control-bearing branch does not authorize projection"
+        },
+        {
+          "sourcePath": "tests/integration/branch-protection.test.ts",
+          "name": "opt-in native reservations veto ordinary switch before effects and expose explicit native bypass"
+        },
+        {
+          "sourcePath": "tests/integration/branch-protection.test.ts",
+          "name": "explicit release and re-reservation keep the other Layer reserved, with safe reversible unprotect"
+        },
+        {
+          "sourcePath": "tests/integration/branch-protection.test.ts",
+          "name": "unknown worktree files and unknown protection directory are preserved instead of forced away"
+        },
+        {
+          "sourcePath": "tests/integration/branch-protection.test.ts",
+          "name": "an unknown protection destination is never initialized or overwritten"
+        },
+        {
+          "sourcePath": "tests/integration/branch-protection.test.ts",
+          "name": "private index or external worktree cannot be mistaken for a pristine owned reservation"
+        },
+        {
+          "sourcePath": "tests/integration/branch-protection.test.ts",
+          "name": "Core lifecycle with protection opens a Layer deliberately, preserves others and guards renamed/new Layers"
+        },
+        {
+          "sourcePath": "tests/integration/branch-protection.test.ts",
+          "name": "disabled released protection migrates without altering legacy and can reserve again in layers"
+        },
+        {
+          "sourcePath": "tests/integration/branch-protection.test.ts",
+          "name": "protection may be enabled before Core initialization without resetting native reservations"
+        },
+        {
+          "sourcePath": "tests/integration/branch-protection.test.ts",
+          "name": "a reserved Layer ref deleted externally is diagnosed before Core registration"
+        }
+      ],
+      "limitations": [
+        "Opt-in cria topologia de worktrees local declarada; --ignore-other-worktrees e remoção externa da reserva são bypass.",
+        "--off-current-layer escolhe não retomar a origem, sem descartar pendências ou desativar outras Layers.",
+        "Mudanças de atributos/módulos e estados fora do envelope podem exigir resolução explícita."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL22 deliberate Layer branch maintains other layers and returns coherently",
+            "status": "PASS"
+          },
+          {
+            "name": "GL22-ROLE named add of tracked working Layer uses the main native index",
+            "status": "PASS"
+          },
+          {
+            "name": "GL22-ROLE new working Layer file commits without a ghost reservation on return",
+            "status": "PASS"
+          },
+          {
+            "name": "GL22-ROLE explicit exit without resuming control-bearing Layer preserves other pending Layer",
+            "status": "PASS"
+          },
+          {
+            "name": "GL04-22-ROLE recognizing a native control-bearing branch does not authorize projection",
+            "status": "PASS"
+          },
+          {
+            "name": "opt-in native reservations veto ordinary switch before effects and expose explicit native bypass",
+            "status": "PASS"
+          },
+          {
+            "name": "explicit release and re-reservation keep the other Layer reserved, with safe reversible unprotect",
+            "status": "PASS"
+          },
+          {
+            "name": "unknown worktree files and unknown protection directory are preserved instead of forced away",
+            "status": "PASS"
+          },
+          {
+            "name": "an unknown protection destination is never initialized or overwritten",
+            "status": "PASS"
+          },
+          {
+            "name": "private index or external worktree cannot be mistaken for a pristine owned reservation",
+            "status": "PASS"
+          },
+          {
+            "name": "Core lifecycle with protection opens a Layer deliberately, preserves others and guards renamed/new Layers",
+            "status": "PASS"
+          },
+          {
+            "name": "disabled released protection migrates without altering legacy and can reserve again in layers",
+            "status": "PASS"
+          },
+          {
+            "name": "protection may be enabled before Core initialization without resetting native reservations",
+            "status": "PASS"
+          },
+          {
+            "name": "a reserved Layer ref deleted externally is diagnosed before Core registration",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-22",
+        "behavior": "No uso comum, Layers são ativadas/desativadas e não selecionadas acidentalmente como branch de trabalho. Deve haver uma ação explícita para abrir uma Layer como branch de trabalho. Nesse modo, as outras Layers podem continuar sendo usadas normalmente e só são desativadas quando o usuário escolhe, respeitando conflitos. Depois, a Layer pode voltar ao papel de camada. Diferencie esse modo de simplesmente escolher o destino de edição.",
+        "observableCriteria": [
+          "Abrir deliberadamente layer/scripts como branch de trabalho, mantendo layer/ia como camada; verificar histórico, stage e arquivos de ambas.",
+          "A mesma origem não deve ser aplicada duas vezes como base e como projeção adicional; não inventar um conflito consigo mesma.",
+          "Demonstrar prevenção/diagnóstico real de seleção acidental e suas fronteiras: CLI gerenciada, git oficial por caminho absoluto e uso sem a ferramenta.",
+          "Demonstrar a saída desse modo e transições com pendências, sem desligar as demais Layers silenciosamente."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-23",
+      "title": "Funcionar diretamente no terminal",
+      "status": "implemented",
+      "implementedBehavior": "Build/CLI independentes do laboratório em dist-core.",
+      "sourcePaths": [
+        "scripts/build-core.mjs",
+        "src/cli/index.ts",
+        "package.json"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/unit/implementation-cli.test.mjs",
+          "name": "implementation CLI help exposes terminal-only product commands and explicit discard"
+        },
+        {
+          "sourcePath": "tests/unit/implementation-cli.test.mjs",
+          "name": "implementation CLI refuses removed auto-park before opening repository"
+        },
+        {
+          "sourcePath": "tests/unit/implementation-cli.test.mjs",
+          "name": "implementation CLI confirmation alone never authorizes deactivation discard"
+        },
+        {
+          "sourcePath": "tests/unit/implementation-cli.test.mjs",
+          "name": "implementation CLI migration requires explicit confirmation before metadata access"
+        },
+        {
+          "sourcePath": "tests/unit/implementation-cli.test.mjs",
+          "name": "implementation CLI rejects discard on unrelated commands and stray path lists"
+        }
+      ],
+      "limitations": [
+        "Fontes exigem Node 22.12+, Git e esbuild disponível; runtime usa Node/Git.",
+        "build/cli/bin legados do pacote raiz continuam ligados ao laboratório."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "implementation CLI help exposes terminal-only product commands and explicit discard",
+            "status": "PASS"
+          },
+          {
+            "name": "implementation CLI refuses removed auto-park before opening repository",
+            "status": "PASS"
+          },
+          {
+            "name": "implementation CLI confirmation alone never authorizes deactivation discard",
+            "status": "PASS"
+          },
+          {
+            "name": "implementation CLI migration requires explicit confirmation before metadata access",
+            "status": "PASS"
+          },
+          {
+            "name": "implementation CLI rejects discard on unrelated commands and stray path lists",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-23",
+        "behavior": "O produto funciona diretamente pelo terminal com Git oficial, sem depender de Electron, Monaco, VS Code ou editor de laboratório em execução. Desenvolver e validar deve ser possível por comandos. Disponibilize build/uso da CLI de forma independente do desktop e declare seus pré-requisitos reais.",
+        "observableCriteria": [
+          "Executar os fluxos públicos completos e a validação sem abrir GUI.",
+          "Comprovar que o caminho de build/uso do produto não precisa inicializar o laboratório ou preparar a demonstração do usuário.",
+          "Documentar como usar a CLI e quais dependências realmente são necessárias; não apresentar o pacote Electron como única distribuição do núcleo."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-24",
+      "title": "Tratar integrações de editor como extras",
+      "status": "implemented",
+      "implementedBehavior": "Editor/plugins são extras fora desta rodada.",
+      "sourcePaths": [
+        "scripts/build-core.mjs",
+        "src/cli/index.ts",
+        "package.json"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/unit/implementation-cli.test.mjs",
+          "name": "implementation CLI help exposes terminal-only product commands and explicit discard"
+        }
+      ],
+      "limitations": [
+        "Não houve abertura/validação gráfica nem implementação de plugin nesta rodada."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "implementation CLI help exposes terminal-only product commands and explicit discard",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-24",
+        "behavior": "Integrações visuais são complementos futuros e opcionais. VS Code e GeppIO podem receber integração posterior, mas não são dependências do núcleo nem escopo de implementação desta rodada. O editor de laboratório serve aos testes manuais do usuário e só deve ser alterado quando houver tarefa específica.",
+        "observableCriteria": [
+          "Os comportamentos aprovados são exercitáveis sem integração visual.",
+          "A documentação separa claramente produto, laboratório e integrações futuras; não declarar plugin pronto por criar contratos do Core."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-25",
+      "title": "Usar “layers” e aproveitar o que o Git oferece",
+      "status": "implemented",
+      "implementedBehavior": "Layout layers e migração explícita com legado retido.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/core/recovery.ts",
+        "src/core/layout.ts",
+        "src/core/rescue.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL25: fresh layout uses layers; legacy opens in place without implicit migration"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL25: explicit migration preserves Git state, legacy bytes, binary shelves and completed absolute journals"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL25: unknown destination and pending recovery are refused without losing bytes"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL25: interruption after copy retains usable legacy and identifiable partial evidence; retry publishes"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL25: interruption after destination reservation refuses reopening and preserves all three copies for export"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL25: storage is discovered with Git when .git is a file; packed refs and worktree bytes remain unchanged"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL19/GL25: public Core/CLI use new layout; CLI rescues invalid metadata and migrates a separate legacy fixture"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL25: migrated Core can advance Layer refs while retained legacy stays historical evidence"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL25: native branch reservations must be disabled and fully released before migration"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL25: migration refuses semantically invalid registry before publishing a new layout"
+        }
+      ],
+      "limitations": [
+        "Migração é explícita e foi testada somente em fixtures.",
+        "Legado retido não é cópia sincronizada editável; divergência posterior provoca recusa.",
+        "Migração verifica schema/campos estruturais pela abertura do Core; não valida toda coerência semântica nem reconstrói histórico ou repara metadados.",
+        "O marcador de migração vincula caminhos absolutos da origem/destino. Relocar um repositório já migrado não tem remapeamento automático; essa fronteira foi identificada por leitura de código, sem campanha runtime de relocação."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL25: fresh layout uses layers; legacy opens in place without implicit migration",
+            "status": "PASS"
+          },
+          {
+            "name": "GL25: explicit migration preserves Git state, legacy bytes, binary shelves and completed absolute journals",
+            "status": "PASS"
+          },
+          {
+            "name": "GL25: unknown destination and pending recovery are refused without losing bytes",
+            "status": "PASS"
+          },
+          {
+            "name": "GL25: interruption after copy retains usable legacy and identifiable partial evidence; retry publishes",
+            "status": "PASS"
+          },
+          {
+            "name": "GL25: interruption after destination reservation refuses reopening and preserves all three copies for export",
+            "status": "PASS"
+          },
+          {
+            "name": "GL25: storage is discovered with Git when .git is a file; packed refs and worktree bytes remain unchanged",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19/GL25: public Core/CLI use new layout; CLI rescues invalid metadata and migrates a separate legacy fixture",
+            "status": "PASS"
+          },
+          {
+            "name": "GL25: migrated Core can advance Layer refs while retained legacy stays historical evidence",
+            "status": "PASS"
+          },
+          {
+            "name": "GL25: native branch reservations must be disabled and fully released before migration",
+            "status": "PASS"
+          },
+          {
+            "name": "GL25: migration refuses semantically invalid registry before publishing a new layout",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-25",
+        "behavior": "A organização adicional deve usar o nome layers e aproveitar ao máximo estruturas e capacidades do Git. Reutilize formatos nativos quando forem adequados, em vez de inventar versões “parecidas”. Não duplique objetos/histórico só para imitar a aparência de pastas. Crie somente o estado próprio necessário. A localização exata e a estratégia de armazenamento ficam para investigação do Codex.",
+        "observableCriteria": [
+          "Explicar o que foi reutilizado do Git e o que realmente precisou ser próprio.",
+          "Implementar e testar transição dos dados antigos quando aplicável, em cópias descartáveis; preservar histórico, trabalho e recuperação existentes.",
+          "Não sobrescrever uma organização layers desconhecida nem apagar backups/shelves históricos para adaptar o novo comportamento."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-26",
+      "title": "Consultar a situação atual",
+      "status": "implemented",
+      "implementedBehavior": "Consulta branch/papel, Layers, target, pendências e bloqueios.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/cli/index.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19-26 abandoned lock is visible in status and doctor without deletion"
+        },
+        {
+          "sourcePath": "tests/integration/layout-rescue.test.ts",
+          "name": "GL19: diagnostic distinguishes deliberate branch mode main index from retained private Layer index"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19-26 Core doctor accepts real working Layer index while retaining its private checkpoint"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19-26 doctor rejects malformed editing baseline independently of normal open"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 independent doctor validates workspace role coherence without rewriting optional return hints"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 external private index lock is unsafe and refuses mutation without removing lock"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 external private index lock and main lock refuse recovery before journal effects"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL19 external private index lock for journal-only registration prevents rollback effects"
+        }
+      ],
+      "limitations": [
+        "Status com target pode reconciliar propriedade; doctor safe:false resulta em CLI 3/ok:false."
+      ],
+      "execution": {
+        "directedPublicEvidence": [],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL19-26 abandoned lock is visible in status and doctor without deletion",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19: diagnostic distinguishes deliberate branch mode main index from retained private Layer index",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19-26 Core doctor accepts real working Layer index while retaining its private checkpoint",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19-26 doctor rejects malformed editing baseline independently of normal open",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 independent doctor validates workspace role coherence without rewriting optional return hints",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 external private index lock is unsafe and refuses mutation without removing lock",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 external private index lock and main lock refuse recovery before journal effects",
+            "status": "PASS"
+          },
+          {
+            "name": "GL19 external private index lock for journal-only registration prevents rollback effects",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-26",
+        "behavior": "Ofereça uma consulta clara no terminal sobre branch de trabalho, seu papel, Layers reconhecidas/ativas, destino de edição e pendências por origem. O usuário deve entender o estado sem abrir uma interface gráfica.",
+        "observableCriteria": [
+          "Consultar estado antes/depois de ativar, editar, commitar, trocar branch e abrir Layer como branch de trabalho.",
+          "Mostrar problemas reais de recuperação/bloqueio em vez de declarar situação saudável apesar deles."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    },
+    {
+      "id": "GL-27",
+      "title": "Conferir o efeito antes de uma ação",
+      "status": "implemented",
+      "implementedBehavior": "A prévia lógica somente leitura inclui arquivos elegíveis do target ainda não reconciliados; a ação revalida o estado atual de forma independente.",
+      "sourcePaths": [
+        "src/core/index.ts",
+        "src/cli/index.ts",
+        "src/core/ignore.ts"
+      ],
+      "testNames": [
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL27 preview is read-only and apply revalidates a new collision"
+        },
+        {
+          "sourcePath": "tests/integration/product-v1.test.ts",
+          "name": "GL27 remote-only removal preview diagnoses absent local reference without creating it"
+        },
+        {
+          "sourcePath": "tests/integration/review-target-preview.test.ts",
+          "name": "R03 preview off includes target newcomers without synchronizing metadata"
+        }
+      ],
+      "limitations": [
+        "Prévia não autoriza descarte nem dispensa nova validação; efeito real pode recusar estado alterado."
+      ],
+      "execution": {
+        "directedPublicEvidence": [
+          "docs/evidence/closure-2026-11-02/review-target-preview.json"
+        ],
+        "priorImplementationEvidence": "Execuções históricas retidas têm snapshots distintos e não aprovam automaticamente estas fontes.",
+        "headlessSuite": "full-final-02: 229 casos, 225 PASS e quatro SKIP juntos no snapshot 1bd7, com fontes estáveis. Os nomes abaixo delimitam o alcance deste requisito; a matriz tem execução própria.",
+        "compatibilityBroad": "TERMINAL_EXIT_0_WITH_355_PASS_6_ENV_BLOCKED",
+        "validationReference": "docs/evidence/closure-2026-11-02/validation.json",
+        "headlessReferencedTests": [
+          {
+            "name": "GL27 preview is read-only and apply revalidates a new collision",
+            "status": "PASS"
+          },
+          {
+            "name": "GL27 remote-only removal preview diagnoses absent local reference without creating it",
+            "status": "PASS"
+          },
+          {
+            "name": "R03 preview off includes target newcomers without synchronizing metadata",
+            "status": "PASS"
+          }
+        ],
+        "notPartOfNpmTest": [],
+        "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
+        "headlessHistoricalRun": "full-final-01"
+      },
+      "approvedContract": {
+        "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
+        "itemId": "GL-27",
+        "behavior": "Permita conferir os efeitos e impedimentos antes de ativar, desativar ou remover uma Layer: quais arquivos aparecerão/sairão e que trabalho será afetado. A forma de oferecer a prévia cabe ao Codex. A aprovação não obriga diálogo interativo em toda operação nem impede automação explícita e segura.",
+        "observableCriteria": [
+          "A prévia não aplica a ação nem altera a propriedade dos arquivos.",
+          "A operação efetiva revalida o estado para não executar cegamente uma prévia desatualizada.",
+          "As confirmações de descarte continuam claras e não são respondidas automaticamente pela automação de produção."
+        ],
+        "qualification": "Contrato recebido preservado; escolhas técnicas, suporte e execuções abaixo são dimensões diferentes da aprovação."
+      }
+    }
+  ],
+  "supportClassification": "Permanecem20 implementados e sete parciais apósR05; o status parcial segue o envelope explícito e a janela de inspeção, não ausência da preservação normal de configuração/reflog.",
+  "validation": {
+    "publicEvidence": "docs/evidence/closure-2026-11-02/validation.json",
+    "headlessSuite": {
+      "id": "full-final-02",
+      "exitCode": 0,
+      "tests": 229,
+      "passed": 225,
+      "failed": 0,
+      "skipped": 4,
+      "sourceFingerprint": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6",
+      "sourceFiles": 61
+    },
+    "infra": {
+      "id": "infra-final-02",
+      "exitCode": 0,
+      "tests": 111,
+      "passed": 111,
+      "failed": 0,
+      "skipped": 0,
+      "sourceFingerprint": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6"
+    },
+    "typecheck": {
+      "id": "typecheck-final-02",
+      "exitCode": 0,
+      "sourceFingerprint": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6"
+    },
+    "compatibilityBroad": {
+      "state": "TERMINAL_EXIT_0_WITH_6_ENV_BLOCKED",
+      "finalAttempt": {
+        "runId": "run-2026-11-03T01-04-32-968Z-96a7aaf6",
+        "selected": 361,
+        "passed": 355,
+        "failed": 0,
+        "environmentBlocked": 6,
+        "exitCode": 0,
+        "sourceFingerprint": "41c28c7186257d5d81b619a7b4f983a89334a8ff2c27c05d485e4ecab98355da",
+        "runnerFingerprint": "e6fbb13d52fdccf8e4d7428fc159f606a5bd6ec1ef841cfb90742c79b14db91f"
+      },
+      "publicEvidence": "docs/evidence/closure-2026-11-02/matrix-broad.json",
+      "historicalFirstAttempt": {
+        "selected": 361,
+        "passed": 348,
+        "failed": 7,
+        "environmentBlocked": 6,
+        "exitCode": 1
+      }
+    },
+    "compiledAndCommittedCopy": "COMPILED_BUILD_SMOKE_PASS_FRESH_COMMITTED_COPY_PENDING",
+    "publication": "PENDING_SERVER_COMPARISON",
+    "qualification": "Full02 229=225 PASS/quatro SKIP, infra02 111 PASS e broad2 361=355 PASS/seis ENV_BLOCKED/zero FAIL concluíram com fontes estáveis nos domínios registrados. Nenhum resultado foi somado ao snapshot anterior. Arquivo, cópia nova commitada e main continuam pendentes.",
+    "revalidationAfterInfraCorrections": "LOCAL_VALIDATION_COMPLETE_FRESH_ARCHIVE_PUBLICATION_PENDING",
+    "afterInfrastructure": {
+      "reference": "docs/evidence/closure-2026-11-02/validation.json",
+      "typecheck": {
+        "id": "typecheck-final-02",
+        "exitCode": 0,
+        "sourceFingerprint": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6"
+      },
+      "buildSmoke": {
+        "id": "build-smoke-final-01",
+        "status": "PASS",
+        "wrapperCommands": 3,
+        "smokeFlows": 7,
+        "smokeRecordedCommands": 82
+      },
+      "archiveToolUnit": {
+        "tests": 6,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0
+      },
+      "compatibilityDirectedR2": {
+        "variants": 7,
+        "passed": 7,
+        "failed": 0
+      },
+      "functionalFreeze": {
+        "files": 173,
+        "fingerprint": "084267c2e9660a22fb79df668fbf84416d839d98382de45caac9c694a45133c2",
+        "originalManifestSHA256": "3ee580862b9b9fb605376f50388a059b56f3966846394279ffae7314918277ea",
+        "afterManifestSHA256": "96a95bf9f902dca36331b492cf44902dd0e6acf106d04f55387b07196c2ff9ed",
+        "equalAfterAllSuites": true
+      },
+      "fullFinal02": {
+        "status": "PASS",
+        "tests": 229,
+        "passed": 225,
+        "failed": 0,
+        "skipped": 4,
+        "sourceFingerprint": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6"
+      },
+      "infraAndBroad02": "PASS_INFRA111_BROAD355_AND_6_ENV_BLOCKED",
+      "infraFinal02": {
+        "status": "PASS",
+        "tests": 111,
+        "passed": 111,
+        "failed": 0,
+        "skipped": 0,
+        "sourceFingerprint": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6"
+      }
+    },
+    "compiledBuildSmoke": "PASS",
+    "freshCommittedCopy": "PENDING",
+    "headlessHistory": [
+      {
+        "id": "full-final-01",
+        "exitCode": 0,
+        "tests": 227,
+        "passed": 223,
+        "failed": 0,
+        "skipped": 4,
+        "sourceFingerprint": "ce8f35a75b2a24d7177fe2bb3845a2d729aec768acbd92b0d2a0f2bfe407e718",
+        "sourceFiles": 61
+      }
+    ],
+    "infraHistory": [
+      {
+        "id": "infra-final-01",
+        "tests": 108,
+        "passed": 108,
+        "failed": 0,
+        "skipped": 0,
+        "exitCode": 0
+      }
+    ]
+  }
+}

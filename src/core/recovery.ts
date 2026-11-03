@@ -1,7 +1,9 @@
 import path from 'node:path';
+import { lstat } from 'node:fs/promises';
 import { LabError } from './errors.js';
+import { validateLayerRenameRecovery } from './layer-rename.js';
 import { git } from './git.js';
-import { safePath, validatePath } from './paths.js';
+import { collisionKey, safePath, validatePath } from './paths.js';
 import { fingerprint, sameFingerprint, type Fingerprint } from './storage.js';
 
 interface RecoveryRepo { root: string; gitDir: string; exclude: string; index: string }
@@ -20,7 +22,7 @@ function absolute(value: unknown): value is string {
 }
 
 async function branch(repo: RecoveryRepo, value: unknown): Promise<string> {
-  if (typeof value !== 'string' || !value || value.startsWith('-') || value.startsWith('layer/') || /[\u0000\r\n]/.test(value)) invalid('Branch tradicional inválida no plano de recuperação.');
+  if (typeof value !== 'string' || !value || value.startsWith('-') || /[\u0000\r\n]/.test(value)) invalid('Branch tradicional inválida no plano de recuperação.');
   const result = await git(repo.root, ['check-ref-format', `refs/heads/${value}`], { ok: [0, 1] });
   if (result.code !== 0) invalid('Referência de branch inválida no plano de recuperação.');
   return value as string;
@@ -32,7 +34,7 @@ async function branch(repo: RecoveryRepo, value: unknown): Promise<string> {
  */
 export async function validateRecovery(repo: RecoveryRepo, directory: string, data: any): Promise<void> {
   const dir = path.resolve(directory);
-  if (dir !== path.join(path.resolve(repo.gitDir), 'git-layers')) invalid('Diretório de recuperação incompatível com o repositório.');
+  if (![path.join(path.resolve(repo.gitDir), 'git-layers'), path.join(path.resolve(repo.gitDir), 'layers')].includes(dir)) invalid('Diretório de recuperação incompatível com o repositório.');
   if (!object(data) || data.schema !== 1 || !safeId(data.id) || !object(data.recovery)) invalid('Journal sem plano de recuperação válido.');
   const recovery = data.recovery;
   const beforeRegistry = recovery.beforeRegistry;
@@ -50,6 +52,17 @@ export async function validateRecovery(repo: RecoveryRepo, directory: string, da
   }
   if (!object(beforeWorkspace) || beforeWorkspace.schema !== 1 || !oid(beforeWorkspace.head, true)) invalid('Workspace anterior ausente ou inválido no journal.');
   await branch(repo, beforeWorkspace.branch);
+  for(const key of ['branchLayer','resumeLayer','returnBranch'])if(beforeWorkspace[key]!==undefined&&(typeof beforeWorkspace[key]!=='string'||!beforeWorkspace[key]))invalid('Papel opcional inválido no workspace anterior.');
+  if(beforeWorkspace.branchLayer!==undefined){const layer=beforeRegistry.layers.find((entry:any)=>entry.name===beforeWorkspace.branchLayer);if(!layer||layer.state!=='inactive'||beforeWorkspace.branch!=='layer/'+layer.name)invalid('Papel Layer como branch não corresponde ao estado anterior.');}
+  if(beforeWorkspace.branch.startsWith('layer/')&&beforeWorkspace.branchLayer!==beforeWorkspace.branch.slice(6))invalid('Branch Layer anterior sem papel explícito correspondente.');
+  if(beforeWorkspace.resumeLayer!==undefined&&beforeWorkspace.resumeLayer!==beforeWorkspace.branchLayer)invalid('Retomada não corresponde à branch Layer anterior.');
+  if(beforeWorkspace.returnBranch!==undefined)await branch(repo,beforeWorkspace.returnBranch);
+  if(beforeWorkspace.editing!==undefined){
+    const editing=beforeWorkspace.editing;if(!object(editing)||typeof editing.layer!=='string'||typeof editing.startedAt!=='string'||!Number.isFinite(Date.parse(editing.startedAt)))invalid('Destino de edição anterior inválido.');
+    if(!beforeRegistry.layers.some((layer:any)=>layer.name===editing.layer&&layer.state==='active'&&layer.name!==beforeWorkspace.branchLayer))invalid('Destino de edição anterior sem Layer ativa correspondente.');
+    const paths=(value:any):string[]=>{if(!Array.isArray(value)||value.some(path=>typeof path!=='string')||new Set(value).size!==value.length)invalid('Baseline de edição inválida ou duplicada.');for(const entry of value){try{validatePath(entry);}catch{invalid('Caminho inválido na baseline de edição.');}}return value;};
+    const before=paths(editing.before);if(editing.unassigned!==undefined&&paths(editing.unassigned).some(path=>!before.includes(path)))invalid('Exceção de edição fora da baseline observada.');
+  }
   if (!Array.isArray(recovery.files) || !Array.isArray(data.backups)) invalid('Lista de arquivos/backups de recuperação ausente.');
   const journalDir = path.join(dir, 'transactions', data.id);
   const backupDir = path.join(journalDir, 'backups');
@@ -83,6 +96,27 @@ export async function validateRecovery(repo: RecoveryRepo, directory: string, da
     const recorded = data.backups.find((entry: any) => object(entry) && entry.source === file.path && entry.copy === file.backup && validFingerprint(entry.fingerprint) && sameFingerprint(entry.fingerprint, file.before));
     if (!recorded) invalid('O arquivo não possui um backup correspondente no journal.', { path: file.path });
   }
+  if (recovery.directories !== undefined) {
+    if (!['deactivate','remove-layer'].includes(data.kind) || !Array.isArray(recovery.directories)) invalid('Plano de diretórios inválido para esta transação.');
+    const directories = new Set<string>();
+    const spellings = new Map<string, string>();
+    for (const entry of recovery.directories) {
+      if (!object(entry) || !absolute(entry.path) || !Number.isInteger(entry.mode) || entry.mode < 0 || entry.mode > 0o777 || directories.has(entry.path)) invalid('Diretório inválido ou duplicado no plano de recuperação.');
+      directories.add(entry.path);
+      const relative = path.relative(path.resolve(repo.root), entry.path).split(path.sep).join('/');
+      if (!relative || relative === '..' || relative.startsWith('../') || path.isAbsolute(relative)) invalid('Diretório de recuperação fora do workspace.');
+      for (let parent = relative; parent !== '.'; parent = path.posix.dirname(parent)) {
+        const key = collisionKey(parent);
+        if (spellings.has(key) && spellings.get(key) !== parent) invalid('Diretórios de recuperação diferem apenas por caixa/Unicode.');
+        spellings.set(key, parent);
+      }
+      if (await safePath(repo.root, relative) !== entry.path) invalid('Diretório de recuperação incompatível com o workspace.');
+      try {
+        if (!(await lstat(entry.path)).isDirectory()) throw new LabError('RECOVERY_CONFLICT', `Um arquivo passou a ocupar o diretório: ${relative}`);
+      } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
+    }
+  }
+  if(recovery.refOperation!==undefined){const op=recovery.refOperation;const layer=beforeRegistry.layers.find((l:any)=>l.id===op?.id);if(!layer||!['rename','delete'].includes(op.kind)||op.from!==layer.ref||op.oid!==layer.oid)invalid('Operação de ref inválida.');if(op.kind==='rename'){if(typeof op.to!=='string'||!op.to.startsWith('refs/heads/layer/'))invalid('Destino de rename inválido.');await branch(repo,op.to.slice(11));}if(op.protocol!==undefined){if(op.kind!=='rename'||op.protocol!=='native-copy-cas-v1')invalid('Protocolo de ref desconhecido.');await validateLayerRenameRecovery(repo,dir,data);}}
   if (recovery.commit !== undefined) {
     const commit = recovery.commit;
     if (!object(commit) || !oid(commit.old, true) || !oid(commit.new) || typeof commit.ref !== 'string') invalid('Plano de commit inválido.');
@@ -97,5 +131,8 @@ export async function validateRecovery(repo: RecoveryRepo, directory: string, da
     const planned = recovery.switch;
     if (!object(planned) || !oid(planned.fromOid) || !oid(planned.toOid) || planned.from !== beforeWorkspace.branch || planned.fromOid !== beforeWorkspace.head) invalid('Plano de troca de branch inválido.');
     await branch(repo, planned.from); await branch(repo, planned.to);
+    if(planned.to.startsWith('layer/')&&(planned.openingName!==planned.to.slice(6)||!beforeRegistry.layers.some((l:any)=>l.name===planned.openingName)))invalid('Entrada Layer como branch não explícita no plano.');
+    if(planned.from.startsWith('layer/')&&beforeWorkspace.branchLayer!==planned.from.slice(6))invalid('Saída Layer como branch sem estado anterior correspondente.');
+    if(planned.resumeName&&planned.resumeName!==beforeWorkspace.branchLayer)invalid('Retomada de Layer inválida.');
   }
 }

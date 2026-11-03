@@ -1,0 +1,1463 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-18T21:54:02.301Z",
+  "purpose": "documentation and read-only inventory; not a scenario run",
+  "git_absolute": "C:/Program Files/Git/cmd/git.exe",
+  "git_version_build": "git version 2.53.0.windows.2\ncpu: x86_64\nbuilt from commit: e9edee0b34751bf4d7d1feda0e2535bff64d4e77\nsizeof-long: 4\nsizeof-size_t: 8\nshell-path: D:/git-sdk-64/usr/bin/sh\nrust: disabled\nfeature: fsmonitor--daemon\ngettext: enabled\nlibcurl: 8.18.0\nOpenSSL: OpenSSL 3.5.5 27 Jan 2026\nzlib: 1.3.1\nSHA-1: SHA1_DC\nSHA-256: SHA256_BLK\ndefault-ref-format: files\ndefault-hash: sha1\n",
+  "installed_manual_root": "C:/Program Files/Git/mingw64/share/doc/git-doc",
+  "counts": {
+    "catalog_commands": 161,
+    "guides_interfaces_formats": 33,
+    "targeted_semantic_cards": 82,
+    "semantic_triage_cards": 79,
+    "catalogued_source_to_review": 0,
+    "local_manual_extraction_only": 0,
+    "not_locally_documented": 9,
+    "builtins_in_catalog": 131,
+    "exec_file_only": 19,
+    "not_found_in_builtin_or_exec": 11,
+    "option_labels_extracted_total": 2003,
+    "reviewed_option_mentions": 387
+  },
+  "upstream_comparison": {
+    "older": "2.53.0",
+    "baseline": "2.56.0",
+    "older_entries": 190,
+    "baseline_entries": 194,
+    "added": [
+      "git-format-rev",
+      "git-history",
+      "git-url-parse",
+      "gitdatamodel"
+    ],
+    "removed": [],
+    "classification_reconstruction": "parsed primary web command-list output; stage unclassified preserved explicitly"
+  },
+  "internal_or_additional_builtins_not_in_baseline": [
+    "checkout--worker",
+    "credential-cache--daemon",
+    "fsck-objects",
+    "fsmonitor--daemon",
+    "init-db",
+    "merge-ours",
+    "merge-recursive",
+    "merge-recursive-ours",
+    "merge-recursive-theirs",
+    "merge-subtree",
+    "pickaxe",
+    "remote-ext",
+    "remote-fd",
+    "submodule--helper",
+    "survey",
+    "upload-archive--writer"
+  ],
+  "local_command_records": [
+    {
+      "executable": "C:/Program Files/Git/cmd/git.exe",
+      "argv": [
+        "version",
+        "--build-options"
+      ],
+      "started_at": "2026-10-18T21:54:01.708Z",
+      "exit_code": 0,
+      "error": null,
+      "stdout": "git version 2.53.0.windows.2\ncpu: x86_64\nbuilt from commit: e9edee0b34751bf4d7d1feda0e2535bff64d4e77\nsizeof-long: 4\nsizeof-size_t: 8\nshell-path: D:/git-sdk-64/usr/bin/sh\nrust: disabled\nfeature: fsmonitor--daemon\ngettext: enabled\nlibcurl: 8.18.0\nOpenSSL: OpenSSL 3.5.5 27 Jan 2026\nzlib: 1.3.1\nSHA-1: SHA1_DC\nSHA-256: SHA256_BLK\ndefault-ref-format: files\ndefault-hash: sha1\n",
+      "stderr": ""
+    },
+    {
+      "executable": "C:/Program Files/Git/cmd/git.exe",
+      "argv": [
+        "--list-cmds=builtins"
+      ],
+      "started_at": "2026-10-18T21:54:01.767Z",
+      "exit_code": 0,
+      "error": null,
+      "stdout": "add\nam\nannotate\napply\narchive\nbackfill\nbisect\nblame\nbranch\nbugreport\nbundle\ncat-file\ncheck-attr\ncheck-ignore\ncheck-mailmap\ncheck-ref-format\ncheckout\ncheckout--worker\ncheckout-index\ncherry\ncherry-pick\nclean\nclone\ncolumn\ncommit\ncommit-graph\ncommit-tree\nconfig\ncount-objects\ncredential\ncredential-cache\ncredential-cache--daemon\ncredential-store\ndescribe\ndiagnose\ndiff\ndiff-files\ndiff-index\ndiff-pairs\ndiff-tree\ndifftool\nfast-export\nfast-import\nfetch\nfetch-pack\nfmt-merge-msg\nfor-each-ref\nfor-each-repo\nformat-patch\nfsck\nfsck-objects\nfsmonitor--daemon\ngc\nget-tar-commit-id\ngrep\nhash-object\nhelp\nhook\nindex-pack\ninit\ninit-db\ninterpret-trailers\nlast-modified\nlog\nls-files\nls-remote\nls-tree\nmailinfo\nmailsplit\nmaintenance\nmerge\nmerge-base\nmerge-file\nmerge-index\nmerge-ours\nmerge-recursive\nmerge-recursive-ours\nmerge-recursive-theirs\nmerge-subtree\nmerge-tree\nmktag\nmktree\nmulti-pack-index\nmv\nname-rev\nnotes\npack-objects\npack-redundant\npack-refs\npatch-id\npickaxe\nprune\nprune-packed\npull\npush\nrange-diff\nread-tree\nrebase\nreceive-pack\nreflog\nrefs\nremote\nremote-ext\nremote-fd\nrepack\nreplace\nreplay\nrepo\nrerere\nreset\nrestore\nrev-list\nrev-parse\nrevert\nrm\nsend-pack\nshortlog\nshow\nshow-branch\nshow-index\nshow-ref\nsparse-checkout\nstage\nstash\nstatus\nstripspace\nsubmodule--helper\nsurvey\nswitch\nsymbolic-ref\ntag\nunpack-file\nunpack-objects\nupdate-index\nupdate-ref\nupdate-server-info\nupload-archive\nupload-archive--writer\nupload-pack\nvar\nverify-commit\nverify-pack\nverify-tag\nversion\nwhatchanged\nworktree\nwrite-tree\n",
+      "stderr": ""
+    },
+    {
+      "executable": "C:/Program Files/Git/cmd/git.exe",
+      "argv": [
+        "help",
+        "-a",
+        "--no-aliases",
+        "--no-external-commands"
+      ],
+      "started_at": "2026-10-18T21:54:01.831Z",
+      "exit_code": 0,
+      "error": null,
+      "stdout": "See 'git help <command>' to read about a specific subcommand\n\nMain Porcelain Commands\n   add                     Add file contents to the index\n   am                      Apply a series of patches from a mailbox\n   archive                 Create an archive of files from a named tree\n   backfill                Download missing objects in a partial clone\n   bisect                  Use binary search to find the commit that introduced a bug\n   branch                  List, create, or delete branches\n   bundle                  Move objects and refs by archive\n   checkout                Switch branches or restore working tree files\n   cherry-pick             Apply the changes introduced by some existing commits\n   citool                  Graphical alternative to git-commit\n   clean                   Remove untracked files from the working tree\n   clone                   Clone a repository into a new directory\n   commit                  Record changes to the repository\n   describe                Give an object a human readable name based on an available ref\n   diff                    Show changes between commits, commit and working tree, etc\n   fetch                   Download objects and refs from another repository\n   format-patch            Prepare patches for e-mail submission\n   gc                      Cleanup unnecessary files and optimize the local repository\n   gitk                    The Git repository browser\n   grep                    Print lines matching a pattern\n   gui                     A portable graphical interface to Git\n   init                    Create an empty Git repository or reinitialize an existing one\n   log                     Show commit logs\n   maintenance             Run tasks to optimize Git repository data\n   merge                   Join two or more development histories together\n   mv                      Move or rename a file, a directory, or a symlink\n   notes                   Add or inspect object notes\n   pull                    Fetch from and integrate with another repository or a local branch\n   push                    Update remote refs along with associated objects\n   range-diff              Compare two commit ranges (e.g. two versions of a branch)\n   rebase                  Reapply commits on top of another base tip\n   reset                   Set `HEAD` or the index to a known state\n   restore                 Restore working tree files\n   revert                  Revert some existing commits\n   rm                      Remove files from the working tree and from the index\n   scalar                  A tool for managing large Git repositories\n   shortlog                Summarize 'git log' output\n   show                    Show various types of objects\n   sparse-checkout         Reduce your working tree to a subset of tracked files\n   stash                   Stash the changes in a dirty working directory away\n   status                  Show the working tree status\n   submodule               Initialize, update or inspect submodules\n   survey                  EXPERIMENTAL: Measure various repository dimensions of scale\n   switch                  Switch branches\n   tag                     Create, list, delete or verify tags\n   worktree                Manage multiple working trees\n\nAncillary Commands / Manipulators\n   config                  Get and set repository or global options\n   fast-export             Git data exporter\n   fast-import             Backend for fast Git data importers\n   filter-branch           Rewrite branches\n   mergetool               Run merge conflict resolution tools to resolve merge conflicts\n   pack-refs               Pack heads and tags for efficient repository access\n   prune                   Prune all unreachable objects from the object database\n   reflog                  Manage reflog information\n   refs                    Low-level access to refs\n   remote                  Manage set of tracked repositories\n   repack                  Pack unpacked objects in a repository\n   replace                 Create, list, delete refs to replace objects\n\nAncillary Commands / Interrogators\n   annotate                Annotate file lines with commit information\n   blame                   Show what revision and author last modified each line of a file\n   bugreport               Collect information for user to file a bug report\n   count-objects           Count unpacked number of objects and their disk consumption\n   diagnose                Generate a zip archive of diagnostic information\n   difftool                Show changes using common diff tools\n   fsck                    Verifies the connectivity and validity of the objects in the database\n   gitweb                  Git web interface (web frontend to Git repositories)\n   help                    Display help information about Git\n   instaweb                Instantly browse your working repository in gitweb\n   merge-tree              Perform merge without touching index or working tree\n   rerere                  Reuse recorded resolution of conflicted merges\n   show-branch             Show branches and their commits\n   verify-commit           Check the GPG signature of commits\n   verify-tag              Check the GPG signature of tags\n   version                 Display version information about Git\n   whatchanged             Show logs with differences each commit introduces\n\nInteracting with Others\n   archimport              Import a GNU Arch repository into Git\n   cvsexportcommit         Export a single commit to a CVS checkout\n   cvsimport               Salvage your data out of another SCM people love to hate\n   cvsserver               A CVS server emulator for Git\n   imap-send               Send a collection of patches from stdin to an IMAP folder\n   p4                      Import from and submit to Perforce repositories\n   quiltimport             Applies a quilt patchset onto the current branch\n   request-pull            Generates a summary of pending changes\n   send-email              Send a collection of patches as emails\n   svn                     Bidirectional operation between a Subversion repository and Git\n\nLow-level Commands / Manipulators\n   apply                   Apply a patch to files and/or to the index\n   checkout-index          Copy files from the index to the working tree\n   commit-graph            Write and verify Git commit-graph files\n   commit-tree             Create a new commit object\n   hash-object             Compute object ID and optionally create an object from a file\n   index-pack              Build pack index file for an existing packed archive\n   merge-file              Run a three-way file merge\n   merge-index             Run a merge for files needing merging\n   mktag                   Creates a tag object with extra validation\n   mktree                  Build a tree-object from ls-tree formatted text\n   multi-pack-index        Write and verify multi-pack-indexes\n   pack-objects            Create a packed archive of objects\n   prune-packed            Remove extra objects that are already in pack files\n   read-tree               Reads tree information into the index\n   replay                  EXPERIMENTAL: Replay commits on a new base, works with bare repos too\n   symbolic-ref            Read, modify and delete symbolic refs\n   unpack-objects          Unpack objects from a packed archive\n   update-index            Register file contents in the working tree to the index\n   update-ref              Update the object name stored in a ref safely\n   write-tree              Create a tree object from the current index\n\nLow-level Commands / Interrogators\n   cat-file                Provide contents or details of repository objects\n   cherry                  Find commits yet to be applied to upstream\n   diff-files              Compares files in the working tree and the index\n   diff-index              Compare a tree to the working tree or index\n   diff-pairs              Compare the content and mode of provided blob pairs\n   diff-tree               Compares the content and mode of blobs found via two tree objects\n   for-each-ref            Output information on each ref\n   for-each-repo           Run a Git command on a list of repositories\n   get-tar-commit-id       Extract commit ID from an archive created using git-archive\n   last-modified           EXPERIMENTAL: Show when files were last modified\n   ls-files                Show information about files in the index and the working tree\n   ls-remote               List references in a remote repository\n   ls-tree                 List the contents of a tree object\n   merge-base              Find as good common ancestors as possible for a merge\n   name-rev                Find symbolic names for given revs\n   pack-redundant          Find redundant pack files\n   repo                    Retrieve information about the repository\n   rev-list                Lists commit objects in reverse chronological order\n   rev-parse               Pick out and massage parameters\n   show-index              Show packed archive index\n   show-ref                List references in a local repository\n   unpack-file             Creates a temporary file with a blob's contents\n   var                     Show a Git logical variable\n   verify-pack             Validate packed Git archive files\n\nLow-level Commands / Syncing Repositories\n   daemon                  A really simple server for Git repositories\n   fetch-pack              Receive missing objects from another repository\n   http-backend            Server side implementation of Git over HTTP\n   send-pack               Push objects over Git protocol to another repository\n   update-server-info      Update auxiliary info file to help dumb servers\n\nLow-level Commands / Internal Helpers\n   check-attr              Display gitattributes information\n   check-ignore            Debug gitignore / exclude files\n   check-mailmap           Show canonical names and email addresses of contacts\n   check-ref-format        Ensures that a reference name is well formed\n   column                  Display data in columns\n   credential              Retrieve and store user credentials\n   credential-cache        Helper to temporarily store passwords in memory\n   credential-store        Helper to store credentials on disk\n   fmt-merge-msg           Produce a merge commit message\n   hook                    Run git hooks\n   interpret-trailers      Add or parse structured information in commit messages\n   mailinfo                Extracts patch and authorship from a single e-mail message\n   mailsplit               Simple UNIX mbox splitter program\n   merge-one-file          The standard helper program to use with git-merge-index\n   patch-id                Compute unique ID for a patch\n   sh-i18n                 Git's i18n setup code for shell scripts\n   sh-setup                Common Git shell script setup code\n   stripspace              Remove unnecessary whitespace\n\nUser-facing repository, command and file interfaces\n   attributes              Defining attributes per path\n   cli                     Git command-line interface and conventions\n   hooks                   Hooks used by Git\n   ignore                  Specifies intentionally untracked files to ignore\n   mailmap                 Map author/committer names and/or E-Mail addresses\n   modules                 Defining submodule properties\n   repository-layout       Git Repository Layout\n   revisions               Specifying revisions and ranges for Git\n\nDeveloper-facing file formats, protocols and other interfaces\n   format-bundle           The bundle file format\n   format-chunk            Chunk-based file formats\n   format-commit-graph     Git commit-graph format\n   format-index            Git index format\n   format-pack             Git pack format\n   format-signature        Git cryptographic signature formats\n   protocol-capabilities   Protocol v0 and v1 capabilities\n   protocol-common         Things common to various protocols\n   protocol-http           Git HTTP-based protocols\n   protocol-pack           How packs are transferred over-the-wire\n   protocol-v2             Git Wire Protocol, Version 2\n",
+      "stderr": ""
+    },
+    {
+      "executable": "C:/Program Files/Git/cmd/git.exe",
+      "argv": [
+        "help",
+        "-g"
+      ],
+      "started_at": "2026-10-18T21:54:01.878Z",
+      "exit_code": 0,
+      "error": null,
+      "stdout": "The Git concept guides are:\n   core-tutorial    A Git core tutorial for developers\n   credentials      Providing usernames and passwords to Git\n   cvs-migration    Git for CVS users\n   diffcore         Tweaking diff output\n   everyday         A useful minimum set of commands for Everyday Git\n   faq              Frequently asked questions about using Git\n   glossary         A Git Glossary\n   namespaces       Git namespaces\n   remote-helpers   Helper programs to interact with remote repositories\n   submodules       Mounting one repository inside another\n   tutorial         A tutorial introduction to Git\n   tutorial-2       A tutorial introduction to Git: part two\n   workflows        An overview of recommended workflows with Git\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n",
+      "stderr": ""
+    },
+    {
+      "executable": "C:/Program Files/Git/cmd/git.exe",
+      "argv": [
+        "help",
+        "--user-interfaces"
+      ],
+      "started_at": "2026-10-18T21:54:01.931Z",
+      "exit_code": 0,
+      "error": null,
+      "stdout": "User-facing repository, command and file interfaces:\n   attributes          Defining attributes per path\n   cli                 Git command-line interface and conventions\n   hooks               Hooks used by Git\n   ignore              Specifies intentionally untracked files to ignore\n   mailmap             Map author/committer names and/or E-Mail addresses\n   modules             Defining submodule properties\n   repository-layout   Git Repository Layout\n   revisions           Specifying revisions and ranges for Git\n\n",
+      "stderr": ""
+    },
+    {
+      "executable": "C:/Program Files/Git/cmd/git.exe",
+      "argv": [
+        "help",
+        "--developer-interfaces"
+      ],
+      "started_at": "2026-10-18T21:54:01.990Z",
+      "exit_code": 0,
+      "error": null,
+      "stdout": "File formats, protocols and other developer interfaces:\n   format-bundle           The bundle file format\n   format-chunk            Chunk-based file formats\n   format-commit-graph     Git commit-graph format\n   format-index            Git index format\n   format-pack             Git pack format\n   format-signature        Git cryptographic signature formats\n   protocol-capabilities   Protocol v0 and v1 capabilities\n   protocol-common         Things common to various protocols\n   protocol-http           Git HTTP-based protocols\n   protocol-pack           How packs are transferred over-the-wire\n   protocol-v2             Git Wire Protocol, Version 2\n\n",
+      "stderr": ""
+    },
+    {
+      "executable": "C:/Program Files/Git/cmd/git.exe",
+      "argv": [
+        "--exec-path"
+      ],
+      "started_at": "2026-10-18T21:54:02.040Z",
+      "exit_code": 0,
+      "error": null,
+      "stdout": "C:/Program Files/Git/mingw64/libexec/git-core\n",
+      "stderr": ""
+    }
+  ],
+  "manual_inventory": [
+    {
+      "id": "gitcore-tutorial",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "016a37cba23c7517939b363647ac65fe0a9afbbf3d9836f108244fed00098f5a",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitcore-tutorial.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitcredentials",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "9add927564a27e8beac22c72115862f6e7315854038b144b2acd8f94b4c5d348",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitcredentials.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitcvs-migration",
+      "kind": "guide",
+      "installed_manual_exists": false,
+      "installed_manual_sha256": null,
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitcvs-migration.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitdatamodel",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "7da4030cf982eedd9cd88dcae7a270aba11aab994b3f65429817117b590953c9",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitdatamodel.adoc",
+      "grade": "TARGETED_CONCEPT_REVIEW"
+    },
+    {
+      "id": "gitdiffcore",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "28cf7eb14e75fe46417d87acf0f81b989419c62b72b5926910e7f256003f185f",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitdiffcore.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "giteveryday",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "1cf6dcc522fc3c6138eaabb813501ba5306a39fe43aac604e4d23c0f4e9ea97b",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/giteveryday.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitfaq",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "e7b3fb68fe05f5e45822e56fe4c95de1482587a97997c87942c8deaee295ba63",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitfaq.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitglossary",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "fe1078d5078c2c7f26abf50a873e34a4e02b605ee6357663e52b60b4da76c575",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitglossary.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitnamespaces",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "e087b9bad8d40dbd632e9831d46f8e6a1f84f3a67642403f9ece82738712862b",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitnamespaces.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitremote-helpers",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "e561ae33db77c184d8286bd253ae8b99888994484b9e41585aaf4d366f5587d3",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitremote-helpers.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitsubmodules",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "0e1a7ca29db55a75014281275a6daaa72b0bc6dbb2375b90549ff4da165ea375",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitsubmodules.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gittutorial",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "9c1b3050b434a2690bf97dde34339b0349e3b405086435b19724917ad81900e0",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gittutorial.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gittutorial-2",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "02a4d2503d1d69c21e652505a3f69ed80799b86b9ee9d1d0acb0a21864240034",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gittutorial-2.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitworkflows",
+      "kind": "guide",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "c7543eeddf45f44b96a33064094e0c2555e0ca2ebe4743724142a82b9af3ea13",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitworkflows.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitattributes",
+      "kind": "userinterface",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "eef6946be5385f14983e4d9c3d8ffece1f85278e117d4ef3404906d0771ea25b",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitattributes.adoc",
+      "grade": "TARGETED_CONCEPT_REVIEW"
+    },
+    {
+      "id": "gitcli",
+      "kind": "userinterface",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "19829855b2982e1b59e75d08fce4ac4a096510a6fcd1735a1bef163d8bc6031d",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitcli.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "githooks",
+      "kind": "userinterface",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "982eb27099a742249c8e35da269688087ae4035c1f276003b731d0ebdbe72945",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/githooks.adoc",
+      "grade": "TARGETED_CONCEPT_REVIEW"
+    },
+    {
+      "id": "gitignore",
+      "kind": "userinterface",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "11228627cb92a82297766739eee801c82deb39b75fb2b1f42d5d0cdca7f9cd53",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitignore.adoc",
+      "grade": "TARGETED_CONCEPT_REVIEW"
+    },
+    {
+      "id": "gitmailmap",
+      "kind": "userinterface",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "31bb0984519fa6a86045403d633d537ae8ca97186e99e553b16a4688c84a45e6",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitmailmap.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitmodules",
+      "kind": "userinterface",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "5923433b7332918b3e65bf1ef8faf400fb2a9bab18fd2db27ebf0bb1c9fd74fa",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitmodules.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitrepository-layout",
+      "kind": "userinterface",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "39ce8d137a30e1fd80eeae146b1c424e56f688f4ddd001259eb98543d3209439",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitrepository-layout.adoc",
+      "grade": "TARGETED_CONCEPT_REVIEW"
+    },
+    {
+      "id": "gitrevisions",
+      "kind": "userinterface",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "afe4cab8520820d9bf583ec5688beea000d50cce6fdd3c841eb9df94763feadd",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitrevisions.adoc",
+      "grade": "TARGETED_CONCEPT_REVIEW"
+    },
+    {
+      "id": "gitformat-bundle",
+      "kind": "format-protocol",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "699b92c6b6a32d81fef4621d9f83a94fd29e182f654a927849788fa57786383e",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitformat-bundle.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitformat-chunk",
+      "kind": "format-protocol",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "a94cdd5c3b99453c560e6996fba65eaf02ef1aacfec4f84d113733e5f678c444",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitformat-chunk.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitformat-commit-graph",
+      "kind": "format-protocol",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "7b089ad1cc15fa324e607ed01643aae72f45c6247caff08a45aa32e2cef441b5",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitformat-commit-graph.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitformat-index",
+      "kind": "format-protocol",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "f17a6bc803fb95df44eff5f7780ffcc20de97c05e5a56700ddd3c71d0016f74f",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitformat-index.adoc",
+      "grade": "TARGETED_CONCEPT_REVIEW"
+    },
+    {
+      "id": "gitformat-pack",
+      "kind": "format-protocol",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "5ae499bacc74fb8c1f94b4856f9e05e52b5a377ebc725befc6c4ac0c41005199",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitformat-pack.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitformat-signature",
+      "kind": "format-protocol",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "e99e9de49bb4d7566199956a44e886643faaf68333974ed055099a310595daf4",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitformat-signature.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitprotocol-capabilities",
+      "kind": "format-protocol",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "daa6f4477fa0206f6732ceb3d0e5437baea9f368a0c0693a75728136e511e1ff",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitprotocol-capabilities.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitprotocol-common",
+      "kind": "format-protocol",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "bcb00e39ed96cf2e6f71b554f67deeb143f234e1a6e87b222d92c081ddc43225",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitprotocol-common.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitprotocol-http",
+      "kind": "format-protocol",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "7eef045c485eb363e2841f93874384895d5c240d8ad4cd240851db6c1a995708",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitprotocol-http.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitprotocol-pack",
+      "kind": "format-protocol",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "690ed46716e8cc11408d0bba78a3e471b91af1f66579694c2f5a421667009e97",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitprotocol-pack.adoc",
+      "grade": "INVENTORY_ONLY_NOT_FULLY_REVIEWED"
+    },
+    {
+      "id": "gitprotocol-v2",
+      "kind": "format-protocol",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "c58a9aac62ecc453c15a01da249d5748c2d78eba0aebd0be5a8c77bc703a0d60",
+      "source": "https://github.com/git/git/blob/v2.56.0/Documentation/gitprotocol-v2.adoc",
+      "grade": "TARGETED_CONCEPT_REVIEW"
+    }
+  ],
+  "command_availability": [
+    {
+      "id": "git-add",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "5bac2f7494bbadcbc16c21f5e14dece6f04683e89f137be3b6e2c840aec02b0b"
+    },
+    {
+      "id": "git-am",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "64f51da8589d0d9b79ef9645c948c754d8e4cd533a7a3a02899a716588e1d560"
+    },
+    {
+      "id": "git-annotate",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "a8d132d68f64f5904d42d0ab4f8c2d8781718467f0f69d56016ecfb02c1a742e"
+    },
+    {
+      "id": "git-apply",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "a230146ae56800fd09edb11a30cb539a28c35d9380231f558656dc852554eca6"
+    },
+    {
+      "id": "git-archimport",
+      "availability": "NOT_FOUND_IN_BUILTINS_OR_EXEC_PATH",
+      "installed_manual_exists": false,
+      "installed_manual_sha256": null
+    },
+    {
+      "id": "git-archive",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "400e9dfedc85a52762c047bf281816f89e22f65a47b0713ade0341529053bd9d"
+    },
+    {
+      "id": "git-backfill",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "c1c5e9e76d3b4cbdc436d43930f342133da0ad782ab9881da974e0e9909c3ab6"
+    },
+    {
+      "id": "git-bisect",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "9117f814e40ddc291c24a601899e458810427dea6e4be121f84c6d6a264d9820"
+    },
+    {
+      "id": "git-blame",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "7192e201a723bba058d08114949a463861a9f4fca9c73b8969df18937ff9e27d"
+    },
+    {
+      "id": "git-branch",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "311fc33c55adc286dcbb5a5120c1c74ea2fc78aec471bd4051154a4aba9006c3"
+    },
+    {
+      "id": "git-bugreport",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "569bae6f9b4152f7118a448c72db9f69daf0f89221ce6da1aaa59c5fc5980a1b"
+    },
+    {
+      "id": "git-bundle",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "77a4e701115f70bc471681f9dec00fe7e1701e4f2090e27950efc0c66e1325ca"
+    },
+    {
+      "id": "git-cat-file",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "d0aa8df229295173f2a021518c924d6f41905122d9774b65f01c7535626d4c74"
+    },
+    {
+      "id": "git-check-attr",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "7dfa5eaf1a25adc203ea3f22606b33dd4e15275719a44050090e12a607f0ba34"
+    },
+    {
+      "id": "git-check-ignore",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "940177c7385eb3cf0ffb1f22ffba35661d16800f8ce787ac676e9a8c89d68208"
+    },
+    {
+      "id": "git-check-mailmap",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "b09bb945c211290820eba06ba8cf46168dc08929747c1e3bdae0448272b6921c"
+    },
+    {
+      "id": "git-check-ref-format",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "d8275b0a52e7caf8e3700de256c92a29a5c72fb23105c1a4a8a321608228663a"
+    },
+    {
+      "id": "git-checkout",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "9f3a0d8e6a3d752436890cb5ee33148b6094105c48a07ec9ede388d70e85ebee"
+    },
+    {
+      "id": "git-checkout-index",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "88eb5659f533b47cde279ea18217eb5285c7432dbc5617560fe27784526fa4dd"
+    },
+    {
+      "id": "git-cherry",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "6da2f34aaba2e9613091f30ec85c7f814384205193a66c2867b066fbeaf92589"
+    },
+    {
+      "id": "git-cherry-pick",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "252073a4dbc3c6ffdeaba7771fb0d4f63ac418f810a43d9f0b8f4c4372481dd0"
+    },
+    {
+      "id": "git-citool",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "bcb8e7ef59c2803cc19fb0b0bbb53cc396d9189cbb98cd379f76fce2f6c79a63"
+    },
+    {
+      "id": "git-clean",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "cdfa67d39c002848e295e98fa01513d4baff512695241043cbc3f08d5e14d128"
+    },
+    {
+      "id": "git-clone",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "e8457c8cf8871edd670fa03b82be68860628f8c155f058db9ebec4356283c4ee"
+    },
+    {
+      "id": "git-column",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "b75d1511b5daa59dab649cf40260d24daff4ac62e1f92ab66709f3225f39a1ee"
+    },
+    {
+      "id": "git-commit",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "ec670cfacaf3df8745e9cfe2fa68b74247cb111e4208e1a0095036732cb5e717"
+    },
+    {
+      "id": "git-commit-graph",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "48331ba115a2e37464d91dc2a54f879667282e82cd97e3c51dc6c6e14ed2838a"
+    },
+    {
+      "id": "git-commit-tree",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "608e33a487db93f76d82401ac00110738f4569e31ce08c731cd7587a5ffb022d"
+    },
+    {
+      "id": "git-config",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "ef16a4c4d1790231af9a8f1a038d6941f1db3a42c04a816222f781866d0bfddc"
+    },
+    {
+      "id": "git-count-objects",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "62fb41e4a50336fc83f103fa7d4e83383b0af41fb13d9e9d369a4cd62eda525d"
+    },
+    {
+      "id": "git-credential",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "4c94a5590fb3712ef2e26704d4f96af2cbbb5b8853d75915d0993ef61130efa3"
+    },
+    {
+      "id": "git-credential-cache",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "d2d05b94eb667731423fe877c7768cdad1741ed64d9c11baba33e7f2b063afb7"
+    },
+    {
+      "id": "git-credential-store",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "96d28d418be24a54566ca335a27e108b01eb7c3058aef61b949f3b0598413441"
+    },
+    {
+      "id": "git-cvsexportcommit",
+      "availability": "NOT_FOUND_IN_BUILTINS_OR_EXEC_PATH",
+      "installed_manual_exists": false,
+      "installed_manual_sha256": null
+    },
+    {
+      "id": "git-cvsimport",
+      "availability": "NOT_FOUND_IN_BUILTINS_OR_EXEC_PATH",
+      "installed_manual_exists": false,
+      "installed_manual_sha256": null
+    },
+    {
+      "id": "git-cvsserver",
+      "availability": "NOT_FOUND_IN_BUILTINS_OR_EXEC_PATH",
+      "installed_manual_exists": false,
+      "installed_manual_sha256": null
+    },
+    {
+      "id": "git-daemon",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "b1653ca783e9db23ee586a07ffc8a97bf3c1a214cd9b8542b4e5040b99c4e814"
+    },
+    {
+      "id": "git-describe",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "6c7cf6413505729ec67104d008e92d8d169103a48ecb83529f0e07c4f0cf5827"
+    },
+    {
+      "id": "git-diagnose",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "0286efa7cded7c3036554db695c9c12d586c77c93fae2c1491172e74a70030b9"
+    },
+    {
+      "id": "git-diff",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "929703cf047c7cfe06f81e397fe77480f7a146e2673dd19208e7b45e65cc8371"
+    },
+    {
+      "id": "git-diff-files",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "410650b61f10c9ad64adcd75686a03ed3b78d1401a188dcde2506f137c7b2d96"
+    },
+    {
+      "id": "git-diff-index",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "9154c70a488fcb95584ce3352b19d73286101a7637f430c65fd91c9de135b704"
+    },
+    {
+      "id": "git-diff-pairs",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "c9c600ebf459f6b06a0550eb3d8e5957bcde913a75924ff20f3a1fd8fd4a92d5"
+    },
+    {
+      "id": "git-diff-tree",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "b921aec163609773a30af6a1129e84b406b5ce5c7ae5996b0deaa4c23c269d60"
+    },
+    {
+      "id": "git-difftool",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "ea327cfcd8756b1f3c58f5d2d1021404c57557a4850aab702f54184aaa75ea05"
+    },
+    {
+      "id": "git-fast-export",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "3d03c2032ca9ad3275e063374edf2473b0b8e32a40da35b90c19edfd1bc2f086"
+    },
+    {
+      "id": "git-fast-import",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "d40cf9020bf86c114948ba165e27b738c53e7c24c394cc66d2b38322e6588f23"
+    },
+    {
+      "id": "git-fetch",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "fd225a09cb7bdb687cff4ba161cb1f337f2523eac5f83db5dbbbb1ef216fa41e"
+    },
+    {
+      "id": "git-fetch-pack",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "ae4c4be9226675792cf9f9a76139e4c2fd8205c92998e2a509565535fb28b964"
+    },
+    {
+      "id": "git-filter-branch",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "883906a802f1695f4994a16927db9c48014afe74a8b6fd93b3f50f010aebdcb3"
+    },
+    {
+      "id": "git-fmt-merge-msg",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "5575a3a805a25ab2bbbf991f40aa6c8781855773dce29af2a12bf68ebda36c68"
+    },
+    {
+      "id": "git-for-each-ref",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "60940ae98e7432e98d3f34dd0f54a4b25244f57a842e030f2d2cbd3389d003c1"
+    },
+    {
+      "id": "git-for-each-repo",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "a36245ff94f8ba5e2f720a01977f629d49abe52153b1b4195915238c88bd3735"
+    },
+    {
+      "id": "git-format-patch",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "d6f883495fa878ff9797c6eea0691e722e9fec310f41780f3cb50554ee5d17ce"
+    },
+    {
+      "id": "git-format-rev",
+      "availability": "NOT_FOUND_IN_BUILTINS_OR_EXEC_PATH",
+      "installed_manual_exists": false,
+      "installed_manual_sha256": null
+    },
+    {
+      "id": "git-fsck",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "5c700052d0f87d879c655cce7e0769af1ded831c37368e86aa71e71f6e470ad8"
+    },
+    {
+      "id": "git-gc",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "e3dbc4081095faf8d2d760eb4a47a1350f89d0c772f55eaada9cfbcdbeafba8c"
+    },
+    {
+      "id": "git-get-tar-commit-id",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "22ebdef82fc9fa9bf77154c8b5efbf8e2dd0a3d40ad8a12ccd4616ee9bd26da3"
+    },
+    {
+      "id": "git-grep",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "cee87fe9974d5558ecfb8520fa95e0558de5798b5c2d336dd035a36c76d6cae8"
+    },
+    {
+      "id": "git-gui",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "74d609166ffbcc6ae381f66af4b2ca0813e717b3dce1127243e2a516be2a77b5"
+    },
+    {
+      "id": "git-hash-object",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "37d38be417e2b21bee4763503c8f38204db3ba2cd8097f586037cf8c18571094"
+    },
+    {
+      "id": "git-help",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "be967840fc290639644ee67c09f25e357da74ca3624a1e71155c6a3307c802bb"
+    },
+    {
+      "id": "git-history",
+      "availability": "NOT_FOUND_IN_BUILTINS_OR_EXEC_PATH",
+      "installed_manual_exists": false,
+      "installed_manual_sha256": null
+    },
+    {
+      "id": "git-hook",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "77ec115e282d54b91048024eb4c8c028bb232d160dd3d03197df9bbebe2b0227"
+    },
+    {
+      "id": "git-http-backend",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "98e81ef5bf20faee6f54a8ee2992901964e735de68087500763404c79437b7a6"
+    },
+    {
+      "id": "git-http-fetch",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "0485ed86820044ac5353e8d516a0b495b6dd177a50ffcb9ea8ab7cc7b2b8acee"
+    },
+    {
+      "id": "git-http-push",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "0a6c10063eed72e7263b541b09f272936bf3f1c8b66f7aa3fa5c045635a60e52"
+    },
+    {
+      "id": "git-imap-send",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "75ddce7d4748e44573abaf58ef9e4d75a964b036885c32c04548d6d14d7901e7"
+    },
+    {
+      "id": "git-index-pack",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "7a8b4c963beb5809cc9e9ef17effbbffa1775f086cd06e017c94d227635319a4"
+    },
+    {
+      "id": "git-init",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "123096436d7d47b718483fdfbc1660446474a77b2a5b33212f5360af89ca2f95"
+    },
+    {
+      "id": "git-instaweb",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "33b5b41bc6232de0f4b19716c9c04c8a685c557a9b3b66ec454aca2d4701d0ee"
+    },
+    {
+      "id": "git-interpret-trailers",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "6d62454c79ea8c3527fe78cee53dc0d5919f094d35176986207950cbd80c96e2"
+    },
+    {
+      "id": "git-last-modified",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "0333a005e0c8880347dd97d8bff6ee2643b7324f6f41bc9f19813c69659697e3"
+    },
+    {
+      "id": "git-log",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "17f65ae61e398c02f4f3f6a79bcc8a7b1dcc3946edc1afa5404a0e01363a852a"
+    },
+    {
+      "id": "git-ls-files",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "68121e25c1f77931530d6c35605f37d42c9a4175c363d009abf27e6df4c6ab73"
+    },
+    {
+      "id": "git-ls-remote",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "9739be01b44da924ebec94ee658d5c080627ee65a2cd7d711fd83d6a081ba4da"
+    },
+    {
+      "id": "git-ls-tree",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "fb78c902d5496cab2e2891b4be8d5f88096ff7baa30957ceb70798b2129877d6"
+    },
+    {
+      "id": "git-mailinfo",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "2a2550306afaf3a2d7ceeac84e9d309b5aed1cb5cf5c13ad757bc868bc09a68e"
+    },
+    {
+      "id": "git-mailsplit",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "539602a64dc52cb0c16a13bc9657bee12265dc8e3f484d775ca59062fb20190f"
+    },
+    {
+      "id": "git-maintenance",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "3f289b2f729c62d756b5cee1549f80704f170db2e8727ac9d3519bc694239111"
+    },
+    {
+      "id": "git-merge",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "8ef01610c3356215cd36ed18acf1fa460a7afbd8ac02b23b75d373b9765cece9"
+    },
+    {
+      "id": "git-merge-base",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "d3cf8078bc9e34dfca1342d1f4d9a5485cc81f0bb624d124ce87725624f60e82"
+    },
+    {
+      "id": "git-merge-file",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "4afa7d015cf64b8d72701abae55cddb634b0058955f2aea9731f69d16d8f7fc4"
+    },
+    {
+      "id": "git-merge-index",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "c9bdd13e80d17bf6951d95e0e8b2052327771c317430c9c7cd16ea5e324bf6d7"
+    },
+    {
+      "id": "git-merge-one-file",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "70a2ff1e53bf2fa8a7f2bcd01d04caaa20944a85ec53ffe18b38a55031d43fc7"
+    },
+    {
+      "id": "git-merge-tree",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "67acc39bf2145fd67b67477728e6a3eb2273186bb34f5df40d0dc89511a3d099"
+    },
+    {
+      "id": "git-mergetool",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "d7f55593ab32d1d6c1cfa21e45d29fc4e2d363145cd8374ce051151acfaedcce"
+    },
+    {
+      "id": "git-mktag",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "307cc764ca44ebb488c7da51460f3d57ab287965b44a95a3a63677c4188e8a74"
+    },
+    {
+      "id": "git-mktree",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "76c374c1dc612b1a2996472be938ab3e0ea2607428dc669dac4da7e6907f6974"
+    },
+    {
+      "id": "git-multi-pack-index",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "2ffdc67e69f1f7b07a85834479bfb32ae365c28358cab6ff32f444c59a3d7bef"
+    },
+    {
+      "id": "git-mv",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "e52a787daf8c211f0db6c92e9ed845f464154ee5b1b36fe4f82d814204976dcf"
+    },
+    {
+      "id": "git-name-rev",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "c3e15407ac8ea924fe3a41e24803007d46250ff1e7912fc138143dfab6dd3fd3"
+    },
+    {
+      "id": "git-notes",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "9f3a7c1088866046349427698ab26670d9d5ed30425cf5635d07d9b6d197cf92"
+    },
+    {
+      "id": "git-p4",
+      "availability": "NOT_FOUND_IN_BUILTINS_OR_EXEC_PATH",
+      "installed_manual_exists": false,
+      "installed_manual_sha256": null
+    },
+    {
+      "id": "git-pack-objects",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "c3a5550f410841ffb573f69af7a6bba03890b10aba56c7dd786617e7acdd1404"
+    },
+    {
+      "id": "git-pack-redundant",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "cd0adceef821ab495a0a65cd673ab2a28165bc68bd7c3e6d27f1e552028d9307"
+    },
+    {
+      "id": "git-pack-refs",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "635511d0a9f9b48c5efb93fec4e6ea135d7658b704f638deed0f90a7af87be5b"
+    },
+    {
+      "id": "git-patch-id",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "e835ca2a7a11b54e3db93221466928c887ef9529a9b34b475d746888e43af410"
+    },
+    {
+      "id": "git-prune",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "75185e698450ad8ba72a2b42899071b54f1b20dfb518bbb01db7ffbd26151472"
+    },
+    {
+      "id": "git-prune-packed",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "6f9da3bced7ddd4568d1b6d0ab897a8dc68992e27b4be98fa48759c624b460ce"
+    },
+    {
+      "id": "git-pull",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "9663af6bb8c8e9c5a9faba6af5c59a859872abcfbbe9d2da7ccb38e92fb77b7a"
+    },
+    {
+      "id": "git-push",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "c37f85dee548c041932a6670de6ae38c693de5b479d18b37eef01e5a08adf001"
+    },
+    {
+      "id": "git-quiltimport",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "d45c3c459be814cb02c2826399f6832e981dfc34dcdb25e9d75fbb1e507407ae"
+    },
+    {
+      "id": "git-range-diff",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "eed46abee99bd6a853ea80e764544cd965a7ba3bce825e930d607b784844fa41"
+    },
+    {
+      "id": "git-read-tree",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "561802bde1ae511ef4d98ebf6c3ed5aa4d13116b5f54f0c5d7dce9730599fcd9"
+    },
+    {
+      "id": "git-rebase",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "def701853d8f0fd250207cfdaabab8afb200a73ba757533de2180ac7d6d891fc"
+    },
+    {
+      "id": "git-receive-pack",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "4d7b0315834dcfca41f6e4e5e9a24c866d9cca5771745a302b4045ca0025c06a"
+    },
+    {
+      "id": "git-reflog",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "59e7f0f15204a8c9f9b058ee62cb26aa2fa726b35dc85c702b75243424d6bf54"
+    },
+    {
+      "id": "git-refs",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "ef1d521fa2172f138605a5710ea8f08890a4000dafb5f074eead6788fd98093f"
+    },
+    {
+      "id": "git-remote",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "e7077112df35a9d9bcc1bdde63d3b7336de3226bf41af56e58f164b1978320c0"
+    },
+    {
+      "id": "git-repack",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "cded1461b89ac6b2101a4cb897f3efb650f6e0055194ca4397ca0e04932af24a"
+    },
+    {
+      "id": "git-replace",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "23dee2276847a6a34d502c438316a2d0090e675b2f866c635a962458118ad2be"
+    },
+    {
+      "id": "git-replay",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "bc7f1628aa80b225e567290f0dade728903734e9ec95a20157a3f3f09a50a0c7"
+    },
+    {
+      "id": "git-repo",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "29f05981bab21f0845539f16d0f8d199850b3107e2fcf8c21fe08e43bf262180"
+    },
+    {
+      "id": "git-request-pull",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "b8dca46b699e0ecc9c6477a0b8e8f49cb870c09f61e68d5411af56321fd41dba"
+    },
+    {
+      "id": "git-rerere",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "caae8802fc581cc62d88a5b727fdecc84c8d3058a6a83a70c5c43d801da5e8d5"
+    },
+    {
+      "id": "git-reset",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "45d30e0979b38ca59072f8ea54f844fb4653272b07fcd4991467a2b34b8612df"
+    },
+    {
+      "id": "git-restore",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "52ce5fdd6921705f570f4042163124764b5c7573596b33abcd569eefc2e196b6"
+    },
+    {
+      "id": "git-rev-list",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "97636544fa129e4e5f9628d044a680b76296a6f6cb607b8c0ca2cbbe59be1dd3"
+    },
+    {
+      "id": "git-rev-parse",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "4d8e9aca13f6ea6808272eb44e417687a5cca7d23cf1ed311f25e9fdeb148902"
+    },
+    {
+      "id": "git-revert",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "63cd3400c56f2c55e61ac2d6048e72c0b700071caabe8d9b337a37d8b180b5fd"
+    },
+    {
+      "id": "git-rm",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "9dfe80c55a2cb899d1a31cb1998f8dc0372134310f635e413079b6578b6c24fd"
+    },
+    {
+      "id": "git-send-email",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "dd20adb5a871cce9ef7dbeadede870b8608198137f420ff84d15a3b33c31b08a"
+    },
+    {
+      "id": "git-send-pack",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "043936207b736715eb1623f22232643d701c771cb77f7cab555003aed556b57d"
+    },
+    {
+      "id": "git-sh-i18n",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "7e3e87444338b602538820c3e757a211a0fc4237e279fd8c36e343c2c97139c6"
+    },
+    {
+      "id": "git-sh-setup",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "d9a602f311d6fded3e77a3e8ea185921ade661bfa61d619dc967b826f574dafa"
+    },
+    {
+      "id": "git-shell",
+      "availability": "NOT_FOUND_IN_BUILTINS_OR_EXEC_PATH",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "cd8e40f2a570fa5f2e1deecbfbdfae93d539d86779153cedfcbaf4dc225f924c"
+    },
+    {
+      "id": "git-shortlog",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "4b8ce591d3d64f91fa4374a4a7c0c68131df25fc5a3d1c4a23e4e88f906643ac"
+    },
+    {
+      "id": "git-show",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "dea0fc6fbdb0e2e8f81ab38467401e9429413a2f59507a7f7cc6076c80e60061"
+    },
+    {
+      "id": "git-show-branch",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "6d3339c4e004e5f74705733767c8b83b8d458be18cde8be3adbead656274758c"
+    },
+    {
+      "id": "git-show-index",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "7f43d0c3c0e5f86a0f2457a69a02efd6efb26d7c4d07c1b5e2e0b5f159f04c0c"
+    },
+    {
+      "id": "git-show-ref",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "788d188ed4c0d99d7c74073f986547b6bf4f38203a76efd04a084679a49225c9"
+    },
+    {
+      "id": "git-sparse-checkout",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "bffe282f5bac3f4eaa415d783db198dc3fb39f80ea3b238f4d59b2837465e1d3"
+    },
+    {
+      "id": "git-stage",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "2f678c6da142078537e23500c048970cf654f7381760f194b282d75e9d87893f"
+    },
+    {
+      "id": "git-stash",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "c1bd5ea8173c12010ed9dfac3aa9b5e776a71406f2ef5fa8031bd9bf391ccb88"
+    },
+    {
+      "id": "git-status",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "3d4ef22e3c74d417c7ba2fce01f6b1905ee8946a88e8e8610700ab09e9d9aa7f"
+    },
+    {
+      "id": "git-stripspace",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "01da7a53bb564b2154b1fe10845c01e56d645d08b19880aa1aaacdbf079596c3"
+    },
+    {
+      "id": "git-submodule",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "cb914aa23939e693aff9ca100d4f238ceb35149a8b3f678ce4d1471f8871990f"
+    },
+    {
+      "id": "git-svn",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "17400b4613ac71b468d35e24f87b91232b17394f813f5c7887d2dfb5176dfbec"
+    },
+    {
+      "id": "git-switch",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "af2df19ed0b0c84e3f82210433e6912b0989dc9be271728de4c4ccc5e10701b8"
+    },
+    {
+      "id": "git-symbolic-ref",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "c852e74cba71e5b574205fd4f0ba18817f38be0ab5447435754a326480b60692"
+    },
+    {
+      "id": "git-tag",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "e51be7ebd88bb05b9018c992b652640b5a9ed16d1917a9f9d91aa97e95000be0"
+    },
+    {
+      "id": "git-unpack-file",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "f5105acff0ae24bfc357d928970657cd885a4ddb9f582381e2ece0921b203ea3"
+    },
+    {
+      "id": "git-unpack-objects",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "d55d5f3684af860b1afcbc992e31c477f78300c95f7d2c8e2ccbb3ceefd61997"
+    },
+    {
+      "id": "git-update-index",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "380c77e805433d759f5f4d6892a7f5b2b269287ce8ad870e643d4d1f3d25b8b9"
+    },
+    {
+      "id": "git-update-ref",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "ba4abaaa5acc9e73587ae2195e0bf431f744258214e575e30f29ae3ff3763a22"
+    },
+    {
+      "id": "git-update-server-info",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "cfdc53f7b6fbb2d32ece4d0e4628d5a7c3dc1592f7840b7182c5a667500147bc"
+    },
+    {
+      "id": "git-upload-archive",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "007aceb3f5835f4c5363cf79c1dd511a3266de1e8372944aee65f10310931b0c"
+    },
+    {
+      "id": "git-upload-pack",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "3f8f35e07fb67878205a1a1512b5c7b09da0414b51b02571092a17f4920a9e80"
+    },
+    {
+      "id": "git-url-parse",
+      "availability": "NOT_FOUND_IN_BUILTINS_OR_EXEC_PATH",
+      "installed_manual_exists": false,
+      "installed_manual_sha256": null
+    },
+    {
+      "id": "git-var",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "bff443363c2229ad73480114b479d32c4278f1eea5ba0c1894da8bda28907eb5"
+    },
+    {
+      "id": "git-verify-commit",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "cc18f1ecb110639d1ceb20836c3469de05e988f6af187e4c785dd92d15b41b56"
+    },
+    {
+      "id": "git-verify-pack",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "7a7354fa9c61ead2180c93f62284fb3683094b97a3a52d8b07db31e7100600cd"
+    },
+    {
+      "id": "git-verify-tag",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "dafc935ab6838c8df48decbb79dc238480b24936270e104ff71315f718fcf097"
+    },
+    {
+      "id": "git-version",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "6adcff464a4daeae526b6d6b945dba90fd212100f1f6f867eac2843143b955c6"
+    },
+    {
+      "id": "git-whatchanged",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "6284cb150b71a946ef99cb23455cc3b7e4727fd2e8d97b973f3544a724c2b85a"
+    },
+    {
+      "id": "git-worktree",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "779377f37b296af17537a808da07962b1deb438249fc536a5ef3e0f6a6c4b8d7"
+    },
+    {
+      "id": "git-write-tree",
+      "availability": "BUILTIN_LISTED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "49699babb41d4adb7ff718ba350d1d954a658e7f0c8caf8dbf2c67728bb2b1f6"
+    },
+    {
+      "id": "gitk",
+      "availability": "NOT_FOUND_IN_BUILTINS_OR_EXEC_PATH",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "7f8e2cbdfe1d74bfbfd546fee4f9ec8b96afcf3f3edc42106c18eab67633fa78"
+    },
+    {
+      "id": "gitweb",
+      "availability": "NOT_FOUND_IN_BUILTINS_OR_EXEC_PATH",
+      "installed_manual_exists": false,
+      "installed_manual_sha256": null
+    },
+    {
+      "id": "scalar",
+      "availability": "OFFICIAL_EXEC_PATH_FILE_PRESENT_NOT_INVOKED",
+      "installed_manual_exists": true,
+      "installed_manual_sha256": "1b0b572dd87015552339c6d752fa9048cdafeacd0db4aacdd6bcd2c877de6f0e"
+    }
+  ],
+  "documentation_updated_at": "2026-10-18T22:35:43.005Z",
+  "supplemental_primary_reviews": [
+    {
+      "command": "git-archimport",
+      "source": "https://git-scm.com/docs/git-archimport",
+      "last_manual_change": "2.35.0",
+      "manual_history_no_changes_range": "2.35.1–2.56.0",
+      "sections": [
+        "DESCRIPTION",
+        "MERGES",
+        "OPTIONS",
+        "manual version history"
+      ],
+      "consulted_at": "2026-10-18T22:35:43.005Z",
+      "execution_claim": "NONE; documentation update only"
+    },
+    {
+      "command": "git-cvsexportcommit",
+      "source": "https://git-scm.com/docs/git-cvsexportcommit",
+      "last_manual_change": "2.35.0",
+      "manual_history_no_changes_range": "2.35.1–2.56.0",
+      "sections": [
+        "DESCRIPTION",
+        "OPTIONS",
+        "CONFIGURATION",
+        "manual version history"
+      ],
+      "consulted_at": "2026-10-18T22:35:43.005Z",
+      "execution_claim": "NONE; documentation update only"
+    },
+    {
+      "command": "git-cvsimport",
+      "source": "https://git-scm.com/docs/git-cvsimport",
+      "last_manual_change": "2.43.1",
+      "manual_history_no_changes_range": "2.43.2–2.56.0",
+      "sections": [
+        "DESCRIPTION",
+        "OPTIONS",
+        "ISSUES",
+        "manual version history"
+      ],
+      "consulted_at": "2026-10-18T22:35:43.005Z",
+      "execution_claim": "NONE; documentation update only"
+    },
+    {
+      "command": "git-cvsserver",
+      "source": "https://git-scm.com/docs/git-cvsserver",
+      "last_manual_change": "2.50.0",
+      "manual_history_no_changes_range": "2.50.1–2.56.0",
+      "sections": [
+        "OPTIONS",
+        "LIMITATIONS",
+        "INSTALLATION",
+        "Configuring database backend",
+        "manual version history"
+      ],
+      "consulted_at": "2026-10-18T22:35:43.005Z",
+      "execution_claim": "NONE; documentation update only"
+    },
+    {
+      "command": "git-p4",
+      "source": "https://git-scm.com/docs/git-p4",
+      "last_manual_change": "2.52.0",
+      "manual_history_no_changes_range": "2.53.0–2.56.0",
+      "sections": [
+        "COMMANDS",
+        "Sync options",
+        "Submit options",
+        "manual version history"
+      ],
+      "consulted_at": "2026-10-18T22:35:43.005Z",
+      "execution_claim": "NONE; documentation update only"
+    },
+    {
+      "command": "gitweb",
+      "source": "https://git-scm.com/docs/gitweb",
+      "last_manual_change": "2.50.0",
+      "manual_history_no_changes_range": "2.50.1–2.56.0",
+      "sections": [
+        "DESCRIPTION",
+        "CONFIGURATION",
+        "Controlling access to Git repositories",
+        "ACTIONS",
+        "manual version history"
+      ],
+      "consulted_at": "2026-10-18T22:35:43.005Z",
+      "execution_claim": "NONE; documentation update only"
+    }
+  ]
+}

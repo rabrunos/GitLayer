@@ -1,0 +1,35 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {createHash,randomUUID} from 'node:crypto';
+import {pathToFileURL} from 'node:url';
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const readJSON=p=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/u,''));
+const inside=(root,file)=>{const r=path.relative(root,file);return !r||r!=='..'&&!r.startsWith('..'+path.sep)&&!path.isAbsolute(r);};
+function noLinks(file){
+ let cursor=path.parse(path.resolve(file)).root;
+ for(const bit of path.relative(cursor,path.resolve(file)).split(path.sep).filter(Boolean)){
+  cursor=path.join(cursor,bit);let stat;
+  try{stat=fs.lstatSync(cursor);}catch(error){if(error.code==='ENOENT')break;throw error;}
+  if(stat.isSymbolicLink())throw Error('Linked path refused: '+cursor);
+ }
+}
+function safeName(name){if(typeof name!=='string'||!name||name.includes('\\')||name.includes(':')||name.startsWith('/')||name.split('/').some(p=>!p||p==='.'||p==='..'))throw Error('Unsafe plan path');return name;}
+function allowed(name){name=name.toLowerCase();return !name.split('/').includes('.git')&&(name.startsWith('.workshop/')||name.startsWith('artifacts/')||/^[^/]+\.zip$/iu.test(name)||/^prompt-codex-[^/]+\.md$/u.test(name))&&!/^\.workshop\/(?:profiles|repositories|npm-cache|electron-cache)(?:\/|$)/u.test(name)&&!/^artifacts\/git layers lab-win32-x64(?:\/|$)/u.test(name);}
+function inventory(root,{ownedRepositories=false,relocatedFrom}={}){
+ const files=[],directories=[];
+ const walk=(file,relative,owned)=>{noLinks(file);const stat=fs.lstatSync(file);if(stat.isSymbolicLink())throw Error('Linked descendant refused');if(stat.isDirectory()){
+  const marker=path.join(file,'.git-compat-owned.json');if(fs.existsSync(marker)){const m=readJSON(marker),expectedParent=relocatedFrom?path.dirname(path.resolve(relocatedFrom,...relative.split('/'))):fs.realpathSync(path.dirname(file));if(typeof m.nonce!=='string'||!/^[a-f\d-]{36}$/iu.test(m.nonce)||typeof m.parent!=='string'||path.relative(m.parent,expectedParent)!=='')throw Error('Invalid fixture ownership marker: '+file);owned=true;}
+  if(fs.existsSync(path.join(file,'.git'))&&!(ownedRepositories&&owned))throw Error('Unowned nested repository refused: '+file);
+  directories.push({path:relative,dev:stat.dev,ino:stat.ino});for(const entry of fs.readdirSync(file).sort())walk(path.join(file,entry),relative?relative+'/'+entry:entry,owned);return;
+ }if(!stat.isFile())throw Error('Special file refused: '+file);const bytes=fs.readFileSync(file),after=fs.lstatSync(file);if(stat.dev!==after.dev||stat.ino!==after.ino||stat.size!==after.size||stat.mtimeMs!==after.mtimeMs||stat.ctimeMs!==after.ctimeMs)throw Error('Input changed during inventory: '+file);files.push({path:relative,bytes:bytes.length,sha256:sha(bytes),dev:stat.dev,ino:stat.ino});};walk(root,'',false);return{files,directories};
+}
+/** Same-volume atomic moves only; never delete, follow links, overwrite or traverse unowned repositories. */
+export function archiveLocalEvidence({projectRoot,archiveRoot,plan,apply=false}){
+ noLinks(projectRoot);noLinks(archiveRoot);const project=fs.realpathSync(projectRoot),archive=fs.realpathSync(archiveRoot);if(inside(project,archive)||inside(archive,project))throw Error('Archive must be disjoint from project');const marker=readJSON(path.join(archive,'.owned-closure'));if(marker.project!==project||typeof marker.id!=='string')throw Error('Archive ownership disagrees');if(!Array.isArray(plan)||!plan.length)throw Error('Nonempty classified plan required');
+ const seen=new Set(),items=plan.map(entry=>{const name=safeName(entry.source);if(!allowed(name)||typeof entry.classification!=='string'||!entry.classification||typeof entry.reason!=='string'||!entry.reason)throw Error('Unclassified/protected plan item: '+name);if(seen.has(name)||[...seen].some(x=>x.startsWith(name+'/')||name.startsWith(x+'/')))throw Error('Overlapping plan entries');seen.add(name);const source=path.resolve(project,...name.split('/')),destination=path.resolve(archive,'items',...name.split('/'));if(!inside(project,source)||!inside(archive,destination))throw Error('Ancestry violation');noLinks(source);noLinks(destination);if(fs.existsSync(destination))throw Error('Archive destination occupied: '+name);if(fs.statSync(source).dev!==fs.statSync(archive).dev)throw Error('Same-volume move required');const before=inventory(source,{ownedRepositories:entry.ownedFixtureRepositories===true});return{...entry,sourcePath:source,destinationPath:destination,before,files:before.files.length,bytes:before.files.reduce((n,f)=>n+f.bytes,0)};});
+ const result={schema:1,id:randomUUID(),at:new Date().toISOString(),mode:apply?'archive-move':'inventory-only',project,archive,policy:'Explicit classified roots; verified atomic same-volume moves; no deletion or overwrite; no linked inputs or unowned nested repositories.',items};if(!apply)return result;
+ const records=path.join(archive,'operations');noLinks(records);fs.mkdirSync(records,{recursive:true});noLinks(records);const record=path.join(records,result.id+'.json');fs.writeFileSync(record+'.before.json',JSON.stringify(result)+'\n',{flag:'wx'});fs.writeFileSync(record,JSON.stringify(result)+'\n',{flag:'wx'});
+ for(const item of items){noLinks(path.dirname(item.destinationPath));fs.mkdirSync(path.dirname(item.destinationPath),{recursive:true});noLinks(path.dirname(item.destinationPath));const latest=inventory(item.sourcePath,{ownedRepositories:item.ownedFixtureRepositories===true});if(JSON.stringify(latest)!==JSON.stringify(item.before))throw Error('Source changed before move: '+item.source);fs.renameSync(item.sourcePath,item.destinationPath);const after=inventory(item.destinationPath,{ownedRepositories:item.ownedFixtureRepositories===true,relocatedFrom:item.sourcePath});if(JSON.stringify(after)!==JSON.stringify(item.before))throw Error('Archive verification differs; preserve both locations for inspection: '+item.source);item.verified=true;item.afterSha256=sha(Buffer.from(JSON.stringify(after)));fs.writeFileSync(record,JSON.stringify(result,null,2)+'\n');}
+ result.completed=new Date().toISOString();result.allVerified=items.every(i=>i.verified);fs.writeFileSync(record,JSON.stringify(result,null,2)+'\n');return result;
+}
+if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){try{const args=process.argv.slice(2),values={};for(let i=0;i<args.length;i++){if(args[i]==='--apply'){values.apply=true;continue;}if(!['--plan','--archive'].includes(args[i])||values[args[i]]||!args[i+1])throw Error('Use --plan JSON --archive EXTERNAL_DIRECTORY [--apply]');values[args[i]]=args[++i];}const result=archiveLocalEvidence({projectRoot:process.cwd(),archiveRoot:values['--archive'],plan:readJSON(values['--plan']),apply:values.apply===true});console.log(JSON.stringify({mode:result.mode,operationId:result.id,allVerified:result.allVerified,items:result.items.map(i=>({source:i.source,classification:i.classification,files:i.files,bytes:i.bytes,verified:i.verified}))},null,2));}catch(error){console.error(JSON.stringify({status:'REFUSED',message:error.message}));process.exitCode=2;}}

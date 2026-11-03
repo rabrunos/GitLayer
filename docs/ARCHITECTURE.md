@@ -1,10 +1,16 @@
 # Arquitetura implementada
 
-Git Layers Lab tem um Core TypeScript comum à CLI e ao processo principal do Electron. O renderer React/Monaco apresenta dados e solicita operações por uma ponte IPC restrita; não lê o sistema de arquivos nem inicia processos. O adaptador `src/core/git.ts` executa o Git do sistema com argumentos separados e sem shell. Não há implementação própria de objetos/índices Git, checkout de Layer, branch sintética de composição ou montagem virtual.
+**Fase atual — 02/11/2026:** [Core/CLI e novos contratos](IMPLEMENTATION-2026-11-02.md) prevalecem sobre descrições históricas do workshop. Build independente em `dist-core/`, edição explícita, migração/resgate e proteção opt-in de seleção por worktrees são do produto; o laboratório não foi aberto nesta rodada.
+
+Git Layers Lab tem um Core TypeScript comum à CLI e ao processo principal do Electron. O renderer React/Monaco apresenta dados e solicita operações por uma ponte IPC restrita; não lê o sistema de arquivos nem inicia processos. O adaptador `src/core/git.ts` executa o Git do sistema com argumentos separados e sem shell. Não há implementação própria de objetos/índices Git, branch sintética de composição ou montagem virtual; uma Layer pode ser aberta deliberadamente como branch de trabalho.
 
 | Componente | Responsabilidade e limite |
 |---|---|
 | `src/core/index.ts` | Coordenação de propriedade, Layers, staging, commits, projeção, shelves, captura, branches tradicionais, diagnóstico e recuperação |
+| `src/core/ignore.ts` | Avaliação nativa de exclusões sem o bloco temporário, compartilhada pela reconciliação e prévia lógica; scratch externo exclusivo sem escrita no repositório |
+| `src/core/layout.ts` e `rescue.ts` | Seleção/migração explícita de layout e diagnóstico/exportação sem abertura normal dos metadados |
+| `src/core/branch-protection.ts` | Reservas opt-in de branches em worktrees próprias; remoção condicionada à prova de propriedade |
+| `scripts/build-core.mjs` | Bundle independente Core/CLI em `dist-core/`, sem importar o laboratório |
 | `src/core/git.ts` | Descoberta oficial dos caminhos, subprocessos Git locais, atributos e envelope de suporte |
 | `src/core/paths.ts` | Política portátil, colisões por componentes e travessia sem links |
 | `src/core/storage.ts` | Schema 1, publicação JSON, fingerprints, backups, locks, journals e failpoints |
@@ -15,7 +21,7 @@ Git Layers Lab tem um Core TypeScript comum à CLI e ao processo principal do El
 
 ## Referências e propriedade
 
-Existe uma branch tradicional ativa, apontada pelo `HEAD` simbólico real, e zero ou mais Layers ativas. Uma Layer registrada usa `refs/heads/layer/<nome>`; o prefixo é convenção da aplicação. Criar uma Layer gera por `mktree`/`commit-tree` um commit raiz de árvore vazia sem pai na base, explicitamente separado dos commits de conteúdo solicitados pelo usuário. Descobrir uma branch com esse prefixo não a registra nem ativa automaticamente.
+Existe uma branch de trabalho apontada pelo `HEAD` simbólico real, normalmente tradicional ou uma Layer aberta deliberadamente, e zero ou mais Layers ativas. Uma Layer registrada usa `refs/heads/layer/<nome>`; o prefixo é convenção da aplicação. Criar uma Layer gera por `mktree`/`commit-tree` um commit raiz de árvore vazia sem pai na base, explicitamente separado dos commits de conteúdo solicitados pelo usuário. Descobrir uma branch local ou candidata remota de remote configurado com esse prefixo a reconhece sem ativar arquivos. `on`/`register` podem criar tracking local de candidata remota única; ambiguidade é recusada. Prévia/consulta remota não criam refs. A composição continua sujeita a validação.
 
 O proprietário da base considera sua árvore `HEAD` e seu índice principal. O proprietário de uma Layer ativa considera sua árvore commitada, seu índice alternativo e reservas explícitas. Assim, exclusões preparadas não liberam um caminho cedo demais, e um arquivo novo reservado continua pertencendo à Layer depois de unstage. Editar um arquivo nunca altera o proprietário. Diretórios podem reunir arquivos de várias origens.
 
@@ -23,12 +29,12 @@ Todos os arquivos projetados são arquivos regulares físicos. Há recusa de col
 
 ## Fontes persistentes
 
-Os caminhos internos são descobertos por `git rev-parse`; a implementação não depende de concatenar `<workspace>/.git`. A estrutura efetiva sob o diretório Git é:
+Os caminhos internos são descobertos por `git rev-parse`; a implementação não depende de concatenar `<workspace>/.git`. Novos dados usam `layers/`; o layout legado `git-layers/` descrito na tabela continua legível e só é migrado explicitamente, por cópia verificada com origem preservada. A estrutura relativa é:
 
 | Caminho relativo | Conteúdo |
 |---|---|
 | `git-layers/registry.json` | Layers registradas, IDs, refs, OIDs, base dos índices, estados, reservas e shelf ativa |
-| `git-layers/workspace.json` | Branch/OID tradicional reconhecidos pelo coordenador |
+| `git-layers/workspace.json` | Branch/OID de trabalho reconhecidos pelo coordenador, papel deliberado e destino de edição quando escolhido |
 | `git-layers/indexes/<id>.index` | Índice Git alternativo real de cada Layer |
 | `git-layers/reservations/<id>.json` | Reserva explícita conferida com o registro |
 | `git-layers/capture.json` | Sessão única de captura atualmente aberta |
@@ -52,19 +58,27 @@ O estado staged é comparado com o commit da própria Layer, e unstaged compara 
 
 Uma ref de Layer alterada externamente ou um `indexBase` desconhecido suspende mutações. O Core não reinicializa silenciosamente um índice sujo a partir da nova referência.
 
-## Projeção, exclusões e shelves
+## Projeção, exclusões e legado de shelves
 
 Antes de ativar, o Core valida composição e destinos, prepara arquivos em área privada usando `checkout-index`, publica somente caminhos aprovados e registra progresso no journal. Antes de substituir/remover compara hashes e modos. As transformações nativas de texto suportadas são feitas pelo Git, e atributos/filtros externos não suportados são recusados.
 
-Um bloco delimitado no `info/exclude` local protege caminhos exatos das Layers ativas, preservando regras fora dele. A proteção é conferida com `check-ignore`, incluindo a semântica da negação. A segurança dos comandos próprios também usa proprietário explícito; não depende apenas do ignore. Uma mudança incompatível em regras de ignore/atributos interrompe a próxima operação gerenciada.
+Um bloco delimitado no `info/exclude` local protege caminhos exatos das Layers ativas, preservando regras fora dele. Com target aberto, inclui exclusão abrangente para novos caminhos e exceções exatas para arquivos anteriores sem dono já elegíveis, protegendo o add comum antes da reconciliação de propriedade. Ao encerrar o target, esse trecho abrangente é removido; regras exatas das Layers permanecem. Negações do usuário em arquivos de maior prioridade e force continuam bypass. A proteção é conferida com `check-ignore`, incluindo a semântica da negação. A segurança dos comandos próprios também usa proprietário explícito; não depende apenas do ignore. Uma mudança incompatível em regras de ignore/atributos interrompe a próxima operação gerenciada.
 
-Desativar uma Layer limpa retira somente seus arquivos. Com alterações, `--park` copia separadamente o índice, as reservas e um snapshot do disco, incluindo arquivo ausente e modo. Não usa stash da base. A reativação restaura essa distinção e conserva a shelf em caso de colisão. Diretórios compartilhados não são removidos recursivamente.
+A reconciliação avalia a intenção de ignore do usuário sem o bloco temporário gerenciado: regras de info/exclude, core.excludesFile e .gitignore mantêm prioridade/negações nativas. Arquivos assim ignorados não são reservados automaticamente; inclusão deliberada continua separada. O helper fornece ao Git um arquivo exclusivo de regras limpas em temporário externo, sem alterar metadata, refs, índices, exclude ou worktree do repositório, e remove sua entrada em finally. As [contraprovas R-02/R-03](evidence/closure-2026-11-02/review-target-preview.json) distinguem falhas anteriores e testes dirigidos aprovados.
+
+A descoberta de candidatos é somente leitura do repositório. A prévia acrescenta reservas virtuais aos caminhos/pendências, informa unreconciled e não as persiste; a mutação chama novamente essa descoberta antes dos efeitos.
+
+Desativar uma Layer limpa retira somente seus arquivos. Com pendências, o fluxo novo exige commit, cancelamento ou descarte explícito (`--discard --yes` na CLI). `--park` é recusado por GL-16. Shelves anteriores continuam preservadas como dados legados; não são criadas para guardar novas pendências na desativação.
+
+Depois de retirar os arquivos, a desativação tenta remover seus diretórios ancestrais vazios, dos mais profundos para os mais rasos, usando somente `rmdir` sem recursão. Ancestrais de caminhos da base em HEAD ou no índice principal e de outras Layers ativas são preservados, inclusive quando seus arquivos estão ausentes no disco. Conteúdo local, ignorado ou subpastas não relacionadas impedem a remoção do diretório. Não há varredura geral de pastas vazias: Git não registra pastas vazias como propriedade da base; a proteção é derivada dos caminhos versionados e preparados.
+
+Cada diretório candidato à remoção é registrado no journal com seu caminho validado e modo antes do `rmdir`. O rollback e `recover` validam o plano completo, recriam diretórios ausentes e restauram os arquivos conforme as verificações de concorrência existentes. Planos com caminhos externos, internos do Git, aliases de caixa/Unicode ou um arquivo ocupando o lugar de diretório são recusados. Diretórios compartilhados nunca são removidos recursivamente.
 
 A troca da branch tradicional exige base tracked limpa. Ela valida a árvore de destino contra todas as Layers ativas e arquivos locais antes da mudança, preserva as projeções em journal, usa a troca normal do Git e rematerializa os arquivos. Essa sequência não é atomicamente invisível a outros programas.
 
-## Captura, concorrência e recuperação
+## Destino, captura legada, concorrência e recuperação
 
-Captura é uma sessão temporária compartilhada entre CLI/desktop. Ela grava o conjunto de caminhos preexistentes no escopo e calcula candidatos atuais por nova varredura. Watchers ajudam a atualizar a interface; não decidem propriedade. A confirmação atribui/prepara somente os selecionados. Cancelar mantém os arquivos físicos. Não há um destino global permanente para arquivos futuros.
+Captura é uma sessão temporária compartilhada entre CLI/desktop. Ela grava o conjunto de caminhos preexistentes no escopo e calcula candidatos atuais por nova varredura. Watchers ajudam a atualizar a interface; não decidem propriedade. A confirmação atribui/prepara somente os selecionados. Cancelar mantém os arquivos físicos. Essa captura é a API legada de revisão. O novo destino `edit` é explícito por workspace, persiste até encerramento/troca e reconcilia novos arquivos nos comandos/consultas, sem apropriação retroativa e sem interceptação contínua de programas externos.
 
 O desktop serializa operações de workspace/Core em uma fila, e o Core usa lock por diretório entre processos. Entrada, tamanho e consulta do PTY e cópia de comandos têm caminho síncrono separado para não aguardar varreduras Git; criação/encerramento da sessão continuam serializados. Locks normais do Git continuam em vigor e nunca são apagados automaticamente. Um lock existente do coordenador é recusado e preservado para inspeção, sem presumir que um PID antigo autoriza removê-lo.
 

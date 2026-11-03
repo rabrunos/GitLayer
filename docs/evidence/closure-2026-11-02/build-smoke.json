@@ -1,0 +1,467 @@
+{
+  "schema": 1,
+  "kind": "compiled-core-cli-build-smoke",
+  "status": "PASS",
+  "id": "build-smoke-final-01",
+  "environment": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "arch": "x64",
+    "node": "v24.14.1",
+    "git": "git version 2.53.0.windows.2",
+    "observer": "Git oficial por caminho absoluto e argv na evidência bruta; caminhos pessoais omitidos."
+  },
+  "wrapper": {
+    "commandCount": 3,
+    "qualification": "Três invocações do wrapper; não são os 82 comandos internos registrados pelo smoke.",
+    "commands": [
+      {
+        "command": "npm.cmd run build:core",
+        "started": "2026-11-03T00:25:45.114Z",
+        "finished": "2026-11-03T00:25:47.642Z",
+        "durationMs": 2527,
+        "exitCode": 0,
+        "signal": null,
+        "stdoutSHA256": "c4108f6c18e9098c83c4e5944c97149951ce8a996833a23a8c9319f2cc03a6b4",
+        "stderrSHA256": "2c6c5d133d91d38ed25536bc0883565b036a975604d09fd0467d5592195ced5f"
+      },
+      {
+        "command": "node dist-core/cli/index.js --help",
+        "started": "2026-11-03T00:25:47.643Z",
+        "finished": "2026-11-03T00:25:47.738Z",
+        "durationMs": 95,
+        "exitCode": 0,
+        "signal": null,
+        "stdoutSHA256": "119eb7496ab511a1b567b92fc189c56fc932edf2af4a8d37d05ed8995efc4aaa",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": "node scripts/smoke-core-cli.mjs --out <NEW_EVIDENCE_DIRECTORY>",
+        "started": "2026-11-03T00:25:47.739Z",
+        "finished": "2026-11-03T00:27:45.665Z",
+        "durationMs": 117925,
+        "exitCode": 0,
+        "signal": null,
+        "stdoutSHA256": "44a9366b3e839fe59c99a5c1e4b2c9c6957f24428f0bd5f5226e116c5b1ade5a",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "sourceFingerprintBefore": "34af1ba7eeb8c3b0f52a69edc986999ccca517ce380949b71f3f1769e5546830",
+    "sourceFingerprintAfter": "34af1ba7eeb8c3b0f52a69edc986999ccca517ce380949b71f3f1769e5546830",
+    "sourceUnchanged": true,
+    "inputScope": [
+      "src",
+      "scripts/build-core.mjs",
+      "scripts/smoke-core-cli.mjs",
+      "package.json",
+      "package-lock.json"
+    ],
+    "inputFiles": 38,
+    "inputManifest": [
+      {
+        "path": "package-lock.json",
+        "sha256": "59f4af4a6d472c2af4334ffd53a7f2a44229080f8906b2bad3ce58c73a16ef7f",
+        "bytes": 71753
+      },
+      {
+        "path": "package.json",
+        "sha256": "f5988df1936bf516d79677c00056bc641501f1dbe4a72cdc10f3f50c09dbe4d3",
+        "bytes": 3185
+      },
+      {
+        "path": "scripts/build-core.mjs",
+        "sha256": "6af2a0624cf9fc7bb9505aa64a6b916ff5479e4a89fb42c9c89626a5e6aaec8c",
+        "bytes": 2492
+      },
+      {
+        "path": "scripts/smoke-core-cli.mjs",
+        "sha256": "88a1a315da0a44b6f1547309ca5c7ca8d6f53b4632bb241849ee15649d070b93",
+        "bytes": 14411
+      },
+      {
+        "path": "src/cli/index.ts",
+        "sha256": "73d46cb67989c52eb08ec6bce548573f0a6248898684788f25afd4f021328978",
+        "bytes": 25534
+      },
+      {
+        "path": "src/core/branch-protection.ts",
+        "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0",
+        "bytes": 17364
+      },
+      {
+        "path": "src/core/demo.ts",
+        "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1",
+        "bytes": 6303
+      },
+      {
+        "path": "src/core/errors.ts",
+        "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c",
+        "bytes": 467
+      },
+      {
+        "path": "src/core/git.ts",
+        "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771",
+        "bytes": 21199
+      },
+      {
+        "path": "src/core/ignore.ts",
+        "sha256": "9e44e2a5e55cac69e154eb62c5a20e16b6038bc110a25318440a056b90d10f2a",
+        "bytes": 3269
+      },
+      {
+        "path": "src/core/index.ts",
+        "sha256": "dfa57f964eee9b92cf3783acdba1917ce3cd084e1bc5a2c70b45ffdccad9e42e",
+        "bytes": 82411
+      },
+      {
+        "path": "src/core/layer-rename.ts",
+        "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336",
+        "bytes": 19188
+      },
+      {
+        "path": "src/core/layout.ts",
+        "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae",
+        "bytes": 16173
+      },
+      {
+        "path": "src/core/paths.ts",
+        "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88",
+        "bytes": 7365
+      },
+      {
+        "path": "src/core/platform.ts",
+        "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179",
+        "bytes": 5247
+      },
+      {
+        "path": "src/core/recovery.ts",
+        "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0",
+        "bytes": 13233
+      },
+      {
+        "path": "src/core/rescue.ts",
+        "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d",
+        "bytes": 20964
+      },
+      {
+        "path": "src/core/storage.ts",
+        "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109",
+        "bytes": 17064
+      },
+      {
+        "path": "src/desktop/commands.ts",
+        "sha256": "09a1145959c4054212f43f733c758748ff9d01006068bccfec2f06a54658fb71",
+        "bytes": 11061
+      },
+      {
+        "path": "src/desktop/main/index.ts",
+        "sha256": "d3a57294e06b9f98f34cd0cbd95eba0bbaa219e913398d76fba9b231b57bd9c7",
+        "bytes": 24028
+      },
+      {
+        "path": "src/desktop/main/terminal-runtime.ts",
+        "sha256": "ceba6a444a5fb7a26d7515ccb788bbe863ba6d9e6656278945d80b4890559601",
+        "bytes": 1666
+      },
+      {
+        "path": "src/desktop/main/terminal.ts",
+        "sha256": "6565a4ba60b78c1cc7f23726829f48b68a294efcbb27e2556a46bc0300fc2c52",
+        "bytes": 13119
+      },
+      {
+        "path": "src/desktop/preload/index.ts",
+        "sha256": "92721a2d46925666159be1ce649646bbb437321b21bbd3645aa76aacaf76515b",
+        "bytes": 2268
+      },
+      {
+        "path": "src/desktop/renderer/App.tsx",
+        "sha256": "ff6e78ccaa578b748a07fbfe7d90078259135813e3a0d6974fea4e1729db06f1",
+        "bytes": 51564
+      },
+      {
+        "path": "src/desktop/renderer/CommandPanel.tsx",
+        "sha256": "46d732e169c31914ba3eff98c51a8e061b5997c010c146c5203ef23dc043f3b4",
+        "bytes": 5585
+      },
+      {
+        "path": "src/desktop/renderer/Editor.tsx",
+        "sha256": "efb64c55a217173da63fa9b5d81feda9a494cfbf93d88c5cb91e18caccbb776e",
+        "bytes": 6624
+      },
+      {
+        "path": "src/desktop/renderer/FileExplorer.tsx",
+        "sha256": "1884071e0c5405263bc8f1cc5574b1ac8a94eeed8c99922a4146a9e0f67a9d53",
+        "bytes": 17691
+      },
+      {
+        "path": "src/desktop/renderer/FileIcon.tsx",
+        "sha256": "15afc7ab5d01be1e6cfdcfbd927aa06b766e39f15fbfb4586516572f82ed86b1",
+        "bytes": 1732
+      },
+      {
+        "path": "src/desktop/renderer/TerminalPanel.tsx",
+        "sha256": "4dc3f5a48b4d3bd9f66867b6b41f2794b4fe655f8b9e16376fbed437369398f6",
+        "bytes": 8183
+      },
+      {
+        "path": "src/desktop/renderer/explorer-tree.ts",
+        "sha256": "5f867f21842f2901e13222615fcecb8aab7be530800ab147a1bfdd39128fbd75",
+        "bytes": 2804
+      },
+      {
+        "path": "src/desktop/renderer/explorer.css",
+        "sha256": "c1ed313e643057aa73226be6c5c38d79172e6c9a0516c963a496c05360bd6f8c",
+        "bytes": 11118
+      },
+      {
+        "path": "src/desktop/renderer/file-decorations.ts",
+        "sha256": "96ef5ca7a8ce4ff1b1103b120256365560c6d14deee75cfed793b10995b78474",
+        "bytes": 2782
+      },
+      {
+        "path": "src/desktop/renderer/index.html",
+        "sha256": "1e2c5916b70a2823f1ccf35442e2fb9954abf2ca895d2170bacab81d8ba2ac1b",
+        "bytes": 566
+      },
+      {
+        "path": "src/desktop/renderer/index.tsx",
+        "sha256": "31ea30c611445f095c42d2c5166f5dd1a91ae6f8d896768b7bc7527cecaaba9c",
+        "bytes": 1120
+      },
+      {
+        "path": "src/desktop/renderer/style.css",
+        "sha256": "4ef542b1e41717bb5c54e52f25db4b840486716d80ce4d9f6521bef8ce07438b",
+        "bytes": 19043
+      },
+      {
+        "path": "src/desktop/renderer/terminal.css",
+        "sha256": "f9d35c8a37eec94b8ef4a257d9612359f5a1d9da733d80ca68e40888eb9fa670",
+        "bytes": 3635
+      },
+      {
+        "path": "src/desktop/renderer/vite-env.d.ts",
+        "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+        "bytes": 38
+      },
+      {
+        "path": "src/desktop/shared.ts",
+        "sha256": "066d050eee90eee62d49978e2edf202cea21622e6060913acf6d043dd1db514b",
+        "bytes": 2270
+      }
+    ],
+    "wrapperSHA256": "a35e725110260717b6f98e0cbc287c96e8faa486901c438b74775a09dba3fe29",
+    "rawResultSHA256": "727e5b0d1215e2e46a4a90bef62e8cd8d3c3afe807774cf21dcd7b3bdc088350"
+  },
+  "smoke": {
+    "runId": "smoke-2026-11-03T00-25-47-797Z-3e131aea",
+    "flows": [
+      {
+        "name": "CLI create and compose two layers",
+        "status": "PASS",
+        "description": "Criação e composição de duas Layers pela CLI compilada."
+      },
+      {
+        "name": "CLI edit routes future files and ends without deactivation",
+        "status": "PASS",
+        "description": "Destino explícito direciona arquivos posteriores e encerra sem desativar a Layer."
+      },
+      {
+        "name": "CLI commits prepared B while disk C and base stage stay independent",
+        "status": "PASS",
+        "description": "Commit registra B preparado, preservando C no disco e o staging da base."
+      },
+      {
+        "name": "CLI preview and discard require separate explicit choices",
+        "status": "PASS",
+        "description": "Prévia e descarte exigem escolhas explícitas separadas."
+      },
+      {
+        "name": "CLI rename preserves history and native protection has explicit entry",
+        "status": "PASS",
+        "description": "Renomeação conserva histórico e a proteção nativa tem entrada deliberada."
+      },
+      {
+        "name": "CLI removal requires confirmation and preserves the other origin",
+        "status": "PASS",
+        "description": "Remoção exige confirmação e preserva a outra origem."
+      },
+      {
+        "name": "CLI doctor is scriptable and raw rescue works with corrupt metadata",
+        "status": "PASS",
+        "description": "Doctor é utilizável por scripts e o resgate independente funciona com metadados corrompidos."
+      }
+    ],
+    "flowCount": 7,
+    "recordedCommands": 82,
+    "commandRoles": {
+      "Node/CLI compilada": 36,
+      "Git oficial": 46
+    },
+    "observedExitCodes": {
+      "0": 77,
+      "2": 2,
+      "3": 2,
+      "128": 1
+    },
+    "commandCountQualification": "São 82 comandos registrados diretamente pelo smoke, incluindo controles de recusa com códigos não zero esperados; isso não conta cada processo Git interno iniciado pela CLI.",
+    "snapshotCount": 4,
+    "runtimeRelocatedWithoutDependencies": true,
+    "qualification": "A CLI/Core compilados foram copiados para runtime descartável sem node_modules; Node e Git instalados continuam necessários. Não é uma cópia nova do commit nem uma instalação limpa pelo lockfile.",
+    "sourceInputs": [
+      {
+        "file": "package.json",
+        "size": 3185,
+        "sha256": "f5988df1936bf516d79677c00056bc641501f1dbe4a72cdc10f3f50c09dbe4d3"
+      },
+      {
+        "file": "scripts/build-core.mjs",
+        "size": 2492,
+        "sha256": "6af2a0624cf9fc7bb9505aa64a6b916ff5479e4a89fb42c9c89626a5e6aaec8c"
+      },
+      {
+        "file": "scripts/smoke-core-cli.mjs",
+        "size": 14411,
+        "sha256": "88a1a315da0a44b6f1547309ca5c7ca8d6f53b4632bb241849ee15649d070b93"
+      },
+      {
+        "file": "src/cli/index.ts",
+        "size": 25534,
+        "sha256": "73d46cb67989c52eb08ec6bce548573f0a6248898684788f25afd4f021328978"
+      },
+      {
+        "file": "src/core/branch-protection.ts",
+        "size": 17364,
+        "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+      },
+      {
+        "file": "src/core/demo.ts",
+        "size": 6303,
+        "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+      },
+      {
+        "file": "src/core/errors.ts",
+        "size": 467,
+        "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+      },
+      {
+        "file": "src/core/git.ts",
+        "size": 21199,
+        "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+      },
+      {
+        "file": "src/core/ignore.ts",
+        "size": 3269,
+        "sha256": "9e44e2a5e55cac69e154eb62c5a20e16b6038bc110a25318440a056b90d10f2a"
+      },
+      {
+        "file": "src/core/index.ts",
+        "size": 82411,
+        "sha256": "dfa57f964eee9b92cf3783acdba1917ce3cd084e1bc5a2c70b45ffdccad9e42e"
+      },
+      {
+        "file": "src/core/layer-rename.ts",
+        "size": 19188,
+        "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+      },
+      {
+        "file": "src/core/layout.ts",
+        "size": 16173,
+        "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+      },
+      {
+        "file": "src/core/paths.ts",
+        "size": 7365,
+        "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+      },
+      {
+        "file": "src/core/platform.ts",
+        "size": 5247,
+        "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+      },
+      {
+        "file": "src/core/recovery.ts",
+        "size": 13233,
+        "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0"
+      },
+      {
+        "file": "src/core/rescue.ts",
+        "size": 20964,
+        "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d"
+      },
+      {
+        "file": "src/core/storage.ts",
+        "size": 17064,
+        "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+      }
+    ],
+    "sourceInputsCount": 17,
+    "sourceInputsUnchanged": true,
+    "runtimeManifest": [
+      {
+        "file": "core/index.js",
+        "size": 215826,
+        "sha256": "ec5d35aaad08708cae392254fc4f2357dfa00f7a4aae4432216ca36ea1f56f63"
+      },
+      {
+        "file": "cli/index.js",
+        "size": 249917,
+        "sha256": "b4ef9cc8e11df38e001a2aadc3891833a013ab5b3d05818d5ec21bf37d6cc422"
+      },
+      {
+        "file": "package.json",
+        "size": 218,
+        "sha256": "0f7f008ec7cbf8e0a984d3ed621ecbf42e95ab806a127efc6faaad3f31d54541"
+      },
+      {
+        "file": "build-manifest.json",
+        "size": 685,
+        "sha256": "62075072933ff99842e50c825d1fed6bfb3aa1c54b7ff6eb000885bc9452d1ca"
+      }
+    ],
+    "rawEvidenceManifest": [
+      {
+        "file": "build-manifest.json",
+        "size": 685,
+        "sha256": "62075072933ff99842e50c825d1fed6bfb3aa1c54b7ff6eb000885bc9452d1ca"
+      },
+      {
+        "file": "commands.json",
+        "size": 88184,
+        "sha256": "d5201cc7c9200bacb3702de9a6876f8f7e979e598891f4d6493f92a21cc18885"
+      },
+      {
+        "file": "result.json",
+        "size": 6863,
+        "sha256": "e714da2aee3ed2df19229a03420ab21510a8ab266e15550d73f85b7ded2aa6b2"
+      },
+      {
+        "file": "snapshots.json",
+        "size": 4346,
+        "sha256": "36a6cd0de69dec613a1282ed1b43417de3b6fae312f14fc44f701a29de354485"
+      },
+      {
+        "file": "tested-runtime-manifest.json",
+        "size": 629,
+        "sha256": "c8030572b6823f9d483ae39112dfe05825f429240b9d0644f01ad80222ef7488"
+      }
+    ],
+    "rawEvidenceManifestSHA256": "f023a832a868be4783cdcbb94f195e47022d8d1c5cbd0fc642160c7c2e0cecd6",
+    "fixtureRetained": false,
+    "limits": [
+      "Smoke CLI não é suíte completa.",
+      "Proteção padrão não cobre --ignore-other-worktrees.",
+      "Target protege imediatamente o add comum e reconcilia propriedade por comando; force e ignore de maior prioridade continuam bypass."
+    ]
+  },
+  "functionalFreezeReference": "docs/evidence/closure-2026-11-02/functional-inputs.json",
+  "pending": [
+    "Cópia nova commitada e instalação pelo lockfile",
+    "Arquivo/limpeza e sincronização main"
+  ],
+  "dataPolicy": "Somente metadados sintéticos selecionados e hashes; sem stdout completo, paths pessoais, credenciais ou valores globais do usuário.",
+  "followingValidation": {
+    "fullFinal02": "PASS_229_225_4SKIP",
+    "infraFinal02": "PASS_111_111",
+    "compatibilityBroad02": "PASS_355_6_ENV_BLOCKED_0_FAIL"
+  }
+}

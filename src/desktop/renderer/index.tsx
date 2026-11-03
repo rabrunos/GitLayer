@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App.js';
 import './style.css';
+import './explorer.css';
 
 class StartupBoundary extends Component<{ children: React.ReactNode }, { error: string | null }> {
   state = { error: null as string | null };

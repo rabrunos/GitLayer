@@ -1,5 +1,7 @@
 # Abrir uma pasta e trabalhar nela
 
+**Escopo deste guia:** o fluxo visual abaixo descreve o laboratório manual existente. O produto Core/CLI de 02/11/2026 tem [build e uso independentes](CLI.md), destino explícito edit sem captura obrigatória e abertura deliberada open-branch; consulte os [contratos atuais](IMPLEMENTATION-2026-11-02.md). O laboratório não foi aberto nem revalidado nesta rodada. Fontes e demonstração existentes permanecem preservadas.
+
 Há duas pastas de trabalho: a pasta deste **workshop**, aberta no VS Code para o Codex desenvolver e depurar o Git Layers Lab; e a pasta de um **projeto de teste**, aberta dentro do Git Layers Lab para editar arquivos e exercitar o Git. Mantenha o projeto de teste fora da árvore do workshop quando quiser um histórico independente.
 
 ## No VS Code e no Codex
@@ -24,6 +26,8 @@ Se selecionar uma subpasta de um repositório existente, o Git descobre a raiz d
 Depois de abrir, selecione os arquivos no **Explorador**. Os botões **Novo arquivo** e **Nova pasta** criam caminhos relativos à raiz. O editor permite salvar (`Ctrl+S`), renomear, excluir com cópia de recuperação e acompanhar mudanças, staging e histórico. Caminhos como `src/game.ts` ou `src\game.ts` são aceitos no Windows. O destaque de sintaxe depende da extensão do arquivo.
 
 Para um repositório recém-criado, use **Configurar identidade local** no painel de versão, crie um arquivo, prepare-o na **Base** e faça o primeiro commit. A identidade fica somente nesse repositório. As Layers exigem esse primeiro commit; depois, crie uma Layer e ative-a explicitamente. Selecionar o nome de uma Layer inspeciona seu histórico: a atribuição de arquivos acontece no fluxo explícito de staging/captura, não por selecionar seu nome.
+
+A bolinha à direita da Layer ativa/desativa seus arquivos no workspace físico. Ao desativar, as pastas ancestrais que ficarem vazias e não forem necessárias à Base ou a outra Layer ativa também são removidas. Pastas com conteúdo local são preservadas; a ativação recria as pastas necessárias aos arquivos. O tooltip da badge de propriedade usa a referência `layer/nome`, no explorador e nas abas.
 
 Ao trocar de pasta com buffers não salvos, o aplicativo pede que sejam salvos e preserva rascunhos. Arquivos alterados por outro programa são sinalizados para comparação/recarregamento; uma gravação obsoleta não substitui silenciosamente esses bytes. A última pasta aberta é lembrada para a próxima inicialização.
 

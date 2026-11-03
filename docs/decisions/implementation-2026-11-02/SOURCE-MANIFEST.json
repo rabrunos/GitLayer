@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "kind": "verbatim-approved-product-brief",
+  "sourcePackage": "Git-Layer-Implementacao-2026-11-02.zip",
+  "sourcePackageSHA256": "2008e9f9de9ba7e99693c89b49d3a9a53e5e79aea09c8a365526f43d32256140",
+  "files": [
+    {
+      "path": "01-PROMPT-CODEX.md",
+      "bytes": 60300,
+      "sha256": "090b2a2c9d1593693c37661c4bd0032afe26cebfb54be1184c7c6c6003d00fe2",
+      "byteIdenticalToReceivedFile": true
+    },
+    {
+      "path": "02-DECISOES-CONSOLIDADAS.json",
+      "bytes": 56234,
+      "sha256": "129bb22c73b5af49bf3de1af319df5d7370a3cc2aba9da87a419338c730c2ad5",
+      "byteIdenticalToReceivedFile": true
+    },
+    {
+      "path": "03-RESPOSTAS-ORIGINAIS.json",
+      "bytes": 58757,
+      "sha256": "24229107e95a4435623f213c17a4ed1f4b2317cd0c93a507559ce5dfd2901034",
+      "byteIdenticalToReceivedFile": true
+    },
+    {
+      "path": "04-AUTORIZACAO-ATUAL-E-ITEM-14.txt",
+      "bytes": 1928,
+      "sha256": "1690d47fa09d2db87823f6dedf6269ca4ea63a6344c1c99a05de6681f9d6ffc2",
+      "byteIdenticalToReceivedFile": true
+    }
+  ],
+  "contentReview": "Four necessary product-decision files reviewed before copying. Only public project/documentation URLs and product instructions observed; no credentials, private home paths or personal Git configuration were included.",
+  "provenanceLimit": "Hashes prove consistency with the locally preserved received files; they are not an independent digital signature."
+}

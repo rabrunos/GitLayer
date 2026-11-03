@@ -102,3 +102,37 @@ test('recovery commit references must match the recorded traditional branch and 
   f.tx.data.recovery.commit.old = 'ffff';
   await assert.rejects(() => validateRecovery(f.repo, f.dir, f.tx.data), { code: 'RECOVERY_INVALID' });
 });
+
+test('directory recovery accepts only validated workspace directories from deactivation', async t => {
+  const f = await plan(t);
+  const directory = path.join(f.root, 'scripts');
+  f.tx.data.kind = 'deactivate';
+  f.tx.data.recovery.directories = [{ path: directory, mode: 0o755 }];
+  await validateRecovery(f.repo, f.dir, f.tx.data);
+  const saved = structuredClone(f.tx.data);
+  for (const target of [f.root, path.join(path.dirname(f.root), 'outside')]) {
+    f.tx.data = structuredClone(saved);
+    f.tx.data.recovery.directories[0].path = target;
+    await assert.rejects(() => validateRecovery(f.repo, f.dir, f.tx.data), { code: 'RECOVERY_INVALID' });
+  }
+  f.tx.data = structuredClone(saved);
+  f.tx.data.recovery.directories[0].path = f.repo.gitDir;
+  await assert.rejects(() => validateRecovery(f.repo, f.dir, f.tx.data), { code: 'PROTECTED_PATH' });
+  f.tx.data = structuredClone(saved);
+  f.tx.data.recovery.directories[0].mode = -1;
+  await assert.rejects(() => validateRecovery(f.repo, f.dir, f.tx.data), { code: 'RECOVERY_INVALID' });
+  f.tx.data = structuredClone(saved);
+  f.tx.data.recovery.directories.push(structuredClone(f.tx.data.recovery.directories[0]));
+  await assert.rejects(() => validateRecovery(f.repo, f.dir, f.tx.data), { code: 'RECOVERY_INVALID' });
+  f.tx.data = structuredClone(saved);
+  f.tx.data.recovery.directories = [{ path: path.join(f.root, 'Scripts/a'), mode: 0o755 }, { path: path.join(f.root, 'scripts/b'), mode: 0o755 }];
+  await assert.rejects(() => validateRecovery(f.repo, f.dir, f.tx.data), { code: 'RECOVERY_INVALID' });
+  f.tx.data = structuredClone(saved);
+  f.tx.data.kind = 'editor-save';
+  await assert.rejects(() => validateRecovery(f.repo, f.dir, f.tx.data), { code: 'RECOVERY_INVALID' });
+  f.tx.data = structuredClone(saved);
+  await fs.writeFile(directory, 'external file after interruption\n');
+  await assert.rejects(() => validateRecovery(f.repo, f.dir, f.tx.data), { code: 'RECOVERY_CONFLICT' });
+  assert.equal(await fs.readFile(directory, 'utf8'), 'external file after interruption\n');
+  assert.equal(await fs.readFile(f.source, 'utf8'), 'applied write\n');
+});

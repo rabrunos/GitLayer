@@ -48,7 +48,7 @@ const commands = new Set([
   'update-index', 'checkout-index', 'commit-tree', 'update-ref', 'check-ignore', 'mktree', 'var', 'apply',
   'check-attr', 'add', 'restore', 'reset', 'commit', 'branch', 'switch', 'checkout',
   'tag', 'stash', 'merge', 'merge-base', 'cherry-pick', 'revert', 'worktree', 'rm', 'mv',
-  'fsck', 'rev-list', 'reflog', 'gc', 'prune', 'clean', 'version', 'count-objects',
+  'remote', 'fsck', 'rev-list', 'reflog', 'gc', 'prune', 'clean', 'version', 'count-objects',
 ]);
 const diffCommands = new Set(['diff', 'diff-files', 'diff-index', 'diff-tree', 'log', 'show']);
 const attributeCommands = new Set([
@@ -67,12 +67,13 @@ export async function git(cwd: string, args: string[], options: GitOptions = {})
   if (!args.length || !commands.has(args[0]!) || args.some(a => typeof a !== 'string' || a.includes('\0'))) {
     throw new LabError('GIT_COMMAND_REFUSED', 'Comando Git inválido ou fora do conjunto local permitido.', { command: args[0] });
   }
-  if (args[0] === 'worktree' && args[1] !== 'list') {
+  if(args[0]==='remote'&&args.length!==1)throw new LabError('GIT_COMMAND_REFUSED','Somente a listagem local de remotos é usada pelo Core.');
+  if (args[0] === 'worktree' && !['list','add','remove'].includes(args[1]??'')) {
     throw new LabError('GIT_COMMAND_REFUSED', 'A aplicação somente inspeciona worktrees.');
   }
   const env: NodeJS.ProcessEnv = {};
   for (const [key, value] of Object.entries(normalizeProcessEnvironment(process.env))) {
-    if (!/^GIT_/iu.test(key)) env[key] = value;
+    if (!/^GIT_/iu.test(key) || gitEnv.has(key)) env[key] = value;
   }
   for (const [key, value] of Object.entries(normalizeProcessEnvironment(options.env ?? {}))) {
     if (/^GIT_/iu.test(key) && !gitEnv.has(key)) {
@@ -212,12 +213,11 @@ export async function assertSupported(repoOrPath: RepoInfo | string, requireComm
     throw new LabError('BARE_REPOSITORY', 'Layers exigem repositório com diretório de trabalho normal.');
   }
   if (!repo.branch) throw new LabError('DETACHED_HEAD', 'HEAD deve apontar simbolicamente para uma branch tradicional.');
-  if (repo.branch.startsWith('layer/')) throw new LabError('LAYER_HEAD', 'HEAD real não pode apontar para uma Layer.');
   if (requireCommit && !repo.head) throw new LabError('UNBORN_HEAD', 'Crie o primeiro commit da branch tradicional antes de habilitar Layers.');
   if (path.resolve(repo.gitDir) !== path.resolve(repo.commonDir)) throw new LabError('LINKED_WORKTREE', 'Linked worktrees não são suportadas na v0.1.');
   const worktrees = (await git(repo.root, ['worktree', 'list', '--porcelain', '-z'])).stdout;
   const worktreeCount = worktrees.toString('utf8').split('\0').filter(item => item.startsWith('worktree ')).length;
-  if (worktreeCount !== 1) throw new LabError('MULTIPLE_WORKTREES', 'Layers exigem exatamente um worktree normal.', { count: worktreeCount });
+  if(worktreeCount!==1){const protection=await (await import('./branch-protection.js')).inspectBranchProtection(repo.root);if(!protection.healthy||protection.externalWorktrees.length||worktreeCount!==1+protection.validWorktrees.length)throw new LabError('MULTIPLE_WORKTREES','Somente o worktree principal e reservas próprias validadas são suportados.',{count:worktreeCount,protection});}
   const config = await originalConfig(repo.root);
   for (const [key, values] of config) {
     const value = values.at(-1)!;

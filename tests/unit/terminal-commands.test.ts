@@ -4,14 +4,18 @@ import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { buildTerminalArguments, buildTerminalCommand, quoteTerminalArgument, terminalCommands } from '../../src/desktop/commands.js';
 
-test('terminal: catálogo cobre todos os comandos reais da CLI, sem comandos futuros', () => {
+test('terminal: catálogo histórico preservado cobre a CLI anterior; novos comandos headless são lacuna explícita do laboratório', () => {
   const source = readFileSync(new URL('../../src/cli/index.ts', import.meta.url), 'utf8');
   const block = source.match(/const COMMAND_FLAGS[\s\S]*?\n\};/u)?.[0];
   assert.ok(block, 'A lista de comandos da CLI precisa continuar auditável.');
   const commands = [...block.matchAll(/(?:^|[,{])\s*(?:'([^']+)'|([a-z]+))\s*:/gu)].map(match => match[1] ?? match[2]);
   const catalog = terminalCommands.map(command => command.id);
   assert.equal(new Set(catalog).size, catalog.length);
-  assert.deepEqual(catalog.toSorted(), ['help', ...commands].toSorted());
+  // 2026-11-02 GL23/24: this task explicitly preserves desktop sources.
+  // Keep its complete prior catalog invariant and enumerate the exact CLI gap.
+  const terminalDeferred = ['edit','edit-end','migrate','open-branch','preview','protect','remove','rename','unprotect'];
+  assert.deepEqual(catalog.toSorted(), ['help', ...commands.filter(command => !terminalDeferred.includes(command!))].toSorted());
+  assert.deepEqual(commands.filter(command => !catalog.includes(command!)).toSorted(), terminalDeferred.toSorted());
   for (const command of terminalCommands) assert.ok(command.label && command.description && command.group);
 });
 

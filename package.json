@@ -1,7 +1,7 @@
 {
   "name": "git-layers-lab",
   "version": "0.1.2",
-  "description": "Laboratório desktop de branches Git locais e Layers independentes",
+  "description": "Core/CLI de Layers com Git oficial; laboratório desktop opcional",
   "private": true,
   "license": "UNLICENSED",
   "type": "module",
@@ -14,9 +14,11 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
+    "build:core": "node scripts/build-core.mjs",
+    "cli:core": "node dist-core/cli/index.js",
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test --test-concurrency=2 --test-timeout=180000 tests/unit/*.test.ts tests/unit/*.test.mjs tests/integration/*.test.ts tests/integration/*.test.mjs",
-    "test:e2e": "node --test tests/e2e/*.test.mjs",
+    "test:e2e": "node --test --test-concurrency=1 tests/e2e/*.test.mjs",
     "desktop": "electron .",
     "cli": "node dist/cli/index.js",
     "demo": "node --import tsx scripts/demo.ts",
@@ -40,7 +42,13 @@
     "test:integration": "node --import tsx --test --test-concurrency=2 --test-timeout=180000 tests/integration/*.test.ts tests/integration/*.test.mjs",
     "test:desktop": "node scripts/workshop-ui.mjs",
     "verify:dev": "node scripts/verify-dev.mjs",
-    "verify:maps": "node scripts/verify-debug-build.mjs"
+    "verify:maps": "node scripts/verify-debug-build.mjs",
+    "compat:list": "node scripts/git-compat/runner.mjs --list",
+    "compat:smoke": "node scripts/git-compat/runner.mjs --suite smoke",
+    "compat:test": "node scripts/git-compat/runner.mjs --suite broad",
+    "compat:selftest": "node scripts/git-compat/runner.mjs --suite harness",
+    "compat:report": "node scripts/git-compat/report.mjs",
+    "compat:infra": "node --test --test-concurrency=1 tests/git-compat/infra/*.test.mjs"
   },
   "dependencies": {
     "@xterm/addon-fit": "0.11.0",

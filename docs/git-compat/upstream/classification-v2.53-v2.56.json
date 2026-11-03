@@ -1,0 +1,1555 @@
+{
+  "schema_version": "1.0",
+  "retrieved_at": "2026-10-18",
+  "retrieval": "web open; parsed classification tokens, not raw byte copies",
+  "sources": [
+    {
+      "version": "2.53.0",
+      "url": "https://raw.githubusercontent.com/git/git/v2.53.0/command-list.txt",
+      "rows": [
+        {
+          "id": "git-add",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-am",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-annotate",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-apply",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-archimport",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-archive",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-backfill",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-bisect",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-blame",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-branch",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-bugreport",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-bundle",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-cat-file",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-check-attr",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-check-ignore",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-check-mailmap",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-check-ref-format",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-checkout",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-checkout-index",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-cherry",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-cherry-pick",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-citool",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-clean",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-clone",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-column",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-commit",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-commit-graph",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-commit-tree",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-config",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-count-objects",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-credential",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-credential-cache",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-credential-store",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-cvsexportcommit",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-cvsimport",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-cvsserver",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-daemon",
+          "category": "synchingrepositories"
+        },
+        {
+          "id": "git-describe",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-diagnose",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-diff",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-diff-files",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-diff-index",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-diff-pairs",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-diff-tree",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-difftool",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-fast-export",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-fast-import",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-fetch",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-fetch-pack",
+          "category": "synchingrepositories"
+        },
+        {
+          "id": "git-filter-branch",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-fmt-merge-msg",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-for-each-ref",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-for-each-repo",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-format-patch",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-fsck",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-gc",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-get-tar-commit-id",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-grep",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-gui",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-hash-object",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-help",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-hook",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-http-backend",
+          "category": "synchingrepositories"
+        },
+        {
+          "id": "git-http-fetch",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-http-push",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-imap-send",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-index-pack",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-init",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-instaweb",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-interpret-trailers",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-last-modified",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-log",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-ls-files",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-ls-remote",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-ls-tree",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-mailinfo",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-mailsplit",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-maintenance",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-merge",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-merge-base",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-merge-file",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-merge-index",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-merge-one-file",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-merge-tree",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-mergetool",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-mktag",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-mktree",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-multi-pack-index",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-mv",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-name-rev",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-notes",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-p4",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-pack-objects",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-pack-redundant",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-pack-refs",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-patch-id",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-prune",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-prune-packed",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-pull",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-push",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-quiltimport",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-range-diff",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-read-tree",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-rebase",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-receive-pack",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-reflog",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-refs",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-remote",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-repack",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-replace",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-replay",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-repo",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-request-pull",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-rerere",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-reset",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-restore",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-rev-list",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-rev-parse",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-revert",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-rm",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-send-email",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-send-pack",
+          "category": "synchingrepositories"
+        },
+        {
+          "id": "git-sh-i18n",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-sh-setup",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-shell",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-shortlog",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-show",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-show-branch",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-show-index",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-show-ref",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-sparse-checkout",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-stash",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-status",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-stripspace",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-submodule",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-svn",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-switch",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-symbolic-ref",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-tag",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-unpack-file",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-unpack-objects",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-update-index",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-update-ref",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-update-server-info",
+          "category": "synchingrepositories"
+        },
+        {
+          "id": "git-upload-archive",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-upload-pack",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-var",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-verify-commit",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-verify-pack",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-verify-tag",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-version",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-whatchanged",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-worktree",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-write-tree",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "gitattributes",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitcli",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitcore-tutorial",
+          "category": "guide"
+        },
+        {
+          "id": "gitcredentials",
+          "category": "guide"
+        },
+        {
+          "id": "gitcvs-migration",
+          "category": "guide"
+        },
+        {
+          "id": "gitdiffcore",
+          "category": "guide"
+        },
+        {
+          "id": "giteveryday",
+          "category": "guide"
+        },
+        {
+          "id": "gitfaq",
+          "category": "guide"
+        },
+        {
+          "id": "gitformat-bundle",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitformat-chunk",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitformat-commit-graph",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitformat-index",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitformat-pack",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitformat-signature",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitglossary",
+          "category": "guide"
+        },
+        {
+          "id": "githooks",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitignore",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitk",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "gitmailmap",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitmodules",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitnamespaces",
+          "category": "guide"
+        },
+        {
+          "id": "gitprotocol-capabilities",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitprotocol-common",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitprotocol-http",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitprotocol-pack",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitprotocol-v2",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitremote-helpers",
+          "category": "guide"
+        },
+        {
+          "id": "gitrepository-layout",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitrevisions",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitsubmodules",
+          "category": "guide"
+        },
+        {
+          "id": "gittutorial",
+          "category": "guide"
+        },
+        {
+          "id": "gittutorial-2",
+          "category": "guide"
+        },
+        {
+          "id": "gitweb",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "gitworkflows",
+          "category": "guide"
+        },
+        {
+          "id": "scalar",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-stage",
+          "category": "unclassified-in-upstream"
+        }
+      ]
+    },
+    {
+      "version": "2.56.0",
+      "url": "https://raw.githubusercontent.com/git/git/v2.56.0/command-list.txt",
+      "rows": [
+        {
+          "id": "git-add",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-am",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-annotate",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-apply",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-archimport",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-archive",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-backfill",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-bisect",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-blame",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-branch",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-bugreport",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-bundle",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-cat-file",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-check-attr",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-check-ignore",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-check-mailmap",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-check-ref-format",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-checkout",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-checkout-index",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-cherry",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-cherry-pick",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-citool",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-clean",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-clone",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-column",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-commit",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-commit-graph",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-commit-tree",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-config",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-count-objects",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-credential",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-credential-cache",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-credential-store",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-cvsexportcommit",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-cvsimport",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-cvsserver",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-daemon",
+          "category": "synchingrepositories"
+        },
+        {
+          "id": "git-describe",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-diagnose",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-diff",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-diff-files",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-diff-index",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-diff-pairs",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-diff-tree",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-difftool",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-fast-export",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-fast-import",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-fetch",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-fetch-pack",
+          "category": "synchingrepositories"
+        },
+        {
+          "id": "git-filter-branch",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-fmt-merge-msg",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-for-each-ref",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-for-each-repo",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-format-patch",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-format-rev",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-fsck",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-gc",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-get-tar-commit-id",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-grep",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-gui",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-hash-object",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-help",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-history",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-hook",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-http-backend",
+          "category": "synchingrepositories"
+        },
+        {
+          "id": "git-http-fetch",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-http-push",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-imap-send",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-index-pack",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-init",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-instaweb",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-interpret-trailers",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-last-modified",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-log",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-ls-files",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-ls-remote",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-ls-tree",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-mailinfo",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-mailsplit",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-maintenance",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-merge",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-merge-base",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-merge-file",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-merge-index",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-merge-one-file",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-merge-tree",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-mergetool",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-mktag",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-mktree",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-multi-pack-index",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-mv",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-name-rev",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-notes",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-p4",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-pack-objects",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-pack-redundant",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-pack-refs",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-patch-id",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-prune",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-prune-packed",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-pull",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-push",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-quiltimport",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-range-diff",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-read-tree",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-rebase",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-receive-pack",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-reflog",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-refs",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-remote",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-repack",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-replace",
+          "category": "ancillarymanipulators"
+        },
+        {
+          "id": "git-replay",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-repo",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-request-pull",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-rerere",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-reset",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-restore",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-rev-list",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-rev-parse",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-revert",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-rm",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-send-email",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-send-pack",
+          "category": "synchingrepositories"
+        },
+        {
+          "id": "git-sh-i18n",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-sh-setup",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-shell",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-shortlog",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-show",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-show-branch",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-show-index",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-show-ref",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-sparse-checkout",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-stash",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-status",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-stripspace",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-submodule",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-svn",
+          "category": "foreignscminterface"
+        },
+        {
+          "id": "git-switch",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-symbolic-ref",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-tag",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-unpack-file",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-unpack-objects",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-update-index",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-update-ref",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "git-update-server-info",
+          "category": "synchingrepositories"
+        },
+        {
+          "id": "git-upload-archive",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-upload-pack",
+          "category": "synchelpers"
+        },
+        {
+          "id": "git-url-parse",
+          "category": "purehelpers"
+        },
+        {
+          "id": "git-var",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-verify-commit",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-verify-pack",
+          "category": "plumbinginterrogators"
+        },
+        {
+          "id": "git-verify-tag",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-version",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-whatchanged",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "git-worktree",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-write-tree",
+          "category": "plumbingmanipulators"
+        },
+        {
+          "id": "gitattributes",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitcli",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitcore-tutorial",
+          "category": "guide"
+        },
+        {
+          "id": "gitcredentials",
+          "category": "guide"
+        },
+        {
+          "id": "gitcvs-migration",
+          "category": "guide"
+        },
+        {
+          "id": "gitdatamodel",
+          "category": "guide"
+        },
+        {
+          "id": "gitdiffcore",
+          "category": "guide"
+        },
+        {
+          "id": "giteveryday",
+          "category": "guide"
+        },
+        {
+          "id": "gitfaq",
+          "category": "guide"
+        },
+        {
+          "id": "gitformat-bundle",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitformat-chunk",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitformat-commit-graph",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitformat-index",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitformat-pack",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitformat-signature",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitglossary",
+          "category": "guide"
+        },
+        {
+          "id": "githooks",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitignore",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitk",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "gitmailmap",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitmodules",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitnamespaces",
+          "category": "guide"
+        },
+        {
+          "id": "gitprotocol-capabilities",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitprotocol-common",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitprotocol-http",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitprotocol-pack",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitprotocol-v2",
+          "category": "developerinterfaces"
+        },
+        {
+          "id": "gitremote-helpers",
+          "category": "guide"
+        },
+        {
+          "id": "gitrepository-layout",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitrevisions",
+          "category": "userinterfaces"
+        },
+        {
+          "id": "gitsubmodules",
+          "category": "guide"
+        },
+        {
+          "id": "gittutorial",
+          "category": "guide"
+        },
+        {
+          "id": "gittutorial-2",
+          "category": "guide"
+        },
+        {
+          "id": "gitweb",
+          "category": "ancillaryinterrogators"
+        },
+        {
+          "id": "gitworkflows",
+          "category": "guide"
+        },
+        {
+          "id": "scalar",
+          "category": "mainporcelain"
+        },
+        {
+          "id": "git-stage",
+          "category": "unclassified-in-upstream"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,40 @@
 # Execução nativa Windows — 18/10/2026
 
+**Relatório histórico — 18/10/2026 e complementos daquela fase:** “fontes atuais” e resultados abaixo referem-se aos snapshots registrados à época. Não certificam a implementação de 02/11/2026. Consulte os [contratos novos do Core/CLI](IMPLEMENTATION-2026-11-02.md) e o [relatório público de fechamento](reports/2026-11-02-closure/REPORT.md); esta rodada não abriu nem revalidou o laboratório gráfico. O conteúdo histórico permanece preservado abaixo. Referências a .workshop identificam a localização local original dos logs/capturas; não são dependências nem links públicos exigidos. A retenção externa verificada e os resultados essenciais publicados são identificados pelo relatório de fechamento; os fatos e contagens históricos não foram reinterpretados.
+
 Executado em **C:\Dev\GitLayer**, com as fontes atuais. O [relatório anterior](history/TEST-REPORT-WORKSHOP-PRE-WINDOWS.md) foi preservado como histórico; ele não comprova esta execução.
+
+## Complemento: pastas vazias ao desativar Layers e tooltips
+
+Reproduzido em fixture Git descartável: desativar `scripts` retirava `scripts/nested/run.ps1`, mas deixava `scripts/` no disco. O novo teste falhou antes da correção. A desativação agora remove apenas ancestrais vazios dos arquivos daquela Layer, dos mais profundos para os mais rasos, sem remoção recursiva. Pastas necessárias a caminhos da Base em HEAD/índice e a outras Layers ativas são preservadas mesmo se esses arquivos estiverem ausentes no disco; conteúdo local/ignorado e subpastas não relacionadas também são preservados. A última Layer ativa pode liberar uma pasta compartilhada vazia. A remoção é registrada no journal e pode ser revertida por recuperação conservadora.
+
+Os tooltips das badges de propriedade em arquivos, abas e pastas usam `layer/nome`, por exemplo `layer/scripts`.
+
+Verificações desta alteração no Windows x64:
+
+- **Typecheck, build de debug e sourcemaps:** aprovados.
+- **Unitários, recuperação e integrações selecionadas:** 64 casos, 62 aprovados, 2 skips (Bash e criação de symlink sem privilégio), zero falhas. Incluem os três novos cenários de limpeza/reativação/proteção/recuperação, quatro regressões de parking/diretório compartilhado/failpoints de projeção e seis casos de compatibilidade Windows com Git real, CRLF, binários e junctions.
+- **`node scripts/workshop-ui.mjs --no-build`:** três testes gráficos aprovados, saída 0. A janela Electron foi confirmada visível, com sandbox ativo; o teste usa a bolinha para desativar `scripts`, confirma a ausência da pasta no disco e na árvore, reativa, confere o conteúdo e verifica os tooltips no novo formato.
+
+Uma tentativa gráfica inicial detectou que a fixture esperava LF enquanto o Git materializava CRLF. A configuração de fim de linha foi explicitada apenas no repositório descartável do teste; a repetição passou sem flexibilizar a comparação de conteúdo. Logs e capturas, inclusive dessa tentativa, estão no relatório local original `.workshop/reports/layer-directories/README.md`. O diagnóstico conhecido `AttachConsole failed` do auxiliar de encerramento de ConPTY continua no stderr, embora os testes e o comando tenham encerrado com código 0.
+
+Somente `dist-debug/` foi atualizado. A suíte completa de integração e o pacote portátil não foram repetidos/atualizados. Não houve limpeza retroativa de diretórios em repositórios do usuário: pastas que sobraram anteriormente são tratadas na próxima desativação da respectiva Layer.
+
+## Complemento: explorador e abas
+
+O explorador foi refeito seguindo as referências abertas do VS Code: [ExplorerDelegate/FilesRenderer/FileSorter](https://github.com/microsoft/vscode/blob/main/src/vs/workbench/contrib/files/browser/views/explorerViewer.ts) e [tree.css](https://github.com/microsoft/vscode/blob/main/src/vs/base/browser/ui/tree/media/tree.css). Agora usa árvore com pastas recolhíveis, ordenação natural por irmãos, linhas de 22 px, Codicons locais, pastas compactas, teclado, menu de contexto, criação/renomeação inline e largura ajustável. Os marcadores Git e de propriedade das Layers permanecem separados.
+
+**Reprodução do defeito das abas:** seis cliques síncronos em `README.md`, antes do retorno da leitura, criavam seis abas com o mesmo caminho/chave React. A abertura agora compartilha a leitura e verifica novamente o caminho antes de inserir. Leituras antigas são invalidadas ao fechar ou trocar de workspace; o fechamento atualiza a seleção a partir do estado corrente.
+
+Verificações desta alteração no Windows x64:
+
+- **Typecheck, build de debug e sourcemaps:** aprovados.
+- **Unitários:** 44 casos, 43 aprovados, um skip Bash, zero falhas.
+- **`node scripts/workshop-ui.mjs --no-build`:** três testes gráficos aprovados, saída 0, com Git real, perfis/repositórios descartáveis e sandbox ativo. O novo teste confirma também `BrowserWindow.isVisible() === true`, seis cliques produzindo uma única aba, fechamento de todas as abas sem sobras, teclado, criação/renomeação, colisão sem sobrescrita, cópia validada de caminho, buffer independente, temas e Layers. Esse teste foi integrado a `workshop:ui`; os arquivos E2E rodam em sequência porque compartilham o clipboard do Windows.
+
+O relatório e as capturas locais estão em `.workshop/reports/explorer/README.md` (localização original). O primeiro teste da cópia de caminho detectou bloqueio de permissão no navegador; foi corrigido por uma operação restrita no preload, sem liberar permissões gerais. O auxiliar de encerramento de ConPTY ainda escreveu `AttachConsole failed` no stderr, embora os testes e o processo tenham encerrado com código 0.
+
+Somente `dist-debug/` foi atualizado; o pacote portátil e `dist/` continuam com suas versões anteriores. A suíte completa de integração não foi repetida. Arrastar/soltar, seleção múltipla e renomeação/exclusão recursiva de pastas não fazem parte desta implementação do explorador.
 
 ## Complemento: janela oculta ao usar Dev
 

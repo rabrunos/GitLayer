@@ -17,7 +17,7 @@ export function explorerFiles(snapshot: WorkspaceState | null): FileEntry[] {
 }
 
 export function layerOwnership(owner: string | null | undefined): string | null {
-  return owner && owner !== 'base' ? `Layer ${owner}` : null;
+  return owner && owner !== 'base' ? `layer/${owner}` : null;
 }
 
 /** Git decoration reflects the disk/index; an unsaved editor buffer stays separate. */

@@ -61,7 +61,7 @@ test('atomic metadata replacement and transaction copies preserve supported phys
   assert.deepEqual((await fs.readdir(root)).filter(name => name.endsWith('.tmp')), []);
 });
 
-test('Git CRLF projection, binary staging and parking preserve the main index in accented paths', async t => {
+test('GL16 Git CRLF projection and explicit discard preserve binary data and the main index in accented paths', async t => {
   const { root, app } = await repository(t);
   await app.create('scripts');
   await app.on('scripts');
@@ -81,10 +81,18 @@ test('Git CRLF projection, binary staging and parking preserve the main index in
   assert.equal(digest(await fs.readFile(app.repo.index)), baseIndex);
   assert.deepEqual((await git(root, ['show', `layer/scripts:${binary}`])).stdout, bytes);
   assert.equal((await git(root, ['show', `layer/scripts:${text}`])).stdout.toString(), staged.toString().replace(/\r\n/g, '\n'));
-  await app.off('scripts', true);
+  // Contract revision 2026-11-02 GL-16: dirty deactivation refuses; no auto-park.
+  await assert.rejects(() => app.off('scripts'), { code: 'LAYER_DIRTY' });
+  assert.deepEqual(await fs.readFile(path.join(root, text)), changed);
+  assert.deepEqual(await fs.readFile(path.join(root, binary)), bytes);
+  assert.equal(digest(await fs.readFile(app.repo.index)), baseIndex);
+  await assert.rejects(() => app.off('scripts', true), { code: 'AUTO_PARK_REMOVED' });
+  await app.deactivate('scripts', { discard: true });
   assert.equal((await fingerprint(path.join(root, text))).exists, false);
   await app.on('scripts');
-  assert.deepEqual(await fs.readFile(path.join(root, text)), changed);
+  assert.deepEqual(await fs.readFile(path.join(root, text)), staged);
+  assert.notDeepEqual(await fs.readFile(path.join(root, text)), changed);
+  await assert.rejects(() => fs.lstat(path.join(app.dir, 'shelves')), { code: 'ENOENT' });
   assert.deepEqual(await fs.readFile(path.join(root, binary)), bytes);
   assert.equal(digest(await fs.readFile(app.repo.index)), baseIndex);
 });

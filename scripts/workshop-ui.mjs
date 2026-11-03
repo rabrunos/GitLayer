@@ -44,7 +44,8 @@ export async function runWorkshopUi({ argv = [], root = fileURLToPath(new URL('.
     const executable = electronExecutable || (await import('electron')).default;
     if (typeof executable !== 'string' || !executable) throw new Error('Electron local não encontrado. Execute npm ci na pasta do workshop.');
     report.phase = 'desktop-e2e';
-    const result = await runUiStage(process.execPath, ['--test', path.join(root, 'tests', 'e2e', 'desktop.test.mjs')], {
+    // Native UI tests share the Windows clipboard; run their files sequentially.
+    const result = await runUiStage(process.execPath, ['--test', '--test-concurrency=1', path.join(root, 'tests', 'e2e', 'desktop.test.mjs'), path.join(root, 'tests', 'e2e', 'explorer.test.mjs')], {
       cwd: root,
       env: { ...childEnv, LAB_E2E_APP: path.join(root, 'dist-debug'), LAB_E2E_DIST: path.join(root, 'dist-debug'), LAB_E2E_EXECUTABLE: executable, LAB_E2E_REPORT_FILE: files.evidence },
       stdout, stderr,

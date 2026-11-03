@@ -1,0 +1,1311 @@
+{
+  "schema": 1,
+  "kind": "published-real-core-performance-evidence",
+  "status": "PASS",
+  "started": "2026-11-02T22:38:57.202Z",
+  "finished": "2026-11-02T22:40:02.900Z",
+  "runner": {
+    "file": "scripts/benchmark-core.mjs",
+    "sha256": "a6a96d62d8b88e639907c78640262cbb9e1cbdf951712ce9ed1857daa41088c8"
+  },
+  "runnerCurrentBytesMatchRecordedHash": true,
+  "command": "node scripts/benchmark-core.mjs --baseline-source <verified-closure-baseline> --out <new-evidence-directory>",
+  "baselineProvenance": {
+    "phase": "closure-2026-11-02",
+    "verifiedBaselineFiles": 324,
+    "source": "Externally preserved inputs of this closure; distinct from the first implementation baseline of301 copies.",
+    "coreManifestDomain": "Core TypeScript files listed under sourceManifests; these are not all324 baseline files."
+  },
+  "environment": {
+    "node": "v24.14.1",
+    "platform": "win32",
+    "arch": "x64",
+    "release": "10.0.26200",
+    "git": "git version 2.53.0.windows.2",
+    "esbuild": "0.28.2",
+    "observer": "Official installed Git executable by absolute argv; host path omitted."
+  },
+  "sourceManifests": {
+    "baseline": {
+      "files": [
+        {
+          "path": "branch-protection.ts",
+          "size": 17364,
+          "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+        },
+        {
+          "path": "demo.ts",
+          "size": 6303,
+          "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+        },
+        {
+          "path": "errors.ts",
+          "size": 467,
+          "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+        },
+        {
+          "path": "git.ts",
+          "size": 21199,
+          "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+        },
+        {
+          "path": "index.ts",
+          "size": 81667,
+          "sha256": "2bb39e20ee959f4375a0d49ec2fbb00e1db39582e848700e2aac78584616e7de"
+        },
+        {
+          "path": "layout.ts",
+          "size": 16173,
+          "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+        },
+        {
+          "path": "paths.ts",
+          "size": 7365,
+          "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+        },
+        {
+          "path": "platform.ts",
+          "size": 5247,
+          "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+        },
+        {
+          "path": "recovery.ts",
+          "size": 12852,
+          "sha256": "78120a414510eaebc72b4995db1661061a837683dcafbbdbbc1e116d9b682095"
+        },
+        {
+          "path": "rescue.ts",
+          "size": 20964,
+          "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d"
+        },
+        {
+          "path": "storage.ts",
+          "size": 17064,
+          "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+        }
+      ],
+      "sha256": "d7b2574829728bf922aee82e09ddf88c5e4e38d721332f0432e77f46bcd5c3ed",
+      "sourceStableDuringCopy": true,
+      "bundleSha256": "6d513f88237765d8f0526ab81e54b53af312a92f0485b15d371d26a788165076"
+    },
+    "current": {
+      "files": [
+        {
+          "path": "branch-protection.ts",
+          "size": 17364,
+          "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+        },
+        {
+          "path": "demo.ts",
+          "size": 6303,
+          "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+        },
+        {
+          "path": "errors.ts",
+          "size": 467,
+          "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+        },
+        {
+          "path": "git.ts",
+          "size": 21199,
+          "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+        },
+        {
+          "path": "ignore.ts",
+          "size": 3269,
+          "sha256": "9e44e2a5e55cac69e154eb62c5a20e16b6038bc110a25318440a056b90d10f2a"
+        },
+        {
+          "path": "index.ts",
+          "size": 82411,
+          "sha256": "dfa57f964eee9b92cf3783acdba1917ce3cd084e1bc5a2c70b45ffdccad9e42e"
+        },
+        {
+          "path": "layer-rename.ts",
+          "size": 19188,
+          "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+        },
+        {
+          "path": "layout.ts",
+          "size": 16173,
+          "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+        },
+        {
+          "path": "paths.ts",
+          "size": 7365,
+          "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+        },
+        {
+          "path": "platform.ts",
+          "size": 5247,
+          "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+        },
+        {
+          "path": "recovery.ts",
+          "size": 13233,
+          "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0"
+        },
+        {
+          "path": "rescue.ts",
+          "size": 20964,
+          "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d"
+        },
+        {
+          "path": "storage.ts",
+          "size": 17064,
+          "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+        }
+      ],
+      "sha256": "a3bde057386dae99a83846e9035b8f15db2fa6cdeb6f9fc73e4888de351685fb",
+      "sourceStableDuringCopy": true,
+      "bundleSha256": "87c49fc7686ab60858a02451a62cb2a97aa6e9a2a27b685d60de263e9c17aeb5"
+    }
+  },
+  "methodology": {
+    "versions": [
+      "baseline",
+      "current"
+    ],
+    "baseFiles": 10,
+    "layerCounts": [
+      0,
+      1
+    ],
+    "layerFilesWhenActive": 10,
+    "samplesPerMetric": 3,
+    "metrics": [
+      "public status",
+      "internal verifyExcludes"
+    ],
+    "execution": "sequential; one isolated worker per version/case; setup excluded",
+    "subprocessCounting": "getGitActivity bounded to 100; overlap establishes exact deltas, otherwise count is a lower bound."
+  },
+  "comparisons": [
+    {
+      "layers": 0,
+      "metric": "status",
+      "comparable": true,
+      "baselineMedianMs": 2226.5343000000003,
+      "currentMedianMs": 1906.9385000000002,
+      "differenceMs": -319.59580000000005,
+      "percentChange": -14.353958077358165,
+      "baselineRangeMs": [
+        2079.7170000000006,
+        2260.0434999999998
+      ],
+      "currentRangeMs": [
+        1878.1404999999995,
+        1985.5711000000006
+      ],
+      "subprocessCountsExact": true,
+      "baselineGitCounts": [
+        61,
+        61,
+        61
+      ],
+      "currentGitCounts": [
+        53,
+        53,
+        53
+      ],
+      "baselineCheckIgnoreCounts": [
+        0,
+        0,
+        0
+      ],
+      "currentCheckIgnoreCounts": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "layers": 0,
+      "metric": "verifyExcludes",
+      "comparable": true,
+      "baselineMedianMs": 0.009200000000419095,
+      "currentMedianMs": 0.007999999999810825,
+      "differenceMs": -0.00120000000060827,
+      "percentChange": -13.043478266887021,
+      "baselineRangeMs": [
+        0.0072000000000116415,
+        0.010200000000622822
+      ],
+      "currentRangeMs": [
+        0.007900000000518048,
+        0.011800000000221189
+      ],
+      "subprocessCountsExact": true,
+      "baselineGitCounts": [
+        0,
+        0,
+        0
+      ],
+      "currentGitCounts": [
+        0,
+        0,
+        0
+      ],
+      "baselineCheckIgnoreCounts": [
+        0,
+        0,
+        0
+      ],
+      "currentCheckIgnoreCounts": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "layers": 1,
+      "metric": "status",
+      "comparable": true,
+      "baselineMedianMs": 3218.940800000002,
+      "currentMedianMs": 3054.485999999999,
+      "differenceMs": -164.45480000000316,
+      "percentChange": -5.108972491821007,
+      "baselineRangeMs": [
+        3117.814199999997,
+        3362.3306999999986
+      ],
+      "currentRangeMs": [
+        2823.407299999999,
+        3066.953099999999
+      ],
+      "subprocessCountsExact": true,
+      "baselineGitCounts": [
+        81,
+        81,
+        81
+      ],
+      "currentGitCounts": [
+        73,
+        73,
+        73
+      ],
+      "baselineCheckIgnoreCounts": [
+        1,
+        1,
+        1
+      ],
+      "currentCheckIgnoreCounts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "layers": 1,
+      "metric": "verifyExcludes",
+      "comparable": true,
+      "baselineMedianMs": 189.25109999999768,
+      "currentMedianMs": 189.28510000000097,
+      "differenceMs": 0.03400000000328873,
+      "percentChange": 0.017965549475418285,
+      "baselineRangeMs": [
+        186.3244999999988,
+        230.7380000000012
+      ],
+      "currentRangeMs": [
+        159.35000000000218,
+        198.91449999999895
+      ],
+      "subprocessCountsExact": true,
+      "baselineGitCounts": [
+        4,
+        4,
+        4
+      ],
+      "currentGitCounts": [
+        4,
+        4,
+        4
+      ],
+      "baselineCheckIgnoreCounts": [
+        1,
+        1,
+        1
+      ],
+      "currentCheckIgnoreCounts": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "version": "baseline",
+      "layerCount": 0,
+      "baseFiles": 10,
+      "layerFiles": 0,
+      "samplesPerMetric": 3,
+      "started": "2026-11-02T22:38:57.520Z",
+      "finished": "2026-11-02T22:39:06.538Z",
+      "setupDurationMs": 1571.8211000000001,
+      "status": "PASS",
+      "semanticStatePreserved": true,
+      "beforeSemanticStateSHA256": "af716ed7b783e6f3122ae388db519e1ac78d88137bde2955615b70d50d2aebfc",
+      "afterSemanticStateSHA256": "af716ed7b783e6f3122ae388db519e1ac78d88137bde2955615b70d50d2aebfc",
+      "samples": [
+        {
+          "metric": "status",
+          "sample": 1,
+          "durationMs": 2226.5343000000003,
+          "git": {
+            "count": 61,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 39,
+            "byCommand": {
+              "rev-parse": 35,
+              "symbolic-ref": 3,
+              "worktree": 2,
+              "config": 4,
+              "for-each-ref": 4,
+              "ls-files": 4,
+              "ls-tree": 3,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 2,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "status",
+          "sample": 2,
+          "durationMs": 2079.7170000000006,
+          "git": {
+            "count": 61,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 39,
+            "byCommand": {
+              "rev-parse": 35,
+              "symbolic-ref": 3,
+              "worktree": 2,
+              "config": 4,
+              "for-each-ref": 4,
+              "ls-files": 4,
+              "ls-tree": 3,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 2,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "status",
+          "sample": 3,
+          "durationMs": 2260.0434999999998,
+          "git": {
+            "count": 61,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 39,
+            "byCommand": {
+              "rev-parse": 35,
+              "symbolic-ref": 3,
+              "worktree": 2,
+              "config": 4,
+              "for-each-ref": 4,
+              "ls-files": 4,
+              "ls-tree": 3,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 2,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 1,
+          "durationMs": 0.010200000000622822,
+          "git": {
+            "count": 0,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 100,
+            "byCommand": {}
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 2,
+          "durationMs": 0.0072000000000116415,
+          "git": {
+            "count": 0,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 100,
+            "byCommand": {}
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 3,
+          "durationMs": 0.009200000000419095,
+          "git": {
+            "count": 0,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 100,
+            "byCommand": {}
+          }
+        }
+      ],
+      "isolation": {
+        "gitConfigurationsRequestedByEnvironment": true,
+        "effectiveScopesAndKeys": [
+          {
+            "scope": "global",
+            "key": "core.hookspath"
+          },
+          {
+            "scope": "global",
+            "key": "credential.helper"
+          },
+          {
+            "scope": "global",
+            "key": "protocol.allow"
+          },
+          {
+            "scope": "global",
+            "key": "protocol.file.allow"
+          },
+          {
+            "scope": "global",
+            "key": "gc.auto"
+          },
+          {
+            "scope": "global",
+            "key": "user.name"
+          },
+          {
+            "scope": "global",
+            "key": "user.email"
+          },
+          {
+            "scope": "global",
+            "key": "commit.gpgsign"
+          },
+          {
+            "scope": "global",
+            "key": "tag.gpgsign"
+          },
+          {
+            "scope": "local",
+            "key": "core.repositoryformatversion"
+          },
+          {
+            "scope": "local",
+            "key": "core.filemode"
+          },
+          {
+            "scope": "local",
+            "key": "core.bare"
+          },
+          {
+            "scope": "local",
+            "key": "core.logallrefupdates"
+          },
+          {
+            "scope": "local",
+            "key": "core.symlinks"
+          },
+          {
+            "scope": "local",
+            "key": "core.ignorecase"
+          },
+          {
+            "scope": "local",
+            "key": "core.autocrlf"
+          },
+          {
+            "scope": "local",
+            "key": "core.fsmonitor"
+          },
+          {
+            "scope": "local",
+            "key": "user.name"
+          },
+          {
+            "scope": "local",
+            "key": "user.email"
+          }
+        ],
+        "systemConfigurationLimitationObserved": false,
+        "noConfigurationValuesRecorded": true
+      },
+      "limits": [
+        "getGitActivity retains at most 100 outcomes; non-overlapping full windows are lower bounds.",
+        "Setup precedes timing; no OS cache eviction and no claim of cold-cache latency.",
+        "verifyExcludes is an internal-method microbenchmark, not a public API.",
+        "No SLO or universal performance conclusion is implied by three samples."
+      ]
+    },
+    {
+      "version": "current",
+      "layerCount": 0,
+      "baseFiles": 10,
+      "layerFiles": 0,
+      "samplesPerMetric": 3,
+      "started": "2026-11-02T22:39:06.625Z",
+      "finished": "2026-11-02T22:39:14.799Z",
+      "setupDurationMs": 1592.5355000000002,
+      "status": "PASS",
+      "semanticStatePreserved": true,
+      "beforeSemanticStateSHA256": "af716ed7b783e6f3122ae388db519e1ac78d88137bde2955615b70d50d2aebfc",
+      "afterSemanticStateSHA256": "af716ed7b783e6f3122ae388db519e1ac78d88137bde2955615b70d50d2aebfc",
+      "samples": [
+        {
+          "metric": "status",
+          "sample": 1,
+          "durationMs": 1985.5711000000006,
+          "git": {
+            "count": 53,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 43,
+            "byCommand": {
+              "rev-parse": 28,
+              "symbolic-ref": 2,
+              "worktree": 2,
+              "config": 4,
+              "for-each-ref": 4,
+              "ls-files": 4,
+              "ls-tree": 3,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 2,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "status",
+          "sample": 2,
+          "durationMs": 1878.1404999999995,
+          "git": {
+            "count": 53,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 47,
+            "byCommand": {
+              "rev-parse": 28,
+              "symbolic-ref": 2,
+              "worktree": 2,
+              "config": 4,
+              "for-each-ref": 4,
+              "ls-files": 4,
+              "ls-tree": 3,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 2,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "status",
+          "sample": 3,
+          "durationMs": 1906.9385000000002,
+          "git": {
+            "count": 53,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 47,
+            "byCommand": {
+              "rev-parse": 28,
+              "symbolic-ref": 2,
+              "worktree": 2,
+              "config": 4,
+              "for-each-ref": 4,
+              "ls-files": 4,
+              "ls-tree": 3,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 2,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 1,
+          "durationMs": 0.011800000000221189,
+          "git": {
+            "count": 0,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 100,
+            "byCommand": {}
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 2,
+          "durationMs": 0.007900000000518048,
+          "git": {
+            "count": 0,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 100,
+            "byCommand": {}
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 3,
+          "durationMs": 0.007999999999810825,
+          "git": {
+            "count": 0,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 100,
+            "byCommand": {}
+          }
+        }
+      ],
+      "isolation": {
+        "gitConfigurationsRequestedByEnvironment": true,
+        "effectiveScopesAndKeys": [
+          {
+            "scope": "global",
+            "key": "core.hookspath"
+          },
+          {
+            "scope": "global",
+            "key": "credential.helper"
+          },
+          {
+            "scope": "global",
+            "key": "protocol.allow"
+          },
+          {
+            "scope": "global",
+            "key": "protocol.file.allow"
+          },
+          {
+            "scope": "global",
+            "key": "gc.auto"
+          },
+          {
+            "scope": "global",
+            "key": "user.name"
+          },
+          {
+            "scope": "global",
+            "key": "user.email"
+          },
+          {
+            "scope": "global",
+            "key": "commit.gpgsign"
+          },
+          {
+            "scope": "global",
+            "key": "tag.gpgsign"
+          },
+          {
+            "scope": "local",
+            "key": "core.repositoryformatversion"
+          },
+          {
+            "scope": "local",
+            "key": "core.filemode"
+          },
+          {
+            "scope": "local",
+            "key": "core.bare"
+          },
+          {
+            "scope": "local",
+            "key": "core.logallrefupdates"
+          },
+          {
+            "scope": "local",
+            "key": "core.symlinks"
+          },
+          {
+            "scope": "local",
+            "key": "core.ignorecase"
+          },
+          {
+            "scope": "local",
+            "key": "core.autocrlf"
+          },
+          {
+            "scope": "local",
+            "key": "core.fsmonitor"
+          },
+          {
+            "scope": "local",
+            "key": "user.name"
+          },
+          {
+            "scope": "local",
+            "key": "user.email"
+          }
+        ],
+        "systemConfigurationLimitationObserved": false,
+        "noConfigurationValuesRecorded": true
+      },
+      "limits": [
+        "getGitActivity retains at most 100 outcomes; non-overlapping full windows are lower bounds.",
+        "Setup precedes timing; no OS cache eviction and no claim of cold-cache latency.",
+        "verifyExcludes is an internal-method microbenchmark, not a public API.",
+        "No SLO or universal performance conclusion is implied by three samples."
+      ]
+    },
+    {
+      "version": "current",
+      "layerCount": 1,
+      "baseFiles": 10,
+      "layerFiles": 10,
+      "samplesPerMetric": 3,
+      "started": "2026-11-02T22:39:14.881Z",
+      "finished": "2026-11-02T22:39:37.823Z",
+      "setupDurationMs": 12596.3881,
+      "status": "PASS",
+      "semanticStatePreserved": true,
+      "beforeSemanticStateSHA256": "49e2365d9ee4f4c34d8462117547fe472affda0fb1255349d4d1d483db63c16e",
+      "afterSemanticStateSHA256": "49e2365d9ee4f4c34d8462117547fe472affda0fb1255349d4d1d483db63c16e",
+      "samples": [
+        {
+          "metric": "status",
+          "sample": 1,
+          "durationMs": 2823.407299999999,
+          "git": {
+            "count": 73,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 27,
+            "byCommand": {
+              "rev-parse": 30,
+              "symbolic-ref": 2,
+              "worktree": 2,
+              "config": 7,
+              "for-each-ref": 4,
+              "ls-files": 11,
+              "ls-tree": 7,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 5,
+              "check-ignore": 1,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "status",
+          "sample": 2,
+          "durationMs": 3054.485999999999,
+          "git": {
+            "count": 73,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 27,
+            "byCommand": {
+              "rev-parse": 30,
+              "symbolic-ref": 2,
+              "worktree": 2,
+              "config": 7,
+              "for-each-ref": 4,
+              "ls-files": 11,
+              "ls-tree": 7,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 5,
+              "check-ignore": 1,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "status",
+          "sample": 3,
+          "durationMs": 3066.953099999999,
+          "git": {
+            "count": 73,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 27,
+            "byCommand": {
+              "rev-parse": 30,
+              "symbolic-ref": 2,
+              "worktree": 2,
+              "config": 7,
+              "for-each-ref": 4,
+              "ls-files": 11,
+              "ls-tree": 7,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 5,
+              "check-ignore": 1,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 1,
+          "durationMs": 198.91449999999895,
+          "git": {
+            "count": 4,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 96,
+            "byCommand": {
+              "ls-tree": 1,
+              "ls-files": 2,
+              "check-ignore": 1
+            }
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 2,
+          "durationMs": 189.28510000000097,
+          "git": {
+            "count": 4,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 96,
+            "byCommand": {
+              "ls-tree": 1,
+              "ls-files": 2,
+              "check-ignore": 1
+            }
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 3,
+          "durationMs": 159.35000000000218,
+          "git": {
+            "count": 4,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 96,
+            "byCommand": {
+              "ls-tree": 1,
+              "ls-files": 2,
+              "check-ignore": 1
+            }
+          }
+        }
+      ],
+      "isolation": {
+        "gitConfigurationsRequestedByEnvironment": true,
+        "effectiveScopesAndKeys": [
+          {
+            "scope": "global",
+            "key": "core.hookspath"
+          },
+          {
+            "scope": "global",
+            "key": "credential.helper"
+          },
+          {
+            "scope": "global",
+            "key": "protocol.allow"
+          },
+          {
+            "scope": "global",
+            "key": "protocol.file.allow"
+          },
+          {
+            "scope": "global",
+            "key": "gc.auto"
+          },
+          {
+            "scope": "global",
+            "key": "user.name"
+          },
+          {
+            "scope": "global",
+            "key": "user.email"
+          },
+          {
+            "scope": "global",
+            "key": "commit.gpgsign"
+          },
+          {
+            "scope": "global",
+            "key": "tag.gpgsign"
+          },
+          {
+            "scope": "local",
+            "key": "core.repositoryformatversion"
+          },
+          {
+            "scope": "local",
+            "key": "core.filemode"
+          },
+          {
+            "scope": "local",
+            "key": "core.bare"
+          },
+          {
+            "scope": "local",
+            "key": "core.logallrefupdates"
+          },
+          {
+            "scope": "local",
+            "key": "core.symlinks"
+          },
+          {
+            "scope": "local",
+            "key": "core.ignorecase"
+          },
+          {
+            "scope": "local",
+            "key": "core.autocrlf"
+          },
+          {
+            "scope": "local",
+            "key": "core.fsmonitor"
+          },
+          {
+            "scope": "local",
+            "key": "user.name"
+          },
+          {
+            "scope": "local",
+            "key": "user.email"
+          }
+        ],
+        "systemConfigurationLimitationObserved": false,
+        "noConfigurationValuesRecorded": true
+      },
+      "limits": [
+        "getGitActivity retains at most 100 outcomes; non-overlapping full windows are lower bounds.",
+        "Setup precedes timing; no OS cache eviction and no claim of cold-cache latency.",
+        "verifyExcludes is an internal-method microbenchmark, not a public API.",
+        "No SLO or universal performance conclusion is implied by three samples."
+      ]
+    },
+    {
+      "version": "baseline",
+      "layerCount": 1,
+      "baseFiles": 10,
+      "layerFiles": 10,
+      "samplesPerMetric": 3,
+      "started": "2026-11-02T22:39:37.913Z",
+      "finished": "2026-11-02T22:40:02.885Z",
+      "setupDurationMs": 13715.3607,
+      "status": "PASS",
+      "semanticStatePreserved": true,
+      "beforeSemanticStateSHA256": "427662962884dfab7bd67396838e598e414b96ebd3cbf526ba693685ce8092c3",
+      "afterSemanticStateSHA256": "427662962884dfab7bd67396838e598e414b96ebd3cbf526ba693685ce8092c3",
+      "samples": [
+        {
+          "metric": "status",
+          "sample": 1,
+          "durationMs": 3218.940800000002,
+          "git": {
+            "count": 81,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 19,
+            "byCommand": {
+              "rev-parse": 37,
+              "symbolic-ref": 3,
+              "worktree": 2,
+              "config": 7,
+              "for-each-ref": 4,
+              "ls-files": 11,
+              "ls-tree": 7,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 5,
+              "check-ignore": 1,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "status",
+          "sample": 2,
+          "durationMs": 3362.3306999999986,
+          "git": {
+            "count": 81,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 19,
+            "byCommand": {
+              "rev-parse": 37,
+              "symbolic-ref": 3,
+              "worktree": 2,
+              "config": 7,
+              "for-each-ref": 4,
+              "ls-files": 11,
+              "ls-tree": 7,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 5,
+              "check-ignore": 1,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "status",
+          "sample": 3,
+          "durationMs": 3117.814199999997,
+          "git": {
+            "count": 81,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 19,
+            "byCommand": {
+              "rev-parse": 37,
+              "symbolic-ref": 3,
+              "worktree": 2,
+              "config": 7,
+              "for-each-ref": 4,
+              "ls-files": 11,
+              "ls-tree": 7,
+              "check-attr": 2,
+              "rev-list": 1,
+              "diff": 5,
+              "check-ignore": 1,
+              "remote": 1
+            }
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 1,
+          "durationMs": 186.3244999999988,
+          "git": {
+            "count": 4,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 96,
+            "byCommand": {
+              "ls-tree": 1,
+              "ls-files": 2,
+              "check-ignore": 1
+            }
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 2,
+          "durationMs": 189.25109999999768,
+          "git": {
+            "count": 4,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 96,
+            "byCommand": {
+              "ls-tree": 1,
+              "ls-files": 2,
+              "check-ignore": 1
+            }
+          }
+        },
+        {
+          "metric": "verifyExcludes",
+          "sample": 3,
+          "durationMs": 230.7380000000012,
+          "git": {
+            "count": 4,
+            "exact": true,
+            "lowerBoundOnly": false,
+            "activityCapacity": 100,
+            "overlap": 96,
+            "byCommand": {
+              "ls-tree": 1,
+              "ls-files": 2,
+              "check-ignore": 1
+            }
+          }
+        }
+      ],
+      "isolation": {
+        "gitConfigurationsRequestedByEnvironment": true,
+        "effectiveScopesAndKeys": [
+          {
+            "scope": "global",
+            "key": "core.hookspath"
+          },
+          {
+            "scope": "global",
+            "key": "credential.helper"
+          },
+          {
+            "scope": "global",
+            "key": "protocol.allow"
+          },
+          {
+            "scope": "global",
+            "key": "protocol.file.allow"
+          },
+          {
+            "scope": "global",
+            "key": "gc.auto"
+          },
+          {
+            "scope": "global",
+            "key": "user.name"
+          },
+          {
+            "scope": "global",
+            "key": "user.email"
+          },
+          {
+            "scope": "global",
+            "key": "commit.gpgsign"
+          },
+          {
+            "scope": "global",
+            "key": "tag.gpgsign"
+          },
+          {
+            "scope": "local",
+            "key": "core.repositoryformatversion"
+          },
+          {
+            "scope": "local",
+            "key": "core.filemode"
+          },
+          {
+            "scope": "local",
+            "key": "core.bare"
+          },
+          {
+            "scope": "local",
+            "key": "core.logallrefupdates"
+          },
+          {
+            "scope": "local",
+            "key": "core.symlinks"
+          },
+          {
+            "scope": "local",
+            "key": "core.ignorecase"
+          },
+          {
+            "scope": "local",
+            "key": "core.autocrlf"
+          },
+          {
+            "scope": "local",
+            "key": "core.fsmonitor"
+          },
+          {
+            "scope": "local",
+            "key": "user.name"
+          },
+          {
+            "scope": "local",
+            "key": "user.email"
+          }
+        ],
+        "systemConfigurationLimitationObserved": false,
+        "noConfigurationValuesRecorded": true
+      },
+      "limits": [
+        "getGitActivity retains at most 100 outcomes; non-overlapping full windows are lower bounds.",
+        "Setup precedes timing; no OS cache eviction and no claim of cold-cache latency.",
+        "verifyExcludes is an internal-method microbenchmark, not a public API.",
+        "No SLO or universal performance conclusion is implied by three samples."
+      ]
+    }
+  ],
+  "processes": [
+    {
+      "case": "baseline-layers-0",
+      "exit": 0,
+      "signal": null,
+      "timedOut": false,
+      "durationMs": 9091,
+      "timeoutMs": 180000,
+      "termination": null
+    },
+    {
+      "case": "current-layers-0",
+      "exit": 0,
+      "signal": null,
+      "timedOut": false,
+      "durationMs": 8258,
+      "timeoutMs": 180000,
+      "termination": null
+    },
+    {
+      "case": "current-layers-1",
+      "exit": 0,
+      "signal": null,
+      "timedOut": false,
+      "durationMs": 23016,
+      "timeoutMs": 180000,
+      "termination": null
+    },
+    {
+      "case": "baseline-layers-1",
+      "exit": 0,
+      "signal": null,
+      "timedOut": false,
+      "durationMs": 25060,
+      "timeoutMs": 180000,
+      "termination": null
+    }
+  ],
+  "configurationAudit": {
+    "sameEffectiveScopesAndKeysInAllFourCases": true,
+    "systemConfigurationLimitationObservedInAnyCase": false,
+    "baselineAndCurrentGitAdapterHashEqual": true,
+    "interpretation": "The generic caveat in retained BENCHMARK.md describes a possible historical adapter weakness, not an observed defect of this baseline. The tested closure baseline and current adapter have identical git.ts hashes and preserve allowed GIT_CONFIG_* isolation variables. These four audits showed only identical synthetic global/local scopes and keys; no configuration values are public and no universal isolation certification follows."
+  },
+  "checkIgnoreBatching": {
+    "newBatchingImprovementObserved": false,
+    "interpretation": "With one active Layer and ten files, both versions used one check-ignore call per sample. No new batching improvement is established by this comparison."
+  },
+  "fixture": {
+    "disposable": true,
+    "cleanup": "owned fixture removed after nonce/ancestry verification"
+  },
+  "rawEvidence": {
+    "archiveId": "closure-2026-11-02-eba4a209",
+    "group": "performance-01",
+    "resultsSHA256": "5b94a5f214e1063e2c8b71737c0da376f80ad3ec8ef45dabfb38affb8c2b0a82",
+    "genericReportSHA256": "ce8e6235b461263809b17b6dc44a015d63e2d2165bd05e0f8969d5c530fbbad6"
+  },
+  "limits": [
+    "Four cases run sequentially, with three samples per metric/case; setup is excluded.",
+    "No cache eviction, cold-cache guarantee, statistical significance test, SLO or universal latency conclusion.",
+    "Status is public API; verifyExcludes is an internal-method microbenchmark.",
+    "Changes include the tested source differences and background/cache effects; timing alone does not isolate the cause.",
+    "This is not a product suite or all-Git compatibility approval.",
+    "Final broad tests and any later functional source edits need their own validation."
+  ]
+}

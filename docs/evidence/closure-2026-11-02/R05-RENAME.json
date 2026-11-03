@@ -1,0 +1,1037 @@
+{
+  "schema": 1,
+  "review": "R-05",
+  "requirement": "GL-20",
+  "classification": "PARTIAL",
+  "scope": "Os 16 casos R05 passaram juntos em full-final-02. full-final-01 e as tentativas dirigidas anteriores, inclusive falhas, conservam snapshots próprios; seus resultados não são somados.",
+  "userContract": "Preservar configuração pertinente de branch, upstream, descrição, reflog, histórico, staging independente e propriedade; recusar estados inseguros sem sobrescrever dados nem publicar/remover remotos.",
+  "technicalChoice": "git branch -c oficial preserva configuração/reflog; depois update-ref verifica o destino e remove a origem com os OIDs esperados. A configuração local é publicada com config.lock próprio e fingerprints antes/depois. O reflog conserva o evento nativo verdadeiro de cópia, sem fabricar evento de renomeação.",
+  "environment": {
+    "platform": "Windows x64",
+    "node": "v24.14.1",
+    "git": "git version 2.53.0.windows.2",
+    "oracle": "Absolute official Git executable with separate argv; independent refs/trees/index/bytes/config/reflog assertions; unique nonce fixtures and synthetic local bare remotes.",
+    "globalGitConfigChanged": false,
+    "realDataMigrated": false,
+    "projectCommitOrRemoteMutationByThisAgent": false
+  },
+  "runs": [
+    {
+      "id": "before-01",
+      "description": "Baseline externa324 congelada em bundle: branch nova perdeu sete valores locais e prefixo do reflog; defeito R05 reproduzido.",
+      "command": {
+        "executable": "node",
+        "argv": [
+          "--import",
+          "tsx",
+          "--test",
+          "--test-name-pattern=^R05 branch rename preserves",
+          "tests/integration/review-rename.test.ts"
+        ]
+      },
+      "exitCode": 1,
+      "signal": null,
+      "durationMs": 7353,
+      "counts": {
+        "tests": 1,
+        "pass": 0,
+        "fail": 1,
+        "skipped": 0
+      },
+      "sourceUnchanged": null,
+      "sourceBasis": "Frozen esbuild bundle from the verified external 324-file baseline",
+      "sourceManifest": [
+        {
+          "path": "src/core/branch-protection.ts",
+          "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+        },
+        {
+          "path": "src/core/demo.ts",
+          "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+        },
+        {
+          "path": "src/core/errors.ts",
+          "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+        },
+        {
+          "path": "src/core/git.ts",
+          "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+        },
+        {
+          "path": "src/core/index.ts",
+          "sha256": "2bb39e20ee959f4375a0d49ec2fbb00e1db39582e848700e2aac78584616e7de"
+        },
+        {
+          "path": "src/core/layout.ts",
+          "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+        },
+        {
+          "path": "src/core/paths.ts",
+          "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+        },
+        {
+          "path": "src/core/platform.ts",
+          "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "78120a414510eaebc72b4995db1661061a837683dcafbbdbbc1e116d9b682095"
+        },
+        {
+          "path": "src/core/rescue.ts",
+          "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d"
+        },
+        {
+          "path": "src/core/storage.ts",
+          "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+        }
+      ],
+      "resultSha256": "7a7e011d74d5dd39cb17152666ec9ba7c330de4c4224d7212a88a08b8cc89228",
+      "stdoutSha256": "2d7624e4e9817033f3fda24ed4a35630cf5f7303925ee3fda2bd12735fbd9507"
+    },
+    {
+      "id": "after-01",
+      "description": "Contraprova corrigida: config/upstream/description/multivalores e histórico completo preservados.",
+      "command": {
+        "executable": "node",
+        "argv": [
+          "--import",
+          "tsx",
+          "--test",
+          "--test-name-pattern=^R05 branch rename preserves",
+          "tests/integration/review-rename.test.ts"
+        ]
+      },
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 10583,
+      "counts": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "skipped": 0
+      },
+      "sourceUnchanged": true,
+      "sourceBasis": "Core files and test identified by the recorded per-run manifests",
+      "sourceManifest": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "fc852ba41eb5175f8dd5d4907d7a1db45d90aa6e412c2edb6c4e80ef8a2225de"
+        },
+        {
+          "path": "src/core/layer-rename.ts",
+          "sha256": "5d32c160667defa3cd0c91f40c6baf1e1baa5587ad195f0f8dec22830cbb271d"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0"
+        },
+        {
+          "path": "tests/integration/review-rename.test.ts",
+          "sha256": "e6a0c4d42245123b6dec88cc9029406de5c173d83ec8771b6eeefaa154b5bab6"
+        }
+      ],
+      "resultSha256": "2791b003fe1775cd7f7bc8f881857d6ac387564a4b37e79ab53b85f5a746ff5f",
+      "stdoutSha256": "c19c7cff6f928a79566ef8537ce98a76309b0ad58492268b9ac547d6916d9821"
+    },
+    {
+      "id": "after-02",
+      "description": "Uma interrupção após cópia, com target/stage/proteção, recuperou estado exato.",
+      "command": {
+        "executable": "node",
+        "argv": [
+          "--import",
+          "tsx",
+          "--test",
+          "--test-name-pattern=^R05 interruption after-rename-copy ",
+          "tests/integration/review-rename.test.ts"
+        ]
+      },
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 29987,
+      "counts": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "skipped": 0
+      },
+      "sourceUnchanged": true,
+      "sourceBasis": "Core files and test identified by the recorded per-run manifests",
+      "sourceManifest": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "fc852ba41eb5175f8dd5d4907d7a1db45d90aa6e412c2edb6c4e80ef8a2225de"
+        },
+        {
+          "path": "src/core/layer-rename.ts",
+          "sha256": "da46bf5e9a806ae90486b120e931fecb62d0a87f42e7c1a92c4f044edee5bd99"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0"
+        },
+        {
+          "path": "src/core/branch-protection.ts",
+          "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+        },
+        {
+          "path": "tests/integration/review-rename.test.ts",
+          "sha256": "b355576b7a7df9ceeb0f6fc745046d59d7b56f3b5d3119abbe9c18324478345e"
+        }
+      ],
+      "resultSha256": "a5656fee5803803a30eb5a522c15cad1844e0355b24ca5568f6cad5fde460721",
+      "stdoutSha256": "a88a2668f4282b671d49d40c56f80d3fa96af51265c9cb490f991b1ba2e977eb"
+    },
+    {
+      "id": "after-03",
+      "description": "16 casos reais:14 PASS e2 FAIL. As duas falhas vieram do oráculo que proibia novas refs técnicas de retenção; nenhuma ref preexistente/config/log/HEAD/índice/arquivo/remoto mudou nesses diffs.",
+      "command": {
+        "executable": "node",
+        "argv": [
+          "--import",
+          "tsx",
+          "--test",
+          "--test-concurrency=1",
+          "tests/integration/review-rename.test.ts"
+        ]
+      },
+      "exitCode": 1,
+      "signal": null,
+      "durationMs": 298019,
+      "counts": {
+        "tests": 16,
+        "pass": 14,
+        "fail": 2,
+        "skipped": 0
+      },
+      "sourceUnchanged": true,
+      "sourceBasis": "Core files and test identified by the recorded per-run manifests",
+      "sourceManifest": [
+        {
+          "path": "src/core/branch-protection.ts",
+          "bytes": 17364,
+          "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+        },
+        {
+          "path": "src/core/demo.ts",
+          "bytes": 6303,
+          "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+        },
+        {
+          "path": "src/core/errors.ts",
+          "bytes": 467,
+          "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+        },
+        {
+          "path": "src/core/git.ts",
+          "bytes": 21199,
+          "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+        },
+        {
+          "path": "src/core/ignore.ts",
+          "bytes": 3269,
+          "sha256": "9e44e2a5e55cac69e154eb62c5a20e16b6038bc110a25318440a056b90d10f2a"
+        },
+        {
+          "path": "src/core/index.ts",
+          "bytes": 82414,
+          "sha256": "fc852ba41eb5175f8dd5d4907d7a1db45d90aa6e412c2edb6c4e80ef8a2225de"
+        },
+        {
+          "path": "src/core/layer-rename.ts",
+          "bytes": 19188,
+          "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+        },
+        {
+          "path": "src/core/layout.ts",
+          "bytes": 16173,
+          "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+        },
+        {
+          "path": "src/core/paths.ts",
+          "bytes": 7365,
+          "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+        },
+        {
+          "path": "src/core/platform.ts",
+          "bytes": 5247,
+          "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "bytes": 13233,
+          "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0"
+        },
+        {
+          "path": "src/core/rescue.ts",
+          "bytes": 20964,
+          "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d"
+        },
+        {
+          "path": "src/core/storage.ts",
+          "bytes": 17064,
+          "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+        },
+        {
+          "path": "tests/integration/review-rename.test.ts",
+          "bytes": 16429,
+          "sha256": "7ad088124060bcb0bc09904a6070698a851951b1ca52dc7111bd9a022090dd05"
+        }
+      ],
+      "resultSha256": "685693c2aaff00d15d31ea96a4d0dddc8cca06ef894cd22025dcff86c35e43e8",
+      "stdoutSha256": "99a11555c79462e97ebfc52a1650992395d081fce5b0477fa85455778c64b568"
+    },
+    {
+      "id": "after-04",
+      "description": "Duas recusas:working branch com stage passou; occupied passou primeira assertiva, mas cleanup da fixture usou OID da Layer ao deletar target criado de HEAD. Git CAS recusou corretamente; falha do teste preservada.",
+      "command": {
+        "executable": "node",
+        "argv": [
+          "--import",
+          "tsx",
+          "--test",
+          "--test-concurrency=1",
+          "--test-name-pattern=^R05 (occupied destination|working branch)",
+          "tests/integration/review-rename.test.ts"
+        ]
+      },
+      "exitCode": 1,
+      "signal": null,
+      "durationMs": 18419,
+      "counts": {
+        "tests": 2,
+        "pass": 1,
+        "fail": 1,
+        "skipped": 0
+      },
+      "sourceUnchanged": true,
+      "sourceBasis": "Core files and test identified by the recorded per-run manifests",
+      "sourceManifest": [
+        {
+          "path": "src/core/branch-protection.ts",
+          "bytes": 17364,
+          "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+        },
+        {
+          "path": "src/core/demo.ts",
+          "bytes": 6303,
+          "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+        },
+        {
+          "path": "src/core/errors.ts",
+          "bytes": 467,
+          "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+        },
+        {
+          "path": "src/core/git.ts",
+          "bytes": 21199,
+          "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+        },
+        {
+          "path": "src/core/ignore.ts",
+          "bytes": 3269,
+          "sha256": "9e44e2a5e55cac69e154eb62c5a20e16b6038bc110a25318440a056b90d10f2a"
+        },
+        {
+          "path": "src/core/index.ts",
+          "bytes": 82411,
+          "sha256": "dfa57f964eee9b92cf3783acdba1917ce3cd084e1bc5a2c70b45ffdccad9e42e"
+        },
+        {
+          "path": "src/core/layer-rename.ts",
+          "bytes": 19188,
+          "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+        },
+        {
+          "path": "src/core/layout.ts",
+          "bytes": 16173,
+          "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+        },
+        {
+          "path": "src/core/paths.ts",
+          "bytes": 7365,
+          "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+        },
+        {
+          "path": "src/core/platform.ts",
+          "bytes": 5247,
+          "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "bytes": 13233,
+          "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0"
+        },
+        {
+          "path": "src/core/rescue.ts",
+          "bytes": 20964,
+          "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d"
+        },
+        {
+          "path": "src/core/storage.ts",
+          "bytes": 17064,
+          "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+        },
+        {
+          "path": "tests/integration/review-rename.test.ts",
+          "bytes": 18500,
+          "sha256": "59799a40bb61f92f2835a063902247abc920b9c98225e4f2af97a6b25ccc6d5b"
+        }
+      ],
+      "resultSha256": "efc20efbc5e1b0cdb17688b7cd5f0c7cf6b99e343c94af997274c45fe0c3ca71",
+      "stdoutSha256": "4045179a3dd289749c03c12217642a1e291dd4a30db58641fd7c7b0f60f59f1b"
+    },
+    {
+      "id": "after-05",
+      "description": "Duas recusas PASS após corrigir cleanup e provar cada nova ref técnica por journal, namespace, identidade e checkpoint anterior. Não é execução completa atual dos16 casos.",
+      "command": {
+        "executable": "node",
+        "argv": [
+          "--import",
+          "tsx",
+          "--test",
+          "--test-concurrency=1",
+          "--test-name-pattern=^R05 (occupied destination|working branch)",
+          "tests/integration/review-rename.test.ts"
+        ]
+      },
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 30486,
+      "counts": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "skipped": 0
+      },
+      "sourceUnchanged": true,
+      "sourceBasis": "Core files and test identified by the recorded per-run manifests",
+      "sourceManifest": [
+        {
+          "path": "src/core/branch-protection.ts",
+          "bytes": 17364,
+          "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+        },
+        {
+          "path": "src/core/demo.ts",
+          "bytes": 6303,
+          "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+        },
+        {
+          "path": "src/core/errors.ts",
+          "bytes": 467,
+          "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+        },
+        {
+          "path": "src/core/git.ts",
+          "bytes": 21199,
+          "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+        },
+        {
+          "path": "src/core/ignore.ts",
+          "bytes": 3269,
+          "sha256": "9e44e2a5e55cac69e154eb62c5a20e16b6038bc110a25318440a056b90d10f2a"
+        },
+        {
+          "path": "src/core/index.ts",
+          "bytes": 82411,
+          "sha256": "dfa57f964eee9b92cf3783acdba1917ce3cd084e1bc5a2c70b45ffdccad9e42e"
+        },
+        {
+          "path": "src/core/layer-rename.ts",
+          "bytes": 19188,
+          "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+        },
+        {
+          "path": "src/core/layout.ts",
+          "bytes": 16173,
+          "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+        },
+        {
+          "path": "src/core/paths.ts",
+          "bytes": 7365,
+          "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+        },
+        {
+          "path": "src/core/platform.ts",
+          "bytes": 5247,
+          "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "bytes": 13233,
+          "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0"
+        },
+        {
+          "path": "src/core/rescue.ts",
+          "bytes": 20964,
+          "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d"
+        },
+        {
+          "path": "src/core/storage.ts",
+          "bytes": 17064,
+          "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+        },
+        {
+          "path": "tests/integration/review-rename.test.ts",
+          "bytes": 18585,
+          "sha256": "41be4e09a34b5bff366ed0e122b7fac5ee457984ee655db58c1662a9ae5d6ecc"
+        }
+      ],
+      "resultSha256": "96c7a5e4dc96dd27c9fc3a65309559314d0d3de6480f24ec9ec212f6aafadfd7",
+      "stdoutSha256": "dc7a8c1bf7249febb82e85f1e45bd27f3d93b9d7f679c77d9c607eba1bfe30f4"
+    }
+  ],
+  "witnesses": [
+    {
+      "run": "after-03",
+      "rawCaseSha256": "37b24fea648b5feb87fe63cafeeaa97de15258683962849d40c0dfd85f6bd9e2",
+      "nativeCommandCount": 32,
+      "label": "rename metadata preservation",
+      "git": "git version 2.53.0.windows.2",
+      "expectedConfig": "branch.layer/new.remote\nfixture\u0000branch.layer/new.merge\nrefs/heads/layer/old\u0000branch.layer/new.description\nSynthetic description\nsecond line\u0000branch.layer/new.pushremote\nfixture\u0000branch.layer/new.rebase\ntrue\u0000branch.layer/new.custom\none\u0000branch.layer/new.custom\ntwo\u0000",
+      "observedConfig": "branch.layer/new.remote\nfixture\u0000branch.layer/new.merge\nrefs/heads/layer/old\u0000branch.layer/new.description\nSynthetic description\nsecond line\u0000branch.layer/new.pushremote\nfixture\u0000branch.layer/new.rebase\ntrue\u0000branch.layer/new.custom\none\u0000branch.layer/new.custom\ntwo\u0000",
+      "sourceReflogSha256": "9db8e918fdc9cbb0d208da060286e418dbb83b4d06252af99152a85e5a4e0db8",
+      "newReflogSha256": "7e41fe1e08f5cc21f910c1e51205ad392f8780d52722064ba36edb4a973a66d9",
+      "sourceReflogPreserved": true,
+      "before": {
+        "head": "67aac3f532bfdd287971ce6872660f23b79837e1\n",
+        "branch": "refs/heads/main\n",
+        "index": "100644 df967b96a579e45a18b8251732d16804b2e56a55 0\tbase.txt\u0000",
+        "files": [
+          {
+            "name": "base.txt",
+            "sha256": "f34848ca92665c342abd5816c9e3eda0e82180671195362bcd0080544a3bc2ac"
+          }
+        ],
+        "remoteRefs": "refs/heads/layer/old 43c06a7780a7cb261e9eb5868cef1c0544564ae3\n"
+      },
+      "after": {
+        "head": "67aac3f532bfdd287971ce6872660f23b79837e1\n",
+        "branch": "refs/heads/main\n",
+        "index": "100644 df967b96a579e45a18b8251732d16804b2e56a55 0\tbase.txt\u0000",
+        "files": [
+          {
+            "name": "base.txt",
+            "sha256": "f34848ca92665c342abd5816c9e3eda0e82180671195362bcd0080544a3bc2ac"
+          }
+        ],
+        "remoteRefs": "refs/heads/layer/old 43c06a7780a7cb261e9eb5868cef1c0544564ae3\n"
+      }
+    },
+    {
+      "run": "after-05",
+      "rawCaseSha256": "f8dd4541bba93526ab368aeac96e7fb6062479aed5f79aa222b2d1cc28e9d0cd",
+      "nativeCommandCount": 84,
+      "label": "five occupied destination/lock cases preserved",
+      "git": "git version 2.53.0.windows.2",
+      "cases": 5,
+      "preexistingRefsPreserved": true,
+      "newTechnicalRetentionRefs": [
+        {
+          "ref": "refs/git-layers/transactions/743b26ae-9851-47d9-a15c-884cdc69efe3/dec4827b-6376-43cf-b0eb-cf5a3797ecdc",
+          "oid": "8fdcf7e2861c3ed0176d84e07ca8431e30788448",
+          "preexistingCheckpoint": "refs/git-layers/state/dec4827b-6376-43cf-b0eb-cf5a3797ecdc",
+          "journalKind": "rename-layer",
+          "journalState": "completed"
+        },
+        {
+          "ref": "refs/git-layers/transactions/8e531efb-b2f8-42ab-9389-a8c82e1698c5/dec4827b-6376-43cf-b0eb-cf5a3797ecdc",
+          "oid": "8fdcf7e2861c3ed0176d84e07ca8431e30788448",
+          "preexistingCheckpoint": "refs/git-layers/state/dec4827b-6376-43cf-b0eb-cf5a3797ecdc",
+          "journalKind": "rename-layer",
+          "journalState": "completed"
+        },
+        {
+          "ref": "refs/git-layers/transactions/16c68f76-0f0d-480e-bdb4-938c9cb0f70f/dec4827b-6376-43cf-b0eb-cf5a3797ecdc",
+          "oid": "8fdcf7e2861c3ed0176d84e07ca8431e30788448",
+          "preexistingCheckpoint": "refs/git-layers/state/dec4827b-6376-43cf-b0eb-cf5a3797ecdc",
+          "journalKind": "rename-layer",
+          "journalState": "completed"
+        },
+        {
+          "ref": "refs/git-layers/transactions/c5993a14-7953-4b1f-9108-9269e11a97eb/dec4827b-6376-43cf-b0eb-cf5a3797ecdc",
+          "oid": "8fdcf7e2861c3ed0176d84e07ca8431e30788448",
+          "preexistingCheckpoint": "refs/git-layers/state/dec4827b-6376-43cf-b0eb-cf5a3797ecdc",
+          "journalKind": "rename-layer",
+          "journalState": "completed"
+        },
+        {
+          "ref": "refs/git-layers/transactions/3910ac2b-e5bc-424f-983e-ca84b036afba/dec4827b-6376-43cf-b0eb-cf5a3797ecdc",
+          "oid": "8fdcf7e2861c3ed0176d84e07ca8431e30788448",
+          "preexistingCheckpoint": "refs/git-layers/state/dec4827b-6376-43cf-b0eb-cf5a3797ecdc",
+          "journalKind": "rename-layer",
+          "journalState": "completed"
+        }
+      ],
+      "technicalEffect": "A completed refusal journal may add only a recovery ref to an unchanged preexisting checkpoint; no branch/config/reflog/stage/file changed."
+    },
+    {
+      "run": "after-05",
+      "rawCaseSha256": "166f7417c6f0f76d04e77dfccc211c0c8d8ac5e551004eb600b6a8991ea3db29",
+      "nativeCommandCount": 44,
+      "label": "unsupported states refused",
+      "git": "git version 2.53.0.windows.2",
+      "states": [
+        "non-local branch config",
+        "source is current working branch with native staged changes"
+      ],
+      "preexistingRefsAndNativeStagePreserved": true,
+      "newTechnicalRetentionRefs": [
+        {
+          "ref": "refs/git-layers/transactions/da3de818-0152-4446-bf77-79834861d08b/17e5593d-a218-43d0-ab25-2930a0ec54b0",
+          "oid": "8fdcf7e2861c3ed0176d84e07ca8431e30788448",
+          "preexistingCheckpoint": "refs/git-layers/state/17e5593d-a218-43d0-ab25-2930a0ec54b0",
+          "journalKind": "rename-layer",
+          "journalState": "completed"
+        }
+      ]
+    }
+  ],
+  "currentSources": [
+    {
+      "path": "src/core/branch-protection.ts",
+      "bytes": 17364,
+      "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+    },
+    {
+      "path": "src/core/demo.ts",
+      "bytes": 6303,
+      "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+    },
+    {
+      "path": "src/core/errors.ts",
+      "bytes": 467,
+      "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+    },
+    {
+      "path": "src/core/git.ts",
+      "bytes": 21199,
+      "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+    },
+    {
+      "path": "src/core/ignore.ts",
+      "bytes": 3269,
+      "sha256": "9e44e2a5e55cac69e154eb62c5a20e16b6038bc110a25318440a056b90d10f2a"
+    },
+    {
+      "path": "src/core/index.ts",
+      "bytes": 82411,
+      "sha256": "dfa57f964eee9b92cf3783acdba1917ce3cd084e1bc5a2c70b45ffdccad9e42e"
+    },
+    {
+      "path": "src/core/layer-rename.ts",
+      "bytes": 19188,
+      "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+    },
+    {
+      "path": "src/core/layout.ts",
+      "bytes": 16173,
+      "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+    },
+    {
+      "path": "src/core/paths.ts",
+      "bytes": 7365,
+      "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+    },
+    {
+      "path": "src/core/platform.ts",
+      "bytes": 5247,
+      "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+    },
+    {
+      "path": "src/core/recovery.ts",
+      "bytes": 13233,
+      "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0"
+    },
+    {
+      "path": "src/core/rescue.ts",
+      "bytes": 20964,
+      "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d"
+    },
+    {
+      "path": "src/core/storage.ts",
+      "bytes": 17064,
+      "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+    },
+    {
+      "path": "tests/integration/review-rename.test.ts",
+      "bytes": 18585,
+      "sha256": "41be4e09a34b5bff366ed0e122b7fac5ee457984ee655db58c1662a9ae5d6ecc"
+    }
+  ],
+  "coverage": {
+    "testFile": "tests/integration/review-rename.test.ts",
+    "implementedCases": 16,
+    "sixRecoverableInterruptions": [
+      "after-rename-copy",
+      "after-rename-retire",
+      "after-rename-config",
+      "after-layer-ref-change",
+      "after-layer-rename-protection",
+      "after-layer-rename-metadata"
+    ],
+    "externalConflictsPreserved": [
+      "local config modified later",
+      "target ref advanced",
+      "source ref advanced with exact native CAS veto",
+      "target reflog appended later"
+    ],
+    "alsoObserved": [
+      "active editing target, staged private index and another active Layer",
+      "two worktree reservations survive rename and ordinary switch remains refused",
+      "remote association remains on the original remote branch and remote refs are unchanged",
+      "nested Unicode name with native absent section/reflog preserved"
+    ],
+    "fullFinalExecutedCases": 16,
+    "fullFinalPassedCases": 16,
+    "fullFinalSuiteId": "full-final-02"
+  },
+  "technicalEffectsOfRefusal": "A completed refusal journal may add a private backup/tree and a recovery ref refs/git-layers/transactions/<UUID>/<layerId>. The strict oracle requires every preexisting ref unchanged, each added ref equal a PREEXISTING checkpoint OID, object type tree, and a matching completed rename-layer journal with the correct Layer identity. This is not a promise of universal zero writes.",
+  "limitations": [
+    "Current working Layer branch must be left before rename; its native staged data is preserved on refusal.",
+    "Destination ref, config (including empty section) or reflog is occupied even if another component is absent. No force overwrite.",
+    "Branch configuration outside the main local config, case/Unicode path aliases, ancestor-name changes, linked worktrees and non-files ref backend are conservatively unsupported. No global config or remote mutation is used to compensate.",
+    "Interruption immediately after native branch copy but before its durable fingerprint snapshot preserves both refs, complete source history, config and backups, then recover refuses ambiguity with RECOVERY_CONFLICT. Manual inspection is required; no claim of universal interruption recovery.",
+    "External divergent refs/config/reflogs and disputed Git locks are preserved. No ACID guarantee against raw concurrent writers, no exhaustive MODEL-008 or power-loss certification.",
+    "A suíte npm completa executou os 16 casos juntos, mas a primeira seleção ampla terminou exit 1 e será reexecutada após correções de infraestrutura. Uma execução não substitui a outra."
+  ],
+  "sources": [
+    "https://git-scm.com/docs/git-branch",
+    "https://git-scm.com/docs/git-update-ref/2.53.0",
+    "https://git-scm.com/docs/git-config/2.53.0"
+  ],
+  "rawEvidencePolicy": "Os resultados brutos, snapshots e observações dirigidas devem ser preservados no arquivo externo closure-2026-11-02-eba4a209, com inventário e hashes verificados antes da retirada dos originais. O manifesto real de movimentação ainda aguarda o coordenador. O relatório e este compacto públicos não dependem de ZIP privado para revisão.",
+  "fullFinalSuite": {
+    "id": "full-final-02",
+    "description": "Todos os casos deste arquivo passaram juntos em full-final-02; não é soma de seleções anteriores.",
+    "command": "npm.cmd test",
+    "exitCode": 0,
+    "counts": {
+      "tests": 16,
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    "fullSuiteCounts": {
+      "tests": 229,
+      "passed": 225,
+      "failed": 0,
+      "skipped": 4,
+      "cancelled": 0,
+      "todo": 0
+    },
+    "sourceFingerprint": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6",
+    "sourceFingerprintAfter": "1bd7178ce452b116bf8759de41edec1fed21bbfde1dcf773f97a6aa64e41bed6",
+    "sourceUnchanged": true,
+    "sourceManifestDomain": "src/**; tests/unit/**; tests/integration/**; package.json; package-lock.json; tsconfig.json. Os 61 arquivos abaixo pertencem a um domínio do produto, distinto dos manifests de fonte/runner do harness de compatibilidade.",
+    "sourceManifestPublicReference": "docs/evidence/closure-2026-11-02/validation.json",
+    "sourceManifestSHA256": "3b55af6bce70b1558ff7f15aa3b3992e8aad1fccd92e57f78c48ea94118dd49a",
+    "rawResultSHA256": "babc24a002a123f1ed861b743419793308eaf4bd4b738a009f7fcfecbb9d9f09",
+    "rawStdoutSHA256": "f68b7c2a20176b0ac8c0605d332e34c161970663daf7d905a76b752c121a6474",
+    "tests": [
+      {
+        "test": "R05 branch rename preserves upstream description custom config and complete reflog",
+        "status": "PASS",
+        "durationMs": 11299.0439,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 occupied destination ref config empty section reflog and config lock are refused without effects",
+        "status": "PASS",
+        "durationMs": 21278.692,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 active editing destination staged index and protection retain ownership and other active layers",
+        "status": "PASS",
+        "durationMs": 44922.6982,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 working branch and external branch config scopes are refused before rename effects",
+        "status": "PASS",
+        "durationMs": 14370.4085,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 interruption after-rename-copy restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 34353.4652,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 interruption after-rename-retire restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 34671.3325,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 interruption after-rename-config restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 35421.1857,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 interruption after-layer-ref-change restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 34381.8593,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 interruption after-layer-rename-protection restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 36396.4725,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 interruption after-layer-rename-metadata restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 36716.4862,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 interruption before durable copied snapshot conservatively preserves both branches and backups",
+        "status": "PASS",
+        "durationMs": 9683.8097,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 recovery preserves later external config and CAS never deletes advanced source",
+        "status": "PASS",
+        "durationMs": 10626.0131,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 recovery preserves later external target-ref and CAS never deletes advanced source",
+        "status": "PASS",
+        "durationMs": 10455.2424,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 recovery preserves later external source-ref and CAS never deletes advanced source",
+        "status": "PASS",
+        "durationMs": 11056.4351,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 recovery preserves later external target-reflog and CAS never deletes advanced source",
+        "status": "PASS",
+        "durationMs": 10608.1279,
+        "reportedReason": null
+      },
+      {
+        "test": "R05 nested Unicode rename preserves native absence of config section and disabled reflog",
+        "status": "PASS",
+        "durationMs": 11461.6119,
+        "reportedReason": null
+      }
+    ],
+    "qualification": "Assertivas reais, fontes arquivadas e saída terminal de full-final-02. Witnesses dirigidos anteriores mantêm sua origem. Infra 111/111 e broad2 355 PASS/seis ENV_BLOCKED/zero FAIL são execuções separadas concluídas."
+  },
+  "featureRequirement": {
+    "feature": "git rev-parse --show-ref-format",
+    "availableInOfficialSource": "2.44.0",
+    "absentHandlerInOfficialSource": "2.43.0",
+    "withoutFeature": "RENAME_UNSUPPORTED",
+    "actuallyExecutedGit": "2.53.0.windows.2",
+    "qualification": "Disponibilidade em fonte/documentação não é certificação runtime dessas versões anteriores.",
+    "sources": [
+      "https://raw.githubusercontent.com/git/git/v2.43.0/builtin/rev-parse.c",
+      "https://raw.githubusercontent.com/git/git/v2.44.0/builtin/rev-parse.c",
+      "https://git-scm.com/docs/git-rev-parse/2.44.0"
+    ]
+  },
+  "nextValidationState": "Full02 e infra02 concluídos; broad2 terminal: 355 PASS, seis ENV_BLOCKED, zero FAIL em 361 selecionadas. Arquivo, cópia nova commitada e main continuam pendentes.",
+  "historicalFullSuites": [
+    {
+      "id": "full-final-01",
+      "description": "Os 16 casos deste arquivo passaram juntos na suíte npm completa; não é soma de seleções anteriores.",
+      "command": "npm.cmd test",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 1780650,
+      "fullSuiteCounts": {
+        "tests": 227,
+        "passed": 223,
+        "failed": 0,
+        "skipped": 4,
+        "cancelled": 0,
+        "todo": 0
+      },
+      "subsetCounts": {
+        "tests": 16,
+        "passed": 16,
+        "failed": 0,
+        "skipped": 0
+      },
+      "tests": [
+        {
+          "test": "R05 branch rename preserves upstream description custom config and complete reflog",
+          "status": "PASS",
+          "durationMs": 10948.4625
+        },
+        {
+          "test": "R05 occupied destination ref config empty section reflog and config lock are refused without effects",
+          "status": "PASS",
+          "durationMs": 21126.9964
+        },
+        {
+          "test": "R05 active editing destination staged index and protection retain ownership and other active layers",
+          "status": "PASS",
+          "durationMs": 44980.6323
+        },
+        {
+          "test": "R05 working branch and external branch config scopes are refused before rename effects",
+          "status": "PASS",
+          "durationMs": 13628.6152
+        },
+        {
+          "test": "R05 interruption after-rename-copy restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 33429.608
+        },
+        {
+          "test": "R05 interruption after-rename-retire restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 32956.3097
+        },
+        {
+          "test": "R05 interruption after-rename-config restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 34672.7438
+        },
+        {
+          "test": "R05 interruption after-layer-ref-change restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 33489.4556
+        },
+        {
+          "test": "R05 interruption after-layer-rename-protection restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 35858.4105
+        },
+        {
+          "test": "R05 interruption after-layer-rename-metadata restores exact config reflog refs roles and private stage",
+          "status": "PASS",
+          "durationMs": 35459.3855
+        },
+        {
+          "test": "R05 interruption before durable copied snapshot conservatively preserves both branches and backups",
+          "status": "PASS",
+          "durationMs": 9403.5698
+        },
+        {
+          "test": "R05 recovery preserves later external config and CAS never deletes advanced source",
+          "status": "PASS",
+          "durationMs": 10091.6634
+        },
+        {
+          "test": "R05 recovery preserves later external target-ref and CAS never deletes advanced source",
+          "status": "PASS",
+          "durationMs": 10154.8051
+        },
+        {
+          "test": "R05 recovery preserves later external source-ref and CAS never deletes advanced source",
+          "status": "PASS",
+          "durationMs": 10729.0985
+        },
+        {
+          "test": "R05 recovery preserves later external target-reflog and CAS never deletes advanced source",
+          "status": "PASS",
+          "durationMs": 9933.6935
+        },
+        {
+          "test": "R05 nested Unicode rename preserves native absence of config section and disabled reflog",
+          "status": "PASS",
+          "durationMs": 11039.4648
+        }
+      ],
+      "sourceFingerprint": "ce8f35a75b2a24d7177fe2bb3845a2d729aec768acbd92b0d2a0f2bfe407e718",
+      "sourceFingerprintAfter": "ce8f35a75b2a24d7177fe2bb3845a2d729aec768acbd92b0d2a0f2bfe407e718",
+      "sourceUnchanged": true,
+      "sourceManifestDomain": "src/**; tests/unit/**; tests/integration/**; package.json; package-lock.json; tsconfig.json. Os 61 arquivos abaixo pertencem a um domínio do produto, distinto dos manifests de fonte/runner do harness de compatibilidade.",
+      "sourceManifestPublicReference": "docs/evidence/closure-2026-11-02/validation.json",
+      "sourceManifestSHA256": "18a76ffdd24583efbc0d86c84250bd5a439a7e2bf6838cf4a44458c06f4b18e2",
+      "sourceManifestAfterSHA256": "18a76ffdd24583efbc0d86c84250bd5a439a7e2bf6838cf4a44458c06f4b18e2",
+      "rawResultSHA256": "e264d99269f07261401b9e1a3d1fd2531e1ecfb2518a7a5d742e758511c8e561",
+      "rawStdoutSHA256": "6b856a48fd704aed668db82e8a8d1e11955f95999f3a5a754cab515876887b7c",
+      "wrapperSHA256": "cf6fb69e941f3b7c1d64d068a56603ecc628c63bb57ba0e6d28abeceb7410da5",
+      "observationQualification": "O wrapper desta execução habilitou GL_IMPLEMENTATION_EVIDENCE, não os emissores GL_RENAME_EVIDENCE/GL_CLOSURE_EVIDENCE desses dois arquivos. A comprovação atual é a execução real das assertivas versionadas, fontes arquivadas e saída terminal; os JSONs detalhados dirigidos anteriores mantêm sua origem e não são relabelados como observações desta suíte.",
+      "sourceManifestExcerpt": [
+        {
+          "path": "src/core/branch-protection.ts",
+          "size": 17364,
+          "sha256": "54c5b73460b50daec41f89c36ce005659438035efec340b17100254106109ae0"
+        },
+        {
+          "path": "src/core/demo.ts",
+          "size": 6303,
+          "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+        },
+        {
+          "path": "src/core/errors.ts",
+          "size": 467,
+          "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+        },
+        {
+          "path": "src/core/git.ts",
+          "size": 21199,
+          "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+        },
+        {
+          "path": "src/core/ignore.ts",
+          "size": 3269,
+          "sha256": "9e44e2a5e55cac69e154eb62c5a20e16b6038bc110a25318440a056b90d10f2a"
+        },
+        {
+          "path": "src/core/index.ts",
+          "size": 82411,
+          "sha256": "dfa57f964eee9b92cf3783acdba1917ce3cd084e1bc5a2c70b45ffdccad9e42e"
+        },
+        {
+          "path": "src/core/layer-rename.ts",
+          "size": 19188,
+          "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+        },
+        {
+          "path": "src/core/layout.ts",
+          "size": 16173,
+          "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+        },
+        {
+          "path": "src/core/paths.ts",
+          "size": 7365,
+          "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+        },
+        {
+          "path": "src/core/platform.ts",
+          "size": 5247,
+          "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "size": 13233,
+          "sha256": "ad3b4c78e324bc073ac2ea3d50ea46b7dbdf88f52663f59da2006958514f9ac0"
+        },
+        {
+          "path": "src/core/rescue.ts",
+          "size": 20964,
+          "sha256": "3af43867bcfddef48128c3faaecd235d60eaf0918a06f54b75e5d14010b1517d"
+        },
+        {
+          "path": "src/core/storage.ts",
+          "size": 17064,
+          "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+        },
+        {
+          "path": "tests/integration/review-rename.test.ts",
+          "size": 18585,
+          "sha256": "41be4e09a34b5bff366ed0e122b7fac5ee457984ee655db58c1662a9ae5d6ecc"
+        }
+      ],
+      "followingSnapshotQualification": "Resultado válido para ce8f. Uma nova suíte após correções de infraestrutura está pendente; não rotular full-final-01 como aprovação do snapshot posterior."
+    }
+  ]
+}

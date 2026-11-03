@@ -1,0 +1,887 @@
+{
+  "formato": "git-layer-brief-implementacao",
+  "versao_schema": 1,
+  "versao_documento": "2026-11-02.implementacao-1",
+  "idioma": "pt-BR",
+  "projeto": "Git Layer",
+  "repositorio": "rabrunos/GitLayer",
+  "natureza": "Consolidação funcional e instruções para o Codex; não é relatório de implementação concluída.",
+  "autorizacao_atual": {
+    "autoriza_implementacao_pelo_codex": true,
+    "fonte": "04-AUTORIZACAO-ATUAL-E-ITEM-14.txt",
+    "observacao": "A mensagem posterior autoriza a nova tarefa. O formulário original continua byte-exato e não é retroativamente reescrito.",
+    "areas": [
+      "Core",
+      "CLI",
+      "testes",
+      "scripts",
+      "build headless",
+      "documentacao",
+      "AGENTS.md",
+      "configuracao e dependencias justificadas do produto"
+    ],
+    "nao_autoriza": [
+      "abrir ou desenvolver editor de laboratorio",
+      "implementar plugins visuais",
+      "modificar Git instalado ou configuracao global pessoal",
+      "commit ou push no repositorio de desenvolvimento",
+      "publicacao ou deploy",
+      "migrar automaticamente dados reais do usuario"
+    ]
+  },
+  "precedencia_do_planejamento": [
+    "Mensagem atual e seus esclarecimentos explícitos",
+    "Respostas e observações do usuário no JSON",
+    "Conversa-base no JSON, onde não substituída",
+    "Código, relatórios e regras anteriores como evidência histórica, não veto a mudanças autorizadas"
+  ],
+  "resolucao_GL14": {
+    "condicao_do_usuario": "Somente o que já existe normalmente no Git; não mudar o commit.",
+    "condicao_verificada": true,
+    "decisao": "Manter preparação integral e seleção opcional nativa de trechos; não impor divisão nem criar novos formatos/semântica.",
+    "fontes": [
+      "G1",
+      "G2"
+    ]
+  },
+  "distincao_de_estados": [
+    "branch de trabalho",
+    "Layer reconhecida",
+    "Layer ativa",
+    "destino de edição",
+    "Layer aberta deliberadamente como branch de trabalho"
+  ],
+  "diretrizes": [
+    "Git oficial é o alvo de compatibilidade.",
+    "Codex decide arquitetura e mecanismos, com testes e justificativa.",
+    "Pode substituir implementação atual sem perder dados/alterações prévias.",
+    "Não manter restrições de preparação como proibição de implementar.",
+    "Aprovação de comportamento não é certificação de suporte.",
+    "As verificações derivadas são critérios de validação, não novas funcionalidades silenciosas."
+  ],
+  "modulos": [
+    {
+      "id": "M01",
+      "titulo": "Funcionamento básico",
+      "itens": [
+        "GL-01",
+        "GL-02",
+        "GL-03",
+        "GL-04",
+        "GL-05"
+      ]
+    },
+    {
+      "id": "M02",
+      "titulo": "Ativação, edição e destino dos arquivos",
+      "itens": [
+        "GL-06",
+        "GL-07",
+        "GL-08",
+        "GL-09",
+        "GL-10",
+        "GL-18"
+      ]
+    },
+    {
+      "id": "M03",
+      "titulo": "Preparação, commits e histórico",
+      "itens": [
+        "GL-11",
+        "GL-12",
+        "GL-13",
+        "GL-14"
+      ]
+    },
+    {
+      "id": "M04",
+      "titulo": "Trocar a branch e desativar Layers",
+      "itens": [
+        "GL-15",
+        "GL-16"
+      ]
+    },
+    {
+      "id": "M05",
+      "titulo": "Conflitos, recuperação e gerenciamento",
+      "itens": [
+        "GL-17",
+        "GL-19",
+        "GL-20"
+      ]
+    },
+    {
+      "id": "M06",
+      "titulo": "Selecionar uma Layer como branch",
+      "itens": [
+        "GL-22"
+      ]
+    },
+    {
+      "id": "M07",
+      "titulo": "Compartilhamento e independência",
+      "itens": [
+        "GL-21",
+        "GL-23",
+        "GL-24",
+        "GL-25"
+      ]
+    },
+    {
+      "id": "M08",
+      "titulo": "Duas ideias adicionais para avaliação",
+      "itens": [
+        "GL-26",
+        "GL-27"
+      ]
+    }
+  ],
+  "requisitos": [
+    {
+      "comportamento_consolidado": "O Git Layer acrescenta camadas ao Git oficial; não é um Git substituto. Preserve o significado dos comandos nativos e o fluxo normal de quem não escolheu usar Layers. Ter branches Layer no repositório não exige mudar o trabalho habitual. Os comandos específicos do produto direcionam operações às Layers sem redefinir silenciosamente git add, git commit, git switch, git push ou outros comandos existentes.",
+      "criterios_observaveis_derivados": [
+        "Comparar o fluxo nativo de um repositório de controle com zero Layers e com Layers reconhecidas mas inativas.",
+        "Com Layers ativas, demonstrar que git add . e o commit nativo não incorporam acidentalmente arquivos das camadas à branch de trabalho.",
+        "Distinguir operações nativas executadas diretamente das operações mediadas pela CLI do produto; não declarar proteção da primeira por testar somente a segunda."
+      ],
+      "notas_de_escopo": "A meta de compatibilidade é ampla. Restrições antigas do protótipo não são requisitos aprovados. O conflito entre preservação do Git e prevenção da seleção acidental é tratado explicitamente em GL-22; não se autoriza resolvê-lo alterando o Git global.",
+      "id": "GL-01",
+      "numero_original": 1,
+      "titulo_original": "O Git tradicional continua sendo o padrão",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-01"
+      },
+      "texto_aprovado_no_formulario": [
+        "O Git Layer acrescenta camadas ao projeto. A pessoa continua usando o Git e escolhendo sua branch normal como antes.",
+        "A direção é preservar o funcionamento dos comandos existentes, sem exigir que o usuário adote um fluxo diferente só porque há Layers no repositório."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "No uso normal, uma branch tradicional — main, develop ou qualquer outra escolhida pelo usuário — continua sendo a branch de trabalho. As Layers a complementam. A exceção aprovada em GL-22 permite uma Layer como branch de trabalho quando aberta deliberadamente; não imponha a antiga proibição absoluta desse estado.",
+      "criterios_observaveis_derivados": [
+        "Ativar/editar/commitar uma Layer não deve trocar involuntariamente a branch de trabalho.",
+        "Diferenciar branch de trabalho, Layer ativa e destino de edição na consulta do estado."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-02",
+      "numero_original": 2,
+      "titulo_original": "A branch tradicional continua selecionada",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-02"
+      },
+      "texto_aprovado_no_formulario": [
+        "Durante o uso normal das camadas, o usuário continua trabalhando na main, develop ou outra branch tradicional.",
+        "As Layers complementam essa branch, em vez de substituí-la. A abertura deliberada da própria Layer como branch é um modo separado, tratado no item 22."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Sem um destino de edição de Layer escolhido, novos arquivos seguem o fluxo normal de adicionar e fazer commit na branch de trabalho. Apenas criar um arquivo não o commita nem o atribui silenciosamente a uma Layer. Uma Layer ativa, mesmo sendo a única, não captura novos arquivos por isso.",
+      "criterios_observaveis_derivados": [
+        "Criar arquivos com nenhuma, uma e várias Layers ativas sem target: continuam no fluxo normal.",
+        "Não absorver retroativamente arquivos preexistentes quando o usuário escolhe um destino de edição."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-03",
+      "numero_original": 3,
+      "titulo_original": "Arquivos novos seguem o fluxo normal por padrão",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-03"
+      },
+      "texto_aprovado_no_formulario": [
+        "Ter uma Layer no repositório, ou deixá-la ativa, não deve capturar arquivos novos automaticamente.",
+        "Sem uma escolha explícita de trabalhar em uma Layer, os arquivos seguem o fluxo normal de adicionar e fazer commit. Criar um arquivo, sozinho, não significa que ele já foi commitado."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Reconheça branches com o padrão layer/<nome> como Layers. Exemplos: layer/scripts, layer/ia e layer/testes. Reconhecer, disponibilizar para escolha e ativar são ações distintas: não ative apenas porque uma branch foi criada, encontrada ou recebida. Uma etapa interna de registro não deve obrigar o usuário a classificar manualmente uma branch cujo prefixo já a identifica.",
+      "criterios_observaveis_derivados": [
+        "Descobrir uma branch com o prefixo criada tanto pelo produto quanto pelo Git oficial, sem ativá-la automaticamente.",
+        "Após receber referências pelo Git, identificar as candidatas corretamente sem sobrescrever arquivos ou descartar conteúdo incompatível."
+      ],
+      "notas_de_escopo": "O nome não prova que a composição é válida. Uma branch criada pelo Git pode conter arquivos também presentes na base; nesse caso reconheça sua identidade, diagnostique a incompatibilidade e preserve os dados. Não elimine esses arquivos para forçar a ativação.",
+      "id": "GL-04",
+      "numero_original": 4,
+      "titulo_original": "Reconhecer Layers pelo nome",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-04"
+      },
+      "texto_aprovado_no_formulario": [
+        "Uma branch com o padrão layer/<nome> será reconhecida pelo aplicativo como Layer. Exemplos: layer/scripts, layer/ia e layer/testes.",
+        "Reconhecer a Layer não significa ativá-la: ela pode existir no repositório e continuar desligada."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Ofereça a função Criar Layer. Na representação aprovada, ela cria uma branch real com o prefixo acordado e permite que a Layer tenha seus próprios arquivos e histórico. O conceito deve permanecer claro, sem depender de uma interface gráfica ou de futura adoção pelo Git oficial.",
+      "criterios_observaveis_derivados": [
+        "Criar uma Layer utilizável sem trocar acidentalmente a branch de trabalho e sem misturar arquivos da base em seu conteúdo.",
+        "A criação não ativa implicitamente o conteúdo contra a vontade do usuário; os estados devem ser claros."
+      ],
+      "notas_de_escopo": "O Codex decide o mecanismo de criação consistente com esses comportamentos. Não existe obrigação de reproduzir o algoritmo atual nem autorização para copiar silenciosamente todo o projeto para a nova Layer.",
+      "id": "GL-05",
+      "numero_original": 5,
+      "titulo_original": "Ter a função “Criar Layer”",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-05"
+      },
+      "texto_aprovado_no_formulario": [
+        "Criar Layer deve ser uma função clara do produto. Na fase atual, a ideia é representá-la por uma branch com o padrão de nome combinado.",
+        "O conceito deve continuar fazendo sentido mesmo se houver outra forma de integração ao Git no futuro. Isso é uma intenção de produto, não uma previsão de adoção oficial."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Ativar disponibiliza os arquivos da Layer fisicamente no projeto. Desativar retira somente seus arquivos do conjunto de trabalho, preservando seu histórico. A desativação respeita GL-16: alterações pendentes devem ser resolvidas antes, não guardadas automaticamente para reativação.",
+      "criterios_observaveis_derivados": [
+        "Arquivos ativados podem ser lidos e editados por ferramentas externas comuns, sem o editor de laboratório.",
+        "Desativar uma Layer limpa preserva os arquivos da base e de outras Layers, inclusive em diretórios compartilhados.",
+        "Reativar uma Layer limpa recupera seu conteúdo versionado e não apaga arquivos locais conflitantes."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-06",
+      "numero_original": 6,
+      "titulo_original": "Ativar e desativar Layers",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-06"
+      },
+      "texto_aprovado_no_formulario": [
+        "Ativar uma Layer disponibiliza seus arquivos fisicamente junto dos arquivos da branch selecionada.",
+        "Desativá-la retira os arquivos dela do conjunto de trabalho, sem apagar seu histórico. Alterações pendentes precisam ser resolvidas antes, conforme o item 16."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Permita zero, uma ou várias Layers ativas simultaneamente. Elas convivem com a branch de trabalho, preservando a separação de arquivos e históricos e respeitando os conflitos. Ativar uma não desliga outra por conveniência.",
+      "criterios_observaveis_derivados": [
+        "Com duas Layers distintas, editar e commitar uma não modifica o trabalho preparado ou os arquivos da outra.",
+        "A ordem de ativação não cria uma prioridade de sobrescrita entre origens."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-07",
+      "numero_original": 7,
+      "titulo_original": "Usar várias Layers ao mesmo tempo",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-07"
+      },
+      "texto_aprovado_no_formulario": [
+        "O usuário pode trabalhar, por exemplo, com layer/scripts e layer/ia ativas ao mesmo tempo, junto da branch tradicional.",
+        "Ativar mais de uma Layer não mistura seus históricos nem muda a origem dos arquivos. As regras de conflito continuam valendo."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "O projeto em uso é a união física dos arquivos da branch de trabalho e das Layers ativas. Não é preciso alternar de projeto ou de editor para acessá-los. Essa união de arquivos não é fusão de históricos nem um commit conjunto.",
+      "criterios_observaveis_derivados": [
+        "Ler no filesystem os arquivos de todas as origens ativas e conferir a ausência dos arquivos exclusivos das Layers desligadas.",
+        "A interface de consulta distingue as origens sem alterar a forma de abrir os arquivos em ferramentas comuns."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-08",
+      "numero_original": 8,
+      "titulo_original": "Enxergar um único projeto",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-08"
+      },
+      "texto_aprovado_no_formulario": [
+        "Os arquivos das Layers ativas aparecem junto dos arquivos da branch normal, no mesmo projeto.",
+        "Essa união é para trabalhar com os arquivos. Cada origem continua separada para alterações e histórico."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Separe ativação de destino de edição. Pode haver várias Layers ativas e, no máximo, uma escolhida como destino dos novos arquivos daquele trabalho. Sem escolha, vale a branch de trabalho. Encerrar o modo de edição volta ao padrão sem desativar automaticamente a Layer. A escolha não transfere arquivos já pertencentes à base ou a outra Layer.",
+      "criterios_observaveis_derivados": [
+        "Entrar, trocar e sair do modo de edição por comandos; verificar o destino dos arquivos novos em cada intervalo.",
+        "Manter a origem dos arquivos existentes e não adotar automaticamente os que já estavam sem atribuição antes da escolha.",
+        "Mostrar de forma inequívoca qual destino está valendo; não depender de um editor aberto para funcionar."
+      ],
+      "notas_de_escopo": "Atribuir destino não significa fazer commit automático. Não confundir roteamento, preparação e gravação no histórico. A delimitação do modo de edição e sua persistência são escolhas de engenharia a justificar sem introduzir captura inesperada.",
+      "id": "GL-09",
+      "numero_original": 9,
+      "titulo_original": "Escolher o destino de edição",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-09"
+      },
+      "texto_aprovado_no_formulario": [
+        "Ativar disponibiliza arquivos. Escolher o destino de edição indica em qual Layer estamos trabalhando e para onde os novos arquivos desse trabalho devem ir.",
+        "Pode haver várias Layers ativas, mas apenas uma escolhida como destino de edição. Encerrar esse modo volta ao comportamento padrão, sem necessariamente desligar a Layer.",
+        "Uma única Layer ativa não se torna destino automático só por ser a única."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Cada arquivo atribuído conserva sua origem. Editar um arquivo, ativar outra Layer ou escolher outro destino não transfere a propriedade. Um arquivo já existente no workspace e ainda não atribuído pode ser destinado explicitamente a uma Layer. Na composição ativa, o mesmo caminho não pertence simultaneamente à branch de trabalho e a uma Layer, nem a duas Layers.",
+      "criterios_observaveis_derivados": [
+        "Atribuir a uma Layer um arquivo local preexistente e ainda não rastreado, sem exigir recriá-lo.",
+        "Recusar mistura de proprietários sem preparar parte indevida de um lote.",
+        "Conservar a propriedade após desfazer a preparação, quando aplicável ao novo contrato, sem vazamento acidental à base."
+      ],
+      "notas_de_escopo": "Essa exclusividade é da composição das Layers; não proíbe branches tradicionais diferentes de conter versões do mesmo caminho. Não foi aprovada uma função geral de transferir arquivos já versionados entre proprietários, nem uma proibição global de caminhos iguais em todas as branches inativas.",
+      "id": "GL-10",
+      "numero_original": 10,
+      "titulo_original": "Preservar a origem de cada arquivo",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-10"
+      },
+      "texto_aprovado_no_formulario": [
+        "Um arquivo que já pertence à branch de trabalho ou a uma Layer mantém sua origem. Escolher outro destino de edição não transfere os arquivos existentes.",
+        "Um arquivo que já estava na pasta e ainda não foi atribuído pode ser destinado explicitamente a uma Layer; não precisa ter sido criado durante o modo de edição.",
+        "Na composição do projeto, um caminho não pode ser misturado entre a branch de trabalho e as Layers, nem entre Layers. Um conflito não pode ser resolvido silenciosamente sobrescrevendo uma versão."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Cada origem mantém suas alterações preparadas para commit separadas. Preparar ou retirar da preparação trabalho de uma Layer não altera o trabalho preparado da base nem de outra Layer. Use as possibilidades reais do Git; não modele stage como um simples indicador booleano de arquivo alterado.",
+      "criterios_observaveis_derivados": [
+        "Preparar A na base e B em uma Layer; operações em B preservam A.",
+        "Preparar uma versão B de um arquivo e depois editar o disco para C: os estados continuam distinguíveis e nenhum deles é silenciosamente substituído."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-11",
+      "numero_original": 11,
+      "titulo_original": "Preparar alterações separadamente",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-11"
+      },
+      "texto_aprovado_no_formulario": [
+        "As alterações escolhidas para o próximo commit de uma Layer devem ficar separadas das alterações da branch tradicional e das outras Layers.",
+        "Preparar trabalho em uma origem não pode incluir trabalho de outra por acidente."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Os commits das Layers são commits Git reais, independentes dos da branch de trabalho e das outras Layers. Cada commit contém somente o trabalho corretamente selecionado para sua origem. Não há commit conjunto automático nem criação paralela de um histórico proprietário.",
+      "criterios_observaveis_derivados": [
+        "Inspecionar árvore/conteúdo do commit com Git oficial, não só a resposta da CLI.",
+        "Conferir que o commit de uma Layer não avança a branch de trabalho nem a outra Layer.",
+        "Edição posterior à preparação não entra automaticamente no commit já delimitado pela preparação."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-12",
+      "numero_original": 12,
+      "titulo_original": "Fazer commits independentes",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-12"
+      },
+      "texto_aprovado_no_formulario": [
+        "Fazer um commit em uma Layer registra o trabalho escolhido para ela.",
+        "Isso não deve criar um commit na branch tradicional nem incorporar alterações de outra Layer."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Permita consultar o histórico e as diferenças de cada Layer separadamente, usando o histórico real do Git. O conjunto de arquivos visíveis não deve aparecer artificialmente como uma única origem de alterações.",
+      "criterios_observaveis_derivados": [
+        "Consultar commits e diferenças de duas Layers e da base, conferindo que os resultados correspondem à origem escolhida.",
+        "Manter coerência do histórico ao desligar, reativar, renomear e receber atualizações da Layer."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-13",
+      "numero_original": 13,
+      "titulo_original": "Consultar o histórico de cada Layer",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-13"
+      },
+      "texto_aprovado_no_formulario": [
+        "Cada Layer mantém seu histórico individual.",
+        "O usuário pode entender o que mudou nela sem precisar tratar o conjunto inteiro de arquivos visíveis como um único histórico."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Resolução final: preservar a semântica nativa de preparação e commit do Git. Preparar todas as alterações desejadas de um arquivo e registrá-las juntas é um fluxo normal; preparar somente determinados trechos também é uma opção nativa. Não tornar essa opção obrigatória, não dividir commits automaticamente e não criar um novo tipo de commit. O filtro de propriedade das Layers limita a origem do conteúdo; não muda o significado de preparação, commit ou histórico. O arquivo inteiro continua pertencendo à mesma origem, mesmo quando só algumas de suas alterações são preparadas.",
+      "criterios_observaveis_derivados": [
+        "Fluxo simples: preparar todas as mudanças do arquivo e fazer um único commit.",
+        "Fluxo opcional nativo: preparar um trecho, fazer commit e conferir que as demais mudanças permanecem no disco, na mesma origem.",
+        "Preparar B, editar para C e fazer commit: o resultado deve respeitar a semântica da forma de commit utilizada, sem capturar C indevidamente."
+      ],
+      "notas_de_escopo": "A condição do usuário foi satisfeita pela documentação oficial de git add -p/--patch e git commit. Não prometer que todo comando commit pega automaticamente tudo que foi salvo; opções nativas têm seus próprios significados. A dúvida do usuário sobre renomear não é uma exigência de perder histórico: mantenha o comportamento nativo do Git.",
+      "id": "GL-14",
+      "numero_original": 14,
+      "titulo_original": "Escolher quais mudanças entram no commit",
+      "estado_atual": "APROVADO_COM_ESCLARECIMENTO_NATIVO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-14"
+      },
+      "texto_aprovado_no_formulario": [
+        "Imagine duas mudanças no mesmo arquivo: uma correção no começo e um exemplo novo no final. Você pode querer registrar primeiro só a correção e deixar o exemplo para outro commit.",
+        "O arquivo continua pertencendo à mesma origem. Isso não significa dividir um arquivo entre duas Layers; apenas escolher quais mudanças entram naquele commit."
+      ],
+      "observacao_original_do_usuario": "Não entendi direito, se o negocio for, eu fazer commit, depois alterar e fazer outro commit, tudo certo, pois é o funcionamento normal do git né, senão, me explica melhor o que é que isso quis dizer.",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Trocar a branch de trabalho não deve desligar as Layers por si só. Na troca compatível, elas continuam ativas. Na incompatível, apresente o impedimento sem sobrescrita, perda de trabalho ou desativação silenciosa. O mesmo princípio de manter as outras Layers se aplica ao modo explícito de GL-22.",
+      "criterios_observaveis_derivados": [
+        "Trocar entre duas branches compatíveis mantendo Layers e suas alterações separadas.",
+        "Trocar para uma branch que ocupa um caminho de Layer: observar e reportar o comportamento real, sem alegar segurança apenas pelo código de saída.",
+        "Verificar separadamente troca pelo Git oficial e eventual fluxo próprio; demonstrar os limites de cada rota."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-15",
+      "numero_original": 15,
+      "titulo_original": "Trocar a branch sem desligar Layers",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-15"
+      },
+      "texto_aprovado_no_formulario": [
+        "Trocar da main para develop não deve, por si só, desligar layer/scripts ou outras Layers em uso.",
+        "Se a branch de destino for incompatível com uma Layer ativa, o aplicativo deve apresentar a situação, sem misturar arquivos ou descartar trabalho.",
+        "A forma de lidar com a incompatibilidade será investigada pelo Codex. Desligar uma Layer sem avisar não atende à intenção definida."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Antes de desativar uma Layer com pendências, avisar e exigir que o usuário resolva. Ele pode registrar o trabalho em commit, descartar deliberadamente o que não quer manter ou cancelar a desativação. Não implementar o antigo fluxo de guardar automaticamente edições para reaparecerem na próxima ativação, seja por shelf, stash automático ou outro nome. Avisar não autoriza descartar. Um arquivo salvo no disco pode continuar pendente no Git.",
+      "criterios_observaveis_derivados": [
+        "Desativar com alterações preparadas, não preparadas, remoções e novos arquivos atribuídos: não perder nem guardar silenciosamente o trabalho.",
+        "Cancelar conserva o estado. Descartar exige escolha explícita e alcance claro. Commit parcial não elimina uma pendência que ainda existe.",
+        "Desativar depois de resolver as pendências e reativar: não ressuscitar automaticamente edições descartadas."
+      ],
+      "notas_de_escopo": "Cópias técnicas para recuperação de falha não são o recurso rejeitado de guardar trabalho para depois. Um stash feito deliberadamente pelo usuário com Git oficial não é proibido por esta regra. O núcleo não pode alegar observar buffers não salvos de todos os editores externos.",
+      "id": "GL-16",
+      "numero_original": 16,
+      "titulo_original": "Resolver pendências antes de desativar",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-16"
+      },
+      "texto_aprovado_no_formulario": [
+        "Ao tentar desativar uma Layer com alterações pendentes, o aplicativo avisa e exige uma decisão antes de prosseguir.",
+        "O usuário pode concluir o trabalho em commit, descartar deliberadamente o que não quer manter ou cancelar a desativação para continuar trabalhando.",
+        "Não haverá armazenamento automático dessas edições para reaparecerem na próxima ativação. Avisar não autoriza apagar sem escolha explícita.",
+        "Salvar no editor não equivale a fazer commit. Cópias para recuperação de falhas têm outra finalidade e não devem virar o antigo recurso de guardar trabalho ao desativar."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Detecte incompatibilidades entre arquivos da branch e das Layers e entre as próprias Layers. Não escolha silenciosamente uma origem vencedora, não sobrescreva o conteúdo de outra e não resolva a colisão ativando/desativando algo sem informar. Conflitos de composição não autorizam criar uma função de merge entre Layers.",
+      "criterios_observaveis_derivados": [
+        "Cobrir colisão de caminho, arquivo/diretório e grafias relevantes à plataforma, inclusive conteúdo idêntico com origens diferentes.",
+        "Conservar arquivos locais preexistentes, inclusive ignorados, e informar quais origens impedem a operação.",
+        "Erro de uma operação deve ser acompanhado de inspeção dos efeitos reais e de recuperação quando necessária."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-17",
+      "numero_original": 17,
+      "titulo_original": "Detectar conflitos sem sobrescrita silenciosa",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-17"
+      },
+      "texto_aprovado_no_formulario": [
+        "O aplicativo deve detectar situações em que os arquivos da branch e das Layers não podem conviver como esperado.",
+        "Um conflito não pode ser resolvido silenciosamente escolhendo uma versão e apagando a outra. O Codex estudará os casos e a forma de cumprir esse resultado."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "O requisito é direcionar corretamente os novos arquivos ao destino explícito. O mecanismo antigo de captura não é obrigatório. Substituí-lo, integrá-lo ao modo de edição ou removê-lo é permitido, desde que os comportamentos de GL-03, GL-09 e GL-10 sejam atendidos e não haja atribuição indevida.",
+      "criterios_observaveis_derivados": [
+        "Criar arquivos por ferramenta externa durante o modo de edição e verificar a atribuição correta.",
+        "Encerrar/cancelar o modo não apaga novos arquivos por surpresa nem mantém uma captura invisível.",
+        "Não exigir que o usuário crie o arquivo por um comando especial ou pelo editor de laboratório."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-18",
+      "numero_original": 18,
+      "titulo_original": "Não obrigar a manter a captura atual",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-18"
+      },
+      "texto_aprovado_no_formulario": [
+        "O resultado desejado é conseguir direcionar novos arquivos para a Layer escolhida.",
+        "“Captura” pode ser um recurso para isso, mas não é uma obrigação de manter o funcionamento atual. O Codex poderá estudar outra solução, sem atribuir arquivos indevidamente."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Ofereça restauração clara, confirmação de descarte e diagnóstico/recuperação após falhas. Preserve o que for recuperável e não declare sucesso quando a operação continua bloqueada ou inconsistente. Recuperação não é promessa de recuperar bytes nunca persistidos ou já destruídos sem evidência. A segurança não deve depender de conseguir abrir normalmente todos os metadados.",
+      "criterios_observaveis_derivados": [
+        "Reproduzir falhas reais de exportação, metadados e locks conhecidas; comprovar a correção ou a substituição do mecanismo com oráculo independente.",
+        "Interromper operações em pontos relevantes, reabrir e recuperar sem sobrescrever trabalho posterior nem duplicar commit.",
+        "Distinguir bloqueio real, operação incompleta e diagnóstico saudável; exportar evidências sem exigir metadados já coerentes quando isso impediria o resgate."
+      ],
+      "notas_de_escopo": "",
+      "id": "GL-19",
+      "numero_original": 19,
+      "titulo_original": "Restaurar e recuperar com clareza",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-19"
+      },
+      "texto_aprovado_no_formulario": [
+        "O usuário deve entender o que será restaurado e confirmar ações que descartem trabalho.",
+        "Quando uma operação falhar, devem existir formas de diagnosticar e recuperar o que for recuperável. A aprovação deste objetivo não é uma promessa de recuperação de qualquer dado em qualquer situação."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Permita renomear e remover Layers com familiaridade de branches. Considere o estado ativo, o destino de edição e alterações pendentes. Não apague trabalho nem mude a origem de arquivos silenciosamente. “Reorganizar” não é requisito adicional. Preserve o significado dos comandos nativos e trate alterações externas de nome/remoção de modo consistente com a segurança do produto.",
+      "criterios_observaveis_derivados": [
+        "Renomear uma Layer preserva histórico e mantém referências de uso coerentes, ou informa bloqueio antes de agir.",
+        "Remover uma Layer não remove arquivos de outras origens nem envia exclusão remota implicitamente.",
+        "Renomeação/remoção pelo Git direto é diagnosticada/reconciliada sem reset destrutivo de dados ou falsa situação saudável."
+      ],
+      "notas_de_escopo": "Sair do prefixo layer/ pode mudar a classificação. Não implementar uma conversão silenciosa que o usuário não pediu; registrar o contrato de nome/identidade e demonstrá-lo. Uma nova função de transferência/fusão continua fora do escopo aprovado.",
+      "id": "GL-20",
+      "numero_original": 20,
+      "titulo_original": "Renomear e remover Layers",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-20"
+      },
+      "texto_aprovado_no_formulario": [
+        "Renomear e remover devem ser familiares para quem trabalha com branches.",
+        "Essas ações precisam considerar que a Layer pode estar ativa, com arquivos em uso ou alterações pendentes. Não autorizam perder trabalho sem uma escolha explícita.",
+        "“Reorganizar” foi retirado da lista por não descrever uma função específica já definida."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Use Git oficial, seus commits, referências e transportes para compartilhar Layers com GitHub, GitLab e outros servidores Git compatíveis. Não crie serviço de hospedagem obrigatório ou outro sistema de histórico. Recursos adicionais devem ser somente os específicos do Git Layer. Compartilhamento de histórico é diferente de ativação e estado de edição local.",
+      "criterios_observaveis_derivados": [
+        "Em remotos locais descartáveis, enviar, clonar/receber, reconhecer e usar uma Layer sem transportar por engano alterações não commitadas.",
+        "Atualizar seu histórico preservando ou explicitamente resolvendo trabalho local; não reinicializar índice/arquivos para esconder divergências.",
+        "Documentar o alcance real de envio de branches e de opções abrangentes do Git; não prometer que históricos de Layers são privados ou invisíveis ao Git."
+      ],
+      "notas_de_escopo": "A observação do usuário em GL-21 reforça exatamente o reaproveitamento do Git. Testes locais do protocolo não certificam todos os provedores remotos; não fazer push em contas reais para produzir uma demonstração.",
+      "id": "GL-21",
+      "numero_original": 21,
+      "titulo_original": "Compartilhar pelo Git normal",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-21"
+      },
+      "texto_aprovado_no_formulario": [
+        "A direção é aproveitar o funcionamento normal do Git para compartilhar os históricos das Layers.",
+        "Não deve ser necessário um serviço de hospedagem exclusivo para Layers. Isso é um objetivo a implementar e validar, não uma afirmação de compatibilidade universal já comprovada."
+      ],
+      "observacao_original_do_usuario": "Isso mesmo, a ideia é usar o proprio git com commit, push, e etc, que as branchs ja tem normalmente, mas direcionar de formas diferentes os nossos comandos pra que a gente gerencie as layers e tal, entao nao precisa criar um novo sistema de historico pra layer, exceto para o que é exclusivo do gitlayer obviamente",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "No uso comum, Layers são ativadas/desativadas e não selecionadas acidentalmente como branch de trabalho. Deve haver uma ação explícita para abrir uma Layer como branch de trabalho. Nesse modo, as outras Layers podem continuar sendo usadas normalmente e só são desativadas quando o usuário escolhe, respeitando conflitos. Depois, a Layer pode voltar ao papel de camada. Diferencie esse modo de simplesmente escolher o destino de edição.",
+      "criterios_observaveis_derivados": [
+        "Abrir deliberadamente layer/scripts como branch de trabalho, mantendo layer/ia como camada; verificar histórico, stage e arquivos de ambas.",
+        "A mesma origem não deve ser aplicada duas vezes como base e como projeção adicional; não inventar um conflito consigo mesma.",
+        "Demonstrar prevenção/diagnóstico real de seleção acidental e suas fronteiras: CLI gerenciada, git oficial por caminho absoluto e uso sem a ferramenta.",
+        "Demonstrar a saída desse modo e transições com pendências, sem desligar as demais Layers silenciosamente."
+      ],
+      "notas_de_escopo": "As respostas GL22-OUTRAS e GL22-CONCILIACAO resolvem o comportamento desejado, não autorizam uma solução técnica específica. Existe tensão entre impedir uma seleção aceita pelo Git e não alterar o Git. O prompt principal exige investigação precoce e reporte honesto de eventual incompatibilidade; não transformar prevenção em mero diagnóstico sem declarar requisito parcial.",
+      "id": "GL-22",
+      "numero_original": 22,
+      "titulo_original": "Abrir deliberadamente a Layer como branch",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-22"
+      },
+      "texto_aprovado_no_formulario": [
+        "No uso normal, Layers são ativadas e desativadas, não escolhidas acidentalmente como a branch principal.",
+        "O usuário também deve poder decidir trabalhar diretamente na branch da Layer, com uma ação explícita que deixe esse modo claro. Depois, poderá voltar a utilizá-la como camada.",
+        "Uma futura integração de editor pode separar as opções de Layers das branches comuns. Escondê-las da lista comum não pode eliminar a entrada deliberada.",
+        "Usar o terminal com Git Layer instalado é diferente de ter apenas Git, sem a ferramenta. A seleção normal dessas branches pelo Git, sem a ferramenta, não pode ser tratada como um bloqueio já oferecido por ela."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": [
+        {
+          "id": "GL22-OUTRAS",
+          "pergunta": "O que você quer que aconteça com as outras Layers ativas quando abrir uma Layer como branch principal?",
+          "contexto": "A conversa não decidiu se elas permanecem ativas, são desligadas mediante confirmação ou seguem outro comportamento. Nenhuma opção foi presumida.",
+          "placeholder": "Descreva o comportamento que deseja, ou escreva que quer discutir depois.",
+          "resposta": "A ideia é que se eu estiver trabalhando na layer como branch principal, ele vai se tornar principal e outras layers podem ser usadas junto com ela como layers normalmente. se a pessoa quiser desativar layer, ela vai la e desativa normalmente.",
+          "respondida": true
+        },
+        {
+          "id": "GL22-CONCILIACAO",
+          "pergunta": "Há alguma prioridade ou limite que você quer explicitar entre preservar o Git e evitar a seleção acidental?",
+          "contexto": "A tensão foi identificada, mas não resolvida. Você pode manter ambos como objetivos e pedir que o Codex investigue e apresente as alternativas; isso não aprova antecipadamente um mecanismo.",
+          "placeholder": "Ex.: manter os dois objetivos e discutir somente se a investigação encontrar incompatibilidade.",
+          "resposta": "A ideia é que pra selecionar a layer como branch principal, não seja da mesma forma que a padrao, tipo, a gente poderia criar algo pra selecionar ela como branch padrao ao inves de selecionar pelo metodo comum. mas tem que pensar nas melhores formas e tal. se for isso que eu entendi, entao é essa minha observacao.",
+          "respondida": true
+        }
+      ]
+    },
+    {
+      "comportamento_consolidado": "O produto funciona diretamente pelo terminal com Git oficial, sem depender de Electron, Monaco, VS Code ou editor de laboratório em execução. Desenvolver e validar deve ser possível por comandos. Disponibilize build/uso da CLI de forma independente do desktop e declare seus pré-requisitos reais.",
+      "criterios_observaveis_derivados": [
+        "Executar os fluxos públicos completos e a validação sem abrir GUI.",
+        "Comprovar que o caminho de build/uso do produto não precisa inicializar o laboratório ou preparar a demonstração do usuário.",
+        "Documentar como usar a CLI e quais dependências realmente são necessárias; não apresentar o pacote Electron como única distribuição do núcleo."
+      ],
+      "notas_de_escopo": "Não se impõe linguagem, framework, formato de executável ou política de runtime. A escolha cabe ao Codex. Instaladores públicos, assinatura, atualizador e publicação não viram requisitos implícitos desta tarefa.",
+      "id": "GL-23",
+      "numero_original": 23,
+      "titulo_original": "Funcionar diretamente no terminal",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-23"
+      },
+      "texto_aprovado_no_formulario": [
+        "O produto deve funcionar com Git pelo terminal, sem exigir o editor de laboratório, VS Code ou interface gráfica.",
+        "O Codex deve poder desenvolver e testar os fluxos por comandos. O editor de laboratório fica para os testes manuais e para alterações nele que você pedir."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Integrações visuais são complementos futuros e opcionais. VS Code e GeppIO podem receber integração posterior, mas não são dependências do núcleo nem escopo de implementação desta rodada. O editor de laboratório serve aos testes manuais do usuário e só deve ser alterado quando houver tarefa específica.",
+      "criterios_observaveis_derivados": [
+        "Os comportamentos aprovados são exercitáveis sem integração visual.",
+        "A documentação separa claramente produto, laboratório e integrações futuras; não declarar plugin pronto por criar contratos do Core."
+      ],
+      "notas_de_escopo": "GeppIO aparece no JSON como contexto posterior de integração opcional e catálogo provisório; não é uma autorização para trabalhar no repositório GeppIO nem adicionar funcionalidades dele.",
+      "id": "GL-24",
+      "numero_original": 24,
+      "titulo_original": "Tratar integrações de editor como extras",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-24"
+      },
+      "texto_aprovado_no_formulario": [
+        "Extensões de editor, como a integração futura com VS Code, acrescentam uma forma de visualizar e controlar as Layers. O funcionamento principal não depende delas.",
+        "O editor de laboratório é uma ferramenta para os testes manuais; não é o produto principal."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "A organização adicional deve usar o nome layers e aproveitar ao máximo estruturas e capacidades do Git. Reutilize formatos nativos quando forem adequados, em vez de inventar versões “parecidas”. Não duplique objetos/histórico só para imitar a aparência de pastas. Crie somente o estado próprio necessário. A localização exata e a estratégia de armazenamento ficam para investigação do Codex.",
+      "criterios_observaveis_derivados": [
+        "Explicar o que foi reutilizado do Git e o que realmente precisou ser próprio.",
+        "Implementar e testar transição dos dados antigos quando aplicável, em cópias descartáveis; preservar histórico, trabalho e recuperação existentes.",
+        "Não sobrescrever uma organização layers desconhecida nem apagar backups/shelves históricos para adaptar o novo comportamento."
+      ],
+      "notas_de_escopo": "Agora está autorizada a implementação do novo layout e dos mecanismos de migração, não a migração automática dos projetos reais ou da demonstração do usuário durante os testes. A independência de .git como pasta literal e de arquivos soltos de refs deve ser considerada na investigação.",
+      "id": "GL-25",
+      "numero_original": 25,
+      "titulo_original": "Usar “layers” e aproveitar o que o Git oferece",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-25"
+      },
+      "texto_aprovado_no_formulario": [
+        "A organização adicional deve usar o nome layers e ser familiar para quem conhece o Git.",
+        "O objetivo não é duplicar os arquivos e recursos do Git: é usar o que ele já oferece e criar somente o adicional necessário.",
+        "Esta revisão não escolhe pastas, formatos ou mecanismos. Essas decisões serão estudadas pelo Codex na etapa apropriada."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Ofereça uma consulta clara no terminal sobre branch de trabalho, seu papel, Layers reconhecidas/ativas, destino de edição e pendências por origem. O usuário deve entender o estado sem abrir uma interface gráfica.",
+      "criterios_observaveis_derivados": [
+        "Consultar estado antes/depois de ativar, editar, commitar, trocar branch e abrir Layer como branch de trabalho.",
+        "Mostrar problemas reais de recuperação/bloqueio em vez de declarar situação saudável apesar deles."
+      ],
+      "notas_de_escopo": "Era sugestão na mensagem-base e foi aprovada no JSON. Não manter o rótulo histórico de “ainda não aprovado” como estado atual.",
+      "id": "GL-26",
+      "numero_original": 26,
+      "titulo_original": "Consultar a situação atual",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-26"
+      },
+      "texto_aprovado_no_formulario": [
+        "Poder saber qual branch está selecionada, quais Layers estão ativas e qual foi escolhida como destino de edição.",
+        "Também poder entender onde há alterações pendentes. Essa consulta deve ser compreensível pelo terminal, sem depender de interface gráfica."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    },
+    {
+      "comportamento_consolidado": "Permita conferir os efeitos e impedimentos antes de ativar, desativar ou remover uma Layer: quais arquivos aparecerão/sairão e que trabalho será afetado. A forma de oferecer a prévia cabe ao Codex. A aprovação não obriga diálogo interativo em toda operação nem impede automação explícita e segura.",
+      "criterios_observaveis_derivados": [
+        "A prévia não aplica a ação nem altera a propriedade dos arquivos.",
+        "A operação efetiva revalida o estado para não executar cegamente uma prévia desatualizada.",
+        "As confirmações de descarte continuam claras e não são respondidas automaticamente pela automação de produção."
+      ],
+      "notas_de_escopo": "Era sugestão na mensagem-base e agora é requisito aprovado; não confundir prévia com autorização irrestrita de descarte.",
+      "id": "GL-27",
+      "numero_original": 27,
+      "titulo_original": "Conferir o efeito antes de uma ação",
+      "estado_atual": "APROVADO",
+      "fonte_primaria": {
+        "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+        "item_id": "GL-27"
+      },
+      "texto_aprovado_no_formulario": [
+        "Antes de uma ação importante, poder entender quais arquivos aparecerão ou sairão do projeto e quais impedimentos existem.",
+        "A intenção é evitar surpresa, especialmente com várias Layers. A forma de oferecer essa prévia ainda não foi definida."
+      ],
+      "observacao_original_do_usuario": "",
+      "respostas_complementares_originais": []
+    }
+  ],
+  "tensoes_a_investigar": [
+    {
+      "id": "T-01",
+      "itens": [
+        "GL-01",
+        "GL-22"
+      ],
+      "descricao": "Prevenir seleção acidental de branches layer/ sem modificar comandos do Git. Escolha técnica não está aprovada antecipadamente. Demonstrar o alcance por rota e versão; não declarar solução universal baseada apenas em wrapper ou interface."
+    },
+    {
+      "id": "T-02",
+      "itens": [
+        "GL-01",
+        "GL-15",
+        "GL-17"
+      ],
+      "descricao": "Trocas e comandos nativos destrutivos externos podem atingir projeções. Preservar semântica e demonstrar limites; não substituir decisões de produto por hipóteses."
+    }
+  ],
+  "novas_funcionalidades_nao_aprovadas": [
+    "merge de Layers na base como função própria",
+    "transferência geral de arquivos já versionados entre proprietários",
+    "commit conjunto automático",
+    "modo de sobrescrita por prioridade de Layers",
+    "stash/shelf automático na desativação",
+    "serviço obrigatório de nuvem ou hospedagem própria",
+    "extensões VS Code/GeppIO nesta rodada"
+  ],
+  "fontes": [
+    {
+      "id": "D1",
+      "tipo": "respostas_do_usuario",
+      "arquivo": "03-RESPOSTAS-ORIGINAIS.json",
+      "sha256": "24229107e95a4435623f213c17a4ed1f4b2317cd0c93a507559ce5dfd2901034",
+      "nota": "Cópia byte-exata; exportado em 2026-11-02T17:32:04.129Z. Contém a mensagem-base, 27 respostas e observações. Seu campo autoriza_implementacao=false permanece histórico."
+    },
+    {
+      "id": "D2",
+      "tipo": "mensagem_posterior_do_usuario",
+      "arquivo": "04-AUTORIZACAO-ATUAL-E-ITEM-14.txt",
+      "nota": "Autorização de preparar o prompt de implementação para o Codex em 2026-11-02T17:48:34Z; GL-14 somente como comportamento nativo."
+    },
+    {
+      "id": "D3",
+      "tipo": "repositorio_consultado",
+      "url": "https://github.com/rabrunos/GitLayer/tree/37887aad107bd751a3687bc660a6644ef5d90c54",
+      "data_consulta": "2026-11-02",
+      "nota": "main remota consultada; AGENTS.md e docs/ARCHITECTURE.md lidos. Não contém necessariamente alterações locais, não usar como baseline obrigatória."
+    },
+    {
+      "id": "D4",
+      "tipo": "evidencias_historicas_fornecidas",
+      "arquivo_original": "Git-Layers-Infraestrutura-Revisada-v2.zip",
+      "zip_sha256": "cb6669cb044a476ee09acc1b792230fd489603e78a6d6156ccb3233c03e33266",
+      "nota": "Revisão de 19/10/2026. Nesta consolidação foram relidos AGENTS e guias da infraestrutura final no arquivo; não houve reexecução da suíte."
+    },
+    {
+      "id": "G1",
+      "tipo": "documentacao_oficial_verificada",
+      "url": "https://git-scm.com/docs/git-add",
+      "secao": "DESCRIPTION e -p/--patch",
+      "data_consulta": "2026-11-02",
+      "nota": "Preparação integral e seletiva nativas; selecionar trechos é opcional."
+    },
+    {
+      "id": "G2",
+      "tipo": "documentacao_oficial_verificada",
+      "url": "https://git-scm.com/docs/git-commit",
+      "secao": "DESCRIPTION e EXAMPLES",
+      "data_consulta": "2026-11-02",
+      "nota": "Commit normal registra conteúdo preparado; opções nativas possuem semântica própria."
+    },
+    {
+      "id": "G3",
+      "tipo": "documentacao_oficial_verificada",
+      "url": "https://git-scm.com/docs/git-switch",
+      "secao": "DESCRIPTION",
+      "data_consulta": "2026-11-02",
+      "nota": "A seleção de branch nativa é distinta da ativação de uma camada."
+    },
+    {
+      "id": "G4",
+      "tipo": "referencia_oficial_consultada",
+      "url": "https://git-scm.com/docs/gitrepository-layout",
+      "data_consulta": "2026-11-02",
+      "nota": "Usar como fonte para investigar armazenamento real; não prescreve a solução do produto."
+    },
+    {
+      "id": "G5",
+      "tipo": "referencia_oficial_consultada",
+      "url": "https://git-scm.com/docs/githooks",
+      "data_consulta": "2026-11-02",
+      "nota": "Conferir limites e momento de execução de mecanismos nativos; esta referência não autoriza instalar hooks globais."
+    },
+    {
+      "id": "G6",
+      "tipo": "referencia_oficial_consultada",
+      "url": "https://git-scm.com/docs/git-branch",
+      "data_consulta": "2026-11-02",
+      "nota": "Branches prefixadas continuam referências Git; nome não garante validade da composição."
+    }
+  ],
+  "estado_de_execucao_deste_pacote": {
+    "produto_executado": false,
+    "repositorio_modificado": false,
+    "testes_do_produto_executados": false,
+    "conteudo_entregue": "Prompt e referências para execução posterior pelo Codex."
+  }
+}

@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import type { Change, Draft, LayerEntry, ReadResult, RepoSnapshot, RuntimeStatus } from '../shared.js';
 import { Editor, languageFor } from './Editor.js';
 import { TerminalPanel } from './TerminalPanel.js';
 import { explorerFiles, fileDecoration, gitStatusLetter, layerOwnership } from './file-decorations.js';
+import { FileExplorer } from './FileExplorer.js';
+import { Codicon, FileIcon } from './FileIcon.js';
 
 type Tab = ReadResult & { path: string; text: string; savedText: string; external?: ReadResult | null; keepDraft?: boolean };
 type Modal = { title: string; detail: string; initial?: string; choices: string[]; resolve: (value: string | null) => void };
@@ -26,7 +29,13 @@ export function App(): React.JSX.Element {
   const snapshotRef = useRef<RepoSnapshot | null>(null);
   const [tabs, setTabs] = useState<Tab[]>([]);
   const tabsRef = useRef<Tab[]>([]);
-  const [active, setActive] = useState('');
+  const [active, setActiveState] = useState('');
+  const activeRef = useRef('');
+  const setActive = useCallback((path: string) => { activeRef.current = path; setActiveState(path); }, []);
+  const openEpoch = useRef(0);
+  const openIntent = useRef(0);
+  const openVersions = useRef(new Map<string, number>());
+  const pendingReads = useRef(new Map<string, Promise<ReadResult>>());
   const [owner, setOwner] = useState('base');
   const [panel, setPanel] = useState<'changes' | 'history' | 'branches' | 'integrity'>('changes');
   const [diff, setDiff] = useState<Diff | null>(null);
@@ -51,6 +60,8 @@ export function App(): React.JSX.Element {
   const draftsTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const refreshing = useRef(false);
   const closingModal = useRef<HTMLButtonElement>(null);
+  const [explorerWidth, setExplorerWidth] = useState(() => Math.min(460, Math.max(200, Number(localStorage.getItem('gitlayers-explorer-width')) || 260)));
+  const tabStrip = useRef<HTMLDivElement>(null);
 
   const ask = useCallback((title: string, detail: string, choices: string[], initial?: string): Promise<string | null> => new Promise(resolve => {
     setModalInput(initial ?? ''); setModal({ title, detail, choices, initial, resolve });
@@ -122,6 +133,9 @@ export function App(): React.JSX.Element {
     return () => { off(); offClose(); clearInterval(interval); };
   }, [refresh, loadDrafts, persistDrafts, call, inspectEnvironment]);
   useEffect(() => { if (modal && modal.initial === undefined) closingModal.current?.focus(); }, [modal]);
+  useEffect(() => {
+    tabStrip.current?.querySelector<HTMLElement>('[role=tab][aria-selected=true]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }, [active, diff, documentView]);
 
   const run = async (action: string, args: unknown = {}, success = '') => {
     setBusy(true); setError(''); setNotice('');
@@ -148,9 +162,9 @@ export function App(): React.JSX.Element {
       return true;
     } catch (e) { setError(String(e)); return false; }
   }, [call, refresh, setAllTabs]);
-  const safeBuffers = async (_affected?: string[]): Promise<boolean> => {
+  const safeBuffers = async (affected?: string[]): Promise<boolean> => {
     await persistDrafts();
-    const unsaved = tabsRef.current.filter(t => t.text !== t.savedText);
+    const unsaved = tabsRef.current.filter(t => t.text !== t.savedText && (!affected || affected.includes(t.path)));
     if (!unsaved.length) return true;
     const answer = await ask('Há alterações não salvas', `Salve ${unsaved.length} arquivo(s) no disco para continuar. O rascunho de recuperação já foi preservado.`, ['Salvar e continuar']);
     if (!answer) return false;
@@ -171,44 +185,77 @@ export function App(): React.JSX.Element {
     draftsTimer.current = setTimeout(() => { void persistDrafts().catch(e => setError(`Falha ao preservar rascunho: ${String(e)}`)); }, 180);
   };
   const openFile = async (p: string) => {
-    setDiff(null); setDocumentView(null); setActive(p);
-    if (tabsRef.current.some(t => t.path === p)) return;
-    try { const file = await call<ReadResult>('read', { path: p }, true); setAllTabs(previous => [...previous, { ...file, path: p, savedText: file.text }]); }
-    catch (e) { setError(String(e)); }
+    const intent = ++openIntent.current;
+    setDiff(null); setDocumentView(null);
+    if (tabsRef.current.some(t => t.path === p)) { setActive(p); return; }
+    const epoch = openEpoch.current;
+    const version = openVersions.current.get(p) ?? 0;
+    const root = snapshotRef.current?.repo.root;
+    const read = pendingReads.current.get(p) ?? call<ReadResult>('read', { path: p }, true);
+    pendingReads.current.set(p, read);
+    try {
+      const file = await read;
+      if (openEpoch.current !== epoch || (openVersions.current.get(p) ?? 0) !== version || snapshotRef.current?.repo.root !== root) return;
+      // Recheck after the asynchronous read: several clicks may share this result.
+      setAllTabs(previous => previous.some(t => t.path === p) ? previous : [...previous, { ...file, path: p, savedText: file.text }]);
+      if (intent === openIntent.current) setActive(p);
+    } catch (e) { if (epoch === openEpoch.current && intent === openIntent.current) setError(String(e)); }
+    finally { if (pendingReads.current.get(p) === read) pendingReads.current.delete(p); }
+  };
+  const removeFileTab = (p: string) => {
+    openVersions.current.set(p, (openVersions.current.get(p) ?? 0) + 1);
+    pendingReads.current.delete(p);
+    const index = tabsRef.current.findIndex(t => t.path === p);
+    setAllTabs(previous => previous.filter(t => t.path !== p));
+    if (activeRef.current === p) setActive(tabsRef.current[Math.min(Math.max(index, 0), tabsRef.current.length - 1)]?.path ?? '');
+  };
+  const resetFileTabs = () => {
+    openEpoch.current++; openIntent.current++;
+    pendingReads.current.clear(); openVersions.current.clear();
+    setAllTabs([]); setActive('');
   };
   const closeTab = async (p: string) => {
     if (!(await safeBuffers([p]))) return;
-    setAllTabs(previous => previous.filter(t => t.path !== p));
-    await call('draftRemove', { path: p }, true);
-    if (active === p) setActive(tabsRef.current.at(-1)?.path ?? '');
+    const focusEditorTab = tabStrip.current?.contains(document.activeElement);
+    removeFileTab(p);
+    if (focusEditorTab) requestAnimationFrame(() => tabStrip.current?.querySelector<HTMLButtonElement>('[role=tab][aria-selected=true]')?.focus());
+    try { await call('draftRemove', { path: p }, true); } catch (e) { setError(String(e)); }
   };
   const openRepo = async (initialize = false) => {
     if (!(await safeBuffers())) return;
     setShowTerminal(false);
     const result = await run(initialize ? 'initialize' : 'open');
-    if (result) { setAllTabs([]); setActive(''); setOwner('base'); setDiff(null); setDocumentView(null); await loadDrafts(); }
+    if (result) { resetFileTabs(); setOwner('base'); setDiff(null); setDocumentView(null); await loadDrafts(); }
   };
   const openDemo = async () => {
     if (!(await safeBuffers())) return;
     setShowTerminal(false);
     const result = await run('demo', {}, 'Demonstração local criada: main, dev, collision-demo, Layer ai e Layer scripts. Nenhum script foi executado.');
-    if (result) { setAllTabs([]); setActive(''); setOwner('base'); setDiff(null); setDocumentView(null); }
+    if (result) { resetFileTabs(); setOwner('base'); setDiff(null); setDocumentView(null); }
   };
-  const createPath = async (directory: boolean) => {
-    const p = await ask(directory ? 'Nova pasta' : 'Novo arquivo', 'Caminho relativo ao repositório. Arquivos novos seguem o fluxo da branch tradicional até atribuição explícita.', ['Criar'], '');
-    if (!p) return;
-    if (snapshot?.files.some(f => f.path === p)) { setError('Esse caminho já existe.'); return; }
-    if (directory) await run('mkdir', { path: p });
-    else { const result = await run('write', { path: p, text: '' }); if (result !== undefined) await openFile(p); }
+  const createPath = async (p: string, directory: boolean): Promise<boolean> => {
+    if (snapshot?.files.some(f => f.path === p) || snapshot?.directories?.includes(p)) { setError('Esse caminho já existe.'); return false; }
+    const result = await run(directory ? 'mkdir' : 'write', directory ? { path: p } : { path: p, text: '' });
+    if (result === undefined) return false;
+    if (!directory) await openFile(p);
+    return true;
+  };
+  const renamePath = async (p: string, to: string): Promise<boolean> => {
+    if (to === p) return true;
+    if (!(await safeBuffers([p]))) return false;
+    if (await run('rename', { from: p, to }) === undefined) return false;
+    removeFileTab(p);
+    await call('draftRemove', { path: p }, true);
+    await openFile(to);
+    return true;
   };
   const mutateFile = async (action: 'rename' | 'delete', p: string) => {
-    if (!(await safeBuffers([p]))) return;
     if (action === 'rename') {
       const to = await ask('Renomear arquivo', 'O proprietário permanece o mesmo. O Core recusa mudança entre origens.', ['Renomear'], p);
       if (!to || to === p) return;
-      if (await run('rename', { from: p, to }) !== undefined) { setAllTabs(previous => previous.filter(t => t.path !== p)); await openFile(to); }
-    } else if (await ask('Excluir arquivo?', `${p}\nSerá criada uma cópia de recuperação antes da remoção. Prepare a exclusão no grupo do proprietário.`, ['Excluir com cópia'])) {
-      if (await run('delete', { path: p, confirmed: true }) !== undefined) { setAllTabs(previous => previous.filter(t => t.path !== p)); if (active === p) setActive(''); }
+      await renamePath(p, to);
+    } else if (await safeBuffers([p]) && await ask('Excluir arquivo?', `${p}\nSerá criada uma cópia de recuperação antes da remoção. Prepare a exclusão no grupo do proprietário.`, ['Excluir com cópia'])) {
+      if (await run('delete', { path: p, confirmed: true }) !== undefined) { removeFileTab(p); await call('draftRemove', { path: p }, true); }
     }
   };
   const loadDiff = async (group: string, p: string, staged = false) => {
@@ -251,14 +298,6 @@ export function App(): React.JSX.Element {
     const decoration = decorationFor(p); const ownership = layerOwnership(fileOwner);
     return <span className="file-decorations">{decoration.bufferDirty && <span className="buffer-dirty" role="img" aria-label="Não salvo no editor" title="Não salvo no editor · ainda não altera o estado Git">●</span>}{decoration.git && <span className={`git-decoration git-${decoration.git === '!' ? 'conflict' : decoration.git}`} title={decoration.title} aria-label={`Git ${decoration.git}: ${decoration.title}`}>{decoration.git}</span>}{ownership && renderLayerIcon(ownership)}</span>;
   };
-  const directories = new Map<string, Set<string | null>>();
-  for (const directory of snapshot?.directories ?? []) directories.set(directory, new Set());
-  for (const file of visibleFiles) {
-    const pieces = file.path.split('/');
-    for (let i = 1; i < pieces.length; i++) { const dir = pieces.slice(0, i).join('/'); const owners = directories.get(dir) ?? new Set(); owners.add(file.owner); directories.set(dir, owners); }
-  }
-  const tree = [...[...directories].map(([path, owners]) => ({ path, directory: true, owner: owners.size === 0 ? null : owners.size === 1 ? [...owners][0] ?? null : 'Misto' })), ...visibleFiles.map(file => ({ ...file, directory: false }))].sort((a, b) => a.path.localeCompare(b.path));
-  const directoryLayers = (p: string) => [...directories.get(p) ?? []].filter((name): name is string => name !== null && name !== 'base').map(name => `Layer ${name}`).join(', ');
   const renderChanges = (heading: string, list: Change[], staged: boolean, groupOwner = owner) => <section className="change-section"><h3>{heading}<span>{list.length}</span></h3>{!list.length && <p className="empty-small">Nenhum arquivo</p>}{list.map((item, i) => <div className="change-row" key={`${item.path}-${i}`}>
     <button className="change-name" onClick={() => void loadDiff(groupOwner, item.path, staged)} title={`Ver diff de ${item.path}`}><span className={`status-letter git-decoration git-${gitStatusLetter(item.status) === '!' ? 'conflict' : gitStatusLetter(item.status)}`}>{gitStatusLetter(item.status || 'M')}</span><span>{item.path}<small>{labels[item.status] ?? item.status}{!staged && changes(group.staged).some(c => c.path === item.path) ? ' após stage' : ''}</small></span></button>
     <button className="small" onClick={() => void stage(groupOwner, item.path, staged)} title={staged ? 'Desfazer staging' : 'Preparar arquivo'} aria-label={`${staged ? 'Unstage' : 'Stage'} ${item.path}`}>{staged ? '−' : '+'}</button>
@@ -271,7 +310,7 @@ export function App(): React.JSX.Element {
     {runtime && <><dl><div><dt>Distribuição preparada</dt><dd>{runtime.target} · v{runtime.appVersion}</dd></div><div><dt>Execução atual</dt><dd>{({ win32: 'Windows', linux: 'Linux', darwin: 'macOS' } as Record<string, string>)[runtime.platform] ?? runtime.platform} {runtime.arch}{runtime.packaged ? ' · aplicativo portátil' : ' · código-fonte'}</dd></div>{runtime.git.version && <><div><dt>Versão do Git</dt><dd>{runtime.git.version}</dd></div><div><dt>Executável do Git</dt><dd className="runtime-path">{runtime.git.executable}</dd></div></>}</dl>{!runtime.git.available && <div className="runtime-help" role="alert"><p>Instale o <strong>Git for Windows</strong> pelo site oficial <code>git-scm.com</code>. Na instalação, mantenha a opção que permite usar o Git em outros programas (PATH).</p><p>Depois, feche e abra novamente o Git Layers Lab. Se o Git já estava instalado, clique em <strong>Verificar Git</strong>. O editor portátil já inclui seu próprio runtime; Node.js e npm não são necessários.</p>{runtime.git.error && <details><summary>Detalhes do diagnóstico</summary><p>{runtime.git.error}</p></details>}</div>}</>}
   </section>;
 
-  return <div className="app" data-testid={snapshot ? 'workspace' : 'welcome'}>
+  return <div className="app" style={{ '--explorer-width': `${explorerWidth}px` } as CSSProperties} data-testid={snapshot ? 'workspace' : 'welcome'}>
     <header className="topbar">
       <div className="brand"><span className="brand-symbol">◫</span><strong>Git Layers<span> LAB</span></strong><span className="experimental">v0.1 · experimental</span></div>
       <div className="top-actions"><button data-testid="open" disabled={!canOpenRepository} onClick={() => void openRepo()}>Abrir pasta</button><button data-testid="initialize" disabled={!canOpenRepository} onClick={() => snapshot ? void run('enableLayers', {}, 'Metadados locais de Git Layers inicializados.') : void openRepo(true)}>{snapshot ? 'Inicializar Layers' : 'Inicializar Git'}</button><button disabled={!canOpenRepository} onClick={() => void openDemo()}>Demonstração</button><button data-testid="terminal-toggle" disabled={!snapshot} onClick={() => setShowTerminal(current => !current)} aria-expanded={showTerminal}>›_ Terminal</button><button onClick={() => setShowEnvironment(!showEnvironment)} aria-expanded={showEnvironment}>Ambiente</button><button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label="Alternar tema">{theme === 'dark' ? '☀ Claro' : '◐ Escuro'}</button></div>
@@ -281,15 +320,27 @@ export function App(): React.JSX.Element {
       <div className="repo-bar"><span className="repo-path" title={snapshot.repo.root}>{snapshot.repo.root}</span><span className="branch-chip">⑂ {snapshot.repo.branch || 'Sem primeiro commit'}</span><span>{snapshot.layers.filter(l => l.state === 'active').length} Layer(s) ativa(s)</span><button className={`safety ${doctor ? doctor.safe ? 'safe' : 'unsafe' : ''}`} onClick={() => void checkIntegrity()}>{snapshot.status.safe === false ? '⚠ Estado inseguro / inicialização pendente' : doctor ? doctor.safe ? '✓ Verificação aprovada' : '⚠ Requer atenção' : '◇ Integridade não verificada'}</button><button disabled={busy} onClick={() => void run('snapshot')}>↻ Atualizar</button></div>
       {snapshot.status.error?.code === 'NOT_INITIALIZED' && <div className="external-warning"><strong>Este repositório está aberto para inspeção.</strong> Inicialize os metadados locais para editar, preparar e usar Layers. <button onClick={() => void run('enableLayers')}>Inicializar Layers neste repositório</button></div>}
       <main className="workspace">
-        <aside className="explorer"><div className="section-heading"><h2>Explorador</h2><div><button className="small" title="Novo arquivo" aria-label="Novo arquivo" onClick={() => void createPath(false)}>＋</button><button className="small" title="Nova pasta" aria-label="Nova pasta" onClick={() => void createPath(true)}>▤</button></div></div>
-          <div className="file-tree">{!tree.length && <p className="empty-small">Crie um arquivo para começar.</p>}{tree.map(file => file.directory ? <div className="directory" key={file.path} style={{ paddingLeft: `${12 + file.path.split('/').length * 9}px` }}><span>▾ {file.path.split('/').pop()}</span>{directoryLayers(file.path) && renderLayerIcon(directoryLayers(file.path))}</div> : <button key={file.path} className={`file-row ${active === file.path && !diff ? 'selected' : ''} ${decorationFor(file.path).git.includes('D') ? 'file-deleted' : ''}`} data-git-status={decorationFor(file.path).git} style={{ paddingLeft: `${12 + file.path.split('/').length * 9}px` }} onClick={() => void openFile(file.path)} title={`${file.path}\n${ownerLabel(file.owner, snapshot.repo.branch)}\n${decorationFor(file.path).title}`}><span className="file-icon">◇</span><span className="filename">{file.path.split('/').pop()}</span>{renderDecoration(file.path, file.owner)}</button>)}</div>
+        <aside className="explorer">
+          <FileExplorer key={snapshot.repo.root} root={snapshot.repo.root} files={visibleFiles} directories={snapshot.directories ?? []} active={!diff && !documentView ? active : ''} busy={busy} readOnly={snapshot.status.error?.code === 'NOT_INITIALIZED'} decoration={decorationFor} renderDecoration={renderDecoration} renderLayers={renderLayerIcon} onOpen={openFile} onCreate={createPath} onRename={renamePath} onDelete={p => mutateFile('delete', p)} onRefresh={() => void run('snapshot')} onError={setError} />
+          <div className="explorer-resize" role="separator" aria-label="Largura do explorador" aria-orientation="vertical" aria-valuemin={200} aria-valuemax={460} aria-valuenow={explorerWidth} tabIndex={0} onPointerDown={event => { event.currentTarget.setPointerCapture(event.pointerId); event.preventDefault(); }} onPointerMove={event => { if (event.currentTarget.hasPointerCapture(event.pointerId)) { const width = Math.max(200, Math.min(460, event.clientX - event.currentTarget.parentElement!.getBoundingClientRect().left)); setExplorerWidth(width); localStorage.setItem('gitlayers-explorer-width', String(width)); } }} onPointerUp={event => event.currentTarget.releasePointerCapture(event.pointerId)} onKeyDown={event => { if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); const width = Math.max(200, Math.min(460, explorerWidth + (event.key === 'ArrowLeft' ? -10 : 10))); setExplorerWidth(width); localStorage.setItem('gitlayers-explorer-width', String(width)); } }} />
           <div className="section-heading layers-heading"><h2>Layers</h2><button className="small" onClick={() => void createLayer()} title="Criar Layer" aria-label="Criar Layer">＋</button></div>
           <div className="layers-list"><button className={`layer-item ${owner === 'base' ? 'selected' : ''}`} onClick={() => { setOwner('base'); setPanel('changes'); }}><span>⑂</span><div><strong>{snapshot.repo.branch || 'Branch tradicional'}</strong><small>Branch tradicional · HEAD real</small></div></button>{snapshot.layers.map(layer => <div className={`layer-card ${owner === layer.name ? 'selected' : ''}`} key={layer.id}><button className="layer-item" onClick={() => { setOwner(layer.name); setPanel('changes'); }}><span>◫</span><div><strong>{layer.name}</strong><small>{({ active: 'Ativa', inactive: 'Inativa', parked: 'Guardada localmente', 'recovery-required': 'Recuperação necessária' } as Record<string, string>)[layer.state] ?? layer.state}</small></div></button><button className="small layer-toggle" title={layer.state === 'active' ? 'Desativar e guardar' : 'Ativar Layer'} aria-label={`${layer.state === 'active' ? 'Desativar' : 'Ativar'} Layer ${layer.name}`} disabled={busy || layer.state === 'recovery-required'} onClick={() => layer.state === 'active' ? void deactivate(layer) : void run('activate', { name: layer.name })}>{layer.state === 'active' ? '◉' : '○'}</button></div>)}</div>
           {snapshot.candidates?.length > 0 && <div className="candidates"><h3>Branches candidatas</h3>{snapshot.candidates.map(name => <button key={name} onClick={async () => { if (await ask('Registrar Layer existente?', `${name} será validada antes do registro. O prefixo sozinho não autoriza ativação.`, ['Validar e registrar'])) await run('registerLayer', { name }); }}>{name} · Registrar</button>)}</div>}
           <p className="sidebar-note">Selecionar uma Layer inspeciona seu histórico. Arquivos mantêm seus proprietários.</p>
         </aside>
         <section className="center">
-          <div className="tabs" role="tablist" aria-label="Arquivos abertos">{tabs.map(tab => <div key={tab.path} className={`tab ${active === tab.path && !diff && !documentView ? 'active' : ''}`}><button role="tab" title={`${tab.path}\n${decorationFor(tab.path).title}`} aria-selected={active === tab.path && !diff && !documentView} onClick={() => { setActive(tab.path); setDiff(null); setDocumentView(null); }}>{tab.path.split('/').pop()}{renderDecoration(tab.path, visibleFiles.find(file => file.path === tab.path)?.owner ?? null)}</button><button aria-label={`Fechar ${tab.path}`} onClick={() => void closeTab(tab.path)}>×</button></div>)}{diff && <div className="tab active"><button>Diff · {diff.path}</button><button aria-label="Fechar diff" onClick={() => setDiff(null)}>×</button></div>}{documentView && <div className="tab active"><button>{documentView.title}</button><button aria-label="Fechar visualização" onClick={() => setDocumentView(null)}>×</button></div>}</div>
+          <div className="tabs" ref={tabStrip} role="tablist" aria-label="Arquivos abertos" onKeyDown={event => {
+            if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+            const items = [...event.currentTarget.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+            const index = items.indexOf(document.activeElement as HTMLButtonElement);
+            if (index < 0) return;
+            event.preventDefault();
+            const next = event.key === 'Home' ? 0 : event.key === 'End' ? items.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : items.length - 1)) % items.length;
+            items[next]?.focus(); items[next]?.click();
+          }}>{tabs.map(tab => <div key={tab.path} className={`tab ${tab.text !== tab.savedText ? 'dirty' : ''} ${active === tab.path && !diff && !documentView ? 'active' : ''}`} onAuxClick={event => { if (event.button === 1) { event.preventDefault(); void closeTab(tab.path); } }}>
+            <button role="tab" title={`${tab.path}\n${decorationFor(tab.path).title}`} aria-selected={active === tab.path && !diff && !documentView} tabIndex={active === tab.path && !diff && !documentView ? 0 : -1} onClick={() => { openIntent.current++; setActive(tab.path); setDiff(null); setDocumentView(null); }}><FileIcon path={tab.path} /><span className="tab-filename">{tab.path.split('/').pop()}</span>{tabs.some(other => other.path !== tab.path && other.path.split('/').pop() === tab.path.split('/').pop()) && <span className="tab-parent">{tab.path.slice(0, tab.path.lastIndexOf('/'))}</span>}{renderDecoration(tab.path, visibleFiles.find(file => file.path === tab.path)?.owner ?? null)}</button>
+            <button className="tab-close" title={`Fechar ${tab.path}`} aria-label={`Fechar ${tab.path}`} onClick={() => void closeTab(tab.path)}><Codicon name="close" /></button>
+          </div>)}{diff && <div className="tab active"><button role="tab" aria-selected="true"><Codicon name="diff" /><span className="tab-filename">Diff · {diff.path}</span></button><button className="tab-close" aria-label="Fechar diff" onClick={() => setDiff(null)}><Codicon name="close" /></button></div>}{documentView && <div className="tab active"><button role="tab" aria-selected="true"><Codicon name="file" /><span className="tab-filename">{documentView.title}</span></button><button className="tab-close" aria-label="Fechar visualização" onClick={() => setDocumentView(null)}><Codicon name="close" /></button></div>}</div>
           {documentView ? <Editor path={`view:${documentView.title}`} text={documentView.content} language="diff" theme={theme} readOnly /> : diff ? <>
             <div className="editor-toolbar"><span>{ownerLabel(diff.owner, snapshot.repo.branch)} · {diff.staged ? 'Commit → índice' : 'Índice → disco'}</span><button onClick={() => void stage(diff.owner, diff.path, diff.staged)}>{diff.staged ? 'Desfazer staging do arquivo' : 'Preparar arquivo inteiro'}</button></div>
             <div className="diff-content"><Editor path={`diff:${diff.owner}:${diff.path}:${diff.staged}`} text={diff.patch || 'Nenhuma diferença.'} theme={theme} language="diff" readOnly />{<div className="hunks"><h3>{diff.staged ? 'Desfazer staging parcial' : 'Staging parcial'}</h3>{diff.hunks.length ? diff.hunks.map(hunk => <article key={hunk.index}><div><code>{hunk.header}</code><button disabled={busy} onClick={async () => { await run(diff.staged ? 'unstageHunk' : 'stageHunk', { owner: diff.owner, path: diff.path, index: hunk.index, token: diff.token }); await loadDiff(diff.owner, diff.path, diff.staged); }}>{diff.staged ? 'Despreparar' : 'Preparar'} hunk {hunk.index + 1}</button></div><pre>{hunk.patch}</pre></article>) : <p>Sem hunks suportados. Binários, adições, exclusões ou mudanças de modo podem exigir o arquivo inteiro.</p>}</div>}</div>
