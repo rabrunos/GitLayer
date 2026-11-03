@@ -1,5 +1,7 @@
 # Estado do Git Layer
 
+A [investigação de segurança e compatibilidade de 03/11/2026](reports/2026-11-03-security-compatibility-investigation/README.md) avaliou este snapshot sem implementar soluções: dois defeitos novos e quatro famílias de risco confirmados. Consulte relatório, matriz, alternativas e reproduções antes de ampliar o uso. Os status da implementação abaixo permanecem históricos; esta investigação não promove requisitos parciais a completos.
+
 O produto é o Core/CLI com Git oficial. Laboratório e integrações visuais são opcionais e não participaram desta validação.
 
 O [relatório público](reports/2026-11-02-closure/REPORT.md), a [matriz dos 27 requisitos](reports/2026-11-02-closure/requirements.json) e a [validação estruturada](evidence/closure-2026-11-02/validation.json) permitem revisão sem ZIP. O suporte permanece em **20 implementados e sete parciais**, nos envelopes declarados.
