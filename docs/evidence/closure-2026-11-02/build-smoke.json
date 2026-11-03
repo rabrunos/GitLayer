@@ -294,8 +294,9 @@
     "flowCount": 7,
     "recordedCommands": 82,
     "commandRoles": {
-      "Node/CLI compilada": 36,
-      "Git oficial": 46
+      "where.exe": 1,
+      "git.exe": 46,
+      "node.exe": 35
     },
     "observedExitCodes": {
       "0": 77,
@@ -451,17 +452,21 @@
       "Smoke CLI não é suíte completa.",
       "Proteção padrão não cobre --ignore-other-worktrees.",
       "Target protege imediatamente o add comum e reconcilia propriedade por comando; force e ignore de maior prioridade continuam bypass."
-    ]
+    ],
+    "commandRoleCorrection": "A discriminação anterior 36 Node/CLI incluía a descoberta where.exe. O registro real distingue executáveis; o total 82 permanece igual."
   },
   "functionalFreezeReference": "docs/evidence/closure-2026-11-02/functional-inputs.json",
-  "pending": [
-    "Cópia nova commitada e instalação pelo lockfile",
-    "Arquivo/limpeza e sincronização main"
-  ],
   "dataPolicy": "Somente metadados sintéticos selecionados e hashes; sem stdout completo, paths pessoais, credenciais ou valores globais do usuário.",
   "followingValidation": {
     "fullFinal02": "PASS_229_225_4SKIP",
     "infraFinal02": "PASS_111_111",
-    "compatibilityBroad02": "PASS_355_6_ENV_BLOCKED_0_FAIL"
+    "compatibilityBroad02": "PASS_355_6_ENV_BLOCKED_0_FAIL",
+    "freshCommittedCopy": {
+      "status": "PASS",
+      "testedCodeCommit": "fc68d8cc1eb1faccf7dbb654eeb632b0caa9f4fb",
+      "reference": "docs/evidence/closure-2026-11-02/fresh-commit.json"
+    },
+    "archivalAndCleanup": "VERIFIED_PAYLOAD_WITH_DECLARED_LOCAL_PRESERVATIONS",
+    "finalizationReference": "docs/evidence/closure-2026-11-02/finalization.json"
   }
 }

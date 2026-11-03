@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "kind": "published-headless-closure-validation",
-  "state": "LOCAL_VALIDATION_COMPLETE_FRESH_ARCHIVE_PUBLICATION_PENDING",
+  "state": "CODE_A_AND_ARCHIVE_VERIFIED_PRE_DOCUMENTARY_B_ATTESTATION",
   "environment": {
     "platform": "win32",
     "arch": "x64",
@@ -1256,7 +1256,7 @@
               "durationMs": 21768.4026
             }
           ],
-          "qualification": "Estes seis casos passaram juntos em full-final-01; as provas anteriores/dirigidas continuam separadas. A nova suíte após correções de infraestrutura ainda está pendente."
+          "qualification": "Estes seis casos passaram juntos em full-final-01; as provas dirigidas conservam seus snapshots. Naquele momento a nova suíte pós-correções de infraestrutura estava pendente; full-final-02 depois concluiu os seis casos juntos em 229 testes."
         },
         "R01Directed": {
           "runId": "run-2026-11-02T22-47-07-078Z-7bc1dcdb",
@@ -1422,7 +1422,7 @@
           "reason": "Gitweb CGI ausente dos caminhos padrão/configurados da instalação efetiva; nenhum navegador ou servidor foi iniciado."
         }
       ],
-      "diagnosis": "Sete falhas de infraestrutura: três expectativas antigas de help de shells, dois localizadores de debugger (zero/três matches antes do filho), um literal histórico de AGENTS e um cwd incorreto em HARNESS-025. A rodada terminou com falha real exit 1; correções e nova execução permanecem pendentes.",
+      "diagnosis": "Sete falhas reais de infraestrutura: três expectativas antigas de help de shells, dois localizadores de debugger (zero/três matches antes do filho), um literal histórico de AGENTS e um cwd incorreto em HARNESS-025. A rodada permanece exit 1. Correções e nova execução estavam pendentes naquele snapshot; o dirigido r2 posterior passou 7/7 e a broad2 concluiu 355 PASS/seis ENV_BLOCKED/zero FAIL.",
       "qualification": "348 PASS não aprovam a seleção inteira. Os seis bloqueios de recurso mantêm suas razões; não são os quatro SKIP da suíte npm. Nenhuma falha é convertida em skip ou apagada."
     },
     {
@@ -1523,12 +1523,19 @@
     "reference": "docs/evidence/closure-2026-11-02/functional-inputs.json",
     "files": 173,
     "fingerprint": "084267c2e9660a22fb79df668fbf84416d839d98382de45caac9c694a45133c2",
-    "qualification": "Manifesto antes das execuções; igualdade depois da campanha ainda depende da verificação final.",
+    "qualification": "Os mesmos 173 paths/tamanhos/hashes foram confirmados antes/depois de todas as suítes e novamente depois do arquivo externo, antes de B. Os manifests têm hashes próprios distintos do fingerprint dos inputs.",
     "afterValidation": {
       "files": 173,
       "fingerprint": "084267c2e9660a22fb79df668fbf84416d839d98382de45caac9c694a45133c2",
       "manifestSHA256": "96a95bf9f902dca36331b492cf44902dd0e6acf106d04f55387b07196c2ff9ed",
       "equalToBefore": true
+    },
+    "afterArchive": {
+      "files": 173,
+      "fingerprint": "084267c2e9660a22fb79df668fbf84416d839d98382de45caac9c694a45133c2",
+      "manifestSHA256": "2eb89f7e768fde2fbd59217e147f5107b4408aad69b591be6be0fd64b734c87d",
+      "equalToBefore": true,
+      "observedAt": "2026-11-03T02:31:43.090Z"
     }
   },
   "buildSmoke": {
@@ -1543,16 +1550,9 @@
     "archiveUnitPassedTogether": 6,
     "compatibilityDirectedPassedTogether": 7
   },
-  "pending": {
-    "infraFinal02": "PASS_111_111",
-    "compatibilityBroad02": "PASS_355_6_ENV_BLOCKED_0_FAIL",
-    "freshCommittedCopy": "NOT_RECORDED_YET",
-    "archivalAndCleanup": "AWAITING_VERIFIED_RECORD",
-    "mainSynchronization": "NOT_RECORDED_YET"
-  },
   "rawRetention": {
     "archiveId": "closure-2026-11-02-eba4a209",
-    "policy": "Reter resultados/manifests brutos fora do checkout com inventário verificado antes de retirar originais. Este candidato público contém somente metadados sintéticos selecionados e hashes, sem stdout integral ou valores de configuração."
+    "policy": "Payload de evidências classificadas arquivado externamente por 194 movimentos verificados, com inventários/hashes e recibos preservados. Dois contêineres sem payload, um run sem prova de propriedade e extras operacionais permanecem declarados; stdout integral e valores pessoais não são publicados."
   },
   "limits": [
     "As duas suítes completas conservam manifests e contagens próprios; resultados de snapshots diferentes não são somados.",
@@ -1560,14 +1560,19 @@
     "O domínio de 61 arquivos da suíte é diferente do manifesto funcional de 173 e dos fingerprints do harness.",
     "Os JSONs detalhados R05/R02/R03 dirigidos anteriores mantêm sua origem; o wrapper full usa GL_IMPLEMENTATION_EVIDENCE e comprova os casos atuais por assertivas reais, fontes e saída terminal.",
     "Build/smoke local não é instalação limpa, publicação nem cópia nova do commit.",
-    "Infra-final-02 concluiu 111/111 PASS; broad2 concluiu 355 PASS, seis ENV_BLOCKED, zero FAIL. Os bloqueios não certificam operações ausentes."
+    "Infra-final-02 concluiu 111/111 PASS; broad2 concluiu 355 PASS, seis ENV_BLOCKED, zero FAIL. Os bloqueios não certificam operações ausentes.",
+    "A cópia nova de A tem PASS separado e não repetiu a suíte npm completa ou broad. Arquivo tem prova própria; a conferência final de B é posterior a esta atestação e informada na entrega."
   ],
   "references": {
     "buildSmoke": "docs/evidence/closure-2026-11-02/build-smoke.json",
     "functionalInputs": "docs/evidence/closure-2026-11-02/functional-inputs.json",
     "infrastructureCorrections": "docs/evidence/closure-2026-11-02/infrastructure-corrections.json",
     "firstBroad": "docs/evidence/closure-2026-11-02/matrix-broad-first.json",
-    "finalBroad": "docs/evidence/closure-2026-11-02/matrix-broad.json"
+    "finalBroad": "docs/evidence/closure-2026-11-02/matrix-broad.json",
+    "freshCommittedCopy": "docs/evidence/closure-2026-11-02/fresh-commit.json",
+    "publishedCodeCheckpoint": "docs/evidence/closure-2026-11-02/code-checkpoint.json",
+    "cleanup": "docs/evidence/closure-2026-11-02/cleanup.json",
+    "finalization": "docs/evidence/closure-2026-11-02/finalization.json"
   },
   "compatibilityBroadFinal": {
     "id": "run-2026-11-03T01-04-32-968Z-96a7aaf6",
@@ -1577,5 +1582,49 @@
     "environmentBlocked": 6,
     "exitCode": 0,
     "publicReference": "docs/evidence/closure-2026-11-02/matrix-broad.json"
+  },
+  "testedCodeCommit": "fc68d8cc1eb1faccf7dbb654eeb632b0caa9f4fb",
+  "freshCommittedCopy": {
+    "status": "PASS",
+    "testedCodeCommit": "fc68d8cc1eb1faccf7dbb654eeb632b0caa9f4fb",
+    "publicEvidence": "docs/evidence/closure-2026-11-02/fresh-commit.json",
+    "sourceFiles": 358,
+    "sourceUnchanged": true,
+    "finalProjectStatusClean": true,
+    "wrapperRecordedCommands": 16,
+    "smokeFlows": 7,
+    "smokeRecordedCommands": 82,
+    "smokeSnapshots": 4,
+    "fullSuiteInFreshCheckout": false
+  },
+  "publishedCodeCheckpoint": {
+    "status": "PASS",
+    "testedCodeCommit": "fc68d8cc1eb1faccf7dbb654eeb632b0caa9f4fb",
+    "reference": "docs/evidence/closure-2026-11-02/code-checkpoint.json",
+    "observedAt": "2026-11-03T02:00:38.979Z",
+    "finalDelivery": false
+  },
+  "stageResults": {
+    "infraFinal02": "PASS_111_111",
+    "compatibilityBroad02": "PASS_355_6_ENV_BLOCKED_0_FAIL",
+    "freshCommittedCopy": "PASS_COMMIT_A",
+    "archivalAndCleanup": "VERIFIED_PAYLOAD_WITH_DECLARED_LOCAL_PRESERVATIONS",
+    "codeAPublished": "OBSERVED_HEAD_TRACKING_SERVER_API_EQUAL"
+  },
+  "publicationProtocol": {
+    "reference": "docs/evidence/closure-2026-11-02/finalization.json",
+    "state": "ATTESTATION_PREPARED_BEFORE_DOCUMENTARY_B",
+    "codeAObservedAt": "2026-11-03T02:00:38.979Z",
+    "finalBObservationProvidedSeparatelyAtDelivery": true,
+    "finalBPushOrServerComparisonClaimed": false
+  },
+  "archivalAndCleanup": {
+    "status": "VERIFIED_DATA_ARCHIVE_WITH_PRESERVED_CONTAINERS",
+    "reference": "docs/evidence/closure-2026-11-02/cleanup.json",
+    "verifiedMoves": 194,
+    "files": 613966,
+    "bytes": 2467819045,
+    "preservedContainers": 2,
+    "preservedUnownedRoots": 1
   }
 }

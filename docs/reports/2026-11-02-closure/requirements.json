@@ -2,7 +2,7 @@
   "schema": 2,
   "kind": "git-layer-closure-requirements",
   "date": "2026-11-02",
-  "state": "LOCAL_VALIDATION_COMPLETE_FRESH_ARCHIVE_PUBLICATION_PENDING",
+  "state": "CODE_A_AND_ARCHIVE_VERIFIED_PRE_DOCUMENTARY_B_ATTESTATION",
   "authority": [
     "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
     "docs/decisions/implementation-2026-11-02/03-RESPOSTAS-ORIGINAIS.json",
@@ -95,7 +95,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -148,7 +149,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -211,7 +213,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -272,7 +275,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -324,7 +328,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -384,7 +389,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -445,7 +451,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -497,7 +504,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -578,7 +586,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -642,7 +651,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -696,7 +706,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -749,7 +760,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -794,7 +806,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -855,7 +868,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -917,7 +931,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -983,7 +998,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -1036,7 +1052,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -1109,7 +1126,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -1359,7 +1377,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -1572,7 +1591,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -1636,7 +1656,8 @@
             "runId": "run-2026-11-02T23-30-09-895Z-f8f19b3b",
             "qualification": "Caso aprovado nesta rodada; a seleção ampla completa terminou exit 1 por outras falhas e será reexecutada."
           }
-        ]
+        ],
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -1788,7 +1809,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -1869,7 +1891,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -1916,7 +1939,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -2038,7 +2062,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -2140,7 +2165,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -2204,7 +2230,8 @@
         ],
         "notPartOfNpmTest": [],
         "headlessEvidenceState": "REFERENCED_TESTS_EXECUTED",
-        "headlessHistoricalRun": "full-final-01"
+        "headlessHistoricalRun": "full-final-01",
+        "currentHeadlessRun": "full-final-02"
       },
       "approvedContract": {
         "sourcePath": "docs/decisions/implementation-2026-11-02/02-DECISOES-CONSOLIDADAS.json",
@@ -2267,10 +2294,10 @@
         "exitCode": 1
       }
     },
-    "compiledAndCommittedCopy": "COMPILED_BUILD_SMOKE_PASS_FRESH_COMMITTED_COPY_PENDING",
-    "publication": "PENDING_SERVER_COMPARISON",
-    "qualification": "Full02 229=225 PASS/quatro SKIP, infra02 111 PASS e broad2 361=355 PASS/seis ENV_BLOCKED/zero FAIL concluíram com fontes estáveis nos domínios registrados. Nenhum resultado foi somado ao snapshot anterior. Arquivo, cópia nova commitada e main continuam pendentes.",
-    "revalidationAfterInfraCorrections": "LOCAL_VALIDATION_COMPLETE_FRESH_ARCHIVE_PUBLICATION_PENDING",
+    "compiledAndCommittedCopy": "PASS_COMPILED_BUILD_SMOKE_AND_FRESH_COMMIT_A",
+    "publication": "CODE_A_OBSERVED_EQUAL_DOCUMENTARY_B_FINAL_PROOF_AT_DELIVERY",
+    "qualification": "Full02 229=225 PASS/quatro SKIP, infra02 111 PASS e broad2 361=355 PASS/seis ENV_BLOCKED/zero FAIL concluíram com fontes estáveis. A cópia nova do commit A instalou pelo lockfile e passou typecheck/build/help/smoke/verificadores. O payload classificado foi arquivado por 194 operações verificadas, com preservações locais declaradas. A main de A foi observada igual no Git e API; a verificação final de B é posterior a esta atestação e informada na entrega. Snapshots não são somados.",
+    "revalidationAfterInfraCorrections": "LOCAL_AND_FRESH_VALIDATION_COMPLETE",
     "afterInfrastructure": {
       "reference": "docs/evidence/closure-2026-11-02/validation.json",
       "typecheck": {
@@ -2322,7 +2349,19 @@
       }
     },
     "compiledBuildSmoke": "PASS",
-    "freshCommittedCopy": "PENDING",
+    "freshCommittedCopy": {
+      "status": "PASS",
+      "testedCodeCommit": "fc68d8cc1eb1faccf7dbb654eeb632b0caa9f4fb",
+      "publicEvidence": "docs/evidence/closure-2026-11-02/fresh-commit.json",
+      "sourceFiles": 358,
+      "sourceUnchanged": true,
+      "finalProjectStatusClean": true,
+      "wrapperRecordedCommands": 16,
+      "smokeFlows": 7,
+      "smokeRecordedCommands": 82,
+      "smokeSnapshots": 4,
+      "fullSuiteInFreshCheckout": false
+    },
     "headlessHistory": [
       {
         "id": "full-final-01",
@@ -2344,6 +2383,24 @@
         "skipped": 0,
         "exitCode": 0
       }
-    ]
-  }
+    ],
+    "publishedCodeCheckpoint": {
+      "status": "PASS",
+      "testedCodeCommit": "fc68d8cc1eb1faccf7dbb654eeb632b0caa9f4fb",
+      "reference": "docs/evidence/closure-2026-11-02/code-checkpoint.json",
+      "observedAt": "2026-11-03T02:00:38.979Z",
+      "finalDelivery": false
+    },
+    "archivalAndCleanup": {
+      "status": "VERIFIED_DATA_ARCHIVE_WITH_PRESERVED_CONTAINERS",
+      "reference": "docs/evidence/closure-2026-11-02/cleanup.json",
+      "verifiedMoves": 194,
+      "files": 613966,
+      "bytes": 2467819045,
+      "preservedContainers": 2,
+      "preservedUnownedRoots": 1
+    },
+    "finalizationReference": "docs/evidence/closure-2026-11-02/finalization.json"
+  },
+  "testedCodeCommit": "fc68d8cc1eb1faccf7dbb654eeb632b0caa9f4fb"
 }
