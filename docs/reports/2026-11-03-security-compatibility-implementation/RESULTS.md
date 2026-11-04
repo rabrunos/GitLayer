@@ -83,7 +83,7 @@ Checks/variantes/continuação não aumentam315 resultados Node. [Reconstrução
 
 ## Código commitado e publicação
 
-A cópia nova do commit, instalação pelo lockfile, verificações compiladas e confronto do servidor serão atestados em [PUBLICATION.md](PUBLICATION.md) antes do encerramento. Essa checagem não repete full/broad; confronta os mesmos inputs funcionais.
+O código A `4ec2c037f1a3e4397ae49ae37b239df60bfcc26f`, sua instalação pelo lockfile em cópia nova, verificações compiladas e presença no servidor estão registrados em [PUBLICATION.md](PUBLICATION.md). Essa checagem não repetiu full/broad: confrontou os mesmos 183 inputs. O commit documental B deve conservar esse domínio e terá instalação/verificações e sincronização observadas após sua criação; o documento de B não antecipa sua própria aprovação.
 
 ## Campanha histórica FULL10
 

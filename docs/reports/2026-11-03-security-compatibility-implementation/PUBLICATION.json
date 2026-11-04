@@ -1,0 +1,1116 @@
+{
+  "schema": 1,
+  "kind": "observed-code-checkpoint-A-before-documentary-B",
+  "at": "2026-11-04T12:07:21.106Z",
+  "code": {
+    "schema": 1,
+    "at": "2026-11-04T12:00:58.058Z",
+    "commit": "4ec2c037f1a3e4397ae49ae37b239df60bfcc26f",
+    "tree": "17921b55f5aaf9c4af749534f3a7ec817b47671c",
+    "parent": "e7f245afe1b3577213c8fee0b7ad8ff4f28e355c",
+    "changedPaths": 93,
+    "allEntries": 437,
+    "functionalCount": 183,
+    "functionalFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "functionalModesAndBlobsMatch": true,
+    "reviewedCaptureSHA256": "94d0265f8adb9c3c9122384790f8bde05949a2747cf4704457190b484ad3816c",
+    "checkoutClean": true,
+    "sourceEntries": [
+      {
+        "path": "package-lock.json",
+        "mode": "100644",
+        "blobOID": "6a3bda6dcca8e63a045484f444a67a0b62181317"
+      },
+      {
+        "path": "package.json",
+        "mode": "100644",
+        "blobOID": "77aa014f188215e329e21b3e0107465f06117dd3"
+      },
+      {
+        "path": "scripts/archive-local-evidence.mjs",
+        "mode": "100644",
+        "blobOID": "e41551cfd10578875fc67c9f4beaf16ad2c0faec"
+      },
+      {
+        "path": "scripts/archive-windows.py",
+        "mode": "100644",
+        "blobOID": "3952d6ea39184da7291359d556e0cb0e3b1e726b"
+      },
+      {
+        "path": "scripts/archive-workshop.py",
+        "mode": "100644",
+        "blobOID": "0b8683f709e0f8ff779c831c0b4965928cb15acf"
+      },
+      {
+        "path": "scripts/archive.py",
+        "mode": "100644",
+        "blobOID": "4e90aabeab0f7e12fe1a72fe1483004eca1f7218"
+      },
+      {
+        "path": "scripts/benchmark-core.mjs",
+        "mode": "100644",
+        "blobOID": "ccc1362eab7d14756ca686faec45b6d3011abae9"
+      },
+      {
+        "path": "scripts/build-core.mjs",
+        "mode": "100644",
+        "blobOID": "fc3188255295f839931ec0cfd480e55a3e9cd47e"
+      },
+      {
+        "path": "scripts/build-debug.mjs",
+        "mode": "100644",
+        "blobOID": "4a5338ca57b37d602bb0742aa6950641832a567d"
+      },
+      {
+        "path": "scripts/build-windows.mjs",
+        "mode": "100644",
+        "blobOID": "0b5f33b5bc7fe8a3c07f4de4f1a09c6abaa7fc42"
+      },
+      {
+        "path": "scripts/build.mjs",
+        "mode": "100644",
+        "blobOID": "58918d38b16e4d135164052c54df158f1587b076"
+      },
+      {
+        "path": "scripts/debug-client.mjs",
+        "mode": "100644",
+        "blobOID": "734cfc8818ebe9c3156dd9dd3b29aa625bed1e27"
+      },
+      {
+        "path": "scripts/demo.ts",
+        "mode": "100644",
+        "blobOID": "e08b269f2842e35b6b283999de363ed30f80f916"
+      },
+      {
+        "path": "scripts/dev.mjs",
+        "mode": "100644",
+        "blobOID": "d9e1b70e7b3bd805992e5cf6c241d8e26c5657e9"
+      },
+      {
+        "path": "scripts/development-inputs.mjs",
+        "mode": "100644",
+        "blobOID": "fa878dcda8a9bfbe5c4039f63c913b115306b2ad"
+      },
+      {
+        "path": "scripts/development-session.mjs",
+        "mode": "100644",
+        "blobOID": "90b01eb35603df504a748a9958c3acb0dcf94e3d"
+      },
+      {
+        "path": "scripts/git-compat/audit.mjs",
+        "mode": "100644",
+        "blobOID": "650e45de0dfdcd6b276c430080b741f2ae6b72fc"
+      },
+      {
+        "path": "scripts/git-compat/core-call.mjs",
+        "mode": "100644",
+        "blobOID": "5ebbc4f844398ad8bf000dca19246435999709a6"
+      },
+      {
+        "path": "scripts/git-compat/docs.mjs",
+        "mode": "100644",
+        "blobOID": "5b1a4b25ffc05fbbe7c3e575a18bd04bcfde7c98"
+      },
+      {
+        "path": "scripts/git-compat/existing.mjs",
+        "mode": "100644",
+        "blobOID": "1b80c6bf691f4577196e61f7a6693e4ffa3a3326"
+      },
+      {
+        "path": "scripts/git-compat/fixture-parent.mjs",
+        "mode": "100644",
+        "blobOID": "11afe917ebfeed6e0da2c9f0818c68e6950b0179"
+      },
+      {
+        "path": "scripts/git-compat/lib.mjs",
+        "mode": "100644",
+        "blobOID": "959e8dcce421589b8ee55f31f7c83e130cc992d8"
+      },
+      {
+        "path": "scripts/git-compat/output-root.mjs",
+        "mode": "100644",
+        "blobOID": "fa8eda8c23f1e0e29335a843e5885c28b120ba9d"
+      },
+      {
+        "path": "scripts/git-compat/package.ps1",
+        "mode": "100644",
+        "blobOID": "5f9483cda6e571d52edf9cc4804ef14ce89d66b7"
+      },
+      {
+        "path": "scripts/git-compat/pty-call.mjs",
+        "mode": "100644",
+        "blobOID": "a766e1477017ea7154956a5ccc82262565216e0e"
+      },
+      {
+        "path": "scripts/git-compat/registry.mjs",
+        "mode": "100644",
+        "blobOID": "76dd28296d4ac93e795b57cc182245bfacf3cc07"
+      },
+      {
+        "path": "scripts/git-compat/report-integrity.mjs",
+        "mode": "100644",
+        "blobOID": "71c9b6e5be5111da86e55f8f47fdae1d4cb6774a"
+      },
+      {
+        "path": "scripts/git-compat/report-phase.mjs",
+        "mode": "100644",
+        "blobOID": "342840fbaa797613716bf7b799a96db8b18bbb8d"
+      },
+      {
+        "path": "scripts/git-compat/report.mjs",
+        "mode": "100644",
+        "blobOID": "08c9ad20df06c16ef18588a410708c8e8ba5ffdb"
+      },
+      {
+        "path": "scripts/git-compat/run.mjs",
+        "mode": "100644",
+        "blobOID": "1d9d26f29256069dda5d7041151b5e498fe1c7b9"
+      },
+      {
+        "path": "scripts/git-compat/runner.mjs",
+        "mode": "100644",
+        "blobOID": "233caee7d9131b7973dad9343c13a18a75635d15"
+      },
+      {
+        "path": "scripts/git-compat/sanitize-history.mjs",
+        "mode": "100644",
+        "blobOID": "e8a7720b9e4cdc614f2d4aa1a43aad9c74021aec"
+      },
+      {
+        "path": "scripts/git-compat/selection.mjs",
+        "mode": "100644",
+        "blobOID": "27f525b01f8f3ad2dcc38e2f9012f79844159772"
+      },
+      {
+        "path": "scripts/git-compat/supervisor.mjs",
+        "mode": "100644",
+        "blobOID": "739e6ed29d723976b8e93dd79ce7b791f15d766b"
+      },
+      {
+        "path": "scripts/git-compat/worker.mjs",
+        "mode": "100644",
+        "blobOID": "d0ffa00f4490196647eb7f50ab8da92ba95036be"
+      },
+      {
+        "path": "scripts/implementation-evidence-closure.mjs",
+        "mode": "100644",
+        "blobOID": "144e20b37944df50ceab324459ec51a06526468a"
+      },
+      {
+        "path": "scripts/local-cli.cmd",
+        "mode": "100644",
+        "blobOID": "62c3e69204e2047e1f3cecf5b96969395d1c1a80"
+      },
+      {
+        "path": "scripts/local-cli.mjs",
+        "mode": "100644",
+        "blobOID": "8719d2c1d672b218d3b05308ee60db77c9afb99b"
+      },
+      {
+        "path": "scripts/local-cli.sh",
+        "mode": "100644",
+        "blobOID": "320e2734215990734d7760944b4219ee66833192"
+      },
+      {
+        "path": "scripts/package-implementation-evidence.mjs",
+        "mode": "100644",
+        "blobOID": "38da60fec6a4523cdb1cd122d56f1a143b3bdfd6"
+      },
+      {
+        "path": "scripts/package.mjs",
+        "mode": "100644",
+        "blobOID": "bdb432f411a0a81c10364bf4b896e26544f6e3af"
+      },
+      {
+        "path": "scripts/run-check.mjs",
+        "mode": "100644",
+        "blobOID": "e05caa3b9c282edab84722f72e497b2bf836f30e"
+      },
+      {
+        "path": "scripts/setup.mjs",
+        "mode": "100644",
+        "blobOID": "876e0f04dc183999634dabbb6eb3ca3f679530d4"
+      },
+      {
+        "path": "scripts/smoke-core-cli.mjs",
+        "mode": "100644",
+        "blobOID": "c684b23145390f4c89b860c8bd89775748241bb5"
+      },
+      {
+        "path": "scripts/validate-implementation.mjs",
+        "mode": "100644",
+        "blobOID": "9f3faa331cbccdfc134618e5b6fc5f13553a06df"
+      },
+      {
+        "path": "scripts/verify-cli-debug.mjs",
+        "mode": "100644",
+        "blobOID": "c01723f47edea1f8b2b7f50e52c1fad369b56a24"
+      },
+      {
+        "path": "scripts/verify-debug-build.mjs",
+        "mode": "100644",
+        "blobOID": "3a86bce503b10c48d4a223f86dd849d111cea06c"
+      },
+      {
+        "path": "scripts/verify-demo-reuse.mjs",
+        "mode": "100644",
+        "blobOID": "e76fef61e3a0197a94a50ee59f9f66d7f4a2b827"
+      },
+      {
+        "path": "scripts/verify-dev.mjs",
+        "mode": "100644",
+        "blobOID": "69ceedf18986b49c5c578bd433b2594d9d1021e4"
+      },
+      {
+        "path": "scripts/verify-extracted.mjs",
+        "mode": "100644",
+        "blobOID": "64c8172a22dd8ac602286b1ba4defb3812ee47ce"
+      },
+      {
+        "path": "scripts/verify-public-docs.mjs",
+        "mode": "100644",
+        "blobOID": "f24fb1893f2c9fda5a5ee702a15b668486bb1338"
+      },
+      {
+        "path": "scripts/verify-workshop-package.mjs",
+        "mode": "100644",
+        "blobOID": "e270a9f357dd57fc8f6f605cda8fdd748eb344b1"
+      },
+      {
+        "path": "scripts/windows-diagnostics.mjs",
+        "mode": "100644",
+        "blobOID": "25d72b2cfc42849d4c94c84180d6109158e4ade2"
+      },
+      {
+        "path": "scripts/windows-portable.mjs",
+        "mode": "100644",
+        "blobOID": "57da7442f70fcf66ff94e2f81a3050400324c13b"
+      },
+      {
+        "path": "scripts/workshop-ui.mjs",
+        "mode": "100644",
+        "blobOID": "1fc6bb68f6112bdd6bf6f37ece2380d74eefabc7"
+      },
+      {
+        "path": "scripts/workshop.mjs",
+        "mode": "100644",
+        "blobOID": "244f09ae9d439e8416aec05708d01902ffbfd593"
+      },
+      {
+        "path": "src/cli/index.ts",
+        "mode": "100644",
+        "blobOID": "c135531ab68aa72b4eb77f7d3417f9ec927fb69f"
+      },
+      {
+        "path": "src/core/branch-protection.ts",
+        "mode": "100644",
+        "blobOID": "3040249fa2953ced3b67f186b12daa6994ad74d5"
+      },
+      {
+        "path": "src/core/demo.ts",
+        "mode": "100644",
+        "blobOID": "f1a82525abb84122bb8ef1fbaa7581b35465a053"
+      },
+      {
+        "path": "src/core/editing-boundary.ts",
+        "mode": "100644",
+        "blobOID": "4a63c68f7100e846ad32995637653e67ebe1175a"
+      },
+      {
+        "path": "src/core/errors.ts",
+        "mode": "100644",
+        "blobOID": "6a14f44d80279861ce41831747e171a5156a0ac1"
+      },
+      {
+        "path": "src/core/git.ts",
+        "mode": "100644",
+        "blobOID": "17dbe33a1d85b5d2c3cb2b894ebb3110b6807bc1"
+      },
+      {
+        "path": "src/core/ignore.ts",
+        "mode": "100644",
+        "blobOID": "1d6b4631beb6e79f61de75c4ab3bed7d1983db55"
+      },
+      {
+        "path": "src/core/index-stage.ts",
+        "mode": "100644",
+        "blobOID": "ca0711dce693ccb4964eb385cf6f2f224eeb64ed"
+      },
+      {
+        "path": "src/core/index.ts",
+        "mode": "100644",
+        "blobOID": "0e5d3a1f9015163e528119c004d6e088c56f0ff2"
+      },
+      {
+        "path": "src/core/layer-rename.ts",
+        "mode": "100644",
+        "blobOID": "f1f57effd0afd0e4be30898e4da05700d95b5402"
+      },
+      {
+        "path": "src/core/layout.ts",
+        "mode": "100644",
+        "blobOID": "2cdc5d5f2557987bdafd0856c9b3b4e5422cb928"
+      },
+      {
+        "path": "src/core/ownership-state.ts",
+        "mode": "100644",
+        "blobOID": "8b00b3944671cbb1e470011226b2c5501d6be3f5"
+      },
+      {
+        "path": "src/core/paths.ts",
+        "mode": "100644",
+        "blobOID": "8a3a31e732c9abba7a7df1a514a8a13cabea8aef"
+      },
+      {
+        "path": "src/core/platform.ts",
+        "mode": "100644",
+        "blobOID": "0292d93cc5492eb51309e64f7d30c21be125cd9e"
+      },
+      {
+        "path": "src/core/recovery.ts",
+        "mode": "100644",
+        "blobOID": "602b9807c71a413b607650e37f173629edc2fbb6"
+      },
+      {
+        "path": "src/core/rescue.ts",
+        "mode": "100644",
+        "blobOID": "d38b55a422072ea11972032355909d2c398f0d7a"
+      },
+      {
+        "path": "src/core/storage.ts",
+        "mode": "100644",
+        "blobOID": "508d51b54a88d030cd1e3183cc2a131c472ca54d"
+      },
+      {
+        "path": "src/desktop/commands.ts",
+        "mode": "100644",
+        "blobOID": "5b06aacbd07eb49379823f666272d9c7934e874f"
+      },
+      {
+        "path": "src/desktop/main/index.ts",
+        "mode": "100644",
+        "blobOID": "ea886b184620433936074c527b51300d306275e8"
+      },
+      {
+        "path": "src/desktop/main/terminal-runtime.ts",
+        "mode": "100644",
+        "blobOID": "808410ac8b98f6f89ffee6d54bdbad1f37b58fe4"
+      },
+      {
+        "path": "src/desktop/main/terminal.ts",
+        "mode": "100644",
+        "blobOID": "3b9d43f9395f49bd70d0df8474be2eff0453e7e0"
+      },
+      {
+        "path": "src/desktop/preload/index.ts",
+        "mode": "100644",
+        "blobOID": "35032c4d716f887f82bf40b4ac7b6ea0b2bdc951"
+      },
+      {
+        "path": "src/desktop/renderer/App.tsx",
+        "mode": "100644",
+        "blobOID": "a8639878bf0f1a5663af6000208cb979558f3d07"
+      },
+      {
+        "path": "src/desktop/renderer/CommandPanel.tsx",
+        "mode": "100644",
+        "blobOID": "2e742f5fb67b666ea3c43063da5e5b4250feaff2"
+      },
+      {
+        "path": "src/desktop/renderer/Editor.tsx",
+        "mode": "100644",
+        "blobOID": "18ecd15d77e31b87bf1c496395d6a269d3ae32ea"
+      },
+      {
+        "path": "src/desktop/renderer/FileExplorer.tsx",
+        "mode": "100644",
+        "blobOID": "05b9334e754a791c6401e19a957021ae6ae3c024"
+      },
+      {
+        "path": "src/desktop/renderer/FileIcon.tsx",
+        "mode": "100644",
+        "blobOID": "cdc839ed733946af8849a8a794f4950c5b40fce7"
+      },
+      {
+        "path": "src/desktop/renderer/TerminalPanel.tsx",
+        "mode": "100644",
+        "blobOID": "d2c3d27053c103e0015ef22dcc59b296a911bf77"
+      },
+      {
+        "path": "src/desktop/renderer/explorer-tree.ts",
+        "mode": "100644",
+        "blobOID": "964333d7728acdc7a425eb17989194eb2f22a2b0"
+      },
+      {
+        "path": "src/desktop/renderer/explorer.css",
+        "mode": "100644",
+        "blobOID": "b431817f6cd45fa2943fa42e1ccd314e1a28e8ae"
+      },
+      {
+        "path": "src/desktop/renderer/file-decorations.ts",
+        "mode": "100644",
+        "blobOID": "96e04d3678605abdfa45df9b4bfaaeecc8e95925"
+      },
+      {
+        "path": "src/desktop/renderer/index.html",
+        "mode": "100644",
+        "blobOID": "493f730533bdaed151efacfade1d0db4e67a8625"
+      },
+      {
+        "path": "src/desktop/renderer/index.tsx",
+        "mode": "100644",
+        "blobOID": "8389c01504e58b8359f964f8ed7c396296c148f0"
+      },
+      {
+        "path": "src/desktop/renderer/style.css",
+        "mode": "100644",
+        "blobOID": "dc006283dd441d83e7270ba3c71c1cb4f7fb086d"
+      },
+      {
+        "path": "src/desktop/renderer/terminal.css",
+        "mode": "100644",
+        "blobOID": "854bf2c6acdae44e6d670cb9d4ddfac5cf632ee7"
+      },
+      {
+        "path": "src/desktop/renderer/vite-env.d.ts",
+        "mode": "100644",
+        "blobOID": "11f02fe2a0061d6e6e1f271b21da95423b448b32"
+      },
+      {
+        "path": "src/desktop/shared.ts",
+        "mode": "100644",
+        "blobOID": "e94a4bd3901bc96d33ab2bb5fa3cbcf04aa14742"
+      },
+      {
+        "path": "tests/e2e/desktop.test.mjs",
+        "mode": "100644",
+        "blobOID": "fcd968d989f43da9991f822af6ea81674fceaa33"
+      },
+      {
+        "path": "tests/e2e/explorer.test.mjs",
+        "mode": "100644",
+        "blobOID": "18989735a2106ab775f946d08166a95f41f20590"
+      },
+      {
+        "path": "tests/e2e/terminal-scenario.mjs",
+        "mode": "100644",
+        "blobOID": "413489d489cf500c43c29533a0014a273afc8ea5"
+      },
+      {
+        "path": "tests/e2e/wait.mjs",
+        "mode": "100644",
+        "blobOID": "495930439317467700f0e274cd3c0d7e0b370718"
+      },
+      {
+        "path": "tests/git-compat/cases/additional.mjs",
+        "mode": "100644",
+        "blobOID": "19dfff44da1a31ad8068a49a65debb3ff5377d26"
+      },
+      {
+        "path": "tests/git-compat/cases/coverage-gaps.mjs",
+        "mode": "100644",
+        "blobOID": "e2f558d132a4ca0ef21dece14d1010906217b950"
+      },
+      {
+        "path": "tests/git-compat/cases/harness-extra.mjs",
+        "mode": "100644",
+        "blobOID": "eac0f559bf2de9088aa2db5ac826b394656a4331"
+      },
+      {
+        "path": "tests/git-compat/cases/harness.mjs",
+        "mode": "100644",
+        "blobOID": "2247c5958cf7f51be6d807441435f35e6089e8b4"
+      },
+      {
+        "path": "tests/git-compat/cases/implementation.mjs",
+        "mode": "100644",
+        "blobOID": "49e8b28949299be1714b1753c39dc52b10f10df1"
+      },
+      {
+        "path": "tests/git-compat/cases/interactive.mjs",
+        "mode": "100644",
+        "blobOID": "07c30d232735ed125e93d1c7382f7eddfc19fcce"
+      },
+      {
+        "path": "tests/git-compat/cases/legacy-transport.mjs",
+        "mode": "100644",
+        "blobOID": "8693ac20922d8282970f2b7df59dc4e313653c9d"
+      },
+      {
+        "path": "tests/git-compat/cases/native-advanced.mjs",
+        "mode": "100644",
+        "blobOID": "8b4fe9da9c485ac6607bf0e5badd3f4d24d4666a"
+      },
+      {
+        "path": "tests/git-compat/cases/native-completion.mjs",
+        "mode": "100644",
+        "blobOID": "8c5c57935838db5ab59986d586336b5bd9677602"
+      },
+      {
+        "path": "tests/git-compat/cases/native-extra.mjs",
+        "mode": "100644",
+        "blobOID": "30ac77cb4f6169859f30e9acae79e17ad4c34db9"
+      },
+      {
+        "path": "tests/git-compat/cases/native-legacy.mjs",
+        "mode": "100644",
+        "blobOID": "ec9a2cc6edfcde68cd064b61cd253749ef20b240"
+      },
+      {
+        "path": "tests/git-compat/cases/native-optional.mjs",
+        "mode": "100644",
+        "blobOID": "378cb3e9cd837c32efaa225af63c67e0ea7e00c2"
+      },
+      {
+        "path": "tests/git-compat/cases/native.mjs",
+        "mode": "100644",
+        "blobOID": "3d851b11cd6db71b9567e484f70dde481eae6fc1"
+      },
+      {
+        "path": "tests/git-compat/cases/product-extra.mjs",
+        "mode": "100644",
+        "blobOID": "bbfd5c6fc7ba61f3a3cb35c05965142f03aaf01f"
+      },
+      {
+        "path": "tests/git-compat/cases/product.mjs",
+        "mode": "100644",
+        "blobOID": "6fb5a14487c533f9b929036e5e7984587f6218db"
+      },
+      {
+        "path": "tests/git-compat/cases/recovery-interleaved.mjs",
+        "mode": "100644",
+        "blobOID": "a18d35a5c6d3683169792b3eebdf299c28971222"
+      },
+      {
+        "path": "tests/git-compat/cases/recovery-observed.mjs",
+        "mode": "100644",
+        "blobOID": "8dc2757c1ad503aab77b181ada216aa90af8199c"
+      },
+      {
+        "path": "tests/git-compat/cases/revision.mjs",
+        "mode": "100644",
+        "blobOID": "f44b9593929d9727284c28772c72efcc257b0fc4"
+      },
+      {
+        "path": "tests/git-compat/cases/transport-extra.mjs",
+        "mode": "100644",
+        "blobOID": "a85a41b7c885bce604fa172527165feb9623d68f"
+      },
+      {
+        "path": "tests/git-compat/cases/webdav.mjs",
+        "mode": "100644",
+        "blobOID": "78156df23e9af953a268af52c1fa95faa398db67"
+      },
+      {
+        "path": "tests/git-compat/expectations-closure-2026-11-02-r1.json",
+        "mode": "100644",
+        "blobOID": "4ad30032b7e3a58c3b1cfa152e458a7dfa84a663"
+      },
+      {
+        "path": "tests/git-compat/expectations-closure-2026-11-02.json",
+        "mode": "100644",
+        "blobOID": "ab0d602199b56f11f7a986b29a7d3d3c46a59578"
+      },
+      {
+        "path": "tests/git-compat/expectations-implementation-2026-11-02.json",
+        "mode": "100644",
+        "blobOID": "4f95abf5700bdb364d513be09034f9fdd1a466fd"
+      },
+      {
+        "path": "tests/git-compat/fixtures/supervisor-worker.mjs",
+        "mode": "100644",
+        "blobOID": "6c22707e3defd5dc41fa67d5cf55c909002d7227"
+      },
+      {
+        "path": "tests/git-compat/helpers/checkpoint-location.mjs",
+        "mode": "100644",
+        "blobOID": "159ea213c4ebdaf5edaee6ae33076aa234124d7f"
+      },
+      {
+        "path": "tests/git-compat/helpers/expectations.mjs",
+        "mode": "100644",
+        "blobOID": "24165f20b47bb931ce4ab644499c82e2057e2982"
+      },
+      {
+        "path": "tests/git-compat/helpers/inspector.mjs",
+        "mode": "100644",
+        "blobOID": "76a12c5b53df56b73e31820386779147c73a7c75"
+      },
+      {
+        "path": "tests/git-compat/helpers/mail-loopback-server.mjs",
+        "mode": "100644",
+        "blobOID": "a5696ca8f00afc1d21938b943a3db015b0e866d1"
+      },
+      {
+        "path": "tests/git-compat/helpers/smart-http-server.mjs",
+        "mode": "100644",
+        "blobOID": "97815de007038207c6e9d4d5753ebd0eed317c6c"
+      },
+      {
+        "path": "tests/git-compat/helpers/webdav.mjs",
+        "mode": "100644",
+        "blobOID": "e623340f498a79abba0737f176b15778cf2a6bfc"
+      },
+      {
+        "path": "tests/git-compat/infra/checkpoint-location.test.mjs",
+        "mode": "100644",
+        "blobOID": "89aa1799bbcd7594fb29fd421ded62cad3f19511"
+      },
+      {
+        "path": "tests/git-compat/infra/docs.test.mjs",
+        "mode": "100644",
+        "blobOID": "79f508dce11ece70f767d1fdc00f3fbf36451407"
+      },
+      {
+        "path": "tests/git-compat/infra/execution-budget.test.mjs",
+        "mode": "100644",
+        "blobOID": "1c44b5b6fefeb41078f9303449cb3787a9e1f42e"
+      },
+      {
+        "path": "tests/git-compat/infra/execution.test.mjs",
+        "mode": "100644",
+        "blobOID": "f3d852229d1803a57d0c11722d7ba5bda9492f72"
+      },
+      {
+        "path": "tests/git-compat/infra/existing-budgets.test.mjs",
+        "mode": "100644",
+        "blobOID": "3f835879f3403995a02ca25f4e5e672e735b641b"
+      },
+      {
+        "path": "tests/git-compat/infra/existing.test.mjs",
+        "mode": "100644",
+        "blobOID": "541766466560f8b5fcf1fac4abfdea7dc5e20916"
+      },
+      {
+        "path": "tests/git-compat/infra/extensibility.test.mjs",
+        "mode": "100644",
+        "blobOID": "cce135900449a5643e88935adfa2e9512bb3ce6d"
+      },
+      {
+        "path": "tests/git-compat/infra/implementation-matrix.test.mjs",
+        "mode": "100644",
+        "blobOID": "39106362850087b21cf41c46de963be50d2f3f6f"
+      },
+      {
+        "path": "tests/git-compat/infra/implementation-package.test.mjs",
+        "mode": "100644",
+        "blobOID": "79e5b8e12e3fdd37bb06ae533b49975e28f43af5"
+      },
+      {
+        "path": "tests/git-compat/infra/portability.test.mjs",
+        "mode": "100644",
+        "blobOID": "a2e96584eea17b0af0ffd1b2e1a5817a1aa5c7bc"
+      },
+      {
+        "path": "tests/git-compat/infra/report-integrity.test.mjs",
+        "mode": "100644",
+        "blobOID": "05fcb29a040e291e2f755df98792f5201d7cebd1"
+      },
+      {
+        "path": "tests/git-compat/infra/report-phase.test.mjs",
+        "mode": "100644",
+        "blobOID": "51afc265bc5a505a8552df2b6cb35c037d2cb688"
+      },
+      {
+        "path": "tests/git-compat/infra/runtime-expectations.test.mjs",
+        "mode": "100644",
+        "blobOID": "a251adb609b715cab19076eacf636cbd375ff709"
+      },
+      {
+        "path": "tests/git-compat/infra/sanitization.test.mjs",
+        "mode": "100644",
+        "blobOID": "f59b02be7ea0e865f816bf4bf1cb4bc14c377775"
+      },
+      {
+        "path": "tests/git-compat/infra/supervisor.test.mjs",
+        "mode": "100644",
+        "blobOID": "d865fff4b33113cff784ea1bea8ae7a568f59787"
+      },
+      {
+        "path": "tests/git-compat/infra/zip-fixtures.mjs",
+        "mode": "100644",
+        "blobOID": "89e0b473e9e976411b9b5d0b2093d5d1212e75bc"
+      },
+      {
+        "path": "tests/git-compat/infra/zip-long.test.mjs",
+        "mode": "100644",
+        "blobOID": "d27441e53fbaa5e8dafefec32c3c45734ab4999e"
+      },
+      {
+        "path": "tests/git-compat/infra/zip-portability.mjs",
+        "mode": "100644",
+        "blobOID": "14ffa84550cb8f78a7236e5c1daf3ff4de84bddb"
+      },
+      {
+        "path": "tests/git-compat/infra/zip.test.mjs",
+        "mode": "100644",
+        "blobOID": "be2a9172dae2655eccc8d21316b08d9cc107e103"
+      },
+      {
+        "path": "tests/git-compat/known-issues.json",
+        "mode": "100644",
+        "blobOID": "ea8b46e7c348d471a52a432750988e1a307cd68c"
+      },
+      {
+        "path": "tests/git-compat/scenarios.json",
+        "mode": "100644",
+        "blobOID": "e1df7ede93c63f626b598c8b0a45f63d4ea9b998"
+      },
+      {
+        "path": "tests/helpers/terminal-scenario.ts",
+        "mode": "100644",
+        "blobOID": "d985bbe3a4029d4ed688b335f407667783dda1b2"
+      },
+      {
+        "path": "tests/integration/branch-protection.test.ts",
+        "mode": "100644",
+        "blobOID": "5c96c95754aa1bc0e02168df5de9b5ce8422ec69"
+      },
+      {
+        "path": "tests/integration/cli.test.ts",
+        "mode": "100644",
+        "blobOID": "998b2b0d41198909fac67641a0ae9671c4993e29"
+      },
+      {
+        "path": "tests/integration/core.test.ts",
+        "mode": "100644",
+        "blobOID": "7064d9ba829a63d0e61d35687ad778e373c50221"
+      },
+      {
+        "path": "tests/integration/editing-boundary.test.ts",
+        "mode": "100644",
+        "blobOID": "fa5c913823738a0536f0065772376c960f00d5cc"
+      },
+      {
+        "path": "tests/integration/editor.test.ts",
+        "mode": "100644",
+        "blobOID": "f47814f7e3fa0fb2699149b94b7d262d5b17957a"
+      },
+      {
+        "path": "tests/integration/layout-rescue.test.ts",
+        "mode": "100644",
+        "blobOID": "9ce20b0e82cece38dabe0756e8bec76df635256c"
+      },
+      {
+        "path": "tests/integration/product-v1.test.ts",
+        "mode": "100644",
+        "blobOID": "353ad8bf7e9df2b1d9f69555961a90bc1dfebfaf"
+      },
+      {
+        "path": "tests/integration/recovery.test.ts",
+        "mode": "100644",
+        "blobOID": "885018e94eea64dd160d4d3205dc08162e02c958"
+      },
+      {
+        "path": "tests/integration/review-rename.test.ts",
+        "mode": "100644",
+        "blobOID": "6c6074f348315361f0e4113192f96dfbffe887c8"
+      },
+      {
+        "path": "tests/integration/review-target-preview.test.ts",
+        "mode": "100644",
+        "blobOID": "089214a3cc0587ea964f74dc3b5adadd6ebfd4e6"
+      },
+      {
+        "path": "tests/integration/security-atomic-stage.test.ts",
+        "mode": "100644",
+        "blobOID": "cc42dda19563d9792d1bcd6d12cd71840b31a329"
+      },
+      {
+        "path": "tests/integration/security-base-origin.test.ts",
+        "mode": "100644",
+        "blobOID": "2f3a5921db7ad93912d2c11665b126e4427254b0"
+      },
+      {
+        "path": "tests/integration/security-diagnostics.test.ts",
+        "mode": "100644",
+        "blobOID": "9a955fbdc171191de32d1ce6804becc9bcaf03da"
+      },
+      {
+        "path": "tests/integration/security-editing-transition.test.ts",
+        "mode": "100644",
+        "blobOID": "726aca15c0550aee7b987adaf343f8a1ab60d2e6"
+      },
+      {
+        "path": "tests/integration/security-ignore-refresh.test.ts",
+        "mode": "100644",
+        "blobOID": "f071d951551df8718efe96cf42a8b63ae1d32789"
+      },
+      {
+        "path": "tests/integration/security-index-concurrency.test.ts",
+        "mode": "100644",
+        "blobOID": "30e7068f5a79758717e884dbf9f75e7749713486"
+      },
+      {
+        "path": "tests/integration/security-ownership.test.ts",
+        "mode": "100644",
+        "blobOID": "3156e97726f159cf116e27c65203338883404189"
+      },
+      {
+        "path": "tests/integration/security-protection.test.ts",
+        "mode": "100644",
+        "blobOID": "0442ce07b50deb5d7113597f71c23d07eba75f92"
+      },
+      {
+        "path": "tests/integration/storage.test.ts",
+        "mode": "100644",
+        "blobOID": "adf510a481f94a0917c7ae10e7a553e34f24eda9"
+      },
+      {
+        "path": "tests/integration/terminal-runtime.test.mjs",
+        "mode": "100644",
+        "blobOID": "957d10db04256e717de1f5b8cca1497af37d67b3"
+      },
+      {
+        "path": "tests/integration/windows-compat.test.ts",
+        "mode": "100644",
+        "blobOID": "8efabc692125a5fd692d689272c8873d9e0792d5"
+      },
+      {
+        "path": "tests/unit/archive-local-evidence.test.mjs",
+        "mode": "100644",
+        "blobOID": "384a6d365d55fba5c43fcf2a4451f68a89ce4454"
+      },
+      {
+        "path": "tests/unit/development-inputs.test.mjs",
+        "mode": "100644",
+        "blobOID": "cf20874ed057ab3f8faac7bcf51863df76c72eeb"
+      },
+      {
+        "path": "tests/unit/e2e-wait.test.mjs",
+        "mode": "100644",
+        "blobOID": "5ee933a2978e26436e9025a23165bbdd679f3ac7"
+      },
+      {
+        "path": "tests/unit/explorer-tree.test.ts",
+        "mode": "100644",
+        "blobOID": "a0df80fcdcf0c911c198290bc990726c482ca4a7"
+      },
+      {
+        "path": "tests/unit/file-decorations.test.ts",
+        "mode": "100644",
+        "blobOID": "3b7708a9314cffc8249865e08185418fa310c92d"
+      },
+      {
+        "path": "tests/unit/implementation-cli.test.mjs",
+        "mode": "100644",
+        "blobOID": "51f57b5ece1e73868c9c0e55302a17458a6a7ffe"
+      },
+      {
+        "path": "tests/unit/paths.test.ts",
+        "mode": "100644",
+        "blobOID": "49b6c69f0fb668bb2b8b55a0f19bfefc7a973f11"
+      },
+      {
+        "path": "tests/unit/platform.test.ts",
+        "mode": "100644",
+        "blobOID": "6ee1601943ac151dd7c9b0bce4cad97e1e263116"
+      },
+      {
+        "path": "tests/unit/terminal-commands.test.ts",
+        "mode": "100644",
+        "blobOID": "cbaa0d18ab522d22838472bc9f9f632c03ec7138"
+      },
+      {
+        "path": "tests/unit/terminal.test.ts",
+        "mode": "100644",
+        "blobOID": "d6fc846ad6e4f8f569697df5a76f3bff7fdf559e"
+      },
+      {
+        "path": "tests/unit/windows-package.test.mjs",
+        "mode": "100644",
+        "blobOID": "49e0ed6261d00c33bbf9269f4e48d0ddee038171"
+      },
+      {
+        "path": "tests/unit/workshop-ui.test.mjs",
+        "mode": "100644",
+        "blobOID": "b3da5b880bc8146a226314091cf3262c686b4760"
+      },
+      {
+        "path": "tsconfig.json",
+        "mode": "100644",
+        "blobOID": "d0d00ab68d07ce5881f2b0d2dc379c01a8067ff8"
+      }
+    ]
+  },
+  "sourceFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+  "functionalInputCount": 183,
+  "freshA": {
+    "wrapperReceipt": {
+      "id": "fresh-wrapper14-4ec2c037f1a3-20261104T120112080Z-90b159e7-a8d0-4ac0-90af-8c582976e8bc/result.json",
+      "sha256": "5d89e2be6d6bd12d1c2eed0050a7a9d31b0fb41270e2d9b7416de537bbfd249c"
+    },
+    "wrapperExitCodeObservedByRoot": 0,
+    "toolChunk": "3d0145",
+    "startedAt": "2026-11-04T12:01:12.086Z",
+    "endedAt": "2026-11-04T12:05:08.732Z",
+    "testedCommit": "4ec2c037f1a3e4397ae49ae37b239df60bfcc26f",
+    "reviewedTree": "17921b55f5aaf9c4af749534f3a7ec817b47671c",
+    "terminalProcessObserved": true,
+    "exitCode": 0,
+    "signal": null,
+    "success": true,
+    "receipt": {
+      "id": "fresh-4ec2c037f1a3/result.json",
+      "sha256": "768a08cea2dcb2100c95b6566a5face67d1e5d05d32e5a916f5a5528c1ba261e"
+    },
+    "commands": [
+      {
+        "label": "clone",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSHA256": "8bcafbe988477f18e9c55e2dffbad6541a3f87642cfaa0eb4a49bb25ad0dc8b5"
+      },
+      {
+        "label": "head",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "stdoutSHA256": "be100e87a950e1ea49f1f53a2238b59fc28c5b8b48fffe2490be7f9bea0dbbfb",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "npm-ci",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "stdoutSHA256": "e7e192e88ca64c2e85f0ae256cbc19d27537b412725433b24265aa93349555d5",
+        "stderrSHA256": "30de96e254edadd5ba9941d9ed37333b02873cbae5f6f6c672be2aa61008a542"
+      },
+      {
+        "label": "typecheck",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "stdoutSHA256": "e8019a022875aefbef7b4fe3f03d9b1d8f36926f96f5bed42e0e197cb41c2a0c",
+        "stderrSHA256": "4e723f3bf722447979fb649b455a4544300837382c8fe02ba61a8bd988f86a07"
+      },
+      {
+        "label": "compiled-help",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "stdoutSHA256": "a6ca42571339a866f81cf150f27cfde13fd23bce542d7cabb2d4434893768073",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "smoke",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "stdoutSHA256": "3d44eaa9b5b9d2bd90d24114e4848cabc1faeaeffc20f2ab55f887ffad513ed6",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "status",
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "inputsBeforeSHA256": "6ef249ad103a54264519dd11c7c6f6d68321090e5b56791130e309cf3c2e1034",
+    "inputsAfterSHA256": "6ef249ad103a54264519dd11c7c6f6d68321090e5b56791130e309cf3c2e1034",
+    "functionalInputCount": 183,
+    "sourceFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "completePhysicalDomainEnumerated": true,
+    "completeCommittedDomainEnumerated": true,
+    "enumeratedManifestSHA256": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "committedManifestSHA256": "3fc87e62cc2618d4d449433950121668e046ed6bc66e579bf7b2080aee14a161",
+    "cloneWithoutHardlinksAndAlternates": true
+  },
+  "publicationA": {
+    "operations": [
+      {
+        "label": "push-A",
+        "receipt": {
+          "id": "git-publication-push-A-cbb7efaf-50ea-461a-a64c-49744ef9c25e/result.json",
+          "sha256": "141f0c617359989da1dd922eae658c23d6846991f72652a67c7e24f98d1109fd"
+        },
+        "args": [
+          "push",
+          "origin",
+          "4ec2c037f1a3e4397ae49ae37b239df60bfcc26f:refs/heads/main"
+        ],
+        "code": 0,
+        "signal": null,
+        "at": "2026-11-04T12:05:27.361Z",
+        "endedAt": "2026-11-04T12:05:29.680Z",
+        "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSHA256": "86d27e9885bbff0b865139da47420e525a745c80c2a0a2f1693c91a1e7c378d1"
+      },
+      {
+        "label": "fetch-A",
+        "receipt": {
+          "id": "git-publication-fetch-A-f9c38e63-290a-4f8b-8ebc-70548af92af9/result.json",
+          "sha256": "939524f2917a6994f83c6dc291745806cc91b4f74ceff6561eca041c3d929ddc"
+        },
+        "args": [
+          "fetch",
+          "--no-tags",
+          "origin",
+          "refs/heads/main:refs/remotes/origin/main"
+        ],
+        "code": 0,
+        "signal": null,
+        "at": "2026-11-04T12:05:35.341Z",
+        "endedAt": "2026-11-04T12:05:35.910Z",
+        "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "server-A",
+        "receipt": {
+          "id": "git-publication-server-A-10a9bc6f-50f1-475a-9abf-68a20b0afadc/result.json",
+          "sha256": "451818a20d5c0181e72513ac039862c44b1def8a95c0897876d428e1b768d2f7"
+        },
+        "args": [
+          "ls-remote",
+          "--exit-code",
+          "origin",
+          "refs/heads/main"
+        ],
+        "code": 0,
+        "signal": null,
+        "at": "2026-11-04T12:05:39.133Z",
+        "endedAt": "2026-11-04T12:05:39.755Z",
+        "stdoutSHA256": "9d517393d97aab2c492c48138be9d68e44d348da9473467cafd9065aa2b5f93c",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "HEAD": "4ec2c037f1a3e4397ae49ae37b239df60bfcc26f",
+    "main": "4ec2c037f1a3e4397ae49ae37b239df60bfcc26f",
+    "originMain": "4ec2c037f1a3e4397ae49ae37b239df60bfcc26f",
+    "serverMain": "4ec2c037f1a3e4397ae49ae37b239df60bfcc26f",
+    "upstream": "origin/main",
+    "ahead": 0,
+    "behind": 0,
+    "checkoutClean": true,
+    "forceUsed": false,
+    "serverObservedAt": "2026-11-04T12:05:39.755Z",
+    "localObservedAt": "2026-11-04T12:07:21.106Z",
+    "observationsNotAtomic": true
+  },
+  "B": {
+    "commit": null,
+    "fresh": null,
+    "server": null,
+    "qualification": "Documentary B does not pre-attest itself. Its tree, source modes/blobs, separate fresh run and server equality are checked after creation and reported externally in the final delivery; no recursive commit C is inferred."
+  },
+  "limitations": [
+    "Local Windows/Git/Node verification, not remote CI or universal compatibility.",
+    "Fresh8 is not another FULL/broad campaign. Source identity is checked by bytes plus independent Git modes/blob OIDs.",
+    "A server equality is an observation at its timestamp; later actors can change refs."
+  ]
+}

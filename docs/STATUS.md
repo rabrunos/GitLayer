@@ -8,7 +8,7 @@ Validação local do mesmo **ACE17/183**, fingerprint ace17ce01ec8a0c5b908f0cb1a
 
 Permanecem **20 implementados e sete parciais: GL-01/09/15/18/19/20/22**. Git direto não é interceptado, protect continua opt-in e Core/CLI não dependem de editor. Não há auto-park, duplicação permanente ou compatibilidade universal certificada. safe:true não cria backup de bytes apenas no disco.
 
-**Cópias commitadas e publicação ainda pendentes:** veja o [registro próprio](reports/2026-11-03-security-compatibility-implementation/PUBLICATION.md), sem antecipar commit/push/igualdade no servidor. Os resultados abaixo são históricos e conservam suas fontes.
+**Código A verificado e publicado:** `4ec2c037f1a3e4397ae49ae37b239df60bfcc26f`, com [registros próprios e protocolo documental B](reports/2026-11-03-security-compatibility-implementation/PUBLICATION.md). B deve preservar os 183 inputs; sua instalação e igualdade no servidor são conferidas depois de B existir, sem autoatestação neste documento. Os resultados abaixo são históricos e conservam suas fontes.
 
 ## Fechamento e investigação anteriores
 

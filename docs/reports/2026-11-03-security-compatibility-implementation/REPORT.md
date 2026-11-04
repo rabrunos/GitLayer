@@ -1,6 +1,6 @@
 # Etapa 1B — segurança e compatibilidade do Git Layer
 
-**Validação local final concluída:**311 PASS/0 FAIL/4 SKIP e zero cancelamentos em315 resultados headless, com pipeline concluído no mesmo ACE17/183. **Cópias commitadas e publicação ainda pendentes**, sem atestação antecipada.
+**Validação local final concluída:**311 PASS/0 FAIL/4 SKIP e zero cancelamentos em315 resultados headless, com pipeline concluído no mesmo ACE17/183. **Código A verificado e publicado:** `4ec2c037f1a3e4397ae49ae37b239df60bfcc26f`. [PUBLICATION](PUBLICATION.md) registra as evidências de A e o protocolo documental B; a conferência de B ocorre depois de seu commit e não é antecipada aqui.
 
 Fonte validada: **183 inputs**, fingerprint `ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d` (ACE17). Fingerprint de fontes não é SHA de commit. A [validação](RESULTS.md), os [recibos](VALIDATION.json) e o [manifesto](SOURCE-MANIFEST.json) identificam essa mesma fonte; os documentos acrescentados depois não alteram esses183 inputs.
 
@@ -10,7 +10,7 @@ A etapa trata **quatro famílias de defeitos gerenciados, D-01/D-02/D-03/D-04, e
 
 A solução implementa a combinação **A+B**: validações e recuperação conservadora do coordenador, apoiadas por refs, índices, exclusões e locks nativos do Git. Core e CLI continuam independentes de editor. Não foram introduzidos interceptadores globais, watchers obrigatórios, worktrees sincronizadas ou um novo sistema permanente de cópias.
 
-FULL14 e pipeline concluíram no ACE17/183 estável; os focos permanecem execuções separadas. Cópias commitadas e publicação ainda precisam de sua atestação própria. Mantêm-se **20 requisitos implementados e sete parciais: GL-01/09/15/18/19/20/22**; esta etapa não certifica Linux, todas as versões Git, worktrees arbitrárias, CI remoto ou desempenho.
+FULL14 e pipeline concluíram no ACE17/183 estável; os focos permanecem execuções separadas. A verificação em cópia nova e a publicação do código A estão registradas em [PUBLICATION](PUBLICATION.md). O commit documental B deve conservar os mesmos 183 inputs; sua instalação e sincronização serão conferidas depois de B existir. Mantêm-se **20 requisitos implementados e sete parciais: GL-01/09/15/18/19/20/22**; esta etapa não certifica Linux, todas as versões Git, worktrees arbitrárias, CI remoto ou desempenho.
 
 ## Defeitos e correções
 
@@ -92,16 +92,16 @@ Os cinco focos abaixo têm recibos terminais código0/sinal nulo e183 inputs est
 | focus-recovery-03 | 4 PASS de execução, exit0 | RECOVERY-001/003/014 e HARNESS-021; não certifica todo GL-19 nem encerra decisões de produto pendentes. |
 | FULL14 |315 resultados: **311 PASS,0 FAIL,4 SKIP,0 cancelados**; código0/sinal nulo |183 inputs ACE17 estáveis antes/depois; recibo terminal próprio, sem soma aos focos. |
 | Pipeline14 | Infra111PASS; broad355PASS/0FAIL/6ENV_BLOCKED; typecheck19/build18/smoke14 exit0; native8PASS | Pipeline completo; broad tem361 selecionados e25NOT_RUN fora da seleção. Fases e domínios são separados. |
-| Cópia nova e publicação | **PENDENTE: commit, fresh, push e SHA no servidor** | [PUBLICATION](PUBLICATION.md) registrará eventos reais; teste local não representa CI remoto. |
+| Código A e protocolo B | Código A `4ec2c037f1a3e4397ae49ae37b239df60bfcc26f`: cópia nova e publicação registradas | [PUBLICATION](PUBLICATION.md) separa A de B. A conferência de B é posterior ao seu commit; teste local não representa CI remoto. |
 
 Resultados, comandos, hashes e limites estão registrados em [RESULTS](RESULTS.md), [VALIDATION](VALIDATION.json) e [EVIDENCE](EVIDENCE.json). A [cronologia](HARNESS-HISTORY.md) preserva campanhas falhas/interrompidas. As receitas e reconstruções históricas em [REPRODUCTIONS](REPRODUCTIONS.md) distinguem fonte inicial, adaptações de harness e evidência runtime; hash privado sozinho não torna uma reprodução pública autossuficiente.
 
 ## Respostas às dez questões
 
-1. **É seguro para uso cotidiano?** O uso continua experimental, dentro do envelope Windows e pelos fluxos gerenciados verificados. A validação integral local passou; cópias commitadas e publicação continuam pendentes, e não há proteção universal contra Git direto.
+1. **É seguro para uso cotidiano?** O uso continua experimental, dentro do envelope Windows e pelos fluxos gerenciados verificados. A validação integral local e a verificação do código A em cópia nova foram concluídas, com sua publicação registrada em [PUBLICATION](PUBLICATION.md). Não há proteção universal contra Git direto; o protocolo de B conserva as verificações posteriores próprias.
 2. **Quais riscos reais permanecem?** Destruição de bytes por Git/ferramentas externas, staging nativo fora da prevenção, alterações entre verificações e recuperação incerta que exige inspeção. Não há reparo automático de histórico já misturado por versões anteriores.
 3. **O que vem do Git Layer ou do Git?** As quatro famílias são erros do coordenador. Destruição/sobrescrita pelos comandos nativos mantém semântica Git; a projeção e as reservas reais ampliam os locais que o usuário precisa compreender. Não são quatro novos defeitos.
-4. **O que é obrigatório antes de ampliar?** Os gates locais P0/P1 passaram no mesmo snapshot, com falhas anteriores preservadas. Ainda é preciso verificar cópias commitadas e servidor. Não aceitar estado saudável por conveniência ou ignorar journal pendente.
+4. **O que é obrigatório antes de ampliar?** Os gates locais P0/P1 passaram no mesmo snapshot, com falhas anteriores preservadas. A cópia nova e o servidor do código A têm registros em [PUBLICATION](PUBLICATION.md); o commit documental B deve preservar os 183 inputs e receber conferência própria posterior. Não aceitar estado saudável por conveniência ou ignorar journal pendente.
 5. **Quais limites persistem com Git intacto?** Um programa que não consulta o mapa privado pode alterar disco, refs e índices. Não há bloqueio universal nem recuperação de bytes nunca registrados. Isso não torna inevitáveis os defeitos corrigíveis do coordenador.
 6. **Qual estratégia é recomendada?** A+B: autoridade explícita e revalidação no Core, com índices/exclusões/refs/locks oficiais como mitigação limitada. Protect permanece opcional.
 7. **Existe arquitetura melhor comprovada?** Nenhuma substituta foi demonstrada superior para todos os contratos. As [alternativas investigadas](../2026-11-03-security-compatibility-investigation/OPTIONS.md) podem orientar estudos opcionais; mudar organização de arquivos exige decisão específica.
