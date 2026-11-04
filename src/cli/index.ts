@@ -23,6 +23,11 @@ Ajuda: git layer -h | git layer help | git-layer --help
   off <nome> [--discard --yes]      Desativa limpa; descarte exige escolha explícita
   edit <nome>                      Escolhe destino para arquivos novos
   edit-end                         Encerra o destino sem desativar a Layer
+  rename-file -- <origem> <destino> Renomeia preservando a origem; não prepara
+  ownership-review                 Revisa ambiguidades e fornece token atual
+  ownership-resolve <ação> --token <token> -- <caminhos>...
+                                   rename usa origem e destino; independent,
+                                   deleted e base exigem escolha deliberada
   rename <nome> <novo-nome>         Renomeia ref e identidade local da Layer
   remove <nome> [--discard] --yes   Remove localmente; descarte é opção separada
   preview <on|off|remove> <nome>    Mostra efeitos/impedimentos sem aplicar ação
@@ -72,6 +77,7 @@ Códigos: 0 sucesso; 2 uso inválido; 3 segurança/estado; 4 Git/IO;
 Use o Git oficial para push/fetch de refs/heads/layer/<nome>.
 --park foi removido: pendências exigem commit, descarte explícito ou cancelamento.
 O destino de edição é reconciliado nas consultas/comandos; não intercepta Git externo.
+switch gerenciado usa --no-overwrite-ignore; protect não protege bytes contra Git direto.
 Comandos Git diretos têm limites próprios; consulte docs/IMPLEMENTATION-2026-11-02.md.
 `;
 
@@ -91,7 +97,7 @@ interface Parsed {
 
 const COMMAND_FLAGS: Record<string, string[]> = {
   init: [], list: [], create: [], register: [], on: [], off: ['discard', 'yes', 'park'],
-  edit: [], 'edit-end': [], rename: [], remove: ['discard', 'yes'], preview: [],
+  edit: [], 'edit-end': [], rename: [], 'rename-file': [], 'ownership-review': [], 'ownership-resolve': ['token'], remove: ['discard', 'yes'], preview: [],
   'open-branch': [], migrate: ['yes'], protect: [], unprotect: [],
   status: [], add: [], unstage: [], diff: ['staged'], commit: ['message'], log: [],
   show: [], restore: ['yes'], release: [], capture: ['path'],
@@ -309,7 +315,7 @@ async function captureInteractive(core: GitLayers, layer: string, scope: string)
 
 async function dispatch(p: Parsed): Promise<{ result: unknown; exitCode: number }> {
   if (p.command === 'help') return { result: HELP, exitCode: 0 };
-  const pathCommands = new Set(['add', 'unstage', 'diff', 'restore', 'release', 'capture-confirm', 'base-add', 'base-unstage', 'hunks', 'stage-hunk']);
+  const pathCommands = new Set(['add', 'unstage', 'diff', 'restore', 'release', 'capture-confirm', 'base-add', 'base-unstage', 'hunks', 'stage-hunk', 'rename-file', 'ownership-resolve']);
   if (p.paths.length && !pathCommands.has(p.command)) throw new CliUsageError(`O comando ${p.command} não aceita caminhos depois de --.`);
   // Rescue deliberately bypasses normal metadata loading, which may be broken.
   if (p.command === 'doctor') { arity(p, 0); const result = await doctorRepository(p.cwd, p.flags.has('fsck')); return { result, exitCode: result.safe === false ? 3 : 0 }; }
@@ -350,6 +356,17 @@ async function dispatch(p: Parsed): Promise<{ result: unknown; exitCode: number 
     }
     case 'edit': arity(p, 1); result = await core.target(argument(p, 0, 'nome da Layer')); break;
     case 'edit-end': arity(p, 0); result = await core.target(); break;
+    case 'rename-file': { arity(p,0); const selected=paths(p,2); result=await core.renameFile(selected[0]!,selected[1]!); break; }
+    case 'ownership-review': arity(p,0); result=await core.ownershipReview(); break;
+    case 'ownership-resolve': {
+      arity(p,1);const action=argument(p,0,'resolução (rename, independent, deleted ou base)'),token=flagValue(p,'token');
+      if(action==='rename'){const selected=paths(p,2);result=await core.resolveOwnership({token,renames:[{from:selected[0]!,to:selected[1]!}]});}
+      else if(action==='independent')result=await core.resolveOwnership({token,independent:paths(p)});
+      else if(action==='deleted')result=await core.resolveOwnership({token,deleted:paths(p)});
+      else if(action==='base')result=await core.resolveOwnership({token,acceptBase:paths(p)});
+      else throw new CliUsageError('ownership-resolve aceita rename, independent, deleted ou base.');break;
+    }
+
     case 'rename': arity(p, 2); result = await core.renameLayer(argument(p, 0, 'nome da Layer'), argument(p, 1, 'novo nome da Layer')); break;
     case 'remove': {
       arity(p, 1);

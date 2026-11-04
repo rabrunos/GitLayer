@@ -1,0 +1,176 @@
+{
+  "schema": 1,
+  "classification": "verified-postdocs-HARNESS-021-only",
+  "success": true,
+  "source": {
+    "count": 183,
+    "fingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d"
+  },
+  "scriptSHA256": "ef17d137091b2257388a3366a9aaea5ac4aa0927e936104f8f175f5e7cbcb005",
+  "pipelineSHA256": "3ed97332467cd8b3be841164a9ae74ca97a97318ad26dac7a713b22a635b3c2b",
+  "documents": [
+    {
+      "file": "AGENTS.md",
+      "sha256": "c033079f84746cd9a39bc2bbfab23f5135af59cf894b957241a5afbf177b45af",
+      "bytes": 13649,
+      "mode": 438
+    },
+    {
+      "file": "docs/git-compat/history/REVISAO-AGENTS-v2.md",
+      "sha256": "b49b1c7250e6383e9168364e5e8cbdc2c19c7070b4507f8b1ccc777354969d1b",
+      "bytes": 4153,
+      "mode": 438
+    },
+    {
+      "file": "docs/reports/2026-11-03-security-compatibility-implementation/README.md",
+      "sha256": "9351b3b5e938a284eb8f1b84226531d0e9d44dd308e74f5188ed67b99847a63d",
+      "bytes": 3594,
+      "mode": 438
+    },
+    {
+      "file": "docs/decisions/2026-11-02-closure.md",
+      "sha256": "b1a18c17b3ab2f13003c08bb2e89b6d27a7e4c02fabce4c789cf3fab52cb24a2",
+      "bytes": 24414,
+      "mode": 438
+    }
+  ],
+  "localLinks": [
+    {
+      "file": "docs/ARCHITECTURE.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/SAFETY.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/LIMITATIONS.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/TEST-REPORT.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/reports/2026-11-03-security-compatibility-implementation/README.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/STATUS.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/IMPLEMENTATION-2026-11-02.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/decisions/2026-11-02-closure.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/git-compat/reference/05-Prompt-Codex.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/git-compat/reference/06-Decisoes-e-Autonomia.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/git-compat/reviews/Revisao-Tecnica-Git-Layers-Validacao-v2.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/git-compat/reference/03-Cenarios-Git-Layers-v2.json",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "tests/git-compat/scenarios.json",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/STATUS.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/git-compat/README.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/git-compat/ARQUITETURA-E-CONTRATOS.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/git-compat/DESKTOP-WORKFLOW.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/WORKSHOP.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/DEVELOPMENT.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/TERMINAL.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/git-compat/history/REVISAO-AGENTS-v2.md",
+      "exists": true,
+      "type": "file"
+    },
+    {
+      "file": "docs/git-compat/history/REVISAO-INFRAESTRUTURA-2026-10-19.md",
+      "exists": true,
+      "type": "file"
+    }
+  ],
+  "matrix": {
+    "runId": "run-2026-11-04T11-56-54-296Z-f6cdd84f",
+    "summarySHA256": "27f87490f7b5a0c09423b4eb6cd8ddc5c003f875f6a9083fd32c604b2d1b9427",
+    "resultsSHA256": "e7e7e6f0b72177e293b1c0da5ae2f00833215863c2fbe614209b37e74c8f8f2f",
+    "instructionProofSHA256": "07be37ac40bf125ccf31d02e183bf2fd2a9428959ef52bf0d73bb2f6b323b263",
+    "runnerSourceFingerprint": "46c67c18ea3bc25bc505ea8a68b76cad47cb2cbfa438daf51a0cbaa27b348175",
+    "runnerFingerprint": "56df12f27c752ea8f1d2306910a2a9d54e90fe1a9ad3c4e2defd6efd70e93504",
+    "selected": 1,
+    "PASS": 1,
+    "FAIL": 0,
+    "SKIP": 0,
+    "product": "NOT_ASSESSED"
+  },
+  "child": {
+    "code": 0,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "startedAt": "2026-11-04T11:56:54.106Z",
+    "closedAt": "2026-11-04T11:56:57.184Z",
+    "durationMs": 3076
+  },
+  "countsAddedToFull": 0,
+  "newNodeTestTotals": 0,
+  "wrapperCloseMustBeObservedByRoot": true,
+  "qualification": "Runner archives all docs as provenance and requires its full runner baseline stable during the run. HARNESS-021 asserts content of only the four listed documents and existence of AGENTS local links. Later RESULTS/PUBLICATION attestations are not content assessed by this scenario.",
+  "commitRule": "Keep the four document bytes/modes and local-link existence/types unchanged through commit A, or rerun this one scenario. Later RESULTS/PUBLICATION text and all REPORT content are not claimed executed; no product behavior is certified."
+}

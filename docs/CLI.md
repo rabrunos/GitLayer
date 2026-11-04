@@ -1,5 +1,21 @@
 # CLI local `git-layer`
 
+**Segurança 1B — 03/11/2026.** Novos comandos Core/CLI:
+
+| Comando | Efeito |
+| --- | --- |
+| `rename-file -- <origem> <destino>` | Renomeia conservando a origem conhecida, sem staging automático. |
+| `ownership-review` | Leitura da ambiguidade atual e token; não publica reservas. |
+| `ownership-resolve rename --token <token> -- <origem> <destino>` | Confirma a relação entre ausência e candidato; conserva a origem anterior. |
+| `ownership-resolve independent --token <token> -- <caminhos>...` | Declara criação independente para o destino aberto ou a base, sem staging. |
+| `ownership-resolve deleted --token <token> -- <caminhos>...` | Reconhece ausências, sem apagar arquivos. |
+| `ownership-resolve base --token <token> -- <caminhos>...` | Aceita caminhos já integrados externamente na base durante edição. |
+| `release base -- <caminhos>...` | Libera origem base explicitamente reservada/aceita, ausente de HEAD e do índice principal atuais; preserva disco e histórico existente. |
+
+Token obsoleto retorna `OWNERSHIP_REVIEW_STALE`; refaça a leitura. Consulte as [reproduções](reports/2026-11-03-security-compatibility-implementation/REPRODUCTIONS.md). Erros JSON seguem em stderr: código 2 para uso e 3 para segurança/estado. Em `status`, examine `result.safe` e `result.error`; exit0 da consulta não certifica segurança universal.
+
+`switch` gerenciado conserva Layers compatíveis e usa `--no-overwrite-ignore`. Git direto permanece intacto. `protect` é opcional; confira `branchProtection.enabled`, `healthy` e `coverage` separadamente. A cobertura completa se refere à seleção nominal de branches Layer locais, com a Layer que já é a branch Git atual isenta. Avalie result.safe e role separadamente para validar o contexto de trabalho; a cobertura não protege bytes nem impede sobrescrita por troca nativa para branch tradicional.
+
 A CLI executa o Core e o Git oficial com argumentos separados. Não requer Electron, editor, plugin nem demonstração. Os contratos e limites de 02/11/2026 estão em [implementação do Core/CLI](IMPLEMENTATION-2026-11-02.md); as evidências anteriores do workshop não certificam esta versão.
 
 ## Build independente
@@ -76,17 +92,19 @@ A prévia off/remove pode ser usada diretamente após criar um arquivo extername
 |---|---|
 | `add <nome> -- <caminho>...` | Atribui/prepara lote autorizado no índice da Layer. |
 | `unstage <nome> -- <caminho>...` | Retira da preparação preservando reserva e disco. |
-| `release <nome> -- <caminho>...` | Libera somente reserva nunca commitada e já não preparada. |
+| `release <nome> -- <caminho>...` | Libera somente reserva explícita ausente da árvore commitada atual e do índice da Layer; preserva disco e histórico existente. |
 | `diff <nome> [--staged] [-- <caminho>...]` | Diferença da origem escolhida. |
 | `commit <nome> -m <mensagem>` | Registra somente seu índice Git, sem dividir commits automaticamente. |
 | `log [<nome>]` / `show <revisão>` | Consulta histórico/commit Git. |
-| `hunks <base|nome> -- <arquivo>` | Lista trechos suportados e token. |
-| `stage-hunk <base|nome> --hunk <n> --token <token> -- <arquivo>` | Prepara trecho com estado ainda válido. |
-| `restore <base|nome> [--yes] -- <caminho>...` | Restaura disco a partir do índice com backup; não faz unstage. |
+| `hunks <base\|nome> -- <arquivo>` | Lista trechos suportados e token. |
+| `stage-hunk <base\|nome> --hunk <n> --token <token> -- <arquivo>` | Prepara trecho com estado ainda válido. |
+| `restore <base\|nome> [--yes] -- <caminho>...` | Restaura disco a partir do índice com backup; não faz unstage. |
+
+Quando a Layer nomeada é a branch de trabalho atual, add/unstage/commit desse nome usam o fluxo do MAIN dessa branch. O Core verifica esse papel dentro do guard atualizado: uma instância antiga não deve publicar um commit na main quando foi solicitada uma Layer projetada sem staging.
 
 Preparar todas as mudanças e fazer um commit só é o fluxo normal de GL-14. Preparar trechos é opcional. Os hunks começam em zero; token obsoleto é recusado, sem fallback para arquivo inteiro. Binários e patches não suportados exigem preparação integral. Preparar B e editar disco para C não faz o commit do índice capturar C silenciosamente.
 
-Para a branch de trabalho, use `base-add -- <caminhos>`, `base-unstage -- <caminhos>` e `base-commit -m <mensagem>`. O índice dessa origem é separado dos índices das Layers ativas. `branches`, `branch-create <nome>` e `branch-delete <nome>` oferecem gerenciamento tradicional conservador; a exclusão não força histórico não integrado.
+Para a branch de trabalho, use `base-add -- <caminhos>`, `base-unstage -- <caminhos>` e `base-commit -m <mensagem>`. O índice dessa origem é separado dos índices das Layers ativas. base-unstage conserva o disco e a origem base já conhecida, inclusive de NEW legitimamente indexado sem ambiguidade. A simples presença no MAIN não prova a origem quando existe ausência conhecida com candidatos: retirar o staging não deve reservar esse candidato na base nem atribuí-lo à Layer. Refaça ownership-review e resolva a relação explicitamente; não é necessário liberar uma reserva base artificial para declarar o rename. Aceite, histórico e reservas explícitas existentes conservam suas próprias pré-condições. `branches`, `branch-create <nome>` e `branch-delete <nome>` oferecem gerenciamento tradicional conservador; a exclusão não força histórico não integrado.
 
 ## Pendências e confirmações
 
@@ -143,6 +161,10 @@ node $cli --cwd $repo migrate --yes
 
 `doctor`/`recovery-export` não exigem `GitLayers.open` normal. Exportar não repara automaticamente, sobrescreve destinos nem remove lock disputado. Para compartilhar histórico use Git oficial, por exemplo `git push remoto layer/scripts` e `git fetch remoto`. Reconhecer uma ref recebida não ativa a Layer. Nenhum comando CLI envia exclusão remota ou cria serviço de nuvem próprio.
 
+Se `recover` retornar `RECOVERY_CONFLICT` com reason `workspace-materialization-disappeared`, preserve os dados e consulte `doctor`/`recovery-export` para uma pasta externa nova. O conflito pode ocorrer quando uma entrada física validada tinha BEFORE ausente e continua ausente: o Core não distingue interrupção anterior à escrita, movimento externo posterior à publicação e rollback parcial, mesmo sem AFTER durável ou confirmação anterior de ausência. Metadados internos aprovados seguem o classificador estrito próprio.
+
+O journal continua pendente e impede operações gerenciadas posteriores; repetir `recover` ou usar `ownership-resolve` não ignora a barreira. Uma recusa tardia pode seguir reversões parciais de metadados. Não apague journals/locks nem altere metadados para forçar sucesso. A ref já conter o OID registrado evita duplicar commit somente se plano, arquivos/backups, fingerprints e contexto forem válidos; não autoriza recuperação automática nem garante restaurar bytes nunca registrados.
+
 ## Captura legada e saída
 
 A API legada continua disponível para compatibilidade: `capture <nome> [--path <pasta>]` interativo, `capture-start`, `capture-review`, `capture-confirm -- <caminhos>` e `capture-cancel`. A revisão/seleção é explícita e cancelar preserva disco. Esse mecanismo não é obrigatório para o novo destino de edição. Ctrl+C no capture interativo resulta em 130.
@@ -159,3 +181,5 @@ A API legada continua disponível para compatibilidade: `capture <nome> [--path 
 | 130 | Captura cancelada por Ctrl+C. |
 
 `doctor` com `safe:false` retorna código 3 e preserva o diagnóstico em stdout como `{ "ok": false, "result": ... }`; isso permite automação sem declarar um bloqueio como sucesso. Ignorar caminhos já reconhecidos ajuda `git add .`, mas `git add -f`, comandos destrutivos e regras do usuário de maior prioridade mantêm os limites do Git direto. Veja [segurança](SAFETY.md), [limitações](LIMITATIONS.md) e o relatório novo antes de atribuir suporte a uma variante.
+
+Se ownership-review indicar ausência de origem conhecida junto de caminhos anteriores sem dono ou ignorados, resolva a relação explicitamente antes de adicionar, commitar ou descartar. Para um candidato já preparado na base, independent é recusado com OWNERSHIP_SELECTION. A decisão base aceita explicitamente essa origem. base-unstage conserva o disco e a origem base conhecida, inclusive de NEW legítimo indexado sem ambiguidade. Se há ausência conhecida e esse NEW é candidato, retirar staging não decide sua origem nem cria reserva base: faça nova revisão e resolução explícita. Não é necessário release artificial para declarar o rename desse candidato. Aceite, histórico e reservas legítimas existentes não são transferidos por unstage. Renomeações externas não são inferidas por semelhança.

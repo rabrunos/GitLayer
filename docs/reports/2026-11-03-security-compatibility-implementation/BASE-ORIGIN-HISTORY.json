@@ -1,0 +1,2553 @@
+{
+  "schema": 1,
+  "scope": "Contraprovas anteriores de D-01, lacuna diagnóstica e seis regressões posteriores no snapshot final identificado, registradas separadamente. Não se somam contagens nem se infere compatibilidade universal, release ou publicação.",
+  "environment": {
+    "platform": "win32 x64",
+    "node": "v24.14.1",
+    "officialGit": "2.53.0.windows.2",
+    "fixtures": "Próprias descartáveis externas, identidade/config/HOME/temporários isolados."
+  },
+  "before": [
+    {
+      "id": "accepted-base-reset-mixed-before-01",
+      "startedAt": "2026-11-03T19:52:55.697Z",
+      "endedAt": "2026-11-03T19:56:04.926Z",
+      "durationMs": 189226.8011,
+      "classification": "Recusa segura por proteção incidental de ignore; variante não reproduzida nessa execução.",
+      "bundleSHA256": "99cddc398f1b1d7951495a74e88b48d2d87407150a6dc90bd32be533217269ba",
+      "coreFingerprint": "053644068fb3faeee4b7fa93bd044606d801322ff6811d29105df930698386c4",
+      "scriptSHA256": "d68938914bb4fda1f61f1440405ca6dfea5b8103ace8f6068802767f70318efe",
+      "summary": {
+        "id": "accepted-base-reset-mixed-before-01/summary.json",
+        "sha256": "3ecdf7ce06899fe21de27fab179e492a74ad534614e5113ba4f9832437371f97"
+      },
+      "bundleManifest": {
+        "id": "accepted-base-reset-mixed-before-01/bundle-manifest.json",
+        "sha256": "7587286f9ed0eeb2f3cfe4ce46f22c3b2ac3102d35356070592b951a30b25505"
+      },
+      "events": {
+        "id": "accepted-base-reset-mixed-before-01/events.json",
+        "sha256": "5f65fe90be15f725bd303ae27395d2ead3d42b459a506086758686e1e4eb6ffb"
+      },
+      "observed": {
+        "nativeMixedResetCode": 0,
+        "originalHead": "b2a8ab2192c0ada34ee52fdcb74a17a90d767191",
+        "managedBaseCommit": "8b9cf97651350d3681d3818ecbd90e0556c787bb",
+        "acceptedBaseBeforeReset": [
+          "moved.txt"
+        ],
+        "baseReservationsBeforeReset": [],
+        "acknowledgedMissingBeforeReset": [
+          "base.txt"
+        ],
+        "movedAbsentFromRestoredMAIN": true,
+        "movedCPhysicalPreserved": true,
+        "acceptedBasePersistsAfterReset": true,
+        "preStatusOwner": null,
+        "postStatusOwner": null,
+        "statusOk": true,
+        "statusSafe": false,
+        "statusError": "EDITING_IGNORE_UNSAFE",
+        "reopenOk": true,
+        "reopenStatusSafe": false,
+        "reviewBefore": {
+          "editingTarget": "b",
+          "missing": [],
+          "candidates": [
+            "moved.txt"
+          ],
+          "externalBase": [],
+          "ambiguous": false
+        },
+        "reviewAfter": {
+          "editingTarget": "b",
+          "missing": [],
+          "candidates": [
+            "moved.txt"
+          ],
+          "externalBase": [],
+          "ambiguous": false
+        },
+        "addOk": false,
+        "addError": "EDITING_IGNORE_UNSAFE",
+        "commitOk": false,
+        "bMovedContent": null,
+        "aIndexB": "a B staged",
+        "aHistoryA": "a A committed",
+        "baseOriginalA": "base A committed",
+        "baseCommittedC": "base C disk",
+        "bSentinelB": null,
+        "layerAIndexRawPreserved": true,
+        "layerARefPreserved": true,
+        "mainAfterResetPreservedThroughB": true,
+        "headAfterResetPreservedThroughB": true,
+        "allDiskBytesPreservedAfterReset": true,
+        "sourceInputsStable": true,
+        "confirmedWrongOrigin": false
+      },
+      "eventsProvenance": {
+        "originalSummaryPrefix": {
+          "sha256": "d69ef0417fd58877ee0a1c129b9b502f198bfb7514c68e1e11974a03fdb27d0c",
+          "eventCount": 87,
+          "serialization": "JSON.stringify({id,events},null,2)+LF; exact prefix recovered from the final preserved event document"
+        },
+        "finalEventsReceipt": {
+          "id": "accepted-base-reset-mixed-before-01/events.json",
+          "sha256": "5f65fe90be15f725bd303ae27395d2ead3d42b459a506086758686e1e4eb6ffb",
+          "eventCount": 88
+        },
+        "appendedAfterSummary": {
+          "eventCount": 1,
+          "kind": "git",
+          "args": [
+            "--version"
+          ],
+          "code": 0,
+          "signal": null,
+          "stdout": "git version 2.53.0.windows.2\n",
+          "at": "2026-11-03T19:56:05.207Z"
+        },
+        "producer": {
+          "id": "prove-accepted-base-reset-mixed-before01.mjs",
+          "sha256": "d68938914bb4fda1f61f1440405ca6dfea5b8103ace8f6068802767f70318efe"
+        },
+        "compactReceipt": {
+          "id": "accepted-base-reset-mixed-before-01/compact.json",
+          "sha256": "2064861e251f6724e84dbbfdfeeb8bb1206373b0f5ef95ecec7dffee63ea31b4"
+        },
+        "qualification": "The historical summary records the event prefix before compact construction calls Git --version. The final events file adds only that successful read-only observation and is independently pinned and referenced by the original compact. Neither historical receipt is rewritten; this is provenance reconciliation, not a new product execution, changed result or additional PASS."
+      }
+    },
+    {
+      "id": "accepted-base-reset-mixed-before-02",
+      "startedAt": "2026-11-03T19:57:52.221Z",
+      "endedAt": "2026-11-03T20:04:55.123Z",
+      "durationMs": 422899.627,
+      "classification": "Defeito confirmado D-01: origem base explicitamente aceita foi atribuída à Layer b.",
+      "bundleSHA256": "99cddc398f1b1d7951495a74e88b48d2d87407150a6dc90bd32be533217269ba",
+      "coreFingerprint": "053644068fb3faeee4b7fa93bd044606d801322ff6811d29105df930698386c4",
+      "scriptSHA256": "6aa551672e66767a28778ace9eae023461f2a345228bb447d3b80ce4f749f3c6",
+      "summary": {
+        "id": "accepted-base-reset-mixed-before-02/summary.json",
+        "sha256": "ecec7fb8c98a76de2d31ab19205b7998aed2834d2bc1406455c4068c5a1257ed"
+      },
+      "bundleManifest": {
+        "id": "accepted-base-reset-mixed-before-02/bundle-manifest.json",
+        "sha256": "56af9853b3e3b3cdc47b5b0d2a3dfc1339242f4e1bcfadd79429c9c9ddfa701b"
+      },
+      "events": {
+        "id": "accepted-base-reset-mixed-before-02/events.json",
+        "sha256": "18464ddc3f8ff2400260699e85ee9be31083e17fb1363dd0d9a2304bec3ffe17"
+      },
+      "observed": {
+        "preResetNormalStatusSafe": true,
+        "exactMovedExemptionAfterNormalStatus": false,
+        "nativeMixedResetCode": 0,
+        "originalHead": "b2a8ab2192c0ada34ee52fdcb74a17a90d767191",
+        "managedBaseCommit": "8b9cf97651350d3681d3818ecbd90e0556c787bb",
+        "acceptedBaseBeforeReset": [
+          "moved.txt"
+        ],
+        "baseReservationsBeforeReset": [],
+        "acknowledgedMissingBeforeReset": [
+          "base.txt"
+        ],
+        "movedAbsentFromRestoredMAIN": true,
+        "movedCPhysicalPreserved": true,
+        "acceptedBasePersistsAfterReset": true,
+        "preStatusOwner": null,
+        "postStatusOwner": "b",
+        "statusOk": true,
+        "statusSafe": true,
+        "reopenOk": true,
+        "reopenStatusSafe": true,
+        "reviewBefore": {
+          "editingTarget": "b",
+          "missing": [],
+          "candidates": [
+            "moved.txt"
+          ],
+          "externalBase": [],
+          "ambiguous": false
+        },
+        "reviewAfter": {
+          "editingTarget": "b",
+          "missing": [],
+          "candidates": [
+            "moved.txt"
+          ],
+          "externalBase": [],
+          "ambiguous": false
+        },
+        "addOk": true,
+        "commitOk": true,
+        "bMovedContent": "base C disk",
+        "aIndexB": "a B staged",
+        "aHistoryA": "a A committed",
+        "baseOriginalA": "base A committed",
+        "baseCommittedC": "base C disk",
+        "bSentinelB": "b B staged",
+        "layerAIndexRawPreserved": true,
+        "layerARefPreserved": true,
+        "mainAfterResetPreservedThroughB": true,
+        "headAfterResetPreservedThroughB": true,
+        "allDiskBytesPreservedAfterReset": true,
+        "sourceInputsStable": true,
+        "confirmedWrongOrigin": true
+      },
+      "eventsProvenance": {
+        "originalSummaryPrefix": {
+          "sha256": "edae094a66ab90636af7dd46e7af48c7888558d0604b0ad8cc5c107ea2b47dd0",
+          "eventCount": 100,
+          "serialization": "JSON.stringify({id,events},null,2)+LF; exact prefix recovered from the final preserved event document"
+        },
+        "finalEventsReceipt": {
+          "id": "accepted-base-reset-mixed-before-02/events.json",
+          "sha256": "18464ddc3f8ff2400260699e85ee9be31083e17fb1363dd0d9a2304bec3ffe17",
+          "eventCount": 101
+        },
+        "appendedAfterSummary": {
+          "eventCount": 1,
+          "kind": "git",
+          "args": [
+            "--version"
+          ],
+          "code": 0,
+          "signal": null,
+          "stdout": "git version 2.53.0.windows.2\n",
+          "at": "2026-11-03T20:04:55.416Z"
+        },
+        "producer": {
+          "id": "prove-accepted-base-reset-mixed-before02.mjs",
+          "sha256": "6aa551672e66767a28778ace9eae023461f2a345228bb447d3b80ce4f749f3c6"
+        },
+        "compactReceipt": {
+          "id": "accepted-base-reset-mixed-before-02/compact.json",
+          "sha256": "bc89929311ba61a34d852b0841badc99849517103892197e4a4d7f1ac434f369"
+        },
+        "qualification": "The historical summary records the event prefix before compact construction calls Git --version. The final events file adds only that successful read-only observation and is independently pinned and referenced by the original compact. Neither historical receipt is rewritten; this is provenance reconciliation, not a new product execution, changed result or additional PASS."
+      }
+    }
+  ],
+  "snapshotDomains": {
+    "coreInputCount": 16,
+    "coreFingerprint": "053644068fb3faeee4b7fa93bd044606d801322ff6811d29105df930698386c4",
+    "campaignFunctionalInputCount": 182,
+    "campaignFunctionalFingerprint": "d869be3212c22216f58f5f237c4e70b6c29503bebadf47544b143b2d1d5038c9",
+    "coreInputsExactlyMatchFull06": true,
+    "qualification": "O fingerprint Core e o funcional cobrem domínios diferentes; os16 hashes Core foram comparados individualmente com o manifesto funcional da FULL06."
+  },
+  "cause": "acceptedBase permanecia no JSON, mas não entrava no mapa de propriedade após HEAD/MAIN deixarem de rastrear o caminho. Uma consulta normal antes do reset atualizava as exclusões e removia a recusa incidental observada na primeira tentativa.",
+  "correction": {
+    "owners": "Aceite base participa do mapa de origem enquanto o contexto existir, independente da entrada atual em HEAD/MAIN.",
+    "lifecycle": "Antes de substituir/encerrar/remover o contexto, preservar em baseReservations aceitações não presentes em HEAD; o índice não é critério suficiente, pois um reset posterior pode remover sua entrada.",
+    "retirement": "Release, rename e exclusão deliberados aposentam ou transferem os marcadores correspondentes; caminhos rastreados em HEAD não ganham reserva fantasma na troca compatível.",
+    "boundaries": "Sem reparo automático de histórico já misturado, dedução por conteúdo ou cópias permanentes. Os seis casos de origem da base passaram na FULL14 e no foco09 do snapshot ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d; isso não certifica compatibilidade universal."
+  },
+  "regressionFile": "tests/integration/security-base-origin.test.ts",
+  "validation": {
+    "state": "Seis casos verificados PASS na FULL14 final e no foco09 separado; escopo local e snapshot indicado.",
+    "expectedCases": 6,
+    "targetFunctionalInputCount": 183,
+    "targetFunctionalFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "regressionFile": "tests/integration/security-base-origin.test.ts",
+    "countsAddedToFinalTotals": false,
+    "finalResults": "RESULTS.md e EVIDENCE.json preservam os totais finais; o foco não é somado novamente."
+  },
+  "full06": {
+    "receipt": {
+      "id": "full-06/result.json",
+      "sha256": "d1b1d38988d5d8ae26a041f6f47c7ed5ebe359277047cc07db187ba9e19ce0df"
+    },
+    "inputBefore": {
+      "id": "full-06/inputs-before.json",
+      "sha256": "7b1c07984df31a0ff0e4c2a59bc5d540ee5d3d53e360f9dd8365574249e552a9"
+    },
+    "inputAfter": {
+      "id": "full-06/inputs-after.json",
+      "sha256": "7b1c07984df31a0ff0e4c2a59bc5d540ee5d3d53e360f9dd8365574249e552a9"
+    },
+    "sourceFingerprint": "d869be3212c22216f58f5f237c4e70b6c29503bebadf47544b143b2d1d5038c9",
+    "inputCount": 182,
+    "exitCode": 4294967295,
+    "inputsStable": true,
+    "nodeTerminalCounts": null,
+    "externallyInterrupted": true,
+    "ownedDescendants": 8,
+    "remainingVerified": 0,
+    "termination": {
+      "id": "full-06/termination-owned-processes.json",
+      "sha256": "fa7f311e987c14d808fda0e995998e276d16bd345b4636725c4c5c529275e635"
+    },
+    "verification": {
+      "id": "full-06/termination-verification.json",
+      "sha256": "c8579f140d8f3848807457869c7c7ff6a784f5511d59cc23e3e2bd3aa71671c0"
+    },
+    "pipeline": {
+      "state": "failed",
+      "steps": 0,
+      "receipt": {
+        "id": "pipeline-final06/result.json",
+        "sha256": "c02bb29107296830af5639279d86574bf92d4480106788d6522a7c24317e2444"
+      }
+    },
+    "wrapper": {
+      "observedExitCode": 1,
+      "observedFinalSaveError": "EPERM em renameSync de tmp para result.json, observado no retorno do processo pelo coordenador.",
+      "failedTemporary": {
+        "id": "preflight-final06/result-e8411337-fd0a-4686-b147-f1b8db15c2bf.tmp",
+        "sha256": "42544f2bf7c4aa46f8103b3f219b1bb4c5eb91b634613d827382f20b34a7fbe1"
+      },
+      "staleTarget": {
+        "id": "preflight-final06/result.json",
+        "sha256": "e9b9e93c88120f8c7dc343c4dfe88c879fa95e3f614478c55019621187071813"
+      },
+      "temporaryState": "failed",
+      "targetState": "running-full06",
+      "qualification": "O erro de gravação do wrapper externo não é corrupção do Core nem resultado de suíte. A causa exata do bloqueio do rename não foi isolada; ambos os arquivos foram preservados."
+    }
+  },
+  "privacy": "Caminhos absolutos, PIDs, commandlines de processos e tokens de revisão omitidos; somente fixture sintética, estados e hashes selecionados.",
+  "rescueDiagnosticGap": {
+    "classification": "Lacuna de diagnóstico da autoridade acceptedBase de D-01; não é D-04 nem nova perda de bytes.",
+    "compact": {
+      "id": "rescue-accepted-base-before-01/compact.json",
+      "sha256": "b2b235ce79e0013c5a35f6a00f75e8785f82a67df5d89df16eeccbf53ffea3c3"
+    },
+    "startedAt": "2026-11-03T20:22:00.416Z",
+    "endedAt": "2026-11-03T20:23:43.983Z",
+    "immutableCore": {
+      "copiedFiles": 16,
+      "inputsStableAtBuild": true,
+      "sourceInputsStableAtEnd": true,
+      "coreFingerprint": "caf96c8997ec4dbeae8310b03eefd133580e9d47026c40f06d42af583c6a247e",
+      "bundleSHA256": "f451d4c8207769b9e793570c1e984950e191062e44e8dc55501395dda14f85d9"
+    },
+    "coreInputsMatchInterruptedFocus01": true,
+    "fixtureInjection": "Reserva de moved.txt foi adicionada deliberadamente à Layer b, com registry/reservations coerentes entre si, depois de origem base aceita ficar fora de HEAD/MAIN. Não foi produzida automaticamente por operação válida do Core.",
+    "observed": {
+      "acceptedBaseRemembered": true,
+      "baseReservationAbsent": true,
+      "absentHEAD": true,
+      "absentMAIN": true,
+      "artificialLayerReservationPresent": true,
+      "coreOwnersError": "PATH_COLLISION",
+      "coreDoctorSafe": false,
+      "coreDoctorFailedChecks": [
+        {
+          "name": "Metadados, refs, índices, propriedade e exclusões",
+          "code": "PATH_COLLISION"
+        }
+      ],
+      "standaloneSafe": true,
+      "standaloneOwnershipCheck": {
+        "name": "Propriedade e exclusões efetivas",
+        "ok": true
+      },
+      "entireDiagnosticDomainPreserved": true,
+      "allRefsPreserved": true,
+      "MAINRawPreserved": true,
+      "privateRawPreserved": true,
+      "projectBytesPreserved": true,
+      "artificialMutationPreservedNonMetadataDomain": true,
+      "bIndexB": "b B staged",
+      "bHistoryA": "b A committed",
+      "physicalC": "b C disk\n",
+      "physicalBaseC": "base C disk\n",
+      "sourceInputsStable": true,
+      "confirmedDiagnosticDivergence": true
+    },
+    "rawReferences": [
+      {
+        "id": "rescue-accepted-base-before-01/bundle-manifest.json",
+        "sha256": "1781deb917830fc2877ec37093f1571d433d45493d581643f19593f1697f77e3"
+      },
+      {
+        "id": "rescue-accepted-base-before-01/events.json",
+        "sha256": "adb82bf986ed813b4fc7fa8534178159b732e584a78cc74daa1b5beac692e42a"
+      },
+      {
+        "id": "rescue-accepted-base-before-01/summary.json",
+        "sha256": "06136a51b7e50efd32edbfd725af5030625cc3c1a57169fe49d5ee0ff644b3a6"
+      },
+      {
+        "id": "rescue-accepted-base-before-01/registry.before-artificial.json",
+        "sha256": "077ceac9d95f91d7b839e95d422dcf284969a8e6496f2176f2fe139686d44366"
+      },
+      {
+        "id": "rescue-accepted-base-before-01/reservations.before-artificial.json",
+        "sha256": "04f49385ea254af9de1f5c46039c113350d5d556e4e04fc96f5fdbdb44c58bd0"
+      },
+      {
+        "id": "rescue-accepted-base-before-01/registry.after-artificial.json",
+        "sha256": "95840e349ddffe665109a2098c2ac3c711c64415baad0b584a78f616f231c99e"
+      },
+      {
+        "id": "rescue-accepted-base-before-01/workspace.after-artificial.json",
+        "sha256": "abf12549e1e5f6ae25f47115a17dbd6178e0ed541075f2cbd3fb3d7d8f80e21f"
+      },
+      {
+        "id": "rescue-accepted-base-before-01/reservations.after-artificial.json",
+        "sha256": "b8a792917c56ffd353262af171d45219bc4a13b437eabc58c094f27ce022ec91"
+      }
+    ],
+    "correction": "O verificador independente de propriedade também deve considerar workspace.editing.acceptedBase como base e recusar a colisão, sem alterar metadados/índices/refs/bytes.",
+    "regression": "O caso 2 de security-base-origin.test.ts, incluindo a assertiva de divergência e preservação, produziu PASS na FULL14 e no foco09 do snapshot ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d. As contagens dirigidas permanecem separadas dos totais integrais."
+  },
+  "interruptedFocused01": {
+    "receipt": {
+      "id": "focus-base-origin-01/result.json",
+      "sha256": "d60398e75a99aad44762a2c7e3f58da9f099bb81d725c430305a238b6430976e"
+    },
+    "inputBefore": {
+      "id": "focus-base-origin-01/inputs-before.json",
+      "sha256": "f8f02ab05f5521b9e8eb034b32e05304d5b8d7d5143648dfbca70ade3476675d"
+    },
+    "inputAfter": {
+      "id": "focus-base-origin-01/inputs-after.json",
+      "sha256": "f8f02ab05f5521b9e8eb034b32e05304d5b8d7d5143648dfbca70ade3476675d"
+    },
+    "sourceFingerprint": "04c6cb7c90e634d280e665abf73e5d7a23734f5d409e77b959fb840e4f8d123e",
+    "inputCount": 183,
+    "inputsStable": true,
+    "exitCode": 4294967295,
+    "nodeTerminalCounts": null,
+    "individualObserved": {
+      "test": "D01 accepted base rename survives mixed reset without Layer staging commit or discard transfer",
+      "status": "PASS",
+      "durationMs": 443929.7772,
+      "qualification": "Somente resultado individual anterior à interrupção; não são totais Node nem aprovação dos seis casos."
+    },
+    "ownedDescendants": 6,
+    "remainingVerified": 0,
+    "termination": {
+      "id": "focus-base-origin-01/termination-owned-processes.json",
+      "sha256": "64d9c2c50d0de1758529a8e64b08d6ba3135dcb70d53f7ab2e41f270d52882da"
+    },
+    "verification": {
+      "id": "focus-base-origin-01/termination-verification.json",
+      "sha256": "c5a47751f76cdf4c0b79dd3fbae7318d63f7aa8e33d50faf3a5dde82def50634"
+    },
+    "reason": "Parada externa para alinhar o diagnóstico independente e ampliar a assertiva antes de nova validação."
+  },
+  "intermediateFocused02": {
+    "capturedAt": "2026-11-03T20:51:55.142Z",
+    "phase": "focus-base-origin-02",
+    "sourceFingerprint": "f37a20b73546629bb6fc80afda37bb1ac1c3fbbf2753926870690620aaaeac10",
+    "inputCount": 183,
+    "stateAtCapture": "Historical failed focused run; terminal result appended below. Not approval of the final snapshot.",
+    "nodeTerminalCounts": {
+      "tests": 6,
+      "suites": 0,
+      "pass": 3,
+      "fail": 3,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "observedIndividualFirstCase": {
+      "status": "PASS",
+      "durationMs": 465390.5255,
+      "qualification": "Individual result only; not a total or approval of the six cases."
+    },
+    "cases": [
+      {
+        "test": "D01 absent accepted base rename requires explicit resolution after mixed reset",
+        "status": "FAIL observed in an intermediate focused run; no final campaign certification",
+        "durationMs": 378874.4008,
+        "receipt": {
+          "id": "focus-base-origin-02/base-origin/D01_absent_accepted_base_rename_requires_explicit_resolution_after_mixed_reset.json",
+          "sha256": "52e83b0a0da3aeba512e81b9acf91d76d9305e08316fba6d806f18de14c3a1d7"
+        },
+        "comparedDomain": {
+          "head": true,
+          "branch": true,
+          "branches": true,
+          "stateRefs": true,
+          "mainIndex": true,
+          "mainRaw": true,
+          "layerIndexes": true,
+          "files": true
+        },
+        "metadataContext": {
+          "editingBefore": "b",
+          "editingAfter": "b",
+          "baseReservationsBefore": [],
+          "baseReservationsAfter": [],
+          "acknowledgedMissing": [
+            "base.txt"
+          ]
+        },
+        "allRefs": {
+          "beforeSHA256": "eac7827486e2118ce542030d0cb3331971ff600d89b975a776a45cd1a7546e01",
+          "afterSHA256": "9036f6ce0596244a48375cae271c4ac63350764296887e93785acfe35ed6a566",
+          "qualification": "Technical retention refs may be added by conservative error handling; branch/state refs are compared separately."
+        }
+      },
+      {
+        "test": "D01 accepted base ownership survives target change edit end and restart after mixed reset",
+        "status": "FAIL observed in an intermediate focused run; no final campaign certification",
+        "durationMs": 121098.5478,
+        "receipt": {
+          "id": "focus-base-origin-02/base-origin/D01_accepted_base_ownership_survives_target_change_edit_end_and_restart_after_mixed_reset.json",
+          "sha256": "9714f442861f9760dd1ae61e912ddd3a160e8d07ea5d3252a7f47f68bc237dc7"
+        },
+        "comparedDomain": {
+          "head": true,
+          "branch": true,
+          "branches": true,
+          "stateRefs": true,
+          "mainIndex": true,
+          "mainRaw": true,
+          "layerIndexes": true,
+          "files": true
+        },
+        "metadataContext": {
+          "editingBefore": "b",
+          "editingAfter": "a",
+          "baseReservationsBefore": [],
+          "baseReservationsAfter": [
+            "moved.txt"
+          ],
+          "acknowledgedMissing": [
+            "base.txt"
+          ]
+        },
+        "allRefs": {
+          "beforeSHA256": "9a5ca1749e14e986974b0b249bc430690a4fe7106f637144331cece939676835",
+          "afterSHA256": "c440de72e040aa8b2a7a687556dddc42c30ab61ecd66bd75af6af20e0ba99e9f",
+          "qualification": "Technical retention refs may be added by conservative error handling; branch/state refs are compared separately."
+        }
+      },
+      {
+        "test": "D01 accepted base ownership survives target deactivation and removal after mixed reset",
+        "status": "FAIL terminal in intermediate focused run; no final campaign certification",
+        "durationMs": 445983.5081,
+        "errorCode": "EDITING_BASE_INTERFERENCE",
+        "receipt": {
+          "id": "focus-base-origin-02/base-origin/D01_accepted_base_ownership_survives_target_deactivation_and_removal_after_mixed_reset.json",
+          "sha256": "906d8c7d38a1ba8f243e393ddb34092b7abe5930e1f397b79e72d61c35c2af94"
+        },
+        "failurePoint": "baseCommit at test line133 after authorized deactivation, activation, target selection and explicit native base acceptance; before the planned target-removal snapshot.",
+        "acknowledgedAbsentPath": "base.txt",
+        "metadataAtFinal": {
+          "editingLayer": "b",
+          "acceptedBase": [
+            "native.txt"
+          ],
+          "baseReservations": [
+            "moved.txt",
+            "native.txt"
+          ],
+          "acknowledgedMissing": [
+            "base.txt"
+          ]
+        },
+        "immediatePreFailureSnapshotAvailable": false,
+        "qualification": "The before-deactivation/final interval includes deliberate changes, including discard:true for Layer b and native staging. It does not establish byte-for-byte preservation across the failing call alone; no loss is inferred from those expected differences. Candidate resumes and later fresh focus separately test the intended continuation."
+      }
+    ],
+    "coordinatorAnalysis": [
+      {
+        "test": "D01 absent accepted base rename requires explicit resolution after mixed reset",
+        "errorCode": "OWNERSHIP_REVIEW_STALE",
+        "cause": "The publication observer dropped an absent path whose accepted base origin was being resolved, producing a false stale comparison without an external change.",
+        "plannedCorrection": "Keep the relevant absent observer paths through publication; do not weaken the token comparison."
+      },
+      {
+        "test": "D01 accepted base ownership survives target change edit end and restart after mixed reset",
+        "errorCode": "EDITING_BASE_INTERFERENCE",
+        "cause": "Target change to a succeeded and retained moved as base; edit-end treated acknowledged absent base.txt as a new external base entry.",
+        "plannedCorrection": "Exclude only paths both acknowledged missing and physically absent from this new-entry diagnosis; present or unacknowledged paths remain checked."
+      }
+    ],
+    "classification": "Three compatibility/transition refusals within intermediate D-01 integration: false stale at case2, acknowledged-absence interference at cases3/4. No new P0 loss or D-04 is certified; this snapshot failed.",
+    "futureEvidence": "Historical f37 ended code1 with3PASS/3FAIL. Later focused03 and full08 must validate all six names on the newly approved, identical183inputs; no totals are added across runs.",
+    "terminal": {
+      "receipt": {
+        "id": "focus-base-origin-02/result.json",
+        "sha256": "5b30ebd908bfb65cd17f15eaa409af3d690fc63cb6cc9caadee97e09de5e460a"
+      },
+      "inputsBefore": {
+        "id": "focus-base-origin-02/inputs-before.json",
+        "sha256": "9c989457a9ea1172a8ac235a1bb08afdddc062c69bcbe4627d1a3651bf779b8c"
+      },
+      "inputsAfter": {
+        "id": "focus-base-origin-02/inputs-after.json",
+        "sha256": "9c989457a9ea1172a8ac235a1bb08afdddc062c69bcbe4627d1a3651bf779b8c"
+      },
+      "stdout": {
+        "id": "focus-base-origin-02/stdout.log",
+        "sha256": "c49e8983aff1e8cc4cbdfb105bf7caf664b280223b6d6b74aad2372c47409751"
+      },
+      "stderr": {
+        "id": "focus-base-origin-02/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAt": "2026-11-03T20:25:46.986Z",
+      "endedAt": "2026-11-03T21:06:55.147Z",
+      "durationMs": 2468158.0733,
+      "nodeReportedDurationMs": 2467952.0693,
+      "exitCode": 1,
+      "signal": null,
+      "inputCount": 183,
+      "inputsStable": true,
+      "sourceFingerprint": "f37a20b73546629bb6fc80afda37bb1ac1c3fbbf2753926870690620aaaeac10",
+      "nodeTerminalCounts": {
+        "tests": 6,
+        "suites": 0,
+        "pass": 3,
+        "fail": 3,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "individualResults": [
+        {
+          "test": "D01 accepted base rename survives mixed reset without Layer staging commit or discard transfer",
+          "status": "PASS",
+          "durationMs": 465390.5255
+        },
+        {
+          "test": "D01 absent accepted base rename requires explicit resolution after mixed reset",
+          "status": "FAIL",
+          "durationMs": 378874.4008,
+          "errorCode": "OWNERSHIP_REVIEW_STALE"
+        },
+        {
+          "test": "D01 accepted base ownership survives target change edit end and restart after mixed reset",
+          "status": "FAIL",
+          "durationMs": 121098.5478,
+          "errorCode": "EDITING_BASE_INTERFERENCE"
+        },
+        {
+          "test": "D01 accepted base ownership survives target deactivation and removal after mixed reset",
+          "status": "FAIL",
+          "durationMs": 445983.5081,
+          "errorCode": "EDITING_BASE_INTERFERENCE"
+        },
+        {
+          "test": "D01 explicit release rename and deletion retire accepted base markers safely",
+          "status": "PASS",
+          "durationMs": 578042.7527
+        },
+        {
+          "test": "D01 clean tracked accepted base creates no phantom reservation on compatible switch",
+          "status": "PASS",
+          "durationMs": 477751.7115
+        }
+      ],
+      "wrappers": {
+        "preflight-final07": {
+          "receipt": {
+            "id": "preflight-final07/result.json",
+            "sha256": "ff3714b33f995e8930d35c5bd0e1b109442e199cb7002618fc7c20dae3ee2002"
+          },
+          "state": "failed",
+          "success": false,
+          "steps": 0,
+          "endedAt": "2026-11-03T21:06:55.735Z",
+          "classification": "Terminal gate refusal; no final campaign or subsequent phase was started."
+        },
+        "pipeline-final07": {
+          "receipt": {
+            "id": "pipeline-final07/result.json",
+            "sha256": "d9fbfd461e38a6560a309b9019295581286d20c93a33f06afdc37b9a5e4e78e2"
+          },
+          "state": "failed",
+          "success": false,
+          "steps": 0,
+          "endedAt": "2026-11-03T21:06:56.104Z",
+          "classification": "Terminal gate refusal; no final campaign or subsequent phase was started."
+        }
+      },
+      "full07DirectoryAbsent": true,
+      "countsAddedToFinalTotals": false
+    }
+  },
+  "intermediateCandidateResume": {
+    "classification": "Experimento candidato em cópias independentes de três fixtures intermediárias; não é execução dos seis testes nem aprovação de working tree, f37 ou snapshot final.",
+    "compact": {
+      "id": "base-origin-candidate-resume-01/compact.json",
+      "sha256": "f52c743c1f7f6eb38bfb3577293d24d0a19a5bf13577ea85bbd6c0b0f814a545"
+    },
+    "startedAt": "2026-11-03T20:56:29.022Z",
+    "endedAt": "2026-11-03T21:00:20.576Z",
+    "durationMs": 231550.9418,
+    "immutableCandidate": {
+      "copiedCoreFiles": 16,
+      "indexSHA256": "e4d2f71eba50e7ac7430493b0ac4295f97a954d90a53338586594931aa67c41c",
+      "bundleSHA256": "58ba290b021f534bec9432edf210a5d5ce63e7492094b81fd826fa0e982a0810",
+      "baselineCampaignFingerprint": "f37a20b73546629bb6fc80afda37bb1ac1c3fbbf2753926870690620aaaeac10",
+      "baselineCoreFingerprint": "d5a7be33887c4bae303b795c780709171b006d69447266105e20709eb74ba4ab",
+      "candidateCoreFingerprint": "5c43d431afd05c3a02b122b3be256829c153514a60144d35eab499a49ff90f5a",
+      "immutableStable": true,
+      "sourceInputsStable": true
+    },
+    "copySafety": {
+      "newOwnedNonce": true,
+      "allOriginalFilesInventoried": true,
+      "symlinksHardlinksAndSharedStorageRefused": true,
+      "physicalFileIdentitiesDistinct": true,
+      "copiedJournalsAllCompleted": true,
+      "neverCalledRecoverOrRestore": true,
+      "originalsUnchanged": [
+        {
+          "case": 2,
+          "inventoryUnchanged": true,
+          "beforeSHA256": "30cf84211d7d4dcb56fe962569757f19538c26848932b41bb9155b2ff24a59e0",
+          "afterSHA256": "30cf84211d7d4dcb56fe962569757f19538c26848932b41bb9155b2ff24a59e0"
+        },
+        {
+          "case": 3,
+          "inventoryUnchanged": true,
+          "beforeSHA256": "ce605f1b58b7f69e05e767b29709bf893029bd01a43c53341467f7efd850d70b",
+          "afterSHA256": "ce605f1b58b7f69e05e767b29709bf893029bd01a43c53341467f7efd850d70b"
+        },
+        {
+          "case": 4,
+          "inventoryUnchanged": true,
+          "beforeSHA256": "8d3ce9c4b314ebcdeeafdc5455c4a84963f0109afd696ce1bb4ab2da029d258b",
+          "afterSHA256": "8d3ce9c4b314ebcdeeafdc5455c4a84963f0109afd696ce1bb4ab2da029d258b"
+        }
+      ]
+    },
+    "outcomes": [
+      {
+        "case": 2,
+        "success": true,
+        "owner": "base",
+        "allGitDomainAndBytesPreserved": true,
+        "retiredOldMarker": true,
+        "baseDestinationReserved": true
+      },
+      {
+        "case": 3,
+        "success": true,
+        "owner": "base",
+        "editEndPreservesGitDomainAndBytes": true,
+        "mixedResetChangesOnlyMAINAsExpected": true,
+        "baseReservationSurvivesRestart": true
+      },
+      {
+        "case": 4,
+        "success": true,
+        "baseCommitOID": "fed74c9e456fdf80bd250c83cae04419b147ae2b",
+        "baseHistoryAndMAINSemanticsAgree": true,
+        "baseCommitPreservesLayerIndexesAndDisk": true,
+        "mixedResetPreservesLayerIndexesAndDisk": true,
+        "removeOnlyLayerB": true,
+        "baseAndLayerABytesPreserved": true,
+        "baseOwnershipRetained": true,
+        "removedLayerCommitOID": "6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0"
+      }
+    ],
+    "rawReferences": [
+      {
+        "id": "base-origin-candidate-resume-01/bundle-manifest.json",
+        "sha256": "b89e5d4f66457d5f9201db6175b863c4c369a0f749dbaccadfc998e2749d0e4f"
+      },
+      {
+        "id": "base-origin-candidate-resume-01/events.json",
+        "sha256": "13aeaf8b732323d86ce5e3c5d92a9267026b09e1bd09553fc606827bd22eabea"
+      },
+      {
+        "id": "base-origin-candidate-resume-01/summary.json",
+        "sha256": "c40bb5e05593d4d52b74018ec1a6c30be2541f6a22dd558ab5ac8ca7e76e6e10"
+      },
+      {
+        "id": "base-origin-candidate-resume-01/case2-original-inventory.json",
+        "sha256": "58e99813aeeed0fa8d5fbb4a6778ffcf9ab2460a11ebd680c3011577c3338260"
+      },
+      {
+        "id": "base-origin-candidate-resume-01/case3-original-inventory.json",
+        "sha256": "5755ac1e55f98309ce4553dd22bd1b77f76d3c76b2058357be30097ea8d1b2c8"
+      },
+      {
+        "id": "base-origin-candidate-resume-01/case4-original-inventory.json",
+        "sha256": "bf09f6107f3be21651e6fa7a0b5682c77597e7ef1592553fa2aaebabdc7e2fc2"
+      }
+    ],
+    "countsAddedToFinalTotals": false,
+    "finalProofStillRequired": "focus-base-origin-03 e os seis casos da FULL08 devem executar nos mesmos 183 inputs finais aprovados. O candidato não substitui esses gates."
+  },
+  "after": {
+    "scope": "Six current FULL14 cases and separate focused09 receipts. These six are already included in full totals; focused counts are not added.",
+    "sourceFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "inputCount": 183,
+    "full": {
+      "receipt": {
+        "id": "full-14/result.json",
+        "sha256": "0d6be76c51ede32d4dc88862a80350abec21f3dcae59f5b95787082e276ef188"
+      },
+      "inputsBefore": {
+        "id": "full-14/inputs-before.json",
+        "sha256": "6ef249ad103a54264519dd11c7c6f6d68321090e5b56791130e309cf3c2e1034"
+      },
+      "inputsAfter": {
+        "id": "full-14/inputs-after.json",
+        "sha256": "6ef249ad103a54264519dd11c7c6f6d68321090e5b56791130e309cf3c2e1034"
+      },
+      "stdout": {
+        "id": "full-14/stdout.log",
+        "sha256": "68f150179e91ec1d6bb36e309a03be04f8334092daff655a7154495f7855fcd6"
+      },
+      "endedAt": "2026-11-04T10:23:00.810Z",
+      "counts": {
+        "tests": 315,
+        "pass": 311,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 4,
+        "todo": 0
+      }
+    },
+    "focused": {
+      "receipt": {
+        "id": "focus-base-origin-09/result.json",
+        "sha256": "6839fb5f035aa57233b4a6d206c4d46fe3dfd7ac3c987fb47c1ca24e89f53658"
+      },
+      "inputsBefore": {
+        "id": "focus-base-origin-09/inputs-before.json",
+        "sha256": "6ef249ad103a54264519dd11c7c6f6d68321090e5b56791130e309cf3c2e1034"
+      },
+      "inputsAfter": {
+        "id": "focus-base-origin-09/inputs-after.json",
+        "sha256": "6ef249ad103a54264519dd11c7c6f6d68321090e5b56791130e309cf3c2e1034"
+      },
+      "stdout": {
+        "id": "focus-base-origin-09/stdout.log",
+        "sha256": "595fa74a86f93da237f1ca7cf76369d9357deda2730515d089cde721170f0acf"
+      },
+      "endedAt": "2026-11-04T07:49:02.782Z",
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    "cases": [
+      {
+        "name": "D01 accepted base rename survives mixed reset without Layer staging commit or discard transfer",
+        "status": "PASS",
+        "fullFixture": {
+          "id": "full-14/base-origin/D01_accepted_base_rename_survives_mixed_reset_without_Layer_staging_commit_or_discard_transfer.json",
+          "sha256": "630b960bb0214b9a129003f7fd0b81cc745c832453e15d72c0de217c6b7644b1"
+        },
+        "focusedFixture": {
+          "id": "focus-base-origin-09/base-origin/D01_accepted_base_rename_survives_mixed_reset_without_Layer_staging_commit_or_discard_transfer.json",
+          "sha256": "0f2096b57ba9e644be8ec644fad2f5e03f6cc56c4ad8cb933f301eb8d600c0c6"
+        },
+        "gitVersion": "git version 2.53.0.windows.2",
+        "observations": [
+          {
+            "label": "accepted base before native reset",
+            "observed": {
+              "head": "f0735648b271afc319b795c211181a6a1fb25f92",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92",
+              "allRefs": {
+                "sha256": "3d49b8b9583d4202213582120b67d4319f570e15ddf90483ea5cce9c5673459b",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "f978a4803d312fdc3364393cd976b623d8ae8084388f1d68044320c406f4b08a",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 5f15213193a2b14763039007989e7a359e78c03d 0\tmoved.txt",
+                "rawSHA256": "1e90ee8e40371a109f5e0c6776982ff05a940851d3156f6e0045009526ab1f5f"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "3010a5992a8efd7b2d4f02e281e767061643770990659d14e41d552e46f39894"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "aab1e9451acbfc96cdaecbb7cc23af6eedb63d0bcc91053cc0cae55b434facfd"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "moved.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "b0c3c72ffeac211b0cc9a3485e3b6eebf549fd9da2695f590b18c26aa0519821",
+                "lines": 12
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "after native reset",
+            "observed": {
+              "head": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "allRefs": {
+                "sha256": "19fe013a5c30fa282a82e69d10e1663b46641a50535e6bf3660d3ffa6ad219df",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "f978a4803d312fdc3364393cd976b623d8ae8084388f1d68044320c406f4b08a",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 0a6b094894e373c0727d51da3db94c4ff45f76d7 0\tbase.txt",
+                "rawSHA256": "19a157e0d08ca0836dd6d0a295dd7dd1794b4276fc606154548b52bf04838a6d"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "3010a5992a8efd7b2d4f02e281e767061643770990659d14e41d552e46f39894"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "aab1e9451acbfc96cdaecbb7cc23af6eedb63d0bcc91053cc0cae55b434facfd"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "moved.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "b0c3c72ffeac211b0cc9a3485e3b6eebf549fd9da2695f590b18c26aa0519821",
+                "lines": 12
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "final",
+            "observed": {
+              "head": "e8bff85d30227105b8f0ab9559c6e58067937e7e",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 78c2f5a41742ade4816d6f606deee7f2976b67f8\nrefs/heads/main e8bff85d30227105b8f0ab9559c6e58067937e7e",
+              "allRefs": {
+                "sha256": "1a1da74f8360e0e676dca684255170c33950792483dd9940718d558d3de63010",
+                "lines": 17
+              },
+              "stateRefs": {
+                "sha256": "f978a4803d312fdc3364393cd976b623d8ae8084388f1d68044320c406f4b08a",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 955b717c7c9ade1289451ebbb12b19e3827f9792 0\tmoved.txt",
+                "rawSHA256": "032d934914b87a7ce4332aae95c045cd017c00f00f25b23523ecd4c301ef66b3"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "3010a5992a8efd7b2d4f02e281e767061643770990659d14e41d552e46f39894"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "edbee913cd8bd109801bb5e056ad8e94e86952b5bccaa232a6f5cd4eff0f6b94"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": null
+              },
+              "exclude": {
+                "sha256": "8f6d07726ee43a253116e0d89d115d02741310b38c0f92d4995aceb8b306d6c9",
+                "lines": 9
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "inactive",
+                  "reservations": []
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "D01 absent accepted base rename requires explicit resolution after mixed reset",
+        "status": "PASS",
+        "fullFixture": {
+          "id": "full-14/base-origin/D01_absent_accepted_base_rename_requires_explicit_resolution_after_mixed_reset.json",
+          "sha256": "745a03ae87d00bcee3844c0eb47ca41a60a1b770b4e974abc4864acfdf5685cc"
+        },
+        "focusedFixture": {
+          "id": "focus-base-origin-09/base-origin/D01_absent_accepted_base_rename_requires_explicit_resolution_after_mixed_reset.json",
+          "sha256": "58efcf3cce81e323c6979430f8782a95eea0526b8015844e119d872e55731e62"
+        },
+        "gitVersion": "git version 2.53.0.windows.2",
+        "observations": [
+          {
+            "label": "accepted base before native reset",
+            "observed": {
+              "head": "f0735648b271afc319b795c211181a6a1fb25f92",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92",
+              "allRefs": {
+                "sha256": "585a0e71ca6de17ec374639ac996e8d4af56d6e493215cf618d2b2a5d2daa72b",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "ccbf1428daa77c218910253db0018fbd258c93d32a8dd3c81868d01abc51464b",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 5f15213193a2b14763039007989e7a359e78c03d 0\tmoved.txt",
+                "rawSHA256": "641bbb0b3369e14cbd6ee8389423299be9297dd49bdb87cf4dd1f2bb0a03e3ce"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "a3eb5f2b81538a35b8aa0b7c85bcff404570960c60f2262fd924f68f18a99737"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "4f21b9c61f8f024e876d3bc58c8fd6fe666c9ff0300c2b264798b53fc5f343b4"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "moved.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "b0c3c72ffeac211b0cc9a3485e3b6eebf549fd9da2695f590b18c26aa0519821",
+                "lines": 12
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "independent rescue refuses contradictory accepted base ownership",
+            "observed": {
+              "safe": false,
+              "ownership": {
+                "name": "Propriedade e exclusões efetivas",
+                "ok": false,
+                "code": "PATH_COLLISION"
+              }
+            }
+          },
+          {
+            "label": "external rename before any reconciliation",
+            "observed": {
+              "head": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "allRefs": {
+                "sha256": "615b551c9973f47f92086b8b2e5927046385c6ed26cb7fa24c6aa7cd03458048",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "ccbf1428daa77c218910253db0018fbd258c93d32a8dd3c81868d01abc51464b",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 0a6b094894e373c0727d51da3db94c4ff45f76d7 0\tbase.txt",
+                "rawSHA256": "19a157e0d08ca0836dd6d0a295dd7dd1794b4276fc606154548b52bf04838a6d"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "a3eb5f2b81538a35b8aa0b7c85bcff404570960c60f2262fd924f68f18a99737"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "4f21b9c61f8f024e876d3bc58c8fd6fe666c9ff0300c2b264798b53fc5f343b4"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "external.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "moved.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "b0c3c72ffeac211b0cc9a3485e3b6eebf549fd9da2695f590b18c26aa0519821",
+                "lines": 12
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "final",
+            "observed": {
+              "head": "6062856fd72544e2e1dca5f69f4aefd44ecef5e9",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 6062856fd72544e2e1dca5f69f4aefd44ecef5e9",
+              "allRefs": {
+                "sha256": "8f24571a004c15dcda07af5c99d7219067da334a463fd30516f38e47aa5dd54f",
+                "lines": 21
+              },
+              "stateRefs": {
+                "sha256": "ccbf1428daa77c218910253db0018fbd258c93d32a8dd3c81868d01abc51464b",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 955b717c7c9ade1289451ebbb12b19e3827f9792 0\texternal.txt",
+                "rawSHA256": "409cc6a76e7b463b2b024e068c453836a47ebca713f7350c9d45b8bd11151962"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "a3eb5f2b81538a35b8aa0b7c85bcff404570960c60f2262fd924f68f18a99737"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "4f21b9c61f8f024e876d3bc58c8fd6fe666c9ff0300c2b264798b53fc5f343b4"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "external.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt",
+                  "moved.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "external.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "b84d8ac3ee368920519d7cf9c069ef7c4eed8b335b6318d4e47c13718ef4cf51",
+                "lines": 13
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "D01 accepted base ownership survives target change edit end and restart after mixed reset",
+        "status": "PASS",
+        "fullFixture": {
+          "id": "full-14/base-origin/D01_accepted_base_ownership_survives_target_change_edit_end_and_restart_after_mixed_reset.json",
+          "sha256": "585028bab4ad5fe826f5a9445ba308fcb5f239f72c2a621472e441a758fd4d13"
+        },
+        "focusedFixture": {
+          "id": "focus-base-origin-09/base-origin/D01_accepted_base_ownership_survives_target_change_edit_end_and_restart_after_mixed_reset.json",
+          "sha256": "b6cca91a9283478da9900ac02b510de51f6739d099109dd6d724df14c010b7c8"
+        },
+        "gitVersion": "git version 2.53.0.windows.2",
+        "observations": [
+          {
+            "label": "accepted base before native reset",
+            "observed": {
+              "head": "f0735648b271afc319b795c211181a6a1fb25f92",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92",
+              "allRefs": {
+                "sha256": "291301b421238f53ea7b9a2e149a986d8ed717bcb9ae4b874b4909296505f998",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "809293316b410138092070e3161d7c03015c52e48161aab393703582c78cef43",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 5f15213193a2b14763039007989e7a359e78c03d 0\tmoved.txt",
+                "rawSHA256": "22b7c409e26db60148391001bca154b8bbd350c934cfe352bea9264f9614af40"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "98d0cfce15e0ac1e3b93f406d879755d584b8d03779661c2b971e326bdf2475b"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "103e4d85b57db51790112cbe95b860968c6534cde8249d41a3ff1448789c9822"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "moved.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "b0c3c72ffeac211b0cc9a3485e3b6eebf549fd9da2695f590b18c26aa0519821",
+                "lines": 12
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "HEAD changed while MAIN still represents accepted base",
+            "observed": {
+              "head": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "allRefs": {
+                "sha256": "c18a8f96f241ba053d24370ea8e32ff47332e465c6ebdaa17dd95f97f2d6c5a1",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "809293316b410138092070e3161d7c03015c52e48161aab393703582c78cef43",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 5f15213193a2b14763039007989e7a359e78c03d 0\tmoved.txt",
+                "rawSHA256": "22b7c409e26db60148391001bca154b8bbd350c934cfe352bea9264f9614af40"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "98d0cfce15e0ac1e3b93f406d879755d584b8d03779661c2b971e326bdf2475b"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "103e4d85b57db51790112cbe95b860968c6534cde8249d41a3ff1448789c9822"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "moved.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "b0c3c72ffeac211b0cc9a3485e3b6eebf549fd9da2695f590b18c26aa0519821",
+                "lines": 12
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "final",
+            "observed": {
+              "head": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "allRefs": {
+                "sha256": "c18a8f96f241ba053d24370ea8e32ff47332e465c6ebdaa17dd95f97f2d6c5a1",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "809293316b410138092070e3161d7c03015c52e48161aab393703582c78cef43",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 0a6b094894e373c0727d51da3db94c4ff45f76d7 0\tbase.txt",
+                "rawSHA256": "19a157e0d08ca0836dd6d0a295dd7dd1794b4276fc606154548b52bf04838a6d"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "98d0cfce15e0ac1e3b93f406d879755d584b8d03779661c2b971e326bdf2475b"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "103e4d85b57db51790112cbe95b860968c6534cde8249d41a3ff1448789c9822"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                },
+                "ordinary.txt": {
+                  "sha256": "670c88106f63de69c3905bfefa68fd2681c7406d565fb4f91fc871c4fd9f74ee",
+                  "bytes": 22,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [
+                  "moved.txt"
+                ],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "moved.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [
+                    "ordinary.txt"
+                  ],
+                  "acceptedBase": []
+                }
+              },
+              "exclude": {
+                "sha256": "102e35864ffb4ce620eab255f3ccb6b2e28781a32daebf2faf55c6c2253d5a5f",
+                "lines": 14
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": [
+                    "ordinary.txt"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "D01 accepted base ownership survives target deactivation and removal after mixed reset",
+        "status": "PASS",
+        "fullFixture": {
+          "id": "full-14/base-origin/D01_accepted_base_ownership_survives_target_deactivation_and_removal_after_mixed_reset.json",
+          "sha256": "d4aa7392a94001ede10125998d1d5c9984913b8640fef576c8967a33357331cd"
+        },
+        "focusedFixture": {
+          "id": "focus-base-origin-09/base-origin/D01_accepted_base_ownership_survives_target_deactivation_and_removal_after_mixed_reset.json",
+          "sha256": "022e53cd80109707157671f1760019681d70a8658c42629e2dcd39f79d3f0f16"
+        },
+        "gitVersion": "git version 2.53.0.windows.2",
+        "observations": [
+          {
+            "label": "accepted base before native reset",
+            "observed": {
+              "head": "f0735648b271afc319b795c211181a6a1fb25f92",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92",
+              "allRefs": {
+                "sha256": "d6a8ea68de41b89fd6ef0822b3f941bbb55a659f44f56b394ab338ae61018c50",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "2d5fff62b155ffe8f8559ac958b8a64e02d86064bcaa2be30fac7d96052d8511",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 5f15213193a2b14763039007989e7a359e78c03d 0\tmoved.txt",
+                "rawSHA256": "b7ac371106df9615722e5055f943beadf99d3eb1ca24a7abb264bb1c42c25762"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "95c3ab9245b0444ad5dc2ee9dec48e6870eb885b201606e55b1982b6101b29cd"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "80995d806278cb35da4c464100af9b05662d231272c7cd2efd65f2c013176ef6"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "moved.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "b0c3c72ffeac211b0cc9a3485e3b6eebf549fd9da2695f590b18c26aa0519821",
+                "lines": 12
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "before deactivation",
+            "observed": {
+              "head": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "allRefs": {
+                "sha256": "c5b4fe8a67b707dab0b5375ae59457b1a9865f01c07261b995aee85b9e6bab86",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "2d5fff62b155ffe8f8559ac958b8a64e02d86064bcaa2be30fac7d96052d8511",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 0a6b094894e373c0727d51da3db94c4ff45f76d7 0\tbase.txt",
+                "rawSHA256": "19a157e0d08ca0836dd6d0a295dd7dd1794b4276fc606154548b52bf04838a6d"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "95c3ab9245b0444ad5dc2ee9dec48e6870eb885b201606e55b1982b6101b29cd"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "80995d806278cb35da4c464100af9b05662d231272c7cd2efd65f2c013176ef6"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "moved.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "b0c3c72ffeac211b0cc9a3485e3b6eebf549fd9da2695f590b18c26aa0519821",
+                "lines": 12
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "before target removal",
+            "observed": {
+              "head": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "allRefs": {
+                "sha256": "3d831c1d8b7f2a420ded61b614cbed6454b166056077ebd678505d8e309f831f",
+                "lines": 15
+              },
+              "stateRefs": {
+                "sha256": "9d63bb15beb244c07240c3d87ed3fe844d14ad6d9673d39a841db954741d047f",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 0a6b094894e373c0727d51da3db94c4ff45f76d7 0\tbase.txt",
+                "rawSHA256": "19a157e0d08ca0836dd6d0a295dd7dd1794b4276fc606154548b52bf04838a6d"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "95c3ab9245b0444ad5dc2ee9dec48e6870eb885b201606e55b1982b6101b29cd"
+                },
+                "b": {
+                  "semantic": "100644 ca8d4ac9a29b3031ac3bfa92975ba3419127e620 0\tb.txt",
+                  "rawSHA256": "5b82b9fe2af547f737e894f4cdb65e661684afbf5736e413bce62950c8e53f9d"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ce73e7af17ba18adfb540b5a9b83d44303841896a4e2413fd2e3e978fe2f84be",
+                  "bytes": 14,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                },
+                "native.txt": {
+                  "sha256": "f319a06248061a14912f71d958ca9d743854e64511bc2fed3da73be2b74f3c8a",
+                  "bytes": 21,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [
+                  "moved.txt"
+                ],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "moved.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "native.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "f5f3e428e6065a107a3ff6ffa682feb6b1663f54491f7592290a076b5ba8e1df",
+                "lines": 13
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "final",
+            "observed": {
+              "head": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "allRefs": {
+                "sha256": "0d3810b5833373dce7369f9a519d62eddc169aa5db0cbaf5b87739a036eaa5d7",
+                "lines": 16
+              },
+              "stateRefs": {
+                "sha256": "9d63bb15beb244c07240c3d87ed3fe844d14ad6d9673d39a841db954741d047f",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 0a6b094894e373c0727d51da3db94c4ff45f76d7 0\tbase.txt",
+                "rawSHA256": "19a157e0d08ca0836dd6d0a295dd7dd1794b4276fc606154548b52bf04838a6d"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "95c3ab9245b0444ad5dc2ee9dec48e6870eb885b201606e55b1982b6101b29cd"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                },
+                "native.txt": {
+                  "sha256": "f319a06248061a14912f71d958ca9d743854e64511bc2fed3da73be2b74f3c8a",
+                  "bytes": 21,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [
+                  "moved.txt",
+                  "native.txt"
+                ],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": null
+              },
+              "exclude": {
+                "sha256": "8f6d07726ee43a253116e0d89d115d02741310b38c0f92d4995aceb8b306d6c9",
+                "lines": 9
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "D01 explicit release rename and deletion retire accepted base markers safely",
+        "status": "PASS",
+        "fullFixture": {
+          "id": "full-14/base-origin/D01_explicit_release_rename_and_deletion_retire_accepted_base_markers_safely.json",
+          "sha256": "4d637cde30b12f03ab8094998cbd7a4ea92225a511a22299854ff14b4c4fb2b7"
+        },
+        "focusedFixture": {
+          "id": "focus-base-origin-09/base-origin/D01_explicit_release_rename_and_deletion_retire_accepted_base_markers_safely.json",
+          "sha256": "53675ca20f7bdab62930ff11915048e2e3a6c08bd45cfa60eb1190008feb32ad"
+        },
+        "gitVersion": "git version 2.53.0.windows.2",
+        "observations": [
+          {
+            "label": "accepted base before native reset",
+            "observed": {
+              "head": "f0735648b271afc319b795c211181a6a1fb25f92",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92",
+              "allRefs": {
+                "sha256": "9ad5beacf91bca1d04dc4f05fd027377bc262aaf06ad24bfa043f95ef468e613",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "a2ac49feb6c622cc9b1e35b264ff5667753bf90bd3b16ad81dbf58f4b953002e",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 5f15213193a2b14763039007989e7a359e78c03d 0\tmoved.txt",
+                "rawSHA256": "945808bd4dea572ad157f289332fbe9b48ccfba288abb8a6778e14835eedf8f4"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "6d58bbbc38d4c12109cdd33f9136df8cafed5e8113f6af480b3ea44904c72822"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "e4ca0c1118e6439602de705bedc382dc72ae8b05e752bfeeecbd1ec6c68c4ac3"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "moved.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "b0c3c72ffeac211b0cc9a3485e3b6eebf549fd9da2695f590b18c26aa0519821",
+                "lines": 12
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "before explicit release",
+            "observed": {
+              "head": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "allRefs": {
+                "sha256": "05997e79672e8ad5e95a9fcb87d90c5259494dbc191deef484e0a7339db36c1e",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "a2ac49feb6c622cc9b1e35b264ff5667753bf90bd3b16ad81dbf58f4b953002e",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 0a6b094894e373c0727d51da3db94c4ff45f76d7 0\tbase.txt",
+                "rawSHA256": "19a157e0d08ca0836dd6d0a295dd7dd1794b4276fc606154548b52bf04838a6d"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "6d58bbbc38d4c12109cdd33f9136df8cafed5e8113f6af480b3ea44904c72822"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "e4ca0c1118e6439602de705bedc382dc72ae8b05e752bfeeecbd1ec6c68c4ac3"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [
+                  "moved.txt"
+                ],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "moved.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "f5f3e428e6065a107a3ff6ffa682feb6b1663f54491f7592290a076b5ba8e1df",
+                "lines": 13
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "final",
+            "observed": {
+              "head": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "allRefs": {
+                "sha256": "05997e79672e8ad5e95a9fcb87d90c5259494dbc191deef484e0a7339db36c1e",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "a2ac49feb6c622cc9b1e35b264ff5667753bf90bd3b16ad81dbf58f4b953002e",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 0a6b094894e373c0727d51da3db94c4ff45f76d7 0\tbase.txt",
+                "rawSHA256": "19a157e0d08ca0836dd6d0a295dd7dd1794b4276fc606154548b52bf04838a6d"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "6d58bbbc38d4c12109cdd33f9136df8cafed5e8113f6af480b3ea44904c72822"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "e4ca0c1118e6439602de705bedc382dc72ae8b05e752bfeeecbd1ec6c68c4ac3"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                },
+                "p.txt": {
+                  "sha256": "f569d321a5b649c1a4f250bafa27e8475e9e88c47dffbd20d4cf17397208e7de",
+                  "bytes": 26,
+                  "mode": 438
+                },
+                "q.txt": {
+                  "sha256": "f9b09fe8a1ecb9f09827762cb42e321045a0ec988cafb37e6c012518c1912458",
+                  "bytes": 26,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt",
+                    "moved.txt"
+                  ],
+                  "unassigned": [
+                    "moved.txt"
+                  ],
+                  "assigned": [
+                    "p.txt",
+                    "q.txt"
+                  ],
+                  "acceptedBase": []
+                }
+              },
+              "exclude": {
+                "sha256": "a5296c4da3f7c33fefcef85f125367af3e46acb94ea1170ce0fa39384d3cc595",
+                "lines": 15
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": [
+                    "p.txt",
+                    "q.txt"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "D01 clean tracked accepted base creates no phantom reservation on compatible switch",
+        "status": "PASS",
+        "fullFixture": {
+          "id": "full-14/base-origin/D01_clean_tracked_accepted_base_creates_no_phantom_reservation_on_compatible_switch.json",
+          "sha256": "be2ea18be8736fd0ce8a7e701c06d75b693e2587364e8b8073ccc2cf9a907775"
+        },
+        "focusedFixture": {
+          "id": "focus-base-origin-09/base-origin/D01_clean_tracked_accepted_base_creates_no_phantom_reservation_on_compatible_switch.json",
+          "sha256": "47d9f33638514b530b3be452ecfaead368fd811d3b5a263dc40b64ab438dce20"
+        },
+        "gitVersion": "git version 2.53.0.windows.2",
+        "observations": [
+          {
+            "label": "accepted base before native reset",
+            "observed": {
+              "head": "f0735648b271afc319b795c211181a6a1fb25f92",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92",
+              "allRefs": {
+                "sha256": "a393b9c33703e1f9d081eef144f8ee3ee0c520d28dcef219d49420c8ea3b85bd",
+                "lines": 13
+              },
+              "stateRefs": {
+                "sha256": "635933bf7e35ff6b5a944abe8a823d1f48a0c42c68fabd2fb4bddde9911c5713",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 5f15213193a2b14763039007989e7a359e78c03d 0\tmoved.txt",
+                "rawSHA256": "93d791c28f6d9b6fc26de0880a285e891ab1bba3d7a0ea4a80043d0711fef072"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "3ca615ff91d6447e69955b7659bf7ac21214fa1b0cbfe2ecba61ef0212f9cf9b"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "31ee78b6f43883f7fe4736a58a980f9db4e30b6a0e20fca6c0acdebcd63709e9"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [],
+                  "acceptedBase": [
+                    "moved.txt"
+                  ]
+                }
+              },
+              "exclude": {
+                "sha256": "b0c3c72ffeac211b0cc9a3485e3b6eebf549fd9da2695f590b18c26aa0519821",
+                "lines": 12
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "before compatible managed switch",
+            "observed": {
+              "head": "438357ec4a08ba009757b0b1176477f5ed61ec62",
+              "branch": "refs/heads/main",
+              "branchRefs": "refs/heads/develop 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 438357ec4a08ba009757b0b1176477f5ed61ec62",
+              "allRefs": {
+                "sha256": "84dae8e4b21b1a0c05a2790b83036cdaa317caf78d21c969502dcc9a9df4c77b",
+                "lines": 14
+              },
+              "stateRefs": {
+                "sha256": "635933bf7e35ff6b5a944abe8a823d1f48a0c42c68fabd2fb4bddde9911c5713",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 955b717c7c9ade1289451ebbb12b19e3827f9792 0\tmoved.txt",
+                "rawSHA256": "8a64d543f91d141260ad12ece6c1b2f623b03e44ef13e0600ee8b428fb97002f"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "3ca615ff91d6447e69955b7659bf7ac21214fa1b0cbfe2ecba61ef0212f9cf9b"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "31ee78b6f43883f7fe4736a58a980f9db4e30b6a0e20fca6c0acdebcd63709e9"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "5f35a88fb826bbc0cc288cb575bd4f020e444ac79e9d034428e76d97653ef7b3",
+                  "bytes": 17,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [
+                  "base.txt"
+                ],
+                "editing": null
+              },
+              "exclude": {
+                "sha256": "d09a35036b6b831ed8379d23afd5c8dd026c1b042995e10a81ce86934f9dd4f4",
+                "lines": 10
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": []
+                }
+              ]
+            }
+          },
+          {
+            "label": "final",
+            "observed": {
+              "head": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+              "branch": "refs/heads/develop",
+              "branchRefs": "refs/heads/develop 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 438357ec4a08ba009757b0b1176477f5ed61ec62",
+              "allRefs": {
+                "sha256": "84dae8e4b21b1a0c05a2790b83036cdaa317caf78d21c969502dcc9a9df4c77b",
+                "lines": 14
+              },
+              "stateRefs": {
+                "sha256": "635933bf7e35ff6b5a944abe8a823d1f48a0c42c68fabd2fb4bddde9911c5713",
+                "lines": 2
+              },
+              "mainIndex": {
+                "semantic": "100644 0a6b094894e373c0727d51da3db94c4ff45f76d7 0\tbase.txt",
+                "rawSHA256": "a9443e011aa56cf96b7bbe7b92a077f189cf40f2547667f1379f71fa4f993072"
+              },
+              "layerIndexes": {
+                "a": {
+                  "semantic": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt",
+                  "rawSHA256": "3ca615ff91d6447e69955b7659bf7ac21214fa1b0cbfe2ecba61ef0212f9cf9b"
+                },
+                "b": {
+                  "semantic": "100644 4283387efd0bd4c0247046c88574109e12fde8fb 0\tb.txt",
+                  "rawSHA256": "31ee78b6f43883f7fe4736a58a980f9db4e30b6a0e20fca6c0acdebcd63709e9"
+                }
+              },
+              "files": {
+                "a.txt": {
+                  "sha256": "b6c0620558a312bf9ba89ba261446d7689f382d07b09fc148abcdc9c8d6f70f3",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "b.txt": {
+                  "sha256": "ddad20dcdbceb160e6282b86564433c2a220bb2ff0aa4c6793316052a1b01c7f",
+                  "bytes": 9,
+                  "mode": 438
+                },
+                "base.txt": {
+                  "sha256": "894777d0e06d51e4128ea833ff82e0cbc1214dfceaf3b036270d7722c79f3847",
+                  "bytes": 17,
+                  "mode": 438
+                },
+                "moved.txt": {
+                  "sha256": "51b2ce5b12d69e321c329efe05342d2eeae4c4281a94e36e7be0bff3186ccd54",
+                  "bytes": 32,
+                  "mode": 438
+                }
+              },
+              "ownership": {
+                "baseReservations": [],
+                "acknowledgedMissing": [],
+                "editing": {
+                  "layer": "b",
+                  "before": [
+                    "a.txt",
+                    "b.txt",
+                    "base.txt"
+                  ],
+                  "unassigned": [],
+                  "assigned": [
+                    "moved.txt"
+                  ],
+                  "acceptedBase": []
+                }
+              },
+              "exclude": {
+                "sha256": "402953f8794c8baae043f63bea028be5e44e9ebb55c3b61bea1bb439d27d0da6",
+                "lines": 13
+              },
+              "layers": [
+                {
+                  "name": "a",
+                  "state": "active",
+                  "reservations": []
+                },
+                {
+                  "name": "b",
+                  "state": "active",
+                  "reservations": [
+                    "moved.txt"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "rawRefInventories": {
+      "05997e79672e8ad5e95a9fcb87d90c5259494dbc191deef484e0a7339db36c1e": {
+        "lines": 13,
+        "raw": "refs/git-layers/state/5615034e-2033-473a-bcce-af5b214db0fc 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/state/984e6ae9-3abe-42bd-9df8-db5b6855a672 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/564d1249-dfc9-4aa8-9a38-2a8b19257acc/5615034e-2033-473a-bcce-af5b214db0fc 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/596d9296-ea69-4256-bf9a-1fefac35e72f/984e6ae9-3abe-42bd-9df8-db5b6855a672 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/6e4b36c8-2804-4cb7-9cbd-6509540fbcf6/5615034e-2033-473a-bcce-af5b214db0fc 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/afc2864e-be26-4709-835c-153e8f0af296/5615034e-2033-473a-bcce-af5b214db0fc 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/dd435114-0e99-4fe0-b20c-72e0284b6be4/984e6ae9-3abe-42bd-9df8-db5b6855a672 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/e4c7ca7e-1cf7-4d12-bf89-a3de41f963a4/984e6ae9-3abe-42bd-9df8-db5b6855a672 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/e4da68f9-2396-4940-ae0b-28bdba1a4f8c/5615034e-2033-473a-bcce-af5b214db0fc 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/e6779000-0082-4ae4-a7b7-c7f84bbfb131/984e6ae9-3abe-42bd-9df8-db5b6855a672 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8"
+      },
+      "0d3810b5833373dce7369f9a519d62eddc169aa5db0cbaf5b87739a036eaa5d7": {
+        "lines": 16,
+        "raw": "refs/git-layers/state/07936431-621f-4b86-b974-d9f1ad479ac1 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/state/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/00b71919-34bc-4f0d-8648-b5428ebc4b89/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/0c5f3077-faa5-46e1-81c1-2a0eaab28ee9/e9a50ade-d329-4846-bf65-b5783f4793e0 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/2f41bf67-5d8b-4259-9bb1-12a7daf4d95c/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/2f41bf67-5d8b-4259-9bb1-12a7daf4d95c/removed-commit 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/git-layers/transactions/4ea1e9f3-e44e-4e79-9268-27fcd4a1febc/07936431-621f-4b86-b974-d9f1ad479ac1 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/7cbb0af5-c253-40ea-b327-c9c35ad9b3ce/07936431-621f-4b86-b974-d9f1ad479ac1 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/7e0547ee-24bb-478b-bcce-99c300f59de3/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/88a9d33d-5132-4aca-9b5a-70e472e2222b/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/8cc849ba-6e5b-4119-9a20-b353ca41b686/07936431-621f-4b86-b974-d9f1ad479ac1 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/9ecc0048-0f82-4fc7-94a9-e245b5b007ac/e9a50ade-d329-4846-bf65-b5783f4793e0 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/b9f35ced-08bd-4c72-a295-7f5558473bf7/07936431-621f-4b86-b974-d9f1ad479ac1 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/d66677ea-2472-4366-a5dd-034190678a79/e9a50ade-d329-4846-bf65-b5783f4793e0 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8"
+      },
+      "19fe013a5c30fa282a82e69d10e1663b46641a50535e6bf3660d3ffa6ad219df": {
+        "lines": 13,
+        "raw": "refs/git-layers/state/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/state/da4b5a9c-7e23-490f-82fa-de248eb6275b b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/0082debe-d3ed-4c62-a779-56f244517c7d/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/278ef737-cde6-46aa-8efa-a6ed85d5aed7/da4b5a9c-7e23-490f-82fa-de248eb6275b 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/30684116-3295-4795-8288-7b225270c025/da4b5a9c-7e23-490f-82fa-de248eb6275b 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/59f38338-6a35-4e49-ba15-25e510af60b3/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/6db87210-d22a-4667-a617-9d49b48adacd/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/b59abb2f-b5ae-4f76-a6f9-a673f6f0b78c/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/d42448a7-89e8-454c-a3dc-4a92d9497896/da4b5a9c-7e23-490f-82fa-de248eb6275b 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/dc5427eb-a14c-40ca-b6a1-f18e1f3358d2/da4b5a9c-7e23-490f-82fa-de248eb6275b 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8"
+      },
+      "1a1da74f8360e0e676dca684255170c33950792483dd9940718d558d3de63010": {
+        "lines": 17,
+        "raw": "refs/git-layers/state/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/state/da4b5a9c-7e23-490f-82fa-de248eb6275b b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/0082debe-d3ed-4c62-a779-56f244517c7d/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/278ef737-cde6-46aa-8efa-a6ed85d5aed7/da4b5a9c-7e23-490f-82fa-de248eb6275b 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/30684116-3295-4795-8288-7b225270c025/da4b5a9c-7e23-490f-82fa-de248eb6275b 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/59f38338-6a35-4e49-ba15-25e510af60b3/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/6db87210-d22a-4667-a617-9d49b48adacd/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/8e9ba308-5467-4e64-890e-b703541a2c86/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/8e9ba308-5467-4e64-890e-b703541a2c86/da4b5a9c-7e23-490f-82fa-de248eb6275b b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/8f48a5c2-604a-426c-ba7f-28e217eac506/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/b59abb2f-b5ae-4f76-a6f9-a673f6f0b78c/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/d42448a7-89e8-454c-a3dc-4a92d9497896/da4b5a9c-7e23-490f-82fa-de248eb6275b 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/da925e07-018f-4619-ae9a-9f426ee57bd6/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/dc5427eb-a14c-40ca-b6a1-f18e1f3358d2/da4b5a9c-7e23-490f-82fa-de248eb6275b 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 78c2f5a41742ade4816d6f606deee7f2976b67f8\nrefs/heads/main e8bff85d30227105b8f0ab9559c6e58067937e7e"
+      },
+      "291301b421238f53ea7b9a2e149a986d8ed717bcb9ae4b874b4909296505f998": {
+        "lines": 13,
+        "raw": "refs/git-layers/state/3437d792-8278-4f9d-877d-1c9b8bb74af5 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/state/a8554fdd-c7c4-4c41-b5dd-df7b20789f73 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/012420f4-3df6-4379-8685-06d700a9c18f/a8554fdd-c7c4-4c41-b5dd-df7b20789f73 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/05d96dfa-abdc-4bf2-b92a-dc85a2d7c091/3437d792-8278-4f9d-877d-1c9b8bb74af5 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/0f223b7c-5797-474a-8a9e-d2815af6049e/3437d792-8278-4f9d-877d-1c9b8bb74af5 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/2099e5ef-a2da-47c8-952c-65036c65b12d/3437d792-8278-4f9d-877d-1c9b8bb74af5 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/79b4b2bc-1e37-42f4-ba05-aaddee2dbf75/a8554fdd-c7c4-4c41-b5dd-df7b20789f73 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/9d7a0470-d393-4f37-87ee-3e124db86979/a8554fdd-c7c4-4c41-b5dd-df7b20789f73 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/d2120675-aeba-44cd-acfe-c2bb5d67cabd/a8554fdd-c7c4-4c41-b5dd-df7b20789f73 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/e97b0db4-e642-4f96-86cc-ceada6b4f505/3437d792-8278-4f9d-877d-1c9b8bb74af5 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92"
+      },
+      "3d49b8b9583d4202213582120b67d4319f570e15ddf90483ea5cce9c5673459b": {
+        "lines": 13,
+        "raw": "refs/git-layers/state/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/state/da4b5a9c-7e23-490f-82fa-de248eb6275b b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/0082debe-d3ed-4c62-a779-56f244517c7d/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/278ef737-cde6-46aa-8efa-a6ed85d5aed7/da4b5a9c-7e23-490f-82fa-de248eb6275b 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/30684116-3295-4795-8288-7b225270c025/da4b5a9c-7e23-490f-82fa-de248eb6275b 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/59f38338-6a35-4e49-ba15-25e510af60b3/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/6db87210-d22a-4667-a617-9d49b48adacd/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/b59abb2f-b5ae-4f76-a6f9-a673f6f0b78c/7c2c4602-7aa9-4c35-a2d2-b1f64f7824d3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/d42448a7-89e8-454c-a3dc-4a92d9497896/da4b5a9c-7e23-490f-82fa-de248eb6275b 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/dc5427eb-a14c-40ca-b6a1-f18e1f3358d2/da4b5a9c-7e23-490f-82fa-de248eb6275b 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92"
+      },
+      "3d831c1d8b7f2a420ded61b614cbed6454b166056077ebd678505d8e309f831f": {
+        "lines": 15,
+        "raw": "refs/git-layers/state/07936431-621f-4b86-b974-d9f1ad479ac1 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/state/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/00b71919-34bc-4f0d-8648-b5428ebc4b89/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/0c5f3077-faa5-46e1-81c1-2a0eaab28ee9/e9a50ade-d329-4846-bf65-b5783f4793e0 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/4ea1e9f3-e44e-4e79-9268-27fcd4a1febc/07936431-621f-4b86-b974-d9f1ad479ac1 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/7cbb0af5-c253-40ea-b327-c9c35ad9b3ce/07936431-621f-4b86-b974-d9f1ad479ac1 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/7e0547ee-24bb-478b-bcce-99c300f59de3/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/88a9d33d-5132-4aca-9b5a-70e472e2222b/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/8cc849ba-6e5b-4119-9a20-b353ca41b686/07936431-621f-4b86-b974-d9f1ad479ac1 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/9ecc0048-0f82-4fc7-94a9-e245b5b007ac/e9a50ade-d329-4846-bf65-b5783f4793e0 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/b9f35ced-08bd-4c72-a295-7f5558473bf7/07936431-621f-4b86-b974-d9f1ad479ac1 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/d66677ea-2472-4366-a5dd-034190678a79/e9a50ade-d329-4846-bf65-b5783f4793e0 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8"
+      },
+      "585a0e71ca6de17ec374639ac996e8d4af56d6e493215cf618d2b2a5d2daa72b": {
+        "lines": 13,
+        "raw": "refs/git-layers/state/3808ff30-a8eb-4a30-9834-0f95456a8ac9 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/state/439a6f43-7800-48e5-a0c2-dc90204ae4e3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/3506952c-5adf-4dac-bfee-4d192ca22bb1/3808ff30-a8eb-4a30-9834-0f95456a8ac9 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/382220f5-1922-4faf-9d3d-073f1535d101/3808ff30-a8eb-4a30-9834-0f95456a8ac9 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/3e32f36b-8e0c-486c-b4d3-773b8021850c/439a6f43-7800-48e5-a0c2-dc90204ae4e3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/726f17ab-f0c3-4aa4-b3b9-68cfaacc9441/3808ff30-a8eb-4a30-9834-0f95456a8ac9 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/8d801f19-548b-469d-a551-a2edcc94a793/3808ff30-a8eb-4a30-9834-0f95456a8ac9 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/b8b448e7-70ba-49e9-8901-3151fabdca60/439a6f43-7800-48e5-a0c2-dc90204ae4e3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/b8ba1290-0438-420a-8b54-8aec17e9d826/439a6f43-7800-48e5-a0c2-dc90204ae4e3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/f7c944dd-ad07-4acb-9ff0-099b4d347ed9/439a6f43-7800-48e5-a0c2-dc90204ae4e3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92"
+      },
+      "615b551c9973f47f92086b8b2e5927046385c6ed26cb7fa24c6aa7cd03458048": {
+        "lines": 13,
+        "raw": "refs/git-layers/state/3808ff30-a8eb-4a30-9834-0f95456a8ac9 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/state/439a6f43-7800-48e5-a0c2-dc90204ae4e3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/3506952c-5adf-4dac-bfee-4d192ca22bb1/3808ff30-a8eb-4a30-9834-0f95456a8ac9 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/382220f5-1922-4faf-9d3d-073f1535d101/3808ff30-a8eb-4a30-9834-0f95456a8ac9 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/3e32f36b-8e0c-486c-b4d3-773b8021850c/439a6f43-7800-48e5-a0c2-dc90204ae4e3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/726f17ab-f0c3-4aa4-b3b9-68cfaacc9441/3808ff30-a8eb-4a30-9834-0f95456a8ac9 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/8d801f19-548b-469d-a551-a2edcc94a793/3808ff30-a8eb-4a30-9834-0f95456a8ac9 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/b8b448e7-70ba-49e9-8901-3151fabdca60/439a6f43-7800-48e5-a0c2-dc90204ae4e3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/b8ba1290-0438-420a-8b54-8aec17e9d826/439a6f43-7800-48e5-a0c2-dc90204ae4e3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/f7c944dd-ad07-4acb-9ff0-099b4d347ed9/439a6f43-7800-48e5-a0c2-dc90204ae4e3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8"
+      },
+      "84dae8e4b21b1a0c05a2790b83036cdaa317caf78d21c969502dcc9a9df4c77b": {
+        "lines": 14,
+        "raw": "refs/git-layers/state/10e99648-b842-4170-b756-528f50d443d7 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/state/8d0ca6ab-cb3c-4ff1-bb1c-f75284cba736 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/14fd827e-7128-45fb-bde6-e3771dc15771/8d0ca6ab-cb3c-4ff1-bb1c-f75284cba736 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/20e1d89c-c385-42aa-9f2f-a2fc11bafc4b/10e99648-b842-4170-b756-528f50d443d7 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/2a674ae1-b569-454f-a41e-1a0df9ad6080/8d0ca6ab-cb3c-4ff1-bb1c-f75284cba736 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/6a1fab02-8b6c-47ab-9cd0-4d2726740c0a/10e99648-b842-4170-b756-528f50d443d7 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/6dec2335-1f1f-4b1b-9502-1cfbf849bd11/10e99648-b842-4170-b756-528f50d443d7 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/6fc9d3b0-658a-47f7-8fd3-9d449e56d9da/10e99648-b842-4170-b756-528f50d443d7 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/827478eb-bbfe-4f1f-b0ff-9ae0c3d2e973/8d0ca6ab-cb3c-4ff1-bb1c-f75284cba736 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/a0ff4451-a647-4b05-a561-d8495b8f6a18/8d0ca6ab-cb3c-4ff1-bb1c-f75284cba736 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/develop 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 438357ec4a08ba009757b0b1176477f5ed61ec62"
+      },
+      "8f24571a004c15dcda07af5c99d7219067da334a463fd30516f38e47aa5dd54f": {
+        "lines": 21,
+        "raw": "refs/git-layers/state/3808ff30-a8eb-4a30-9834-0f95456a8ac9 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/state/439a6f43-7800-48e5-a0c2-dc90204ae4e3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/3506952c-5adf-4dac-bfee-4d192ca22bb1/3808ff30-a8eb-4a30-9834-0f95456a8ac9 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/382220f5-1922-4faf-9d3d-073f1535d101/3808ff30-a8eb-4a30-9834-0f95456a8ac9 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/3e32f36b-8e0c-486c-b4d3-773b8021850c/439a6f43-7800-48e5-a0c2-dc90204ae4e3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/726f17ab-f0c3-4aa4-b3b9-68cfaacc9441/3808ff30-a8eb-4a30-9834-0f95456a8ac9 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/823acdc1-8f55-47dc-8c66-d517dce7379e/3808ff30-a8eb-4a30-9834-0f95456a8ac9 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/823acdc1-8f55-47dc-8c66-d517dce7379e/439a6f43-7800-48e5-a0c2-dc90204ae4e3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/8d801f19-548b-469d-a551-a2edcc94a793/3808ff30-a8eb-4a30-9834-0f95456a8ac9 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/b8b448e7-70ba-49e9-8901-3151fabdca60/439a6f43-7800-48e5-a0c2-dc90204ae4e3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/b8ba1290-0438-420a-8b54-8aec17e9d826/439a6f43-7800-48e5-a0c2-dc90204ae4e3 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/bb320f2f-c3ac-4c6e-a98a-58cb7e52a6cf/3808ff30-a8eb-4a30-9834-0f95456a8ac9 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/bb320f2f-c3ac-4c6e-a98a-58cb7e52a6cf/439a6f43-7800-48e5-a0c2-dc90204ae4e3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/d2d6a5c2-086f-4103-a876-0ddba96d8fb4/3808ff30-a8eb-4a30-9834-0f95456a8ac9 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/d2d6a5c2-086f-4103-a876-0ddba96d8fb4/439a6f43-7800-48e5-a0c2-dc90204ae4e3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/f7c944dd-ad07-4acb-9ff0-099b4d347ed9/439a6f43-7800-48e5-a0c2-dc90204ae4e3 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/fe50434d-90e3-48a2-925a-a77f889122fa/3808ff30-a8eb-4a30-9834-0f95456a8ac9 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/fe50434d-90e3-48a2-925a-a77f889122fa/439a6f43-7800-48e5-a0c2-dc90204ae4e3 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 6062856fd72544e2e1dca5f69f4aefd44ecef5e9"
+      },
+      "9ad5beacf91bca1d04dc4f05fd027377bc262aaf06ad24bfa043f95ef468e613": {
+        "lines": 13,
+        "raw": "refs/git-layers/state/5615034e-2033-473a-bcce-af5b214db0fc 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/state/984e6ae9-3abe-42bd-9df8-db5b6855a672 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/564d1249-dfc9-4aa8-9a38-2a8b19257acc/5615034e-2033-473a-bcce-af5b214db0fc 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/596d9296-ea69-4256-bf9a-1fefac35e72f/984e6ae9-3abe-42bd-9df8-db5b6855a672 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/6e4b36c8-2804-4cb7-9cbd-6509540fbcf6/5615034e-2033-473a-bcce-af5b214db0fc 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/afc2864e-be26-4709-835c-153e8f0af296/5615034e-2033-473a-bcce-af5b214db0fc 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/dd435114-0e99-4fe0-b20c-72e0284b6be4/984e6ae9-3abe-42bd-9df8-db5b6855a672 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/e4c7ca7e-1cf7-4d12-bf89-a3de41f963a4/984e6ae9-3abe-42bd-9df8-db5b6855a672 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/e4da68f9-2396-4940-ae0b-28bdba1a4f8c/5615034e-2033-473a-bcce-af5b214db0fc 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/e6779000-0082-4ae4-a7b7-c7f84bbfb131/984e6ae9-3abe-42bd-9df8-db5b6855a672 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92"
+      },
+      "a393b9c33703e1f9d081eef144f8ee3ee0c520d28dcef219d49420c8ea3b85bd": {
+        "lines": 13,
+        "raw": "refs/git-layers/state/10e99648-b842-4170-b756-528f50d443d7 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/state/8d0ca6ab-cb3c-4ff1-bb1c-f75284cba736 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/14fd827e-7128-45fb-bde6-e3771dc15771/8d0ca6ab-cb3c-4ff1-bb1c-f75284cba736 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/20e1d89c-c385-42aa-9f2f-a2fc11bafc4b/10e99648-b842-4170-b756-528f50d443d7 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/2a674ae1-b569-454f-a41e-1a0df9ad6080/8d0ca6ab-cb3c-4ff1-bb1c-f75284cba736 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/6a1fab02-8b6c-47ab-9cd0-4d2726740c0a/10e99648-b842-4170-b756-528f50d443d7 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/6dec2335-1f1f-4b1b-9502-1cfbf849bd11/10e99648-b842-4170-b756-528f50d443d7 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/6fc9d3b0-658a-47f7-8fd3-9d449e56d9da/10e99648-b842-4170-b756-528f50d443d7 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/827478eb-bbfe-4f1f-b0ff-9ae0c3d2e973/8d0ca6ab-cb3c-4ff1-bb1c-f75284cba736 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/a0ff4451-a647-4b05-a561-d8495b8f6a18/8d0ca6ab-cb3c-4ff1-bb1c-f75284cba736 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92"
+      },
+      "c18a8f96f241ba053d24370ea8e32ff47332e465c6ebdaa17dd95f97f2d6c5a1": {
+        "lines": 13,
+        "raw": "refs/git-layers/state/3437d792-8278-4f9d-877d-1c9b8bb74af5 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/state/a8554fdd-c7c4-4c41-b5dd-df7b20789f73 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/transactions/012420f4-3df6-4379-8685-06d700a9c18f/a8554fdd-c7c4-4c41-b5dd-df7b20789f73 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/05d96dfa-abdc-4bf2-b92a-dc85a2d7c091/3437d792-8278-4f9d-877d-1c9b8bb74af5 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/0f223b7c-5797-474a-8a9e-d2815af6049e/3437d792-8278-4f9d-877d-1c9b8bb74af5 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/2099e5ef-a2da-47c8-952c-65036c65b12d/3437d792-8278-4f9d-877d-1c9b8bb74af5 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/79b4b2bc-1e37-42f4-ba05-aaddee2dbf75/a8554fdd-c7c4-4c41-b5dd-df7b20789f73 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/9d7a0470-d393-4f37-87ee-3e124db86979/a8554fdd-c7c4-4c41-b5dd-df7b20789f73 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/d2120675-aeba-44cd-acfe-c2bb5d67cabd/a8554fdd-c7c4-4c41-b5dd-df7b20789f73 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/e97b0db4-e642-4f96-86cc-ceada6b4f505/3437d792-8278-4f9d-877d-1c9b8bb74af5 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8"
+      },
+      "c5b4fe8a67b707dab0b5375ae59457b1a9865f01c07261b995aee85b9e6bab86": {
+        "lines": 13,
+        "raw": "refs/git-layers/state/07936431-621f-4b86-b974-d9f1ad479ac1 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/state/e9a50ade-d329-4846-bf65-b5783f4793e0 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/4ea1e9f3-e44e-4e79-9268-27fcd4a1febc/07936431-621f-4b86-b974-d9f1ad479ac1 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/7cbb0af5-c253-40ea-b327-c9c35ad9b3ce/07936431-621f-4b86-b974-d9f1ad479ac1 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/7e0547ee-24bb-478b-bcce-99c300f59de3/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/88a9d33d-5132-4aca-9b5a-70e472e2222b/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/8cc849ba-6e5b-4119-9a20-b353ca41b686/07936431-621f-4b86-b974-d9f1ad479ac1 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/9ecc0048-0f82-4fc7-94a9-e245b5b007ac/e9a50ade-d329-4846-bf65-b5783f4793e0 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/b9f35ced-08bd-4c72-a295-7f5558473bf7/07936431-621f-4b86-b974-d9f1ad479ac1 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/d66677ea-2472-4366-a5dd-034190678a79/e9a50ade-d329-4846-bf65-b5783f4793e0 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8"
+      },
+      "d6a8ea68de41b89fd6ef0822b3f941bbb55a659f44f56b394ab338ae61018c50": {
+        "lines": 13,
+        "raw": "refs/git-layers/state/07936431-621f-4b86-b974-d9f1ad479ac1 b464f8b6907bae8c74e68901b5c31879f909a692\nrefs/git-layers/state/e9a50ade-d329-4846-bf65-b5783f4793e0 5ebdcb2154103174b30b6bc324aa2b5ec26654d7\nrefs/git-layers/transactions/4ea1e9f3-e44e-4e79-9268-27fcd4a1febc/07936431-621f-4b86-b974-d9f1ad479ac1 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/7cbb0af5-c253-40ea-b327-c9c35ad9b3ce/07936431-621f-4b86-b974-d9f1ad479ac1 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/7e0547ee-24bb-478b-bcce-99c300f59de3/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/88a9d33d-5132-4aca-9b5a-70e472e2222b/e9a50ade-d329-4846-bf65-b5783f4793e0 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/8cc849ba-6e5b-4119-9a20-b353ca41b686/07936431-621f-4b86-b974-d9f1ad479ac1 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/9ecc0048-0f82-4fc7-94a9-e245b5b007ac/e9a50ade-d329-4846-bf65-b5783f4793e0 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/b9f35ced-08bd-4c72-a295-7f5558473bf7/07936431-621f-4b86-b974-d9f1ad479ac1 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/d66677ea-2472-4366-a5dd-034190678a79/e9a50ade-d329-4846-bf65-b5783f4793e0 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/layer/b 6540cb6ca08d3a6652c0618a9a2efcb04d6c5ac0\nrefs/heads/main f0735648b271afc319b795c211181a6a1fb25f92"
+      }
+    },
+    "countsAddedToFullTotals": false
+  }
+}

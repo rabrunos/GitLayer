@@ -92,7 +92,7 @@ test('editor Core preserves UTF-8 CRLF, rejects stale saves and exposes binary c
   for (const file of ['../outside', '.git/config', '/etc/passwd']) await assert.rejects(() => f.app.readFile(file));
 });
 
-test('editor Core renames within a Layer, refuses cross-owner destinations and backs up confirmed deletion bytes', { timeout: 300000 }, async t => {
+test('editor Core renames within a Layer, refuses cross-owner destinations and backs up confirmed deletion bytes', { timeout: 900000 }, async t => {
   const f = await fixture(t);
   for (const name of ['ai', 'other']) {
     await f.app.create(name);

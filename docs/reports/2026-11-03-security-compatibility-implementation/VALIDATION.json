@@ -1,0 +1,5266 @@
+{
+  "schema": 1,
+  "kind": "stage-1b-validation",
+  "directedMaterialization": {
+    "phase": "focus-materialization",
+    "id": "01",
+    "startedAt": "2026-11-04T07:09:24.107Z",
+    "endedAt": "2026-11-04T07:42:14.870Z",
+    "durationMs": 1970760.7462000002,
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v24.14.1",
+    "command": {
+      "executable": "node",
+      "args": [
+        "--import",
+        "tsx",
+        "--test-reporter=spec",
+        "--test-reporter-destination=stdout",
+        "--test-reporter=tap",
+        "--test-reporter-destination=stderr",
+        "--test",
+        "--test-concurrency=1",
+        "--test-timeout=900000",
+        "--test-name-pattern=^D01 materialization ",
+        "tests/integration/security-ownership.test.ts"
+      ]
+    },
+    "code": 0,
+    "signal": null,
+    "inputsStable": true,
+    "inputCount": 183,
+    "sourceFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "summary": [
+      "ℹ tests 4",
+      "ℹ suites 0",
+      "ℹ pass 4",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ duration_ms 1970649.8229"
+    ],
+    "counts": {
+      "tests": 4,
+      "pass": 4,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "receipt": {
+      "id": "focus-materialization-01/result.json",
+      "sha256": "2a0a16fcc7d8e4b79afb05c89f45e0b7b6511e3b78bd0121a410c207eef94aea"
+    },
+    "notAddedToFullTotals": true
+  },
+  "directedAcknowledgements": {
+    "phase": "focus-ack",
+    "id": "02",
+    "startedAt": "2026-11-04T07:09:23.577Z",
+    "endedAt": "2026-11-04T07:29:48.043Z",
+    "durationMs": 1224464.1275,
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v24.14.1",
+    "command": {
+      "executable": "node",
+      "args": [
+        "--import",
+        "tsx",
+        "--test-reporter=spec",
+        "--test-reporter-destination=stdout",
+        "--test-reporter=tap",
+        "--test-reporter-destination=stderr",
+        "--test",
+        "--test-concurrency=1",
+        "--test-timeout=900000",
+        "--test-name-pattern=^D01 acknowledgement revocation survives a synthetic finish EIO rollback$|^D01 acknowledgement interruption stays ambiguous through recovery and idempotent retry$|^D01 acknowledgement revocation in direct base staging survives refusal and reopen$|^D01 acknowledgement revocation in base unstaging survives refusal and reopen$|^D01 acknowledgement pending observation survives synthetic completion persistence failure$|^D01 acknowledgement malformed recovery plans refuse before any write$|^D01 acknowledgement forward base recovery retries deterministic images with and without revocations$|^D01 acknowledgement forward layer recovery retries deterministic images with and without revocations$",
+        "tests/integration/security-ownership.test.ts"
+      ]
+    },
+    "code": 0,
+    "signal": null,
+    "inputsStable": true,
+    "inputCount": 183,
+    "sourceFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "summary": [
+      "ℹ tests 8",
+      "ℹ suites 0",
+      "ℹ pass 8",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ duration_ms 1224337.3524"
+    ],
+    "counts": {
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "receipt": {
+      "id": "focus-ack-02/result.json",
+      "sha256": "f17ad8f62a41b9a27673fc88525af8b6bf0a9354f5dc2e804bf14e54f745cbc8"
+    },
+    "notAddedToFullTotals": true
+  },
+  "directedSafety": {
+    "phase": "focus-safety",
+    "id": "06",
+    "startedAt": "2026-11-04T07:44:10.967Z",
+    "endedAt": "2026-11-04T08:08:17.642Z",
+    "durationMs": 1446674.3397000001,
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v24.14.1",
+    "command": {
+      "executable": "node",
+      "args": [
+        "--import",
+        "tsx",
+        "--test-reporter=spec",
+        "--test-reporter-destination=stdout",
+        "--test-reporter=tap",
+        "--test-reporter-destination=stderr",
+        "--test",
+        "--test-concurrency=1",
+        "--test-timeout=900000",
+        "--test-name-pattern=P1 base unstage remains|P1 broad base unstage|P1 working Layer unstage|^D02 Core target retries a real creation|^R02 |^R03 |^demo script creates|^D01 without an editing target detects Layer renames, retains native staging and revokes acknowledgements after an observed reappearance$|^D01 an owned rename staged natively before the first capture anchor cannot contaminate a managed base commit$|^P1 global ignore changes refresh old-file exceptions and absent released reservations$|^P1 info ignore changes refresh old-file exceptions and absent released reservations$|^D01 stable no-target status and empty recovery preserve the completed journal inventory$|^D01 no-target observed reappearance survives an external rename before acknowledgement publication$",
+        "tests/integration/security-diagnostics.test.ts",
+        "tests/integration/security-editing-transition.test.ts",
+        "tests/integration/review-target-preview.test.ts",
+        "tests/integration/cli.test.ts",
+        "tests/integration/security-ownership.test.ts",
+        "tests/integration/security-ignore-refresh.test.ts"
+      ]
+    },
+    "code": 0,
+    "signal": null,
+    "inputsStable": true,
+    "inputCount": 183,
+    "sourceFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "summary": [
+      "ℹ tests 17",
+      "ℹ suites 0",
+      "ℹ pass 17",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ duration_ms 1446568.6801"
+    ],
+    "counts": {
+      "tests": 17,
+      "pass": 17,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "receipt": {
+      "id": "focus-safety-06/result.json",
+      "sha256": "71397b4fbfc4b0651258e294d56ff8b6cb08d9b8cab11d7c3359deec71d1476b"
+    },
+    "notAddedToFullTotals": true
+  },
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v24.14.1",
+    "git": "git version 2.53.0.windows.2",
+    "gui": false,
+    "globalConfigurationChanged": false
+  },
+  "full": {
+    "command": {
+      "executable": "node",
+      "args": [
+        "--import",
+        "tsx",
+        "--test-reporter=spec",
+        "--test-reporter-destination=stdout",
+        "--test-reporter=tap",
+        "--test-reporter-destination=stderr",
+        "--test",
+        "--test-concurrency=2",
+        "--test-timeout=900000",
+        "tests/unit/*.test.ts",
+        "tests/unit/*.test.mjs",
+        "tests/integration/*.test.ts",
+        "tests/integration/*.test.mjs"
+      ]
+    },
+    "exitCode": 0,
+    "startedAt": "2026-11-04T08:08:19.553Z",
+    "endedAt": "2026-11-04T10:23:00.810Z",
+    "durationMs": 8082111.6006000005,
+    "inputsStable": true,
+    "inputCount": 183,
+    "sourceFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "receipt": {
+      "id": "full-14/result.json",
+      "sha256": "0d6be76c51ede32d4dc88862a80350abec21f3dcae59f5b95787082e276ef188"
+    },
+    "totals": {
+      "tests": 315,
+      "suites": 0,
+      "pass": 311,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 4,
+      "todo": 0,
+      "duration_ms": 8082014.2058
+    },
+    "cases": [
+      {
+        "name": "opt-in native reservations veto ordinary switch before effects and expose explicit native bypass",
+        "status": "PASS",
+        "durationMs": 5305.7646
+      },
+      {
+        "name": "explicit release and re-reservation keep the other Layer reserved, with safe reversible unprotect",
+        "status": "PASS",
+        "durationMs": 15121.6984
+      },
+      {
+        "name": "unknown worktree files and unknown protection directory are preserved instead of forced away",
+        "status": "PASS",
+        "durationMs": 7677.5972
+      },
+      {
+        "name": "an unknown protection destination is never initialized or overwritten",
+        "status": "PASS",
+        "durationMs": 1833.9986
+      },
+      {
+        "name": "private index or external worktree cannot be mistaken for a pristine owned reservation",
+        "status": "PASS",
+        "durationMs": 7293.7768
+      },
+      {
+        "name": "Core lifecycle with protection opens a Layer deliberately, preserves others and guards renamed/new Layers",
+        "status": "PASS",
+        "durationMs": 92472.1088
+      },
+      {
+        "name": "disabled released protection migrates without altering legacy and can reserve again in layers",
+        "status": "PASS",
+        "durationMs": 11051.7091
+      },
+      {
+        "name": "protection may be enabled before Core initialization without resetting native reservations",
+        "status": "PASS",
+        "durationMs": 15697.5607
+      },
+      {
+        "name": "a reserved Layer ref deleted externally is diagnosed before Core registration",
+        "status": "PASS",
+        "durationMs": 3885.1367
+      },
+      {
+        "name": "CLI help and JSON usage errors have stable exit codes",
+        "status": "PASS",
+        "durationMs": 600.7872
+      },
+      {
+        "name": "CLI commits a real Layer with literal accented paths and leaves HEAD/base index intact",
+        "status": "PASS",
+        "durationMs": 48430.092
+      },
+      {
+        "name": "CLI restore requires explicit noninteractive confirmation and preserves index plus recovery copy",
+        "status": "PASS",
+        "durationMs": 33938.0672
+      },
+      {
+        "name": "CLI shared capture selects new paths only and cancellation preserves bytes",
+        "status": "PASS",
+        "durationMs": 50563.4083
+      },
+      {
+        "name": "demo script creates genuine branches/Layers and refuses a nonempty destination",
+        "status": "PASS",
+        "durationMs": 42955.3155
+      },
+      {
+        "name": "base flow uses the actual index, branch ref, staged tree and commit",
+        "status": "PASS",
+        "durationMs": 7466.8653
+      },
+      {
+        "name": "two active Layers project real files while HEAD and base index stay unchanged",
+        "status": "PASS",
+        "durationMs": 41534.3222
+      },
+      {
+        "name": "native git add dot protects Layer files and adds ordinary new files",
+        "status": "PASS",
+        "durationMs": 22594.0677
+      },
+      {
+        "name": "Layer stage and commit preserve base staging and the other Layer index bytes",
+        "status": "PASS",
+        "durationMs": 60951.9781
+      },
+      {
+        "name": "a Layer commits exactly staged content and retains later disk edits",
+        "status": "PASS",
+        "durationMs": 33991.5066
+      },
+      {
+        "name": "a mixed-owner batch is rejected before any part gets staged",
+        "status": "PASS",
+        "durationMs": 29989.1956
+      },
+      {
+        "name": "new-file reservations survive unstage and reopening without leaking to base",
+        "status": "PASS",
+        "durationMs": 22043.6048
+      },
+      {
+        "name": "capture selects only newly appearing paths and ends after confirmation",
+        "status": "PASS",
+        "durationMs": 33221.2897
+      },
+      {
+        "name": "capture cancellation preserves candidate bytes without assigning ownership",
+        "status": "PASS",
+        "durationMs": 30933.1372
+      },
+      {
+        "name": "activation refuses preexisting untracked bytes even if identical",
+        "status": "PASS",
+        "durationMs": 25126.6419
+      },
+      {
+        "name": "activation refuses an ignored preexisting file without overwriting it",
+        "status": "PASS",
+        "durationMs": 31106.5689
+      },
+      {
+        "name": "ignore negation blocks assignment and is not mistaken for effective exclusion",
+        "status": "PASS",
+        "durationMs": 18584.7944
+      },
+      {
+        "name": "GL16 deactivation refuses pending changes and explicit discard restores committed state",
+        "status": "PASS",
+        "durationMs": 78521.1551
+      },
+      {
+        "name": "deactivation removes only Layer files in a shared directory",
+        "status": "PASS",
+        "durationMs": 28457.3042
+      },
+      {
+        "name": "deactivation prunes empty Layer directories and activation recreates them",
+        "status": "PASS",
+        "durationMs": 39366.9879
+      },
+      {
+        "name": "deactivation prunes no Base directories, active Layer ancestors or local contents",
+        "status": "PASS",
+        "durationMs": 89479.5896
+      },
+      {
+        "name": "deactivation directory pruning is recoverable after an interruption",
+        "status": "PASS",
+        "durationMs": 44057.8998
+      },
+      {
+        "name": "managed switch preserves dirty Layer state and rejects colliding branch",
+        "status": "PASS",
+        "durationMs": 29201.2814
+      },
+      {
+        "name": "external Layer ref movement refuses commit without overwriting new ref or disk",
+        "status": "PASS",
+        "durationMs": 27338.1095
+      },
+      {
+        "name": "checkpoints retain staged blobs after reflog expiration and immediate garbage collection",
+        "status": "PASS",
+        "durationMs": 32655.9475
+      },
+      {
+        "name": "restore requires explicit confirmation and restores disk from index without unstage",
+        "status": "PASS",
+        "durationMs": 48845.7803
+      },
+      {
+        "name": "literal pathspec and ignore metacharacters do not stage neighboring files",
+        "status": "PASS",
+        "durationMs": 26059.1141
+      },
+      {
+        "name": "binary, UTF-8, LF, CRLF and executable mode survive clean off/on",
+        "status": "PASS",
+        "durationMs": 37682.3119
+      },
+      {
+        "name": "symlink file and paths through symlink directories are never adopted",
+        "status": "SKIP",
+        "durationMs": 11604.1303,
+        "reason": "Windows account cannot create symlinks; junction coverage runs separately."
+      },
+      {
+        "name": "base and Layer partial staging select one hunk and reject a stale token",
+        "status": "PASS",
+        "durationMs": 55428.8074
+      },
+      {
+        "name": "future metadata schema is refused without replacing the original file",
+        "status": "PASS",
+        "durationMs": 2742.5097
+      },
+      {
+        "name": "malformed metadata fails safely instead of reinitializing the registry",
+        "status": "PASS",
+        "durationMs": 2654.5661
+      },
+      {
+        "name": "a crash after Layer ref advancement is recovered without a duplicate commit",
+        "status": "PASS",
+        "durationMs": 32719.2369
+      },
+      {
+        "name": "concurrent Core writers are serialized or one fails without corrupting refs",
+        "status": "PASS",
+        "durationMs": 5609.8216
+      },
+      {
+        "name": "GL04 existing layer-prefixed branches are recognized without activation",
+        "status": "PASS",
+        "durationMs": 5801.8579
+      },
+      {
+        "name": "an independent branch containing a base-owned file cannot be activated as a Layer",
+        "status": "PASS",
+        "durationMs": 8863.1387
+      },
+      {
+        "name": "base ownership includes staged additions that have never been committed",
+        "status": "PASS",
+        "durationMs": 12869.5371
+      },
+      {
+        "name": "Layer control files are refused before changing their ownership",
+        "status": "PASS",
+        "durationMs": 13603.7166
+      },
+      {
+        "name": "the local exclude block preserves preexisting rules outside it",
+        "status": "PASS",
+        "durationMs": 20330.286
+      },
+      {
+        "name": "an existing coordinator lock is refused and never removed automatically",
+        "status": "PASS",
+        "durationMs": 2256.6522
+      },
+      {
+        "name": "empty Layer commit messages fail without advancing the ref",
+        "status": "PASS",
+        "durationMs": 22258.343
+      },
+      {
+        "name": "required commit signing is explicitly refused for Layer plumbing",
+        "status": "PASS",
+        "durationMs": 22858.4453
+      },
+      {
+        "name": "stage failpoint after-stage-index leaves recoverable evidence and preserves later disk bytes",
+        "status": "PASS",
+        "durationMs": 28505.7198
+      },
+      {
+        "name": "stage failpoint after-stage-checkpoint leaves recoverable evidence and preserves later disk bytes",
+        "status": "PASS",
+        "durationMs": 28838.689
+      },
+      {
+        "name": "projection failpoint after-activate-files never overwrites an edit made after interruption",
+        "status": "PASS",
+        "durationMs": 30123.9518
+      },
+      {
+        "name": "projection failpoint after-deactivate-files never overwrites an edit made after interruption",
+        "status": "PASS",
+        "durationMs": 26647.1903
+      },
+      {
+        "name": "switch failpoint preserves the dirty Layer and permits conservative recovery",
+        "status": "PASS",
+        "durationMs": 41521.5587
+      },
+      {
+        "name": "activation refuses an untracked file occupying a required ancestor directory",
+        "status": "PASS",
+        "durationMs": 23646.8502
+      },
+      {
+        "name": "activation refuses a preexisting directory tree where its own file would go",
+        "status": "PASS",
+        "durationMs": 23337.3304
+      },
+      {
+        "name": "activation refuses preexisting case aliases without creating a second spelling",
+        "status": "PASS",
+        "durationMs": 24097.4596
+      },
+      {
+        "name": "activation refuses an empty directory alias in a required ancestor path",
+        "status": "PASS",
+        "durationMs": 23390.6377
+      },
+      {
+        "name": "partial unstage removes one staged hunk, preserves disk and refuses obsolete tokens",
+        "status": "PASS",
+        "durationMs": 60254.735
+      },
+      {
+        "name": "native text eol attributes normalize the blob and restore exact CRLF bytes",
+        "status": "PASS",
+        "durationMs": 32473.108
+      },
+      {
+        "name": "release explicitly removes only a never-committed unstaged reservation",
+        "status": "PASS",
+        "durationMs": 40204.4219
+      },
+      {
+        "name": "forced native addition demonstrates the protection limit and is diagnosed",
+        "status": "PASS",
+        "durationMs": 30193.4524
+      },
+      {
+        "name": "a later ignore negation marks the active composition unsafe before the next mutation",
+        "status": "PASS",
+        "durationMs": 37626.9309
+      },
+      {
+        "name": "Layer root creation and stage checkpoints need no personal identity but user commits do",
+        "status": "PASS",
+        "durationMs": 22664.3601
+      },
+      {
+        "name": "future reservation metadata schema aborts mutation and preserves its exact bytes",
+        "status": "PASS",
+        "durationMs": 19582.631
+      },
+      {
+        "name": "reserved Layer name base cannot redirect a Layer commit to the traditional branch",
+        "status": "PASS",
+        "durationMs": 8980.4677
+      },
+      {
+        "name": "D02 boundary matches native ignore precedence and preserves repository state",
+        "status": "PASS",
+        "durationMs": 2632.95
+      },
+      {
+        "name": "D02 creation between walk and native ignore is retried as one coherent boundary",
+        "status": "PASS",
+        "durationMs": 2686.9939
+      },
+      {
+        "name": "D02 continuous external creation is refused after bounded retries without publication",
+        "status": "PASS",
+        "durationMs": 3630.0882
+      },
+      {
+        "name": "D02 ignore change during enumeration retries using current user rules",
+        "status": "PASS",
+        "durationMs": 2145.6819
+      },
+      {
+        "name": "D02 final validation permits ordinary newcomers after the selected boundary",
+        "status": "PASS",
+        "durationMs": 2100.9725
+      },
+      {
+        "name": "D02 managed exclude replacement does not change the user-rule boundary",
+        "status": "PASS",
+        "durationMs": 1780.0282
+      },
+      {
+        "name": "dot-ignore",
+        "status": "PASS",
+        "durationMs": 2262.6585
+      },
+      {
+        "name": "info-ignore",
+        "status": "PASS",
+        "durationMs": 2259.1593
+      },
+      {
+        "name": "global-ignore",
+        "status": "PASS",
+        "durationMs": 2286.8211
+      },
+      {
+        "name": "index",
+        "status": "PASS",
+        "durationMs": 2019.5727
+      },
+      {
+        "name": "ref",
+        "status": "PASS",
+        "durationMs": 2852.4849
+      },
+      {
+        "name": "head",
+        "status": "PASS",
+        "durationMs": 2181.7611
+      },
+      {
+        "name": "D02 pre-publication validation rejects changed ignore, index, refs or HEAD",
+        "status": "PASS",
+        "durationMs": 13863.6968
+      },
+      {
+        "name": "D02 Git changes during capture refuse instead of accepting a later retry",
+        "status": "PASS",
+        "durationMs": 1509.4107
+      },
+      {
+        "name": "editor Core initializes an unborn repository, configures only local identity and creates its first real commit",
+        "status": "PASS",
+        "durationMs": 12611.3772
+      },
+      {
+        "name": "editor Core preserves UTF-8 CRLF, rejects stale saves and exposes binary content as read-only",
+        "status": "PASS",
+        "durationMs": 15761.6706
+      },
+      {
+        "name": "editor Core renames within a Layer, refuses cross-owner destinations and backs up confirmed deletion bytes",
+        "status": "PASS",
+        "durationMs": 102240.5276
+      },
+      {
+        "name": "GL25: fresh layout uses layers; legacy opens in place without implicit migration",
+        "status": "PASS",
+        "durationMs": 726.7426
+      },
+      {
+        "name": "GL25: explicit migration preserves Git state, legacy bytes, binary shelves and completed absolute journals",
+        "status": "PASS",
+        "durationMs": 4265.4987
+      },
+      {
+        "name": "GL25: unknown destination and pending recovery are refused without losing bytes",
+        "status": "PASS",
+        "durationMs": 1327.6212
+      },
+      {
+        "name": "GL25: interruption after copy retains usable legacy and identifiable partial evidence; retry publishes",
+        "status": "PASS",
+        "durationMs": 2123.0971
+      },
+      {
+        "name": "GL19: doctor and export preserve invalid registry, invalid journal and live/stale locks independently of normal open",
+        "status": "PASS",
+        "durationMs": 2882.0895
+      },
+      {
+        "name": "GL19: export requires a new external destination, refuses linked ancestors and records source junction without following it",
+        "status": "PASS",
+        "durationMs": 3537.6207
+      },
+      {
+        "name": "GL19: recovery validates both discovered layouts without permitting arbitrary metadata roots",
+        "status": "PASS",
+        "durationMs": 789.1581
+      },
+      {
+        "name": "GL25: interruption after destination reservation refuses reopening and preserves all three copies for export",
+        "status": "PASS",
+        "durationMs": 1841.1734
+      },
+      {
+        "name": "GL25: storage is discovered with Git when .git is a file; packed refs and worktree bytes remain unchanged",
+        "status": "PASS",
+        "durationMs": 1737.8841
+      },
+      {
+        "name": "GL19/GL25: public Core/CLI use new layout; CLI rescues invalid metadata and migrates a separate legacy fixture",
+        "status": "PASS",
+        "durationMs": 8515.6065
+      },
+      {
+        "name": "GL25: migrated Core can advance Layer refs while retained legacy stays historical evidence",
+        "status": "PASS",
+        "durationMs": 33348.421
+      },
+      {
+        "name": "GL19: diagnostic distinguishes deliberate branch mode main index from retained private Layer index",
+        "status": "PASS",
+        "durationMs": 9247.619
+      },
+      {
+        "name": "GL19: real Windows exclusive file lock aborts export with incomplete manifest and unchanged source",
+        "status": "PASS",
+        "durationMs": 1145.8365
+      },
+      {
+        "name": "GL25: native branch reservations must be disabled and fully released before migration",
+        "status": "PASS",
+        "durationMs": 2675.72
+      },
+      {
+        "name": "GL19: semantic registry/workspace damage and missing retention checkpoint are unsafe without resetting any bytes",
+        "status": "PASS",
+        "durationMs": 12112.94
+      },
+      {
+        "name": "GL19: namespace export cannot bypass workspace or Git-directory ancestry",
+        "status": "PASS",
+        "durationMs": 1274.1638
+      },
+      {
+        "name": "GL19: doctor independently diagnoses missing protection holders after native Git returns to one worktree",
+        "status": "PASS",
+        "durationMs": 8829.1495
+      },
+      {
+        "name": "GL25: migration refuses semantically invalid registry before publishing a new layout",
+        "status": "PASS",
+        "durationMs": 3834.5778
+      },
+      {
+        "name": "GL01-05 recognized inactive layers preserve native default flow",
+        "status": "PASS",
+        "durationMs": 9527.515
+      },
+      {
+        "name": "GL01-08 two active layers isolate native add and commit",
+        "status": "PASS",
+        "durationMs": 56006.2085
+      },
+      {
+        "name": "GL03-09-10-18 explicit edit intervals reserve without staging or adopting old files",
+        "status": "PASS",
+        "durationMs": 101111.0451
+      },
+      {
+        "name": "GL16 dirty off refuses then explicit discard never resurrects edits",
+        "status": "PASS",
+        "durationMs": 46628.9213
+      },
+      {
+        "name": "GL11-12-14 staged B commit preserves disk C and independent base stage",
+        "status": "PASS",
+        "durationMs": 36950.9845
+      },
+      {
+        "name": "GL14 optional native patch application keeps unselected changes",
+        "status": "PASS",
+        "durationMs": 38938.4407
+      },
+      {
+        "name": "GL15 managed compatible switch keeps another layer staged and dirty",
+        "status": "PASS",
+        "durationMs": 37360.5444
+      },
+      {
+        "name": "GL17 collision branch refuses before physical effects",
+        "status": "PASS",
+        "durationMs": 25700.2077
+      },
+      {
+        "name": "GL22 deliberate Layer branch maintains other layers and returns coherently",
+        "status": "PASS",
+        "durationMs": 81449.8988
+      },
+      {
+        "name": "GL20 rename active layer retains ownership target and staged bytes",
+        "status": "PASS",
+        "durationMs": 57149.8699
+      },
+      {
+        "name": "GL20 removal refuses pending then explicit discard preserves other origin",
+        "status": "PASS",
+        "durationMs": 74820.6348
+      },
+      {
+        "name": "GL27 preview is read-only and apply revalidates a new collision",
+        "status": "PASS",
+        "durationMs": 36009.9233
+      },
+      {
+        "name": "GL19 rename interrupted after ref update recovers without loss",
+        "status": "PASS",
+        "durationMs": 34680.4041
+      },
+      {
+        "name": "GL19 explicit branch transition failpoint recovers role and other projection",
+        "status": "PASS",
+        "durationMs": 61240.5266
+      },
+      {
+        "name": "GL19 leaving Layer branch interrupted after switch restores resumed projection",
+        "status": "PASS",
+        "durationMs": 61288.5857
+      },
+      {
+        "name": "GL09 target skips control files and explicit release remains released",
+        "status": "PASS",
+        "durationMs": 48408.8969
+      },
+      {
+        "name": "GL19-26 abandoned lock is visible in status and doctor without deletion",
+        "status": "PASS",
+        "durationMs": 29843.3769
+      },
+      {
+        "name": "GL19-20 interrupted remove retains full commit through aggressive GC",
+        "status": "PASS",
+        "durationMs": 30013.2286
+      },
+      {
+        "name": "GL13 log observes native Layer branch commit without prior status",
+        "status": "PASS",
+        "durationMs": 22715.6583
+      },
+      {
+        "name": "GL19 oversized switch journal fails before withdrawing large projection",
+        "status": "PASS",
+        "durationMs": 31130.0474
+      },
+      {
+        "name": "GL01-09 target excludes new external files before observation and preserves prior unassigned flow",
+        "status": "PASS",
+        "durationMs": 33706.4374
+      },
+      {
+        "name": "GAP GL01-09 higher priority ignore negation can bypass target protection in native add",
+        "status": "PASS",
+        "durationMs": 30581.4835
+      },
+      {
+        "name": "GL19-ROLE interrupted commit of working Layer recovers metadata without duplicate history",
+        "status": "PASS",
+        "durationMs": 60498.1951
+      },
+      {
+        "name": "GL22-ROLE named add of tracked working Layer uses the main native index",
+        "status": "PASS",
+        "durationMs": 52244.6672
+      },
+      {
+        "name": "GL22-ROLE new working Layer file commits without a ghost reservation on return",
+        "status": "PASS",
+        "durationMs": 68139.8282
+      },
+      {
+        "name": "GL11-14-ROLE named unstage and restore preserve B index semantics on working Layer",
+        "status": "PASS",
+        "durationMs": 65045.2984
+      },
+      {
+        "name": "GL22-ROLE explicit exit without resuming control-bearing Layer preserves other pending Layer",
+        "status": "PASS",
+        "durationMs": 77966.215
+      },
+      {
+        "name": "GL04-22-ROLE recognizing a native control-bearing branch does not authorize projection",
+        "status": "PASS",
+        "durationMs": 52509.9857
+      },
+      {
+        "name": "GL04-20 native prefixed identity can be renamed and removed without manual registration",
+        "status": "PASS",
+        "durationMs": 13752.0931
+      },
+      {
+        "name": "GL19-26 Core doctor accepts real working Layer index while retaining its private checkpoint",
+        "status": "PASS",
+        "durationMs": 54880.494
+      },
+      {
+        "name": "GL19-ROLE external private index modification refuses return without overwriting either index",
+        "status": "PASS",
+        "durationMs": 49411.6607
+      },
+      {
+        "name": "GL19 recovery validates optional prior workspace roles and editing before any metadata write",
+        "status": "PASS",
+        "durationMs": 83208.3763
+      },
+      {
+        "name": "GL19-ROLE recover without pending journals acknowledges native branch-role commit and preserves main stage",
+        "status": "PASS",
+        "durationMs": 56603.8733
+      },
+      {
+        "name": "GL19 main index lock prevents Layer mutation before effects",
+        "status": "PASS",
+        "durationMs": 24050.6369
+      },
+      {
+        "name": "GL19-26 doctor rejects malformed editing baseline independently of normal open",
+        "status": "PASS",
+        "durationMs": 43470.0543
+      },
+      {
+        "name": "GL27 remote-only removal preview diagnoses absent local reference without creating it",
+        "status": "PASS",
+        "durationMs": 21294.2763
+      },
+      {
+        "name": "GL19 independent doctor validates workspace role coherence without rewriting optional return hints",
+        "status": "PASS",
+        "durationMs": 13347.7031
+      },
+      {
+        "name": "GL19 external private index lock is unsafe and refuses mutation without removing lock",
+        "status": "PASS",
+        "durationMs": 38703.2475
+      },
+      {
+        "name": "GL19 external private index lock and main lock refuse recovery before journal effects",
+        "status": "PASS",
+        "durationMs": 37067.8459
+      },
+      {
+        "name": "GL19 external private index lock for journal-only registration prevents rollback effects",
+        "status": "PASS",
+        "durationMs": 9659.2083
+      },
+      {
+        "name": "recovery validator accepts an exact journal and its intact durable backup",
+        "status": "PASS",
+        "durationMs": 109.6563
+      },
+      {
+        "name": "changed or missing recovery backup causes refusal before any write",
+        "status": "PASS",
+        "durationMs": 130.0397
+      },
+      {
+        "name": "recovery refuses paths outside workspace and backups outside its own transaction",
+        "status": "PASS",
+        "durationMs": 200.8873
+      },
+      {
+        "name": "recovery rejects malformed plans, duplicate paths and unsafe prior registry identifiers",
+        "status": "PASS",
+        "durationMs": 126.0349
+      },
+      {
+        "name": "recovery cannot overwrite journals, arbitrary Git internals or symlink targets",
+        "status": "SKIP",
+        "durationMs": 122.811,
+        "reason": "Windows account cannot create symlinks."
+      },
+      {
+        "name": "recovery commit references must match the recorded traditional branch and prior OID",
+        "status": "PASS",
+        "durationMs": 181.6813
+      },
+      {
+        "name": "directory recovery accepts only validated workspace directories from deactivation",
+        "status": "PASS",
+        "durationMs": 560.3551
+      },
+      {
+        "name": "R05 branch rename preserves upstream description custom config and complete reflog",
+        "status": "PASS",
+        "durationMs": 12391.1411
+      },
+      {
+        "name": "R05 occupied destination ref config empty section reflog and config lock are refused without effects",
+        "status": "PASS",
+        "durationMs": 23758.7512
+      },
+      {
+        "name": "R05 active editing destination staged index and protection retain ownership and other active layers",
+        "status": "PASS",
+        "durationMs": 54209.4634
+      },
+      {
+        "name": "R05 working branch and external branch config scopes are refused before rename effects",
+        "status": "PASS",
+        "durationMs": 15564.6652
+      },
+      {
+        "name": "R05 interruption after-rename-copy restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 41103.5667
+      },
+      {
+        "name": "R05 interruption after-rename-retire restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 41555.3603
+      },
+      {
+        "name": "R05 interruption after-rename-config restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 42106.1684
+      },
+      {
+        "name": "R05 interruption after-layer-ref-change restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 42951.4424
+      },
+      {
+        "name": "R05 interruption after-layer-rename-protection restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 43797.9983
+      },
+      {
+        "name": "R05 interruption after-layer-rename-metadata restores exact config reflog refs roles and private stage",
+        "status": "PASS",
+        "durationMs": 45112.2391
+      },
+      {
+        "name": "R05 interruption before durable copied snapshot conservatively preserves both branches and backups",
+        "status": "PASS",
+        "durationMs": 10772.2261
+      },
+      {
+        "name": "R05 recovery preserves later external config and CAS never deletes advanced source",
+        "status": "PASS",
+        "durationMs": 11512.193
+      },
+      {
+        "name": "R05 recovery preserves later external target-ref and CAS never deletes advanced source",
+        "status": "PASS",
+        "durationMs": 12383.9581
+      },
+      {
+        "name": "R05 recovery preserves later external source-ref and CAS never deletes advanced source",
+        "status": "PASS",
+        "durationMs": 12811.2983
+      },
+      {
+        "name": "R05 recovery preserves later external target-reflog and CAS never deletes advanced source",
+        "status": "PASS",
+        "durationMs": 11588.4575
+      },
+      {
+        "name": "R05 nested Unicode rename preserves native absence of config section and disabled reflog",
+        "status": "PASS",
+        "durationMs": 12739.9341
+      },
+      {
+        "name": "R02 target preserves ignored intention from info",
+        "status": "PASS",
+        "durationMs": 39972.2181
+      },
+      {
+        "name": "R02 target preserves ignored intention from global",
+        "status": "PASS",
+        "durationMs": 39818.1245
+      },
+      {
+        "name": "R02 target preserves ignored intention from gitignore",
+        "status": "PASS",
+        "durationMs": 40059.0702
+      },
+      {
+        "name": "R03 preview off includes target newcomers without synchronizing metadata",
+        "status": "PASS",
+        "durationMs": 29194.4702
+      },
+      {
+        "name": "R03 preview remove includes target newcomers without synchronizing metadata",
+        "status": "PASS",
+        "durationMs": 29408.3611
+      },
+      {
+        "name": "R02 native ignore evaluation preserves negations, hierarchy and last-rule priority",
+        "status": "PASS",
+        "durationMs": 11877.7635
+      },
+      {
+        "name": "D03 failed base batch keeps staged B and disk C while ordinary Git exposes its real partial index effect",
+        "status": "PASS",
+        "durationMs": 51441.1644
+      },
+      {
+        "name": "D03 successful base and Layer staging preserve unrelated B-C states and native index separation",
+        "status": "PASS",
+        "durationMs": 75694.9979
+      },
+      {
+        "name": "D03 unborn failure leaves MAIN absent and successful first commit retains staged B versus disk C",
+        "status": "PASS",
+        "durationMs": 12557.3567
+      },
+      {
+        "name": "D03 concurrent real MAIN writer after scratch preparation is preserved with its recovery journal",
+        "status": "PASS",
+        "durationMs": 30876.9776
+      },
+      {
+        "name": "D03 a real late MAIN lock is retained without publishing the prepared index",
+        "status": "PASS",
+        "durationMs": 29030.1793
+      },
+      {
+        "name": "D03 publication-before-after interruption records planned state and recovery never overwrites a later native index",
+        "status": "PASS",
+        "durationMs": 39293.0679
+      },
+      {
+        "name": "D01 accepted base rename survives mixed reset without Layer staging commit or discard transfer",
+        "status": "PASS",
+        "durationMs": 132387.2494
+      },
+      {
+        "name": "D01 absent accepted base rename requires explicit resolution after mixed reset",
+        "status": "PASS",
+        "durationMs": 167049.4929
+      },
+      {
+        "name": "D01 accepted base ownership survives target change edit end and restart after mixed reset",
+        "status": "PASS",
+        "durationMs": 132738.7696
+      },
+      {
+        "name": "D01 accepted base ownership survives target deactivation and removal after mixed reset",
+        "status": "PASS",
+        "durationMs": 160014.7113
+      },
+      {
+        "name": "D01 explicit release rename and deletion retire accepted base markers safely",
+        "status": "PASS",
+        "durationMs": 171419.2459
+      },
+      {
+        "name": "D01 clean tracked accepted base creates no phantom reservation on compatible switch",
+        "status": "PASS",
+        "durationMs": 134559.5191
+      },
+      {
+        "name": "P1 native newcomer staged in base requires explicit acceptance without reassigning or staging",
+        "status": "PASS",
+        "durationMs": 46768.7995
+      },
+      {
+        "name": "P1 native newcomer committed in base requires explicit acceptance without reassigning or staging",
+        "status": "PASS",
+        "durationMs": 48987.6889
+      },
+      {
+        "name": "P1 explicit base acceptance survives unstage and reopen while preserving user ignore intent",
+        "status": "PASS",
+        "durationMs": 71434.1139
+      },
+      {
+        "name": "P1 base unstage remains available to resolve unreconciled native staging and preserves disk bytes",
+        "status": "PASS",
+        "durationMs": 78758.6104
+      },
+      {
+        "name": "P1 higher priority ignore diagnoses exposure before native add",
+        "status": "PASS",
+        "durationMs": 32365.7999
+      },
+      {
+        "name": "P1 higher priority ignore native add before observation diagnoses base interference",
+        "status": "PASS",
+        "durationMs": 31736.5966
+      },
+      {
+        "name": "P1 known Layer force staging is diagnosed as base contamination without changing either origin",
+        "status": "PASS",
+        "durationMs": 25039.5866
+      },
+      {
+        "name": "P1 ignore changes after reservation do not move the reserved path to another origin",
+        "status": "PASS",
+        "durationMs": 72569.804
+      },
+      {
+        "name": "P1 managed switch preserves Layer stage and disk while native ignored collision needs conservative option",
+        "status": "PASS",
+        "durationMs": 48190.6181
+      },
+      {
+        "name": "P1 public CLI ownership resolution rejects malformed and stale choices and preserves rename origin",
+        "status": "PASS",
+        "durationMs": 51155.2857
+      },
+      {
+        "name": "P1 broad base unstage refuses an unindexed newcomer without reserving its origin",
+        "status": "PASS",
+        "durationMs": 193224.9986
+      },
+      {
+        "name": "P1 working Layer unstage routes retain MAIN origins across another target and guarded exit",
+        "status": "PASS",
+        "durationMs": 164170.4151
+      },
+      {
+        "name": "D02 Core target retries a real creation between walk and native ignore and reopens coherent metadata",
+        "status": "PASS",
+        "durationMs": 34510.0805
+      },
+      {
+        "name": "D02 Core target retries an external rename of a preexisting unowned file without assigning it",
+        "status": "PASS",
+        "durationMs": 34158.9443
+      },
+      {
+        "name": "D02 Core target change reconciles the old target before capturing a coherent new boundary",
+        "status": "PASS",
+        "durationMs": 43498.8953
+      },
+      {
+        "name": "D02 Core refuses global-ignore changed after capture before publication and preserves the previous target",
+        "status": "PASS",
+        "durationMs": 39964.1881
+      },
+      {
+        "name": "D02 Core refuses main-index changed after capture before publication and preserves the previous target",
+        "status": "PASS",
+        "durationMs": 40542.2798
+      },
+      {
+        "name": "D02 Core edit-end uses the final reconciliation as its boundary and preserves later ordinary creations",
+        "status": "PASS",
+        "durationMs": 41661.0657
+      },
+      {
+        "name": "P1 Core status refuses a real user info-exclude edit during exemption evaluation and preserves the external policy",
+        "status": "PASS",
+        "durationMs": 57597.4819
+      },
+      {
+        "name": "D01 target retry cannot absorb a real owned Layer rename into the preexisting frontier",
+        "status": "PASS",
+        "durationMs": 124961.3769
+      },
+      {
+        "name": "D01 target retry preserves a renamed base origin and refuses a new foreign Layer claim",
+        "status": "PASS",
+        "durationMs": 60134.5603
+      },
+      {
+        "name": "D01 final target publication rechecks the old logical context without assigning interval files",
+        "status": "PASS",
+        "durationMs": 77876.1677
+      },
+      {
+        "name": "D01 an external rename onto a preexisting unowned path stays ambiguous until an explicit origin decision",
+        "status": "PASS",
+        "durationMs": 83127.6552
+      },
+      {
+        "name": "D01 an owned rename staged natively before the first capture anchor cannot contaminate a managed base commit",
+        "status": "PASS",
+        "durationMs": 123231.2805
+      },
+      {
+        "name": "P1 global ignore changes refresh old-file exceptions and absent released reservations",
+        "status": "PASS",
+        "durationMs": 120742.3026
+      },
+      {
+        "name": "P1 info ignore changes refresh old-file exceptions and absent released reservations",
+        "status": "PASS",
+        "durationMs": 137905.6416
+      },
+      {
+        "name": "D01 base commit refuses an external Layer rename and native main-index staging before write-tree without losing either origin",
+        "status": "PASS",
+        "durationMs": 52778.1465
+      },
+      {
+        "name": "D01 managed base rename preserves base ownership, staged B and disk C across restart and Layer discard",
+        "status": "PASS",
+        "durationMs": 111962.9605
+      },
+      {
+        "name": "D01 managed Layer rename retains its own index and refuses another target even with staged B and disk C",
+        "status": "PASS",
+        "durationMs": 90113.4969
+      },
+      {
+        "name": "D01 external base rename edited refuses ambiguity and resolves without staging",
+        "status": "PASS",
+        "durationMs": 141391.4877
+      },
+      {
+        "name": "D01 external a rename edited refuses ambiguity and resolves without staging",
+        "status": "PASS",
+        "durationMs": 162148.6635
+      },
+      {
+        "name": "D01 external unowned rename identical refuses ambiguity and resolves without staging",
+        "status": "PASS",
+        "durationMs": 120055.6593
+      },
+      {
+        "name": "D01 external base copy-delete identical refuses ambiguity and resolves without staging",
+        "status": "PASS",
+        "durationMs": 115374.1471
+      },
+      {
+        "name": "D01 external a copy-delete identical refuses ambiguity and resolves without staging",
+        "status": "PASS",
+        "durationMs": 123265.1786
+      },
+      {
+        "name": "D01 external unowned copy-delete edited refuses ambiguity and resolves without staging",
+        "status": "PASS",
+        "durationMs": 119027.3465
+      },
+      {
+        "name": "D01 a file observed and staged before source deletion still blocks commit until independent creation is declared",
+        "status": "PASS",
+        "durationMs": 92776.9518
+      },
+      {
+        "name": "D01 normal new files and copies remain automatic while preexisting unowned files are never captured retroactively",
+        "status": "PASS",
+        "durationMs": 73201.9681
+      },
+      {
+        "name": "D01 an already staged target candidate cannot change origin until explicit unstage, which preserves later disk bytes",
+        "status": "PASS",
+        "durationMs": 104597.4722
+      },
+      {
+        "name": "D01 without an editing target detects Layer renames, retains native staging and revokes acknowledgements after an observed reappearance",
+        "status": "PASS",
+        "durationMs": 212994.7014
+      },
+      {
+        "name": "D01 base ownership claims never override the original user ignore rules during editing",
+        "status": "PASS",
+        "durationMs": 39187.3754
+      },
+      {
+        "name": "D01 stable no-target status and empty recovery preserve the completed journal inventory",
+        "status": "PASS",
+        "durationMs": 43154.8724
+      },
+      {
+        "name": "D01 no-target observed reappearance survives an external rename before acknowledgement publication",
+        "status": "PASS",
+        "durationMs": 123775.2662
+      },
+      {
+        "name": "D01 acknowledgement revocation survives a synthetic finish EIO rollback",
+        "status": "PASS",
+        "durationMs": 89192.5031
+      },
+      {
+        "name": "D01 acknowledgement interruption stays ambiguous through recovery and idempotent retry",
+        "status": "PASS",
+        "durationMs": 112844.7223
+      },
+      {
+        "name": "D01 acknowledgement revocation in direct base staging survives refusal and reopen",
+        "status": "PASS",
+        "durationMs": 95425.5787
+      },
+      {
+        "name": "D01 acknowledgement revocation in base unstaging survives refusal and reopen",
+        "status": "PASS",
+        "durationMs": 86776.6114
+      },
+      {
+        "name": "D01 acknowledgement pending observation survives synthetic completion persistence failure",
+        "status": "PASS",
+        "durationMs": 92925.571
+      },
+      {
+        "name": "D01 acknowledgement malformed recovery plans refuse before any write",
+        "status": "PASS",
+        "durationMs": 99463.7641
+      },
+      {
+        "name": "D01 acknowledgement forward base recovery retries deterministic images with and without revocations",
+        "status": "PASS",
+        "durationMs": 209174.8476
+      },
+      {
+        "name": "D01 acknowledgement forward layer recovery retries deterministic images with and without revocations",
+        "status": "PASS",
+        "durationMs": 213947.9996
+      },
+      {
+        "name": "D01 materialization activation retires absence authority before a later external rename",
+        "status": "PASS",
+        "durationMs": 163374.1263
+      },
+      {
+        "name": "D01 materialization restore write and rename destinations preserve original ownership",
+        "status": "PASS",
+        "durationMs": 448337.476
+      },
+      {
+        "name": "D01 materialization interruption preserves revoked authority across recovery",
+        "status": "PASS",
+        "durationMs": 843867.6849
+      },
+      {
+        "name": "D01 materialization recovery refuses legacy authority beside known bytes",
+        "status": "PASS",
+        "durationMs": 290841.528
+      },
+      {
+        "name": "P1 protect distinguishes opt-in structural health and complete nominal coverage",
+        "status": "PASS",
+        "durationMs": 14154.0212
+      },
+      {
+        "name": "P1 protect repairs only an absent owned reservation and preserves current refs",
+        "status": "PASS",
+        "durationMs": 8068.1559
+      },
+      {
+        "name": "P1 protect diagnoses locks content and index without removing unknown state",
+        "status": "PASS",
+        "durationMs": 12076.5925
+      },
+      {
+        "name": "P1 protect detects stable external ref changes against registered Core OID",
+        "status": "PASS",
+        "durationMs": 8409.0969
+      },
+      {
+        "name": "P1 unexpected commit in reservation preserves parent index and projection with recovery guidance",
+        "status": "PASS",
+        "durationMs": 11908.1333
+      },
+      {
+        "name": "P1 protected managed commits and deliberate native branch commits remain healthy",
+        "status": "PASS",
+        "durationMs": 41889.5871
+      },
+      {
+        "name": "storage creates nested metadata through native and namespace Windows paths",
+        "status": "PASS",
+        "durationMs": 34.1087
+      },
+      {
+        "name": "storage publishes valid JSON and refuses invalid/future schemas without changing bytes",
+        "status": "PASS",
+        "durationMs": 22.1233
+      },
+      {
+        "name": "transaction backups retain binary bytes, executable mode and explicit missing markers",
+        "status": "PASS",
+        "durationMs": 41.8461
+      },
+      {
+        "name": "journals retain mutable recovery plans and distinguish pending, failed and completed",
+        "status": "PASS",
+        "durationMs": 37.8477
+      },
+      {
+        "name": "coordinator rejects concurrent processes and releases only its own completed lock",
+        "status": "PASS",
+        "durationMs": 151.3437
+      },
+      {
+        "name": "existing coordinator lock and changed ownership are preserved",
+        "status": "PASS",
+        "durationMs": 24.0235
+      },
+      {
+        "name": "lock cleanup preserves the original failure and still releases an unchanged own lock",
+        "status": "PASS",
+        "durationMs": 23.5373
+      },
+      {
+        "name": "storage refuses symlink sources, destinations and parent directories",
+        "status": "SKIP",
+        "durationMs": 2.9913,
+        "reason": "Windows account cannot create symlinks."
+      },
+      {
+        "name": "invalid journals remain visible as errors and failpoints match explicit step names",
+        "status": "PASS",
+        "durationMs": 18.5884
+      },
+      {
+        "name": "real interactive PTY runs typed Git Layers and completes capture through its TTY",
+        "status": "PASS",
+        "durationMs": 37170.446
+      },
+      {
+        "name": "real Git discovery returns an executable without a repository or shell",
+        "status": "PASS",
+        "durationMs": 52.7457
+      },
+      {
+        "name": "atomic metadata replacement and transaction copies preserve supported physical modes",
+        "status": "PASS",
+        "durationMs": 101.9826
+      },
+      {
+        "name": "GL16 Git CRLF projection and explicit discard preserve binary data and the main index in accented paths",
+        "status": "PASS",
+        "durationMs": 28460.3182
+      },
+      {
+        "name": "directory junctions and symlink ancestors cannot enter projection, traversal or storage",
+        "status": "PASS",
+        "durationMs": 8.3799
+      },
+      {
+        "name": "existing executable Git metadata survives edits when the filesystem ignores executable bits",
+        "status": "PASS",
+        "durationMs": 24760.2225
+      },
+      {
+        "name": "a repository that explicitly disables hooks with the platform null device remains supported",
+        "status": "PASS",
+        "durationMs": 4928.0783
+      },
+      {
+        "name": "archive inventory is read-only; atomic move preserves exact file bytes and identities",
+        "status": "PASS",
+        "durationMs": 37.8551
+      },
+      {
+        "name": "archive refuses protected source, occupied destination, traversal and overlap before any move",
+        "status": "PASS",
+        "durationMs": 19.2381
+      },
+      {
+        "name": "archive refuses unowned nested Git data; recognizes explicit nonce ancestry for owned fixtures",
+        "status": "PASS",
+        "durationMs": 37.4654
+      },
+      {
+        "name": "archive refuses symlinks and archive inside project without following data",
+        "status": "PASS",
+        "durationMs": 10.3619
+      },
+      {
+        "name": "archive rejects destination junction before creating paths or operation records",
+        "status": "PASS",
+        "durationMs": 12.9756
+      },
+      {
+        "name": "archive rejects operation-record junction before writes or source moves",
+        "status": "PASS",
+        "durationMs": 27.1717
+      },
+      {
+        "name": "Dev ignores duplicate write/metadata notifications but detects source changes, additions and deletions",
+        "status": "PASS",
+        "durationMs": 19.9963
+      },
+      {
+        "name": "UI polling awaits false asynchronous results instead of approving a truthy Promise",
+        "status": "PASS",
+        "durationMs": 9.8726
+      },
+      {
+        "name": "Explorer groups real siblings, folders first, with natural file ordering",
+        "status": "PASS",
+        "durationMs": 1.7212
+      },
+      {
+        "name": "Explorer compacts only folder chains and retains empty and deleted paths",
+        "status": "PASS",
+        "durationMs": 0.3412
+      },
+      {
+        "name": "Explorer renders a directory once when it replaces a deleted tracked file",
+        "status": "PASS",
+        "durationMs": 0.1749
+      },
+      {
+        "name": "Explorer: arquivo limpo não recebe mudança Git ou badge de base; Layer tem nome no tooltip",
+        "status": "PASS",
+        "durationMs": 1.4185
+      },
+      {
+        "name": "Explorer: badges refletem Git real e distinguem staging, disco, novos e buffer não salvo",
+        "status": "PASS",
+        "durationMs": 0.4608
+      },
+      {
+        "name": "Explorer: deletados ausentes do disco permanecem na árvore com proprietário e estado corretos",
+        "status": "PASS",
+        "durationMs": 0.3566
+      },
+      {
+        "name": "implementation CLI help exposes terminal-only product commands and explicit discard",
+        "status": "PASS",
+        "durationMs": 175.6299
+      },
+      {
+        "name": "implementation CLI refuses removed auto-park before opening repository",
+        "status": "PASS",
+        "durationMs": 169.879
+      },
+      {
+        "name": "implementation CLI confirmation alone never authorizes deactivation discard",
+        "status": "PASS",
+        "durationMs": 201.2271
+      },
+      {
+        "name": "implementation CLI migration requires explicit confirmation before metadata access",
+        "status": "PASS",
+        "durationMs": 179.124
+      },
+      {
+        "name": "implementation CLI rejects discard on unrelated commands and stray path lists",
+        "status": "PASS",
+        "durationMs": 345.1982
+      },
+      {
+        "name": "portable relative paths preserve spaces, accents and literal pattern characters",
+        "status": "PASS",
+        "durationMs": 1.3323
+      },
+      {
+        "name": "absolute paths, empty components and traversal are refused",
+        "status": "PASS",
+        "durationMs": 0.3992
+      },
+      {
+        "name": "Git internals and aliases are protected at every depth and case",
+        "status": "PASS",
+        "durationMs": 0.2993
+      },
+      {
+        "name": "Windows reserved names, trailing spaces and trailing dots are refused",
+        "status": "PASS",
+        "durationMs": 0.2533
+      },
+      {
+        "name": "controls, bidirectional markers and nonportable punctuation are refused",
+        "status": "PASS",
+        "durationMs": 0.2446
+      },
+      {
+        "name": "noncanonical Unicode spelling is refused instead of silently renamed",
+        "status": "PASS",
+        "durationMs": 0.1512
+      },
+      {
+        "name": "path and component lengths have explicit upper bounds",
+        "status": "PASS",
+        "durationMs": 0.2008
+      },
+      {
+        "name": "equal paths from two owners collide even when they could contain identical bytes",
+        "status": "PASS",
+        "durationMs": 0.2661
+      },
+      {
+        "name": "file versus directory conflicts are checked by path components",
+        "status": "PASS",
+        "durationMs": 0.277
+      },
+      {
+        "name": "case and Unicode compatibility aliases cannot have separate owners",
+        "status": "PASS",
+        "durationMs": 0.9357
+      },
+      {
+        "name": "directory case aliases collide with an ancestor file",
+        "status": "PASS",
+        "durationMs": 0.1452
+      },
+      {
+        "name": "shared directories and duplicate representations of one owned path are allowed",
+        "status": "PASS",
+        "durationMs": 0.1418
+      },
+      {
+        "name": "Windows child environment has exactly one case-insensitive value per key",
+        "status": "PASS",
+        "durationMs": 1.3893
+      },
+      {
+        "name": "Git for Windows discovery accepts quoted PATH and standard system/per-user installations",
+        "status": "PASS",
+        "durationMs": 0.7387
+      },
+      {
+        "name": "executable discovery refuses repository-relative PATH entries and keeps POSIX spelling",
+        "status": "PASS",
+        "durationMs": 0.3737
+      },
+      {
+        "name": "Git absolute paths use forward slashes without changing POSIX literal backslashes",
+        "status": "PASS",
+        "durationMs": 0.1578
+      },
+      {
+        "name": "file mode comparison retains POSIX modes and Windows read-only integrity",
+        "status": "PASS",
+        "durationMs": 0.1885
+      },
+      {
+        "name": "Windows native user input becomes a portable relative path without normalizing traversal",
+        "status": "PASS",
+        "durationMs": 0.72
+      },
+      {
+        "name": "terminal: catálogo histórico preservado cobre a CLI anterior; novos comandos headless são lacuna explícita do laboratório",
+        "status": "PASS",
+        "durationMs": 1.8284
+      },
+      {
+        "name": "terminal: caminhos viram argumentos literais depois de -- e campos opcionais não executam nada",
+        "status": "PASS",
+        "durationMs": 0.6077
+      },
+      {
+        "name": "terminal: valida campos, tipos, controles e staging parcial antes de escrever no PTY",
+        "status": "PASS",
+        "durationMs": 0.6951
+      },
+      {
+        "name": "terminal: PowerShell usa strings literais para apóstrofos e metacaracteres",
+        "status": "PASS",
+        "durationMs": 0.2338
+      },
+      {
+        "name": "terminal: Bash real preserva argumentos e não avalia metacaracteres da mensagem",
+        "status": "SKIP",
+        "durationMs": 0.0982,
+        "reason": "Roundtrip Bash do host; o fluxo PowerShell tem verificação separada."
+      },
+      {
+        "name": "terminal dimensions reject oversized or malformed IPC values",
+        "status": "PASS",
+        "durationMs": 1.807
+      },
+      {
+        "name": "private prompt markers survive arbitrary PTY chunk boundaries without swallowing other ANSI output",
+        "status": "PASS",
+        "durationMs": 0.4592
+      },
+      {
+        "name": "terminal commands use the live PTY and reject a running process or unfinished input",
+        "status": "PASS",
+        "durationMs": 13.3306
+      },
+      {
+        "name": "ConPTY cursor and device replies do not make an empty prompt look edited",
+        "status": "PASS",
+        "durationMs": 4.464
+      },
+      {
+        "name": "terminal launch keeps normal shell environment, uses a temporary helper and cleans it on close",
+        "status": "PASS",
+        "durationMs": 5.8764
+      },
+      {
+        "name": "PTY exit is surfaced without inventing terminal output and refuses later writes",
+        "status": "PASS",
+        "durationMs": 111.7201
+      },
+      {
+        "name": "PTY startup failure is explicit and never falls back to simulated or piped output",
+        "status": "PASS",
+        "durationMs": 6.6286
+      },
+      {
+        "name": "generated Windows launch uses ConPTY and waits in the same console without piping CLI streams",
+        "status": "PASS",
+        "durationMs": 6.4434
+      },
+      {
+        "name": "Windows package verifier rejects ELF, invalid and 32-bit executables",
+        "status": "PASS",
+        "durationMs": 1.6544
+      },
+      {
+        "name": "portable CLI launchers quote paths, forward arguments, preserve cwd and scope Node mode",
+        "status": "PASS",
+        "durationMs": 0.329
+      },
+      {
+        "name": "portable payload includes standalone CLI, license notices and validates every runtime file",
+        "status": "PASS",
+        "durationMs": 91.8108
+      },
+      {
+        "name": "node-pty staging retains workers and only Windows x64 runtime binaries with original notices",
+        "status": "PASS",
+        "durationMs": 108.7904
+      },
+      {
+        "name": "workshop UI: falha real antes da janela produz código não zero e logs novos",
+        "status": "PASS",
+        "durationMs": 90.6114
+      }
+    ],
+    "stdout": {
+      "id": "full-14/stdout.log",
+      "sha256": "68f150179e91ec1d6bb36e309a03be04f8334092daff655a7154495f7855fcd6"
+    },
+    "stderr": {
+      "id": "full-14/stderr.log",
+      "sha256": "27209baed277e23e0455829fcb71503033b7d911f032b1a51963d7cda0788091"
+    }
+  },
+  "infra": {
+    "command": {
+      "executable": "node",
+      "args": [
+        "--test-reporter=spec",
+        "--test-reporter-destination=stdout",
+        "--test-reporter=tap",
+        "--test-reporter-destination=stderr",
+        "--test",
+        "--test-concurrency=1",
+        "tests/git-compat/infra/*.test.mjs"
+      ]
+    },
+    "exitCode": 0,
+    "startedAt": "2026-11-04T10:23:01.787Z",
+    "endedAt": "2026-11-04T10:24:36.797Z",
+    "durationMs": 95009.891,
+    "inputsStable": true,
+    "inputCount": 183,
+    "sourceFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "receipt": {
+      "id": "infra-14/result.json",
+      "sha256": "6bf28005a7d50571029bdad9723b05858b52ba8dc5a5473b08a38c5913aecd98"
+    },
+    "totals": {
+      "tests": 111,
+      "suites": 0,
+      "pass": 111,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 94920.2831
+    },
+    "cases": [
+      {
+        "name": "Inspector locator ignores matching lines in other methods and accepts variable generated filesystem bindings",
+        "status": "PASS",
+        "durationMs": 1.2792
+      },
+      {
+        "name": "Inspector locator refuses missing, duplicated, unclosed or ambiguous methods before any child can start",
+        "status": "PASS",
+        "durationMs": 1.7429
+      },
+      {
+        "name": "Inspector commit checkpoint requires durable journal then publication barrier before the unique assignment",
+        "status": "PASS",
+        "durationMs": 0.3793
+      },
+      {
+        "name": "baseline and historical AGENTS root context",
+        "status": "PASS",
+        "durationMs": 244.2638
+      },
+      {
+        "name": "new scenario ID accepted",
+        "status": "PASS",
+        "durationMs": 233.5154
+      },
+      {
+        "name": "original scenario removal rejected",
+        "status": "PASS",
+        "durationMs": 233.8469
+      },
+      {
+        "name": "duplicate scenario ID rejected",
+        "status": "PASS",
+        "durationMs": 231.2683
+      },
+      {
+        "name": "changed original reference rejected",
+        "status": "PASS",
+        "durationMs": 235.1501
+      },
+      {
+        "name": "duplicate headings, Unicode spaces, references and code controls",
+        "status": "PASS",
+        "durationMs": 232.1306
+      },
+      {
+        "name": "broken local link rejected",
+        "status": "PASS",
+        "durationMs": 236.7829
+      },
+      {
+        "name": "missing Markdown anchor rejected",
+        "status": "PASS",
+        "durationMs": 234.8088
+      },
+      {
+        "name": "absolute and escaping links rejected",
+        "status": "PASS",
+        "durationMs": 234.7527
+      },
+      {
+        "name": "unclosed fence rejected",
+        "status": "PASS",
+        "durationMs": 232.823
+      },
+      {
+        "name": "new output succeeds; existing output and linked parent preserved",
+        "status": "PASS",
+        "durationMs": 13.9168
+      },
+      {
+        "name": "historical output path refused",
+        "status": "PASS",
+        "durationMs": 0.1775
+      },
+      {
+        "name": "invalid or repeated options rejected",
+        "status": "PASS",
+        "durationMs": 0.2006
+      },
+      {
+        "name": "restored fixture and historical audit unchanged",
+        "status": "PASS",
+        "durationMs": 234.7712
+      },
+      {
+        "name": "documentation validator: fourteen independent positive and negative controls",
+        "status": "PASS",
+        "durationMs": 2912.0991
+      },
+      {
+        "name": "default budgets are 30 seconds for raw/run/Git and 90 seconds for the CLI, recorded without waiting",
+        "status": "PASS",
+        "durationMs": 249.5591
+      },
+      {
+        "name": "the fake composite CLI exceeds the command budget and succeeds within its configured CLI budget with binary evidence",
+        "status": "PASS",
+        "durationMs": 2074.5501
+      },
+      {
+        "name": "run and Git-shaped invocations of the same real Node process retain the shorter command budget",
+        "status": "PASS",
+        "durationMs": 1886.5052
+      },
+      {
+        "name": "an explicit shorter CLI override still rejects timeout even when its termination signal/code is allowed",
+        "status": "PASS",
+        "durationMs": 442.0433
+      },
+      {
+        "name": "an explicit larger CLI override takes precedence over the configured CLI budget",
+        "status": "PASS",
+        "durationMs": 2164.0775
+      },
+      {
+        "name": "invalid default and explicit budgets reject before process creation",
+        "status": "PASS",
+        "durationMs": 7.4756
+      },
+      {
+        "name": "a shorter owning-process deadline remains a supervised infrastructure FAIL with its effective budget",
+        "status": "PASS",
+        "durationMs": 442.2697
+      },
+      {
+        "name": "a spawn failure retains the configured budget in error metadata without claiming execution success",
+        "status": "PASS",
+        "durationMs": 7.7198
+      },
+      {
+        "name": "binary subprocess evidence preserves bytes which are not valid UTF-8",
+        "status": "PASS",
+        "durationMs": 78.1877
+      },
+      {
+        "name": "nested linked sources cannot disappear from an audit manifest",
+        "status": "PASS",
+        "durationMs": 5.7551
+      },
+      {
+        "name": "exited parent PID is never signalled and descendant-held pipes have a bounded drain",
+        "status": "PASS",
+        "durationMs": 7138.6556
+      },
+      {
+        "name": "existing budgets have explicit defaults and exact inclusive integer bounds",
+        "status": "PASS",
+        "durationMs": 11.5698
+      },
+      {
+        "name": "existing rejects malformed budgets, missing/repeated options before mkdir",
+        "status": "PASS",
+        "durationMs": 4.7302
+      },
+      {
+        "name": "existing record helper persists actual PID, termination, budgets, exit and signal",
+        "status": "PASS",
+        "durationMs": 4.364
+      },
+      {
+        "name": "existing captures a short real owned-child timeout and retains raw streams",
+        "status": "PASS",
+        "durationMs": 185.3384
+      },
+      {
+        "name": "output-root validation blocks every protected tree before creating directories",
+        "status": "PASS",
+        "durationMs": 13.0485
+      },
+      {
+        "name": "output-root validation rejects linked and non-directory ancestors",
+        "status": "PASS",
+        "durationMs": 12.0219
+      },
+      {
+        "name": "the real existing CLI rejects invalid suites and protected output before setup or test execution",
+        "status": "PASS",
+        "durationMs": 725.8786
+      },
+      {
+        "name": "existing refuses repository TEMP parents and accepts a read-only explicit owned external override",
+        "status": "PASS",
+        "durationMs": 417.7185
+      },
+      {
+        "name": "existing evidence preserves real binary child streams and Unicode or TAP summaries",
+        "status": "PASS",
+        "durationMs": 70.6769
+      },
+      {
+        "name": "source preservation includes a truly untracked fixture file and accepts the next authorized baseline",
+        "status": "PASS",
+        "durationMs": 765.1774
+      },
+      {
+        "name": "the original reference IDs remain present while a legitimate extra scenario has its own result",
+        "status": "PASS",
+        "durationMs": 75.9564
+      },
+      {
+        "name": "working-matrix denominators follow legitimate additions without a preparation-era constant",
+        "status": "PASS",
+        "durationMs": 66.6988
+      },
+      {
+        "name": "matrix files permit legitimate extensions and reject unregistered scopes before any execution",
+        "status": "PASS",
+        "durationMs": 368.6328
+      },
+      {
+        "name": "selection validates every public selector and keeps empty execution distinct from inspection",
+        "status": "PASS",
+        "durationMs": 93.8544
+      },
+      {
+        "name": "real runner CLI rejects typos, specification-only IDs and empty intersections before creating a report",
+        "status": "PASS",
+        "durationMs": 2066.1739
+      },
+      {
+        "name": "real runner CLI labels list, deliberately empty execution and retry without failures without a test PASS",
+        "status": "PASS",
+        "durationMs": 3589.2704
+      },
+      {
+        "name": "retry validates status and identity before filtering and selects only an available failed variant",
+        "status": "PASS",
+        "durationMs": 1425.1408
+      },
+      {
+        "name": "a known gap requires the complete exact observation and the relevant runtime",
+        "status": "PASS",
+        "durationMs": 1.7329
+      },
+      {
+        "name": "unrelated legitimate source changes do not freeze a strict known observation",
+        "status": "PASS",
+        "durationMs": 0.3772
+      },
+      {
+        "name": "recorded observations and environment do not change retrospectively with caller objects",
+        "status": "PASS",
+        "durationMs": 0.2428
+      },
+      {
+        "name": "a real desired outcome is recognized after a product fix and remains visible for review",
+        "status": "PASS",
+        "durationMs": 0.3012
+      },
+      {
+        "name": "an explicit successor expectation can retire a gap without rewriting historical evidence",
+        "status": "PASS",
+        "durationMs": 0.4901
+      },
+      {
+        "name": "malformed or incomplete observations cannot receive an approval",
+        "status": "PASS",
+        "durationMs": 1.0891
+      },
+      {
+        "name": "implementation matrix keeps every original ID and selected MODEL coverage explicitly non-exhaustive",
+        "status": "PASS",
+        "durationMs": 19.083
+      },
+      {
+        "name": "headless snapshot inventories new layers and retained legacy separately without calling product",
+        "status": "PASS",
+        "durationMs": 863.9779
+      },
+      {
+        "name": "implementation closure preserves partial status and reports previous full-suite delta without certifying current full coverage",
+        "status": "PASS",
+        "durationMs": 13.3132
+      },
+      {
+        "name": "implementation closure refuses missing, duplicate, pending or unhashed requirements and unclosed final state",
+        "status": "PASS",
+        "durationMs": 1.1535
+      },
+      {
+        "name": "implementation closure refuses altered evidence, path traversal, stale current sources and missing terminal executions",
+        "status": "PASS",
+        "durationMs": 2.4514
+      },
+      {
+        "name": "implementation closure requires stable result fingerprint and current-snapshot focused plus typecheck inputs",
+        "status": "PASS",
+        "durationMs": 2.3636
+      },
+      {
+        "name": "implementation closure refuses source manifest references without matching archived source bytes",
+        "status": "PASS",
+        "durationMs": 0.6951
+      },
+      {
+        "name": "implementation closure accepts honestly declared failed final checks without converting them into product PASS",
+        "status": "PASS",
+        "durationMs": 0.5353
+      },
+      {
+        "name": "implementation package argument parsing imports without launching Git, PowerShell, product, build or package",
+        "status": "PASS",
+        "durationMs": 0.7143
+      },
+      {
+        "name": "new package and closure scripts contain no unresolved identifiers in semantic JavaScript analysis",
+        "status": "PASS",
+        "durationMs": 1024.0295
+      },
+      {
+        "name": "scenario preservation compares immutable original bytes and derives extensible matrix counts from unique rows",
+        "status": "PASS",
+        "durationMs": 0.8476
+      },
+      {
+        "name": "previous-focused execution retains its own source delta and failure without becoming a current result",
+        "status": "PASS",
+        "durationMs": 1.0067
+      },
+      {
+        "name": "patch normalization rewrites metadata only and preserves identical prefixes in hunk and binary payload",
+        "status": "PASS",
+        "durationMs": 0.6396
+      },
+      {
+        "name": "official Git reconstructs exact text, Unicode, spaced paths, internal prefixes, added/deleted and binary files from normalized patch",
+        "status": "PASS",
+        "durationMs": 512.0185
+      },
+      {
+        "name": "fresh copy accepts an authorized source baseline and reports its archived execution after a later edit without private brief",
+        "status": "PASS",
+        "durationMs": 38261.9031
+      },
+      {
+        "name": "report integrity: valid-selected-pass",
+        "status": "PASS",
+        "durationMs": 1222.4557
+      },
+      {
+        "name": "report integrity: valid-failed-execution-remains-unapproved",
+        "status": "PASS",
+        "durationMs": 1250.6185
+      },
+      {
+        "name": "report integrity: env-blocked-only-is-administrative-success",
+        "status": "PASS",
+        "durationMs": 1216.0411
+      },
+      {
+        "name": "report integrity: explicit-empty-is-administrative-success",
+        "status": "PASS",
+        "durationMs": 1168.896
+      },
+      {
+        "name": "report integrity: forged-zero-exit-over-fail",
+        "status": "PASS",
+        "durationMs": 174.8175
+      },
+      {
+        "name": "report integrity: unfinished-selected-worker",
+        "status": "PASS",
+        "durationMs": 173.5294
+      },
+      {
+        "name": "report integrity: unselected-pass-cannot-inflate-results",
+        "status": "PASS",
+        "durationMs": 170.533
+      },
+      {
+        "name": "report integrity: interrupted-run-cannot-claim-zero",
+        "status": "PASS",
+        "durationMs": 184.9427
+      },
+      {
+        "name": "report integrity: xpass-cannot-claim-zero",
+        "status": "PASS",
+        "durationMs": 182.5107
+      },
+      {
+        "name": "report integrity: unregistered-xfail-is-rejected",
+        "status": "PASS",
+        "durationMs": 176.1248
+      },
+      {
+        "name": "report integrity: infrastructure-cannot-use-semantic-xfail",
+        "status": "PASS",
+        "durationMs": 174.7254
+      },
+      {
+        "name": "report integrity: xfail-wrong-source",
+        "status": "PASS",
+        "durationMs": 298.0312
+      },
+      {
+        "name": "report integrity: xfail-wrong-signature",
+        "status": "PASS",
+        "durationMs": 251.72
+      },
+      {
+        "name": "report integrity: run-registry-must-match-frozen-registry",
+        "status": "PASS",
+        "durationMs": 180.2411
+      },
+      {
+        "name": "report integrity: strict-registered-xfail-has-no-passed-test",
+        "status": "PASS",
+        "durationMs": 1215.8062
+      },
+      {
+        "name": "report integrity: valid-run-allow-incomplete-is-forensic",
+        "status": "PASS",
+        "durationMs": 1382.3281
+      },
+      {
+        "name": "report integrity: contradictory-run-allow-incomplete-is-forensic",
+        "status": "PASS",
+        "durationMs": 1206.7046
+      },
+      {
+        "name": "report phase keeps historical context and boilerplate as the default",
+        "status": "PASS",
+        "durationMs": 1.0382
+      },
+      {
+        "name": "explicit implementation separates user authorization from technical choices without approving results",
+        "status": "PASS",
+        "durationMs": 0.9005
+      },
+      {
+        "name": "only a selected frozen implementation recipe selects the implementation prose automatically",
+        "status": "PASS",
+        "durationMs": 0.2587
+      },
+      {
+        "name": "unknown, contradictory or malformed phase declarations fail instead of silently changing scope",
+        "status": "PASS",
+        "durationMs": 0.3421
+      },
+      {
+        "name": "real renderer ZIP uses phase aware prose and preserves historical default in independent synthetic runs",
+        "status": "PASS",
+        "durationMs": 2142.2303
+      },
+      {
+        "name": "R01 current runtime contracts bind executable cases while preserving the complete historical catalog",
+        "status": "PASS",
+        "durationMs": 95.9961
+      },
+      {
+        "name": "R01 generated current contracts remain deterministic and valid across discard/recommit boundaries",
+        "status": "PASS",
+        "durationMs": 10.6189
+      },
+      {
+        "name": "R01 reporter identifies current executable expectations without reclassifying execution or historical runs",
+        "status": "PASS",
+        "durationMs": 1.1233
+      },
+      {
+        "name": "portable offline redaction preserves raw evidence, binary/source bytes, failures and updates declared hashes",
+        "status": "PASS",
+        "durationMs": 46.3773
+      },
+      {
+        "name": "existing summaries and nested result homonyms are generic text while authoritative hashes and classifications survive",
+        "status": "PASS",
+        "durationMs": 100.1599
+      },
+      {
+        "name": "single-run input uses artifact-base paths and leaves nearby existing summaries untouched",
+        "status": "PASS",
+        "durationMs": 43.9369
+      },
+      {
+        "name": "invalid authoritative shapes fail before text writes in dry-run and real modes",
+        "status": "PASS",
+        "durationMs": 118.2653
+      },
+      {
+        "name": "accepts a structurally valid matching PASS only after normal exit 0",
+        "status": "PASS",
+        "durationMs": 188.7048
+      },
+      {
+        "name": "valid PASS JSON cannot override a later exit 7",
+        "status": "PASS",
+        "durationMs": 91.914
+      },
+      {
+        "name": "valid PASS JSON with a live handle becomes timeout failure",
+        "status": "PASS",
+        "durationMs": 952.3512
+      },
+      {
+        "name": "valid PASS JSON cannot override a real output-limit termination",
+        "status": "PASS",
+        "durationMs": 201.6877
+      },
+      {
+        "name": "abrupt termination after a deterministic PASS handshake is infrastructure failure",
+        "status": "PASS",
+        "durationMs": 89.9941
+      },
+      {
+        "name": "malformed worker JSON remains available as bytes and fails closed",
+        "status": "PASS",
+        "durationMs": 90.2336
+      },
+      {
+        "name": "missing worker JSON is visible despite process exit 0",
+        "status": "PASS",
+        "durationMs": 84.5806
+      },
+      {
+        "name": "a structurally valid proposal with a foreign identity cannot replace selection",
+        "status": "PASS",
+        "durationMs": 88.6656
+      },
+      {
+        "name": "schema validation failure is supervised instead of crashing the run",
+        "status": "PASS",
+        "durationMs": 88.1353
+      },
+      {
+        "name": "preserves the worker case FAIL with fail0 without promoting it to PASS",
+        "status": "PASS",
+        "durationMs": 103.9711
+      },
+      {
+        "name": "preserves the worker case FAIL with fail1 without promoting it to PASS",
+        "status": "PASS",
+        "durationMs": 97.3533
+      },
+      {
+        "name": "a worker cannot grant itself XFAIL",
+        "status": "PASS",
+        "durationMs": 93.361
+      },
+      {
+        "name": "real spawn errors are retained as infrastructure evidence",
+        "status": "PASS",
+        "durationMs": 12.9106
+      },
+      {
+        "name": "Windows ZIP preserves paths beyond MAX_PATH without changing policy",
+        "status": "PASS",
+        "durationMs": 2041.238
+      },
+      {
+        "name": "R-04 real Windows ZIP names, standard reader, Unicode/empty entries and safety controls",
+        "status": "PASS",
+        "durationMs": 7996.1274
+      }
+    ],
+    "stdout": {
+      "id": "infra-14/stdout.log",
+      "sha256": "f280a889f258a536781d2a81a5cab1e7eb3c91bf0dfec3214726dfe17ce97022"
+    },
+    "stderr": {
+      "id": "infra-14/stderr.log",
+      "sha256": "c1e733bd58b6ca85b4051f20cff7248e6914efc5dbdb0127ce1ef8ef6e6d8ead"
+    }
+  },
+  "broad": {
+    "command": {
+      "executable": "node",
+      "args": [
+        "scripts/git-compat/runner.mjs",
+        "--suite",
+        "broad",
+        "--jobs",
+        "2",
+        "--seed",
+        "20261103",
+        "--out",
+        "<external-evidence>"
+      ]
+    },
+    "exitCode": 0,
+    "startedAt": "2026-11-04T10:24:37.014Z",
+    "endedAt": "2026-11-04T11:03:21.429Z",
+    "durationMs": 2324449.5647,
+    "inputsStable": true,
+    "inputCount": 183,
+    "sourceFingerprint": "46c67c18ea3bc25bc505ea8a68b76cad47cb2cbfa438daf51a0cbaa27b348175",
+    "receipt": {
+      "id": "broad-14/result.json",
+      "sha256": "e457618366c8f96ef6556c8d93de432cf122bad7dc6e7850d9d50efbaca9e887"
+    },
+    "runId": "run-2026-11-04T10-24-37-168Z-7ce187d3",
+    "selected": 361,
+    "workerProcesses": 361,
+    "outcome": "SELECTED",
+    "runnerFingerprint": "31f43e23a0278fa4f510296fc173056ec16d9e84b5ced58e363bdd8287f59fe8",
+    "wrapperFunctionalFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "sourceUnchanged": true,
+    "runnerUnchanged": true,
+    "counts": {
+      "scenario_ids": 358,
+      "variants": 386,
+      "execution": {
+        "ENV_BLOCKED": 6,
+        "NOT_RUN": 25,
+        "PASS": 355
+      },
+      "product": {
+        "DOCUMENTED_RESTRICTION": 26,
+        "NOT_ASSESSED": 288,
+        "PENDING_PRODUCT_SPEC": 13,
+        "PRODUCT_GAP": 1,
+        "VERIFIED_SUPPORTED": 58
+      },
+      "selection": {
+        "NOT_SELECTED": 5,
+        "OUT_OF_SCOPE_CURRENT_PHASE": 20,
+        "SELECTED": 361
+      },
+      "implementation": {
+        "IMPLEMENTED": 366,
+        "SPEC_ONLY": 20
+      },
+      "known": {
+        "NONE": 386
+      },
+      "executed_ids": 327,
+      "implemented_ids": 338,
+      "processes": 13005
+    },
+    "selectedCounts": {
+      "PASS": 355,
+      "ENV_BLOCKED": 6
+    },
+    "receiptSummary": {
+      "id": "broad-14/matrix/runs/run-2026-11-04T10-24-37-168Z-7ce187d3/summary.json",
+      "sha256": "d0e554fd1078ccba59a6875dfa680d16422463a3d38ffd81c2f59e644a9bf997"
+    },
+    "receiptResults": {
+      "id": "broad-14/matrix/runs/run-2026-11-04T10-24-37-168Z-7ce187d3/results.json",
+      "sha256": "a11060a0ffdd1d196cc144a976ffc3c67dc615a5a00c37c12573e3c38b76a99f"
+    },
+    "selectedResults": [
+      {
+        "id": "ENV-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1710
+      },
+      {
+        "id": "ENV-002",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2157
+      },
+      {
+        "id": "ENV-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1646
+      },
+      {
+        "id": "ENV-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1982
+      },
+      {
+        "id": "ENV-004",
+        "variant": "product-cli-separate-gitdir",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 37579
+      },
+      {
+        "id": "ENV-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1751
+      },
+      {
+        "id": "ENV-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1896
+      },
+      {
+        "id": "ENV-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1893
+      },
+      {
+        "id": "ENV-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1981
+      },
+      {
+        "id": "ENV-009",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1711
+      },
+      {
+        "id": "ENV-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2080
+      },
+      {
+        "id": "ENV-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1633
+      },
+      {
+        "id": "ENV-012",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1973
+      },
+      {
+        "id": "ENV-013",
+        "variant": "cli-headless-lifecycle",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 29216
+      },
+      {
+        "id": "ENV-014",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1741
+      },
+      {
+        "id": "INIT-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1409
+      },
+      {
+        "id": "INIT-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 899
+      },
+      {
+        "id": "INIT-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2028
+      },
+      {
+        "id": "INIT-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2007
+      },
+      {
+        "id": "INIT-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2482
+      },
+      {
+        "id": "INIT-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1966
+      },
+      {
+        "id": "INIT-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2094
+      },
+      {
+        "id": "INIT-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2696
+      },
+      {
+        "id": "INIT-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2715
+      },
+      {
+        "id": "INIT-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2114
+      },
+      {
+        "id": "INIT-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1605
+      },
+      {
+        "id": "INIT-012",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1845
+      },
+      {
+        "id": "INDEX-001",
+        "variant": "native-add-dot-layer",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 23461
+      },
+      {
+        "id": "INDEX-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2035
+      },
+      {
+        "id": "INDEX-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1901
+      },
+      {
+        "id": "INDEX-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1724
+      },
+      {
+        "id": "INDEX-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1688
+      },
+      {
+        "id": "INDEX-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1679
+      },
+      {
+        "id": "INDEX-006",
+        "variant": "forced-native-add-diagnosed",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 32082
+      },
+      {
+        "id": "INDEX-007",
+        "variant": "native-vs-managed-mixed-batch",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 27955
+      },
+      {
+        "id": "INDEX-008",
+        "variant": "real-conpty",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2468
+      },
+      {
+        "id": "INDEX-009",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2294
+      },
+      {
+        "id": "INDEX-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2020
+      },
+      {
+        "id": "INDEX-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1956
+      },
+      {
+        "id": "INDEX-012",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2145
+      },
+      {
+        "id": "INDEX-013",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1696
+      },
+      {
+        "id": "INDEX-014",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3154
+      },
+      {
+        "id": "INDEX-015",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1783
+      },
+      {
+        "id": "INDEX-016",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2051
+      },
+      {
+        "id": "INDEX-017",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1781
+      },
+      {
+        "id": "INDEX-018",
+        "variant": "native-advanced",
+        "status": "ENV_BLOCKED",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1798,
+        "reason": "Effective Git add -h does not advertise --resolved; the resolved-staging operation was not executed."
+      },
+      {
+        "id": "INDEX-019",
+        "variant": "layer-index-native-roundtrip",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 30615
+      },
+      {
+        "id": "INDEX-020",
+        "variant": "index-selection-subprocess-isolation",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 67872
+      },
+      {
+        "id": "COMMIT-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1905
+      },
+      {
+        "id": "COMMIT-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1825
+      },
+      {
+        "id": "COMMIT-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2063
+      },
+      {
+        "id": "COMMIT-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3557
+      },
+      {
+        "id": "COMMIT-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1903
+      },
+      {
+        "id": "COMMIT-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2098
+      },
+      {
+        "id": "COMMIT-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2063
+      },
+      {
+        "id": "COMMIT-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1650
+      },
+      {
+        "id": "COMMIT-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2559
+      },
+      {
+        "id": "COMMIT-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1720
+      },
+      {
+        "id": "COMMIT-011",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2394
+      },
+      {
+        "id": "COMMIT-012",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2258
+      },
+      {
+        "id": "COMMIT-013",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1867
+      },
+      {
+        "id": "COMMIT-014",
+        "variant": "native-add-then-native-commit",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 31032
+      },
+      {
+        "id": "BRANCH-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2106
+      },
+      {
+        "id": "BRANCH-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1861
+      },
+      {
+        "id": "BRANCH-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2057
+      },
+      {
+        "id": "BRANCH-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2295
+      },
+      {
+        "id": "BRANCH-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3537
+      },
+      {
+        "id": "BRANCH-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2144
+      },
+      {
+        "id": "BRANCH-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2299
+      },
+      {
+        "id": "BRANCH-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3631
+      },
+      {
+        "id": "BRANCH-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2037
+      },
+      {
+        "id": "BRANCH-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2184
+      },
+      {
+        "id": "BRANCH-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2455
+      },
+      {
+        "id": "BRANCH-012",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1817
+      },
+      {
+        "id": "BRANCH-013",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1974
+      },
+      {
+        "id": "BRANCH-014",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2717
+      },
+      {
+        "id": "BRANCH-015",
+        "variant": "native-advanced",
+        "status": "ENV_BLOCKED",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1793,
+        "reason": "Effective Git branch does not advertise --delete-merged; no deletion operation was certified."
+      },
+      {
+        "id": "BRANCH-016",
+        "variant": "absolute-checkout-inactive",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 31081
+      },
+      {
+        "id": "BRANCH-016",
+        "variant": "absolute-checkout-active",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 28869
+      },
+      {
+        "id": "BRANCH-017",
+        "variant": "absolute-switch-inactive",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 31293
+      },
+      {
+        "id": "BRANCH-017",
+        "variant": "absolute-switch-active",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 29290
+      },
+      {
+        "id": "BRANCH-018",
+        "variant": "managed-refusal-native-bypass",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 27998
+      },
+      {
+        "id": "BRANCH-019",
+        "variant": "native-ref-list-vs-registration",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 24915
+      },
+      {
+        "id": "BRANCH-020",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2194
+      },
+      {
+        "id": "MERGE-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2168
+      },
+      {
+        "id": "MERGE-001",
+        "variant": "core-merge-not-implemented-native-ff",
+        "status": "PASS",
+        "product": "PRODUCT_GAP",
+        "durationMs": 6397
+      },
+      {
+        "id": "MERGE-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2352
+      },
+      {
+        "id": "MERGE-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 4521
+      },
+      {
+        "id": "MERGE-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2550
+      },
+      {
+        "id": "MERGE-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2493
+      },
+      {
+        "id": "MERGE-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3785
+      },
+      {
+        "id": "MERGE-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 5831
+      },
+      {
+        "id": "MERGE-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2302
+      },
+      {
+        "id": "MERGE-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2565
+      },
+      {
+        "id": "MERGE-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 4507
+      },
+      {
+        "id": "MERGE-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 5741
+      },
+      {
+        "id": "MERGE-012",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2835
+      },
+      {
+        "id": "MERGE-013",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2562
+      },
+      {
+        "id": "MERGE-014",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 4623
+      },
+      {
+        "id": "MERGE-015",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2321
+      },
+      {
+        "id": "REWRITE-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2672
+      },
+      {
+        "id": "REWRITE-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2817
+      },
+      {
+        "id": "REWRITE-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 5578
+      },
+      {
+        "id": "REWRITE-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 11508
+      },
+      {
+        "id": "REWRITE-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 4022
+      },
+      {
+        "id": "REWRITE-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2392
+      },
+      {
+        "id": "REWRITE-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2305
+      },
+      {
+        "id": "REWRITE-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2881
+      },
+      {
+        "id": "REWRITE-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 7457
+      },
+      {
+        "id": "REWRITE-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2012
+      },
+      {
+        "id": "REWRITE-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 7465
+      },
+      {
+        "id": "REWRITE-012",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 4196
+      },
+      {
+        "id": "REWRITE-013",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3192
+      },
+      {
+        "id": "REWRITE-014",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2764
+      },
+      {
+        "id": "REWRITE-015",
+        "variant": "native-advanced",
+        "status": "ENV_BLOCKED",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1529,
+        "reason": "Official history builtin absent from effective Git --list-cmds=builtins; no external git-history was launched."
+      },
+      {
+        "id": "STASH-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1859
+      },
+      {
+        "id": "STASH-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2000
+      },
+      {
+        "id": "STASH-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2111
+      },
+      {
+        "id": "STASH-003",
+        "variant": "native-stash-all-projected-layer",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 22591
+      },
+      {
+        "id": "STASH-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3763
+      },
+      {
+        "id": "STASH-005",
+        "variant": "real-conpty",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3122
+      },
+      {
+        "id": "STASH-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2737
+      },
+      {
+        "id": "STASH-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1970
+      },
+      {
+        "id": "STASH-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2503
+      },
+      {
+        "id": "STASH-009",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2688
+      },
+      {
+        "id": "STASH-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1555
+      },
+      {
+        "id": "STASH-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3033
+      },
+      {
+        "id": "STASH-011",
+        "variant": "native-clean-including-ignored",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 23668
+      },
+      {
+        "id": "STASH-011",
+        "variant": "native-clean-only-ignored",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 23298
+      },
+      {
+        "id": "STASH-012",
+        "variant": "real-conpty",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2344
+      },
+      {
+        "id": "STASH-013",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2056
+      },
+      {
+        "id": "REMOTE-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2580
+      },
+      {
+        "id": "REMOTE-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3810
+      },
+      {
+        "id": "REMOTE-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3372
+      },
+      {
+        "id": "REMOTE-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3068
+      },
+      {
+        "id": "REMOTE-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3303
+      },
+      {
+        "id": "REMOTE-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 9817
+      },
+      {
+        "id": "REMOTE-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2393
+      },
+      {
+        "id": "REMOTE-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2977
+      },
+      {
+        "id": "REMOTE-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2622
+      },
+      {
+        "id": "REMOTE-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2411
+      },
+      {
+        "id": "REMOTE-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3872
+      },
+      {
+        "id": "REMOTE-012",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3082
+      },
+      {
+        "id": "REMOTE-013",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2903
+      },
+      {
+        "id": "REMOTE-014",
+        "variant": "native-advanced",
+        "status": "ENV_BLOCKED",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1531,
+        "reason": "Official url-parse builtin absent in this Git; URL transport behavior is not inferred from help or a third-party parser."
+      },
+      {
+        "id": "REMOTE-015",
+        "variant": "transport-extra",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 4420
+      },
+      {
+        "id": "REMOTE-016",
+        "variant": "local-push-commit-not-stage",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 29205
+      },
+      {
+        "id": "WORKTREE-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2067
+      },
+      {
+        "id": "WORKTREE-002",
+        "variant": "coverage-gaps",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 26095
+      },
+      {
+        "id": "WORKTREE-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2016
+      },
+      {
+        "id": "WORKTREE-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2100
+      },
+      {
+        "id": "WORKTREE-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2041
+      },
+      {
+        "id": "WORKTREE-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2048
+      },
+      {
+        "id": "WORKTREE-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 6757
+      },
+      {
+        "id": "WORKTREE-008",
+        "variant": "dirty-nested-local-submodules",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 8997
+      },
+      {
+        "id": "WORKTREE-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 6393
+      },
+      {
+        "id": "WORKTREE-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2559
+      },
+      {
+        "id": "WORKTREE-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2530
+      },
+      {
+        "id": "WORKTREE-012",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2095
+      },
+      {
+        "id": "WORKTREE-013",
+        "variant": "untracked-cache-and-controlled-fsmonitor",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1657
+      },
+      {
+        "id": "WORKTREE-014",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2001
+      },
+      {
+        "id": "WORKTREE-014",
+        "variant": "native-worktree-selects-layer",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 25658
+      },
+      {
+        "id": "PATH-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2155
+      },
+      {
+        "id": "PATH-002",
+        "variant": "case-rename-physical-filesystem",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1191
+      },
+      {
+        "id": "PATH-003",
+        "variant": "long-path-and-ntfs-name-protection",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1295
+      },
+      {
+        "id": "PATH-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1648
+      },
+      {
+        "id": "PATH-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1796
+      },
+      {
+        "id": "PATH-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1835
+      },
+      {
+        "id": "PATH-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3868
+      },
+      {
+        "id": "PATH-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2375
+      },
+      {
+        "id": "PATH-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2368
+      },
+      {
+        "id": "PATH-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2034
+      },
+      {
+        "id": "PATH-011",
+        "variant": "owned-hardlink-junction-boundaries",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1035
+      },
+      {
+        "id": "PATH-012",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2545
+      },
+      {
+        "id": "PATH-012",
+        "variant": "native-advanced-process-filter",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2095
+      },
+      {
+        "id": "PATH-013",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2061
+      },
+      {
+        "id": "PATH-013",
+        "variant": "native-advanced-textconv",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2508
+      },
+      {
+        "id": "PATH-014",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2383
+      },
+      {
+        "id": "PATH-015",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2574
+      },
+      {
+        "id": "INSPECT-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2459
+      },
+      {
+        "id": "INSPECT-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1742
+      },
+      {
+        "id": "INSPECT-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2115
+      },
+      {
+        "id": "INSPECT-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1877
+      },
+      {
+        "id": "INSPECT-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2032
+      },
+      {
+        "id": "INSPECT-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2548
+      },
+      {
+        "id": "INSPECT-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2574
+      },
+      {
+        "id": "INSPECT-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2099
+      },
+      {
+        "id": "INSPECT-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1916
+      },
+      {
+        "id": "INSPECT-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1807
+      },
+      {
+        "id": "INSPECT-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2483
+      },
+      {
+        "id": "INSPECT-012",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2455
+      },
+      {
+        "id": "INSPECT-013",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2407
+      },
+      {
+        "id": "INSPECT-014",
+        "variant": "bugreport-diagnose-disposable-output",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1099
+      },
+      {
+        "id": "PATCH-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2006
+      },
+      {
+        "id": "PATCH-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2382
+      },
+      {
+        "id": "PATCH-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2732
+      },
+      {
+        "id": "PATCH-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2032
+      },
+      {
+        "id": "PATCH-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2847
+      },
+      {
+        "id": "PATCH-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 7573
+      },
+      {
+        "id": "PATCH-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2003
+      },
+      {
+        "id": "PATCH-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2483
+      },
+      {
+        "id": "PATCH-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2584
+      },
+      {
+        "id": "PATCH-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2708
+      },
+      {
+        "id": "PATCH-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 15111
+      },
+      {
+        "id": "PATCH-012",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 4686
+      },
+      {
+        "id": "OBJECT-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1621
+      },
+      {
+        "id": "OBJECT-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1710
+      },
+      {
+        "id": "OBJECT-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1705
+      },
+      {
+        "id": "OBJECT-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2022
+      },
+      {
+        "id": "OBJECT-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1863
+      },
+      {
+        "id": "OBJECT-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2188
+      },
+      {
+        "id": "OBJECT-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2036
+      },
+      {
+        "id": "OBJECT-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1655
+      },
+      {
+        "id": "OBJECT-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1858
+      },
+      {
+        "id": "OBJECT-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1692
+      },
+      {
+        "id": "OBJECT-011",
+        "variant": "coverage-gaps",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2035
+      },
+      {
+        "id": "OBJECT-012",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1613
+      },
+      {
+        "id": "REF-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2086
+      },
+      {
+        "id": "REF-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2133
+      },
+      {
+        "id": "REF-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2225
+      },
+      {
+        "id": "REF-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1851
+      },
+      {
+        "id": "REF-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1882
+      },
+      {
+        "id": "REF-006",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2809
+      },
+      {
+        "id": "REF-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1895
+      },
+      {
+        "id": "REF-008",
+        "variant": "gc-retains-private-staged-objects",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 51928
+      },
+      {
+        "id": "REF-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2338
+      },
+      {
+        "id": "REF-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2301
+      },
+      {
+        "id": "REF-011",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3163
+      },
+      {
+        "id": "REF-012",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2461
+      },
+      {
+        "id": "REF-013",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2532
+      },
+      {
+        "id": "REF-014",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2129
+      },
+      {
+        "id": "PROTO-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2167
+      },
+      {
+        "id": "PROTO-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2529
+      },
+      {
+        "id": "PROTO-003",
+        "variant": "native-optional",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2352
+      },
+      {
+        "id": "PROTO-004",
+        "variant": "transport-extra",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 5174
+      },
+      {
+        "id": "PROTO-005",
+        "variant": "native-optional",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2207
+      },
+      {
+        "id": "PROTO-007",
+        "variant": "native",
+        "status": "ENV_BLOCKED",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1750,
+        "reason": "git-shell is absent from the effective Git installation; inspected <Git-install>/mingw64/libexec/git-core/git-shell.exe, <Git-install>/cmd/git-shell.exe, <Git-install>/usr/bin/git-shell.exe, <Git-install>/mingw64/bin/git-shell.exe",
+        "originalReasonSHA256": "5db12a22c2137880552223eb4a30ee0cb6e32c98422a164dced7c6b6f487ed16"
+      },
+      {
+        "id": "PROTO-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2010
+      },
+      {
+        "id": "PROTO-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3366
+      },
+      {
+        "id": "PROTO-010",
+        "variant": "native-optional",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2335
+      },
+      {
+        "id": "PROTO-011",
+        "variant": "native-optional",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3416
+      },
+      {
+        "id": "PROTO-012",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1638
+      },
+      {
+        "id": "TOOLS-001",
+        "variant": "native-optional",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 6858
+      },
+      {
+        "id": "TOOLS-003",
+        "variant": "legacy-transport",
+        "status": "ENV_BLOCKED",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1921,
+        "reason": "Gitweb CGI is absent from the effective official installation default and fixture-configured paths; isolated PATH daemon probes are recorded. No browser or server was started. This does not assert absence everywhere on the host."
+      },
+      {
+        "id": "TOOLS-004",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2268
+      },
+      {
+        "id": "TOOLS-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3325
+      },
+      {
+        "id": "TOOLS-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2396
+      },
+      {
+        "id": "TOOLS-007",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2342
+      },
+      {
+        "id": "TOOLS-008",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2319
+      },
+      {
+        "id": "TOOLS-009",
+        "variant": "native-advanced",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2515
+      },
+      {
+        "id": "TOOLS-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1971
+      },
+      {
+        "id": "TOOLS-011",
+        "variant": "native-optional-powershell",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 11799
+      },
+      {
+        "id": "TOOLS-011",
+        "variant": "native-optional-cmd",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 10929
+      },
+      {
+        "id": "TOOLS-011",
+        "variant": "native-optional-bash",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 10046
+      },
+      {
+        "id": "TOOLS-013",
+        "variant": "native-optional",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 13433
+      },
+      {
+        "id": "LEGACY-001",
+        "variant": "legacy-transport",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3614
+      },
+      {
+        "id": "LEGACY-002",
+        "variant": "legacy-transport",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2314
+      },
+      {
+        "id": "LAYER-001",
+        "variant": "zero-layers-native-daily",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 12298
+      },
+      {
+        "id": "LAYER-002",
+        "variant": "two-disjoint-real-layers",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 47719
+      },
+      {
+        "id": "LAYER-003",
+        "variant": "commit-one-preserves-other-owners",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 69555
+      },
+      {
+        "id": "LAYER-004",
+        "variant": "same-bytes-local-collision",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 33185
+      },
+      {
+        "id": "LAYER-005",
+        "variant": "base-owned-add-refused",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 28555
+      },
+      {
+        "id": "LAYER-006",
+        "variant": "collision-one-first",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 62242
+      },
+      {
+        "id": "LAYER-006",
+        "variant": "collision-two-first",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 62863
+      },
+      {
+        "id": "LAYER-007",
+        "variant": "reserve-unstage-release",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 37217
+      },
+      {
+        "id": "LAYER-008",
+        "variant": "delete-stage-recreate-owner",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 40540
+      },
+      {
+        "id": "LAYER-009",
+        "variant": "native-vs-managed-owner-rename",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 28083
+      },
+      {
+        "id": "LAYER-010",
+        "variant": "park-four-dimensions",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 67541
+      },
+      {
+        "id": "LAYER-011",
+        "variant": "capture-scope-confirm",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 35434
+      },
+      {
+        "id": "LAYER-011",
+        "variant": "capture-scope-cancel",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 32590
+      },
+      {
+        "id": "LAYER-012",
+        "variant": "capture-off-cancel-trap",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 36333
+      },
+      {
+        "id": "LAYER-013",
+        "variant": "capture-stale-edited",
+        "status": "PASS",
+        "product": "PENDING_PRODUCT_SPEC",
+        "durationMs": 36517
+      },
+      {
+        "id": "LAYER-013",
+        "variant": "capture-stale-removed",
+        "status": "PASS",
+        "product": "PENDING_PRODUCT_SPEC",
+        "durationMs": 33280
+      },
+      {
+        "id": "LAYER-014",
+        "variant": "external-ref-advanced-preserves-index",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 36949
+      },
+      {
+        "id": "LAYER-015",
+        "variant": "external-ref-delete",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 33400
+      },
+      {
+        "id": "LAYER-015",
+        "variant": "external-ref-rename",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 33464
+      },
+      {
+        "id": "LAYER-016",
+        "variant": "missing-lifecycle-cli-surface",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 37441
+      },
+      {
+        "id": "LAYOUT-011",
+        "variant": "native-index-v2-v4-copy",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 26353
+      },
+      {
+        "id": "LAYOUT-012",
+        "variant": "native-objects-private-coordination",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 32856
+      },
+      {
+        "id": "RECOVERY-001",
+        "variant": "two-writers-observed-barrier",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 41481
+      },
+      {
+        "id": "RECOVERY-002",
+        "variant": "reader-during-observed-materialization",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 63956
+      },
+      {
+        "id": "RECOVERY-003",
+        "variant": "external-ref-after-observed-preflight",
+        "status": "PASS",
+        "product": "PENDING_PRODUCT_SPEC",
+        "durationMs": 39842
+      },
+      {
+        "id": "RECOVERY-004",
+        "variant": "real-product-storage-lock-owner-killed",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 32426
+      },
+      {
+        "id": "RECOVERY-005",
+        "variant": "real-death-after-backup-before-unlink",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 35065
+      },
+      {
+        "id": "RECOVERY-006",
+        "variant": "real-death-after-layer-ref-publication",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 41224
+      },
+      {
+        "id": "RECOVERY-007",
+        "variant": "real-death-after-first-materialized-file",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 51231
+      },
+      {
+        "id": "RECOVERY-008",
+        "variant": "failpoint-after-stage-index",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 45693
+      },
+      {
+        "id": "RECOVERY-008",
+        "variant": "failpoint-after-stage-checkpoint",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 46453
+      },
+      {
+        "id": "RECOVERY-009",
+        "variant": "malformed-registry",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 31724
+      },
+      {
+        "id": "RECOVERY-009",
+        "variant": "future-workspace",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 32328
+      },
+      {
+        "id": "RECOVERY-009",
+        "variant": "missing-workspace",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 32223
+      },
+      {
+        "id": "RECOVERY-010",
+        "variant": "backup-changed",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 40702
+      },
+      {
+        "id": "RECOVERY-010",
+        "variant": "backup-missing",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 41456
+      },
+      {
+        "id": "RECOVERY-011",
+        "variant": "real-exclusive-index-file-handle",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 30866
+      },
+      {
+        "id": "RECOVERY-013",
+        "variant": "gc-between-private-index-and-retention-ref",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 43576
+      },
+      {
+        "id": "RECOVERY-014",
+        "variant": "reopen-recover-idempotence",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 55917
+      },
+      {
+        "id": "HARNESS-001",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 640
+      },
+      {
+        "id": "HARNESS-002",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 17
+      },
+      {
+        "id": "HARNESS-003",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 26
+      },
+      {
+        "id": "HARNESS-004",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 89
+      },
+      {
+        "id": "HARNESS-005",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 28074
+      },
+      {
+        "id": "HARNESS-006",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1195
+      },
+      {
+        "id": "HARNESS-007",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 8
+      },
+      {
+        "id": "HARNESS-008",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1167
+      },
+      {
+        "id": "HARNESS-011",
+        "variant": "portable-and-selection",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1303
+      },
+      {
+        "id": "HARNESS-012",
+        "variant": "portable-and-selection",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 17
+      },
+      {
+        "id": "HARNESS-013",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 12
+      },
+      {
+        "id": "HARNESS-014",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 21
+      },
+      {
+        "id": "HARNESS-015",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1264
+      },
+      {
+        "id": "HARNESS-016",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 9022
+      },
+      {
+        "id": "HARNESS-017",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 15
+      },
+      {
+        "id": "HARNESS-018",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 30
+      },
+      {
+        "id": "HARNESS-019",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 7
+      },
+      {
+        "id": "HARNESS-020",
+        "variant": "portable-and-selection",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 8279
+      },
+      {
+        "id": "HARNESS-021",
+        "variant": "portable-and-selection",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 17
+      },
+      {
+        "id": "HARNESS-022",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1101
+      },
+      {
+        "id": "HARNESS-023",
+        "variant": "negative-controls",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 25
+      },
+      {
+        "id": "HOOK-001",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2181
+      },
+      {
+        "id": "HOOK-002",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2341
+      },
+      {
+        "id": "HOOK-003",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2512
+      },
+      {
+        "id": "HOOK-004",
+        "variant": "native-optional",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 4826
+      },
+      {
+        "id": "HOOK-005",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2368
+      },
+      {
+        "id": "HOOK-006",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2293
+      },
+      {
+        "id": "HOOK-007",
+        "variant": "native-optional",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3354
+      },
+      {
+        "id": "HOOK-008",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2341
+      },
+      {
+        "id": "HOOK-009",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2189
+      },
+      {
+        "id": "HOOK-010",
+        "variant": "native",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2419
+      },
+      {
+        "id": "HOOK-011",
+        "variant": "coverage-gaps",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2752
+      },
+      {
+        "id": "HOOK-012",
+        "variant": "native-optional",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 3792
+      },
+      {
+        "id": "MODEL-001",
+        "variant": "on-off-roundtrip-three-times",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 58045
+      },
+      {
+        "id": "MODEL-002",
+        "variant": "disjoint-activation-commutes",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 105026
+      },
+      {
+        "id": "MODEL-003",
+        "variant": "park-staged-dirty-absence-roundtrip",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 89749
+      },
+      {
+        "id": "MODEL-004",
+        "variant": "mixed-owner-batch-permutations",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 80416
+      },
+      {
+        "id": "MODEL-005",
+        "variant": "seeded-owner-independence",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 86709
+      },
+      {
+        "id": "MODEL-006",
+        "variant": "seeded-real-cli-state-sequence",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 85588
+      },
+      {
+        "id": "MODEL-007",
+        "variant": "seeded-native-and-managed-sequence",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 109372
+      },
+      {
+        "id": "MODEL-008",
+        "variant": "implementation-handled-stage",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 47449
+      },
+      {
+        "id": "MODEL-008",
+        "variant": "implementation-handled-rename",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 49696
+      },
+      {
+        "id": "MODEL-008",
+        "variant": "implementation-handled-deactivate",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 47324
+      },
+      {
+        "id": "MODEL-008",
+        "variant": "implementation-handled-openbranch",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 43480
+      },
+      {
+        "id": "MODEL-009",
+        "variant": "diagnostic-export-evidence-monotonic",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 49293
+      },
+      {
+        "id": "MODEL-010",
+        "variant": "coverage-gaps-sha1-files",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 8062
+      },
+      {
+        "id": "MODEL-010",
+        "variant": "coverage-gaps-sha1-reftable",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 7575
+      },
+      {
+        "id": "MODEL-010",
+        "variant": "coverage-gaps-sha256-files",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 7884
+      },
+      {
+        "id": "MODEL-010",
+        "variant": "coverage-gaps-sha256-reftable",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 6783
+      },
+      {
+        "id": "MODEL-011",
+        "variant": "portable-and-selection",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 1576
+      },
+      {
+        "id": "HARNESS-024",
+        "variant": "supervisor-final-process-state",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 2623
+      },
+      {
+        "id": "HARNESS-025",
+        "variant": "selection-and-expectation-evolution",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 10462
+      },
+      {
+        "id": "HARNESS-026",
+        "variant": "fresh-copy-and-archived-report",
+        "status": "PASS",
+        "product": "NOT_ASSESSED",
+        "durationMs": 42413
+      },
+      {
+        "id": "IMPL-001",
+        "variant": "native-default-recognition",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 10009
+      },
+      {
+        "id": "IMPL-002",
+        "variant": "composition-editing-target",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 91319
+      },
+      {
+        "id": "IMPL-003",
+        "variant": "assign-preexisting-explicitly",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 38782
+      },
+      {
+        "id": "IMPL-004",
+        "variant": "dirty-off-preview-discard",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 63071
+      },
+      {
+        "id": "IMPL-004",
+        "variant": "interactive-newcomer-preview-cancel-confirm",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 87870
+      },
+      {
+        "id": "IMPL-005",
+        "variant": "layer-lifecycle-and-external-ref",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 52349
+      },
+      {
+        "id": "IMPL-006",
+        "variant": "deliberate-branch-with-other-layer",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 65238
+      },
+      {
+        "id": "IMPL-007",
+        "variant": "native-protection-and-explicit-bypass",
+        "status": "PASS",
+        "product": "DOCUMENTED_RESTRICTION",
+        "durationMs": 31172
+      },
+      {
+        "id": "IMPL-008",
+        "variant": "raw-rescue-invalid-metadata-lock",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 8115
+      },
+      {
+        "id": "IMPL-009",
+        "variant": "explicit-layout-migration",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 8559
+      },
+      {
+        "id": "IMPL-010",
+        "variant": "share-local-bare-and-recognize-clone",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 40597
+      },
+      {
+        "id": "IMPL-011",
+        "variant": "native-whole-commit-and-optional-hunk",
+        "status": "PASS",
+        "product": "VERIFIED_SUPPORTED",
+        "durationMs": 52187
+      }
+    ],
+    "notSelected": [
+      {
+        "id": "REF-015",
+        "variant": "real-journals-and-private-retention-measured",
+        "selection": "NOT_SELECTED",
+        "status": "NOT_RUN",
+        "reason": "Implemented variant omitted by selection"
+      },
+      {
+        "id": "PROTO-006",
+        "variant": "official-http-push-loopback-webdav",
+        "selection": "NOT_SELECTED",
+        "status": "NOT_RUN",
+        "reason": "Implemented variant omitted by selection"
+      },
+      {
+        "id": "TOOLS-002",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "OFFICIAL_GUI_INVENTORY_ONLY: Componentes oficiais permanecem catalogados; não abrir GUI nem automatizar tela nesta fase headless."
+      },
+      {
+        "id": "TOOLS-012",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "DEFERRED_THIRD_PARTY: Compatibilidade com ferramenta/implementação externa foi retirada do escopo atual pelo usuário. ID preservado para rastreabilidade."
+      },
+      {
+        "id": "TOOLS-014",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "DEFERRED_THIRD_PARTY: Compatibilidade com ferramenta/implementação externa foi retirada do escopo atual pelo usuário. ID preservado para rastreabilidade."
+      },
+      {
+        "id": "TOOLS-015",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "DEFERRED_THIRD_PARTY: Compatibilidade com ferramenta/implementação externa foi retirada do escopo atual pelo usuário. ID preservado para rastreabilidade."
+      },
+      {
+        "id": "LEGACY-003",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "OFFICIAL_BRIDGE_INVENTORY_ONLY: Comando oficial catalogado; validação end-to-end com outro SCM/servidor externo adiada. Não implementar integração com terceiros nesta rodada."
+      },
+      {
+        "id": "LEGACY-004",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "OFFICIAL_BRIDGE_INVENTORY_ONLY: Comando oficial catalogado; validação end-to-end com outro SCM/servidor externo adiada. Não implementar integração com terceiros nesta rodada."
+      },
+      {
+        "id": "LEGACY-005",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "OFFICIAL_BRIDGE_INVENTORY_ONLY: Comando oficial catalogado; validação end-to-end com outro SCM/servidor externo adiada. Não implementar integração com terceiros nesta rodada."
+      },
+      {
+        "id": "LEGACY-006",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "OFFICIAL_BRIDGE_INVENTORY_ONLY: Comando oficial catalogado; validação end-to-end com outro SCM/servidor externo adiada. Não implementar integração com terceiros nesta rodada."
+      },
+      {
+        "id": "LEGACY-007",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "OFFICIAL_BRIDGE_INVENTORY_ONLY: Comando oficial catalogado; validação end-to-end com outro SCM/servidor externo adiada. Não implementar integração com terceiros nesta rodada."
+      },
+      {
+        "id": "LEGACY-008",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "EXTERNAL_INVENTORY_ONLY: Registrar origem de comandos externos sem executar ou certificar compatibilidade."
+      },
+      {
+        "id": "LAYOUT-001",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "FUTURE_LAYOUT_SPECIFICATION: Destino layers desejado; preparar critérios e caracterizar estado atual, sem implementar migrador ou layout novo."
+      },
+      {
+        "id": "LAYOUT-002",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "FUTURE_LAYOUT_SPECIFICATION: Destino layers desejado; preparar critérios e caracterizar estado atual, sem implementar migrador ou layout novo."
+      },
+      {
+        "id": "LAYOUT-003",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "FUTURE_LAYOUT_SPECIFICATION: Destino layers desejado; preparar critérios e caracterizar estado atual, sem implementar migrador ou layout novo."
+      },
+      {
+        "id": "LAYOUT-004",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "FUTURE_LAYOUT_SPECIFICATION: Destino layers desejado; preparar critérios e caracterizar estado atual, sem implementar migrador ou layout novo."
+      },
+      {
+        "id": "LAYOUT-005",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "FUTURE_LAYOUT_SPECIFICATION: Destino layers desejado; preparar critérios e caracterizar estado atual, sem implementar migrador ou layout novo."
+      },
+      {
+        "id": "LAYOUT-006",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "FUTURE_LAYOUT_SPECIFICATION: Destino layers desejado; preparar critérios e caracterizar estado atual, sem implementar migrador ou layout novo."
+      },
+      {
+        "id": "LAYOUT-007",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "FUTURE_LAYOUT_SPECIFICATION: Destino layers desejado; preparar critérios e caracterizar estado atual, sem implementar migrador ou layout novo."
+      },
+      {
+        "id": "LAYOUT-008",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "FUTURE_LAYOUT_SPECIFICATION: Destino layers desejado; preparar critérios e caracterizar estado atual, sem implementar migrador ou layout novo."
+      },
+      {
+        "id": "LAYOUT-009",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "FUTURE_LAYOUT_SPECIFICATION: Destino layers desejado; preparar critérios e caracterizar estado atual, sem implementar migrador ou layout novo."
+      },
+      {
+        "id": "LAYOUT-010",
+        "variant": "specification",
+        "selection": "OUT_OF_SCOPE_CURRENT_PHASE",
+        "status": "NOT_RUN",
+        "reason": "FUTURE_LAYOUT_SPECIFICATION: Destino layers desejado; preparar critérios e caracterizar estado atual, sem implementar migrador ou layout novo."
+      },
+      {
+        "id": "RECOVERY-012",
+        "variant": "switch-snapshot-json-limit-49mib",
+        "selection": "NOT_SELECTED",
+        "status": "NOT_RUN",
+        "reason": "Implemented variant omitted by selection"
+      },
+      {
+        "id": "HARNESS-009",
+        "variant": "measured-product-scan-size-10-1000",
+        "selection": "NOT_SELECTED",
+        "status": "NOT_RUN",
+        "reason": "Implemented variant omitted by selection"
+      },
+      {
+        "id": "HARNESS-010",
+        "variant": "measured-completed-journal-scan-0-100-1000",
+        "selection": "NOT_SELECTED",
+        "status": "NOT_RUN",
+        "reason": "Implemented variant omitted by selection"
+      }
+    ]
+  },
+  "typecheck": {
+    "command": {
+      "executable": "node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ]
+    },
+    "exitCode": 0,
+    "startedAt": "2026-11-04T11:03:21.644Z",
+    "endedAt": "2026-11-04T11:03:24.145Z",
+    "durationMs": 2499.5676,
+    "inputsStable": true,
+    "inputCount": 183,
+    "sourceFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "receipt": {
+      "id": "typecheck-19/result.json",
+      "sha256": "34ed6a2b137791877aedac6ebd10c5d2a645f28b7dd6e5b2f82a9b670f0cdf02"
+    }
+  },
+  "build": {
+    "command": {
+      "executable": "node",
+      "args": [
+        "scripts/build-core.mjs"
+      ]
+    },
+    "exitCode": 0,
+    "startedAt": "2026-11-04T11:03:24.368Z",
+    "endedAt": "2026-11-04T11:03:24.603Z",
+    "durationMs": 233.8058,
+    "inputsStable": true,
+    "inputCount": 183,
+    "sourceFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "receipt": {
+      "id": "build-18/result.json",
+      "sha256": "bed560ed79b73a316876977ecd1f8e97a0b7ad6a9812fcce853841dc69b32cdf"
+    }
+  },
+  "smoke": {
+    "command": {
+      "executable": "node",
+      "args": [
+        "scripts/smoke-core-cli.mjs",
+        "--out",
+        "<external-evidence>"
+      ]
+    },
+    "exitCode": 0,
+    "startedAt": "2026-11-04T11:03:24.820Z",
+    "endedAt": "2026-11-04T11:06:03.577Z",
+    "durationMs": 158757.2316,
+    "inputsStable": true,
+    "inputCount": 183,
+    "sourceFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "receipt": {
+      "id": "smoke-14/result.json",
+      "sha256": "ab8e9a72d78f9e9f0e300361de5cb98030756c9d6f2a0421da6222e6feceb750"
+    }
+  },
+  "snapshotComparison": {
+    "fullFunctionalFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "finalFunctionalFingerprint": "ace17ce01ec8a0c5b908f0cb1a912f77af7b3f02af51313e7c749a2daeabc19d",
+    "delta": [],
+    "productionAndHeadlessInputsEqual": true,
+    "headlessComparisonDomain": "All src/**; scripts/**; tests/**; package.json; package-lock.json; tsconfig.json; exact bytes identical across all final campaign phases.",
+    "headlessComparisonFingerprint": "925184637512b97489914c13ff9dc69ad0e7972a7a42e22b43261ce01e85a5db",
+    "qualification": "The final full headless, infrastructure and broad suites ran on the same unchanged functional inputs. Counts from intermediate runs are not summed."
+  }
+}

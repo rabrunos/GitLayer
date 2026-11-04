@@ -91,7 +91,28 @@ export const cases=[
   },{profile:'L4',phase:'CURRENT_PRODUCT',productStatus:'PENDING_PRODUCT_SPEC',tier:'stress',timeout:300000}),
   spec('MODEL-003','park-staged-dirty-absence-roundtrip','Repeated dirty refusals preserve all states; authorized discard restores only committed A',async c=>{
     await c.init();await c.layer();const own=layerIndex(c),head=await gt(c,['rev-parse','HEAD']),ref=await gt(c,['rev-parse','layer/tools']);
-    c.write('layer.txt','staged B\n');await cli(c,['add','tools','--','layer.txt']);fs.unlinkSync(path.join(c.repo,'layer.txt'));c.write('reserved.txt','reserved physical\n');await cli(c,['add','tools','--','reserved.txt']);await cli(c,['unstage','tools','--','reserved.txt']);
+    c.write('layer.txt','staged B\n');await cli(c,['add','tools','--','layer.txt']);fs.unlinkSync(path.join(c.repo,'layer.txt'));c.write('reserved.txt','reserved physical\n');
+    const ambiguous=await cli(c,['add','tools','--','reserved.txt'],[3]);
+    c.eq('external absence and newcomer require an ownership decision',ambiguous.body.error.code,'OWNERSHIP_AMBIGUOUS');
+    const review=(await cli(c,['ownership-review'])).body.result;
+    c.eq('ownership review identifies only the missing Layer path',review.missing,[{path:'layer.txt',owner:'tools'}]);
+    c.eq('ownership review identifies the independent newcomer',review.candidates,['reserved.txt']);
+    const decisionState=async()=>({
+      head:await gt(c,['rev-parse','HEAD']),branch:await gt(c,['symbolic-ref','HEAD']),refs:(await c.git(['for-each-ref','--format=%(refname) %(objectname)'])).stdout,
+      mainIndex:(await c.git(['ls-files','--stage','-z'])).stdout,mainIndexSHA256:fileHash(path.join(c.repo,'.git/index')),
+      layerIndex:(await c.git(['ls-files','--stage','-z'],{env:{GIT_INDEX_FILE:own}})).stdout,layerIndexSHA256:fileHash(own),
+      files:Object.fromEntries(['base.txt','layer.txt','reserved.txt'].map(file=>{const full=path.join(c.repo,file);if(!fs.existsSync(full))return[file,{exists:false}];const stat=fs.lstatSync(full);if(!stat.isFile()||stat.isSymbolicLink()||stat.nlink!==1)throw Error('Ownership decision fixture requires regular owned files');return[file,{exists:true,mode:stat.mode&0o777,sha256:fileHash(full),bytesBase64:fs.readFileSync(full).toString('base64')}];})),
+    });
+    const beforeDecision=await decisionState();
+    const resolution=await cli(c,['ownership-resolve','deleted','--token',review.token,'--','layer.txt']);
+    const afterDecision=await decisionState();
+    c.eq('recognizing only the external deletion preserves HEAD refs indexes bytes and modes',afterDecision,beforeDecision);
+    const owners=await c.core('files',[]);
+    c.eq('newcomer remains unassigned until the original explicit add',owners.find(file=>file.path==='reserved.txt')?.owner,null);
+    const unchangedAfterOwnershipRead=await decisionState();
+    c.eq('read-only ownership observation preserves all Git and physical state',unchangedAfterOwnershipRead,beforeDecision);
+    json(path.join(c.artifactDir,'model003-ownership-decision.json'),{review:{editingTarget:review.editingTarget,missing:review.missing,candidates:review.candidates},resolution:resolution.body.result,beforeDecision,afterDecision,owners,unchangedAfterOwnershipRead});
+    await cli(c,['add','tools','--','reserved.txt']);await cli(c,['unstage','tools','--','reserved.txt']);
     c.write('base.txt','base staged\n');await c.git(['add','base.txt']);const index=(await c.git(['ls-files','--stage','-z'],{env:{GIT_INDEX_FILE:own}})).stdout,base=(await c.git(['ls-files','--stage','-z'])).stdout,registration=c.read('.git/layers/registry.json');
     for(let i=0;i<2;i++){const r=await cli(c,['off','tools'],[3]);c.eq('dirty off rejected '+i,r.body.error.code,'LAYER_DIRTY');c.eq('dirty absence retained '+i,c.exists('layer.txt'),false);c.eq('reservation bytes retained '+i,c.read('reserved.txt'),'reserved physical\n');c.eq('staged B retained '+i,(await c.git(['show',':layer.txt'],{env:{GIT_INDEX_FILE:own}})).stdout,'staged B\n');c.eq('Layer index retained '+i,(await c.git(['ls-files','--stage','-z'],{env:{GIT_INDEX_FILE:own}})).stdout,index);c.eq('registry retained '+i,c.read('.git/layers/registry.json'),registration);c.eq('Base stage retained '+i,(await c.git(['ls-files','--stage','-z'])).stdout,base);}
     await cli(c,['off','tools','--discard','--yes']);await cli(c,['on','tools']);c.eq('committed A restored',c.read('layer.txt'),'layer one\n');c.eq('discarded reservation absent',c.exists('reserved.txt'),false);c.eq('base stage after discard',(await c.git(['ls-files','--stage','-z'])).stdout,base);c.eq('HEAD retained',await gt(c,['rev-parse','HEAD']),head);c.eq('Layer ref retained',await gt(c,['rev-parse','layer/tools']),ref);

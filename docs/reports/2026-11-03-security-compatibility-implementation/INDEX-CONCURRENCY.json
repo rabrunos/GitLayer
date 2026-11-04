@@ -1,0 +1,292 @@
+{
+  "schema": 1,
+  "id": "focus-index-concurrency08",
+  "classification": "Supplementary retention proof on the current snapshot; already a separate case in FULL08, never added to full totals.",
+  "test": "D01 base commit refuses an external Layer rename and native main-index staging before write-tree without losing either origin",
+  "status": "PASS",
+  "sourceFingerprint": "ec0c3ab647d4b9e4fe3d5a830861701b61b2aa4883e7eb418efe4e580b375e0f",
+  "inputCount": 183,
+  "inputsStable": true,
+  "sourceTestSHA256": "958757ff5106327abd593fbfc95f5678680288c28b5868666368409092f4e86e",
+  "platform": "win32",
+  "node": "v24.14.1",
+  "officialGitVersion": "git version 2.53.0.windows.2",
+  "command": {
+    "executable": "node",
+    "args": [
+      "--import",
+      "tsx",
+      "--test",
+      "--test-concurrency=1",
+      "--test-timeout=900000",
+      "tests/integration/security-index-concurrency.test.ts"
+    ]
+  },
+  "startedAt": "2026-11-03T21:39:49.076Z",
+  "endedAt": "2026-11-03T21:42:37.703Z",
+  "durationMs": 168624.0989,
+  "counts": {
+    "tests": 1,
+    "pass": 1,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "countsAddedToFullTotals": 0,
+  "writer": {
+    "realProcessObserved": true,
+    "exitCode": 0,
+    "barrier": "MAIN write-tree invocation after initial validation",
+    "scriptSHA256": "1e7a9ead0e6b0fb5622eaebdb9d797fc9271ea2bb8cb730d77be364868b5d6bc"
+  },
+  "refusal": {
+    "codeAssertedByPassingTest": "OWNERSHIP_AMBIGUOUS",
+    "statusSafe": false,
+    "statusErrorCode": "RECOVERY_REQUIRED",
+    "doctorSafe": false,
+    "pendingTransactions": [
+      {
+        "id": "13d785ec-f307-4541-960c-3261ff29aef7",
+        "kind": "commit-base",
+        "state": "recovery-required",
+        "errorCode": "OWNERSHIP_AMBIGUOUS"
+      }
+    ],
+    "checks": [
+      {
+        "name": "Locks e resgate independente",
+        "ok": false,
+        "errorCode": "RECOVERY_REQUIRED"
+      },
+      {
+        "name": "HEAD e recursos suportados",
+        "ok": true
+      },
+      {
+        "name": "Metadados, refs, índices, propriedade e exclusões",
+        "ok": false,
+        "errorCode": "RECOVERY_REQUIRED"
+      },
+      {
+        "name": "Índice principal",
+        "ok": true
+      },
+      {
+        "name": "Layer a: objetos e checkpoint",
+        "ok": true
+      },
+      {
+        "name": "Journals",
+        "ok": false,
+        "errorCode": "RECOVERY_REQUIRED"
+      }
+    ]
+  },
+  "snapshots": {
+    "before": {
+      "HEAD": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+      "branch": "refs/heads/main",
+      "branchRefs": "refs/heads/layer/a 38f12300e0dcae2e4d4a33d6854f6d2a108a0929\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+      "allRefs": {
+        "sha256": "46ca0fb1aff32852c140ecd0bc143c4a3298ca730b9c265ab9192321e6fe5b00",
+        "count": 7
+      },
+      "MAIN": {
+        "semantic": "100644 fb10bc9bcda07fe0df149b5400ba7628077c24ba 0\tbase.txt"
+      },
+      "layerPrivate": {
+        "semantic": "100644 e2a1d728828ea417ecb54f558531185d126415d8 0\ta.txt",
+        "rawSHA256": "84c00ee1ef4e3592c20c04ba6720afa03ca91cb93bf060bc06913e204f890d0e"
+      },
+      "disk": {
+        "a": {
+          "present": true,
+          "text": "Layer C external disk\n",
+          "sha256": "c9d6bc410be0a68bc98ec74bf0ae12e651a3ec7122e920a81df1966ec814c1c2"
+        },
+        "moved": {
+          "present": false
+        },
+        "base": {
+          "present": true,
+          "text": "base B staged\n",
+          "sha256": "e0ef1119a900c3b2ef63f5b350f2b9bb4993ee09943040c3b973f90d1c582955"
+        }
+      }
+    },
+    "externalState": {
+      "HEAD": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+      "branch": "refs/heads/main",
+      "branchRefs": "refs/heads/layer/a 38f12300e0dcae2e4d4a33d6854f6d2a108a0929\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+      "allRefs": {
+        "sha256": "46ca0fb1aff32852c140ecd0bc143c4a3298ca730b9c265ab9192321e6fe5b00",
+        "count": 7
+      },
+      "MAIN": {
+        "semantic": "100644 fb10bc9bcda07fe0df149b5400ba7628077c24ba 0\tbase.txt\n100644 52b578edf7be1be0e541b40231004c4f2bdbc090 0\tmoved.txt"
+      },
+      "layerPrivate": {
+        "semantic": "100644 e2a1d728828ea417ecb54f558531185d126415d8 0\ta.txt",
+        "rawSHA256": "84c00ee1ef4e3592c20c04ba6720afa03ca91cb93bf060bc06913e204f890d0e"
+      },
+      "disk": {
+        "a": {
+          "present": false
+        },
+        "moved": {
+          "present": true,
+          "text": "Layer C external disk\n",
+          "sha256": "c9d6bc410be0a68bc98ec74bf0ae12e651a3ec7122e920a81df1966ec814c1c2"
+        },
+        "base": {
+          "present": true,
+          "text": "base B staged\n",
+          "sha256": "e0ef1119a900c3b2ef63f5b350f2b9bb4993ee09943040c3b973f90d1c582955"
+        }
+      }
+    },
+    "after": {
+      "HEAD": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+      "branch": "refs/heads/main",
+      "branchRefs": "refs/heads/layer/a 38f12300e0dcae2e4d4a33d6854f6d2a108a0929\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+      "allRefs": {
+        "sha256": "46ca0fb1aff32852c140ecd0bc143c4a3298ca730b9c265ab9192321e6fe5b00",
+        "count": 7
+      },
+      "MAIN": {
+        "semantic": "100644 fb10bc9bcda07fe0df149b5400ba7628077c24ba 0\tbase.txt\n100644 52b578edf7be1be0e541b40231004c4f2bdbc090 0\tmoved.txt"
+      },
+      "layerPrivate": {
+        "semantic": "100644 e2a1d728828ea417ecb54f558531185d126415d8 0\ta.txt",
+        "rawSHA256": "84c00ee1ef4e3592c20c04ba6720afa03ca91cb93bf060bc06913e204f890d0e"
+      },
+      "disk": {
+        "a": {
+          "present": false
+        },
+        "moved": {
+          "present": true,
+          "text": "Layer C external disk\n",
+          "sha256": "c9d6bc410be0a68bc98ec74bf0ae12e651a3ec7122e920a81df1966ec814c1c2"
+        },
+        "base": {
+          "present": true,
+          "text": "base B staged\n",
+          "sha256": "e0ef1119a900c3b2ef63f5b350f2b9bb4993ee09943040c3b973f90d1c582955"
+        }
+      }
+    },
+    "final": {
+      "HEAD": "7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+      "branch": "refs/heads/main",
+      "branchRefs": "refs/heads/layer/a 38f12300e0dcae2e4d4a33d6854f6d2a108a0929\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8",
+      "allRefs": {
+        "sha256": "46ca0fb1aff32852c140ecd0bc143c4a3298ca730b9c265ab9192321e6fe5b00",
+        "count": 7
+      },
+      "MAIN": {
+        "semantic": "100644 fb10bc9bcda07fe0df149b5400ba7628077c24ba 0\tbase.txt\n100644 52b578edf7be1be0e541b40231004c4f2bdbc090 0\tmoved.txt"
+      },
+      "layerPrivate": {
+        "semantic": "100644 e2a1d728828ea417ecb54f558531185d126415d8 0\ta.txt",
+        "rawSHA256": "84c00ee1ef4e3592c20c04ba6720afa03ca91cb93bf060bc06913e204f890d0e"
+      },
+      "disk": {
+        "a": {
+          "present": false
+        },
+        "moved": {
+          "present": true,
+          "text": "Layer C external disk\n",
+          "sha256": "c9d6bc410be0a68bc98ec74bf0ae12e651a3ec7122e920a81df1966ec814c1c2"
+        },
+        "base": {
+          "present": true,
+          "text": "base B staged\n",
+          "sha256": "e0ef1119a900c3b2ef63f5b350f2b9bb4993ee09943040c3b973f90d1c582955"
+        }
+      }
+    }
+  },
+  "rawRefInventories": {
+    "46ca0fb1aff32852c140ecd0bc143c4a3298ca730b9c265ab9192321e6fe5b00": "refs/git-layers/state/c628519d-c4b6-4171-8010-6df2c0dc50b5 0f4558ca8c0810430a4a1c25ca8dc51fbc515c7d\nrefs/git-layers/transactions/3155d698-51ed-4e94-aab3-f7fe4ae1368d/c628519d-c4b6-4171-8010-6df2c0dc50b5 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/git-layers/transactions/840cb745-fcd6-4c13-9e1e-8c3a8289ddaf/c628519d-c4b6-4171-8010-6df2c0dc50b5 8b1420da86379c8c1f13d7b167081b825d6abd23\nrefs/git-layers/transactions/ab288cbb-dfbc-4c4a-b456-46eba6170708/c628519d-c4b6-4171-8010-6df2c0dc50b5 8b1420da86379c8c1f13d7b167081b825d6abd23\nrefs/git-layers/transactions/e5d812ab-f2ae-45c2-8b92-9f3f083880e2/c628519d-c4b6-4171-8010-6df2c0dc50b5 4b825dc642cb6eb9a060e54bf8d69288fbee4904\nrefs/heads/layer/a 38f12300e0dcae2e4d4a33d6854f6d2a108a0929\nrefs/heads/main 7a4875dbc3ba3e9eb0f278cb57ebb8c4a384fea8"
+  },
+  "allPriorRefsPreserved": true,
+  "additionalTechnicalRefsObserved": [],
+  "independentGitContent": {
+    "mainBaseB": "base B staged",
+    "mainMovedC": "Layer C external disk",
+    "privateLayerB": "Layer B staged",
+    "layerHistoryA": "Layer A committed",
+    "baseHistoryA": "base A committed",
+    "exportedMainMovedC": "Layer C external disk",
+    "exportedMainBaseB": "base B staged"
+  },
+  "preservation": {
+    "headPreserved": true,
+    "branchPreserved": true,
+    "branchRefsPreserved": true,
+    "privateSemanticPreserved": true,
+    "privateRawPreserved": true,
+    "externalMAINPreserved": true,
+    "oldPathAbsent": true,
+    "movedDiskCPreserved": true,
+    "baseDiskBPreserved": true
+  },
+  "recoveryExport": {
+    "complete": true,
+    "manifestComplete": true,
+    "manifestSHA256": "99f4c07c16ab3d6789ee8d912594b897a840f74db3e26ae40f8f021a88a4ceca",
+    "entryCount": 56,
+    "privateCopies": [
+      {
+        "entry": "metadata/layers/indexes/c628519d-c4b6-4171-8010-6df2c0dc50b5.index",
+        "sha256": "84c00ee1ef4e3592c20c04ba6720afa03ca91cb93bf060bc06913e204f890d0e"
+      },
+      {
+        "entry": "metadata/layers/transactions/3155d698-51ed-4e94-aab3-f7fe4ae1368d/stage-f00b1c2b-5d95-42e8-85fe-18994c6438df.index",
+        "sha256": "f7a887761e7c0e082f5ee4f6efbaec76206111141e003908a4430c149f0dd47b"
+      },
+      {
+        "entry": "metadata/layers/transactions/ab288cbb-dfbc-4c4a-b456-46eba6170708/stage-b10ad5af-5e2a-4451-9d10-936213adb656.index",
+        "sha256": "b04d72c1419279fa9155a725088341868af8076f29af1c2d56cebbe4c9d54c4d"
+      }
+    ],
+    "privateBeforeRawPreserved": true,
+    "exportedMAINContainsNativeMovedC": true,
+    "exportedMAINContainsBaseB": true
+  },
+  "references": [
+    {
+      "id": "focus-index-concurrency08/result.json",
+      "sha256": "86d5ab65abe23d969dcbf18eda4581c73cdb4b6a37d9581935dbc1247b3950fa"
+    },
+    {
+      "id": "focus-index-concurrency08/inputs-before.json",
+      "sha256": "78a3aabfd96c515699dcb6bfd229a4d7c8785bc24a482918dd1948901a4df495"
+    },
+    {
+      "id": "focus-index-concurrency08/inputs-after.json",
+      "sha256": "78a3aabfd96c515699dcb6bfd229a4d7c8785bc24a482918dd1948901a4df495"
+    },
+    {
+      "id": "focus-index-concurrency08/stdout.log",
+      "sha256": "4ae991554e0f3287a7ed66252998d98310d805dae8b1537f81ebdf8f6c43f431"
+    },
+    {
+      "id": "focus-index-concurrency08/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "focus-index-concurrency08/events/base-commit-native-index-writer.json",
+      "sha256": "27b9f434adbbcb59f788d7d5d45d698671a147ad3831f62ebf54ac6eec53b248"
+    }
+  ],
+  "limits": [
+    "This supplement does not change FULL08 approval or totals and does not certify Linux or universal Git behavior.",
+    "MAIN raw bytes before the writer and file modes are not captured by this unchanged test; MAIN semantic entries and private raw hashes are observed.",
+    "New technical refs are listed as observed; this supplement does not independently certify each journal-bound retention origin.",
+    "C existed on disk before the native writer explicitly staged it; this evidence does not claim automatic recovery of disk-only bytes never copied."
+  ],
+  "privacy": "Only synthetic payloads and refs. Absolute host/fixture/export paths, PIDs and environment values remain in private raw receipts."
+}

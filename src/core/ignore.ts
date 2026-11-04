@@ -11,7 +11,7 @@ const within = (parent: string, child: string) => {
 };
 
 /** Evaluate the user's rules with Git, excluding only our temporary managed block.
- * ls-files reproduces standard precedence using global/info files and per-directory
+ * ls-files includes cached paths as well as newcomers and reproduces standard precedence using global/info files and per-directory
  * .gitignore. An exclusive scratch input outside the repository is removed in
  * finally; repository metadata, indexes, refs and worktree remain read-only.
  */
@@ -30,7 +30,7 @@ export async function ignoredWithoutManagedExcludes(repo: RepoInfo, candidates: 
     try { await handle.writeFile(bytes); owned = await handle.stat(); } finally { await handle.close(); }
     const configured = await git(repo.root, ['config', '--null', '--path', '--get', 'core.excludesFile'], { ok: [0, 1] });
     const globalFile = configured.code === 0 ? configured.stdout.toString('utf8').replace(/\0$/u, '') : path.join(process.env.XDG_CONFIG_HOME || path.join(process.env.HOME || os.homedir(), '.config'), 'git', 'ignore');
-    const args = ['ls-files', '--others', '--ignored', '-z', '--exclude-per-directory=.gitignore'];
+    const args = ['ls-files', '--cached', '--others', '--ignored', '-z', '--exclude-per-directory=.gitignore'];
     if (globalFile) {
       const absolute = path.resolve(repo.root, globalFile);
       try { if (!(await fs.stat(absolute)).isFile()) throw new LabError('EXCLUDE_INVALID', 'O arquivo global de exclusões não é regular.'); args.push('--exclude-from=' + absolute); }

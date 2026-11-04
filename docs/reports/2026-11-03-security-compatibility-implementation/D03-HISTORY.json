@@ -1,0 +1,449 @@
+{
+  "schema": 1,
+  "id": "D03-HISTORY-COMPACT",
+  "generatedAt": "2026-11-03T17:55:53.123Z",
+  "status": "historical-directed-evidence-not-final-attestation",
+  "platform": {
+    "os": "win32",
+    "node": "v24.14.1",
+    "git": "git version 2.53.0.windows.2"
+  },
+  "scope": "Preserved evidence consolidation and read-only backup/object inspection; no tests rerun or fixture/production mutations.",
+  "before": {
+    "id": "atomic-stage-before-01",
+    "command": {
+      "executable": "node",
+      "args": [
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "--test-timeout=300000",
+        "--test-name-pattern=^D03 failed base batch",
+        "tests/integration/security-atomic-stage.test.ts"
+      ]
+    },
+    "exitCode": 1,
+    "counts": {
+      "tests": 1,
+      "suites": 0,
+      "pass": 0,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 149973.4069
+    },
+    "expected": "A nonzero add preserves both effective indexes, refs and disk bytes.",
+    "observed": "Ignored-path error removed staged base.txt/B from MAIN. B remained in backup and Git object; Layer B, disk C and refs remained intact.",
+    "immutableExecutedCore": {
+      "id": "stage-before/core.mjs",
+      "sha256": "9602a71c99f50c4e651505d86bb514325016cba31179e86d1ba007deccba8880",
+      "manifestId": "stage-before/manifest.json",
+      "inputFingerprint": "f9bd2854c41d4a86c017e5a4182fe7b0e5a2460967113b39b6783b7e3a1a67a5",
+      "copiedInputsVerified": 15,
+      "buildInputs": 14,
+      "inputsStableAtBuild": true,
+      "fixtureBundleHashMatches": true
+    },
+    "workingInputs": {
+      "stable": false,
+      "fingerprint": "54f68854b3a7b5600aae2628a88cf2287c963ee1d835486ef0664d9a316108b8",
+      "changed": [
+        {
+          "id": "src/core/index-stage.ts",
+          "before": "27f37713e5fe313fbf485e7bba42f5ce1a45f10e0536600f9b0c61c2045c2fbb",
+          "after": "69d981eabe8f706a30614e9d176ef07e6d3af7b876a2cc21e18e28efb444c321"
+        }
+      ],
+      "interpretation": "The changing working helper was not in the imported immutable pre-D03 bundle; this is not validation of that final working tree."
+    },
+    "state": {
+      "before": {
+        "head": "c9b12df9144f6b8cb348dfe31edb01475fe5e7e8",
+        "branch": "refs/heads/main",
+        "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/main c9b12df9144f6b8cb348dfe31edb01475fe5e7e8",
+        "stateRefs": "refs/git-layers/state/fbddd29d-4805-45de-9837-da3af5ed9b83 b464f8b6907bae8c74e68901b5c31879f909a692",
+        "main": {
+          "exists": true,
+          "sha256": "506cd1862b6c8818b0412c596ae496cc6f37aeb2bed919ad14021d159eeef27c",
+          "mode": 438,
+          "entries": "100644 fb10bc9bcda07fe0df149b5400ba7628077c24ba 0\tbase.txt\n100644 4c81ef7e181be1b327c1bd90898b6626335515a8 0\tkeep.txt"
+        },
+        "privateIndexes": {
+          "a": {
+            "exists": true,
+            "sha256": "2b1f8f0a0af9eb49e42206551905e9dd9435dff29311c1bc26f7875004a5caa7",
+            "mode": 438,
+            "entries": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt"
+          }
+        },
+        "files": {
+          "base.txt": null,
+          "keep.txt": "keep A committed\n",
+          "a.txt": "a C disk\n",
+          "b.txt": null,
+          "chosen.txt": null,
+          "external.txt": null,
+          "ignored.cache": "base C disk\n",
+          "blocked.cache": null
+        }
+      },
+      "after": {
+        "head": "c9b12df9144f6b8cb348dfe31edb01475fe5e7e8",
+        "branch": "refs/heads/main",
+        "branchRefs": "refs/heads/layer/a c87c296a848b9028999be027a5b2426cac551032\nrefs/heads/main c9b12df9144f6b8cb348dfe31edb01475fe5e7e8",
+        "stateRefs": "refs/git-layers/state/fbddd29d-4805-45de-9837-da3af5ed9b83 b464f8b6907bae8c74e68901b5c31879f909a692",
+        "main": {
+          "exists": true,
+          "sha256": "4ecb45f9439dc0f43c6c10baa6ebb4ebbb08341c0a49369dfad530bf53a11b9b",
+          "mode": 438,
+          "entries": "100644 4c81ef7e181be1b327c1bd90898b6626335515a8 0\tkeep.txt"
+        },
+        "privateIndexes": {
+          "a": {
+            "exists": true,
+            "sha256": "2b1f8f0a0af9eb49e42206551905e9dd9435dff29311c1bc26f7875004a5caa7",
+            "mode": 438,
+            "entries": "100644 b8e6d3a3ea0bac52901ed52a235ce68d712d49f3 0\ta.txt"
+          }
+        },
+        "files": {
+          "base.txt": null,
+          "keep.txt": "keep A committed\n",
+          "a.txt": "a C disk\n",
+          "b.txt": null,
+          "chosen.txt": null,
+          "external.txt": null,
+          "ignored.cache": "base C disk\n",
+          "blocked.cache": null
+        }
+      },
+      "checks": {
+        "mainLostBaseStagedEntry": true,
+        "baseBRetainedInBackupAndObject": true,
+        "layerPrivateIndexUnchanged": true,
+        "headAndBranchRefsUnchanged": true,
+        "checkpointRefsUnchanged": true,
+        "diskBytesUnchanged": true
+      },
+      "readOnlyOfficialGitObjects": {
+        "baseB": {
+          "oid": "fb10bc9bcda07fe0df149b5400ba7628077c24ba",
+          "bytes": "base B staged\n"
+        },
+        "layerB": {
+          "oid": "b8e6d3a3ea0bac52901ed52a235ce68d712d49f3",
+          "bytes": "a B staged\n"
+        }
+      },
+      "pendingJournal": {
+        "id": "b699578f-01d9-440f-b046-e74f055eba57",
+        "kind": "stage-base",
+        "state": "recovery-required",
+        "errorCode": "GIT_FAILED",
+        "mainBackupId": "fixtures/atomic-stage-driver-xQL9DC/temp/gl-atomic-stage-sxlQdi/repo/.git/layers/transactions/b699578f-01d9-440f-b046-e74f055eba57/backups/9ccbe17b-0a3d-4336-af70-64c7687cf2df-file-0",
+        "mainBeforeSHA256": "506cd1862b6c8818b0412c596ae496cc6f37aeb2bed919ad14021d159eeef27c",
+        "afterNotRecorded": true,
+        "steps": [
+          "prepared",
+          "backup-ready",
+          "failed"
+        ]
+      }
+    },
+    "nativeControl": {
+      "args": [
+        "add",
+        "-A",
+        "--",
+        "base.txt",
+        "ignored.cache"
+      ],
+      "code": 1,
+      "mainBefore": "100644 fb10bc9bcda07fe0df149b5400ba7628077c24ba 0\tbase.txt\n100644 4c81ef7e181be1b327c1bd90898b6626335515a8 0\tkeep.txt",
+      "mainAfter": "100644 4c81ef7e181be1b327c1bd90898b6626335515a8 0\tkeep.txt",
+      "classification": "Native partial effect; coordinator failed to isolate failed staging."
+    }
+  },
+  "after01": {
+    "id": "atomic-stage-after-01",
+    "command": {
+      "executable": "node",
+      "args": [
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "--test-timeout=300000",
+        "tests/integration/security-atomic-stage.test.ts"
+      ]
+    },
+    "exitCode": 1,
+    "nodeCounts": {
+      "tests": 4,
+      "suites": 0,
+      "pass": 3,
+      "fail": 0,
+      "cancelled": 1,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 559485.3829
+    },
+    "workingInputsStable": true,
+    "sourceFingerprint": "8d80962f2e2ce68dfc2d12304963c804735b1d7139822ce6db0de32cd5f0b903",
+    "plannedCases": 6,
+    "reportedResults": 4,
+    "reported": [
+      {
+        "test": "D03 failed base batch keeps staged B and disk C while ordinary Git exposes its real partial index effect",
+        "nodeReported": "pass",
+        "durationMs": 127257.1095,
+        "afterCancellation": false,
+        "usableAsIsolatedProof": true
+      },
+      {
+        "test": "D03 successful base and Layer staging preserve unrelated B-C states and native index separation",
+        "nodeReported": "cancelled-timeout",
+        "durationMs": 302853.4328,
+        "afterCancellation": false,
+        "usableAsIsolatedProof": false
+      },
+      {
+        "test": "D03 unborn failure leaves MAIN absent and successful first commit retains staged B versus disk C",
+        "nodeReported": "pass",
+        "durationMs": 81590.1348,
+        "afterCancellation": true,
+        "usableAsIsolatedProof": false
+      },
+      {
+        "test": "D03 concurrent real MAIN writer after scratch preparation is preserved with its recovery journal",
+        "nodeReported": "pass",
+        "durationMs": 44356.6907,
+        "afterCancellation": true,
+        "usableAsIsolatedProof": false
+      }
+    ],
+    "notReported": [
+      "D03 a real late MAIN lock is retained without publishing the prepared index",
+      "D03 publication-before-after interruption records planned state and recovery never overwrites a later native index"
+    ],
+    "firstCaseStatePreserved": true,
+    "interpretation": "Exactly four Node results: 3 PASS, 0 FAIL, 1 timeout cancellation, not six-case approval. PASS results after cancellation are not accepted as independent certification: uncancelled async Core work could overlap subsequent process-environment restoration.",
+    "termination": {
+      "receiptId": "evidence/atomic-stage-after-01/termination-owned-processes.json",
+      "reason": "Composite test timeout; prevent subsequent tests overlapping an uncancelled async Core operation",
+      "ownedDescendantsRecorded": 2,
+      "actions": [
+        "stop-owned-descendant",
+        "stop-owned-descendant"
+      ],
+      "verificationId": "evidence/atomic-stage-after-01/termination-verification.json",
+      "registeredCount": 2,
+      "sameInstanceCount": 0,
+      "allRegisteredInstancesAbsent": true,
+      "noAdditionalTerminationByConsolidator": true
+    }
+  },
+  "nextCycleBudget": {
+    "newCompositeIntegrationBudgetMs": 900000,
+    "sixD03Cases": true,
+    "sixD01ExternalVariants": true,
+    "D01NoTargetComposite": true,
+    "additionalFiles": [
+      "tests/integration/security-ownership.test.ts",
+      "tests/integration/security-index-concurrency.test.ts",
+      "tests/integration/security-ignore-refresh.test.ts",
+      "tests/integration/security-editing-transition.test.ts",
+      "tests/integration/security-diagnostics.test.ts",
+      "tests/integration/security-protection.test.ts"
+    ],
+    "gitChildTimeoutChanged": false,
+    "legacyIndividualBudgetsAndNpmDefaultUnchanged": true,
+    "assertionsWeakened": false,
+    "performanceBenchmark": false,
+    "interpretation": "Scenario execution budgets only; later terminal results required, no final attestation."
+  },
+  "evidence": [
+    {
+      "id": "evidence/atomic-stage-after-01/budget-change.json",
+      "sha256": "dbc09fb86e552fc57d376dd2006859a8ae7fb1f485ecf00e6238f81b05d7b425"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/fixtures/atomic_stage_D03_concurrent_real_MAIN_writer_after_scratch_preparation_is_preserved_with_its_recovery_journal.json",
+      "sha256": "b75bf8356e3fb939af02cbcf7ef9a8f6367814828736d9ede6a9a61cadcadfdf"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/fixtures/atomic_stage_D03_failed_base_batch_keeps_staged_B_and_disk_C_while_ordinary_Git_exposes_its_real_partial_index_effect.json",
+      "sha256": "14338c62450c9c22aa53bc851d2e65b87a8d539b012024e2cb6745ca3717d838"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/fixtures/atomic_stage_D03_successful_base_and_Layer_staging_preserve_unrelated_B-C_states_and_native_index_separation.json",
+      "sha256": "d9234dd9abece64a5824ab655b97b3d2a728c8114ec96d1cab313d0c51d03dc4"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/fixtures/atomic_stage_D03_unborn_failure_leaves_MAIN_absent_and_successful_first_commit_retains_staged_B_versus_disk_C.json",
+      "sha256": "f5ae97573e1d7bca4c25c8f0ba1153f8984f0cf8fa6243ea3b0f5a01d913424e"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/inputs-after.json",
+      "sha256": "e6d68721bcacc8a900f5669ca634096db3a128d95337ea5e5f2b038b1e751bd8"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/inputs-before.json",
+      "sha256": "e6d68721bcacc8a900f5669ca634096db3a128d95337ea5e5f2b038b1e751bd8"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/result.json",
+      "sha256": "d93d42f15db3527a0ed81b60bb5a8e46d07e16f3bce423c6388adf17c7f83462"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/security-atomic-stage-300s.ts",
+      "sha256": "3f3bf663ff3c008e7434d9be26b84ee4d0e6a07cfb42fa07dd23f32751eff6b2"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/stdout.log",
+      "sha256": "6018eab396c757c6c8ed0edb6d1c03bc07d4612e09e6e4f811e6a57adc3ce68d"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/termination-owned-processes.json",
+      "sha256": "6eba033caee26e4032303f7ddec142d46dd8529e76c2575d5046186ee6edafcf"
+    },
+    {
+      "id": "evidence/atomic-stage-after-01/termination-verification.json",
+      "sha256": "71064f37363752016d639ad7b02dc6ddcd1fbc07fd548287a9cd859decb3d6d2"
+    },
+    {
+      "id": "evidence/atomic-stage-before-01/fixtures/atomic_stage_D03_failed_base_batch_keeps_staged_B_and_disk_C_while_ordinary_Git_exposes_its_real_partial_index_effect.json",
+      "sha256": "0744e22f6ec6b67441f126277264cc27391e48bf881a3caded8f84bbdf384e71"
+    },
+    {
+      "id": "evidence/atomic-stage-before-01/inputs-after.json",
+      "sha256": "e6d68721bcacc8a900f5669ca634096db3a128d95337ea5e5f2b038b1e751bd8"
+    },
+    {
+      "id": "evidence/atomic-stage-before-01/inputs-before.json",
+      "sha256": "c638c851b01fbecca7e62940c5a9af7fab66535b9a4b33340fbe8830e2fbb445"
+    },
+    {
+      "id": "evidence/atomic-stage-before-01/result.json",
+      "sha256": "ed35bf90d8ef8d0624196cdfb7349b16e3f26d17cefb64135cc84630054895a0"
+    },
+    {
+      "id": "evidence/atomic-stage-before-01/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "evidence/atomic-stage-before-01/stdout.log",
+      "sha256": "a103814f0e15b2e35c18111e6f3a3f2a46eb0028af1ee28d4a178f6d77a0e2b1"
+    },
+    {
+      "id": "evidence/composite-test-budgets-final/receipt.json",
+      "sha256": "6214bb4ddd851892ad5ee1a37997d90d8182f205b723326708ff03c8d796ac8b"
+    },
+    {
+      "id": "evidence/composite-test-budgets-final/security-diagnostics.before.ts",
+      "sha256": "6bdc41c83a078ec86ed9b8691fbacc964566f9bb36dfba7cbfab3db6dc73d4d4"
+    },
+    {
+      "id": "evidence/composite-test-budgets-final/security-editing-transition.before.ts",
+      "sha256": "3f042e91e72ad00681b164cdae93646ba839c670087c8461d13a1796ff12115c"
+    },
+    {
+      "id": "evidence/composite-test-budgets-final/security-ignore-refresh.before.ts",
+      "sha256": "d7a3895a9ea6d8f2966811cfbd0e562e0e834a6eacb5c337ef67c2d342331374"
+    },
+    {
+      "id": "evidence/composite-test-budgets-final/security-index-concurrency.before.ts",
+      "sha256": "fc0b320184a66866e4b9bb8b06bb2279ecc66878d61d65622f4c3b4e01c26aaa"
+    },
+    {
+      "id": "evidence/composite-test-budgets-final/security-ownership.before.ts",
+      "sha256": "ea67f917e32841d42aca0f11193e48a30b157e37010d2f216e7b8e4c5f448f67"
+    },
+    {
+      "id": "evidence/composite-test-budgets-final/security-protection.before.ts",
+      "sha256": "2e8841a247c156c333ce893f59150dd54e3e53f0f8b6958bf993acf84dc98a3c"
+    },
+    {
+      "id": "fixtures/atomic-stage-driver-xQL9DC/temp/gl-atomic-stage-sxlQdi/repo/.git/layers/transactions/b699578f-01d9-440f-b046-e74f055eba57/backups/9ccbe17b-0a3d-4336-af70-64c7687cf2df-file-0",
+      "sha256": "506cd1862b6c8818b0412c596ae496cc6f37aeb2bed919ad14021d159eeef27c"
+    },
+    {
+      "id": "run-atomic-stage-900s.mjs",
+      "sha256": "35396d62592d56cb85aa9fae7e1874f54754c8faa0498a1bf5085206b0eaf30a"
+    },
+    {
+      "id": "stage-before/core.mjs",
+      "sha256": "9602a71c99f50c4e651505d86bb514325016cba31179e86d1ba007deccba8880"
+    },
+    {
+      "id": "stage-before/manifest.json",
+      "sha256": "236ecb2481b5c7f69f881c73bb68aa95ee1216ece2d65f742344269e67673d74"
+    },
+    {
+      "id": "stage-before/src/core/branch-protection.ts",
+      "sha256": "530fe59190262f3256f89e23c3e9c32d71f108deec9360928c15f9ff8ff6c74d"
+    },
+    {
+      "id": "stage-before/src/core/demo.ts",
+      "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+    },
+    {
+      "id": "stage-before/src/core/editing-boundary.ts",
+      "sha256": "9a6b2c68d283aa5a751fc139ef59c2ffec8233b21eb490d47edaa5cdcd909b85"
+    },
+    {
+      "id": "stage-before/src/core/errors.ts",
+      "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+    },
+    {
+      "id": "stage-before/src/core/git.ts",
+      "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+    },
+    {
+      "id": "stage-before/src/core/ignore.ts",
+      "sha256": "3d0fa49bae842dfeed7e45f5f934509b8e40bc064e2b3832789868d2981f524b"
+    },
+    {
+      "id": "stage-before/src/core/index.ts",
+      "sha256": "35e7a31baecb05ab7e6a4bbb88a63adc9fe21a720ff1069604ceb1ae72761adc"
+    },
+    {
+      "id": "stage-before/src/core/layer-rename.ts",
+      "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+    },
+    {
+      "id": "stage-before/src/core/layout.ts",
+      "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+    },
+    {
+      "id": "stage-before/src/core/ownership-state.ts",
+      "sha256": "4686ed8a7613600fbba4eff9324067e4baf64ab56b7b508651c5a039ca9263f8"
+    },
+    {
+      "id": "stage-before/src/core/paths.ts",
+      "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+    },
+    {
+      "id": "stage-before/src/core/platform.ts",
+      "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+    },
+    {
+      "id": "stage-before/src/core/recovery.ts",
+      "sha256": "a8bc1cf93dffa5b5802ae89dab77d91ee0b56318f3799c0f7a8ac70cd5984e48"
+    },
+    {
+      "id": "stage-before/src/core/rescue.ts",
+      "sha256": "6a48c5033d558e9abfb587137ca4288a420f6f18b9b46813f44252fc3695e423"
+    },
+    {
+      "id": "stage-before/src/core/storage.ts",
+      "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+    }
+  ]
+}

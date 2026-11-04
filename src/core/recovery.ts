@@ -1,8 +1,11 @@
 import path from 'node:path';
-import { lstat } from 'node:fs/promises';
+import { lstat, readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { LabError } from './errors.js';
+import { validOwnershipMetadata } from './ownership-state.js';
 import { validateLayerRenameRecovery } from './layer-rename.js';
-import { git } from './git.js';
+import { git, treeEntries } from './git.js';
+import { comparableFileMode } from './platform.js';
 import { collisionKey, safePath, validatePath } from './paths.js';
 import { fingerprint, sameFingerprint, type Fingerprint } from './storage.js';
 
@@ -28,6 +31,90 @@ async function branch(repo: RecoveryRepo, value: unknown): Promise<string> {
   return value as string;
 }
 
+
+interface RecoveryWorkspaceImage { kind:'rollback'|'forward-base'|'forward-layer'; path:string; bytes:Buffer; fingerprint:Fingerprint }
+
+/** The original before/backup remain facts. This reducer only removes authority. */
+export function recoveryBeforeWorkspace(data:any,workspace:any=data.recovery.beforeWorkspace):any {
+  const result=structuredClone(workspace),intent=data.recovery.acknowledgements;
+  if(intent){const removed=new Set<string>([...intent.revoked,...intent.pending]);if(result.acknowledgedMissing)result.acknowledgedMissing=result.acknowledgedMissing.filter((p:string)=>!removed.has(p));}
+  return result;
+}
+
+function approvedRecoveryMetadata(repo:RecoveryRepo,dir:string,file:string):boolean {
+    if (file === path.resolve(repo.index) || file === path.resolve(repo.exclude) || file === path.join(path.resolve(repo.gitDir), 'config')) return true;
+    const relative = path.relative(dir, file).split(path.sep).join('/');
+    if (relative === 'registry.json' || relative === 'workspace.json' || relative === 'capture.json') return true;
+    if (/^(reservations|captures)\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.json$/.test(relative)) return true;
+    if (/^indexes\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.index$/.test(relative)) return true;
+    return /^shelves\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\/shelf\.json$/.test(relative);
+}
+
+/** Read original facts only; absence of an optional legacy workspace plan creates no backup. */
+async function readRecoveryWorkspaceBackup(directory:string,data:any,required=false){
+  const file=path.join(path.resolve(directory),'workspace.json');
+  const entry=data.recovery.files.find((f:any)=>f.path===file);
+  if(!entry?.before.exists||!entry.backup){
+    if(required)invalid('Revogação de confirmações sem backup original do workspace.');
+    return undefined;
+  }
+  const original=await readFile(entry.backup);
+  if(createHash('sha256').update(original).digest('hex')!==entry.before.hash)throw new LabError('RECOVERY_CONFLICT','Backup do workspace mudou durante a derivação.');
+  let workspace:any;try{workspace=JSON.parse(original.toString('utf8'));}catch{invalid('Backup do workspace não contém JSON válido.');}
+  if(!object(workspace)||!validOwnershipMetadata(workspace)||JSON.stringify(workspace.acknowledgedMissing??[])!==JSON.stringify(data.recovery.beforeWorkspace.acknowledgedMissing??[]))invalid('Confirmações do backup não correspondem ao workspace anterior.');
+  return {file,entry,workspace};
+}
+/** An uncertain or observed publication cannot be treated as an unchanged absent before. */
+export function assertRecoveryMaterializationState(repo:RecoveryRepo,directory:string,file:any,current:Fingerprint):void {
+  if(approvedRecoveryMetadata(repo,path.resolve(directory),file.path)||file.before.exists||current.exists)return;
+  const relative=path.relative(path.resolve(repo.root),file.path).split(path.sep).join('/');
+  throw new LabError('RECOVERY_CONFLICT','A publicação de um arquivo do workspace está ausente ou incerta. A ausência atual pode ser estado anterior, edição externa ou rollback parcial; a recuperação exige inspeção. Journal e backups preservados; execute doctor e recovery-export.',{reason:'workspace-materialization-disappeared',paths:[{path:relative,beforePresent:false,afterRecorded:file.after!==undefined,recordedAfterPresent:file.after?.exists===true,present:false}]});
+}
+/** A legacy/incomplete plan cannot regrant absence authority beside known materialization. */
+async function assertRecoveryMaterializationSafe(repo:RecoveryRepo,directory:string,data:any):Promise<void>{
+  // The new protocol checks the same immutable backup in recoveryWorkspaceImages.
+  if(data.recovery.acknowledgements===undefined)await readRecoveryWorkspaceBackup(directory,data);
+  for(const file of data.recovery.files){
+    if(!approvedRecoveryMetadata(repo,path.resolve(directory),file.path)&&file.before.exists===false)assertRecoveryMaterializationState(repo,directory,file,await fingerprint(file.path));
+  }
+  const retained:string[]=recoveryBeforeWorkspace(data).acknowledgedMissing??[];
+  if(!retained.length)return;
+  const conflicts:{path:string;present:boolean;restorable:boolean;recordedAfterPresent:boolean}[]=[];
+  for(const relative of retained){
+    const full=await safePath(repo.root,relative);
+    const recorded=data.recovery.files.find((entry:any)=>entry.path===full);
+    const current=await fingerprint(full);
+    const restorable=recorded?.before.exists===true,recordedAfterPresent=recorded?.after?.exists===true;
+    if(current.exists||restorable||recordedAfterPresent)conflicts.push({path:relative,present:current.exists,restorable,recordedAfterPresent});
+  }
+  if(conflicts.length)throw new LabError('RECOVERY_CONFLICT','A recuperação não pode repor confirmação de ausência de caminho presente ou materializado sem revogação durável. Journal, arquivos e backups preservados; execute doctor e recovery-export antes de decidir.',{reason:'acknowledged-materialization-without-revocation',paths:conflicts});
+}
+/** Call only after the complete recovery plan was validated. No arbitrary hash is trusted. */
+export async function recoveryWorkspaceImages(repo:RecoveryRepo,directory:string,data:any):Promise<RecoveryWorkspaceImage[]> {
+  const intent=data.recovery.acknowledgements;
+  if(!intent)return [];
+  const {file,entry,workspace}=(await readRecoveryWorkspaceBackup(directory,data,true))!;
+  const removed=[...intent.revoked,...intent.pending];
+  const image=(kind:RecoveryWorkspaceImage['kind'],value:any,mode:number):RecoveryWorkspaceImage=>{const bytes=Buffer.from(JSON.stringify(value,null,2)+'\n','utf8');return {kind,path:file,bytes,fingerprint:{exists:true,hash:createHash('sha256').update(bytes).digest('hex'),mode}};};
+  const images:RecoveryWorkspaceImage[]=removed.length?[image('rollback',recoveryBeforeWorkspace(data,workspace),entry.before.mode)]:[];
+  const commit=data.recovery.commit;
+  if(commit){
+    const base=commit.base===true,previous=data.recovery.beforeWorkspace;
+    if(!base){
+      const head=await git(repo.root,['rev-parse','--verify','HEAD'],{ok:[0,128]}),branch=await git(repo.root,['symbolic-ref','--quiet','--short','HEAD'],{ok:[0,1]});
+      if(head.code!==0||branch.code!==0||head.stdout.toString().trim()!==previous.head||branch.stdout.toString().trim()!==previous.branch)throw new LabError('RECOVERY_CONFLICT','HEAD mudou após o commit da Layer interrompido; estado e journal preservados.');
+    }
+    // Only the new protocol reconstructs Layer metadata from its exact before.
+    // Ordinary creations can be reconciled again after conservative recovery.
+    const forward=base?{...recoveryBeforeWorkspace(data),schema:1,head:commit.new,branch:previous.branch}:recoveryBeforeWorkspace(data);
+    const normalizationHead=base?commit.new:previous.head;
+    // Exactly the ownership normalization performed by save() on this HEAD tree.
+    if(forward.baseReservations?.length){const committed=new Set((await treeEntries(repo.root,normalizationHead)).map(e=>e.path));if(forward.editing)forward.editing.acceptedBase=[...new Set([...forward.editing.acceptedBase??[],...forward.baseReservations.filter((p:string)=>committed.has(p))])];forward.baseReservations=forward.baseReservations.filter((p:string)=>!committed.has(p));}
+    images.push(image(base?'forward-base':'forward-layer',forward,comparableFileMode(0o600)));
+  }
+  return images;
+}
+
 /**
  * Recovery is a write boundary: a JSON journal cannot authorize arbitrary paths.
  * Validate the complete plan before restoring even its first file.
@@ -51,6 +138,7 @@ export async function validateRecovery(repo: RecoveryRepo, directory: string, da
     for (const reserved of layer.reservations) validatePath(reserved);
   }
   if (!object(beforeWorkspace) || beforeWorkspace.schema !== 1 || !oid(beforeWorkspace.head, true)) invalid('Workspace anterior ausente ou inválido no journal.');
+  if(!validOwnershipMetadata(beforeWorkspace))invalid('Propriedade anterior inválida no journal.');
   await branch(repo, beforeWorkspace.branch);
   for(const key of ['branchLayer','resumeLayer','returnBranch'])if(beforeWorkspace[key]!==undefined&&(typeof beforeWorkspace[key]!=='string'||!beforeWorkspace[key]))invalid('Papel opcional inválido no workspace anterior.');
   if(beforeWorkspace.branchLayer!==undefined){const layer=beforeRegistry.layers.find((entry:any)=>entry.name===beforeWorkspace.branchLayer);if(!layer||layer.state!=='inactive'||beforeWorkspace.branch!=='layer/'+layer.name)invalid('Papel Layer como branch não corresponde ao estado anterior.');}
@@ -63,23 +151,27 @@ export async function validateRecovery(repo: RecoveryRepo, directory: string, da
     const paths=(value:any):string[]=>{if(!Array.isArray(value)||value.some(path=>typeof path!=='string')||new Set(value).size!==value.length)invalid('Baseline de edição inválida ou duplicada.');for(const entry of value){try{validatePath(entry);}catch{invalid('Caminho inválido na baseline de edição.');}}return value;};
     const before=paths(editing.before);if(editing.unassigned!==undefined&&paths(editing.unassigned).some(path=>!before.includes(path)))invalid('Exceção de edição fora da baseline observada.');
   }
+  const acknowledgements=recovery.acknowledgements;
+  if(acknowledgements!==undefined){
+    if(!object(acknowledgements)||Object.keys(acknowledgements).sort().join(',')!=='pending,revoked')invalid('Plano de revogação de confirmações inválido.');
+    const previous=beforeWorkspace.acknowledgedMissing??[];
+    for(const key of ['revoked','pending']){
+      const paths=acknowledgements[key];if(!Array.isArray(paths))invalid('Lista de revogação inválida.');
+      for(const p of paths){if(typeof p!=='string'||!previous.includes(p))invalid('Revogação fora das confirmações anteriores.');try{validatePath(p);}catch{invalid('Caminho de revogação inválido.');}}
+    }
+    const all=[...acknowledgements.revoked,...acknowledgements.pending];
+    if(new Set(all.map(collisionKey)).size!==all.length)invalid('Revogações duplicadas ou conflitantes por caixa/Unicode.');
+  }
   if (!Array.isArray(recovery.files) || !Array.isArray(data.backups)) invalid('Lista de arquivos/backups de recuperação ausente.');
   const journalDir = path.join(dir, 'transactions', data.id);
   const backupDir = path.join(journalDir, 'backups');
-  const approvedMetadata = (file: string): boolean => {
-    if (file === path.resolve(repo.index) || file === path.resolve(repo.exclude) || file === path.join(path.resolve(repo.gitDir), 'config')) return true;
-    const relative = path.relative(dir, file).split(path.sep).join('/');
-    if (relative === 'registry.json' || relative === 'workspace.json' || relative === 'capture.json') return true;
-    if (/^(reservations|captures)\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.json$/.test(relative)) return true;
-    if (/^indexes\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.index$/.test(relative)) return true;
-    return /^shelves\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\/shelf\.json$/.test(relative);
-  };
+
   const paths = new Set<string>();
   for (const file of recovery.files) {
     if (!object(file) || !absolute(file.path) || !validFingerprint(file.before) || (file.after !== undefined && !validFingerprint(file.after)) || (file.backup !== null && !absolute(file.backup))) invalid('Arquivo ou fingerprint inválido no plano de recuperação.');
     if (paths.has(file.path)) invalid('Arquivo duplicado no plano de recuperação.', { path: file.path });
     paths.add(file.path);
-    if (!approvedMetadata(file.path)) {
+    if (!approvedRecoveryMetadata(repo,dir,file.path)) {
       const relative = path.relative(path.resolve(repo.root), file.path).split(path.sep).join('/');
       if (!relative || relative === '..' || relative.startsWith('../') || path.isAbsolute(relative)) invalid('Recuperação tentou acessar um caminho fora do workspace.', { path: file.path });
       const resolved = await safePath(repo.root, relative);
@@ -135,4 +227,6 @@ export async function validateRecovery(repo: RecoveryRepo, directory: string, da
     if(planned.from.startsWith('layer/')&&beforeWorkspace.branchLayer!==planned.from.slice(6))invalid('Saída Layer como branch sem estado anterior correspondente.');
     if(planned.resumeName&&planned.resumeName!==beforeWorkspace.branchLayer)invalid('Retomada de Layer inválida.');
   }
+  if(acknowledgements!==undefined)await recoveryWorkspaceImages(repo,dir,data);
+  await assertRecoveryMaterializationSafe(repo,dir,data);
 }

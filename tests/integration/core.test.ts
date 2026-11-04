@@ -6,6 +6,8 @@ import path from 'node:path';
 import os from 'node:os';
 import test, { after, type TestContext } from 'node:test';
 import { GitLayers } from '../../src/core/index.js';
+import { resolveGit } from '../../scripts/git-compat/lib.mjs';
+const officialGit = resolveGit();
 
 // Every repository is disposable, has only local identity, and uses no host Git config.
 // Tests run serially because each fixture temporarily isolates the Core's process env.
@@ -33,7 +35,7 @@ async function fixture(t: TestContext) {
     }
     rmSync(root, { recursive: true, force: true });
   });
-  const git = (...args: string[]) => execFileSync('git', ['-C', root, ...args], {
+  const git = (...args: string[]) => execFileSync(officialGit, ['-C', root, ...args], {
     encoding: 'utf8', env: { ...process.env, GIT_TERMINAL_PROMPT: '0', GIT_OPTIONAL_LOCKS: '0' }, stdio: ['pipe', 'pipe', 'pipe'],
   }).trimEnd();
   const write = (file: string, content: string | Buffer) => {
@@ -60,6 +62,15 @@ async function fixture(t: TestContext) {
     await app.commit(name, `Seed ${name}`);
   };
   return { root, home, app, git, write, read, index, layer };
+}
+
+// Stage 1B: external absence + creation needs a deliberate decision. The
+// decision itself must preserve native refs/indices and physical bytes/modes.
+async function decisionSnapshot(f: Awaited<ReturnType<typeof fixture>>, paths: string[]) {
+  const layers=await f.app.list();
+  return {refs:f.git('for-each-ref','--format=%(refname) %(objectname)'),mainIndex:f.index(),
+    layerIndexes:layers.filter(layer=>layer.id).map(layer=>({id:layer.id,sha256:createHash('sha256').update(readFileSync(path.join(f.app.dir,'indexes',layer.id+'.index'))).digest('hex')})),
+    files:paths.map(file=>{const full=path.join(f.root,file);return existsSync(full)?{path:file,sha256:createHash('sha256').update(readFileSync(full)).digest('hex'),mode:lstatSync(full).mode}:{path:file,absent:true};})};
 }
 
 function changed(changes: Array<{ path: string }>, file: string) { return changes.some(change => change.path === file); }
@@ -251,6 +262,11 @@ test('GL16 deactivation refuses pending changes and explicit discard restores co
   f.write('scripts/a.py', 'unstaged A\n');
   unlinkSync(path.join(f.root, 'scripts/deleted.py'));
   f.write('scripts/new.py', 'new staged\n');
+  await assert.rejects(()=>f.app.add('scripts',['scripts/new.py']),{code:'OWNERSHIP_AMBIGUOUS'});
+  const review=await f.app.ownershipReview(),beforeDecision=await decisionSnapshot(f,['scripts/a.py','scripts/deleted.py','scripts/new.py']);
+  await f.app.resolveOwnership({token:review.token,deleted:['scripts/deleted.py']});
+  assert.deepEqual(await decisionSnapshot(f,['scripts/a.py','scripts/deleted.py','scripts/new.py']),beforeDecision);
+  assert.equal((await f.app.files()).find(file=>file.path==='scripts/new.py')!.owner,null);
   await f.app.add('scripts', ['scripts/new.py']);
   await f.app.unstage('scripts', ['scripts/new.py']);
   await assert.rejects(() => f.app.off('scripts'));
@@ -320,6 +336,12 @@ test('deactivation prunes no Base directories, active Layer ancestors or local c
   mkdirSync(path.join(f.root, 'local-empty/personal-empty'));
   mkdirSync(path.join(f.root, 'unrelated-empty'));
   const index = f.index();
+  await assert.rejects(()=>f.app.off('scripts'),{code:'OWNERSHIP_AMBIGUOUS'});
+  const review=await f.app.ownershipReview(),observedPaths=[...paths,'base-head/base.txt','base-index/base.txt','other-shared/other.txt','local/local.txt','ignored/local.txt'];
+  const beforeDecision=await decisionSnapshot(f,observedPaths);
+  await f.app.resolveOwnership({token:review.token,deleted:['other-shared/other.txt']});
+  assert.deepEqual(await decisionSnapshot(f,observedPaths),beforeDecision);
+  for(const file of ['local/local.txt','ignored/local.txt'])assert.equal((await f.app.files()).find(entry=>entry.path===file)!.owner,null);
   await f.app.off('scripts');
   for (const folder of ['base-head', 'base-index', 'other-shared', 'local', 'ignored', 'local-empty/personal-empty', 'unrelated-empty']) assert.equal(lstatSync(path.join(f.root, folder)).isDirectory(), true, `Preserve ${folder}`);
   assert.equal(f.read('local/local.txt'), 'untracked local bytes\n');

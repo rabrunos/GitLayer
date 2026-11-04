@@ -13,7 +13,7 @@ test('terminal: catálogo histórico preservado cobre a CLI anterior; novos coma
   assert.equal(new Set(catalog).size, catalog.length);
   // 2026-11-02 GL23/24: this task explicitly preserves desktop sources.
   // Keep its complete prior catalog invariant and enumerate the exact CLI gap.
-  const terminalDeferred = ['edit','edit-end','migrate','open-branch','preview','protect','remove','rename','unprotect'];
+  const terminalDeferred = ['edit','edit-end','migrate','open-branch','ownership-review','ownership-resolve','preview','protect','remove','rename','rename-file','unprotect'];
   assert.deepEqual(catalog.toSorted(), ['help', ...commands.filter(command => !terminalDeferred.includes(command!))].toSorted());
   assert.deepEqual(commands.filter(command => !catalog.includes(command!)).toSorted(), terminalDeferred.toSorted());
   for (const command of terminalCommands) assert.ok(command.label && command.description && command.group);

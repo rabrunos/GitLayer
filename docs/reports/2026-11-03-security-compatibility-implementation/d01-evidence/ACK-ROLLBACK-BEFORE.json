@@ -1,0 +1,173 @@
+{
+  "schema": 1,
+  "kind": "D01-intermediate-candidate-acknowledgement-rollback-counterproofs",
+  "classification": "CONFIRMED_D01_VARIANT",
+  "sourceManifest": "SOURCE-MANIFEST12.json",
+  "fingerprint": "49ba56cd980e339bd00770d8b4a294914b7b30236923da79008b966961567d09",
+  "inputCount": 183,
+  "proofs": [
+    {
+      "id": "ack-rollback49ba-proof-928ec8d0-6265-4636-bc4d-130a57eaad4b",
+      "receiptSHA256": "3665952a56eb3cf2068b86f95c250fe78f769097f27d4f4ff096417c88bcad7a",
+      "proofSHA256": "b52d62ee8f7888989d44c22bbac2392cd8c696b0c66eae10205ee4de6038c891",
+      "controllerSHA256": "76c893027934658eba3bcf3ae7228bca6d97cf51d4357c99da5f9bb18eeff12f",
+      "observationSHA256": "1d3efe217b44db9fe9dd18dcc86300b135fdc05d2726fc0cb46ffbf83b336a07",
+      "startedAt": "2026-11-04T04:55:18.352Z",
+      "endedAt": "2026-11-04T04:57:02.144Z",
+      "code": 0,
+      "signal": null,
+      "actualCloseObserved": true,
+      "sourceFingerprint": "49ba56cd980e339bd00770d8b4a294914b7b30236923da79008b966961567d09",
+      "inputCount": 183,
+      "inputsStable": true,
+      "first": {
+        "safe": false,
+        "error": {
+          "code": "EIO",
+          "message": "TEST ONLY one-shot EIO before original Transaction.finish"
+        }
+      },
+      "injectedIO": true,
+      "variant": "One-shot synthetic EIO before original Transaction.finish after metadata publication",
+      "writer": {
+        "separateProcessConfirmed": true,
+        "renameConfirmed": true
+      },
+      "ackRestoredAfterFailure": true,
+      "reopenedStatus": {
+        "safe": true
+      },
+      "stage": {
+        "paths": [
+          "again.txt"
+        ]
+      },
+      "commit": {
+        "oid": "b34b4d43e197b60edaf73500c1325564d166ced4",
+        "ref": "refs/heads/main",
+        "tree": "388e14d8e175d75a5014aa9b63e6d5e72c4d47d2"
+      },
+      "workspace": {
+        "schema": 1,
+        "head": "b34b4d43e197b60edaf73500c1325564d166ced4",
+        "branch": "main",
+        "acknowledgedMissing": [
+          "a.txt"
+        ]
+      },
+      "finalIndexSummary": {
+        "main": {
+          "sha256": "7363536f968bc209f7e06c9b02bee7cc2e3e97efb3b5e70a96bb31f07f53b661",
+          "bytes": 209,
+          "mode": 438
+        },
+        "a": {
+          "sha256": "ec88e4875921920295318feeec3a3faf9100625db82154bb4fba1988676d9a34",
+          "bytes": 137,
+          "mode": 438
+        },
+        "b": {
+          "sha256": "4c076bdb31a20b24d5de560e78e36a47d8c95f2eedc6a04cbfbd846d2d78d7ad",
+          "bytes": 137,
+          "mode": 438
+        }
+      },
+      "journals": [
+        {
+          "kind": "editing-sync",
+          "state": "completed",
+          "error": {
+            "name": "Error",
+            "message": "TEST ONLY one-shot EIO before original Transaction.finish",
+            "code": "EIO"
+          }
+        }
+      ],
+      "countsAddedToFull": 0,
+      "qualification": "Exit0 means the unsafe counterexample assertions were met, not product safety PASS. Physical reappearance and rename were performed by a separate local Node process in a newly owned disposable fixture. No remote operation or development checkout mutation occurred."
+    },
+    {
+      "id": "ack-rollback49ba-noeio-proof-33adcfd8-bf3c-4dd9-bafd-adafad08a065",
+      "receiptSHA256": "2178135ba512de1cee02f56bc6cd73dbd4f6b2e0dad4208f6ec60aef039cb164",
+      "proofSHA256": "bf57df87492929c5d362792e2414955f838da938f7efca189a633d0665036a9c",
+      "controllerSHA256": "dc5e3747ece189025660e9ad5ad8f5fb88714767ce30960f81458812b6c1ae6b",
+      "observationSHA256": "66c3fcbe969428cf2130362ffb424de01d076ced0181a5d0c957b2443097ad46",
+      "startedAt": "2026-11-04T04:59:47.630Z",
+      "endedAt": "2026-11-04T05:01:33.380Z",
+      "code": 0,
+      "signal": null,
+      "actualCloseObserved": true,
+      "sourceFingerprint": "49ba56cd980e339bd00770d8b4a294914b7b30236923da79008b966961567d09",
+      "inputCount": 183,
+      "inputsStable": true,
+      "first": {
+        "command": "baseStage base.txt",
+        "error": {
+          "code": "OWNERSHIP_AMBIGUOUS",
+          "message": "Há caminhos ausentes e candidatos novos cuja origem não pode ser deduzida. Execute ownership-review e resolva explicitamente antes de preparar, commitar ou descartar."
+        }
+      },
+      "injectedIO": false,
+      "variant": "ordinary managed ambiguity refusal",
+      "writer": {
+        "separateProcessConfirmed": true,
+        "renameConfirmed": true
+      },
+      "ackRestoredAfterFailure": true,
+      "reopenedStatus": {
+        "safe": true
+      },
+      "stage": {
+        "paths": [
+          "again.txt"
+        ]
+      },
+      "commit": {
+        "oid": "b34b4d43e197b60edaf73500c1325564d166ced4",
+        "ref": "refs/heads/main",
+        "tree": "388e14d8e175d75a5014aa9b63e6d5e72c4d47d2"
+      },
+      "workspace": {
+        "schema": 1,
+        "head": "b34b4d43e197b60edaf73500c1325564d166ced4",
+        "branch": "main",
+        "acknowledgedMissing": [
+          "a.txt"
+        ]
+      },
+      "finalIndexSummary": {
+        "main": {
+          "sha256": "ae55eeb36f3676ff017f18cbe2192c6e617e4bd3af93815698263bc482920f04",
+          "bytes": 209,
+          "mode": 438
+        },
+        "a": {
+          "sha256": "9d35d781590df30f4554bc48dec47fffd99b09fd1ccd1d031fc32de63a6ec272",
+          "bytes": 137,
+          "mode": 438
+        },
+        "b": {
+          "sha256": "b7e0e93fe1b20f8ae48bd919535d1901b4a2c989636f1aa7a269ed23d393f161",
+          "bytes": 137,
+          "mode": 438
+        }
+      },
+      "journals": [
+        {
+          "kind": "stage-base",
+          "state": "completed",
+          "error": {
+            "name": "LabError",
+            "message": "Há caminhos ausentes e candidatos novos cuja origem não pode ser deduzida. Execute ownership-review e resolva explicitamente antes de preparar, commitar ou descartar.",
+            "code": "OWNERSHIP_AMBIGUOUS"
+          }
+        }
+      ],
+      "countsAddedToFull": 0,
+      "qualification": "Exit0 means the unsafe counterexample assertions were met, not product safety PASS. Physical reappearance and rename were performed by a separate local Node process in a newly owned disposable fixture. No remote operation or development checkout mutation occurred."
+    }
+  ],
+  "confirmedConsequence": "A completed rollback restored an old acknowledgement; reopen/status was healthy, then managed baseStage/baseCommit incorporated again.txt from the known Layer-origin path into MAIN. Layer refs and private indexes were preserved by independent official-Git and byte assertions.",
+  "limits": "No corruption of Git objects or physical byte loss was demonstrated in these two cases. The first EIO was test-only fault injection; the second case used an ordinary ambiguity refusal with no I/O fault. These are intermediate candidate defects within D01, not a fifth defect family. No equivalence with every power-loss/storage failure is claimed.",
+  "countsAddedToFull": 0
+}

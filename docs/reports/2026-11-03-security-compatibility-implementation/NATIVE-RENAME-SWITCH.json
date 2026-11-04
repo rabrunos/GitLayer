@@ -1,0 +1,992 @@
+{
+ "schema": 1,
+ "id": "external-base-rename-switch-before-observation-01",
+ "classification": "Recusa segura; hipotese de transferencia refutada neste envelope. Nao e defeito novo nem aprovacao universal.",
+ "startedAt": "2026-11-03T21:26:16.457Z",
+ "endedAt": "2026-11-03T21:27:33.503Z",
+ "durationMs": 77042.7451,
+ "platform": "win32",
+ "node": "v24.14.1",
+ "officialGitVersion": "git version 2.53.0.windows.2",
+ "source": {
+  "functionalFingerprint": "ec0c3ab647d4b9e4fe3d5a830861701b61b2aa4883e7eb418efe4e580b375e0f",
+  "coreInputCount": 16,
+  "coreFingerprint": "5c43d431afd05c3a02b122b3be256829c153514a60144d35eab499a49ff90f5a",
+  "bundleSHA256": "0a8c3e90a232f90f716e8936a654248fef3f5a65642fb39be27a784b0810379c",
+  "inputsBefore": [
+   {
+    "file": "src/core/branch-protection.ts",
+    "sha256": "530fe59190262f3256f89e23c3e9c32d71f108deec9360928c15f9ff8ff6c74d"
+   },
+   {
+    "file": "src/core/demo.ts",
+    "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+   },
+   {
+    "file": "src/core/editing-boundary.ts",
+    "sha256": "a8c8cf1cf27770949d611e6315dff50924ba5a06fd1dd6f02dd7d089c5aa60a3"
+   },
+   {
+    "file": "src/core/errors.ts",
+    "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+   },
+   {
+    "file": "src/core/git.ts",
+    "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+   },
+   {
+    "file": "src/core/ignore.ts",
+    "sha256": "3d0fa49bae842dfeed7e45f5f934509b8e40bc064e2b3832789868d2981f524b"
+   },
+   {
+    "file": "src/core/index-stage.ts",
+    "sha256": "69d981eabe8f706a30614e9d176ef07e6d3af7b876a2cc21e18e28efb444c321"
+   },
+   {
+    "file": "src/core/index.ts",
+    "sha256": "e4d2f71eba50e7ac7430493b0ac4295f97a954d90a53338586594931aa67c41c"
+   },
+   {
+    "file": "src/core/layer-rename.ts",
+    "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+   },
+   {
+    "file": "src/core/layout.ts",
+    "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+   },
+   {
+    "file": "src/core/ownership-state.ts",
+    "sha256": "4686ed8a7613600fbba4eff9324067e4baf64ab56b7b508651c5a039ca9263f8"
+   },
+   {
+    "file": "src/core/paths.ts",
+    "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+   },
+   {
+    "file": "src/core/platform.ts",
+    "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+   },
+   {
+    "file": "src/core/recovery.ts",
+    "sha256": "a8bc1cf93dffa5b5802ae89dab77d91ee0b56318f3799c0f7a8ac70cd5984e48"
+   },
+   {
+    "file": "src/core/rescue.ts",
+    "sha256": "bd50b1cf30a62839d1a3413a9c4f14a23a6888d75a83f81cf8b8b6eb7386b79e"
+   },
+   {
+    "file": "src/core/storage.ts",
+    "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+   }
+  ],
+  "inputsAfter": [
+   {
+    "file": "src/core/branch-protection.ts",
+    "sha256": "530fe59190262f3256f89e23c3e9c32d71f108deec9360928c15f9ff8ff6c74d"
+   },
+   {
+    "file": "src/core/demo.ts",
+    "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+   },
+   {
+    "file": "src/core/editing-boundary.ts",
+    "sha256": "a8c8cf1cf27770949d611e6315dff50924ba5a06fd1dd6f02dd7d089c5aa60a3"
+   },
+   {
+    "file": "src/core/errors.ts",
+    "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+   },
+   {
+    "file": "src/core/git.ts",
+    "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+   },
+   {
+    "file": "src/core/ignore.ts",
+    "sha256": "3d0fa49bae842dfeed7e45f5f934509b8e40bc064e2b3832789868d2981f524b"
+   },
+   {
+    "file": "src/core/index-stage.ts",
+    "sha256": "69d981eabe8f706a30614e9d176ef07e6d3af7b876a2cc21e18e28efb444c321"
+   },
+   {
+    "file": "src/core/index.ts",
+    "sha256": "e4d2f71eba50e7ac7430493b0ac4295f97a954d90a53338586594931aa67c41c"
+   },
+   {
+    "file": "src/core/layer-rename.ts",
+    "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+   },
+   {
+    "file": "src/core/layout.ts",
+    "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+   },
+   {
+    "file": "src/core/ownership-state.ts",
+    "sha256": "4686ed8a7613600fbba4eff9324067e4baf64ab56b7b508651c5a039ca9263f8"
+   },
+   {
+    "file": "src/core/paths.ts",
+    "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+   },
+   {
+    "file": "src/core/platform.ts",
+    "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+   },
+   {
+    "file": "src/core/recovery.ts",
+    "sha256": "a8bc1cf93dffa5b5802ae89dab77d91ee0b56318f3799c0f7a8ac70cd5984e48"
+   },
+   {
+    "file": "src/core/rescue.ts",
+    "sha256": "bd50b1cf30a62839d1a3413a9c4f14a23a6888d75a83f81cf8b8b6eb7386b79e"
+   },
+   {
+    "file": "src/core/storage.ts",
+    "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+   }
+  ],
+  "sourceInputsStable": true,
+  "immutableCoreStable": true
+ },
+ "fixture": {
+  "newExclusiveOwnedFixture": true,
+  "markerNonceVerified": true,
+  "ancestryVerified": true,
+  "localOnly": true,
+  "noSharedObjectsOrLinks": true,
+  "noDestructiveDevelopmentCheckoutOperation": true
+ },
+ "recipe": [
+  {
+   "operation": "Official Git setup",
+   "description": "main tracks base.txt with exact bytes base A committed origin plus LF; develop is a child commit with an empty tree. Native layer/a and layer/b are disjoint root commits with a.txt or b.txt, exact payload a A committed or b A committed plus LF."
+  },
+  {
+   "operation": "Core",
+   "calls": [
+    "init",
+    "on a",
+    "on b",
+    "target b"
+   ]
+  },
+  {
+   "operation": "External file operation",
+   "action": "rename",
+   "from": "base.txt",
+   "to": "moved.txt",
+   "beforeFirstCoreQuery": true
+  },
+  {
+   "operation": "Official Git",
+   "args": [
+    "switch",
+    "develop"
+   ],
+   "exitCode": 0
+  },
+  {
+   "operation": "Core observations",
+   "calls": [
+    "status",
+    "files",
+    "ownershipReview",
+    "open",
+    "status",
+    "files"
+   ]
+  },
+  {
+   "operation": "Conditional managed add and commit",
+   "attempted": false,
+   "reason": "Both statuses report safe:false and moved.txt stays unowned."
+  }
+ ],
+ "observed": {
+  "nativeSwitchAccepted": true,
+  "firstStatus": {
+   "safe": false,
+   "error": "OWNERSHIP_AMBIGUOUS"
+  },
+  "reopened": true,
+  "reopenedStatus": {
+   "safe": false,
+   "error": "OWNERSHIP_AMBIGUOUS"
+  },
+  "movedOwner": null,
+  "reopenedMovedOwner": null,
+  "review": {
+   "token": "436edfd1c44cefed0d1a2bc2600823d27c2b8b18edc0480681ae537fbab19a0a",
+   "observationToken": "aa1ce3adf67c19c10b473d54a7b0579e06406a3e2f668bdc2912013334530c84",
+   "editingTarget": "b",
+   "missing": [
+    {
+     "path": "base.txt",
+     "owner": null
+    }
+   ],
+   "candidates": [
+    "moved.txt"
+   ],
+   "externalBase": [],
+   "ambiguous": true,
+   "readOnly": true
+  },
+  "noManagedAddAttempt": true,
+  "noManagedCommitAttempt": true,
+  "noOwnershipTransfer": true
+ },
+ "preservation": {
+  "nativeBranchChange": {
+   "before": {
+    "head": "f9ae43dff9a1752ce296c5f536533ed9e318a6de",
+    "branch": "refs/heads/main",
+    "MAIN": {
+     "exists": true,
+     "sha256": "86d6ce92f482a1041e7e5f6073ebe8ec3aa043d9f3562a23a25bd0e16a2dce9f",
+     "mode": 438,
+     "entries": "100644 5fd77a9a234c6f6bc1058c244e78b18a8cfb37c9 0\tbase.txt"
+    }
+   },
+   "after": {
+    "head": "b718f2e242a39c35f32c42b9142b4959c723fd18",
+    "branch": "refs/heads/develop",
+    "MAIN": {
+     "exists": true,
+     "sha256": "8a99f56bd3599f16165eb30aa3c8c626923a7d63855907a5b97b98b5c6cdea2b",
+     "mode": 438,
+     "entries": ""
+    }
+   }
+  },
+  "afterNativeSwitchVersusFinal": {
+   "HEADIdentical": true,
+   "branchIdentical": true,
+   "MAINRawAndSemanticIdentical": true,
+   "mainBefore": {
+    "exists": true,
+    "sha256": "8a99f56bd3599f16165eb30aa3c8c626923a7d63855907a5b97b98b5c6cdea2b",
+    "mode": 438,
+    "entries": ""
+   },
+   "mainAfter": {
+    "exists": true,
+    "sha256": "8a99f56bd3599f16165eb30aa3c8c626923a7d63855907a5b97b98b5c6cdea2b",
+    "mode": 438,
+    "entries": ""
+   },
+   "allPriorRefsPreserved": true,
+   "refsBefore": "refs/git-layers/state/459c1ac5-8349-42fb-84a2-58cb4a217d55 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/state/919e856c-8ce7-4ba2-9e6c-2078db61b66f 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/7417deaf-f84d-48e9-911b-fa63eb2819ed/919e856c-8ce7-4ba2-9e6c-2078db61b66f 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/d125b742-47a5-4999-b605-53ea9f79f944/459c1ac5-8349-42fb-84a2-58cb4a217d55 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/heads/develop b718f2e242a39c35f32c42b9142b4959c723fd18\nrefs/heads/layer/a d4fd97fe85118a7eeb1d99ffec66d2354f17adc5\nrefs/heads/layer/b af70492d1c8efb33a419e92fd599da38391c2071\nrefs/heads/main f9ae43dff9a1752ce296c5f536533ed9e318a6de",
+   "refsAfter": "refs/git-layers/state/459c1ac5-8349-42fb-84a2-58cb4a217d55 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/state/919e856c-8ce7-4ba2-9e6c-2078db61b66f 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/2e92b33f-6d5a-4082-908a-6dd1307e41d2/459c1ac5-8349-42fb-84a2-58cb4a217d55 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/2e92b33f-6d5a-4082-908a-6dd1307e41d2/919e856c-8ce7-4ba2-9e6c-2078db61b66f 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/7417deaf-f84d-48e9-911b-fa63eb2819ed/919e856c-8ce7-4ba2-9e6c-2078db61b66f 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/git-layers/transactions/d125b742-47a5-4999-b605-53ea9f79f944/459c1ac5-8349-42fb-84a2-58cb4a217d55 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/ed54cb26-1a30-4ae9-b2db-33cf1d95e7fb/459c1ac5-8349-42fb-84a2-58cb4a217d55 328924d0394d1f6f9bb6b0c3701b72901694f097\nrefs/git-layers/transactions/ed54cb26-1a30-4ae9-b2db-33cf1d95e7fb/919e856c-8ce7-4ba2-9e6c-2078db61b66f 135d78e2914cbe83b996ed502b5259230c2a59c5\nrefs/heads/develop b718f2e242a39c35f32c42b9142b4959c723fd18\nrefs/heads/layer/a d4fd97fe85118a7eeb1d99ffec66d2354f17adc5\nrefs/heads/layer/b af70492d1c8efb33a419e92fd599da38391c2071\nrefs/heads/main f9ae43dff9a1752ce296c5f536533ed9e318a6de",
+   "extraRefs": [
+    {
+     "ref": "refs/git-layers/transactions/2e92b33f-6d5a-4082-908a-6dd1307e41d2/459c1ac5-8349-42fb-84a2-58cb4a217d55",
+     "oid": "328924d0394d1f6f9bb6b0c3701b72901694f097",
+     "type": "tree",
+     "equalsPriorStateCheckpoint": true
+    },
+    {
+     "ref": "refs/git-layers/transactions/2e92b33f-6d5a-4082-908a-6dd1307e41d2/919e856c-8ce7-4ba2-9e6c-2078db61b66f",
+     "oid": "135d78e2914cbe83b996ed502b5259230c2a59c5",
+     "type": "tree",
+     "equalsPriorStateCheckpoint": true
+    },
+    {
+     "ref": "refs/git-layers/transactions/ed54cb26-1a30-4ae9-b2db-33cf1d95e7fb/459c1ac5-8349-42fb-84a2-58cb4a217d55",
+     "oid": "328924d0394d1f6f9bb6b0c3701b72901694f097",
+     "type": "tree",
+     "equalsPriorStateCheckpoint": true
+    },
+    {
+     "ref": "refs/git-layers/transactions/ed54cb26-1a30-4ae9-b2db-33cf1d95e7fb/919e856c-8ce7-4ba2-9e6c-2078db61b66f",
+     "oid": "135d78e2914cbe83b996ed502b5259230c2a59c5",
+     "type": "tree",
+     "equalsPriorStateCheckpoint": true
+    }
+   ],
+   "retentionJournals": [
+    {
+     "id": "2e92b33f-6d5a-4082-908a-6dd1307e41d2",
+     "kind": "editing-sync",
+     "state": "completed",
+     "error": "OWNERSHIP_AMBIGUOUS",
+     "sha256": "68ed65732046ff20db93012fe3ec8c7e46ffa3b6076309525ca05617a807debe"
+    },
+    {
+     "id": "ed54cb26-1a30-4ae9-b2db-33cf1d95e7fb",
+     "kind": "editing-sync",
+     "state": "completed",
+     "error": "OWNERSHIP_AMBIGUOUS",
+     "sha256": "f15b4e1018348118fc27501dc0226f5625e612f4863b0e1a45ad321a921d9cd2"
+    }
+   ],
+   "privateIndexes": [
+    {
+     "layer": "a",
+     "index": ".git/layers/indexes/459c1ac5-8349-42fb-84a2-58cb4a217d55.index",
+     "bytesBefore": 137,
+     "bytesAfter": 137,
+     "beforeSHA256": "436892ca97ff096e98435647ae1d1cd6ca1eaa5344991d706184f1a2448af4ba",
+     "afterSHA256": "8c2c1cfbe463b932352edafe76ef3dff2065c4a4531766d0d029139935492080",
+     "rawBytesIdentical": false,
+     "entriesBefore": "100644 903cef804b442a6887241df9705a11ea1ce5d5eb 0\ta.txt",
+     "entriesAfter": "100644 903cef804b442a6887241df9705a11ea1ce5d5eb 0\ta.txt",
+     "semanticEntriesIdentical": true,
+     "changedByteOffsets": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      51,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136
+     ],
+     "changeScope": "Only ctime/mtime/file-size stat fields and final SHA-1 checksum differ. Blob, mode, path, flags, padding and TREE extension bytes are identical.",
+     "preservedOriginalBackupSHA256": "436892ca97ff096e98435647ae1d1cd6ca1eaa5344991d706184f1a2448af4ba"
+    },
+    {
+     "layer": "b",
+     "index": ".git/layers/indexes/919e856c-8ce7-4ba2-9e6c-2078db61b66f.index",
+     "bytesBefore": 137,
+     "bytesAfter": 137,
+     "beforeSHA256": "245cf30dca724a68054c5bd4449134ef587cbe6306e13c391b65f19dfe7eae86",
+     "afterSHA256": "d1b623d61efcde5ca496c5abb749ba17fe3a7bae9b2cf98361276a8b389fed28",
+     "rawBytesIdentical": false,
+     "entriesBefore": "100644 ca8d4ac9a29b3031ac3bfa92975ba3419127e620 0\tb.txt",
+     "entriesAfter": "100644 ca8d4ac9a29b3031ac3bfa92975ba3419127e620 0\tb.txt",
+     "semanticEntriesIdentical": true,
+     "changedByteOffsets": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      51,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136
+     ],
+     "changeScope": "Only ctime/mtime/file-size stat fields and final SHA-1 checksum differ. Blob, mode, path, flags, padding and TREE extension bytes are identical.",
+     "preservedOriginalBackupSHA256": "245cf30dca724a68054c5bd4449134ef587cbe6306e13c391b65f19dfe7eae86"
+    }
+   ],
+   "physicalBytesIdentical": true,
+   "filesBefore": {
+    "base.txt": null,
+    "moved.txt": "base A committed origin\n",
+    "a.txt": "a A committed\n",
+    "b.txt": "b A committed\n"
+   },
+   "filesAfter": {
+    "base.txt": null,
+    "moved.txt": "base A committed origin\n",
+    "a.txt": "a A committed\n",
+    "b.txt": "b A committed\n"
+   },
+   "registryIdentical": true,
+   "workspaceIdentical": true,
+   "editingBefore": {
+    "layer": "b",
+    "before": [
+     "a.txt",
+     "b.txt",
+     "base.txt"
+    ],
+    "unassigned": [],
+    "assigned": [],
+    "acceptedBase": [],
+    "startedAt": "2026-11-03T21:26:43.944Z"
+   },
+   "editingAfter": {
+    "layer": "b",
+    "before": [
+     "a.txt",
+     "b.txt",
+     "base.txt"
+    ],
+    "unassigned": [],
+    "assigned": [],
+    "acceptedBase": [],
+    "startedAt": "2026-11-03T21:26:43.944Z"
+   }
+  }
+ },
+ "officialGitCommands": {
+  "executable": "Git oficial absoluto registrado no recibo privado; argv abaixo sem shell",
+  "cwd": "<FIXTURE>/repo",
+  "commands": [
+   {
+    "args": [
+     "init",
+     "-b",
+     "main"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "config",
+     "core.autocrlf",
+     "false"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "config",
+     "core.hooksPath",
+     "NUL"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "add",
+     "--",
+     "base.txt"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "commit",
+     "-m",
+     "base origin on main"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "rev-parse",
+     "HEAD"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "mktree"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "commit-tree",
+     "4b825dc642cb6eb9a060e54bf8d69288fbee4904",
+     "-p",
+     "f9ae43dff9a1752ce296c5f536533ed9e318a6de",
+     "-m",
+     "develop intentionally omits base path"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "update-ref",
+     "refs/heads/develop",
+     "b718f2e242a39c35f32c42b9142b4959c723fd18"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "hash-object",
+     "-w",
+     "--stdin"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "mktree"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "commit-tree",
+     "328924d0394d1f6f9bb6b0c3701b72901694f097",
+     "-m",
+     "seed disjoint layer a"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "update-ref",
+     "refs/heads/layer/a",
+     "d4fd97fe85118a7eeb1d99ffec66d2354f17adc5"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "hash-object",
+     "-w",
+     "--stdin"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "mktree"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "commit-tree",
+     "135d78e2914cbe83b996ed502b5259230c2a59c5",
+     "-m",
+     "seed disjoint layer b"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "update-ref",
+     "refs/heads/layer/b",
+     "af70492d1c8efb33a419e92fd599da38391c2071"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "rev-parse",
+     "HEAD"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "symbolic-ref",
+     "HEAD"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "for-each-ref",
+     "--format=%(refname) %(objectname)"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": ".git/layers/indexes/459c1ac5-8349-42fb-84a2-58cb4a217d55.index",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": ".git/layers/indexes/919e856c-8ce7-4ba2-9e6c-2078db61b66f.index",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "switch",
+     "develop"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "rev-parse",
+     "HEAD"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "symbolic-ref",
+     "HEAD"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "for-each-ref",
+     "--format=%(refname) %(objectname)"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": ".git/layers/indexes/459c1ac5-8349-42fb-84a2-58cb4a217d55.index",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": ".git/layers/indexes/919e856c-8ce7-4ba2-9e6c-2078db61b66f.index",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "rev-parse",
+     "HEAD"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "symbolic-ref",
+     "HEAD"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "for-each-ref",
+     "--format=%(refname) %(objectname)"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": ".git/layers/indexes/459c1ac5-8349-42fb-84a2-58cb4a217d55.index",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": ".git/layers/indexes/919e856c-8ce7-4ba2-9e6c-2078db61b66f.index",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "rev-parse",
+     "HEAD"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "symbolic-ref",
+     "HEAD"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "for-each-ref",
+     "--format=%(refname) %(objectname)"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": ".git/layers/indexes/459c1ac5-8349-42fb-84a2-58cb4a217d55.index",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": ".git/layers/indexes/919e856c-8ce7-4ba2-9e6c-2078db61b66f.index",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "show",
+     "f9ae43dff9a1752ce296c5f536533ed9e318a6de:base.txt"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "show",
+     "layer/a:a.txt"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   },
+   {
+    "args": [
+     "--version"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "signal": null
+   }
+  ],
+  "additionalReadOnlyObservers": [
+   {
+    "args": [
+     "cat-file",
+     "-t",
+     "328924d0394d1f6f9bb6b0c3701b72901694f097"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "stdout": "tree\n",
+    "stderr": ""
+   },
+   {
+    "args": [
+     "cat-file",
+     "-t",
+     "135d78e2914cbe83b996ed502b5259230c2a59c5"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "stdout": "tree\n",
+    "stderr": ""
+   },
+   {
+    "args": [
+     "cat-file",
+     "-t",
+     "328924d0394d1f6f9bb6b0c3701b72901694f097"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "stdout": "tree\n",
+    "stderr": ""
+   },
+   {
+    "args": [
+     "cat-file",
+     "-t",
+     "135d78e2914cbe83b996ed502b5259230c2a59c5"
+    ],
+    "index": "MAIN",
+    "code": 0,
+    "stdout": "tree\n",
+    "stderr": ""
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": ".git/layers/indexes/459c1ac5-8349-42fb-84a2-58cb4a217d55.index",
+    "code": 0,
+    "stdout": "100644 903cef804b442a6887241df9705a11ea1ce5d5eb 0\ta.txt\n",
+    "stderr": ""
+   },
+   {
+    "args": [
+     "ls-files",
+     "--stage"
+    ],
+    "index": ".git/layers/indexes/919e856c-8ce7-4ba2-9e6c-2078db61b66f.index",
+    "code": 0,
+    "stdout": "100644 ca8d4ac9a29b3031ac3bfa92975ba3419127e620 0\tb.txt\n",
+    "stderr": ""
+   }
+  ]
+ },
+ "references": [
+  {
+   "id": "external-base-rename-switch-before-observation-01/bundle-manifest.json",
+   "sha256": "ba26bea3da9b1a4777388f06979a151ea03c95b47f66863ae7e8132f43517fb0"
+  },
+  {
+   "id": "external-base-rename-switch-before-observation-01/events.json",
+   "sha256": "57269ec9cffebf0ff1296dd01ad789b1e28979ef748d4ae9c023d4f20c3805df"
+  },
+  {
+   "id": "external-base-rename-switch-before-observation-01/summary.json",
+   "sha256": "8c72934b39ebb576e052aa928bcd0f25e805136441e3aa77f6c814acfd7fbaad"
+  },
+  {
+   "id": "external-base-rename-switch-before-observation-01/compact.json",
+   "sha256": "431f4a8284467e0ea7f02ed2c7a641face7d31200433594e07826a8d32558e89"
+  }
+ ],
+ "script": {
+  "id": "prove-external-base-rename-switch01.mjs",
+  "sha256": "3a33ade1c78036bd78c41cdddfe43e8346941f10ebf9d58df12ffd2187f9aba8"
+ },
+ "limits": [
+  "Este experimento nao testa todas as trocas ou eventos externos invisiveis.",
+  "Status que recusa pode criar journals/checkpoints tecnicos e atualizar stat cache privado; nao e consulta prometida como somente leitura.",
+  "Nenhuma perda de bytes, transferencia de origem ou mudanca de blob preparado foi observada.",
+  "Contagens nao sao adicionadas a foco03, FULL08, infraestrutura ou matriz ampla."
+ ],
+ "countsAddedToFinalTotals": false
+}

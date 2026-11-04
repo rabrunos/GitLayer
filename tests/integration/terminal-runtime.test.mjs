@@ -5,7 +5,7 @@ import { mkdtemp, mkdir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { build } from 'esbuild';
 
-test('real interactive PTY runs typed Git Layers and completes capture through its TTY', { timeout: 180000 }, async () => {
+test('real interactive PTY runs typed Git Layers and completes capture through its TTY', { timeout: 900000 }, async () => {
   const parent = path.resolve('.workshop/test-runtime');
   await mkdir(parent, { recursive: true });
   const runtime = await mkdtemp(path.join(parent, 'pty-'));

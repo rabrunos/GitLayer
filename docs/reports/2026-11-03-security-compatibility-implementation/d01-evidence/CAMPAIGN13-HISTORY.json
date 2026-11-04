@@ -1,0 +1,255 @@
+{
+  "schema": 1,
+  "kind": "campaign13-interrupted-history",
+  "preparedAt": "2026-11-04T06:43:03.355Z",
+  "classification": "INTERRUPTED_FOR_INDEPENDENTLY_CONFIRMED_D01_VARIANT",
+  "source": {
+    "functionalFingerprint": "699434cf9a0321cac219107ab9e7c2bfb765a4dff295c54d5cdc85bea97b9982",
+    "functionalInputCount": 183,
+    "manifest": {
+      "document": "SOURCE-MANIFEST13.json",
+      "sha256": "7741f2ef386433a57e9f28f51a6930b0f8c387ca9d4f920ad3ee5326ece19050"
+    },
+    "CoreIndexSHA256": "6679649f828d920cd3f6791b482cf8de56d7e08878262c31ea99cab4b5189cbc",
+    "recoverySHA256": "bff56f491f795c6089e293697b718c774394f2a8d301a8cbe913bc02dfa5b9ef"
+  },
+  "directedPrechecks": {
+    "acknowledgements": {
+      "receipt": {
+        "id": "focus-ack-01/result.json",
+        "sha256": "6559f03601dc59673ab27f30aac6d926a380c69ab74c0372da39e8ee64e1397c"
+      },
+      "startedAt": "2026-11-04T05:19:59.907Z",
+      "endedAt": "2026-11-04T05:38:24.903Z",
+      "code": 0,
+      "signal": null,
+      "sourceFingerprint": "699434cf9a0321cac219107ab9e7c2bfb765a4dff295c54d5cdc85bea97b9982",
+      "inputCount": 183,
+      "inputsStable": true,
+      "counts": {
+        "tests": 8,
+        "pass": 8,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "notAddedToFullTotals": true
+    },
+    "baseOrigin": {
+      "receipt": {
+        "id": "focus-base-origin-08/result.json",
+        "sha256": "5937981a340cb343401212937d41efa5ea9b9528547fe9f44302ba37cd05070d"
+      },
+      "startedAt": "2026-11-04T05:22:40.756Z",
+      "endedAt": "2026-11-04T05:37:38.521Z",
+      "code": 0,
+      "signal": null,
+      "sourceFingerprint": "699434cf9a0321cac219107ab9e7c2bfb765a4dff295c54d5cdc85bea97b9982",
+      "inputCount": 183,
+      "inputsStable": true,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "notAddedToFullTotals": true
+    },
+    "legacySafety": {
+      "receipt": {
+        "id": "focus-safety-05/result.json",
+        "sha256": "c46825bbf3568ebf87ffa6a50f688cd2385baafbd1acf7c3fc43c9ea273a945b"
+      },
+      "startedAt": "2026-11-04T05:38:09.491Z",
+      "endedAt": "2026-11-04T06:01:48.904Z",
+      "code": 0,
+      "signal": null,
+      "sourceFingerprint": "699434cf9a0321cac219107ab9e7c2bfb765a4dff295c54d5cdc85bea97b9982",
+      "inputCount": 183,
+      "inputsStable": true,
+      "counts": {
+        "tests": 17,
+        "pass": 17,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "notAddedToFullTotals": true
+    }
+  },
+  "full": {
+    "receipt": {
+      "id": "full-13/result.json",
+      "sha256": "778634d3ea37792c9c310b752f5d3915fd974d0309d4ede8b107d3d7253f146f"
+    },
+    "inputsBefore": {
+      "id": "full-13/inputs-before.json",
+      "sha256": "a209e5293311d0a516ab5581c3b8153bd8d1d0cf78d95200f52ab99ed72d2799"
+    },
+    "inputsAfter": {
+      "id": "full-13/inputs-after.json",
+      "sha256": "a209e5293311d0a516ab5581c3b8153bd8d1d0cf78d95200f52ab99ed72d2799"
+    },
+    "stdout": {
+      "id": "full-13/stdout.log",
+      "sha256": "95b408700cd452e5b1ed3f2b24af59f66c1963249376728ba107a54abf9af6e7"
+    },
+    "stderr": {
+      "id": "full-13/stderr.log",
+      "sha256": "0981a2cd7bafa5d46a9799d8789af1a483e8ed4e11c4e1c0c47ddb6c5aadc114"
+    },
+    "command": {
+      "executable": "node",
+      "args": [
+        "--import",
+        "tsx",
+        "--test-reporter=spec",
+        "--test-reporter-destination=stdout",
+        "--test-reporter=tap",
+        "--test-reporter-destination=stderr",
+        "--test",
+        "--test-concurrency=2",
+        "--test-timeout=900000",
+        "tests/unit/*.test.ts",
+        "tests/unit/*.test.mjs",
+        "tests/integration/*.test.ts",
+        "tests/integration/*.test.mjs"
+      ]
+    },
+    "startedAt": "2026-11-04T06:01:50.130Z",
+    "endedAt": "2026-11-04T06:31:01.100Z",
+    "durationMs": 1750968.1458,
+    "code": 4294967295,
+    "signal": null,
+    "inputsStable": true,
+    "inputCount": 183,
+    "sourceFingerprint": "699434cf9a0321cac219107ab9e7c2bfb765a4dff295c54d5cdc85bea97b9982",
+    "partialObservedTopLevelResults": {
+      "pass": 125,
+      "fail": 0,
+      "skipped": 1
+    },
+    "partialObservedNestedResults": {
+      "pass": 6,
+      "fail": 0,
+      "skipped": 0
+    },
+    "partialUnits": "125 top-level PASS and one top-level SKIP, plus six nested PASS; all are observations before interruption, not terminal Node totals.",
+    "terminalNodeCounts": null,
+    "terminalNodeSummaryAbsent": true,
+    "completeSuite": false,
+    "safetyApproval": false,
+    "qualification": "125 top-level PASS and one top-level SKIP were observed before the deliberate stop; six nested PASS are recorded separately. No terminal Node totals were emitted. These partial observations are neither a passing full suite nor a zero-failure claim for unexecuted cases; they are never summed with later campaigns."
+  },
+  "interruption": {
+    "receipt": {
+      "id": "stop-full13-materialization-handles-47a44629-2830-472f-933e-705a5fbbb6da/RESULT.json",
+      "sha256": "a77500d9485c631ce6fba274c54a7151c01032506037c4245a33465f0089e85f"
+    },
+    "terminalRecheck": {
+      "id": "stop-full13-materialization-handles-47a44629-2830-472f-933e-705a5fbbb6da/CIM-TERMINAL.json",
+      "sha256": "a30b346aae6de87b7234e2137c687e074b4e2aefaeaec9b414259946279f8257"
+    },
+    "classification": "INTERRUPTED_FOR_CONFIRMED_D01_MATERIALIZATION",
+    "startedAt": "2026-11-04T06:30:59.4304777Z",
+    "endedAt": "2026-11-04T06:31:02.0124389Z",
+    "verifiedOwnedSubtreeAction": true,
+    "verifiedHandleCloseObserved": true,
+    "handleExitCode": -1,
+    "wrapperWasPreserved": true,
+    "remainingOwnedIdentitiesAfter": 0,
+    "scope": "Only the identity-verified owned full13 test subtree was stopped; its wrapper and downstream coordinators received natural terminal failure receipts. No personal process ancestry or full CIM data is projected."
+  },
+  "coordinators": {
+    "preflight": {
+      "receipt": {
+        "id": "preflight-final13/result.json",
+        "sha256": "2fe2c538ade5477505bb2d5be20f4ef579fe66029084534be413d078cf921670"
+      },
+      "state": "failed",
+      "success": false,
+      "startedAt": "2026-11-04T05:38:51.435Z",
+      "endedAt": "2026-11-04T06:31:01.115Z",
+      "stepCount": 1,
+      "fullStep": {
+        "name": "full-13",
+        "code": 4294967295,
+        "signal": null,
+        "startedAt": "2026-11-04T06:01:49.951Z",
+        "endedAt": "2026-11-04T06:31:01.112Z"
+      },
+      "errorMessage": "Full13 failed 4294967295"
+    },
+    "pipeline": {
+      "receipt": {
+        "id": "pipeline-final13/result.json",
+        "sha256": "96690ae128cd19b2faa8143d295bca87559bfc2ff652e4f8c4b8818406237d2c"
+      },
+      "state": "failed",
+      "success": false,
+      "startedAt": "2026-11-04T05:39:04.273Z",
+      "endedAt": "2026-11-04T06:31:02.055Z",
+      "stepCount": 0,
+      "errorMessage": "Preflight13 failed before a passing full receipt; no later phase started"
+    },
+    "AFTER": {
+      "receipt": {
+        "id": "after-final13-20261104T053922988Z-1fdf584d-9775-46d2-b6f5-4440beebc9db/result.json",
+        "sha256": "2d25078334b34e2a5ca6bb98cf299a63656237f2a9b86c48931a166c24e30b57"
+      },
+      "state": "failed",
+      "success": false,
+      "startedAt": "2026-11-04T05:39:22.993Z",
+      "endedAt": "2026-11-04T06:31:28.098Z",
+      "stepCount": 0,
+      "countsAddedToFull": 0,
+      "errorMessage": "Pipeline13 did not complete\n+ actual - expected\n\n+ 'failed'\n- 'complete'\n"
+    }
+  },
+  "cause": {
+    "document": "MATERIALIZATION-BEFORE.json",
+    "classification": "CONFIRMED_D01_WRONG_ORIGIN_COMMIT_AFTER_MANAGED_MATERIALIZATION",
+    "confirmed": true,
+    "defectFamily": "D-01",
+    "initialObserverAPIErrorPreserved": true,
+    "subsequentCorrectAddCommitConfirmed": true,
+    "notAFifthDefectFamily": true
+  },
+  "postFullPhaseEvidenceAbsentAtProjection": [
+    {
+      "id": "infra-13",
+      "absent": true
+    },
+    {
+      "id": "broad-13",
+      "absent": true
+    },
+    {
+      "id": "typecheck-18",
+      "absent": true
+    },
+    {
+      "id": "build-17",
+      "absent": true
+    },
+    {
+      "id": "smoke-13",
+      "absent": true
+    },
+    {
+      "id": "native-base-unstage-origin-after-01",
+      "absent": true
+    },
+    {
+      "id": "base-unstage-ambiguity-after-01",
+      "absent": true
+    }
+  ],
+  "countsAddedToFinalCampaign": 0,
+  "qualification": "Historical interrupted candidate13 only. The directed8/6/17 passes do not approve full13 or any subsequent source. Exit4294967295 records the deliberate interruption and is not classified as ENV_BLOCKED. No infrastructure/broad/build/smoke/native8/AFTER result from this campaign is claimed. Existing reports and raw receipts are preserved unchanged.",
+  "privacy": "Absolute paths, fixture identities, process IDs, executable command lines, process ancestry/CIM and full logs are omitted; relative evidence IDs and SHA-256 hashes identify preserved originals."
+}

@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "scope": "Contraprova de uma variante D-01 num bundle intermediário e dirigido posterior no snapshot identificado; as execuções são separadas, sem somar contagens nem inferir aprovação universal ou publicação.",
+  "before": {
+    "id": "target-boundary-owned-rename-before-01",
+    "startedAt": "2026-11-03T18:30:13.125Z",
+    "endedAt": "2026-11-03T18:38:25.354Z",
+    "bundleSHA256": "ef728186eef9a61a81a077deffff65e1f55ca10bacb55e3c1244dc5759ef814c",
+    "sourceFingerprint": "26b63942ddd91f1a3b4914d81975c9e5f22325cd2e1f7799be4131243271a01a",
+    "scriptSHA256": "f2b559484e89d92d2afdbb9202a6e8cb0fc4227449963ce29d77a7bf25a002b6",
+    "bundleManifestSHA256": "6962d5fad3236b8bb42cc4aae62e0f55ba212685db1e1279ae8a07768dae7a31",
+    "eventsSHA256": "ef707e34ec0fb32fc56a0fc0703650f263772d36d0584856538831071cb27615",
+    "receiptSHA256": "653ca91cee944a3424b9f16190473f7b4be44c05f598d09065d668d00cca967e",
+    "platform": "win32 x64",
+    "node": "v24.14.1",
+    "officialGitVersion": "2.53.0.windows.2",
+    "durationMs": 492227.1302,
+    "observed": {
+      "fired": true,
+      "sawContext": true,
+      "ignoreInvocations": 3,
+      "targetOk": true,
+      "statusSafe": true,
+      "reopenOk": true,
+      "reopenStatusSafe": true,
+      "review": {
+        "token": "68f66dba2d5398dc84e2a63a38e86b2dda52b78e9c851efe350623d6b036dfe4",
+        "observationToken": "3ed54c6a08b3ae2acc8a6deb4c12cb91cb93df65953c23550ee6c9196fbf2042",
+        "editingTarget": "b",
+        "missing": [
+          {
+            "path": "known.txt",
+            "owner": "a"
+          }
+        ],
+        "candidates": [],
+        "externalBase": [],
+        "ambiguous": false,
+        "readOnly": true
+      },
+      "addOk": true,
+      "commitOk": true,
+      "bMovedContent": "a C disk",
+      "aIndexKnown": "a B staged",
+      "aHistoryKnown": "a A committed",
+      "physicalKnown": null,
+      "physicalMoved": "a C disk\n",
+      "preexistingUnowned": "preexisting eligible unowned\n",
+      "baselineAbsorbedMoved": true,
+      "unassignedAbsorbedMoved": true,
+      "aRefPreserved": true,
+      "aIndexRawPreserved": true,
+      "MAINRawPreserved": true,
+      "headPreserved": true,
+      "inputsStable": true,
+      "confirmedWrongOrigin": true
+    }
+  },
+  "correction": {
+    "knownOriginPresence": "Anchored across capture attempts",
+    "previousLogicalContext": "Checked before replacing editing and again before publication",
+    "unknownPreexistingAndIgnored": "Considered candidates when a known origin is missing",
+    "externalMAIN": "Preserved; explicit unstage or base acceptance required",
+    "history": "No automatic repair or transfer of already committed wrong-origin history"
+  },
+  "regressionFile": "tests/integration/security-editing-transition.test.ts",
+  "finalResults": "RESULTS.md e EVIDENCE.json registram somente execuções terminais finais; esta contraprova não é somada a elas.",
+  "directedAfter": {
+    "id": "focus-frontier-07",
+    "scope": "Cinco regressões históricas nos182inputs anteriores; não é prova do snapshot final. Os mesmos cinco nomes são novamente exigidos na FULL14.",
+    "startedAt": "2026-11-03T18:54:26.005Z",
+    "endedAt": "2026-11-03T19:12:38.825Z",
+    "exitCode": 0,
+    "signal": null,
+    "inputsStable": true,
+    "inputCount": 182,
+    "sourceFingerprint": "d869be3212c22216f58f5f237c4e70b6c29503bebadf47544b143b2d1d5038c9",
+    "counts": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "command": {
+      "executable": "node",
+      "args": [
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "--test-timeout=900000",
+        "--test-name-pattern=^D01 ",
+        "tests/integration/security-editing-transition.test.ts"
+      ]
+    },
+    "tests": [
+      "D01 target retry cannot absorb a real owned Layer rename into the preexisting frontier",
+      "D01 target retry preserves a renamed base origin and refuses a new foreign Layer claim",
+      "D01 final target publication rechecks the old logical context without assigning interval files",
+      "D01 an external rename onto a preexisting unowned path stays ambiguous until an explicit origin decision",
+      "D01 an owned rename staged natively before the first capture anchor cannot contaminate a managed base commit"
+    ],
+    "receipt": {
+      "id": "focus-frontier-07/result.json",
+      "sha256": "d3c7ff6faa56e53b8b4fa6c398234cc7de8af69d2596e03654563e8a310fafb8"
+    },
+    "inputsBefore": {
+      "id": "focus-frontier-07/inputs-before.json",
+      "sha256": "7b1c07984df31a0ff0e4c2a59bc5d540ee5d3d53e360f9dd8365574249e552a9"
+    },
+    "inputsAfter": {
+      "id": "focus-frontier-07/inputs-after.json",
+      "sha256": "7b1c07984df31a0ff0e4c2a59bc5d540ee5d3d53e360f9dd8365574249e552a9"
+    },
+    "stdout": {
+      "id": "focus-frontier-07/stdout.log",
+      "sha256": "bdfcd2bb0bde448c543747a52ba7a845f40f0a79ce1dddf56098605f030da439"
+    },
+    "stderr": {
+      "id": "focus-frontier-07/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "retentionOracle": "Todas as refs anteriores conservam seus OIDs; extras exigem journal novo próprio, Layer correspondente, checkpoint anterior exato, ref direta e objeto tree. Demais estados do domínio permanecem comparados.",
+    "notAddedToFinalTotals": true
+  }
+}

@@ -1,10 +1,16 @@
 # Limitações do Core/CLI e do workshop
 
+**Etapa 1B:** os cinco requisitos GL-01/09/15/18/22 continuam parciais; as novas recusas/diagnósticos estão no [relatório](reports/2026-11-03-security-compatibility-implementation/REPORT.md). D-01/D-02 não são limites inevitáveis e recebem correções específicas. A resolução de propriedade pode exigir revisão adicional quando há ausências e criações simultâneas; essa recusa conservadora não prova uma renomeação. Sequências externas inteiramente entre consultas não são reconstruídas. As novas verificações não criam isolamento ACID nem proteção universal do disco.
+
+As exceções de arquivos anteriores são revalidadas por status/mutações que reconciliam o destino. Consultas somente leitura não reescrevem ignore; Git direto antes da reconciliação pode usar o bloco anterior. Recriar caminho antigo ausente pode exigir consulta antes do add comum.
+
+O envelope executado deve ser consultado nos resultados desta etapa. Suporte universal de versões Git, Linux, worktrees arbitrárias, escala e recuperação ampliada não decorre dos testes Windows. Downgrade para fontes anteriores aos novos metadados de propriedade não foi certificado.
+
 **Fase de 02/11/2026:** [novos contratos e limites](IMPLEMENTATION-2026-11-02.md) distinguem edição, abertura como branch, lifecycle, resgate e migração. GL-01/GL-22 não têm proteção universal de Git direto: `protect` usa reservas opt-in em worktrees, com bypass `--ignore-other-worktrees`; o target protege preparação nativa comum antes da observação e reconcilia propriedade nos comandos/consultas, mas force e ignore de maior prioridade continuam bypass. As seções gráficas abaixo e seus resultados são do workshop anterior, não execução desta rodada.
 
 ## Estado da entrega
 
-**Core/CLI experimental, com requisitos parciais.** Esta implementação é validada por comandos headless, Git oficial e fixtures descartáveis. Os resultados, falhas, snapshots e limites estão no [relatório de 02/11/2026](reports/2026-11-02-closure/REPORT.md); suporte e execução são dimensões distintas. O build `build:core` usa `dist-core/`, com Node e Git como requisitos de runtime. Não houve abertura ou desenvolvimento do laboratório nem teste gráfico nesta rodada.
+**Core/CLI experimental, com requisitos parciais.** Esta implementação é validada por comandos headless, Git oficial e fixtures descartáveis. Os resultados atuais estão no [relatório 1B](reports/2026-11-03-security-compatibility-implementation/REPORT.md); o [relatório de 02/11/2026](reports/2026-11-02-closure/REPORT.md) conserva resultados históricos; suporte e execução são dimensões distintas. O build `build:core` usa `dist-core/`, com Node e Git como requisitos de runtime. Não houve abertura ou desenvolvimento do laboratório nem teste gráfico nesta rodada.
 
 ### Workshop legado — distribuição e execuções históricas
 
@@ -19,7 +25,7 @@ O pacote é portátil para Windows 10/11 x64, sem instalador e sem assinatura di
 - Stage/unstage por arquivo e por hunk de arquivos regulares de texto já rastreados, sem mudanças de modo. Novos/removidos, binários e patches incompatíveis exigem arquivo inteiro. Tokens obsoletos são recusados.
 - Histórico de até 50 commits por chamada, detalhes e comparação. Renomear/excluir arquivos com backups.
 - Troca de branch com base tracked limpa e Layers preservadas. Mudanças em .gitignore/.gitattributes podem exigir resolver pendências/desativar Layers antes da troca.
-- Journals, backups e recuperação conservadora. Troca interrompida pode ser concluída no destino preservando staged/unstaged. Alterações posteriores impedem sobrescrita.
+- Journals, backups e recuperação conservadora. Troca interrompida pode ser concluída quando plano, contexto, índices e arquivos continuam validáveis. Uma entrada física do workspace com BEFORE ausente e caminho atual ausente recusa com `RECOVERY_CONFLICT`/`workspace-materialization-disappeared`, inclusive sem AFTER durável ou confirmação anterior de ausência. Interrupção antes da escrita, publicação seguida de movimento externo e rollback parcial podem ser indistinguíveis. Metadados internos aprovados têm classificação estrita própria. O journal permanece pendente, pode exigir inspeção/recuperação manual e não é liberado por repetir `recover` ou resolver propriedade. Recusa tardia pode ocorrer após efeitos parciais em metadados. OID publicado não substitui validação de plano, backups, fingerprints e contexto. Veja [segurança](SAFETY.md#transações-e-recuperação); não há recuperação prometida de bytes nunca registrados.
 - Integração histórica do laboratório, preservada: desktop React/Monaco, UTF-8/EOL, temas, abas, rascunhos, diff/histórico, captura, demonstração, identidade local, branches, diagnóstico e exportação conectados ao Core.
 - Contrato preservado do laboratório: preload restrito, emissor IPC verificado, sandbox/contextIsolation ligados, Node desligado no renderer, CSP e bloqueio de navegação/rede.
 - Busca do Git no PATH e pastas convencionais do Windows, ambiente sem duplicação Path/PATH e tratamento de separadores.
@@ -62,7 +68,7 @@ Arquivos somente leitura ou bloqueados por outro processo podem impedir substitu
 
 Unicode NFC, caixa, equivalências por componentes e nomes reservados portáteis são validados; nenhuma renomeação silenciosa é feita. .gitignore, .gitattributes e .gitmodules pertencem à base. Hooks/assinatura, fsmonitor externo, split/sparse index, alternates, replace refs e filtros externos são recusados.
 
-Journals JSON e shelves legadas têm limite de 64 MiB. Backups, shelves, refs de recuperação e rascunhos não têm expurgo automático nem criptografia. Não foram medidos desempenho amplo, corte real de energia ou todos os casos de interferência externa. Locks próprios ou do Git nunca são apagados automaticamente.
+Journals JSON e shelves legadas têm limite de 64 MiB. Backups, shelves, refs de recuperação e rascunhos não têm expurgo automático nem criptografia. Não foram medidos desempenho amplo, corte real de energia ou todos os casos de interferência externa. Locks preexistentes ou cuja posse não possa ser comprovada são preservados. Locks temporários criados e comprovadamente pertencentes à operação podem ser publicados ou removidos pelo protocolo descrito em [segurança](SAFETY.md).
 
 ## Histórico
 

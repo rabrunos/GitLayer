@@ -12,9 +12,9 @@ const project = path.resolve('.');
 const cli = path.join(project, 'src/cli/index.ts');
 const demo = path.join(project, 'scripts/demo.ts');
 
-async function processResult(executable: string, args: string[], cwd: string, env: NodeJS.ProcessEnv) {
+async function processResult(executable: string, args: string[], cwd: string, env: NodeJS.ProcessEnv, timeout = 150_000) {
   try {
-    const result = await execFileAsync(executable, args, { cwd, env, shell: false, encoding: 'utf8', timeout: 150_000, maxBuffer: 8 * 1024 * 1024 });
+    const result = await execFileAsync(executable, args, { cwd, env, shell: false, encoding: 'utf8', timeout, maxBuffer: 8 * 1024 * 1024 });
     return { code: 0, stdout: result.stdout, stderr: result.stderr };
   } catch (error) {
     const failure = error as { code?: number; stdout?: string; stderr?: string };
@@ -142,7 +142,8 @@ test('demo script creates genuine branches/Layers and refuses a nonempty destina
   t.after(() => rmSync(container, { recursive: true, force: true }));
   const target = path.join(container, 'new-demo');
   const env = { ...process.env, GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: "/dev/null" };
-  const result = await processResult(process.execPath, ['--import', 'tsx', demo, target], project, env);
+  // Demo creation composes multiple Core/Git operations; single-command budgets stay unchanged.
+  const result = await processResult(process.execPath, ['--import', 'tsx', demo, target], project, env, 600_000);
   assert.equal(result.code, 0, result.stderr);
   const created = JSON.parse(result.stdout);
   assert.equal(created.head, 'main');

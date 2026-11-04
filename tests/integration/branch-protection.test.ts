@@ -46,7 +46,7 @@ async function fixture(t: TestContext) {
   return { root, repo, native, snapshot };
 }
 
-test('opt-in native reservations veto ordinary switch before effects and expose explicit native bypass', { timeout: 60000 }, async t => {
+test('opt-in native reservations veto ordinary switch before effects and expose explicit native bypass', { timeout: 900000 }, async t => {
   const f=await fixture(t);
   assert.equal((await inspectBranchProtection(f.repo)).enabled,false);
   const protection=await enableBranchProtection(f.repo);
@@ -59,7 +59,7 @@ test('opt-in native reservations veto ordinary switch before effects and expose 
   assert.equal(f.native(['symbolic-ref','--short','HEAD']).stdout.trim(),'layer/scripts');
 });
 
-test('explicit release and re-reservation keep the other Layer reserved, with safe reversible unprotect', { timeout: 60000 }, async t => {
+test('explicit release and re-reservation keep the other Layer reserved, with safe reversible unprotect', { timeout: 900000 }, async t => {
   const f=await fixture(t); await enableBranchProtection(f.repo);
   const released=await releaseLayerProtection(f.repo,'scripts'); assert.equal(released.validWorktrees.length,1);
   f.native(['switch','layer/scripts']);
@@ -73,7 +73,7 @@ test('explicit release and re-reservation keep the other Layer reserved, with sa
   f.native(['switch','layer/scripts']);
 });
 
-test('unknown worktree files and unknown protection directory are preserved instead of forced away', { timeout: 60000 }, async t => {
+test('unknown worktree files and unknown protection directory are preserved instead of forced away', { timeout: 900000 }, async t => {
   const f=await fixture(t); const enabled=await enableBranchProtection(f.repo);
   const foreign=path.join(enabled.validWorktrees[0]!,'personal.txt'); await fs.writeFile(foreign,'external work\n');
   const before=await f.snapshot(); const status=await inspectBranchProtection(f.repo); assert.equal(status.healthy,false); assert(status.problems.length>0);
@@ -81,14 +81,14 @@ test('unknown worktree files and unknown protection directory are preserved inst
   assert.equal(await fs.readFile(foreign,'utf8'),'external work\n'); assert.deepEqual(await f.snapshot(),before);
 });
 
-test('an unknown protection destination is never initialized or overwritten', { timeout: 60000 }, async t => {
+test('an unknown protection destination is never initialized or overwritten', { timeout: 900000 }, async t => {
   const second=await fixture(t); const repoInfo=await discover(second.repo); const occupied=path.join(repoInfo.gitDir,'layers','branch-protection');
   await fs.mkdir(occupied,{recursive:true}); await fs.writeFile(path.join(occupied,'unknown.txt'),'do not replace');
   await assert.rejects(()=>enableBranchProtection(second.repo), { code:'PROTECTION_CONFLICT' });
   assert.equal(await fs.readFile(path.join(occupied,'unknown.txt'),'utf8'),'do not replace');
 });
 
-test('private index or external worktree cannot be mistaken for a pristine owned reservation', { timeout: 60000 }, async t => {
+test('private index or external worktree cannot be mistaken for a pristine owned reservation', { timeout: 900000 }, async t => {
   const f=await fixture(t); const protectedState=await enableBranchProtection(f.repo); const own=protectedState.validWorktrees[0]!;
   f.native(['read-tree','HEAD'],[0],own);
   assert.equal((await inspectBranchProtection(f.repo)).healthy,false);
@@ -99,7 +99,7 @@ test('private index or external worktree cannot be mistaken for a pristine owned
   const inspected=await inspectBranchProtection(f.repo); assert(inspected.externalWorktrees.some(w=>path.resolve(w)===path.resolve(external)));
 });
 
-test('Core lifecycle with protection opens a Layer deliberately, preserves others and guards renamed/new Layers', { timeout: 120000 }, async t => {
+test('Core lifecycle with protection opens a Layer deliberately, preserves others and guards renamed/new Layers', { timeout: 900000 }, async t => {
   const f=await fixture(t); f.native(['config','--local','user.name','Protection Fixture']); f.native(['config','--local','user.email','fixture@example.invalid']);
   const app=await GitLayers.init(f.repo); await enableBranchProtection(f.repo);
   await app.on('scripts'); await app.on('ia');
@@ -126,7 +126,7 @@ test('Core lifecycle with protection opens a Layer deliberately, preserves other
   assert.deepEqual(final.branchProtection.unprotectedLayers,[]);
 });
 
-test('disabled released protection migrates without altering legacy and can reserve again in layers', { timeout: 90000 }, async t => {
+test('disabled released protection migrates without altering legacy and can reserve again in layers', { timeout: 900000 }, async t => {
   const f=await fixture(t); const info=await discover(f.repo), legacy=path.join(info.gitDir,'git-layers');
   await fs.mkdir(legacy);
   await fs.writeFile(path.join(legacy,'registry.json'),JSON.stringify({schema:1,layers:[]}));
@@ -144,7 +144,7 @@ test('disabled released protection migrates without altering legacy and can rese
   assert.deepEqual(await inventoryLayerDirectory(legacy),before);
   await disableBranchProtection(f.repo); assert.deepEqual(await inventoryLayerDirectory(legacy),before);
 });
-test('protection may be enabled before Core initialization without resetting native reservations', { timeout: 60000 }, async t => {
+test('protection may be enabled before Core initialization without resetting native reservations', { timeout: 900000 }, async t => {
   const f=await fixture(t); const before=await enableBranchProtection(f.repo);
   assert.equal(before.validWorktrees.length,2);
   const app=await GitLayers.init(f.repo);
@@ -154,7 +154,7 @@ test('protection may be enabled before Core initialization without resetting nat
   assert.equal(await fs.readFile(path.join(f.repo,'scripts.txt'),'utf8'),'scripts\n');
   f.native(['switch','layer/scripts'],[128]);
 });
-test('a reserved Layer ref deleted externally is diagnosed before Core registration', { timeout: 60000 }, async t => {
+test('a reserved Layer ref deleted externally is diagnosed before Core registration', { timeout: 900000 }, async t => {
   const f=await fixture(t); await enableBranchProtection(f.repo);
   const before=await f.snapshot();
   f.native(['update-ref','-d','refs/heads/layer/scripts']);

@@ -1,0 +1,581 @@
+diff --git a/src/core/index.ts b/src/core/index.ts
+index dc7209cce8ca1480cf6bd20ddf6ccd7efb824dcd..3cf03b6d7413b610f6c230601b909676c7b265d4 100644
+--- a/src/core/index.ts
++++ b/src/core/index.ts
+@@ -10,7 +10,7 @@ import { resolveLayerDirectory } from './layout.js';
+ import { ignoredWithoutManagedExcludes } from './ignore.js';
+ import { doctorRepository, exportRepositoryRecovery } from './rescue.js';
+ import { comparableFileMode, gitPath } from './platform.js';
+-import { validateRecovery, recoveryBeforeWorkspace, recoveryWorkspaceImages } from './recovery.js';
++import { validateRecovery } from './recovery.js';
+ import { validOwnershipMetadata, type EditingOwnership, type WorkspaceOwnership } from './ownership-state.js';
+ import { captureEditingBoundary } from './editing-boundary.js';
+ import { stageIndex } from './index-stage.js';
+@@ -145,17 +145,8 @@ export class GitLayers {
+     return withLock(this.dir,async()=>{await this.guard(requireCommit,true);return this.mutateLocked(kind,fn,options);});
+   }
+   /** Only callers already holding the coordinator lock and a fresh guard may enter. */
+-  private async mutateLocked<T>(kind:string,fn:()=>Promise<T>,options:{reconcile?:boolean;revokedAcknowledgements?:string[]}={}):Promise<T>{
+-    this.tx=await Transaction.begin(this.dir,kind,{head:this.repo.head,branch:this.repo.branch});this.recoveryFiles=[];this.tx.data.recovery={files:this.recoveryFiles,beforeRegistry:structuredClone(this.registry),beforeWorkspace:structuredClone(this.workspace)};
+-    if(options.revokedAcknowledgements?.length){
+-      const previous=this.tx.data.recovery.beforeWorkspace.acknowledgedMissing??[],revoked=[...options.revokedAcknowledgements];
+-      if(revoked.some(p=>!previous.includes(p))||new Set(revoked.map(collisionKey)).size!==revoked.length)throw new LabError('RECOVERY_INVALID','Revogação conhecida não corresponde ao contexto anterior.');
+-      this.tx.data.recovery.acknowledgements={revoked,pending:[]};
+-      // A crash before this backup/prepared is complete remains an invalid pending
+-      // journal: it must never restore or complete an unrecorded observation.
+-      await this.track(path.join(this.dir,'workspace.json'));
+-    }
+-    await this.tx.record('prepared');
++  private async mutateLocked<T>(kind:string,fn:()=>Promise<T>,options:{reconcile?:boolean}={}):Promise<T>{
++    this.tx=await Transaction.begin(this.dir,kind,{head:this.repo.head,branch:this.repo.branch});this.recoveryFiles=[];this.tx.data.recovery={files:this.recoveryFiles,beforeRegistry:structuredClone(this.registry),beforeWorkspace:structuredClone(this.workspace)};await this.tx.record('prepared');
+       try{if(options.reconcile!==false)await this.syncEditingInternal();const value=await fn();if(this.publicationCheck)await this.publicationCheck();await this.save();if(kind==='rename-layer')failpoint('after-layer-rename-metadata');await this.tx.finish();return value;}catch(e){await this.tx.fail(e);if(!(e instanceof LabError&&e.code==='INJECTED_FAILURE')){try{await this.rollback(this.tx.data);await this.tx.finish();await this.refresh();for(const l of this.registry.layers){await this.checkpoint(l);if(this.workspace.branchLayer!==l.name)await this.reserveProtection(l.name);}}catch{/* keep journal and bytes, caller sees original error */}}throw e;}finally{this.tx=undefined;this.recoveryFiles=[];this.publicationCheck=undefined;}
+   }
+   /** Stable no-target queries observe ownership without publishing a no-op transaction. */
+@@ -176,7 +167,7 @@ export class GitLayers {
+           await this.mutateLocked('editing-sync',async()=>{
+             this.workspace.acknowledgedMissing=(this.workspace.acknowledgedMissing??[]).filter(p=>!observed.has(p));
+             return {revokedAcknowledgements:revoked};
+-          },{reconcile:false,revokedAcknowledgements:revoked});
++          },{reconcile:false});
+           continue;
+         }
+         // Reuse this very observation, so a second precheck cannot lose its meaning.
+@@ -187,7 +178,7 @@ export class GitLayers {
+     });
+   }
+   private async rollback(data:any){
+-    await validateRecovery(this.repo,this.dir,data);const workspaceImages=await recoveryWorkspaceImages(this.repo,this.dir,data),derived=workspaceImages.find(image=>image.kind==='rollback');await this.rollbackRefs(data);
++    await validateRecovery(this.repo,this.dir,data);await this.rollbackRefs(data);
+     if(data.recovery?.commit){const c=data.recovery.commit;const current=await gitText(this.repo.root,['rev-parse','--verify',c.ref]);if(current!==c.old)throw new LabError('RECOVERY_REQUIRED','Uma referência já avançou; finalize a recuperação pelo commit existente.');}
+     if(data.recovery?.switch){const s=data.recovery.switch;const r=await discover(this.repo.root);if(r.branch!==s.from)throw new LabError('RECOVERY_REQUIRED','A branch já mudou; recuperação exige inspeção.');}
+     for (const directory of [...(data.recovery.directories ?? [])].sort((a, b) => a.path.length - b.path.length)) {
+@@ -197,10 +188,9 @@ export class GitLayers {
+       await fs.mkdir(full, { recursive: true, mode: directory.mode });
+     }
+     for(const f of [...(data.recovery?.files??[])].reverse()){
+-      const current=await fingerprint(f.path),image=derived?.path===f.path?derived:undefined,desired=image?.fingerprint??f.before;
+-      if(sameFingerprint(current,desired))continue;
+-      if(!sameFingerprint(current,f.before)&&(!f.after||!sameFingerprint(current,f.after))&&!workspaceImages.some(entry=>entry.path===f.path&&sameFingerprint(current,entry.fingerprint)))throw new LabError('RECOVERY_CONFLICT',`Mudança posterior detectada: ${f.path}. Exporte os backups.`);
+-      if(f.backup){if(!sameFingerprint(await fingerprint(f.backup),f.before))throw new LabError('RECOVERY_CONFLICT',`Backup alterado: ${f.backup}`);await fs.mkdir(path.dirname(f.path),{recursive:true});const temporary=`${f.path}.recovery-${randomUUID()}`;const handle=await fs.open(temporary,'wx',f.before.mode);try{await handle.writeFile(image?.bytes??await fs.readFile(f.backup));await handle.chmod(desired.mode);await handle.sync();}finally{await handle.close();}if(!sameFingerprint(await fingerprint(f.path),current)){await fs.unlink(temporary);throw new LabError('RECOVERY_CONFLICT',`Arquivo mudou durante a recuperação: ${f.path}`);}await fs.rename(temporary,f.path);}else if(current.exists)await fs.unlink(f.path);
++      const current=await fingerprint(f.path);if(sameFingerprint(current,f.before))continue;
++      if(!f.after||!sameFingerprint(current,f.after))throw new LabError('RECOVERY_CONFLICT',`Mudança posterior detectada: ${f.path}. Exporte os backups.`);
++      if(f.backup){if(!sameFingerprint(await fingerprint(f.backup),f.before))throw new LabError('RECOVERY_CONFLICT',`Backup alterado: ${f.backup}`);await fs.mkdir(path.dirname(f.path),{recursive:true});const temporary=`${f.path}.recovery-${randomUUID()}`;const handle=await fs.open(temporary,'wx',f.before.mode);try{await handle.writeFile(await fs.readFile(f.backup));await handle.chmod(f.before.mode);await handle.sync();}finally{await handle.close();}if(!sameFingerprint(await fingerprint(f.path),current)){await fs.unlink(temporary);throw new LabError('RECOVERY_CONFLICT',`Arquivo mudou durante a recuperação: ${f.path}`);}await fs.rename(temporary,f.path);}else if(current.exists)await fs.unlink(f.path);
+     }
+   }
+   async list(){await this.load();const known=structuredClone(this.registry.layers);for(const name of await this.candidates()){const ref='refs/heads/layer/'+name;known.push({id:'',name,ref,oid:await gitText(this.repo.root,['rev-parse','--verify',ref]),indexBase:'',state:'inactive',reservations:[]});}for(const remote of await this.remoteCandidates())known.push({id:'',...remote,indexBase:'',state:'inactive',reservations:[]});return known;}
+@@ -388,35 +378,9 @@ export class GitLayers {
+     if(editing.acceptedBase)editing.acceptedBase=editing.acceptedBase.filter(p=>!retired.has(p));
+     if(editing.unassigned)editing.unassigned=editing.unassigned.filter(p=>!retired.has(p));
+   }
+-  /** Record uncertainty before any walk that may remove acknowledged authority. */
+-  private async beginAcknowledgementObservation():Promise<string[]>{
+-    const current=this.workspace.acknowledgedMissing??[];if(!current.length)return [];
+-    if(!this.tx)throw new LabError('RECOVERY_REQUIRED','Observação de confirmações exige journal recuperável.');
+-    const previous=this.tx.data.recovery.beforeWorkspace.acknowledgedMissing??[];
+-    if(current.some(p=>!previous.includes(p)))throw new LabError('RECOVERY_INVALID','Confirmação criada nesta operação ainda não pode ser observada para revogação.');
+-    await this.track(path.join(this.dir,'workspace.json'));
+-    const old=this.tx.data.recovery.acknowledgements??{revoked:[],pending:[]};
+-    const revoked=[...old.revoked] as string[],known=new Set(revoked);
+-    const pending=[...new Set<string>([...old.pending,...current].filter(p=>!known.has(p)))];
+-    this.tx.data.recovery.acknowledgements={revoked,pending};
+-    await this.tx.record('acknowledgement-observation-pending');
+-    return pending;
+-  }
+-  /** Publish the observed union durably before changing authority in memory. */
+-  private async completeAcknowledgementObservation(present:Set<string>){
+-    const old=this.tx?.data.recovery.acknowledgements;if(!old)return;
+-    const revoked=[...new Set<string>([...old.revoked,...old.pending.filter((p:string)=>present.has(p))])];
+-    this.tx!.data.recovery.acknowledgements={revoked,pending:[]};
+-    await this.tx!.record('acknowledgement-observation-completed');
+-    const removed=new Set(revoked);if(this.workspace.acknowledgedMissing)this.workspace.acknowledgedMissing=this.workspace.acknowledgedMissing.filter(p=>!removed.has(p));
+-  }
+-  private async observeAcknowledgementsFromDisk(){
+-    const pending=await this.beginAcknowledgementObservation();if(!pending.length)return;
+-    await this.completeAcknowledgementObservation(new Set(await walk(this.repo.root)));
+-  }
+   private async syncEditingInternal(){
+     await this.retainAcceptedBase();
+-    await this.observeAcknowledgementsFromDisk();
++    if(this.workspace.acknowledgedMissing?.length){const present=new Set(await walk(this.repo.root));this.workspace.acknowledgedMissing=this.workspace.acknowledgedMissing.filter(p=>!present.has(p));}
+     const editing=this.workspace.editing,assigned=await this.editingCandidates();if(!editing)return {assigned};
+     const l=this.layer(editing.layer,true);
+     if(assigned.length){l.reservations=[...new Set([...l.reservations,...assigned])];editing.assigned=[...new Set([...editing.assigned??[],...assigned])];await this.owners();}
+@@ -428,7 +392,7 @@ export class GitLayers {
+     if(current!==expected){await this.writeBytes(this.repo.exclude,expected,undefined,before);await this.verifyExcludes();}
+     else if(!sameFingerprint(before,await fingerprint(this.repo.exclude)))throw new LabError('EXTERNAL_EDIT','Regras de exclusão mudaram durante a reconciliação; texto externo preservado.');
+     this.workspace.acknowledgedMissing=this.workspace.acknowledgedMissing??[];
+-    await this.observeAcknowledgementsFromDisk();
++    const disk=new Set(await walk(this.repo.root));this.workspace.acknowledgedMissing=this.workspace.acknowledgedMissing.filter(p=>!disk.has(p));
+     return {assigned};
+   }
+   /** Read-only transition/claim check: never assigns interval creations to the old target. */
+@@ -513,11 +477,9 @@ export class GitLayers {
+     if(!sameFingerprint(initialIndex,await fingerprint(this.repo.index)))throw new LabError('EXTERNAL_EDIT','O índice principal mudou durante a validação do unstage.');
+     // Native staging identifies a destination, never the source of an ambiguous rename.
+     // Observe before restore and retain only unambiguous or explicitly accepted base origins.
+-    await this.beginAcknowledgementObservation();
+     const context=structuredClone(this.workspace),observation=await this.editingObservation(context,true);
+     const present=new Set(context.editing||this.registry.layers.some(l=>l.state==='active')?observation.disk:await walk(this.repo.root));
+-    await this.completeAcknowledgementObservation(present);
+-    if(context.acknowledgedMissing)context.acknowledgedMissing=[...this.workspace.acknowledgedMissing??[]];
++    if(context.acknowledgedMissing?.length){context.acknowledgedMissing=context.acknowledgedMissing.filter(p=>!present.has(p));this.workspace.acknowledgedMissing=[...context.acknowledgedMissing];}
+     const selectedNew=new Set(files.filter(p=>indexed.has(p)&&!committed.has(p)));
+     const missingSelected=observation.missing.filter(entry=>selectedNew.has(entry.path));
+     if(missingSelected.length)throw new LabError('OWNERSHIP_AMBIGUOUS','O staging é a última origem conhecida de caminhos ausentes. Resolva a renomeação ou exclusão com ownership-review antes do unstage.',{missing:missingSelected,candidates:observation.candidates});
+@@ -614,7 +576,7 @@ export class GitLayers {
+       const retainedLayers=[...this.registry.layers,...pending.flatMap(data=>data.recovery.beforeRegistry.layers as Layer[])];
+       const plannedIndices=pending.flatMap(data=>data.recovery.files.filter((file:any)=>/^indexes\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.index$/u.test(path.relative(this.dir,file.path).split(path.sep).join('/'))).map((file:any)=>file.path as string));
+       for(const index of new Set([this.repo.index,...retainedLayers.map(l=>this.privateIndex(l)),...plannedIndices]))if(await exists(index+'.lock'))throw new LabError('LOCKED','Native index lock present; recovery preserved every journal and index.',{path:index+'.lock'});
+-      const recovered=[];for(const data of pending){const journal=path.join(this.dir,'transactions',data.id,'journal.json');await validateRecovery(this.repo,this.dir,data);const workspaceImages=await recoveryWorkspaceImages(this.repo,this.dir,data);for(const f of data.recovery.files){const cur=await fingerprint(f.path);if(!sameFingerprint(cur,f.before)&&(!f.after||!sameFingerprint(cur,f.after))&&!workspaceImages.some(image=>image.path===f.path&&sameFingerprint(cur,image.fingerprint)))throw new LabError('RECOVERY_CONFLICT',`Mudança posterior detectada: ${f.path}`);}const commit=data.recovery?.commit;if(commit){const current=await gitText(this.repo.root,['rev-parse','--verify',commit.ref]);if(current===commit.new){if(commit.base){this.repo=await discover(this.repo.root);if(this.repo.branch!==data.recovery.beforeWorkspace.branch||this.repo.head!==commit.new)throw new LabError('RECOVERY_CONFLICT','HEAD não corresponde ao commit interrompido.');this.registry=structuredClone(data.recovery.beforeRegistry);this.workspace={...recoveryBeforeWorkspace(data),schema:1,head:this.repo.head,branch:this.repo.branch};if(this.workspace.branchLayer){const l=this.layer(this.workspace.branchLayer);l.oid=current;l.indexBase=current;const committed=new Set((await treeEntries(this.repo.root,current)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!committed.has(p));}}else{this.registry=data.recovery.beforeRegistry;if(data.recovery.acknowledgements!==undefined)this.workspace=recoveryBeforeWorkspace(data);const l=this.registry.layers.find(l=>l.id===commit.layerId);if(!l)throw new LabError('RECOVERY_CONFLICT','Layer do commit não encontrada.');l.oid=current;l.indexBase=current;const committed=new Set((await treeEntries(this.repo.root,current)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!committed.has(p));}this.workspace=recoveryBeforeWorkspace(data,this.workspace);await this.save();await this.updateExcludes();}else if(current===commit.old)await this.rollback(data);else throw new LabError('RECOVERY_CONFLICT','Ref mudou após a falha; exporte os backups.');
++      const recovered=[];for(const data of pending){const journal=path.join(this.dir,'transactions',data.id,'journal.json');await validateRecovery(this.repo,this.dir,data);for(const f of data.recovery.files){const cur=await fingerprint(f.path);if(!sameFingerprint(cur,f.before)&&(!f.after||!sameFingerprint(cur,f.after)))throw new LabError('RECOVERY_CONFLICT',`Mudança posterior detectada: ${f.path}`);}const commit=data.recovery?.commit;if(commit){const current=await gitText(this.repo.root,['rev-parse','--verify',commit.ref]);if(current===commit.new){if(commit.base){this.repo=await discover(this.repo.root);if(this.repo.branch!==data.recovery.beforeWorkspace.branch||this.repo.head!==commit.new)throw new LabError('RECOVERY_CONFLICT','HEAD não corresponde ao commit interrompido.');this.registry=structuredClone(data.recovery.beforeRegistry);this.workspace={...structuredClone(data.recovery.beforeWorkspace),schema:1,head:this.repo.head,branch:this.repo.branch};if(this.workspace.branchLayer){const l=this.layer(this.workspace.branchLayer);l.oid=current;l.indexBase=current;const committed=new Set((await treeEntries(this.repo.root,current)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!committed.has(p));}}else{this.registry=data.recovery.beforeRegistry;const l=this.registry.layers.find(l=>l.id===commit.layerId);if(!l)throw new LabError('RECOVERY_CONFLICT','Layer do commit não encontrada.');l.oid=current;l.indexBase=current;const committed=new Set((await treeEntries(this.repo.root,current)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!committed.has(p));}await this.save();await this.updateExcludes();}else if(current===commit.old)await this.rollback(data);else throw new LabError('RECOVERY_CONFLICT','Ref mudou após a falha; exporte os backups.');
+       }else if(data.recovery?.switch){
+         const sw=data.recovery.switch;const actual=await discover(this.repo.root);
+         if(actual.branch===sw.from&&actual.head===sw.fromOid)await this.rollback(data);
+@@ -634,7 +596,7 @@ export class GitLayers {
+           if(sw.openingName){const opened=this.layer(sw.openingName);opened.state='inactive';this.workspace={schema:1,head:actual.head,branch:actual.branch,branchLayer:sw.openingName,...(sw.openingWasActive?{resumeLayer:sw.openingName}:{}),returnBranch:sw.from};}
+           else this.workspace={schema:1,head:actual.head,branch:actual.branch};
+           if(sw.resumeName){const resumed=this.layer(sw.resumeName);resumed.state='active';resumed.oid=sw.fromOid;resumed.indexBase=sw.fromOid;}
+-          this.workspace=recoveryBeforeWorkspace(data,this.workspace);await this.owners();await this.updateExcludes();
++          await this.owners();await this.updateExcludes();
+           for(const f of sw.snapshots){if(f.bytes===null)continue;const full=await safePath(this.repo.root,f.path);const planned={exists:true,hash:hash(Buffer.from(f.bytes,'base64')),mode:f.mode};const current=await fingerprint(full);if(sameFingerprint(current,planned))continue;if(current.exists)throw new LabError('RECOVERY_CONFLICT',`Destino mudou: ${f.path}`);await this.writeBytes(full,Buffer.from(f.bytes,'base64'),f.mode,current);const plan=data.recovery.files.find((x:any)=>x.path===full);plan.after=await fingerprint(full);await atomicJSON(journal,data);}
+           await this.save();
+         }else throw new LabError('RECOVERY_CONFLICT','HEAD divergiu da troca interrompida; exporte os backups.');
+diff --git a/src/core/recovery.ts b/src/core/recovery.ts
+index 6b60e7c95930248663a1cd637431ab11f8447696..451caa8b4b33d7b04e7cc3f41b4cc04a72564a81 100644
+--- a/src/core/recovery.ts
++++ b/src/core/recovery.ts
+@@ -1,11 +1,9 @@
+ import path from 'node:path';
+-import { lstat, readFile } from 'node:fs/promises';
+-import { createHash } from 'node:crypto';
++import { lstat } from 'node:fs/promises';
+ import { LabError } from './errors.js';
+ import { validOwnershipMetadata } from './ownership-state.js';
+ import { validateLayerRenameRecovery } from './layer-rename.js';
+-import { git, treeEntries } from './git.js';
+-import { comparableFileMode } from './platform.js';
++import { git } from './git.js';
+ import { collisionKey, safePath, validatePath } from './paths.js';
+ import { fingerprint, sameFingerprint, type Fingerprint } from './storage.js';
+ 
+@@ -31,48 +29,6 @@ async function branch(repo: RecoveryRepo, value: unknown): Promise<string> {
+   return value as string;
+ }
+ 
+-
+-interface RecoveryWorkspaceImage { kind:'rollback'|'forward-base'|'forward-layer'; path:string; bytes:Buffer; fingerprint:Fingerprint }
+-
+-/** The original before/backup remain facts. This reducer only removes authority. */
+-export function recoveryBeforeWorkspace(data:any,workspace:any=data.recovery.beforeWorkspace):any {
+-  const result=structuredClone(workspace),intent=data.recovery.acknowledgements;
+-  if(intent){const removed=new Set<string>([...intent.revoked,...intent.pending]);if(result.acknowledgedMissing)result.acknowledgedMissing=result.acknowledgedMissing.filter((p:string)=>!removed.has(p));}
+-  return result;
+-}
+-
+-/** Call only after the complete recovery plan was validated. No arbitrary hash is trusted. */
+-export async function recoveryWorkspaceImages(repo:RecoveryRepo,directory:string,data:any):Promise<RecoveryWorkspaceImage[]> {
+-  const intent=data.recovery.acknowledgements;
+-  if(!intent)return [];
+-  const file=path.join(path.resolve(directory),'workspace.json');
+-  const entry=data.recovery.files.find((f:any)=>f.path===file);
+-  if(!entry?.before.exists||!entry.backup)invalid('Revogação de confirmações sem backup original do workspace.');
+-  const original=await readFile(entry.backup);
+-  if(createHash('sha256').update(original).digest('hex')!==entry.before.hash)throw new LabError('RECOVERY_CONFLICT','Backup do workspace mudou durante a derivação.');
+-  let workspace:any;try{workspace=JSON.parse(original.toString('utf8'));}catch{invalid('Backup do workspace não contém JSON válido.');}
+-  if(!object(workspace)||!validOwnershipMetadata(workspace)||JSON.stringify(workspace.acknowledgedMissing??[])!==JSON.stringify(data.recovery.beforeWorkspace.acknowledgedMissing??[]))invalid('Confirmações do backup não correspondem ao workspace anterior.');
+-  const removed=[...intent.revoked,...intent.pending];
+-  const image=(kind:RecoveryWorkspaceImage['kind'],value:any,mode:number):RecoveryWorkspaceImage=>{const bytes=Buffer.from(JSON.stringify(value,null,2)+'\n','utf8');return {kind,path:file,bytes,fingerprint:{exists:true,hash:createHash('sha256').update(bytes).digest('hex'),mode}};};
+-  const images:RecoveryWorkspaceImage[]=removed.length?[image('rollback',recoveryBeforeWorkspace(data,workspace),entry.before.mode)]:[];
+-  const commit=data.recovery.commit;
+-  if(commit){
+-    const base=commit.base===true,previous=data.recovery.beforeWorkspace;
+-    if(!base){
+-      const head=await git(repo.root,['rev-parse','--verify','HEAD'],{ok:[0,128]}),branch=await git(repo.root,['symbolic-ref','--quiet','--short','HEAD'],{ok:[0,1]});
+-      if(head.code!==0||branch.code!==0||head.stdout.toString().trim()!==previous.head||branch.stdout.toString().trim()!==previous.branch)throw new LabError('RECOVERY_CONFLICT','HEAD mudou após o commit da Layer interrompido; estado e journal preservados.');
+-    }
+-    // Only the new protocol reconstructs Layer metadata from its exact before.
+-    // Ordinary creations can be reconciled again after conservative recovery.
+-    const forward=base?{...recoveryBeforeWorkspace(data),schema:1,head:commit.new,branch:previous.branch}:recoveryBeforeWorkspace(data);
+-    const normalizationHead=base?commit.new:previous.head;
+-    // Exactly the ownership normalization performed by save() on this HEAD tree.
+-    if(forward.baseReservations?.length){const committed=new Set((await treeEntries(repo.root,normalizationHead)).map(e=>e.path));if(forward.editing)forward.editing.acceptedBase=[...new Set([...forward.editing.acceptedBase??[],...forward.baseReservations.filter((p:string)=>committed.has(p))])];forward.baseReservations=forward.baseReservations.filter((p:string)=>!committed.has(p));}
+-    images.push(image(base?'forward-base':'forward-layer',forward,comparableFileMode(0o600)));
+-  }
+-  return images;
+-}
+-
+ /**
+  * Recovery is a write boundary: a JSON journal cannot authorize arbitrary paths.
+  * Validate the complete plan before restoring even its first file.
+@@ -109,17 +65,6 @@ export async function validateRecovery(repo: RecoveryRepo, directory: string, da
+     const paths=(value:any):string[]=>{if(!Array.isArray(value)||value.some(path=>typeof path!=='string')||new Set(value).size!==value.length)invalid('Baseline de edição inválida ou duplicada.');for(const entry of value){try{validatePath(entry);}catch{invalid('Caminho inválido na baseline de edição.');}}return value;};
+     const before=paths(editing.before);if(editing.unassigned!==undefined&&paths(editing.unassigned).some(path=>!before.includes(path)))invalid('Exceção de edição fora da baseline observada.');
+   }
+-  const acknowledgements=recovery.acknowledgements;
+-  if(acknowledgements!==undefined){
+-    if(!object(acknowledgements)||Object.keys(acknowledgements).sort().join(',')!=='pending,revoked')invalid('Plano de revogação de confirmações inválido.');
+-    const previous=beforeWorkspace.acknowledgedMissing??[];
+-    for(const key of ['revoked','pending']){
+-      const paths=acknowledgements[key];if(!Array.isArray(paths))invalid('Lista de revogação inválida.');
+-      for(const p of paths){if(typeof p!=='string'||!previous.includes(p))invalid('Revogação fora das confirmações anteriores.');try{validatePath(p);}catch{invalid('Caminho de revogação inválido.');}}
+-    }
+-    const all=[...acknowledgements.revoked,...acknowledgements.pending];
+-    if(new Set(all.map(collisionKey)).size!==all.length)invalid('Revogações duplicadas ou conflitantes por caixa/Unicode.');
+-  }
+   if (!Array.isArray(recovery.files) || !Array.isArray(data.backups)) invalid('Lista de arquivos/backups de recuperação ausente.');
+   const journalDir = path.join(dir, 'transactions', data.id);
+   const backupDir = path.join(journalDir, 'backups');
+@@ -192,5 +137,4 @@ export async function validateRecovery(repo: RecoveryRepo, directory: string, da
+     if(planned.from.startsWith('layer/')&&beforeWorkspace.branchLayer!==planned.from.slice(6))invalid('Saída Layer como branch sem estado anterior correspondente.');
+     if(planned.resumeName&&planned.resumeName!==beforeWorkspace.branchLayer)invalid('Retomada de Layer inválida.');
+   }
+-  if(acknowledgements!==undefined)await recoveryWorkspaceImages(repo,dir,data);
+ }
+diff --git a/tests/integration/security-ownership.test.ts b/tests/integration/security-ownership.test.ts
+index 26bfe600ef53e8e39231e91bd4193278473a9eca..f67b567a62d05d88e7deb5ab3f005906eaa1409f 100644
+--- a/tests/integration/security-ownership.test.ts
++++ b/tests/integration/security-ownership.test.ts
+@@ -439,343 +439,3 @@ test('D01 no-target observed reappearance survives an external rename before ack
+   await f.app.resolveOwnership({ token: review.token, renames: [{ from: 'a.txt', to: 'again.txt' }] }); assert.deepEqual(f.domain(), expectedDomain); assert.equal((await f.app.files()).find(file => file.path === 'again.txt')!.owner, 'a'); assert.equal((await f.app.status()).safe, true);
+   f.record('observed revocation remains durable through restart and explicit rename recovery', { writer, journal: newJournals[0], workspace: workspace(), domain: f.domain() });
+ });
+-
+-// Regressions for monotonic acknowledgement revocation and recovery.
+-// The preceding source is preserved byte for byte; fault injection is fixture-local.
+-type AckFixture = Awaited<ReturnType<typeof fixture>>;
+-type AckRaw = { sha256: string; bytes: number; mode: number; base64: string };
+-function ackRaw(file: string): AckRaw {
+-  const stat = fs.lstatSync(file); assert(stat.isFile() && !stat.isSymbolicLink() && stat.nlink === 1);
+-  const bytes = fs.readFileSync(file); return { sha256: hash(bytes), bytes: bytes.length, mode: stat.mode & 0o777, base64: bytes.toString('base64') };
+-}
+-function ackWorkspace(f: AckFixture): any { return JSON.parse(fs.readFileSync(path.join(f.app.dir, 'workspace.json'), 'utf8')); }
+-function ackJournals(f: AckFixture): Map<string, any> {
+-  const directory = path.join(f.app.dir, 'transactions');
+-  return new Map(fs.readdirSync(directory).sort().map(id => [id, JSON.parse(fs.readFileSync(path.join(directory, id, 'journal.json'), 'utf8'))]));
+-}
+-function ackRefs(f: AckFixture): Map<string, string> { return new Map(f.git(['for-each-ref', '--format=%(refname) %(objectname)']).split('\n').filter(Boolean).map(line => line.split(' ') as [string, string])); }
+-function ackBackupInventory(f: AckFixture): Record<string, unknown> {
+-  return Object.fromEntries(Object.entries(inventory(path.join(f.app.dir, 'transactions'))).filter(([name]) => /^[^/]+\/backups\//u.test(name)));
+-}
+-function ackSnapshot(f: AckFixture, label: string) {
+-  const state = { domain: f.domain(), refs: [...ackRefs(f)], raw: { main: ackRaw(f.app.repo.index), a: ackRaw(f.layerIndex('a')), b: ackRaw(f.layerIndex('b')) }, workspace: ackRaw(path.join(f.app.dir, 'workspace.json')), registry: ackRaw(path.join(f.app.dir, 'registry.json')), exclude: ackRaw(f.app.repo.exclude), backups: ackBackupInventory(f), journals: [...ackJournals(f).keys()] };
+-  f.record(label, state); return state;
+-}
+-type AckSnapshot = ReturnType<typeof ackSnapshot>;
+-function ackOnlyRename(before: AckSnapshot, from = 'a.txt', to = 'again.txt'): AckSnapshot['domain'] {
+-  const expected = structuredClone(before.domain); assert(expected.files[from]); assert(!expected.files[to]); expected.files[to] = expected.files[from]; delete expected.files[from]; return expected;
+-}
+-function ackPreserveBackups(f: AckFixture, before: AckSnapshot) {
+-  const after = ackBackupInventory(f); for (const [file, value] of Object.entries(before.backups)) assert.deepEqual(after[file], value, 'An original backup never changes during observation or recovery');
+-}
+-function ackPreserveRefs(f: AckFixture, before: AckSnapshot) {
+-  const previous = new Map(before.refs), current = ackRefs(f);
+-  for (const [ref, oid] of previous) assert.equal(current.get(ref), oid, 'Every previously observed ref keeps its OID');
+-  const retained: unknown[] = [];
+-  for (const [ref, oid] of current) if (!previous.has(ref)) {
+-    const match = /^refs\/git-layers\/transactions\/([a-f0-9-]{36})\/([a-f0-9-]{36})$/u.exec(ref); assert(match, 'Only journal-backed conservative checkpoint refs may be new');
+-    const [, transaction, layer] = match; assert(!before.journals.includes(transaction!));
+-    const journal = ackJournals(f).get(transaction!); assert(journal); assert.equal(journal.id, transaction); assert.equal(journal.state, 'completed');
+-    assert(journal.recovery.beforeRegistry.layers.some((entry: any) => entry.id === layer));
+-    assert.equal(oid, previous.get('refs/git-layers/state/' + layer)); assert.equal(f.git(['cat-file', '-t', oid]), 'tree'); assert.equal(f.git(['for-each-ref', '--format=%(symref)', ref]), '');
+-    retained.push({ ref, oid, transaction, layer });
+-  }
+-  f.record('Verified prior refs and optional conservative checkpoint retention', { before: before.refs, after: [...current], retained });
+-}
+-function ackPreserve(f: AckFixture, before: AckSnapshot, expected = before.domain) {
+-  assert.deepEqual(f.domain(), expected, 'HEAD, branch histories, semantic indices, worktree bytes and modes retain their observed values');
+-  assert.deepEqual(ackRaw(f.app.repo.index), before.raw.main, 'MAIN B remains byte exact');
+-  assert.deepEqual(ackRaw(f.layerIndex('a')), before.raw.a, 'Private A index B remains byte exact');
+-  assert.deepEqual(ackRaw(f.layerIndex('b')), before.raw.b, 'Private B index B remains byte exact');
+-  ackPreserveRefs(f, before); ackPreserveBackups(f, before);
+-}
+-function ackRealRename(f: AckFixture, from = 'a.txt', to = 'again.txt') {
+-  const root = path.dirname(f.repo), marker = path.join(root, '.git-compat-owned.json');
+-  const ownership = JSON.parse(fs.readFileSync(marker, 'utf8')); assert.match(ownership.nonce, /^[a-f0-9-]{36}$/u); assert.equal(fs.realpathSync(path.dirname(root)), ownership.parent);
+-  for (let current = root; ; current = path.dirname(current)) { const stat = fs.lstatSync(current); assert(stat.isDirectory() && !stat.isSymbolicLink()); if (path.dirname(current) === current) break; }
+-  assert.equal(fs.realpathSync(f.repo), path.join(fs.realpathSync(root), 'repo'));
+-  const script = "const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');const root=fs.realpathSync(process.argv[1]);const from=path.resolve(root,process.argv[2]),to=path.resolve(root,process.argv[3]);for(const p of [from,to]){const r=path.relative(root,p);if(!r||r==='..'||r.startsWith('..'+path.sep)||path.isAbsolute(r))throw Error('outside fixture');}const s=fs.lstatSync(from);if(!s.isFile()||s.isSymbolicLink()||s.nlink!==1||fs.existsSync(to))throw Error('unsafe fixture writer');const before=fs.readFileSync(from);fs.renameSync(from,to);const after=fs.readFileSync(to);process.stdout.write(JSON.stringify({pid:process.pid,renamed:!fs.existsSync(from)&&fs.existsSync(to),sha256:crypto.createHash('sha256').update(after).digest('hex'),bytesEqual:before.equals(after),modeBefore:s.mode&511,modeAfter:fs.lstatSync(to).mode&511}));";
+-  const writer = JSON.parse(execFileSync(process.execPath, ['-e', script, f.repo, from, to], { cwd: f.repo, env: process.env, windowsHide: true, encoding: 'utf8', timeout: 60000 }));
+-  assert(writer.renamed && writer.bytesEqual); assert.notEqual(writer.pid, process.pid); assert.equal(writer.modeBefore, writer.modeAfter); f.record('Real independent fixture writer', writer); return writer;
+-}
+-async function ackScenario(t: TestContext, label: string, run: (f: AckFixture, scoped: TestContext) => Promise<void>) {
+-  // Multiple subscenarios remain one top-level test and restore process.env separately.
+-  const cleanups: Array<() => unknown> = [];
+-  const scoped = { name: t.name + ' [' + label + ']', after: (fn: () => unknown) => { cleanups.push(fn); }, diagnostic: (message: string) => t.diagnostic(message) } as unknown as TestContext;
+-  try { await run(await fixture(scoped), scoped); } finally { for (const cleanup of cleanups.reverse()) await cleanup(); }
+-}
+-async function ackPrepare(f: AckFixture, reappeared = true, nativeNew = false) {
+-  await f.seed('a', 'a.txt'); await f.seed('b', 'b.txt');
+-  f.write('base.txt', 'base B staged\n'); f.git(['add', '--', 'base.txt']); f.write('base.txt', 'base C disk\n');
+-  f.write('a.txt', 'a B staged\n'); await f.app.add('a', ['a.txt']); f.write('a.txt', 'a C disk\n'); await f.pendingB();
+-  fs.renameSync(path.join(f.repo, 'a.txt'), path.join(f.repo, 'first.txt'));
+-  const review = await f.app.ownershipReview(); await f.app.resolveOwnership({ token: review.token, renames: [{ from: 'a.txt', to: 'first.txt' }] });
+-  assert.equal((await f.app.status()).safe, true); await f.reopen(); assert(ackWorkspace(f).acknowledgedMissing.includes('a.txt'));
+-  if (nativeNew) { f.write('native-new.txt', 'native B staged\n'); f.git(['add', '--', 'native-new.txt']); f.write('native-new.txt', 'native C disk\n'); }
+-  if (reappeared) f.write('a.txt', 'observed reappearance C2\n');
+-  assert.equal(f.git(['show', ':base.txt']), 'base B staged'); assert.equal(f.git(['show', ':a.txt'], f.layerIndex('a')), 'a B staged'); assert.equal(f.git(['show', ':b.txt'], f.layerIndex('b')), 'b B staged');
+-}
+-function ackNewJournal(f: AckFixture, before: AckSnapshot, kind: string): any {
+-  const added = [...ackJournals(f)].filter(([id, data]) => !before.journals.includes(id) && data.kind === kind); assert.equal(added.length, 1, 'The selected operation owns exactly one new journal'); return added[0]![1];
+-}
+-function ackOriginalWorkspaceBackup(f: AckFixture, journal: any, before: AckSnapshot) {
+-  const entry = journal.recovery.files.find((item: any) => item.path === path.join(f.app.dir, 'workspace.json')); assert(entry?.backup && entry.before.exists);
+-  assert.equal(entry.before.hash, before.workspace.sha256); const raw = ackRaw(entry.backup); assert.equal(raw.sha256, before.workspace.sha256); assert.equal(raw.base64, before.workspace.base64);
+-  assert.deepEqual(JSON.parse(Buffer.from(raw.base64, 'base64').toString('utf8')).acknowledgedMissing, journal.recovery.beforeWorkspace.acknowledgedMissing);
+-  assert(journal.recovery.beforeWorkspace.acknowledgedMissing.includes('a.txt')); f.record('Original immutable workspace backup', { journal: journal.id, sha256: raw.sha256, bytes: raw.bytes, mode: raw.mode }); return raw;
+-}
+-async function ackAmbiguous(f: AckFixture, before: AckSnapshot, expected = ackOnlyRename(before)) {
+-  await f.reopen(); const status = await f.app.status(); assert.equal(status.safe, false); assert.equal(status.error?.code, 'OWNERSHIP_AMBIGUOUS');
+-  assert(!ackWorkspace(f).acknowledgedMissing.includes('a.txt'), 'Observed presence never regains an old absence acknowledgement');
+-  const review = await f.app.ownershipReview(); assert(review.missing.some(entry => entry.path === 'a.txt' && entry.owner === 'a')); assert(review.candidates.includes('again.txt')); assert.equal(review.ambiguous, true);
+-  assert.equal((await f.app.files()).find(file => file.path === 'again.txt')!.owner, null); assert(!status.layers.find(layer => layer.name === 'b')!.reservations.includes('again.txt'));
+-  ackPreserve(f, before, expected); f.record('Ambiguity remains after reopen', { status, review, workspace: ackWorkspace(f) });
+-}
+-function ackOwnTransaction(f: AckFixture, tx: Transaction, kind: string) { return path.dirname(path.dirname(tx.dir)) === f.app.dir && tx.data.kind === kind; }
+-function ackSyntheticEio(label: string): NodeJS.ErrnoException { return Object.assign(new Error('Synthetic fixture-only persistence failure: ' + label), { code: 'EIO' }); }
+-
+-test('D01 acknowledgement revocation survives a synthetic finish EIO rollback', { timeout: 900000 }, async t => {
+-  await ackScenario(t, 'finish-EIO', async (f, scoped) => {
+-    await ackPrepare(f); const before = ackSnapshot(f, 'before synthetic finish EIO');
+-    const original = Transaction.prototype.finish; let fired = false;
+-    Transaction.prototype.finish = async function () {
+-      if (!fired && ackOwnTransaction(f, this, 'editing-sync')) {
+-        fired = true; assert(!ackWorkspace(f).acknowledgedMissing.includes('a.txt'));
+-        const durable = JSON.parse(fs.readFileSync(path.join(this.dir, 'journal.json'), 'utf8'));
+-        assert.deepEqual(durable.recovery.acknowledgements, { revoked: ['a.txt'], pending: [] });
+-        ackRealRename(f); throw ackSyntheticEio('finish after workspace publication');
+-      }
+-      return original.call(this);
+-    };
+-    scoped.after(() => { Transaction.prototype.finish = original; });
+-    let status: Awaited<ReturnType<GitLayers['status']>>;
+-    try { status = await f.app.status(); } finally { Transaction.prototype.finish = original; }
+-    assert(fired, 'Synthetic finish barrier must fire'); assert.equal(status.safe, false); assert.equal(status.error?.code, 'EIO');
+-    const journal = ackNewJournal(f, before, 'editing-sync'); assert.equal(journal.state, 'completed'); assert.equal(journal.error.code, 'EIO');
+-    assert.deepEqual(journal.recovery.acknowledgements, { revoked: ['a.txt'], pending: [] });
+-    const backup = ackOriginalWorkspaceBackup(f, journal, before); await ackAmbiguous(f, before);
+-    assert.deepEqual(ackRaw(journal.recovery.files.find((item: any) => item.path === path.join(f.app.dir, 'workspace.json')).backup), backup);
+-    assert.deepEqual((await f.app.recover()).recovered, []); ackPreserve(f, before, ackOnlyRename(before));
+-  });
+-});
+-
+-test('D01 acknowledgement interruption stays ambiguous through recovery and idempotent retry', { timeout: 900000 }, async t => {
+-  await ackScenario(t, 'pending-injection', async (f, scoped) => {
+-    await ackPrepare(f); const before = ackSnapshot(f, 'before injected finish interruption');
+-    const { LabError } = await import('../../src/core/errors.js'); const original = Transaction.prototype.finish; let fired = false;
+-    Transaction.prototype.finish = async function () {
+-      if (!fired && ackOwnTransaction(f, this, 'editing-sync')) { fired = true; ackRealRename(f); throw new LabError('INJECTED_FAILURE', 'Fixture-only interruption after observed revocation'); }
+-      return original.call(this);
+-    };
+-    scoped.after(() => { Transaction.prototype.finish = original; });
+-    let status: Awaited<ReturnType<GitLayers['status']>>;
+-    try { status = await f.app.status(); } finally { Transaction.prototype.finish = original; }
+-    assert(fired); assert.equal(status.safe, false); assert.equal(status.error?.code, 'RECOVERY_REQUIRED');
+-    const journal = ackNewJournal(f, before, 'editing-sync'); assert.notEqual(journal.state, 'completed'); assert.equal(journal.error.code, 'INJECTED_FAILURE');
+-    assert.deepEqual(journal.recovery.acknowledgements, { revoked: ['a.txt'], pending: [] }); const backup = ackOriginalWorkspaceBackup(f, journal, before);
+-    ackPreserve(f, before, ackOnlyRename(before)); await f.reopen(); assert.deepEqual((await f.app.recover()).recovered, [journal.id]);
+-    const after = ackSnapshot(f, 'after first explicit recovery'); assert.deepEqual((await f.app.recover()).recovered, []);
+-    assert.deepEqual(ackSnapshot(f, 'after idempotent recovery'), after); await ackAmbiguous(f, before);
+-    assert.deepEqual(ackRaw(journal.recovery.files.find((item: any) => item.path === path.join(f.app.dir, 'workspace.json')).backup), backup);
+-    for (const operation of [() => f.app.baseStage(['again.txt']), () => f.app.baseCommit('foreign origin must refuse'), () => f.app.commit('b', 'foreign origin must refuse'), () => f.app.deactivate('b', { discard: true })]) {
+-      await assert.rejects(operation(), { code: 'OWNERSHIP_AMBIGUOUS' }); ackPreserve(f, before, ackOnlyRename(before)); assert(!ackWorkspace(f).acknowledgedMissing.includes('a.txt'));
+-    }
+-  });
+-});
+-
+-test('D01 acknowledgement revocation in direct base staging survives refusal and reopen', { timeout: 900000 }, async t => {
+-  await ackScenario(t, 'direct-stage', async (f, scoped) => {
+-    await ackPrepare(f); const before = ackSnapshot(f, 'before direct base stage acknowledgement observation');
+-    const internal = f.app as unknown as { completeAcknowledgementObservation: (present: Set<string>) => Promise<void>; workspace: { acknowledgedMissing: string[] } };
+-    const original = internal.completeAcknowledgementObservation; let fired = false;
+-    internal.completeAcknowledgementObservation = async function (present) {
+-      await original.call(this, present);
+-      if (!fired) { fired = true; assert(present.has('a.txt')); assert(!internal.workspace.acknowledgedMissing.includes('a.txt')); ackRealRename(f); }
+-    };
+-    scoped.after(() => { internal.completeAcknowledgementObservation = original; });
+-    try { await assert.rejects(f.app.baseStage(['base.txt']), { code: 'OWNERSHIP_AMBIGUOUS' }); } finally { internal.completeAcknowledgementObservation = original; }
+-    assert(fired); const journal = ackNewJournal(f, before, 'stage-base'); assert.equal(journal.state, 'completed'); assert.equal(journal.error.code, 'OWNERSHIP_AMBIGUOUS');
+-    assert.deepEqual(journal.recovery.acknowledgements, { revoked: ['a.txt'], pending: [] }); ackOriginalWorkspaceBackup(f, journal, before);
+-    await ackAmbiguous(f, before);
+-    await assert.rejects(f.app.baseStage(['again.txt']), { code: 'OWNERSHIP_AMBIGUOUS' }); await assert.rejects(f.app.baseCommit('must not launder Layer data after refusal'), { code: 'OWNERSHIP_AMBIGUOUS' });
+-    ackPreserve(f, before, ackOnlyRename(before)); assert.equal(f.git(['show', 'HEAD:base.txt']), 'base A'); assert.equal(f.read('base.txt'), 'base C disk\n');
+-  });
+-});
+-
+-test('D01 acknowledgement revocation in base unstaging survives refusal and reopen', { timeout: 900000 }, async t => {
+-  await ackScenario(t, 'direct-unstage', async (f, scoped) => {
+-    await ackPrepare(f, true, true); const before = ackSnapshot(f, 'before direct base unstage acknowledgement observation');
+-    const internal = f.app as unknown as { completeAcknowledgementObservation: (present: Set<string>) => Promise<void>; workspace: { acknowledgedMissing: string[] } };
+-    const original = internal.completeAcknowledgementObservation; let fired = false;
+-    internal.completeAcknowledgementObservation = async function (present) {
+-      await original.call(this, present);
+-      if (!fired) { fired = true; assert(present.has('a.txt')); assert(!internal.workspace.acknowledgedMissing.includes('a.txt')); ackRealRename(f); }
+-    };
+-    scoped.after(() => { internal.completeAcknowledgementObservation = original; });
+-    try { await assert.rejects(f.app.baseUnstage(['native-new.txt']), { code: 'OWNERSHIP_AMBIGUOUS' }); } finally { internal.completeAcknowledgementObservation = original; }
+-    assert(fired); const journal = ackNewJournal(f, before, 'unstage-base'); assert.equal(journal.state, 'completed'); assert.equal(journal.error.code, 'OWNERSHIP_AMBIGUOUS');
+-    assert.deepEqual(journal.recovery.acknowledgements, { revoked: ['a.txt'], pending: [] }); ackOriginalWorkspaceBackup(f, journal, before); await ackAmbiguous(f, before);
+-    assert.equal(f.git(['show', ':native-new.txt']), 'native B staged'); assert.equal(f.read('native-new.txt'), 'native C disk\n');
+-    assert(!ackWorkspace(f).baseReservations?.includes('native-new.txt')); ackPreserve(f, before, ackOnlyRename(before));
+-  });
+-});
+-
+-test('D01 acknowledgement pending observation survives synthetic completion persistence failure', { timeout: 900000 }, async t => {
+-  await ackScenario(t, 'pending-durable', async (f, scoped) => {
+-    await ackPrepare(f); const before = ackSnapshot(f, 'before synthetic completion persistence outage');
+-    const originalRecord = Transaction.prototype.record, originalFail = Transaction.prototype.fail; let fired = false, failFired = false, selected = '';
+-    Transaction.prototype.record = async function (step, details) {
+-      if (!fired && ackOwnTransaction(f, this, 'stage-base') && step === 'acknowledgement-observation-completed') {
+-        fired = true; selected = this.id; const durable = JSON.parse(fs.readFileSync(path.join(this.dir, 'journal.json'), 'utf8'));
+-        assert.deepEqual(durable.recovery.acknowledgements, { revoked: [], pending: ['a.txt'] }); assert(durable.steps.some((entry: any) => entry.step === 'acknowledgement-observation-pending'));
+-        assert(!durable.steps.some((entry: any) => entry.step === 'acknowledgement-observation-completed')); assert.deepEqual(this.data.recovery.acknowledgements, { revoked: ['a.txt'], pending: [] });
+-        ackRealRename(f); throw ackSyntheticEio('completed observation record unavailable');
+-      }
+-      return originalRecord.call(this, step, details);
+-    };
+-    Transaction.prototype.fail = async function (error) { if (this.id === selected) { failFired = true; throw ackSyntheticEio('failure record also unavailable'); } return originalFail.call(this, error); };
+-    scoped.after(() => { Transaction.prototype.record = originalRecord; Transaction.prototype.fail = originalFail; });
+-    try { await assert.rejects(f.app.baseStage(['base.txt']), { code: 'EIO' }); } finally { Transaction.prototype.record = originalRecord; Transaction.prototype.fail = originalFail; }
+-    assert(fired && failFired); const journal = ackNewJournal(f, before, 'stage-base'); assert.notEqual(journal.state, 'completed'); assert.deepEqual(journal.recovery.acknowledgements, { revoked: [], pending: ['a.txt'] });
+-    const backup = ackOriginalWorkspaceBackup(f, journal, before); ackPreserve(f, before, ackOnlyRename(before));
+-    await f.reopen(); const blocked = await f.app.status(); assert.equal(blocked.safe, false); assert.equal(blocked.error?.code, 'RECOVERY_REQUIRED');
+-    assert.deepEqual((await f.app.recover()).recovered, [journal.id]); const after = ackSnapshot(f, 'pending authority removed by conservative recovery'); assert.deepEqual((await f.app.recover()).recovered, []); assert.deepEqual(ackSnapshot(f, 'pending recovery retry no-op'), after);
+-    await ackAmbiguous(f, before); assert.deepEqual(ackRaw(journal.recovery.files.find((item: any) => item.path === path.join(f.app.dir, 'workspace.json')).backup), backup);
+-    f.record('Synthetic outage qualification', { actualHostEio: false, unavailableRecords: ['acknowledgement-observation-completed', 'failed'], pendingWasDurable: true });
+-  });
+-});
+-
+-test('D01 acknowledgement malformed recovery plans refuse before any write', { timeout: 900000 }, async t => {
+-  await ackScenario(t, 'malformed-plans', async (f, scoped) => {
+-    await ackPrepare(f); const before = ackSnapshot(f, 'before validator fixture interruption');
+-    const { LabError } = await import('../../src/core/errors.js'); const original = Transaction.prototype.finish; let fired = false;
+-    Transaction.prototype.finish = async function () { if (!fired && ackOwnTransaction(f, this, 'editing-sync')) { fired = true; ackRealRename(f); throw new LabError('INJECTED_FAILURE', 'Fixture-only pending plan for validator checks'); } return original.call(this); };
+-    scoped.after(() => { Transaction.prototype.finish = original; });
+-    try { assert.equal((await f.app.status()).safe, false); } finally { Transaction.prototype.finish = original; }
+-    assert(fired); const journal = ackNewJournal(f, before, 'editing-sync'), file = path.join(f.app.dir, 'transactions', journal.id, 'journal.json'), originalBytes = fs.readFileSync(file);
+-    const backup = ackOriginalWorkspaceBackup(f, journal, before);
+-    const poisons: Array<[string, (data: any) => void]> = [
+-      ['missing required array', data => { delete data.recovery.acknowledgements.pending; }],
+-      ['array replaced by string', data => { data.recovery.acknowledgements.pending = 'a.txt'; }],
+-      ['duplicate revoked path', data => { data.recovery.acknowledgements.revoked = ['a.txt', 'a.txt']; }],
+-      ['overlap pending and revoked', data => { data.recovery.acknowledgements.pending = ['a.txt']; }],
+-      ['authority not present in before', data => { data.recovery.acknowledgements.revoked = ['base.txt']; }],
+-      ['path traversal', data => { data.recovery.acknowledgements.revoked = ['../escape']; }],
+-      ['missing original workspace plan', data => { data.recovery.files = data.recovery.files.filter((item: any) => item.path !== path.join(f.app.dir, 'workspace.json')); }],
+-    ];
+-    for (const [label, poison] of poisons) {
+-      const data = JSON.parse(originalBytes.toString('utf8')); poison(data); fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
+-      const independent = ackSnapshot(f, 'before invalid recovery: ' + label), metadata = inventory(f.app.dir);
+-      await assert.rejects(f.app.recover(), { code: 'RECOVERY_INVALID' });
+-      assert.deepEqual(ackSnapshot(f, 'after invalid recovery: ' + label), independent); assert.deepEqual(inventory(f.app.dir), metadata, 'Validation failure precedes every metadata or backup write');
+-      assert.deepEqual(ackRaw(journal.recovery.files.find((item: any) => item.path === path.join(f.app.dir, 'workspace.json')).backup), backup);
+-      // Restore only the deliberately poisoned fixture input after all refusal oracles pass.
+-      fs.writeFileSync(file, originalBytes); assert.equal(hash(fs.readFileSync(file)), hash(originalBytes));
+-    }
+-    assert.deepEqual((await f.app.recover()).recovered, [journal.id]); assert.deepEqual((await f.app.recover()).recovered, []); await ackAmbiguous(f, before);
+-  });
+-});
+-
+-function ackForwardWorkspace(f: AckFixture, journal: any) {
+-  const workspace = structuredClone(journal.recovery.beforeWorkspace), intent = journal.recovery.acknowledgements;
+-  const removed = new Set<string>([...intent.revoked, ...intent.pending]);
+-  if (workspace.acknowledgedMissing) workspace.acknowledgedMissing = workspace.acknowledgedMissing.filter((item: string) => !removed.has(item));
+-  if (journal.recovery.commit.base) { workspace.schema = 1; workspace.head = journal.recovery.commit.new; workspace.branch = journal.recovery.beforeWorkspace.branch; }
+-  if (workspace.baseReservations?.length) {
+-    const committed = new Set(f.git(['ls-tree', '-r', '--name-only', '-z', 'HEAD']).split('\0').filter(Boolean));
+-    if (workspace.editing) workspace.editing.acceptedBase = [...new Set([...workspace.editing.acceptedBase ?? [], ...workspace.baseReservations.filter((item: string) => committed.has(item))])];
+-    workspace.baseReservations = workspace.baseReservations.filter((item: string) => !committed.has(item));
+-  }
+-  return Buffer.from(JSON.stringify(workspace, null, 2) + '\n', 'utf8');
+-}
+-async function ackForwardScenario(t: TestContext, base: boolean, revoked: boolean) {
+-  await ackScenario(t, (base ? 'base' : 'layer') + (revoked ? '-revoked' : '-empty'), async (f, scoped) => {
+-    await ackPrepare(f, revoked);
+-    const workspaceFile = path.join(f.app.dir, 'workspace.json');
+-    if (!revoked) {
+-      const original = ackRaw(workspaceFile), parsed = ackWorkspace(f);
+-      // A valid formatting-only fixture input makes deterministic save bytes distinct.
+-      fs.writeFileSync(workspaceFile, JSON.stringify(parsed)); await f.reopen();
+-      assert.deepEqual(ackWorkspace(f), parsed); assert.notEqual(ackRaw(workspaceFile).sha256, original.sha256);
+-      f.record('Controlled valid workspace formatting, fields unchanged', { before: original, after: ackRaw(workspaceFile), fieldsEqual: true });
+-    }
+-    const before = ackSnapshot(f, 'before forward ' + (base ? 'base' : 'layer') + ' commit'), { LabError } = await import('../../src/core/errors.js');
+-    const originalRecord = Transaction.prototype.record; let fired = false; let advanced: AckSnapshot | undefined;
+-    Transaction.prototype.record = async function (step, details) {
+-      await originalRecord.call(this, step, details);
+-      if (!fired && ackOwnTransaction(f, this, base ? 'commit-base' : 'commit-layer') && step === 'commit-ref-updated') {
+-        fired = true; assert.deepEqual(this.data.recovery.acknowledgements, { revoked: revoked ? ['a.txt'] : [], pending: [] });
+-        if (revoked) ackRealRename(f);
+-        advanced = ackSnapshot(f, 'ref already advanced before injected interruption');
+-        throw new LabError('INJECTED_FAILURE', 'Fixture-only interruption after published commit ref');
+-      }
+-    };
+-    scoped.after(() => { Transaction.prototype.record = originalRecord; });
+-    try {
+-      if (base) await assert.rejects(f.app.baseCommit('deliberate staged base B'), { code: 'INJECTED_FAILURE' });
+-      else await assert.rejects(f.app.commit('b', 'deliberate staged Layer B'), { code: 'INJECTED_FAILURE' });
+-    } finally { Transaction.prototype.record = originalRecord; }
+-    assert(fired && advanced, 'Ref-updated barrier and independent snapshot must execute');
+-    const journal = ackNewJournal(f, before, base ? 'commit-base' : 'commit-layer'); assert.notEqual(journal.state, 'completed'); assert.equal(journal.error.code, 'INJECTED_FAILURE');
+-    assert.deepEqual(journal.recovery.acknowledgements, { revoked: revoked ? ['a.txt'] : [], pending: [] });
+-    const commit = journal.recovery.commit; assert.equal(f.git(['rev-parse', commit.ref]), commit.new); assert.notEqual(commit.new, commit.old);
+-    const previousRefs = new Map(before.refs), advancedRefs = new Map(advanced.refs);
+-    for (const [ref, oid] of previousRefs) assert.equal(advancedRefs.get(ref), ref === commit.ref ? commit.new : oid, 'Only the intended previous ref may advance');
+-    for (const [ref, oid] of advancedRefs) if (!previousRefs.has(ref)) {
+-      const match = /^refs\/git-layers\/transactions\/([a-f0-9-]{36})\/([a-f0-9-]{36})$/u.exec(ref); assert(match); assert.equal(match[1], journal.id);
+-      assert(journal.recovery.beforeRegistry.layers.some((entry: any) => entry.id === match[2])); assert.equal(oid, previousRefs.get('refs/git-layers/state/' + match[2])); assert.equal(f.git(['cat-file', '-t', oid]), 'tree'); assert.equal(f.git(['for-each-ref', '--format=%(symref)', ref]), '');
+-    }
+-    if (base) { assert.equal(advanced.domain.head, commit.new); assert.equal(f.git(['show', 'HEAD:base.txt']), 'base B staged'); }
+-    else { assert.equal(advanced.domain.head, before.domain.head); assert.equal(f.git(['show', 'layer/b:b.txt']), 'b B staged'); }
+-    assert.equal(f.git(['ls-tree', '-r', '--name-only', commit.new]).split('\n').includes('again.txt'), false, 'The published commit contains no interval-renamed foreign file');
+-    assert.deepEqual(advanced.domain.files, revoked ? ackOnlyRename(before).files : before.domain.files);
+-    assert.deepEqual(advanced.domain.layerIndexes, before.domain.layerIndexes); assert.equal(advanced.domain.mainIndex, before.domain.mainIndex);
+-    assert.deepEqual(advanced.raw.a, before.raw.a); assert.deepEqual(advanced.raw.b, before.raw.b); if (!base) assert.deepEqual(advanced.raw.main, before.raw.main);
+-    const backup = ackOriginalWorkspaceBackup(f, journal, before), expectedWorkspace = ackForwardWorkspace(f, journal);
+-    const internal = f.app as unknown as { save: () => Promise<void> }, originalSave = internal.save; let saveFired = false;
+-    internal.save = async function () {
+-      await originalSave.call(this);
+-      if (!saveFired) {
+-        saveFired = true; assert.notEqual(ackJournals(f).get(journal.id).state, 'completed');
+-        assert(fs.readFileSync(workspaceFile).equals(expectedWorkspace), 'Forward save is the independently reconstructed deterministic image');
+-        f.record('Synthetic interruption after forward save and before journal completion', { image: ackRaw(workspaceFile), originalBackup: backup, actualHostEio: false });
+-        throw ackSyntheticEio('forward workspace saved but journal not completed');
+-      }
+-    };
+-    scoped.after(() => { internal.save = originalSave; });
+-    try { await assert.rejects(f.app.recover(), { code: 'EIO' }); } finally { internal.save = originalSave; }
+-    assert(saveFired); assert.notEqual(ackJournals(f).get(journal.id).state, 'completed'); assert(fs.readFileSync(workspaceFile).equals(expectedWorkspace));
+-    ackPreserve(f, advanced); assert.deepEqual(ackRaw(journal.recovery.files.find((item: any) => item.path === workspaceFile).backup), backup);
+-    const deterministic = fs.readFileSync(workspaceFile); if (!revoked) assert.notEqual(hash(deterministic), backup.sha256, 'Valid formatting-only input makes the saved image differ even without revocation');
+-    // A byte-distinct, even semantically identical, external image is not an approved CAS image.
+-    fs.writeFileSync(workspaceFile, Buffer.concat([deterministic, Buffer.from(' ')]));
+-    const tampered = ackSnapshot(f, 'before unapproved workspace image retry'), tamperedMetadata = inventory(f.app.dir);
+-    await assert.rejects(f.app.recover(), { code: 'RECOVERY_CONFLICT' });
+-    assert.deepEqual(ackSnapshot(f, 'after unapproved workspace image refusal'), tampered); assert.deepEqual(inventory(f.app.dir), tamperedMetadata);
+-    // Restore only this deliberately altered fixture image, after all refusal oracles pass.
+-    fs.writeFileSync(workspaceFile, deterministic); assert(fs.readFileSync(workspaceFile).equals(expectedWorkspace));
+-    await f.reopen(); assert.deepEqual((await f.app.recover()).recovered, [journal.id]);
+-    const recovered = ackSnapshot(f, 'after deterministic forward retry'); assert.deepEqual((await f.app.recover()).recovered, []); assert.deepEqual(ackSnapshot(f, 'after second forward retry is no-op'), recovered);
+-    ackPreserve(f, advanced); assert.deepEqual(ackRaw(journal.recovery.files.find((item: any) => item.path === workspaceFile).backup), backup);
+-    if (revoked) await ackAmbiguous(f, advanced, advanced.domain);
+-    else {
+-      assert(ackWorkspace(f).acknowledgedMissing.includes('a.txt'), 'An unobserved, still absent origin retains its legitimate acknowledgement');
+-      const status = await f.app.status(); assert.equal(status.safe, true); assert.equal(status.editingTarget, null); assert.equal((await f.app.ownershipReview()).ambiguous, false);
+-      ackPreserve(f, advanced);
+-      f.write('ordinary.txt', 'ordinary deliberate base creation\n'); assert.equal((await f.app.status()).safe, true); assert.equal((await f.app.files()).find(file => file.path === 'ordinary.txt')!.owner, null);
+-      await f.app.baseStage(['ordinary.txt']); assert.equal(f.git(['show', ':ordinary.txt']), 'ordinary deliberate base creation'); await f.app.baseCommit('ordinary creation remains usable after recovery');
+-      assert.equal(f.git(['show', 'HEAD:ordinary.txt']), 'ordinary deliberate base creation'); assert(ackWorkspace(f).acknowledgedMissing.includes('a.txt'));
+-      assert.equal(f.read('first.txt'), 'a C disk\n'); assert.equal(f.read('b.txt'), 'b C disk\n'); assert.equal(f.read('base.txt'), 'base C disk\n');
+-      assert.deepEqual(ackRaw(f.layerIndex('a')), advanced.raw.a); assert.deepEqual(ackRaw(f.layerIndex('b')), advanced.raw.b); ackPreserveBackups(f, before);
+-    }
+-    f.record('Forward recovery subscenario qualification', { base, revoked, countedAsAdditionalTest: false, commit, originalWorkspaceBackupSha256: backup.sha256, deterministicWorkspaceSha256: hash(expectedWorkspace) });
+-  });
+-}
+-
+-test('D01 acknowledgement forward base recovery retries deterministic images with and without revocations', { timeout: 900000 }, async t => {
+-  await ackForwardScenario(t, true, true); await ackForwardScenario(t, true, false);
+-});
+-
+-test('D01 acknowledgement forward layer recovery retries deterministic images with and without revocations', { timeout: 900000 }, async t => {
+-  await ackForwardScenario(t, false, true); await ackForwardScenario(t, false, false);
+-});

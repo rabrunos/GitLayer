@@ -13,7 +13,7 @@ const spec = (id, variant, title, run, limits) => ({ id, variant, title, profile
 export const cases = [
   spec('RECOVERY-003', 'external-ref-after-observed-preflight', 'Native compare-and-swap can advance a Layer ref after the managed preflight', async c => {
     await c.init(); await c.layer(); c.write('layer.txt', 'B staged after preflight\n'); const old = await gt(c, ['rev-parse', 'layer/tools']), base = await gt(c, ['rev-parse', 'HEAD']), tree = await gt(c, ['rev-parse', 'layer/tools^{tree}']);
-    const paused = await pauseCore(c, { method: 'add', args: ['tools', ['layer.txt']], needle: '        const value = await fn();', label: 'external-native-ref-after-preflight' });
+    const paused = await pauseCore(c, { method: 'add', args: ['tools', ['layer.txt']], locator: { method: 'mutateLocked', line: /^\s*if \(options\.reconcile !== false\) await this\.syncEditingInternal\(\);\s*$/, before: [/this\.tx = await Transaction\.begin\(/, /this\.tx\.data\.recovery = /, /await this\.tx\.record\("prepared"\)/], lookback: 12 }, label: 'external-native-ref-after-preflight' });
     try {
       const journal = durableJournal(c, paused); c.eq('Observed writer transaction is stage', journal.kind, 'stage'); c.eq('Last durable step proves preflight ended before managed writes', journal.steps.at(-1).step, 'prepared');
       const external = await gt(c, ['commit-tree', tree, '-p', old, '-m', 'external writer after managed guard']); await c.git(['update-ref', 'refs/heads/layer/tools', external, old]); c.eq('Native writer CAS advances despite private coordinator lock', await gt(c, ['rev-parse', 'layer/tools']), external); c.eq('Registry still contains preflight OID', registry(c).layers[0].oid, old);

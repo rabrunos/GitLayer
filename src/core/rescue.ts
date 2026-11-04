@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import { randomUUID, createHash } from 'node:crypto';
 import { LabError, errorMessage } from './errors.js';
+import { validOwnershipMetadata, type WorkspaceOwnership } from './ownership-state.js';
 import { discover, git, treeEntries, assertSupported } from './git.js';
 import { assertNoCollisions, validatePath } from './paths.js';
 import { assertNoPathLinks, inspectLayerLayout } from './layout.js';
@@ -76,9 +77,9 @@ export async function doctorRepository(root: string, fsck = false): Promise<{
       if (new Set(registry.layers.map(layer => layer.id)).size !== registry.layers.length || new Set(registry.layers.map(layer => layer.name)).size !== registry.layers.length) throw new LabError('METADATA_INVALID', 'IDs ou nomes duplicados.');
       return { layers: registry.layers.length };
     });
-    let workspace: { branch: string; head: string; branchLayer?: string; resumeLayer?: string; returnBranch?: string; editing?: { layer: string; before: string[]; unassigned?: string[]; startedAt: string } } | undefined;
+    let workspace: WorkspaceOwnership & { branch: string; head: string; branchLayer?: string; resumeLayer?: string; returnBranch?: string; editing?: { layer: string; before: string[]; unassigned?: string[]; acceptedBase?: string[]; startedAt: string } } | undefined;
     await check('Workspace: ' + directory, async () => {
-      workspace = await readJSON(path.join(directory, 'workspace.json'), value => typeof value.head === 'string' && typeof value.branch === 'string' && ['branchLayer', 'resumeLayer', 'returnBranch'].every(key => value[key] === undefined || typeof value[key] === 'string') && (value.editing === undefined || (value.editing && typeof value.editing.layer === 'string' && Array.isArray(value.editing.before) && value.editing.before.every((item: unknown) => typeof item === 'string' && !!validatePath(item)) && typeof value.editing.startedAt === 'string' && Number.isFinite(Date.parse(value.editing.startedAt)) && new Set(value.editing.before).size === value.editing.before.length && (value.editing.unassigned === undefined || (Array.isArray(value.editing.unassigned) && value.editing.unassigned.every((item: unknown) => typeof item === 'string' && !!validatePath(item)) && new Set(value.editing.unassigned).size === value.editing.unassigned.length && value.editing.unassigned.every((item: string) => value.editing.before.includes(item)))))));
+      workspace = await readJSON(path.join(directory, 'workspace.json'), value => validOwnershipMetadata(value) && typeof value.head === 'string' && typeof value.branch === 'string' && ['branchLayer', 'resumeLayer', 'returnBranch'].every(key => value[key] === undefined || typeof value[key] === 'string') && (value.editing === undefined || (value.editing && typeof value.editing.layer === 'string' && Array.isArray(value.editing.before) && value.editing.before.every((item: unknown) => typeof item === 'string' && !!validatePath(item)) && typeof value.editing.startedAt === 'string' && Number.isFinite(Date.parse(value.editing.startedAt)) && new Set(value.editing.before).size === value.editing.before.length && (value.editing.unassigned === undefined || (Array.isArray(value.editing.unassigned) && value.editing.unassigned.every((item: unknown) => typeof item === 'string' && !!validatePath(item)) && new Set(value.editing.unassigned).size === value.editing.unassigned.length && value.editing.unassigned.every((item: string) => value.editing.before.includes(item)))))));
       return workspace;
     });
     if (selectedLayout === directory && registry && workspace) await check('Workspace roles: ' + directory, async () => {
@@ -124,6 +125,8 @@ export async function doctorRepository(root: string, fsck = false): Promise<{
       const base = [...(repo.head ? await treeEntries(repo.root, repo.head) : []), ...await treeEntries(repo.root, ':index')];
       const indexedBase = new Set((await treeEntries(repo.root, ':index')).map(entry => entry.path));
       const ownership = base.map(entry => ({ path: entry.path, owner: workspace!.branchLayer ?? 'base' }));
+      for(const file of workspace!.baseReservations??[])ownership.push({path:file,owner:workspace!.branchLayer??'base'});
+      for(const file of workspace!.editing?.acceptedBase??[])ownership.push({path:file,owner:workspace!.branchLayer??'base'});
       const protectedPaths: string[] = [];
       for (const layer of registry!.layers.filter(entry => entry.state === 'active' && entry.name !== workspace!.branchLayer)) {
         const index = path.join(directory, 'indexes', layer.id + '.index');

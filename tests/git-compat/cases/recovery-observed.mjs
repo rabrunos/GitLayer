@@ -31,7 +31,7 @@ const spec = (id, variant, title, run, limits, productStatus = 'DOCUMENTED_RESTR
 export const cases = [
   spec('RECOVERY-001', 'two-writers-observed-barrier', 'A real paused managed writer holds its lock while the second writer is refused', async c => {
     await c.init(); await c.layer(); c.write('layer.txt', 'B stage candidate\n'); const ref = await gt(c, ['rev-parse', 'layer/tools']), before = (await c.git(['ls-files', '--stage', '-z'], { env: { GIT_INDEX_FILE: indexPath(c) } })).stdout;
-    const paused = await pauseCore(c, { method: 'add', args: ['tools', ['layer.txt']], needle: '        const value = await fn();', label: 'writer-prepared' });
+    const paused = await pauseCore(c, { method: 'add', args: ['tools', ['layer.txt']], locator: { method: 'mutateLocked', line: /^\s*if \(options\.reconcile !== false\) await this\.syncEditingInternal\(\);\s*$/, before: [/this\.tx = await Transaction\.begin\(/, /this\.tx\.data\.recovery = /, /await this\.tx\.record\("prepared"\)/], lookback: 12 }, label: 'writer-prepared' });
     try {
       lockOwnedBy(c, paused); const durable = journal(c, paused); c.eq('First writer transaction is staging', durable.value.kind, 'stage'); c.ok('First writer prepared journal is durable', durable.value.steps.some(s => s.step === 'prepared'));
       const other = parseCLI(await c.cli(['add', 'tools', '--', 'layer.txt'], { ok: [3] })); c.eq('Second managed writer refused while first is paused', other.error.code, 'LOCKED'); c.eq('Refused writer does not stage a subset', (await c.git(['ls-files', '--stage', '-z'], { env: { GIT_INDEX_FILE: indexPath(c) } })).stdout, before); c.eq('Neither stage attempt silently creates a commit', await gt(c, ['rev-parse', 'layer/tools']), ref);
