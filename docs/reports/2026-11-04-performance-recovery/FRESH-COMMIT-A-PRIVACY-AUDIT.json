@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "kind": "independent-local-publication-audit",
+  "status": "NO_CANDIDATES_OBSERVED",
+  "startedAt": "2026-11-05T05:17:15.386Z",
+  "nonce": "886e5437-8888-40b5-a9e7-e4ca0f0e2edf",
+  "helper": {
+    "label": "audit-helper",
+    "bytes": 18250,
+    "sha256": "808cb5d967beb9f8f898eb5487cd2ace2c064b3fdacebb68452db2464e0bfd55"
+  },
+  "allowlist": {
+    "label": "explicit-allowlist",
+    "bytes": 635,
+    "sha256": "2686a9b1b2322f6bd7e5c5a7c205c5442ac4ffb196f089325f498d92737c50f7"
+  },
+  "scope": "Only explicit new report/projection outputs. No raw streams, workspace traversal, Git, product tests, repair or publication.",
+  "counts": {
+    "files": 1,
+    "candidates": 0,
+    "informational": 0
+  },
+  "results": [
+    {
+      "label": "fresh-commit-a-public",
+      "role": "projected-evidence",
+      "format": "json",
+      "input": {
+        "label": "fresh-commit-a-public",
+        "bytes": 310526,
+        "sha256": "3bd5eff1985c92e1316a7731b631cd9ce7c65e5d1547a7e9bc86f3857a4f17cd"
+      },
+      "valid": true,
+      "issues": [],
+      "findings": [],
+      "nodesVisited": 5745,
+      "stringsInspected": 7197,
+      "findingLimitReached": false,
+      "decision": "Findings are candidates; only root can classify technical examples, public installations or private data."
+    }
+  ],
+  "provenance": {
+    "inputReceipts": [
+      {
+        "label": "stage-marker",
+        "bytes": 190,
+        "sha256": "e53c7d41452ac85d784b86a2b50c2dde084ae39c9504be3f841f69a5b342d2a3"
+      },
+      {
+        "label": "benchmark-FINAL",
+        "bytes": 42128,
+        "sha256": "ed12eb5a3197c709e0e21c093774ce2c8456edc5406fd1b68f90ce871440c4a3"
+      },
+      {
+        "label": "explicit-allowlist",
+        "bytes": 635,
+        "sha256": "2686a9b1b2322f6bd7e5c5a7c205c5442ac4ffb196f089325f498d92737c50f7"
+      },
+      {
+        "label": "projection-marker-0",
+        "bytes": 349,
+        "sha256": "eb6f335c7890ebaf5319585bfebcb53dd850a0e045ab369489a5d8c2c3622db4"
+      },
+      {
+        "label": "fresh-commit-a-public",
+        "bytes": 310526,
+        "sha256": "3bd5eff1985c92e1316a7731b631cd9ce7c65e5d1547a7e9bc86f3857a4f17cd"
+      },
+      {
+        "label": "audit-helper",
+        "bytes": 18250,
+        "sha256": "808cb5d967beb9f8f898eb5487cd2ace2c064b3fdacebb68452db2464e0bfd55"
+      }
+    ],
+    "unchangedRechecked": true,
+    "benchmarkQuietRequired": true
+  },
+  "limits": {
+    "maxFileBytes": 67108864,
+    "maxTotalBytes": 268435456,
+    "maxStringCharacters": 8388608,
+    "maxNodes": 200000,
+    "maxDepth": 64,
+    "maxFindings": 10000,
+    "maxDecodePasses": 4
+  },
+  "policy": {
+    "inputsEdited": false,
+    "automaticRedaction": false,
+    "automaticRemoval": false,
+    "examplesClassifiedAutomatically": false,
+    "rootClassificationRequired": true,
+    "rawMatchedValuesPublished": false,
+    "numericOwnedPidsAreNotSecretsByThemselves": true
+  },
+  "limitations": [
+    "Candidate scan, not proof of universal absence of secrets or personal information.",
+    "No base64/compression/archive decoding, natural-language identity inference or reconstruction of hidden data.",
+    "Derived offsets refer to decoded views; JSON structural paths use object-key order and array indices without echoing private key names.",
+    "Public installation paths and intentional technical examples remain findings until root classification; evidence is never removed automatically.",
+    "A NO_CANDIDATES result is not a product PASS, suite result, remote CI check or authorization to publish."
+  ],
+  "endedAt": "2026-11-05T05:17:15.400Z"
+}

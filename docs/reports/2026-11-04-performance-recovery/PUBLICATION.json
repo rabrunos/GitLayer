@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "kind": "commit-a-validation-and-documentary-b-protocol",
+  "recordedAt": "2026-11-05T05:18:47.991Z",
+  "initialMain": "d71ccc7d188500a22e56ea93c70ac946dba9db60",
+  "implementationCommitA": "934befc1516bd12b3aee43c6b4e326d34e647f1b",
+  "functionalFingerprint": "5cc41446889657aee4f4622a0d5ab3ed46483a01f937cab7218a8c297415b44d",
+  "functionalFiles": 209,
+  "core18Fingerprint": "23c0b284f827cf30c07264874591e0b14da2dafee373885f214181152d2f7feb",
+  "freshA": {
+    "status": "PASS",
+    "startedAt": "2026-11-05T05:13:30.486Z",
+    "endedAt": "2026-11-05T05:16:10.140Z",
+    "rawResultSHA256": "0697d7e2af969aabe1246f67baadeacee3af5010698ab6fe3e9079edbc90958e",
+    "publicFile": "FRESH-COMMIT-A.json",
+    "publicSHA256": "3bd5eff1985c92e1316a7731b631cd9ce7c65e5d1547a7e9bc86f3857a4f17cd",
+    "audit": "FRESH-COMMIT-A-PRIVACY-AUDIT.json",
+    "auditSHA256": "33bd339c5cb0f3601f135559a503a877b8712906a53a47af44a40fbcea4e85cb",
+    "wrapperCommands": 22,
+    "expectedNonzeroProbe": "source-uploadpack-hook-config exit1 proves local hook absent",
+    "smoke": {
+      "commands": 82,
+      "snapshots": 4,
+      "steps": 7,
+      "status": "PASS",
+      "relocatedWithoutDependencies": true
+    },
+    "sourceAndCloneUnchanged": true,
+    "compiledUnchanged": true,
+    "cloneMode": "--no-local --no-hardlinks; no alternates; independent npm cache/config/HOME/TEMP",
+    "install": "npm ci --ignore-scripts --no-audit --no-fund; exact lockfile",
+    "phases": [
+      "installation",
+      "typecheck",
+      "Core/CLI build",
+      "compiled help",
+      "compiled relocated smoke"
+    ]
+  },
+  "documentaryB": {
+    "functionalChangesAllowed": false,
+    "protocol": [
+      "Commit only documentary attestation with identical209 functional files.",
+      "Recheck remote, then normal push main without force.",
+      "Compare HEAD/origin-main/ls-remote/direct GitHub commit and verify clean status and report links.",
+      "After push, validate a new independent copy of the actual final B SHA.",
+      "Report the observed B SHA, sync and fresh-B result after B exists; no self-referential commit assertion is fabricated here."
+    ]
+  },
+  "checksAreLocal": true,
+  "githubHostedCICertified": false,
+  "qualifications": [
+    "Full415 remains V9 runtime/corpus; final infra113 and broad361 have V11 fingerprints.",
+    "Campaign counts are not summed.",
+    "This pre-B protocol preserves observed A evidence and does not invent a B SHA or anticipate the post-push result."
+  ]
+}
