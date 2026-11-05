@@ -1,0 +1,310 @@
+{
+  "schema": 1,
+  "kind": "public-flat-node-tap-results",
+  "phase": "isolated-reproduction",
+  "originalStatus": "PASS",
+  "startedAt": "2026-11-04T17:19:17.495Z",
+  "endedAt": "2026-11-04T17:22:13.162Z",
+  "source": {
+    "inputs": [
+      "src",
+      "scripts",
+      "tests",
+      "package-lock.json",
+      "package.json",
+      "tsconfig.debug.json",
+      "tsconfig.json"
+    ],
+    "beforeFingerprint": "f72502adcfd332e3109ad3e82ec845731f376cfc41d5e4a44be5ce89a6c4a825",
+    "afterFingerprint": "f72502adcfd332e3109ad3e82ec845731f376cfc41d5e4a44be5ce89a6c4a825",
+    "sourceUnchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "count": 205,
+    "archive": "source/"
+  },
+  "command": {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "argv": [
+      "--import",
+      "tsx",
+      "--import",
+      "file:///<STAGE2>/repro-observer-preload.mjs",
+      "--test",
+      "--test-concurrency=1",
+      "--test-timeout=900000",
+      "--test-name-pattern",
+      ".*",
+      "--test-reporter=spec",
+      "--test-reporter-destination=stdout",
+      "--test-reporter=tap",
+      "--test-reporter-destination=stderr",
+      "tests/integration/review-target-preview.test.ts"
+    ],
+    "timeoutMs": 3600000,
+    "declaredTestBudgetMs": 900000,
+    "scope": "Explicit directed file selection with all original assertions, scales and declared per-test budgets preserved; not the full suite."
+  },
+  "process": {
+    "pid": "<OWNED_PID>",
+    "exitCode": 0,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "timeoutMs": 3600000,
+    "durationMs": 174514,
+    "termination": null
+  },
+  "phaseError": null,
+  "metadata": {
+    "officialGit": "C:\\Program Files\\Git\\cmd\\git.exe",
+    "environmentPolicy": "Isolated HOME/USERPROFILE/XDG/Git identity/config/credentials/TEMP. Exact declared test budget and assertions from the identified current source. One test file/case at a time. All evidence retained."
+  },
+  "complete": true,
+  "completeScope": "Only the complete consistent unindented Node summary in a verified final trailer matching the terminal result.summary. This flag is not a product PASS or a hierarchy claim.",
+  "nodeFinalSummary": {
+    "format": "Node.js TAP final summary",
+    "counts": {
+      "tests": 6,
+      "suites": 0,
+      "pass": 6,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 174444.0856
+    },
+    "complete": true,
+    "consistent": true
+  },
+  "recordedSummary": {
+    "format": "Node.js TAP final summary",
+    "counts": {
+      "tests": 6,
+      "suites": 0,
+      "pass": 6,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 174444.0856
+    },
+    "complete": true,
+    "consistent": true
+  },
+  "summaryMatchesRecorded": true,
+  "duplicateSummaryKeys": [],
+  "summaryTrailer": {
+    "firstLine": 39,
+    "lastLine": 46,
+    "followsAllParsedResults": true,
+    "trailingContent": [],
+    "verifiedFinalTrailer": true
+  },
+  "parsedResultCount": 6,
+  "resultCountMatchesDeclaredTests": true,
+  "results": [
+    {
+      "line": 3,
+      "indent": 0,
+      "indentText": "",
+      "id": "1",
+      "status": "ok",
+      "name": "R02 target preserves ignored intention from info",
+      "rawName": "R02 target preserves ignored intention from info",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 34512.0722,
+      "durationText": "34512.0722",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 4,
+        "lastLine": 7,
+        "closed": true,
+        "sha256": "53a4a9ec7cbe021d2e6936211be3e1ff91c419014ec014f1e69d2cd8ae76b9a8",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 9,
+      "indent": 0,
+      "indentText": "",
+      "id": "2",
+      "status": "ok",
+      "name": "R02 target preserves ignored intention from global",
+      "rawName": "R02 target preserves ignored intention from global",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 35136.4854,
+      "durationText": "35136.4854",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 10,
+        "lastLine": 13,
+        "closed": true,
+        "sha256": "6cc200c43f770499413fa16a6042273fe18af25fbd70607a97990a448efd8a08",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 15,
+      "indent": 0,
+      "indentText": "",
+      "id": "3",
+      "status": "ok",
+      "name": "R02 target preserves ignored intention from gitignore",
+      "rawName": "R02 target preserves ignored intention from gitignore",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 37429.4079,
+      "durationText": "37429.4079",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 16,
+        "lastLine": 19,
+        "closed": true,
+        "sha256": "604e7f784dd409bfffddeb37515d3c42738d114ba9e509457c9857dd6a7c282a",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 21,
+      "indent": 0,
+      "indentText": "",
+      "id": "4",
+      "status": "ok",
+      "name": "R03 preview off includes target newcomers without synchronizing metadata",
+      "rawName": "R03 preview off includes target newcomers without synchronizing metadata",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 27330.9628,
+      "durationText": "27330.9628",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 22,
+        "lastLine": 25,
+        "closed": true,
+        "sha256": "59d4e45629ef18c2e1eb421f6cc70d15c7b2525cb9a8d0249bb60e2884fc2001",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 27,
+      "indent": 0,
+      "indentText": "",
+      "id": "5",
+      "status": "ok",
+      "name": "R03 preview remove includes target newcomers without synchronizing metadata",
+      "rawName": "R03 preview remove includes target newcomers without synchronizing metadata",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 27183.021,
+      "durationText": "27183.021",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 28,
+        "lastLine": 31,
+        "closed": true,
+        "sha256": "5398975fca5f61330c2c730318b16f475502f6ae557a0314492a0f51bf3c7521",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 33,
+      "indent": 0,
+      "indentText": "",
+      "id": "6",
+      "status": "ok",
+      "name": "R02 native ignore evaluation preserves negations, hierarchy and last-rule priority",
+      "rawName": "R02 native ignore evaluation preserves negations, hierarchy and last-rule priority",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 12386.388,
+      "durationText": "12386.388",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 34,
+        "lastLine": 37,
+        "closed": true,
+        "sha256": "1a9a1d22ae5ab34f7225f10e9337c5caac33e6fb9614c04b0729631d6a54f4d5",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    }
+  ],
+  "unparsedResultLikeLines": [],
+  "hierarchyInferred": false,
+  "campaignsAggregated": false,
+  "provenance": {
+    "helper": {
+      "bytes": 22023,
+      "sha256": "af63c5be113ece5ae6905a47b7355a79314f7983de1f81d4659d230dc1547cd9"
+    },
+    "result": {
+      "bytes": 3943,
+      "sha256": "e4777c7d19ac8f77352dda498fb90e21889e6f1ddac4bb952cc22bbf4a0465cf"
+    },
+    "tap": {
+      "bytes": 1316,
+      "sha256": "da07b863407fcdb5009a92e1e5671f9fbab98a094af1b9d7c0b9b93648c2685a"
+    },
+    "started": {
+      "bytes": 2565,
+      "sha256": "96ea93eeedb8b1d20a7c8f53edbcfc9b887ae5a7ebea1b7cf53b6233839c9b56"
+    },
+    "rawStreamsPublished": false,
+    "rawDiagnosticValuesOmitted": [
+      "location",
+      "stack",
+      "expected",
+      "actual",
+      "operator",
+      "fixture diagnostics and other comments"
+    ],
+    "redactions": [
+      "Known stage/temp/profile/source roots, including repeated escaped separators",
+      "Owned process identifiers"
+    ],
+    "unknownAbsolutePathPolicy": "Refuse unknown absolute Windows/UNC and profile paths; only observed Git/Node installation roots may remain."
+  },
+  "limitations": [
+    "Flat rows retain original indentation and IDs without inventing parent/child relations.",
+    "Observed PASS/FAIL maps only ok/not ok; explicit SKIP/TODO directives are preserved separately, never converted into an environment classification.",
+    "Only immediately associated Node-style YAML diagnostics are parsed. Unsupported/ambiguous fields retain line ranges and hashes as unparsed metadata.",
+    "Cancelled parent/child semantics are not reconstructed; Node final totals remain authoritative for the recorded campaign.",
+    "A row-count mismatch or parsing ambiguity is declared and never corrected by inventing or removing results.",
+    "No totals are combined with a retry, reproduction, focus or other campaign."
+  ]
+}

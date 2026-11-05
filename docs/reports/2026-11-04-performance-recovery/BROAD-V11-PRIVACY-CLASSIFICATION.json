@@ -1,0 +1,2554 @@
+{
+  "schema": 1,
+  "kind": "root-reviewed-privacy-classification",
+  "recordedAt": "2026-11-05T05:10:31.665Z",
+  "rootApproved": true,
+  "auditSHA256": "d79cb7a77de66a330478a3d00610f153942146c1b4ae40970d47bcbc0554fe24",
+  "proposalSHA256": "cab16080f9282f9c7e21f68d63588bf5889e199e7a6b9fad3e509727483518d0",
+  "scope": "Only the254 exact label+findingID pairs in the18 hash-pinned V11 public artifacts. All44 complete public parents reviewed by root;246 raw official Git-z matches independently rechecked. No blanket exception.",
+  "summary": {
+    "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION": 246,
+    "EXACT_NATIVE_GIT_Z_CONFIG_ORIGIN_WITH_DECLARED_ROOT_ALIAS": 1,
+    "FULL_FILE_URI_WITH_DECLARED_PRIVATE_ROOT_ALIAS": 1,
+    "NATIVE_GIT_PERCENT_FORMAT_ARGUMENT_REQUIRES_ROOT_REVIEW": 5,
+    "RECORDED_OWNED_FIXTURE_CGI_CHILD_PID_INFORMATIONAL": 1
+  },
+  "unknown": 0,
+  "independentNativeZParentChecks": 246,
+  "groups": [
+    {
+      "id": "GROUP-001",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "parentCharacters": 59,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 86,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-002",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "4ae7f099823cba6dc49caa62a4d5db4463bfde16b089f6a6b1e14fba2e950e15",
+      "parentCharacters": 73,
+      "classification": "EXACT_NATIVE_GIT_Z_CONFIG_ORIGIN_WITH_DECLARED_ROOT_ALIAS",
+      "occurrences": 1,
+      "technicalFact": "The complete recorded NUL-bearing config-origin string replays the declared STAGE alias exactly; its fixture-relative form has the exact SHA of official Git config --show-origin -z stdout. The synthetic HOME config path and owned fixture marker are verified privately."
+    },
+    {
+      "id": "GROUP-003",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "0df49e70896c4c7010caed4589848e63c24d45cbc61346b7a1b84fbe7ed51093",
+      "parentCharacters": 117,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-004",
+      "kind": "FILE_URI",
+      "parentValueSHA256": "2b64da0fbe36c0e13f6a634cd4bf169e6bc361ca3ef92d2852fb4496e8c822e8",
+      "parentCharacters": 50,
+      "classification": "FULL_FILE_URI_WITH_DECLARED_PRIVATE_ROOT_ALIAS",
+      "occurrences": 1,
+      "technicalFact": "Every embedded file URI in the complete parent is checked for a declared SOURCE/STAGE/FIXTURE alias, and the complete parent replays exactly from the recorded original under the declared root substitutions. A historical failed-test stack remains a failure, not a successful campaign."
+    },
+    {
+      "id": "GROUP-005",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "parentCharacters": 71,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 8,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-006",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "eddafa9a027a6b37d52dedc5129cb55f69cf88d3abf760924a14cc5d6e566c72",
+      "parentCharacters": 117,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-007",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "parentCharacters": 60,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 42,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-008",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "f1ee37066ee2dcf5596fe0c304eb1d0db82e931066342f78027012e205dd323b",
+      "parentCharacters": 119,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-009",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "a0a883cf2fcde2ded18b3a35710dc8a099245e4716e65841d7c57cec1f1e41c9",
+      "parentCharacters": 183,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-010",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "parentCharacters": 60,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 6,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-011",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "97a450005f20eead8c822892d213c16ff19c76cc6ee4c339ab165b38adf9e965",
+      "parentCharacters": 59,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 4,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-012",
+      "kind": "UNDECODABLE_PERCENT_SEQUENCE",
+      "parentValueSHA256": "7c7f849eafdd640ea64319c6b9357d932e4637232033481ff4c4652fadbe8fd8",
+      "parentCharacters": 32,
+      "classification": "NATIVE_GIT_PERCENT_FORMAT_ARGUMENT_REQUIRES_ROOT_REVIEW",
+      "occurrences": 1,
+      "technicalFact": "The auditor flags an undecodable percent run in the complete recorded argument; this is not itself a path or secret finding. The exact native argv/context and original hash are retained."
+    },
+    {
+      "id": "GROUP-013",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "da56ee1564e8da9d96342bbde1be5e65b061ff455359cad93f0e535ffb118904",
+      "parentCharacters": 192,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-014",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "10b27b865c004f46b499e600ddb10d4d74bf4810843e420cbd48071a3279ce28",
+      "parentCharacters": 59,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-015",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "345966059178983e9157014827f2e298654d863b7396108bc18cf294c560bf28",
+      "parentCharacters": 118,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-016",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "ceabc9261a175624940abbd116a45f789c91439da2305e3e4458b0613c35afa7",
+      "parentCharacters": 59,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 4,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-017",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "a061061eef8d93428ee306dacb18d10fbe26aa3fd7c2364f6919cd71f1de364a",
+      "parentCharacters": 120,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-018",
+      "kind": "OWNED_PROCESS_ID_CANDIDATE",
+      "parentValueSHA256": "ff607d88094dbb4b133b57f11683aa00f6d3752f539ff7473194453c5c077b96",
+      "parentCharacters": 5,
+      "classification": "RECORDED_OWNED_FIXTURE_CGI_CHILD_PID_INFORMATIONAL",
+      "occurrences": 1,
+      "technicalFact": "The complete numeric field belongs to the fixture helper direct CGI child: exact parent-container match to the declared connection-cut transcript, same request backend-closed event, recorded zero owned backends at stop, and archived spawn/owned-set source. This is historical ownership context, not a current process-absence proof."
+    },
+    {
+      "id": "GROUP-019",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "parentCharacters": 60,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 12,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-020",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "aecf7148fe970a2c0b265465557b6e9bd1e47d42d8b06c26c27aae7b2deb5277",
+      "parentCharacters": 2290,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 4,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-021",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "fe2f730c8653f06726ad76a235c23a8810769f18009ecb5c308d24c7df7d6780",
+      "parentCharacters": 187,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-022",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "3987770e8cdbfc4ec0535782b87c591dd7e563ce2aab03bed1ac089ebf31d76b",
+      "parentCharacters": 185,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-023",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "cbda44c80bb61e80e1031b59d8401e5ee054cf00ccc7419329eafddf9edf0e0f",
+      "parentCharacters": 119,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-024",
+      "kind": "UNDECODABLE_PERCENT_SEQUENCE",
+      "parentValueSHA256": "6deef77b6add6914039cf650bf5eb7c8c298c0e61e08f717558373ba957837e5",
+      "parentCharacters": 16,
+      "classification": "NATIVE_GIT_PERCENT_FORMAT_ARGUMENT_REQUIRES_ROOT_REVIEW",
+      "occurrences": 1,
+      "technicalFact": "The auditor flags an undecodable percent run in the complete recorded argument; this is not itself a path or secret finding. The exact native argv/context and original hash are retained."
+    },
+    {
+      "id": "GROUP-025",
+      "kind": "UNDECODABLE_PERCENT_SEQUENCE",
+      "parentValueSHA256": "bab0abc97c8dfbb218a835c3099a8e43ba0e092b480b0b5755de65ec7f18585a",
+      "parentCharacters": 16,
+      "classification": "NATIVE_GIT_PERCENT_FORMAT_ARGUMENT_REQUIRES_ROOT_REVIEW",
+      "occurrences": 1,
+      "technicalFact": "The auditor flags an undecodable percent run in the complete recorded argument; this is not itself a path or secret finding. The exact native argv/context and original hash are retained."
+    },
+    {
+      "id": "GROUP-026",
+      "kind": "UNDECODABLE_PERCENT_SEQUENCE",
+      "parentValueSHA256": "5554e79f1fbc68b5f119559a11fd4d8d087bb38e13d57c7b870f09ce4f11c466",
+      "parentCharacters": 12,
+      "classification": "NATIVE_GIT_PERCENT_FORMAT_ARGUMENT_REQUIRES_ROOT_REVIEW",
+      "occurrences": 2,
+      "technicalFact": "The auditor flags an undecodable percent run in the complete recorded argument; this is not itself a path or secret finding. The exact native argv/context and original hash are retained."
+    },
+    {
+      "id": "GROUP-027",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "74f6b4876abcfc5424c63a138c3b2ed857645f127fe89d7437b7e35606291eb1",
+      "parentCharacters": 189,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-028",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "dbb5b1c8f165e0fe9b3dc1999038ced58244779600e81d0284cb1bffb42707db",
+      "parentCharacters": 124,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-029",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "3cc03b6dca19179637da474b6fbb720643fdc3a1d9daf48b45a0ca53b55c97d5",
+      "parentCharacters": 125,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 4,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-030",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "parentCharacters": 59,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 12,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-031",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "78813eda44bdcfd395585aae473cfa18b3f114abb84dedd6efdc27d3ae8673ac",
+      "parentCharacters": 58,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-032",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "47f52857d4b4c4b46d8ce1777c26078a663479759bc4f5ca1c28af493b544317",
+      "parentCharacters": 121,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-033",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "6b377cb0187df0661ef3b6d05589576a3056fd5f0662c605a16ec023a30bdeff",
+      "parentCharacters": 60,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 4,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-034",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "40a623ae280774c00143ca561bbf23d2509cb7fb060920ecba4ae8a31705f5f0",
+      "parentCharacters": 119,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-035",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "d94d49f5e8f413bc2bc4f94fb453f985a33ab967fb65b9180f38ddf395f18c32",
+      "parentCharacters": 121,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 4,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-036",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "3575b0c0ca28a97399ad50d6f06d86f6722353dd3869dc5855b42b2111bc7f44",
+      "parentCharacters": 58,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-037",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "762a0f064845ab4faff917eede43588b4dd231d33ba0208cdafaf398635a93c2",
+      "parentCharacters": 58,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-038",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "parentCharacters": 58,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 6,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-039",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "6e0ae2de959818663ca6ee250b4c0a8755202dccb997ff65cb18c1e697449932",
+      "parentCharacters": 59,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-040",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "c3398a6b0d90686ed1e483bc58bb80d1b458fac3e60a90a3c6eed5c98e42af3b",
+      "parentCharacters": 58,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-041",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "8ef4b0567f30f0da76e6ebc9fde7c8587698fd7be351891d52dcc9acc43eefd3",
+      "parentCharacters": 60,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-042",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "e51dca952d84db65488bcdb8da25948e0713b42bb9d6f214e313e60850d6d9ca",
+      "parentCharacters": 60,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-043",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "f74dec717ea43d3b273d417ef57c8ddd314d5c75215fa6b132153f05b30d7b11",
+      "parentCharacters": 60,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 2,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    },
+    {
+      "id": "GROUP-044",
+      "kind": "NUL_CHARACTER",
+      "parentValueSHA256": "4e0252109dd704a103cb28f3726a8bce67b4c548cf64aba0f551942980e0cb32",
+      "parentCharacters": 60,
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "occurrences": 4,
+      "technicalFact": "The complete original parent SHA matches declared official Git -z stdout from this same owned case; the public value matches the original or exact declared-root projection."
+    }
+  ],
+  "findings": [
+    {
+      "label": "broad-v11-public-02",
+      "id": "914ead7091e9ce1bbcb041d71937be36d102aba97d5472156ad128ff496c4596",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "1de5a982a34e3fd35a04be53d9e699acafa06eefe3c5c89d773e55e571abd333"
+    },
+    {
+      "label": "broad-v11-public-02",
+      "id": "5cb5ec279d5d896043913e81a1745ca9c89e489388bce7ccbacd9d203b070ab9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "1de5a982a34e3fd35a04be53d9e699acafa06eefe3c5c89d773e55e571abd333"
+    },
+    {
+      "label": "broad-v11-public-02",
+      "id": "649d9d69b131f1f6ea39e3664d6f80875ee5f9d59cec3f82a9d9a1d63796405d",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "e96c336c783c4a6615983de5004c23a78c4a9b385c0e8b4df678113342b42a03"
+    },
+    {
+      "label": "broad-v11-public-02",
+      "id": "db141296c3e0c95da44a1eb05e7d319c8dc681e3a03c42f0ee1c8ce9bb3069d5",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "e96c336c783c4a6615983de5004c23a78c4a9b385c0e8b4df678113342b42a03"
+    },
+    {
+      "label": "broad-v11-public-02",
+      "id": "33f0b93ef7bf2cde9ac645fc7e2f18bfe5607730e483a6b88ce9ae85898842f2",
+      "classification": "EXACT_NATIVE_GIT_Z_CONFIG_ORIGIN_WITH_DECLARED_ROOT_ALIAS",
+      "parentValueSHA256": "4ae7f099823cba6dc49caa62a4d5db4463bfde16b089f6a6b1e14fba2e950e15",
+      "sourceValueSHA256": "9c8db8ac92c266e64108f6757b7cbbee310a4c30b21af8096d841034c07f43a2",
+      "contextSHA256": "6b4067586e5d244950553d593dbb144659ccb715dc32dde4612b4528dd57a8e0"
+    },
+    {
+      "label": "broad-v11-public-02",
+      "id": "eb6b61ca22a6290c480206d99a0063920ea61692dc933e203e754cabfd5064c4",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "0df49e70896c4c7010caed4589848e63c24d45cbc61346b7a1b84fbe7ed51093",
+      "sourceValueSHA256": "0df49e70896c4c7010caed4589848e63c24d45cbc61346b7a1b84fbe7ed51093",
+      "contextSHA256": "9469e4d81a98befdaff17ee1da30b0bd6ce1f618f036ce2c3543dc3ac756ac72"
+    },
+    {
+      "label": "broad-v11-public-02",
+      "id": "9689433452b32fea8e5044f83d7745568361b3cfacd36a822298ae9d76f55dd4",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "0df49e70896c4c7010caed4589848e63c24d45cbc61346b7a1b84fbe7ed51093",
+      "sourceValueSHA256": "0df49e70896c4c7010caed4589848e63c24d45cbc61346b7a1b84fbe7ed51093",
+      "contextSHA256": "9469e4d81a98befdaff17ee1da30b0bd6ce1f618f036ce2c3543dc3ac756ac72"
+    },
+    {
+      "label": "broad-v11-public-02",
+      "id": "21b17a52de1dcce5fa0719ba90e832b7f0811b034c5f6772736d1f3d988b012f",
+      "classification": "FULL_FILE_URI_WITH_DECLARED_PRIVATE_ROOT_ALIAS",
+      "parentValueSHA256": "2b64da0fbe36c0e13f6a634cd4bf169e6bc361ca3ef92d2852fb4496e8c822e8",
+      "sourceValueSHA256": "08c8e8296f372e1c220cae02b12307cf8b79096d2e4357c02fff3c26c95b22b2",
+      "contextSHA256": "b47ced98f38787f1cafcacff671a0c0f7c9f8c6f1a664a9c2ed54004db5d8265"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "14c051f813c8173f9b380d0ac0809b57c172b40adcb69ce19e82e784924db02c",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "7147eaa7fa9b4a662015b0618f845a2c7134b8b263f434c7358aaa1316c479df"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "4c0d2618f88cc132e7da07012ddf8d0110e1d1b7a474fce8257de27d3933e733",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "7147eaa7fa9b4a662015b0618f845a2c7134b8b263f434c7358aaa1316c479df"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "c83601c9eede71ea006a5b1914bed314833f11c91379a1d9857e393c43aa408a",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "sourceValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "contextSHA256": "108447beb7699918ffeb2551a19314611722d6939a59b49b8ca39bc9bc807aa4"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "f9afbe0becf3e4efe445bdaeaae53bb12d836157b59bb9d7ccbb698aab5b4959",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "sourceValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "contextSHA256": "108447beb7699918ffeb2551a19314611722d6939a59b49b8ca39bc9bc807aa4"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "ec322f9aff9d59a0f8cfd45454b5b52a5fcca2e9aa96d5641e131ccb1243e39c",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "00b5d1d73d88492ca3ccb203c356c198a650d6f32f67e9a1a926163bca6b8789"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "f80c8bdc5fe48e071eef75e22c50469aa538f419c003068499909e28770e4dd9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "00b5d1d73d88492ca3ccb203c356c198a650d6f32f67e9a1a926163bca6b8789"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "06d203cfb7d3f620e1591197aca336b76d1ae313e02a2eb4b0e5a162ea630963",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "eddafa9a027a6b37d52dedc5129cb55f69cf88d3abf760924a14cc5d6e566c72",
+      "sourceValueSHA256": "eddafa9a027a6b37d52dedc5129cb55f69cf88d3abf760924a14cc5d6e566c72",
+      "contextSHA256": "51145d668750b02b6093ebbd31885f5b43eff45013bc1b48ef0ca4eec687b130"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "041efd013422f123a7164fb1dfe2deedf6820ee4585c172b6067b81687233952",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "eddafa9a027a6b37d52dedc5129cb55f69cf88d3abf760924a14cc5d6e566c72",
+      "sourceValueSHA256": "eddafa9a027a6b37d52dedc5129cb55f69cf88d3abf760924a14cc5d6e566c72",
+      "contextSHA256": "51145d668750b02b6093ebbd31885f5b43eff45013bc1b48ef0ca4eec687b130"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "1f8d447110584463a7f3d1f190817e5ef20eadf1e66c285d877b344d2228be8c",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "0683856004bb2342f945c453c91267e926ace4db4abd0abc44f20050b2dcf729"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "a9c7f60a1ce0d1b50ac10ef64506de0cba49b0867dceb9574cfecccc22528dc5",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "0683856004bb2342f945c453c91267e926ace4db4abd0abc44f20050b2dcf729"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "d2fd0466335ba178a85db646fe687d4118f07aa4b7ff94d574fe9e364a16e8fc",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "f1ee37066ee2dcf5596fe0c304eb1d0db82e931066342f78027012e205dd323b",
+      "sourceValueSHA256": "f1ee37066ee2dcf5596fe0c304eb1d0db82e931066342f78027012e205dd323b",
+      "contextSHA256": "f8fefb47a877b84e6bf965f7a772a6d98160a687f37d687a281d46165f03f445"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "3b5444b65c579fd9f4366df52fe3b8673760fa4cf5b09eb74970bc5ce637fc1b",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "f1ee37066ee2dcf5596fe0c304eb1d0db82e931066342f78027012e205dd323b",
+      "sourceValueSHA256": "f1ee37066ee2dcf5596fe0c304eb1d0db82e931066342f78027012e205dd323b",
+      "contextSHA256": "f8fefb47a877b84e6bf965f7a772a6d98160a687f37d687a281d46165f03f445"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "8f5141e124e309b6a4447008acead8b350c6dc11f5631b9c6e5a1fe2b0d238dd",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a0a883cf2fcde2ded18b3a35710dc8a099245e4716e65841d7c57cec1f1e41c9",
+      "sourceValueSHA256": "a0a883cf2fcde2ded18b3a35710dc8a099245e4716e65841d7c57cec1f1e41c9",
+      "contextSHA256": "90eec912e800f192d4a875d6fe147a5095e3d85621b3c0723981929e60b4a520"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "33f0b93ef7bf2cde9ac645fc7e2f18bfe5607730e483a6b88ce9ae85898842f2",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a0a883cf2fcde2ded18b3a35710dc8a099245e4716e65841d7c57cec1f1e41c9",
+      "sourceValueSHA256": "a0a883cf2fcde2ded18b3a35710dc8a099245e4716e65841d7c57cec1f1e41c9",
+      "contextSHA256": "90eec912e800f192d4a875d6fe147a5095e3d85621b3c0723981929e60b4a520"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "f494a2f3141a36dfbef54e5ddb4aa51ed53ed9aa70aed651f73e733abae0ec7c",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "6ab47e803545020d75cb8814a8af142a723b3719778fa252b5e9525331768177"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "c765f8e433d0822d065b8d65e9812b87bb1744dd4b3760278e784c55e36e11ef",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "6ab47e803545020d75cb8814a8af142a723b3719778fa252b5e9525331768177"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "d29bad7172d408304a4b403769c3ec5481ff23802a5bf57205be589a810050c9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "9edb6f5b5d22f424ff23c2618447ae8eedfc608786fa946ce49d772b15351a18"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "759b32160ef012d1513b41846075bd9bd30ee16e46968daf355d5e035ca5e739",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "9edb6f5b5d22f424ff23c2618447ae8eedfc608786fa946ce49d772b15351a18"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "816831d043008be1e15dfd7c7028995eb0a20e69ccbc4aeb604d6e527aead3de",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "sourceValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "contextSHA256": "83b42cbc00cf70934e4174b804fda38cf357b88d9417b64b0d9c704fec20786d"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "1632d996b19c33fee15bc5b91ca6015d6ea7d4d2f9a5ec9ed0d83e81893e1d2c",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "sourceValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "contextSHA256": "83b42cbc00cf70934e4174b804fda38cf357b88d9417b64b0d9c704fec20786d"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "6290c5bf5878d53f8004e2bb09780476a63454a13095b29cd51d16294bbeab88",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "sourceValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "contextSHA256": "1e4aa4598ca6a95b990e9fd4a34f38099bd4dc501a4ea803a60cb4dab808be1b"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "48569fb8ca0c7f4328589e51f04a13fb6f923b3d08f2643bf9f8da3fe8f0e296",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "sourceValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "contextSHA256": "1e4aa4598ca6a95b990e9fd4a34f38099bd4dc501a4ea803a60cb4dab808be1b"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "82502853fa15f82a8fb9ab20689041e250e6f097e32fac79de38e04d3d42b1d0",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "sourceValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "contextSHA256": "cdf6d4b223b4d402f00c8d29ec3488a1509220b7dba335c4fae6144811da8599"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "51b9a26f166cc62ff9ed532234ed318b98eddef4685b4eac5d648686ca29de93",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "sourceValueSHA256": "8c694bd630512d9496a1755ed888d908aaa44aa366b8ede6df5c9130ce3f3413",
+      "contextSHA256": "cdf6d4b223b4d402f00c8d29ec3488a1509220b7dba335c4fae6144811da8599"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "f2c41d42a2685188d4128d3a4b4329478e8dccb57f59feeaa0b397e24c53e255",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "7e01b310b1d22c5dad491fe1bdd5d3ed9e062a109a592af91484d08451c205d0"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "id": "a4585c4dbee388b5446aa3c93d70458886c11d45a6c0d0c590531fc9a9b4d2b7",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "7e01b310b1d22c5dad491fe1bdd5d3ed9e062a109a592af91484d08451c205d0"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "8210979a4a2240bd733ae32472cfd2d4b691213244b55063488693e0fd97b179",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "97a450005f20eead8c822892d213c16ff19c76cc6ee4c339ab165b38adf9e965",
+      "sourceValueSHA256": "97a450005f20eead8c822892d213c16ff19c76cc6ee4c339ab165b38adf9e965",
+      "contextSHA256": "de858b61d379496171dd08212d46ab3c0c11826967ed18fbda4ed2f5937e8397"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "4e29946651b65a3eaf28d8ecb40152e8e33d93363f33c181e22a3c0df59de4cf",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "97a450005f20eead8c822892d213c16ff19c76cc6ee4c339ab165b38adf9e965",
+      "sourceValueSHA256": "97a450005f20eead8c822892d213c16ff19c76cc6ee4c339ab165b38adf9e965",
+      "contextSHA256": "de858b61d379496171dd08212d46ab3c0c11826967ed18fbda4ed2f5937e8397"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "86e1f6a6f7d0be22b91288c755908f5d46afa7e208f38420572dcdab4900bb6e",
+      "classification": "NATIVE_GIT_PERCENT_FORMAT_ARGUMENT_REQUIRES_ROOT_REVIEW",
+      "parentValueSHA256": "7c7f849eafdd640ea64319c6b9357d932e4637232033481ff4c4652fadbe8fd8",
+      "sourceValueSHA256": "7c7f849eafdd640ea64319c6b9357d932e4637232033481ff4c4652fadbe8fd8",
+      "contextSHA256": "5fa3ea4ef0a367e9cfd397e26a973722cf1c7ac000fcfc91633cdd6ca00b4e91"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "07c266b3a1a40e4865f88e879e3a420e78b3682032dce8d28406095b9c1b9582",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "da56ee1564e8da9d96342bbde1be5e65b061ff455359cad93f0e535ffb118904",
+      "sourceValueSHA256": "da56ee1564e8da9d96342bbde1be5e65b061ff455359cad93f0e535ffb118904",
+      "contextSHA256": "d008794cdddf7d5151340bfdaf8a1ea3f4545cfa67e172c8bb744490f5f72c80"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "4c9935985e1e727b8e6616cc4a361a6b8fe8fdd040a0d64a101bf3cd3d08bafc",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "da56ee1564e8da9d96342bbde1be5e65b061ff455359cad93f0e535ffb118904",
+      "sourceValueSHA256": "da56ee1564e8da9d96342bbde1be5e65b061ff455359cad93f0e535ffb118904",
+      "contextSHA256": "d008794cdddf7d5151340bfdaf8a1ea3f4545cfa67e172c8bb744490f5f72c80"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "b48989dfac75bdad52e19bdc4177781da3d86b084734e060050edf4fe515044e",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "97a450005f20eead8c822892d213c16ff19c76cc6ee4c339ab165b38adf9e965",
+      "sourceValueSHA256": "97a450005f20eead8c822892d213c16ff19c76cc6ee4c339ab165b38adf9e965",
+      "contextSHA256": "287764021d4f23309d3db0b583f96b5c9c57e68506d60da01a48e9e38c32bb55"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "ae91d9ea3e35d35e7048d6dcc8d97c6adb67eb6a185d72e71c293b5492185fd6",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "97a450005f20eead8c822892d213c16ff19c76cc6ee4c339ab165b38adf9e965",
+      "sourceValueSHA256": "97a450005f20eead8c822892d213c16ff19c76cc6ee4c339ab165b38adf9e965",
+      "contextSHA256": "287764021d4f23309d3db0b583f96b5c9c57e68506d60da01a48e9e38c32bb55"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "77003a8af3c63293a9baefe15104ea383d5d51b564cb9644b1b42aa4811ea9f8",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "sourceValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "contextSHA256": "b5d227a615c73323590c7e1de16a0423698bd713d8faa38b6cea3c49220600b2"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "cea525daea3aea6cc8e28af29ef252eb49df9d5943014bdf69d8f1ec82f9b41b",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "sourceValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "contextSHA256": "b5d227a615c73323590c7e1de16a0423698bd713d8faa38b6cea3c49220600b2"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "c55edf6faf068af152877fde4357064e2c7bbb50f8dc081b6c1cd01655aca049",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "sourceValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "contextSHA256": "27b24409404dd08abfad53ea630c3f6399364d4dd371f23c2825c4fa456220d7"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "d8cf54fd4a97b20c29f049abaa2636db1b7a7c641473d9097e9b98c8c67ab2b3",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "sourceValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "contextSHA256": "27b24409404dd08abfad53ea630c3f6399364d4dd371f23c2825c4fa456220d7"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "0a3679364abc9ecff58d1f69b035cd173194dde2d0f112a88f23e78efea8ad47",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "sourceValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "contextSHA256": "b7b693edbd2aca28664cab2ab23b6d4f7dbcf502f097bcc49d2a3e6db4e5b7cc"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "64613bd545cf8390a1a37a9c7d6b5e97c24597188c5e5e9bc0d469f9f1812749",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "sourceValueSHA256": "c7681121c65f3a2a7f2a2b823ec0f8f796f23c3ab5e2516601bfc3c6d9764a27",
+      "contextSHA256": "b7b693edbd2aca28664cab2ab23b6d4f7dbcf502f097bcc49d2a3e6db4e5b7cc"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "ef2bbdcefcbfa7e67da4c60bc098b6bbd052c7cf13f78c7ae75f4aa11dd4dcce",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "10b27b865c004f46b499e600ddb10d4d74bf4810843e420cbd48071a3279ce28",
+      "sourceValueSHA256": "10b27b865c004f46b499e600ddb10d4d74bf4810843e420cbd48071a3279ce28",
+      "contextSHA256": "ce0fe3712f89e93fe36bf8c70cb16cebcad65a3c359c393c3ba4d28ca29675b3"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "3ef43e88f63bdb5eb134e88b1667ecd84a614305a0461264c1a58bf3448cd2c0",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "10b27b865c004f46b499e600ddb10d4d74bf4810843e420cbd48071a3279ce28",
+      "sourceValueSHA256": "10b27b865c004f46b499e600ddb10d4d74bf4810843e420cbd48071a3279ce28",
+      "contextSHA256": "ce0fe3712f89e93fe36bf8c70cb16cebcad65a3c359c393c3ba4d28ca29675b3"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "b0891f46f0bf86334993150a501e6f404cfcb1d7635e0b388a63a7d3be28b5a2",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "c3843aafb4e3136002adb008d088693a94dc44db6335f8d57cfd63d60a26cdf7"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "76026c11559453f4db6b1c2cfc18b5005b02d28baf5cd10c7c5ecc458b9f1452",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "c3843aafb4e3136002adb008d088693a94dc44db6335f8d57cfd63d60a26cdf7"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "17464d5ada6cbca11acf2694891174615e336e1dc1012bc35191944c1e46d272",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "77e823cdc32da64c55a2f44a1836c772bea817f377ccf78215505f3e52adf39c"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "id": "36dc4cfd381a9e0cfab0547ae21cac25aab9b4a005e95297ac7be7de9e6d21d4",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "77e823cdc32da64c55a2f44a1836c772bea817f377ccf78215505f3e52adf39c"
+    },
+    {
+      "label": "broad-v11-public-05",
+      "id": "435b9046d8445a14609b5534a91a21d8f1104bfc9ab731374cd8bed6d33b1de4",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "9cc5cd4b712d77a50ada3d98d5ee08cd441c9529409d16e7008f315fb4cc3336"
+    },
+    {
+      "label": "broad-v11-public-05",
+      "id": "eb59d4d69b3fb52d01cdb3060f9648f38f3f7bf35f98b64c71eb3ce50cff026b",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "9cc5cd4b712d77a50ada3d98d5ee08cd441c9529409d16e7008f315fb4cc3336"
+    },
+    {
+      "label": "broad-v11-public-05",
+      "id": "7470be1505ea2b286c7a0fa73d8b6479b544fd87459b68b8372abc1f01bee0fe",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "345966059178983e9157014827f2e298654d863b7396108bc18cf294c560bf28",
+      "sourceValueSHA256": "345966059178983e9157014827f2e298654d863b7396108bc18cf294c560bf28",
+      "contextSHA256": "6548fe5595a8197ea50b221ad5e21e6e9c2302c3e1a2b588e35894850c743d92"
+    },
+    {
+      "label": "broad-v11-public-05",
+      "id": "07cb3305278ab00987ec41bb80e7d0b32fbaff91855d86f1904161e850c75ff2",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "345966059178983e9157014827f2e298654d863b7396108bc18cf294c560bf28",
+      "sourceValueSHA256": "345966059178983e9157014827f2e298654d863b7396108bc18cf294c560bf28",
+      "contextSHA256": "6548fe5595a8197ea50b221ad5e21e6e9c2302c3e1a2b588e35894850c743d92"
+    },
+    {
+      "label": "broad-v11-public-06",
+      "id": "8e4e1f2a87a1ff96e75bb3b55c37096ed9dc122ec3ab97e498ca65fa49ca30a0",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "ceabc9261a175624940abbd116a45f789c91439da2305e3e4458b0613c35afa7",
+      "sourceValueSHA256": "ceabc9261a175624940abbd116a45f789c91439da2305e3e4458b0613c35afa7",
+      "contextSHA256": "187ef7af060e9de19c71d17a64ba7945ed41ada3ac71bb66a56eebd7b3506570"
+    },
+    {
+      "label": "broad-v11-public-06",
+      "id": "1601324241805a44120dd11a2994a387898f93ea3a43d0094f1ec00e438dbc99",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "ceabc9261a175624940abbd116a45f789c91439da2305e3e4458b0613c35afa7",
+      "sourceValueSHA256": "ceabc9261a175624940abbd116a45f789c91439da2305e3e4458b0613c35afa7",
+      "contextSHA256": "187ef7af060e9de19c71d17a64ba7945ed41ada3ac71bb66a56eebd7b3506570"
+    },
+    {
+      "label": "broad-v11-public-06",
+      "id": "649d9d69b131f1f6ea39e3664d6f80875ee5f9d59cec3f82a9d9a1d63796405d",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "ceabc9261a175624940abbd116a45f789c91439da2305e3e4458b0613c35afa7",
+      "sourceValueSHA256": "ceabc9261a175624940abbd116a45f789c91439da2305e3e4458b0613c35afa7",
+      "contextSHA256": "0a247cba4439658059cb452758ce1dd4f79a2d6f22c8cfbac01840a6fe3eb404"
+    },
+    {
+      "label": "broad-v11-public-06",
+      "id": "db141296c3e0c95da44a1eb05e7d319c8dc681e3a03c42f0ee1c8ce9bb3069d5",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "ceabc9261a175624940abbd116a45f789c91439da2305e3e4458b0613c35afa7",
+      "sourceValueSHA256": "ceabc9261a175624940abbd116a45f789c91439da2305e3e4458b0613c35afa7",
+      "contextSHA256": "0a247cba4439658059cb452758ce1dd4f79a2d6f22c8cfbac01840a6fe3eb404"
+    },
+    {
+      "label": "broad-v11-public-06",
+      "id": "a00857a3f39e5397aec1fb3d63cded71f0bcf717b03642d9b4a09bbb09bdf286",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a061061eef8d93428ee306dacb18d10fbe26aa3fd7c2364f6919cd71f1de364a",
+      "sourceValueSHA256": "a061061eef8d93428ee306dacb18d10fbe26aa3fd7c2364f6919cd71f1de364a",
+      "contextSHA256": "a1b4e816204e73162ffc80a3b3783f6d40225ce901971cb6b461bdd2986f893e"
+    },
+    {
+      "label": "broad-v11-public-06",
+      "id": "61a3c42232565841d93d17aef192ad3163a953c7413b0bb254ca11c2d741ca97",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a061061eef8d93428ee306dacb18d10fbe26aa3fd7c2364f6919cd71f1de364a",
+      "sourceValueSHA256": "a061061eef8d93428ee306dacb18d10fbe26aa3fd7c2364f6919cd71f1de364a",
+      "contextSHA256": "a1b4e816204e73162ffc80a3b3783f6d40225ce901971cb6b461bdd2986f893e"
+    },
+    {
+      "label": "broad-v11-public-06",
+      "id": "8958214411ab65b30f42683c6c25e86cf55a5f8d0cd24fe0a4c5a89f8a006840",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "9ed7dda8dde7fa081bf6b147b55c706b9fc383e299bb6db0982e0851e98b1bfb"
+    },
+    {
+      "label": "broad-v11-public-06",
+      "id": "b96259d2790b017a3ed9b10bee083e67da0b5d07518525ada194f886b628f0e4",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "9ed7dda8dde7fa081bf6b147b55c706b9fc383e299bb6db0982e0851e98b1bfb"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "4d925e4e4b516ecdd02bee4e4c5d6f560880d4b8b7b2be3a9691d68be1aeaffe",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "ca5da05dd956a4d8d29e469834e7f261ab129644df2751bdc3fc06ca57258cad"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "81509271eb5d3e0fdd8fd8fa7be0c09283fbd0356e0547931b05a8cd8dd2c3bb",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "ca5da05dd956a4d8d29e469834e7f261ab129644df2751bdc3fc06ca57258cad"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "0f0ed90e9d8f71bdb2013544dce7731415d19ad49178281915030c56997b1347",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "d964104a0e77ddf36979cfb59969e6886215ac412a6c74498bf7e5e537521224"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "93f3cfb89f17c88bdc768f18ce425044af04c398b896c1aebb759c01b9d21bdf",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "d964104a0e77ddf36979cfb59969e6886215ac412a6c74498bf7e5e537521224"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "8adba556b81543cec3bf67642613c87a52bcf023c64b41b0cb4dfe5f331986f9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "73868d75faabb13038b3ab6350815a5c5f59b7867a2282d6ee4a59ea09f31a4f"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "d9f4cd8e386d0e1548c6b32ea05caaa5800281df1099653c1dc0cfc5a4ab44f3",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "73868d75faabb13038b3ab6350815a5c5f59b7867a2282d6ee4a59ea09f31a4f"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "be7b47135f5d73f14bdf0cc32e6df2c8585b577d53719eb75efa4dc0ac37a88c",
+      "classification": "RECORDED_OWNED_FIXTURE_CGI_CHILD_PID_INFORMATIONAL",
+      "parentValueSHA256": "ff607d88094dbb4b133b57f11683aa00f6d3752f539ff7473194453c5c077b96",
+      "sourceValueSHA256": "ff607d88094dbb4b133b57f11683aa00f6d3752f539ff7473194453c5c077b96",
+      "contextSHA256": "7fa78b48a0b81b30536bb8d1c57974cd0f03095eccb068ab8b89c940d71baae9"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "ddd6acab565e2decc3b755635952f80bc2d2cd7df7fdf34df2b30a356da4a8bb",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "bbaea0038d0b75bf4b720bccdf81b2c0c3662c9f9408f232147656be0ec2cb94"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "6354a014fccd73005f8f3c2932a423515969b53652812956aebace14b659c571",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "bbaea0038d0b75bf4b720bccdf81b2c0c3662c9f9408f232147656be0ec2cb94"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "ae115054ca8c3a8804d2929587bf652e1a1e56b7239ffcef1da2eb27b2b8afaf",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "59b15c6318e276b5327d6700d23ccbd4d3efcb68e6999e054c4f93b0643739ca"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "f4667b0d942718de8716ddc200ec40845507e7750f1705746e0fcb179c5e99a5",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "59b15c6318e276b5327d6700d23ccbd4d3efcb68e6999e054c4f93b0643739ca"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "6dad6eaebcfe6253263fd5f857043425696809a8071e188a5fb6c6ff01cdb8e3",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "e3766e889ad06d65c5e17e74376e9175a9a674a56ac8401c26b75c71b4303074"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "d1e0880418416a91d168831e25639d34f12f83eba12745c20ae1fea2e3df137a",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "e3766e889ad06d65c5e17e74376e9175a9a674a56ac8401c26b75c71b4303074"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "1ed855fd523de2d31d96583f7123203f98cd49b04bd0669794007dcf09393aea",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "c3df3fc3ff09dc524e790481bdb69a337824135ed1cd6e276d18c8a574e42dda"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "1b23a5a85d57a8940459d01a1f12b5dbbeecf5e0b0ab4a9785db520cebc5dda7",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "c3df3fc3ff09dc524e790481bdb69a337824135ed1cd6e276d18c8a574e42dda"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "3cd78a6980ea24c6e8f3b6b5115ff6ddd0109791d9e8ec785502671ec869f15c",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "73cb9cbeb89c1032f158a161e2a87ebe60a2b90673ff7261af2eb41c7a6efb5b"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "dd10cf7b473f7358611f4c0e6a39565a4ea951a1f86279f8382e62c6a24d8444",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "73cb9cbeb89c1032f158a161e2a87ebe60a2b90673ff7261af2eb41c7a6efb5b"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "4e1b57dba8bd3d414b5a748bbb3b2b7105a167e97f382064b1cab649de5403a9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "a091fcb541466d386751a88d2589c072e77a0c16e85b355c84bfcf39052944f5"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "id": "1c29c974e8038e259e7a3f82e7a698bed2155cf1e99085905a4622dc8bc62ffb",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "a091fcb541466d386751a88d2589c072e77a0c16e85b355c84bfcf39052944f5"
+    },
+    {
+      "label": "broad-v11-public-08",
+      "id": "368bd9a5065d48c7a98fddd5be3723f10e41c6038392ba35cfb2f1016e20b9bd",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "aecf7148fe970a2c0b265465557b6e9bd1e47d42d8b06c26c27aae7b2deb5277",
+      "sourceValueSHA256": "aecf7148fe970a2c0b265465557b6e9bd1e47d42d8b06c26c27aae7b2deb5277",
+      "contextSHA256": "e487fd3e946d6247ef5090e89e45844cf15304d803daf9f61382029a4d7dd63a"
+    },
+    {
+      "label": "broad-v11-public-08",
+      "id": "5c08e2ad8b98fb14950ee5f6bcdc6fc5ad6e749e7e3e703965deea3797715cee",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "aecf7148fe970a2c0b265465557b6e9bd1e47d42d8b06c26c27aae7b2deb5277",
+      "sourceValueSHA256": "aecf7148fe970a2c0b265465557b6e9bd1e47d42d8b06c26c27aae7b2deb5277",
+      "contextSHA256": "e487fd3e946d6247ef5090e89e45844cf15304d803daf9f61382029a4d7dd63a"
+    },
+    {
+      "label": "broad-v11-public-08",
+      "id": "541a9a3d09d3c99478135aa21cbd644392bacecc1d663c92027924545f3068b2",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "aecf7148fe970a2c0b265465557b6e9bd1e47d42d8b06c26c27aae7b2deb5277",
+      "sourceValueSHA256": "aecf7148fe970a2c0b265465557b6e9bd1e47d42d8b06c26c27aae7b2deb5277",
+      "contextSHA256": "6a64ed99605041412f174df4d7b1388ca78c47ee296dba89f54827de79b1ac26"
+    },
+    {
+      "label": "broad-v11-public-08",
+      "id": "1078375ddef32c5ddc5fb124d15a9f9d939e1c9ea9b596456d5ef035dce2c24d",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "aecf7148fe970a2c0b265465557b6e9bd1e47d42d8b06c26c27aae7b2deb5277",
+      "sourceValueSHA256": "aecf7148fe970a2c0b265465557b6e9bd1e47d42d8b06c26c27aae7b2deb5277",
+      "contextSHA256": "6a64ed99605041412f174df4d7b1388ca78c47ee296dba89f54827de79b1ac26"
+    },
+    {
+      "label": "broad-v11-public-08",
+      "id": "77003a8af3c63293a9baefe15104ea383d5d51b564cb9644b1b42aa4811ea9f8",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "2386d5c9d07acac171abe974f284bf84212c6ba3e53335ca70764ed41fd81a53"
+    },
+    {
+      "label": "broad-v11-public-08",
+      "id": "cea525daea3aea6cc8e28af29ef252eb49df9d5943014bdf69d8f1ec82f9b41b",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "2386d5c9d07acac171abe974f284bf84212c6ba3e53335ca70764ed41fd81a53"
+    },
+    {
+      "label": "broad-v11-public-08",
+      "id": "1ed855fd523de2d31d96583f7123203f98cd49b04bd0669794007dcf09393aea",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "fe2f730c8653f06726ad76a235c23a8810769f18009ecb5c308d24c7df7d6780",
+      "sourceValueSHA256": "fe2f730c8653f06726ad76a235c23a8810769f18009ecb5c308d24c7df7d6780",
+      "contextSHA256": "d14fd7b726de8a6e67916232331071ccc07be0de6abeb93d7624b46f0fbd19d9"
+    },
+    {
+      "label": "broad-v11-public-08",
+      "id": "1b23a5a85d57a8940459d01a1f12b5dbbeecf5e0b0ab4a9785db520cebc5dda7",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "fe2f730c8653f06726ad76a235c23a8810769f18009ecb5c308d24c7df7d6780",
+      "sourceValueSHA256": "fe2f730c8653f06726ad76a235c23a8810769f18009ecb5c308d24c7df7d6780",
+      "contextSHA256": "d14fd7b726de8a6e67916232331071ccc07be0de6abeb93d7624b46f0fbd19d9"
+    },
+    {
+      "label": "broad-v11-public-09",
+      "id": "14c051f813c8173f9b380d0ac0809b57c172b40adcb69ce19e82e784924db02c",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "3987770e8cdbfc4ec0535782b87c591dd7e563ce2aab03bed1ac089ebf31d76b",
+      "sourceValueSHA256": "3987770e8cdbfc4ec0535782b87c591dd7e563ce2aab03bed1ac089ebf31d76b",
+      "contextSHA256": "a059bfcf0b27b0955610d46396df3e678b5deca1c4bc5c9eb96ea151612f9336"
+    },
+    {
+      "label": "broad-v11-public-09",
+      "id": "4c0d2618f88cc132e7da07012ddf8d0110e1d1b7a474fce8257de27d3933e733",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "3987770e8cdbfc4ec0535782b87c591dd7e563ce2aab03bed1ac089ebf31d76b",
+      "sourceValueSHA256": "3987770e8cdbfc4ec0535782b87c591dd7e563ce2aab03bed1ac089ebf31d76b",
+      "contextSHA256": "a059bfcf0b27b0955610d46396df3e678b5deca1c4bc5c9eb96ea151612f9336"
+    },
+    {
+      "label": "broad-v11-public-09",
+      "id": "3012e7546b89ecffd64fe204032155dd195d6fb3c28811cd9418cce4ee0fd7b0",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "cbda44c80bb61e80e1031b59d8401e5ee054cf00ccc7419329eafddf9edf0e0f",
+      "sourceValueSHA256": "cbda44c80bb61e80e1031b59d8401e5ee054cf00ccc7419329eafddf9edf0e0f",
+      "contextSHA256": "c647430d25278d459a3534411445d06af64b73b24406b3a459e38763a6a39df9"
+    },
+    {
+      "label": "broad-v11-public-09",
+      "id": "cbae5747fd37da7102b8c887ac28dfd9b04198108b04ca374bcdbf2eba6a1325",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "cbda44c80bb61e80e1031b59d8401e5ee054cf00ccc7419329eafddf9edf0e0f",
+      "sourceValueSHA256": "cbda44c80bb61e80e1031b59d8401e5ee054cf00ccc7419329eafddf9edf0e0f",
+      "contextSHA256": "c647430d25278d459a3534411445d06af64b73b24406b3a459e38763a6a39df9"
+    },
+    {
+      "label": "broad-v11-public-09",
+      "id": "ba02c424000b4f630e12a20ded09dfd4b53e0d702b55637b594779be75a25335",
+      "classification": "NATIVE_GIT_PERCENT_FORMAT_ARGUMENT_REQUIRES_ROOT_REVIEW",
+      "parentValueSHA256": "6deef77b6add6914039cf650bf5eb7c8c298c0e61e08f717558373ba957837e5",
+      "sourceValueSHA256": "6deef77b6add6914039cf650bf5eb7c8c298c0e61e08f717558373ba957837e5",
+      "contextSHA256": "8168388d322ef6e93952a8135c2fd25d8b8fc0decf9d09b74f05cdc14b5db1d4"
+    },
+    {
+      "label": "broad-v11-public-09",
+      "id": "fe69d333dfb27f7fc822150064e857ef9a645970ebca300bceeda351b564b015",
+      "classification": "NATIVE_GIT_PERCENT_FORMAT_ARGUMENT_REQUIRES_ROOT_REVIEW",
+      "parentValueSHA256": "bab0abc97c8dfbb218a835c3099a8e43ba0e092b480b0b5755de65ec7f18585a",
+      "sourceValueSHA256": "bab0abc97c8dfbb218a835c3099a8e43ba0e092b480b0b5755de65ec7f18585a",
+      "contextSHA256": "f5c76031e33b5b9cb6fcba298749950bb4b81ccd515df051e79d7756aae88334"
+    },
+    {
+      "label": "broad-v11-public-09",
+      "id": "2894deb0670395897bf79a2a822335263e2113adb506102ee934732f1c618201",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "277e22b43c8d49abbd85db2e3991d95820bc15e4400e8b3ed464f64ef14b6ee2"
+    },
+    {
+      "label": "broad-v11-public-09",
+      "id": "dd19ad524583f741803c0de36a370e94ab81c86402b710462e1ba426a0cf60f5",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "277e22b43c8d49abbd85db2e3991d95820bc15e4400e8b3ed464f64ef14b6ee2"
+    },
+    {
+      "label": "broad-v11-public-09",
+      "id": "a144c9aa4ae711c1a55b80aa4bb430320bf112ee621ebbce1a7e227b7e857b2d",
+      "classification": "NATIVE_GIT_PERCENT_FORMAT_ARGUMENT_REQUIRES_ROOT_REVIEW",
+      "parentValueSHA256": "5554e79f1fbc68b5f119559a11fd4d8d087bb38e13d57c7b870f09ce4f11c466",
+      "sourceValueSHA256": "5554e79f1fbc68b5f119559a11fd4d8d087bb38e13d57c7b870f09ce4f11c466",
+      "contextSHA256": "79fa6010276e8d353735d1678f941b8001a4138c187aa50ecfa369d1343c8299"
+    },
+    {
+      "label": "broad-v11-public-09",
+      "id": "b09d2f6220be21a53d0f8749ccdbc9d4f86d88adc40b55e4cf595186aca5cb25",
+      "classification": "NATIVE_GIT_PERCENT_FORMAT_ARGUMENT_REQUIRES_ROOT_REVIEW",
+      "parentValueSHA256": "5554e79f1fbc68b5f119559a11fd4d8d087bb38e13d57c7b870f09ce4f11c466",
+      "sourceValueSHA256": "5554e79f1fbc68b5f119559a11fd4d8d087bb38e13d57c7b870f09ce4f11c466",
+      "contextSHA256": "7e0c6431554de4c66217642ede84ae9fc19aa7bd5bed77236ccf5d51763f44f7"
+    },
+    {
+      "label": "broad-v11-public-10",
+      "id": "a9d912c6666d1029c647e39ed3a7fc927121e01a6cf52456ee1d90f25b540405",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "1eaeba9f91277276f6c73c96cab617f4fe5c4f8fb9129bd9aead4628808f9061"
+    },
+    {
+      "label": "broad-v11-public-10",
+      "id": "4381479c0b368fd03c9252feefdd04337b249c5f7fa7b1d2d22e84224b8d1485",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "1eaeba9f91277276f6c73c96cab617f4fe5c4f8fb9129bd9aead4628808f9061"
+    },
+    {
+      "label": "broad-v11-public-10",
+      "id": "1045079fa9bf6f898ef8fea4051ed16f1da6a39c84a6a51bf9fa7e341d83fed9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "5ee8f42d595387d9300ebc2e398c124ec0807ccd19212b4ff9e4e7e3ae10b478"
+    },
+    {
+      "label": "broad-v11-public-10",
+      "id": "b5a92f7c758bd0fc14fc7daf1f9e16338c13f8acb754dad2d18731f41489a62f",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "5ee8f42d595387d9300ebc2e398c124ec0807ccd19212b4ff9e4e7e3ae10b478"
+    },
+    {
+      "label": "broad-v11-public-10",
+      "id": "56d57d8f41a154906c1463dc012a4ba4ea69f6ca09996cb4948a2d98602b78f0",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "74f6b4876abcfc5424c63a138c3b2ed857645f127fe89d7437b7e35606291eb1",
+      "sourceValueSHA256": "74f6b4876abcfc5424c63a138c3b2ed857645f127fe89d7437b7e35606291eb1",
+      "contextSHA256": "ac7b35d6c5dff263ef5d71e77fcb24d4b94accb992a89e4af62f442483e40d63"
+    },
+    {
+      "label": "broad-v11-public-10",
+      "id": "7494314752fdfdcad444070c8dd3b96aa6a488618338dc319fa463d2e7d93ba9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "74f6b4876abcfc5424c63a138c3b2ed857645f127fe89d7437b7e35606291eb1",
+      "sourceValueSHA256": "74f6b4876abcfc5424c63a138c3b2ed857645f127fe89d7437b7e35606291eb1",
+      "contextSHA256": "ac7b35d6c5dff263ef5d71e77fcb24d4b94accb992a89e4af62f442483e40d63"
+    },
+    {
+      "label": "broad-v11-public-10",
+      "id": "f30741396cf9d9907671b16b18e9598b8a3e34ec029a6b3c460dc71b6f9fd913",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "866e4e370bc2b4d0ff665cf9433f388a9f0a42963b4ec3a5e1c640b39eb6dc9c"
+    },
+    {
+      "label": "broad-v11-public-10",
+      "id": "217c5e153ed519f8fdf0da5480c4e0105dd10326fde8692e4f57327e48470235",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "866e4e370bc2b4d0ff665cf9433f388a9f0a42963b4ec3a5e1c640b39eb6dc9c"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "ccda7efdad8cd6baaaa300960c42949695687981f3c48dd822d4f24b26a98ca9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "5716b685fe4e6268c207be2095551a37015145c5c89f9840236044c37e3dbf44"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "68ea806bc12e874799e9fd817907adf0a16fc2ca91ffc4d43b8c7dae235ad072",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "5716b685fe4e6268c207be2095551a37015145c5c89f9840236044c37e3dbf44"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "914ead7091e9ce1bbcb041d71937be36d102aba97d5472156ad128ff496c4596",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "573c58be27732d968e0ceaf9c717929b1f7f96ae56dfa318b00cdec6b77e725c"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "5cb5ec279d5d896043913e81a1745ca9c89e489388bce7ccbacd9d203b070ab9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "573c58be27732d968e0ceaf9c717929b1f7f96ae56dfa318b00cdec6b77e725c"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "3caf4abc04531930fd98a0ac77a93e8c1c2a43697eccb5738a7364953bedeb66",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "9d9bac04c319d329968eabb0c18193a0c0c582b5cb883c2dc08282e014f2358c"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "a21fce3ca7177c6b652bce8cc208b842fd15898dab8b4e31363cdc25fd87b180",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "9d9bac04c319d329968eabb0c18193a0c0c582b5cb883c2dc08282e014f2358c"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "669031c4ad31bffd0c48bf0bf4aa71f75294926572c62163a3a38ae5cfac85c6",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "dbb5b1c8f165e0fe9b3dc1999038ced58244779600e81d0284cb1bffb42707db",
+      "sourceValueSHA256": "dbb5b1c8f165e0fe9b3dc1999038ced58244779600e81d0284cb1bffb42707db",
+      "contextSHA256": "403d1eaa557412e3a369f30dd8f9b20b81144e98fdff3068fc2a07ebb94647db"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "c83256d09174ff4ed190d5b608ae0df0411b4596fffa2531a9f813808aa88ddc",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "dbb5b1c8f165e0fe9b3dc1999038ced58244779600e81d0284cb1bffb42707db",
+      "sourceValueSHA256": "dbb5b1c8f165e0fe9b3dc1999038ced58244779600e81d0284cb1bffb42707db",
+      "contextSHA256": "403d1eaa557412e3a369f30dd8f9b20b81144e98fdff3068fc2a07ebb94647db"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "8ed6db6057824debd44ddce76aba4f3e8fce30878835a4c3c1ca1debaea784d3",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "3cc03b6dca19179637da474b6fbb720643fdc3a1d9daf48b45a0ca53b55c97d5",
+      "sourceValueSHA256": "3cc03b6dca19179637da474b6fbb720643fdc3a1d9daf48b45a0ca53b55c97d5",
+      "contextSHA256": "36b860557f011374c72fb4b136405a40a1edad689e0a41ea30f0393defe9ddb7"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "166ab3d5acdc5e589cd416ec112ff903fae84562bbd400654caccd60167bb093",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "3cc03b6dca19179637da474b6fbb720643fdc3a1d9daf48b45a0ca53b55c97d5",
+      "sourceValueSHA256": "3cc03b6dca19179637da474b6fbb720643fdc3a1d9daf48b45a0ca53b55c97d5",
+      "contextSHA256": "36b860557f011374c72fb4b136405a40a1edad689e0a41ea30f0393defe9ddb7"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "c75e19ce3192f412e97d429a557a9c89bd03cf6308ab9a4b17abc9af4bfdd2f5",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "3cc03b6dca19179637da474b6fbb720643fdc3a1d9daf48b45a0ca53b55c97d5",
+      "sourceValueSHA256": "3cc03b6dca19179637da474b6fbb720643fdc3a1d9daf48b45a0ca53b55c97d5",
+      "contextSHA256": "228cea5f1535429e478d7c537615847cf6ce88b73472e01c542aa7772787f9e6"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "869e725f9419a6f8dfc2f87748b27e7a4c2dd3dae5093e58e5259e9386ec3398",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "3cc03b6dca19179637da474b6fbb720643fdc3a1d9daf48b45a0ca53b55c97d5",
+      "sourceValueSHA256": "3cc03b6dca19179637da474b6fbb720643fdc3a1d9daf48b45a0ca53b55c97d5",
+      "contextSHA256": "228cea5f1535429e478d7c537615847cf6ce88b73472e01c542aa7772787f9e6"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "bc6d7c381b5fc94fedac863252f54d3864e294d271a9e60ae2b39815fc2dfd1a",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "7112ad085b1d65ebbb3cbc009f9e73749d7285a9048458581e0b70d663f8c346"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "a25b5ffee5ca7ca3919f6682de57d9a14471eff004a206dc66e639f2c303a74a",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "7112ad085b1d65ebbb3cbc009f9e73749d7285a9048458581e0b70d663f8c346"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "46b3e4a85b6086e4dd99176073bb772c99a61d6882959366f91db171df8e329d",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "78813eda44bdcfd395585aae473cfa18b3f114abb84dedd6efdc27d3ae8673ac",
+      "sourceValueSHA256": "78813eda44bdcfd395585aae473cfa18b3f114abb84dedd6efdc27d3ae8673ac",
+      "contextSHA256": "18255d8e8a2480383387f3bf44db162f03eed87b9752e7a10ab70d145ca12210"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "9e85d082112034e55459ad11a9f5508ef027bd749b1849e49173c4134f62f498",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "78813eda44bdcfd395585aae473cfa18b3f114abb84dedd6efdc27d3ae8673ac",
+      "sourceValueSHA256": "78813eda44bdcfd395585aae473cfa18b3f114abb84dedd6efdc27d3ae8673ac",
+      "contextSHA256": "18255d8e8a2480383387f3bf44db162f03eed87b9752e7a10ab70d145ca12210"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "1c066362c74f14ab3595cb57d186d64a1a67fe0be4ad7389b328a42259ae989b",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "b955409c65500ecb954b9068bb120adb1f1b238094ee8df82d69857517b91078"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "062f378c80ef58ef8ce811131e144620bdd747442a865848eaaf66c9abf940b9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "b955409c65500ecb954b9068bb120adb1f1b238094ee8df82d69857517b91078"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "a22817b54e2c8501c397801bfdf9da30bf78f5ffe2bd62c27668155c5c9c518b",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "ee74215d2ae69cc8dc1b70550c483342c9e375ee90850718f0534c9f6ce114f6"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "3354e25b14ef0ee2cbf513bd2fc6d376fce32bc77451eb770b04ef4bb35d2cbc",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "ee74215d2ae69cc8dc1b70550c483342c9e375ee90850718f0534c9f6ce114f6"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "beacd06f744f4367ac950f5fa27d2fec584dfabb127783a689531c2e886ac8d7",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "93c01506629bef86f7d8af8fb5d1c37356b3472c017a2e67fa671677c8da7b46"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "id": "62c7c47462be690d64afb4c486f0b8252504e7c2ed7eb6b58fbfbba8219215e7",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "93c01506629bef86f7d8af8fb5d1c37356b3472c017a2e67fa671677c8da7b46"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "133c71981568ae00a832fb8a40757c1c5808e90d1d068229e42db501e6203f3d",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "c314aa8e5e9f90523a4c0b232d535eaf8567c0f56f01a3b4007089b6139693f9"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "f800f0282a8c7cfa96010d8669cf06538e55c38df0abc18d81aaf42aaec0df9a",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "c314aa8e5e9f90523a4c0b232d535eaf8567c0f56f01a3b4007089b6139693f9"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "cc6b45ac0e7a1874995fd53521f493f94a45afd9e55caf012a265cbba0d756ee",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "47f52857d4b4c4b46d8ce1777c26078a663479759bc4f5ca1c28af493b544317",
+      "sourceValueSHA256": "47f52857d4b4c4b46d8ce1777c26078a663479759bc4f5ca1c28af493b544317",
+      "contextSHA256": "5383b80f7461aefd652df1b8ea157bf18ef4ec60355e361006ff340c1e7b1fdb"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "b8f64d19a08593294da14bda5eda3f86c46b5fd1156c2a9505dfc7ca2de3c8d5",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "47f52857d4b4c4b46d8ce1777c26078a663479759bc4f5ca1c28af493b544317",
+      "sourceValueSHA256": "47f52857d4b4c4b46d8ce1777c26078a663479759bc4f5ca1c28af493b544317",
+      "contextSHA256": "5383b80f7461aefd652df1b8ea157bf18ef4ec60355e361006ff340c1e7b1fdb"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "129ccca63c801bc1ba3d74493ad4b2451f18cde74c69d1ab0e5679c9336e4833",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "da789f79dbb51f0cd66be9bac75c3795d7b2f3e054e3822743bc015af0e41996"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "e3953e81e1925a03cb07363d68cc8c3c4681efb4ad80a5d7506bdffc83771cc4",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "da789f79dbb51f0cd66be9bac75c3795d7b2f3e054e3822743bc015af0e41996"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "b48989dfac75bdad52e19bdc4177781da3d86b084734e060050edf4fe515044e",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "57253ed8040b47b25e5fbd18405f5237b43231883ee91a034116896c6c89fc36"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "ae91d9ea3e35d35e7048d6dcc8d97c6adb67eb6a185d72e71c293b5492185fd6",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "57253ed8040b47b25e5fbd18405f5237b43231883ee91a034116896c6c89fc36"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "b5f57ed440cff1233cf26be7520a93f1eb55867842e990e7334580ded732e648",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "db49c7992406e5c9530e0ec397be117c9f4f2a599d6c9f809e7f5315f468c989"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "72f49c7c12566e5e5666acc4ba6e997a56e30c8a2118fc0301b3af17d880e5d3",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "db49c7992406e5c9530e0ec397be117c9f4f2a599d6c9f809e7f5315f468c989"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "fa94de0f973eb3d0d76178f0a586b1b1abafd125a6fbed7adc99b0347d2e4690",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "8e728467ffa852e10d3c17fbc3594015871975d52a06c2d4ab3765cdf5852cff"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "a952ed5d9512e944c4ac86e3c99915335b624b01ef14d9c616beab3a8e6dd2e0",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "8e728467ffa852e10d3c17fbc3594015871975d52a06c2d4ab3765cdf5852cff"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "3e35adda559946efbe624f2a0c71cbd7a5817edcc610d5ac9d28e0d28feb1f47",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "db9231df22838c816b3d0e9127790e88eac1d93ee560fbb61249e2a89bc9c73f"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "2d80337c801b2cae38013fe04d8168806308d32d1cefbee3e2afacd368b53ccb",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "db9231df22838c816b3d0e9127790e88eac1d93ee560fbb61249e2a89bc9c73f"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "ae75dd43fa26c3e94a1cc12f8e012578c6881ca56a88bfc679f784b9f4fe0d1d",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "7f56eb5d8e44125a0d7ebc211ebfdd15c235877068ce0ffddf8718b5fb49ac06"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "e3dfe7e6ade334397a25dbdb78bf245d5047c9e6924c012b53aa5f37c71ef53b",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "7f56eb5d8e44125a0d7ebc211ebfdd15c235877068ce0ffddf8718b5fb49ac06"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "b45e01bf4f35b9743d2a12d40fca87ab2d20b3dba8b581031d856b6cca9a772a",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "f0758b2520def9a8646d74d163b3996a754b1809c46a43fe62b5d850c93756a8"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "98b27ed8058449b73648bb18ddcf262f08432c7bcebad6fd6a6acd7f3172eab6",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "f0758b2520def9a8646d74d163b3996a754b1809c46a43fe62b5d850c93756a8"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "4dfd8cc9f1f584e5322a48f3d9f5c031038de8e47e4f711e884ea753301e955a",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "b5e4a8f3b33733e626bb021e5c292bd8fd331aeb5c6a9095e609508da3846f27"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "1cd021dc69731e693674ec49d72004b976b596254b070d30a5a2ef24e4a8c2fa",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "b5e4a8f3b33733e626bb021e5c292bd8fd331aeb5c6a9095e609508da3846f27"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "30ce06c9d3c82650e8228fe4250192a773d836b216d1dc3cc2c380f29b7302c0",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "1e482e4f9253f894a9e06f16d4776ec0d0b458c04a8504b4ce501c8923fa8ede"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "639d5794a59aa9e9d5ba23a4be80b8952cf89e07ab77df9d221e636111e0580f",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "1e482e4f9253f894a9e06f16d4776ec0d0b458c04a8504b4ce501c8923fa8ede"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "4d96a9fa39f4f9c06caa37b6aec04e995db933ce71dde20f3b96cfc6e1bfa9ee",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "62bc8641e43b24b70cca5037293d2ef97ba3743953873a17283098d9894652de"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "007c82c8b53725b932c760205c621071830c30cf27ab9e2c9776ae7bdc142bca",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "62bc8641e43b24b70cca5037293d2ef97ba3743953873a17283098d9894652de"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "d73956333f4dd331b8aba5af0d33d542c6073302d3f6b111a0d7df312e2e1583",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "656382c17a593ffc307201c39481452bf8cd0823e25fcc2a84a19089f5da08db"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "c499c0e9e651b722e675a6bac7baf74685d5ed54a4d5571720a00023c657625d",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "656382c17a593ffc307201c39481452bf8cd0823e25fcc2a84a19089f5da08db"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "874d72a382c650ce35386735001dd46b199ee24451907031a8d4b850d8f67efd",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "533ae800f9850e8d5b98f735be1cb4e82c4d76b7ae6f46b30f5fcfc326f015ed"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "e1f15f58a3b8dad57828be6ae3a00f0b203dc057d8fd4ebb4659b3a279beadd7",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "533ae800f9850e8d5b98f735be1cb4e82c4d76b7ae6f46b30f5fcfc326f015ed"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "0feaa037eeea16b4e36bc5253de4d56db119ffe4f1d2a26bf93bfb220fb01b6e",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "b8bf3a109b7dc2b875a785f857872838407e96083f0063f77122058a7f806169"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "id": "187e8d3ff907a03ea989fec05df1e90d387e8883cfcbd37d62106584d54db8d6",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "b8bf3a109b7dc2b875a785f857872838407e96083f0063f77122058a7f806169"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "b870bf1c6bd9655338b6ea82f6341cffb0549f199c478f5d51e1c98276b38ef4",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "8880226b31e9f7b6527b48e3bbb90f8b6f6213daddc07810237495eb7d9f8a06"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "432c0500307689af298a69916f8d400e269d9282e26195e1436d1294a50c1239",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "8880226b31e9f7b6527b48e3bbb90f8b6f6213daddc07810237495eb7d9f8a06"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "6c7bb5d16c400acc087535b7ba4f04968a5e470a7362c7e13bfe77550ea9c6ac",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "7a1a5509f07e035d539c8d6652ed46452012434354cecf23e4d801d5b03c0135"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "c13eb35414d8d452d72bc605e9689483e1f12b35ca1dcd71ff655cdcc123dddd",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "7a1a5509f07e035d539c8d6652ed46452012434354cecf23e4d801d5b03c0135"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "b7934324ff1a06d3f9601832a604146ac2e5b17edc250601bb3a0291b0d38a81",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "c0551e42b61798210e130ef74f16108d5f8429be597aed141de273631a1dadde"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "ae3505615d92025a5730846ed7d5120529890d2d7781c5e83d9ef28bea467504",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "c0551e42b61798210e130ef74f16108d5f8429be597aed141de273631a1dadde"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "0df841e6e13e1a15dff98d395f0567e9c9eac14c348643397df5e0e18ec00064",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "d113d7398dd5a36ebbbe6dc786b83297efcf527428a044d6c301fadfc9935b47"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "48fecbe339cbeabc9c66dc4356a55a3ccc79c68914d6b4ef567dabcd74d5d102",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "d113d7398dd5a36ebbbe6dc786b83297efcf527428a044d6c301fadfc9935b47"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "85a068ea00d6535eddf98b1c83982105fff90373dc760320b229e536ebc0af3f",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "6a69219a9edfa824b1e4aded5186de79b42377173b9fe565d1b804398ec897cc"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "5a62ebff47074f62e61f5268d92caf59af5e2e2947193c3f8408cea81ee9b34a",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "6a69219a9edfa824b1e4aded5186de79b42377173b9fe565d1b804398ec897cc"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "2b2a81c54dc3aff53e2ae8310cbd64d849ec5d9578c2172e419e7ddf1c3d9625",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "c668f9ad46091628c26ef964c978710fa92ce1865c28e3aa3a218e3803a0c19a"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "da595ceb48146e7c0c3fea4edb6d17e512699f5752fa4f8d17901e765434ac1f",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "c668f9ad46091628c26ef964c978710fa92ce1865c28e3aa3a218e3803a0c19a"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "95077947b00158c4eb2e7468b16cb85feecba2c9498e4aea27dbfa7e52fe22d1",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "00ed274165861d196faaa24c93f8d4abbf578e32596bd7245b4f88a2d4b6bc11"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "017e75c8bd92d21e7853a3383025a47c12cc3bdc77208da9728ce864df277633",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "00ed274165861d196faaa24c93f8d4abbf578e32596bd7245b4f88a2d4b6bc11"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "9f2759c71cabe1895abdd9596be2a95ac1c5e1f45523ba0dfb9b47e065333aee",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "3b52523826085e8d6ddcdab35a4d6d4115e8f6c7acea2e1ae14a1c8b0fb5aefa"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "33643659f255783ac5b7ef9bbe80fd3b8a17ffc2ed877482eba0de5a509475b1",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "3b52523826085e8d6ddcdab35a4d6d4115e8f6c7acea2e1ae14a1c8b0fb5aefa"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "fb80c7dba16a32dd39937b978331b8d1de69620a7c8d50613eb99734cbacaa21",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "6b377cb0187df0661ef3b6d05589576a3056fd5f0662c605a16ec023a30bdeff",
+      "sourceValueSHA256": "6b377cb0187df0661ef3b6d05589576a3056fd5f0662c605a16ec023a30bdeff",
+      "contextSHA256": "23456a8540b70050f7e4100d19743f0cf6421119d5927fca9d4b4e422cd3f654"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "e4a1546035dee474fe16f5c471b00565ac721edc9e6786addc7505380b094c68",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "6b377cb0187df0661ef3b6d05589576a3056fd5f0662c605a16ec023a30bdeff",
+      "sourceValueSHA256": "6b377cb0187df0661ef3b6d05589576a3056fd5f0662c605a16ec023a30bdeff",
+      "contextSHA256": "23456a8540b70050f7e4100d19743f0cf6421119d5927fca9d4b4e422cd3f654"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "6cd612b69f6dfbc55f7cde9e0f08470a787983d2333953e6f60e22289afa64b8",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "6b377cb0187df0661ef3b6d05589576a3056fd5f0662c605a16ec023a30bdeff",
+      "sourceValueSHA256": "6b377cb0187df0661ef3b6d05589576a3056fd5f0662c605a16ec023a30bdeff",
+      "contextSHA256": "3f95784766fb4d6ad3ba335bd59a89b6ceebad8386b3b3c11a40199741a9dff5"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "1597ae9fc1476a0063a57e429113829e1f532a820a5917b3833edb70d638e10b",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "6b377cb0187df0661ef3b6d05589576a3056fd5f0662c605a16ec023a30bdeff",
+      "sourceValueSHA256": "6b377cb0187df0661ef3b6d05589576a3056fd5f0662c605a16ec023a30bdeff",
+      "contextSHA256": "3f95784766fb4d6ad3ba335bd59a89b6ceebad8386b3b3c11a40199741a9dff5"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "22e257efa9e0502ac8bdcb03e83ad8d5594a5f8780020156521772476e674e60",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "62468eb53480cc2cabde3afb9fffa1d6df2daa7e15e44b0a29e55937ca3ad59f"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "f707d77c3748f825aacd1168404faa66c43dea40996f91f8e4e01006440baa95",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "62468eb53480cc2cabde3afb9fffa1d6df2daa7e15e44b0a29e55937ca3ad59f"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "d720e68cdd1e21002fdd8f26a99b6db4e8ab466eb788b1f41efda06b14728754",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "e3d2f594ab9b33b74b651876f87d9d5f24a777ee53ed105900a5fdf2a92b7a9b"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "id": "a21c1bcaf7abdeeab1cf561a0a5b76d588d34333abf245275393ed14e02758d9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "e3d2f594ab9b33b74b651876f87d9d5f24a777ee53ed105900a5fdf2a92b7a9b"
+    },
+    {
+      "label": "broad-v11-public-15",
+      "id": "024c77eb55325848a15ad825aba07b41e3341b27d9db775e47f54932175815eb",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "953c7702939f29b30e94a86336a523bfcd5e3d0aadf2764f75770dc33e156085"
+    },
+    {
+      "label": "broad-v11-public-15",
+      "id": "4c221d9e12be4d35707a949bf86b7ca02c18b322fb41a6aef2a62a55ee50c169",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "953c7702939f29b30e94a86336a523bfcd5e3d0aadf2764f75770dc33e156085"
+    },
+    {
+      "label": "broad-v11-public-15",
+      "id": "b7c8b34e8e6ee3ea38f6465d0e251c0ee426dcedbb1569a5ddceea911619634c",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "40a623ae280774c00143ca561bbf23d2509cb7fb060920ecba4ae8a31705f5f0",
+      "sourceValueSHA256": "40a623ae280774c00143ca561bbf23d2509cb7fb060920ecba4ae8a31705f5f0",
+      "contextSHA256": "bc28de4f3f30bdea9b49bf9d338ea2bf9cf23010f3fbf9e291ca0bc79083b1ac"
+    },
+    {
+      "label": "broad-v11-public-15",
+      "id": "f27020ed16a78315235c9b8c54f1848d00e70e84e2c8570fc5057a4cbcf9986b",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "40a623ae280774c00143ca561bbf23d2509cb7fb060920ecba4ae8a31705f5f0",
+      "sourceValueSHA256": "40a623ae280774c00143ca561bbf23d2509cb7fb060920ecba4ae8a31705f5f0",
+      "contextSHA256": "bc28de4f3f30bdea9b49bf9d338ea2bf9cf23010f3fbf9e291ca0bc79083b1ac"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "4185fc3296f94dd2cf1f2224eb9a37acbc6d4865988d95c526af7fd7cb67ae02",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "a1994168089ad25106d2b6f32f1fed1086ff17eb62a2fb73bb6f3780269d4e25"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "a12a11061492970a2b0d0d91e983f76041941b9cd8c3c63bf172dd4247467e75",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "a1994168089ad25106d2b6f32f1fed1086ff17eb62a2fb73bb6f3780269d4e25"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "133c71981568ae00a832fb8a40757c1c5808e90d1d068229e42db501e6203f3d",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d94d49f5e8f413bc2bc4f94fb453f985a33ab967fb65b9180f38ddf395f18c32",
+      "sourceValueSHA256": "d94d49f5e8f413bc2bc4f94fb453f985a33ab967fb65b9180f38ddf395f18c32",
+      "contextSHA256": "7de12c955cb6c52fc3ea094667944089dbf1ef683e7128d2d3c517fff3e82c30"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "f800f0282a8c7cfa96010d8669cf06538e55c38df0abc18d81aaf42aaec0df9a",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d94d49f5e8f413bc2bc4f94fb453f985a33ab967fb65b9180f38ddf395f18c32",
+      "sourceValueSHA256": "d94d49f5e8f413bc2bc4f94fb453f985a33ab967fb65b9180f38ddf395f18c32",
+      "contextSHA256": "7de12c955cb6c52fc3ea094667944089dbf1ef683e7128d2d3c517fff3e82c30"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "0fa1cb0cb1a4ac1638e3fa62f773f1e4e81214f9527c3583d856f3e202d8cdc0",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d94d49f5e8f413bc2bc4f94fb453f985a33ab967fb65b9180f38ddf395f18c32",
+      "sourceValueSHA256": "d94d49f5e8f413bc2bc4f94fb453f985a33ab967fb65b9180f38ddf395f18c32",
+      "contextSHA256": "8eacb5905a3caf41c50f47d572e1ea71e263468199507bdf9a6bb164cf570423"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "3ea4539a89781f5ed286d849b86df239300e319beb35b7dadfcc85b95415fa6e",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d94d49f5e8f413bc2bc4f94fb453f985a33ab967fb65b9180f38ddf395f18c32",
+      "sourceValueSHA256": "d94d49f5e8f413bc2bc4f94fb453f985a33ab967fb65b9180f38ddf395f18c32",
+      "contextSHA256": "8eacb5905a3caf41c50f47d572e1ea71e263468199507bdf9a6bb164cf570423"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "4f457bb5395546f691ceb2fa63a77504c1288a5f601ed4f6d908bc9592deb419",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "c432dece2f6bae2469a157cfc9685258ce38baacb97d60e146dfea2aadc4c78d"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "0871b1d78bc00169754f4a7446711f5ca17f51249416739f1764d02b1f7a81e0",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "c432dece2f6bae2469a157cfc9685258ce38baacb97d60e146dfea2aadc4c78d"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "2ea48941ab85ef46393d049fa2010995565505430a21126dc89a489e803409f2",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "2398c473af1bdbb74d49b71250bf7bc4d4eadb896d93f2a9bbd0d556e7af74d1"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "3ce5db1dacd60c2af8b642ead45e75f40a4c35453a8b6c1a9d8ce668b9f0f694",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "3575b0c0ca28a97399ad50d6f06d86f6722353dd3869dc5855b42b2111bc7f44",
+      "sourceValueSHA256": "3575b0c0ca28a97399ad50d6f06d86f6722353dd3869dc5855b42b2111bc7f44",
+      "contextSHA256": "908b190955f47cd6b305878fa02d09594977ecaa13fa41e000eb31018f464b9a"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "3c2fe9619bf3f0010a5a21395f1afac0180a22ddbac07630a230daf6694897a7",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "762a0f064845ab4faff917eede43588b4dd231d33ba0208cdafaf398635a93c2",
+      "sourceValueSHA256": "762a0f064845ab4faff917eede43588b4dd231d33ba0208cdafaf398635a93c2",
+      "contextSHA256": "cddb343d35df095839647799f271111618b4042a864df82dd902847d53ef1d50"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "cce08fe1dad0a6b9822af8a30d8da0166d7d0a2784119fb68d1923eaf5bc6967",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "2398c473af1bdbb74d49b71250bf7bc4d4eadb896d93f2a9bbd0d556e7af74d1"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "5c330337aa68bd7c07f74033167e6b37b03e7400a7c69afa8e8406287b12e2c9",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "3575b0c0ca28a97399ad50d6f06d86f6722353dd3869dc5855b42b2111bc7f44",
+      "sourceValueSHA256": "3575b0c0ca28a97399ad50d6f06d86f6722353dd3869dc5855b42b2111bc7f44",
+      "contextSHA256": "908b190955f47cd6b305878fa02d09594977ecaa13fa41e000eb31018f464b9a"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "fd951d8fba2643381ae8435b396dc1a4ab99e92ea938d654cd7c7e6d4cec6fb3",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "762a0f064845ab4faff917eede43588b4dd231d33ba0208cdafaf398635a93c2",
+      "sourceValueSHA256": "762a0f064845ab4faff917eede43588b4dd231d33ba0208cdafaf398635a93c2",
+      "contextSHA256": "cddb343d35df095839647799f271111618b4042a864df82dd902847d53ef1d50"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "94dce08fcba09d2c48a9fad3fa4c9770c9118f8fd352569ff86fc741ab57c375",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "8a0768f02abd2cd0d5a68bb3854aff4546605e203a6f303fbbf871ab1a341e82"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "eeca89f90bb74d030c8f5202c547bd2dda13dfde6761a62cf20b65b2144f4543",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "332102fa664a7a51690aa7cf8149cde05efaa44aae1e42701788a047a1b2ce6f"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "97ce81bef9dec51840f2ba7caef8c37ea1b96ee5be5be33e24c35a99689afa96",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "8a0768f02abd2cd0d5a68bb3854aff4546605e203a6f303fbbf871ab1a341e82"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "dcada234a6db661454a51739e215ea6f78913c6b4f6f30b9cdc58fade153fefb",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "332102fa664a7a51690aa7cf8149cde05efaa44aae1e42701788a047a1b2ce6f"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "57a06cc07161cbe5aac45a26770512296553153c148ed25c1ae997a9f5457aa3",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "5c32401781de31d0afb536ff7e18e2319996b6c19cbd754215f4b6ae74aa21b5"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "00b4bdca9dec2b7fb777ab87f3c54f1b84668fa973ce432c126aaffcd81eeee6",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "e31fd5617269584972b2045021c59b272a4682b025e78ac19d802bc03eaa52ae"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "b2195818aeae3743909976aaff473c9a2221a9fb55a9eb8702ce3be6123e9c13",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "5c32401781de31d0afb536ff7e18e2319996b6c19cbd754215f4b6ae74aa21b5"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "6d189ab6610eb3dcbfa57de27fd96cf560bb95a4c233d810b86e712e7dcd413c",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "e31fd5617269584972b2045021c59b272a4682b025e78ac19d802bc03eaa52ae"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "e6b8639581a36c91ab2736c0ae8d82d597cf765958061cbe1256541358cf12ad",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "ca83eb99a999e1b9f3cabfd714a9f1bd2b361634adb0015b8124d1b1b19c5199"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "943896c0a19fab15fcb7534c485b39d9dafa646c97acb8cda324c7503aba728b",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "ca83eb99a999e1b9f3cabfd714a9f1bd2b361634adb0015b8124d1b1b19c5199"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "aab747e4abca98fa5cd5e347c641a7a425269e9b849dac6b78495c5626fe7325",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "829dbb15a1bcad048d296760b505955d3d0d7f0bb82b30bdaf706fa74e27ad69"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "db4d89693a4dbaec9334870933eeaab3d011924b0e30456a604469dcbe8f26f1",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "829dbb15a1bcad048d296760b505955d3d0d7f0bb82b30bdaf706fa74e27ad69"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "ff0481cbbffe006404968f2a135dc8a24dcaf772e18042d35c207cd06e189021",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "97b3b3241e6b93e5a9ed34b52a546fdd9fd2e1f1142937bec2f140f5ebd2d9c6"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "ab447b8c254cff17bb70e3d188e023769801e893dd12617a41d7ba9627fa0da2",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "sourceValueSHA256": "9595837b4dddcab7bd7b438f8d0471b3baa711f679d67d56c0e60445b8056ad1",
+      "contextSHA256": "97b3b3241e6b93e5a9ed34b52a546fdd9fd2e1f1142937bec2f140f5ebd2d9c6"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "3d23c2fac5a8db755581f5f31be01fa5931b98f839a91f2f9880aa3163a88c47",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "3bedf5bdd3c148a2ea8fba7babb6670dd76f63910b3a1050a8af0d206bfe4a59"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "32c85d93883b57a8732ded064f799020f168ff6b472882f084e505fdf9562844",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "3bedf5bdd3c148a2ea8fba7babb6670dd76f63910b3a1050a8af0d206bfe4a59"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "738e936ad5ad192641ed0be65f2fff973747607a4448be80ecc03e49b0b80e37",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "99d42e7bbe0f31bc87b5beb24217e238779ac39cf924b59ecd9a569587f33b06"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "9b2a7a392fd69479b39d80cb6b74cc4cf52ab641880d0f7e15d3bc444d5a4033",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "99d42e7bbe0f31bc87b5beb24217e238779ac39cf924b59ecd9a569587f33b06"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "06046ee420b70e3a08a9ecf19963216b305e93b6d9b29fa9cadb169512d73f27",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "sourceValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "contextSHA256": "c2f3e29adfa77d9d29e1c2f30bf37059f9f4bfe5cdf67f0aa69802b33d1aafe7"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "d6f87830d61363ccce373f82f39917f75b86ba21606ccf83d49ed964b314e7e0",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "sourceValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "contextSHA256": "c2f3e29adfa77d9d29e1c2f30bf37059f9f4bfe5cdf67f0aa69802b33d1aafe7"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "e9060fd347a3abaa64084dbe8b0ff31ca98af3d992b50449f8ee1074c928d5c2",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "sourceValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "contextSHA256": "97c431fc9d7ba64d2627bc1e73429156e018806cf8a0397bdbec3b2c5bf40177"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "5352f97d79e5a447a73df9d2a0c03c014ebde7b9a7e7178786b0b82116134b5d",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "sourceValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "contextSHA256": "97c431fc9d7ba64d2627bc1e73429156e018806cf8a0397bdbec3b2c5bf40177"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "8dd5efc9e655aa83ba3b1a7f2af5fae46ad62f673a463c63c032a11a2679dec3",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "sourceValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "contextSHA256": "c909f4bb59e8bfdfc455ce02e77dd63624b50ec153e36903d56699f813d6d238"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "c7f98ccfa0f804503c9617f387aca00441d8f516a8de8ee09ef30405b35f1a53",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "sourceValueSHA256": "0ce15b6f81e85e5e0c8d467e2a393f8bfacb012edb264eb6833cd087e908668d",
+      "contextSHA256": "c909f4bb59e8bfdfc455ce02e77dd63624b50ec153e36903d56699f813d6d238"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "8145b0d1c014b8f66fe24b498bdba0cc8d0864d49365e9a67a513a453a73ffb4",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "6e0ae2de959818663ca6ee250b4c0a8755202dccb997ff65cb18c1e697449932",
+      "sourceValueSHA256": "6e0ae2de959818663ca6ee250b4c0a8755202dccb997ff65cb18c1e697449932",
+      "contextSHA256": "dafa9321c322180ae5a1f22194149e1bc7518f0947b60c9ceddcec28cedb02c3"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "92afbf309779ba31fb68443f790917017aa577e873af9efcb63754fe5b7e2599",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "c3398a6b0d90686ed1e483bc58bb80d1b458fac3e60a90a3c6eed5c98e42af3b",
+      "sourceValueSHA256": "c3398a6b0d90686ed1e483bc58bb80d1b458fac3e60a90a3c6eed5c98e42af3b",
+      "contextSHA256": "e2fdd76a9d6c82d626f3e9edc2b90c71fcc024690293619c2a5477d899e8331e"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "29b078edbd27ab42fa9b248e8aa64cd8e5f41b7caf40f61cb2e214b2ac9835bb",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "6e0ae2de959818663ca6ee250b4c0a8755202dccb997ff65cb18c1e697449932",
+      "sourceValueSHA256": "6e0ae2de959818663ca6ee250b4c0a8755202dccb997ff65cb18c1e697449932",
+      "contextSHA256": "dafa9321c322180ae5a1f22194149e1bc7518f0947b60c9ceddcec28cedb02c3"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "105c7ef6e50faf5299cbfd1f2aba26665d1486815b67da441fde5b19f4335fcc",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "c3398a6b0d90686ed1e483bc58bb80d1b458fac3e60a90a3c6eed5c98e42af3b",
+      "sourceValueSHA256": "c3398a6b0d90686ed1e483bc58bb80d1b458fac3e60a90a3c6eed5c98e42af3b",
+      "contextSHA256": "e2fdd76a9d6c82d626f3e9edc2b90c71fcc024690293619c2a5477d899e8331e"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "fa94de0f973eb3d0d76178f0a586b1b1abafd125a6fbed7adc99b0347d2e4690",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "8ef4b0567f30f0da76e6ebc9fde7c8587698fd7be351891d52dcc9acc43eefd3",
+      "sourceValueSHA256": "8ef4b0567f30f0da76e6ebc9fde7c8587698fd7be351891d52dcc9acc43eefd3",
+      "contextSHA256": "97ba90c2595e1ff9361c9b8225892f215dfb1c817db699eefda6e211776a47d7"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "a952ed5d9512e944c4ac86e3c99915335b624b01ef14d9c616beab3a8e6dd2e0",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "8ef4b0567f30f0da76e6ebc9fde7c8587698fd7be351891d52dcc9acc43eefd3",
+      "sourceValueSHA256": "8ef4b0567f30f0da76e6ebc9fde7c8587698fd7be351891d52dcc9acc43eefd3",
+      "contextSHA256": "97ba90c2595e1ff9361c9b8225892f215dfb1c817db699eefda6e211776a47d7"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "4b9569b1ef7ffd1c2ebb97b920ece0f105f1919d1f1f4e9cfc369d4bf9b908c2",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "5d99f42ffe71b73f1f80525b8d5b93e6da264cb36c523699dfc3365823a6e68d"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "ffd975685347ff8cd2bf02c5e6b5ea469fd854bf2f1ebe62ec9a3ab69f8aba3e",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "5d99f42ffe71b73f1f80525b8d5b93e6da264cb36c523699dfc3365823a6e68d"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "c41356eb179f1ab83509a21e0ff404115e4d15fe8d84c5f9a46a9480f852687a",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "8ccda1cd8018e23fdb191100c90f663d6ae1168d77be1d263c1247271c21ae55"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "d6aa4720005d5e9275f3067a4cdf8485182c3664a92cec0802b588792d235ee6",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "sourceValueSHA256": "baf32341421c6b51a0928ab85e18d8bf242cd8559a7d34f2ed806ebf15028675",
+      "contextSHA256": "8ccda1cd8018e23fdb191100c90f663d6ae1168d77be1d263c1247271c21ae55"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "fec428faeacb0672cf8487e12af8dc06de3715b345b0d0672ae064a949c2d7df",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "484bc84bb2edf827254d15ed7ba00dfe4bbf4b3bf6f236510ffa141e5ac6691f"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "id": "bf8c94afefdf5777b4a221d1c5a3ff329f5c6d2e8f8136fd8d5144f6007afe2c",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "484bc84bb2edf827254d15ed7ba00dfe4bbf4b3bf6f236510ffa141e5ac6691f"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "7000cc3e219485fbee41b1b7850cf67faeeea1074e840e1cddb9140ea5f58f53",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "e51dca952d84db65488bcdb8da25948e0713b42bb9d6f214e313e60850d6d9ca",
+      "sourceValueSHA256": "e51dca952d84db65488bcdb8da25948e0713b42bb9d6f214e313e60850d6d9ca",
+      "contextSHA256": "da89896f6e9f356aca239c66d8e4c962630a2008dfb800f6367b39139acc7c9e"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "e98fe277731e9dfe4c1ea10cc8611ccc553d68bd5402a510daa0a0cff88ee4db",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "e51dca952d84db65488bcdb8da25948e0713b42bb9d6f214e313e60850d6d9ca",
+      "sourceValueSHA256": "e51dca952d84db65488bcdb8da25948e0713b42bb9d6f214e313e60850d6d9ca",
+      "contextSHA256": "da89896f6e9f356aca239c66d8e4c962630a2008dfb800f6367b39139acc7c9e"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "03669d4f81652d9d1fd805a94f9d8e31e54a99cafdfe7d4025ae682bb24074d7",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "05ce5ab2d0cf64e771040ef5228dd704cfb0a5832e410d47d8606a34843f7efb"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "1d46c25bc8762e36aa08d58c6a55c972d315f7367927d079979de8a5d5618aa6",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "f74dec717ea43d3b273d417ef57c8ddd314d5c75215fa6b132153f05b30d7b11",
+      "sourceValueSHA256": "f74dec717ea43d3b273d417ef57c8ddd314d5c75215fa6b132153f05b30d7b11",
+      "contextSHA256": "8490f1c9ecb1931119915469a916decbf9d2f80d86e250dcfb8153791190cf05"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "636ffb373e2c9c43133194eae595fef57c5a477a0ccfead12a26720f39039506",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "4e0252109dd704a103cb28f3726a8bce67b4c548cf64aba0f551942980e0cb32",
+      "sourceValueSHA256": "4e0252109dd704a103cb28f3726a8bce67b4c548cf64aba0f551942980e0cb32",
+      "contextSHA256": "96937cc6a46c5a5fe10bd76cc763e692c5069daf6d22a291a291c5fbc3ecbeec"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "71bb4f10d84f38515217efc4a62eb0e53fa913d03c614ffb59f7b34b68327a3a",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "05ce5ab2d0cf64e771040ef5228dd704cfb0a5832e410d47d8606a34843f7efb"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "16ad2d8746be31cc59a331c816019d033d490686298d28bfdc097374abf1909b",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "f74dec717ea43d3b273d417ef57c8ddd314d5c75215fa6b132153f05b30d7b11",
+      "sourceValueSHA256": "f74dec717ea43d3b273d417ef57c8ddd314d5c75215fa6b132153f05b30d7b11",
+      "contextSHA256": "8490f1c9ecb1931119915469a916decbf9d2f80d86e250dcfb8153791190cf05"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "5709ee1355772d82b0f5cbeab4a024e723f4930bb613d4d0a3d5d1d61e176a81",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "4e0252109dd704a103cb28f3726a8bce67b4c548cf64aba0f551942980e0cb32",
+      "sourceValueSHA256": "4e0252109dd704a103cb28f3726a8bce67b4c548cf64aba0f551942980e0cb32",
+      "contextSHA256": "96937cc6a46c5a5fe10bd76cc763e692c5069daf6d22a291a291c5fbc3ecbeec"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "92732b9f95a9b4cc7a87eef473aa3e7b2054c8e785028bc84616d742c86af85f",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "4e0252109dd704a103cb28f3726a8bce67b4c548cf64aba0f551942980e0cb32",
+      "sourceValueSHA256": "4e0252109dd704a103cb28f3726a8bce67b4c548cf64aba0f551942980e0cb32",
+      "contextSHA256": "3b3921408da5e47fb119e95d83ad3f2397038da0d98757c2275f91738ea7f9d0"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "d74d99aea0e3eb4f82bf016e38e28dc44bad3cb4eb786690daa5704cb255c5b7",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "4e0252109dd704a103cb28f3726a8bce67b4c548cf64aba0f551942980e0cb32",
+      "sourceValueSHA256": "4e0252109dd704a103cb28f3726a8bce67b4c548cf64aba0f551942980e0cb32",
+      "contextSHA256": "3b3921408da5e47fb119e95d83ad3f2397038da0d98757c2275f91738ea7f9d0"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "4310063da138f51295716fbb42580ccc6424509166cee5348f2cecb0c20350a3",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "1aece8ed3a21e1a72608acc3fc6e078a0c30798252ce17443625544727488e25"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "7d6513cc2cc4a14069a2aef6ced139cd011676519d5e6cf391fd66d6d4564846",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "sourceValueSHA256": "a25285b8795b996ba770d70d8c17dbbad0e1c218510f5f0ccde7ada53b6ab599",
+      "contextSHA256": "1aece8ed3a21e1a72608acc3fc6e078a0c30798252ce17443625544727488e25"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "17a5e2ae204ca852c467156db4bdcb66a5624e281128dca3675159527698914e",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "400282f4cdd60aeee99fb73f3531ab9177a20b0217548fd6c248c30ae610becd"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "id": "ef41934e5723aa49783d6b6b97167b1345b0389f16f16e657870f612f7761536",
+      "classification": "EXACT_NATIVE_GIT_Z_STDOUT_ASSERTION",
+      "parentValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "sourceValueSHA256": "d251792d89a8a35c9f3484db99cb552a22184f474b7c2aadfb730142c987057c",
+      "contextSHA256": "400282f4cdd60aeee99fb73f3531ab9177a20b0217548fd6c248c30ae610becd"
+    }
+  ],
+  "inputFiles": [
+    {
+      "label": "broad-v11-public-00",
+      "bytes": 2111080,
+      "sha256": "4af7ef36a984a64cfbe8b51afb3d38ad02648b43fe9c530e77bee6bfc260c09c"
+    },
+    {
+      "label": "broad-v11-public-01",
+      "bytes": 34207,
+      "sha256": "6d45210beb854b8a8924a9aa5b845a3e065c29f159a2b01f6c2f7875bc423f1e"
+    },
+    {
+      "label": "broad-v11-public-02",
+      "bytes": 1220787,
+      "sha256": "47f83a36691c863f6f944a261b7beaed06e948fc3a0ef37ee22d6ae1b9e3d83d"
+    },
+    {
+      "label": "broad-v11-public-03",
+      "bytes": 1238515,
+      "sha256": "3cd20046275f624988c02ae1e0243301e07c97180017211e11b247022eb2982c"
+    },
+    {
+      "label": "broad-v11-public-04",
+      "bytes": 1373834,
+      "sha256": "627bee5ad5789628880159b130116b8e50ec8ec73664cf3d9400c44f86018765"
+    },
+    {
+      "label": "broad-v11-public-05",
+      "bytes": 1659681,
+      "sha256": "7e0dcec730526335d365ef4b21ab0420adcf1fd6cb3b2d79edb70eb9d37bcfef"
+    },
+    {
+      "label": "broad-v11-public-06",
+      "bytes": 1928614,
+      "sha256": "8a36f74f66734d2cd3e7e126aeedfe8336b09197973d2c0bbbb3d08c91d671db"
+    },
+    {
+      "label": "broad-v11-public-07",
+      "bytes": 1720215,
+      "sha256": "0df23a0c50fb1e21c416d24dd18ca37aef606baac5b3a6cbfcd695d839878d5a"
+    },
+    {
+      "label": "broad-v11-public-08",
+      "bytes": 1279148,
+      "sha256": "9ffc4ca39961e6ed343d7e3061d370419df5fd1601ef24f204961995d6b5aab5"
+    },
+    {
+      "label": "broad-v11-public-09",
+      "bytes": 1420856,
+      "sha256": "241e728ee4c9b8e184a1a806169ddd6639492d699b6bbe8eb8cc4b99def1ccd4"
+    },
+    {
+      "label": "broad-v11-public-10",
+      "bytes": 1334188,
+      "sha256": "56f1009aa66ea13e45cf8258301a363d4c909ad8c9ab571afb4d3713f75c4891"
+    },
+    {
+      "label": "broad-v11-public-11",
+      "bytes": 1232658,
+      "sha256": "7cd5ef2493c0706c5185d0bde77344b1d6de4c4c2e1d05c463dd5151f560b9f5"
+    },
+    {
+      "label": "broad-v11-public-12",
+      "bytes": 877166,
+      "sha256": "d0a44d43bf199faf1cce5524226c0ad40751f95ec037555a14813d8a4083da71"
+    },
+    {
+      "label": "broad-v11-public-13",
+      "bytes": 848196,
+      "sha256": "f1499306976d03d0bea689c9ad9ed25a98b91db6c82f6d84d4fd0b24ec53e0f3"
+    },
+    {
+      "label": "broad-v11-public-14",
+      "bytes": 1245861,
+      "sha256": "e08546ff8a49d8e601eb1cbb32e6bb3db326bf56d9e8c247a6c95c2a84ecc07a"
+    },
+    {
+      "label": "broad-v11-public-15",
+      "bytes": 770469,
+      "sha256": "7ff0530b8bb12d7b9e27ba837db491c618e0d1169bc972dea26b8489730afd0b"
+    },
+    {
+      "label": "broad-v11-public-16",
+      "bytes": 2482432,
+      "sha256": "466f9fca39b6154d73dea801805bb4b619d4809568cbfc7a4f228a05579fe932"
+    },
+    {
+      "label": "broad-v11-public-17",
+      "bytes": 710683,
+      "sha256": "167fb5848076da810869fe232318ac5672b1fa8048cf45179f91b5eec8bfaa18"
+    }
+  ],
+  "inputsEdited": false,
+  "originalMatrixStatus": "PASS",
+  "originalNestedQuiet": false,
+  "rootClosureAccepted": true,
+  "productApprovalInferred": false,
+  "limitations": [
+    "Privacy classification is not product support or universal absence of secrets.",
+    "NUL parents are exact native Git output assertions; percent formats are literal native arguments.",
+    "File URI uses a declared root alias; config-origin belongs to a nonce-owned synthetic HOME.",
+    "Historical owned CGI PID is retained as informational evidence, not a current absence claim.",
+    "The original nested quiet=false and separate later root closure remain intact."
+  ]
+}

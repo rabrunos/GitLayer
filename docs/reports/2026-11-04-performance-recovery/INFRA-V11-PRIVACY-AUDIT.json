@@ -1,0 +1,212 @@
+{
+  "schema": 1,
+  "kind": "independent-local-publication-audit",
+  "status": "ROOT_REVIEW_REQUIRED",
+  "startedAt": "2026-11-05T03:53:55.013Z",
+  "nonce": "04006b5e-f436-4ecc-903c-04c91a4345a2",
+  "helper": {
+    "label": "audit-helper",
+    "bytes": 18250,
+    "sha256": "808cb5d967beb9f8f898eb5487cd2ace2c064b3fdacebb68452db2464e0bfd55"
+  },
+  "allowlist": {
+    "label": "explicit-allowlist",
+    "bytes": 1269,
+    "sha256": "1627b9716fb3f6f27028365c2d7b811fe655434342f902bac601e2685d168648"
+  },
+  "scope": "Only explicit new report/projection outputs. No raw streams, workspace traversal, Git, product tests, repair or publication.",
+  "counts": {
+    "files": 4,
+    "candidates": 2,
+    "informational": 0
+  },
+  "results": [
+    {
+      "label": "infra-v11-tap",
+      "role": "public-report",
+      "format": "json",
+      "input": {
+        "label": "infra-v11-tap",
+        "bytes": 92530,
+        "sha256": "4e1c2dcabe613a70b61fa277feeec35f8a091fd10683c2ddeb3f5d8712331c7e"
+      },
+      "valid": true,
+      "issues": [],
+      "findings": [
+        {
+          "id": "4b3f1a46ef2e12c1fcbd95508b2cbbd9249917f3a693db08f5bcd8c5e0cc8b07",
+          "kind": "WINDOWS_DRIVE_PATH",
+          "classification": "UNCLASSIFIED_ROOT_REVIEW",
+          "locator": {
+            "format": "json",
+            "structuralPath": [
+              {
+                "objectKeyIndex": 7
+              },
+              {
+                "objectKeyIndex": 0
+              }
+            ],
+            "keyOrValue": "value",
+            "offsetScope": "original decoded UTF8 string"
+          },
+          "encodingPass": 0,
+          "decodedCharacterOffset": 0,
+          "matchedValueSHA256": "836fafb1e6d8c94222b39c75a5701f27577e033dc8c423224715d81966dd0977",
+          "matchedCharacters": 10,
+          "rawValuePublished": false
+        },
+        {
+          "id": "543e102cec2cab02aaf7e4a821586feb13fdf2c1092cf567a5013b5a87e27836",
+          "kind": "WINDOWS_DRIVE_PATH",
+          "classification": "UNCLASSIFIED_ROOT_REVIEW",
+          "locator": {
+            "format": "json",
+            "structuralPath": [
+              {
+                "objectKeyIndex": 10
+              },
+              {
+                "objectKeyIndex": 4
+              }
+            ],
+            "keyOrValue": "value",
+            "offsetScope": "original decoded UTF8 string"
+          },
+          "encodingPass": 0,
+          "decodedCharacterOffset": 0,
+          "matchedValueSHA256": "836fafb1e6d8c94222b39c75a5701f27577e033dc8c423224715d81966dd0977",
+          "matchedCharacters": 10,
+          "rawValuePublished": false
+        }
+      ],
+      "nodesVisited": 2738,
+      "stringsInspected": 3557,
+      "findingLimitReached": false,
+      "decision": "Findings are candidates; only root can classify technical examples, public installations or private data."
+    },
+    {
+      "label": "infra-v11-receipt",
+      "role": "public-report",
+      "format": "json",
+      "input": {
+        "label": "infra-v11-receipt",
+        "bytes": 101953,
+        "sha256": "924045386de7db61302060ea6476153ab29cdb610de0c0bb9b5fccc3af659779"
+      },
+      "valid": true,
+      "issues": [],
+      "findings": [],
+      "nodesVisited": 1904,
+      "stringsInspected": 2389,
+      "findingLimitReached": false,
+      "decision": "Findings are candidates; only root can classify technical examples, public installations or private data."
+    },
+    {
+      "label": "harness021-controls",
+      "role": "public-report",
+      "format": "json",
+      "input": {
+        "label": "harness021-controls",
+        "bytes": 3021,
+        "sha256": "5ec9d52987107ef1d86000771707688a2d6ba42d91c6ceb68ef59075ad1a92e7"
+      },
+      "valid": true,
+      "issues": [],
+      "findings": [],
+      "nodesVisited": 77,
+      "stringsInspected": 90,
+      "findingLimitReached": false,
+      "decision": "Findings are candidates; only root can classify technical examples, public installations or private data."
+    },
+    {
+      "label": "source-equivalence-v11",
+      "role": "public-report",
+      "format": "json",
+      "input": {
+        "label": "source-equivalence-v11",
+        "bytes": 160788,
+        "sha256": "590960f20f08178b26966a533857591a7a40f7cfd592b14a6456fb3a88a7fa46"
+      },
+      "valid": true,
+      "issues": [],
+      "findings": [],
+      "nodesVisited": 3847,
+      "stringsInspected": 4996,
+      "findingLimitReached": false,
+      "decision": "Findings are candidates; only root can classify technical examples, public installations or private data."
+    }
+  ],
+  "provenance": {
+    "inputReceipts": [
+      {
+        "label": "stage-marker",
+        "bytes": 190,
+        "sha256": "e53c7d41452ac85d784b86a2b50c2dde084ae39c9504be3f841f69a5b342d2a3"
+      },
+      {
+        "label": "benchmark-FINAL",
+        "bytes": 42128,
+        "sha256": "ed12eb5a3197c709e0e21c093774ce2c8456edc5406fd1b68f90ce871440c4a3"
+      },
+      {
+        "label": "explicit-allowlist",
+        "bytes": 1269,
+        "sha256": "1627b9716fb3f6f27028365c2d7b811fe655434342f902bac601e2685d168648"
+      },
+      {
+        "label": "infra-v11-tap",
+        "bytes": 92530,
+        "sha256": "4e1c2dcabe613a70b61fa277feeec35f8a091fd10683c2ddeb3f5d8712331c7e"
+      },
+      {
+        "label": "infra-v11-receipt",
+        "bytes": 101953,
+        "sha256": "924045386de7db61302060ea6476153ab29cdb610de0c0bb9b5fccc3af659779"
+      },
+      {
+        "label": "harness021-controls",
+        "bytes": 3021,
+        "sha256": "5ec9d52987107ef1d86000771707688a2d6ba42d91c6ceb68ef59075ad1a92e7"
+      },
+      {
+        "label": "source-equivalence-v11",
+        "bytes": 160788,
+        "sha256": "590960f20f08178b26966a533857591a7a40f7cfd592b14a6456fb3a88a7fa46"
+      },
+      {
+        "label": "audit-helper",
+        "bytes": 18250,
+        "sha256": "808cb5d967beb9f8f898eb5487cd2ace2c064b3fdacebb68452db2464e0bfd55"
+      }
+    ],
+    "unchangedRechecked": true,
+    "benchmarkQuietRequired": true
+  },
+  "limits": {
+    "maxFileBytes": 67108864,
+    "maxTotalBytes": 268435456,
+    "maxStringCharacters": 8388608,
+    "maxNodes": 200000,
+    "maxDepth": 64,
+    "maxFindings": 10000,
+    "maxDecodePasses": 4
+  },
+  "policy": {
+    "inputsEdited": false,
+    "automaticRedaction": false,
+    "automaticRemoval": false,
+    "examplesClassifiedAutomatically": false,
+    "rootClassificationRequired": true,
+    "rawMatchedValuesPublished": false,
+    "numericOwnedPidsAreNotSecretsByThemselves": true
+  },
+  "limitations": [
+    "Candidate scan, not proof of universal absence of secrets or personal information.",
+    "No base64/compression/archive decoding, natural-language identity inference or reconstruction of hidden data.",
+    "Derived offsets refer to decoded views; JSON structural paths use object-key order and array indices without echoing private key names.",
+    "Public installation paths and intentional technical examples remain findings until root classification; evidence is never removed automatically.",
+    "A NO_CANDIDATES result is not a product PASS, suite result, remote CI check or authorization to publish."
+  ],
+  "endedAt": "2026-11-05T03:53:55.028Z"
+}

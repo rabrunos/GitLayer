@@ -1,5 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
+
+/** A validated external parent for disposable infrastructure/domain fixtures. */
+export const externalFixtureParent = projectRoot => validateFixtureParent(process.env.GIT_COMPAT_EXTERNAL_FIXTURE_PARENT ?? os.tmpdir(), { projectRoot });
 
 const inside=(root,target)=>{const rel=path.relative(root,target);return rel===''||(!rel.startsWith('..'+path.sep)&&rel!=='..'&&!path.isAbsolute(rel));};
 export function validateFixtureParent(candidate,{projectRoot}={}) {

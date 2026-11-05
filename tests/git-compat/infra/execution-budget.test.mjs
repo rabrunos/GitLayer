@@ -5,6 +5,7 @@ import test from 'node:test';
 import { randomUUID } from 'node:crypto';
 import { context,createFixture,cleanupFixture,isolatedEnvironment,project,execute,json,relative,validateResult,DEFAULT_COMMAND_TIMEOUT_MS,DEFAULT_CLI_TIMEOUT_MS } from '../../../scripts/git-compat/lib.mjs';
 import { reconcileWorkerResult } from '../../../scripts/git-compat/supervisor.mjs';
+import { externalFixtureParent } from '../../../scripts/git-compat/fixture-parent.mjs';
 
 const evidenceParent=process.env.GIT_COMPAT_INFRA_EVIDENCE_ROOT??path.join(project,'artifacts/git-compat/auxiliary/timeout-policy');
 if(!path.isAbsolute(evidenceParent))throw Error('GIT_COMPAT_INFRA_EVIDENCE_ROOT must be absolute');
@@ -18,7 +19,7 @@ process.stdout.write('fake CLI ready\\n');
 setTimeout(()=>{process.stdout.write('fake CLI completed\\n');},delay);
 `;
 function fixture(t,label,budgets={commandTimeoutMs:commandBudget,cliTimeoutMs:cliBudget}) {
-  const f=createFixture(path.join(project,'.workshop/git-compat-infra'),'f');t.after(()=>cleanupFixture(f));
+  const f=createFixture(externalFixtureParent(project),'f');t.after(()=>cleanupFixture(f));
   const buildDir=path.join(f.root,'build');fs.mkdirSync(buildDir);fs.writeFileSync(path.join(buildDir,'cli.mjs'),fakeCli);
   const config={root:f.root,repo:path.join(f.root,'repo'),artifactDir:path.join(f.root,'evidence'),packageRoot:f.root,buildDir,gitPath:process.execPath,env:isolatedEnvironment(f.root,process.execPath),...budgets};
   return {c:context(config),config,label};

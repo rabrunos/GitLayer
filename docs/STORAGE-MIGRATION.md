@@ -1,5 +1,7 @@
 # Armazenamento e resgate — implementação de 02/11/2026
 
+**Complemento de 04/11/2026:** [recuperação da etapa 2](reports/2026-11-04-performance-recovery/RECOVERY.md) amplia o diagnóstico independente por journal. Planos inválidos, backups ausentes/alterados, V05 e imagens posteriores incompatíveis são apresentados sem tentar reparo; uma entrada inválida não esconde as demais. `planValid` descreve o alcance do check e não dispensa as revalidações operacionais de `recover`. Nenhum schema, regra de migração, retenção do legado ou autorização de descarte foi relaxado.
+
 O Core descobre o diretório Git com o Git oficial. Um repositório novo usa layers/ nesse diretório. Um git-layers/ anterior continua sendo aberto no lugar; abertura, diagnóstico e build não o migram. Índices, árvores, blobs, commits e referências continuam sendo formatos nativos do Git.
 
 A migração é uma cópia explícita e verificada. Ela não altera HEAD, referências, índice principal ou arquivos de trabalho. O legado integral permanece como evidência: journals concluídos podem conter caminhos absolutos que continuam apontando para as cópias originais. Não apague nem edite o legado retido. O marcador layers/layout-migration.json registra manifesto/hash do legado; mudança posterior no legado impede nova abertura para evitar duas cópias ativas silenciosamente.

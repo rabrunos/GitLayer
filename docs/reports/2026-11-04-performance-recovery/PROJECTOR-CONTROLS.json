@@ -1,0 +1,166 @@
+{
+  "schema": 1,
+  "kind": "external-validation-projector-synthetic-controls",
+  "outcome": "PASS",
+  "scope": "Only the external receipt projector. These controls are not Git/Core product tests and are never added to product campaign totals.",
+  "executedAt": "2026-11-04T19:29:42.336Z",
+  "node": "v24.14.1",
+  "platform": "win32",
+  "arch": "x64",
+  "helper": {
+    "file": "project-final-validation.mjs",
+    "sha256": "aacabbb49c0c6ad20f189eb34b8fe2de040bc45084d8a8a3c778f6fa4b69dfb6",
+    "bytes": 26519
+  },
+  "preservedOriginal": {
+    "file": "project-final-validation.v1-63dc44474314.mjs",
+    "sha256": "63dc4447431465e82d1927bb12f908a4dd290ffe41909127288a31676d1ae19b",
+    "bytes": 16322
+  },
+  "controller": {
+    "file": "control-final-projector-v3.mjs",
+    "sha256": "310001b462920c7ad9998d3fa12b237e8e01ff68c98d9905293ddb035566fcb6"
+  },
+  "originalReceipt": {
+    "bytes": 66295,
+    "sha256": "0f9848bc47e2bb76cecb7ec7ab47aafbb1c24a0007dc499c3640567018a0ce00"
+  },
+  "syntheticControlsExecuted": 30,
+  "controls": [
+    {
+      "id": "known-backslash1",
+      "outcome": "PASS"
+    },
+    {
+      "id": "known-backslash2",
+      "outcome": "PASS"
+    },
+    {
+      "id": "known-backslash4",
+      "outcome": "PASS"
+    },
+    {
+      "id": "known-forwardslash",
+      "outcome": "PASS"
+    },
+    {
+      "id": "unknown-profile",
+      "outcome": "PASS"
+    },
+    {
+      "id": "unknown-profile-escaped",
+      "outcome": "PASS"
+    },
+    {
+      "id": "unknown-profile-forward",
+      "outcome": "PASS"
+    },
+    {
+      "id": "unknown-embedded-drive",
+      "outcome": "PASS"
+    },
+    {
+      "id": "known-file-uri",
+      "outcome": "PASS"
+    },
+    {
+      "id": "unknown-file-drive",
+      "outcome": "PASS"
+    },
+    {
+      "id": "unknown-file-unc",
+      "outcome": "PASS"
+    },
+    {
+      "id": "known-https-uri",
+      "outcome": "PASS"
+    },
+    {
+      "id": "explicit-personal-item-omission",
+      "outcome": "PASS"
+    },
+    {
+      "id": "scalar-personal-omission",
+      "outcome": "PASS"
+    },
+    {
+      "id": "personal-hash-mismatch-refused",
+      "outcome": "PASS"
+    },
+    {
+      "id": "noncontext-omission-refused",
+      "outcome": "PASS"
+    },
+    {
+      "id": "metadata-memory-explicit",
+      "outcome": "PASS"
+    },
+    {
+      "id": "failed-and-retry-separate",
+      "outcome": "PASS"
+    },
+    {
+      "id": "inconsistent-pass",
+      "outcome": "PASS"
+    },
+    {
+      "id": "inconsistent-passed",
+      "outcome": "PASS"
+    },
+    {
+      "id": "inconsistent-succeeded",
+      "outcome": "PASS"
+    },
+    {
+      "id": "truncated-json-refused",
+      "outcome": "PASS"
+    },
+    {
+      "id": "invalid-utf8-refused",
+      "outcome": "PASS"
+    },
+    {
+      "id": "output-existing-preserved",
+      "outcome": "PASS"
+    },
+    {
+      "id": "output-outside-child-refused",
+      "outcome": "PASS"
+    },
+    {
+      "id": "duplicate-receipt-refused",
+      "outcome": "PASS"
+    },
+    {
+      "id": "active-receipt-refused",
+      "outcome": "PASS"
+    },
+    {
+      "id": "write-aftereffect-partial",
+      "outcome": "PASS"
+    },
+    {
+      "id": "write-aftereffect-after-fsync",
+      "outcome": "PASS"
+    },
+    {
+      "id": "declared-json-stream-data-refused",
+      "outcome": "PASS"
+    }
+  ],
+  "budgets": {
+    "perChildTimeoutMs": 15000,
+    "maxChildOutputBytes": 2097152,
+    "JSONInputLimitBytes": 67108864
+  },
+  "inputsUnchanged": true,
+  "helperUnchanged": true,
+  "preservedOriginalUnchanged": true,
+  "aggregateWithProductTests": false,
+  "limitations": [
+    "Synthetic outcomes validate this utility only; no product campaign totals are derived.",
+    "Injected EIO follows actual output writes/fsync in an owned process, not real hardware I/O failure or power loss.",
+    "Runtime controls use small files; the64MiB per-block growth guard was reviewed statically, not stress-tested with large data.",
+    "Identity observations do not claim hostile-kernel atomic directory-descriptor semantics on Windows."
+  ]
+}

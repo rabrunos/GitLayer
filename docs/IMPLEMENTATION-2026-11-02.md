@@ -1,5 +1,7 @@
 # Core/CLI — implementação de 02/11/2026
 
+**Continuação de 04/11/2026 — Etapa 2.** O [relatório de desempenho e recuperação](reports/2026-11-04-performance-recovery/README.md) descreve otimizações e diagnóstico independente, preservando estes contratos. Sua validação integral nas fontes finais está PENDENTE; resultados anteriores não são atribuídos automaticamente ao código modificado. A classificação permanece em 20 implementados e sete parciais, incluindo GL-19.
+
 **Continuação aprovada em 03/11/2026 — etapa 1B.** O [relatório de segurança implementada](reports/2026-11-03-security-compatibility-implementation/README.md) acrescenta correções de origem de rename, fronteira coerente do destino, opção conservadora na troca gerenciada e diagnósticos de staging/protect. Essas garantias e seus testes próprios complementam este contrato; não reclassificam resultados históricos nem tornam GL-01/09/15/18/22 completos. A ausência de observação contínua e as operações Git diretas permanecem fronteiras explícitas, não justificativas para D-01/D-02.
 
 Esta fase implementa o produto segundo GL-01 a GL-27 do pacote de 02/11/2026. As restrições de 18 e 19/10 sobre não editar o produto pertencem às rodadas históricas. O [relatório público de fechamento](reports/2026-11-02-closure/REPORT.md) identifica fontes e resultados desta fase. Os logs brutos e entregas locais anteriores têm retenção externa; os relatórios anteriores não certificam estas fontes. A existência de uma API não comprova todos os critérios de um requisito.

@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "kind": "synthetic-harness021-authorization-controls",
+  "status": "CONTROLS_PASSED",
+  "generatedAt": "2026-11-05T03:36:22.714Z",
+  "nonce": "7cb5007d-f8ea-43ad-b6a6-14fa70ad8e1e",
+  "counts": {
+    "controls": 9,
+    "positive": 1,
+    "negative": 8,
+    "matchedExpected": 9
+  },
+  "controls": [
+    {
+      "name": "current stage2 mission",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "name": "push absent",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "name": "main absent",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "name": "force permission is not no-force authority",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "name": "stage2 report absent",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "name": "historical stage1B is not current stage2",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "name": "Core CLI scope absent",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "name": "mission authorization absent",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "name": "inherited stage1B safeguards absent",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "source": {
+    "originalFile": "tests/git-compat/cases/harness-extra.mjs",
+    "originalSHA256": "74f5b786edf2179aa4621260d12cbc8bcd920dcf9338c005280ce22d58cdaff8",
+    "candidateFile": "harness-extra-v11-stage2-authority-candidate.mjs",
+    "candidateSHA256": "27942bd7edde3bff4876bc030790395ba37e5cb230c030659ef3a7845a96a74c",
+    "agentsSHA256": "071924a4a5bdfb069e2cf03246e54d0834ccaa76d3e9406838794d6df6f2d2ba",
+    "parser": {
+      "name": "TypeScript createSourceFile",
+      "version": "5.9.3",
+      "sha256": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675"
+    },
+    "functionSHA256": "df92ba0abf1d9f54c094b6afe6d3993d7af4774c755c69903c869a591b31cecd",
+    "controlsDeclarationSHA256": "05e2a0f8f1fb7ecd04e0588a68343b0518ca537a6315c0b77608ad9a32b0f8cb"
+  },
+  "structuralProof": {
+    "onlyCaseHARNESS021Changed": true,
+    "prefixBytesUnchanged": true,
+    "suffixBytesUnchanged": true,
+    "caseIdOccurrenceCount": 1,
+    "caseVariantDeclarationUnchanged": true,
+    "caseClassificationDeclarationUnchanged": true
+  },
+  "productImported": false,
+  "gitInvoked": false,
+  "matrixExecuted": false,
+  "projectEdited": false,
+  "sourceInputsRevalidated": true,
+  "qualifications": [
+    "Only the exact AST-extracted local pure function plus its nine candidate controls were evaluated. No case module was imported.",
+    "Parser and text-control success do not certify GitLayer behavior, the HARNESS021 real case or the compatibility matrix.",
+    "Current AGENTS text is observed; authority remains the user mission and applicable repository instructions, never a report index.",
+    "All original campaign failures remain unchanged. Root must apply only after D3 release and run the whole new broad campaign."
+  ]
+}

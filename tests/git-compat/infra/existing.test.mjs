@@ -8,7 +8,7 @@ import test from 'node:test';
 import { context,createFixture,cleanupFixture,isolatedEnvironment,project,fileHash,sha256 } from '../../../scripts/git-compat/lib.mjs';
 import { fileManifest } from '../../../scripts/git-compat/audit.mjs';
 import { validateOutputRoot,protectedOutputDirectories } from '../../../scripts/git-compat/output-root.mjs';
-import { validateFixtureParent } from '../../../scripts/git-compat/fixture-parent.mjs';
+import { validateFixtureParent, externalFixtureParent } from '../../../scripts/git-compat/fixture-parent.mjs';
 import { existingSummaryLines,parseExistingArgs,persistExistingStreams } from '../../../scripts/git-compat/existing.mjs';
 
 const evidenceParent=process.env.GIT_COMPAT_INFRA_EVIDENCE_ROOT?validateOutputRoot(process.env.GIT_COMPAT_INFRA_EVIDENCE_ROOT,{projectRoot:project}):null;
@@ -21,7 +21,7 @@ function record(label,data,execution) {
   fs.writeFileSync(path.join(evidenceRoot,label+'.json'),JSON.stringify(data,null,2)+'\n');
 }
 function owned(t,label) {
-  const f=createFixture(path.join(project,'.workshop/git-compat-infra'),label);t.after(()=>cleanupFixture(f));
+  const f=createFixture(externalFixtureParent(project),label);t.after(()=>cleanupFixture(f));
   return context({root:f.root,repo:path.join(f.root,'repo'),artifactDir:path.join(f.root,'evidence'),packageRoot:f.root,gitPath:process.execPath,env:isolatedEnvironment(f.root,process.execPath)});
 }
 

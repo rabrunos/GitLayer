@@ -1,0 +1,597 @@
+{
+  "schema": 1,
+  "scope": "Investigation evidence and bounded-assert infrastructure controls. Core scratch-query candidate has not yet passed directed/final gates.",
+  "coreFixValidation": "DIRECTED_PASS_FULL_AND_FINAL_BENCHMARK_PENDING",
+  "classification": {
+    "status1200Original": "FAIL preserved; not ENV_BLOCKED or SKIP",
+    "oom": "Synchronous Node assertion formatting after completed Core.status, with a real unexpected private-index byte mutation",
+    "r02": "PASS in separate six-test file reproduction; original focus FAIL preserved; final full pending",
+    "externalLoadAttribution": "Isolated reproduction confirms owned-process allocation; no causal attribution to uncontrolled external load."
+  },
+  "environment": {
+    "node": "v24.14.1",
+    "git": "2.53.0.windows.2",
+    "platform": "win32",
+    "arch": "x64"
+  },
+  "sourceAtReproductions": {
+    "fingerprint": "aa87896721bd2c2347c95b3b7dadef163b636e9fc6c95fe3493497baa9050dca",
+    "inputCount": 201,
+    "unchanged": true,
+    "qualification": "Historical investigation snapshot, not current source or final certification"
+  },
+  "reproductions": [
+    {
+      "id": "status1200-01",
+      "status": "FAIL",
+      "execution": {
+        "exitCode": 1,
+        "timedOut": false,
+        "outputTruncated": false,
+        "summary": {
+          "format": "Node.js TAP final summary",
+          "counts": {},
+          "complete": false,
+          "consistent": false
+        }
+      },
+      "coreStatus": {
+        "at": "2026-11-04T16:41:04.468Z",
+        "durationMs": 5707.643100000001,
+        "safe": true,
+        "error": null,
+        "qualification": "Instrumented reproduction observation, not benchmark latency"
+      },
+      "memory": {
+        "source": "Independent Windows CIM observation; JavaScript timer stops during synchronous formatting",
+        "ownNodePeakPrivateBytes": 82298068992,
+        "ownNodePeakRssBytes": 25593745408,
+        "atPrivatePeak": "2026-11-04T16:42:18.0317247+00:00",
+        "pairedWindowsAtPrivatePeak": {
+          "CommittedBytes": 113821970432,
+          "CommitLimit": 114288377856,
+          "PercentCommittedBytesInUse": 99,
+          "AvailableMBytes": 144
+        },
+        "firstOwnNodeOverGiBAt": "2026-11-04T16:41:05.2767543+00:00",
+        "limitations": [
+          "CommitLimit changed dynamically; pair values by timestamp, never combine peak commit with initial limit.",
+          "Observed/sampled peak is a lower bound; virtual-address reservation is a separate metric.",
+          "Owned test tree was stopped to protect host; no completed test TAP summary."
+        ]
+      }
+    },
+    {
+      "id": "status1200-02",
+      "status": "FAIL",
+      "execution": {
+        "exitCode": 1,
+        "timedOut": false,
+        "outputTruncated": false,
+        "summary": {
+          "format": "Node.js TAP final summary",
+          "counts": {
+            "tests": 1,
+            "suites": 0,
+            "pass": 0,
+            "fail": 1,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0,
+            "duration_ms": 17046.1835
+          },
+          "complete": true,
+          "consistent": true
+        }
+      },
+      "coreStatus": {
+        "at": "2026-11-04T16:45:56.074Z",
+        "durationMs": 7379.259099999999,
+        "safe": true,
+        "error": null,
+        "qualification": "Instrumented reproduction observation, not benchmark latency"
+      },
+      "boundedObserver": {
+        "comparison": "exact Buffer.equals",
+        "capBytesEach": 1048576,
+        "actualBytes": 144101,
+        "expectedBytes": 144101,
+        "actualSha256": "53c574219e9acbfe23b8850b8394e814509bdd15ffdef090705ac7eacc25801b",
+        "expectedSha256": "4681a018b9531474b1f45cef74bfc1761353d35f998f68fe6db6fce1b6b00536",
+        "firstDifferentOffset": 132,
+        "boundedRange": {
+          "offset": 116,
+          "actualHex": "6162696c6974792e74787400000000006aeb613b02a1b7e06aeb613b02a94ce40000000000000000000081a400000000",
+          "expectedHex": "6162696c6974792e7478740000000000000000000000000000000000000000000000000000000000000081a400000000"
+        }
+      },
+      "memory": {
+        "nodePeak": {
+          "rss": 120918016,
+          "heapTotal": 51625984,
+          "heapUsed": 27223728,
+          "external": 8500238,
+          "arrayBuffers": 5584795
+        },
+        "qualification": "Sampled Node memory with bounded failure formatter; unsampled peaks possible"
+      }
+    }
+  ],
+  "capturedIndex": {
+    "originalCapturesUnchanged": {
+      "actual": true,
+      "expected": true
+    },
+    "entryCount": 1200,
+    "semanticOutputEqual": true,
+    "semanticSha256": "f18be5724b686fb63d9a8db181736a1ddfa9a35ec67a6bf0f7e6672ad5417565",
+    "semanticQuery": [
+      "ls-files",
+      "--stage",
+      "-v",
+      "-z"
+    ],
+    "changedSemantic": [],
+    "changedStatCount": 1198,
+    "allDifferingBytes": {
+      "statBytes": 20282,
+      "checksumBytes": 20,
+      "otherBytes": 0,
+      "otherOffsetSample": []
+    },
+    "extensionBytesEqual": true,
+    "extensionBytes": 69,
+    "checksums": {
+      "actual": "d37785537c28b781c8463b46512a193333b8e22c",
+      "expected": "24b66e2b999f1739f18da305db7ee4d19e7a109d"
+    },
+    "changedStatSample": [
+      {
+        "ordinal": 1,
+        "path": "layer/0001-long-path-for-command-line-scalability.txt",
+        "actual": [
+          1793810747,
+          44152800,
+          1793810747,
+          44649700,
+          0,
+          0,
+          33188,
+          0,
+          0,
+          2
+        ],
+        "expected": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          33188,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "ordinal": 2,
+        "path": "layer/0002-long-path-for-command-line-scalability.txt",
+        "actual": [
+          1793810747,
+          44649700,
+          1793810747,
+          44649700,
+          0,
+          0,
+          33188,
+          0,
+          0,
+          2
+        ],
+        "expected": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          33188,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "ordinal": 3,
+        "path": "layer/0003-long-path-for-command-line-scalability.txt",
+        "actual": [
+          1793810747,
+          45222300,
+          1793810747,
+          45717700,
+          0,
+          0,
+          33188,
+          0,
+          0,
+          2
+        ],
+        "expected": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          33188,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "statFields": [
+      "ctimeSeconds",
+      "ctimeNanoseconds",
+      "mtimeSeconds",
+      "mtimeNanoseconds",
+      "device",
+      "inode",
+      "mode",
+      "uid",
+      "gid",
+      "size"
+    ],
+    "qualification": "Equal semantics explains the mutation but does not authorize replacing the exact-byte oracle."
+  },
+  "nativeProbe": {
+    "originalRepositoryUnchanged": true,
+    "originalCapturesUnchanged": true,
+    "query": [
+      "diff",
+      "--no-ext-diff",
+      "--no-textconv",
+      "--name-status",
+      "-z",
+      "--no-renames",
+      "--"
+    ],
+    "copies": [
+      {
+        "basis": "expected",
+        "mode": "default",
+        "optionalLocks": "0",
+        "independentCopy": true,
+        "exitCode": 0,
+        "indexBytesEqual": false,
+        "indexBefore": {
+          "bytes": 144101,
+          "sha256": "4681a018b9531474b1f45cef74bfc1761353d35f998f68fe6db6fce1b6b00536"
+        },
+        "indexAfter": {
+          "bytes": 144101,
+          "sha256": "53c574219e9acbfe23b8850b8394e814509bdd15ffdef090705ac7eacc25801b"
+        },
+        "changeCount": 2,
+        "stdout": {
+          "file": "expected-default.stdout.bin",
+          "bytes": 112,
+          "sha256": "aea45556c530af102e6e02609075e981caa7fe6adf12ad1fa486b61ebc89d9f7"
+        },
+        "exploratoryDurationMs": 765.0056999999999
+      },
+      {
+        "basis": "expected",
+        "mode": "disabled",
+        "optionalLocks": "0",
+        "independentCopy": true,
+        "exitCode": 0,
+        "indexBytesEqual": true,
+        "indexBefore": {
+          "bytes": 144101,
+          "sha256": "4681a018b9531474b1f45cef74bfc1761353d35f998f68fe6db6fce1b6b00536"
+        },
+        "indexAfter": {
+          "bytes": 144101,
+          "sha256": "4681a018b9531474b1f45cef74bfc1761353d35f998f68fe6db6fce1b6b00536"
+        },
+        "changeCount": 1200,
+        "stdout": {
+          "file": "expected-disabled.stdout.bin",
+          "bytes": 67200,
+          "sha256": "8f5c101121b9134e4ab123dc4d88b2fd9611e40e2e19744797b7fe102a7f633f"
+        },
+        "exploratoryDurationMs": 118.38159999999993
+      },
+      {
+        "basis": "actual",
+        "mode": "default",
+        "optionalLocks": "0",
+        "independentCopy": true,
+        "exitCode": 0,
+        "indexBytesEqual": true,
+        "indexBefore": {
+          "bytes": 144101,
+          "sha256": "53c574219e9acbfe23b8850b8394e814509bdd15ffdef090705ac7eacc25801b"
+        },
+        "indexAfter": {
+          "bytes": 144101,
+          "sha256": "53c574219e9acbfe23b8850b8394e814509bdd15ffdef090705ac7eacc25801b"
+        },
+        "changeCount": 2,
+        "stdout": {
+          "file": "actual-default.stdout.bin",
+          "bytes": 112,
+          "sha256": "aea45556c530af102e6e02609075e981caa7fe6adf12ad1fa486b61ebc89d9f7"
+        },
+        "exploratoryDurationMs": 71.78760000000011
+      },
+      {
+        "basis": "actual",
+        "mode": "disabled",
+        "optionalLocks": "0",
+        "independentCopy": true,
+        "exitCode": 0,
+        "indexBytesEqual": true,
+        "indexBefore": {
+          "bytes": 144101,
+          "sha256": "53c574219e9acbfe23b8850b8394e814509bdd15ffdef090705ac7eacc25801b"
+        },
+        "indexAfter": {
+          "bytes": 144101,
+          "sha256": "53c574219e9acbfe23b8850b8394e814509bdd15ffdef090705ac7eacc25801b"
+        },
+        "changeCount": 2,
+        "stdout": {
+          "file": "actual-disabled.stdout.bin",
+          "bytes": 112,
+          "sha256": "aea45556c530af102e6e02609075e981caa7fe6adf12ad1fa486b61ebc89d9f7"
+        },
+        "exploratoryDurationMs": 72.17070000000012
+      }
+    ],
+    "qualification": "One exploratory observation per copied index/config; not product latency or a comparative benchmark."
+  },
+  "boundedAssertion": {
+    "policy": "Buffer.equals compares all bytes; hashes/length/first offset are only bounded failure diagnostics. AssertionError actual/expected are booleans, never buffers.",
+    "helperFile": "tests/helpers/assert-bytes.ts",
+    "unitFile": "tests/unit/assert-bytes.test.ts",
+    "intermediateRun": {
+      "status": "PASS",
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sourceUnchanged": true,
+      "exitCode": 0,
+      "durationMs": 420,
+      "argv": [
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "--test-timeout=45000",
+        "--test-reporter=tap",
+        "tests/unit/assert-bytes.test.ts"
+      ],
+      "selectedInputHashes": [
+        {
+          "file": "tests/helpers/assert-bytes.ts",
+          "bytes": 1271,
+          "sha256": "6ca51dd7e2db34693212af666b126688650727e7ff73b5f4fbdbb4c5eacbac4e"
+        },
+        {
+          "file": "tests/unit/assert-bytes.test.ts",
+          "bytes": 6267,
+          "sha256": "98625b63c65d0f9813c785cea9c219e4f1c1839a776e05bab3c2067ea6b995f5"
+        },
+        {
+          "file": "scripts/git-compat/lib.mjs",
+          "bytes": 23585,
+          "sha256": "bd36f29ee217d5bcfd2b2af38dd3e93090574b9b8ade0482b747eab3034f0b81"
+        }
+      ],
+      "memory": {
+        "kind": "bounded-byte-assertion-child",
+        "rows": [
+          {
+            "bytes": 256,
+            "difference": "many bytes",
+            "messageLength": 276,
+            "actual": false,
+            "expected": true
+          },
+          {
+            "bytes": 147456,
+            "difference": "one middle byte",
+            "messageLength": 286,
+            "actual": false,
+            "expected": true
+          },
+          {
+            "bytes": 1048576,
+            "difference": "one middle byte",
+            "messageLength": 289,
+            "actual": false,
+            "expected": true
+          }
+        ],
+        "baselineRssBytes": 63279104,
+        "afterRssBytes": 63971328,
+        "maxRssBytes": 63979520,
+        "rssDelta": 700416
+      }
+    },
+    "negativeControlPolicy": {
+      "manyDifferentBytes": 256,
+      "largeInputsBytes": [
+        147456,
+        1048576
+      ],
+      "largeDifferentBytesEach": 1,
+      "heapLimitMiB": 96,
+      "heapIsNotExternalOrRssLimit": true,
+      "rssObservedAssertions": {
+        "maximumGrowthBytes": 67108864,
+        "maximumPeakBytes": 402653184
+      },
+      "typeBeforeValueAssertions": true,
+      "fullFinalRerun": "PENDING"
+    }
+  },
+  "candidate": {
+    "state": "IMPLEMENTED_DIRECTED_PASS_FULL_AND_FINAL_BENCHMARK_PENDING",
+    "module": "src/core/index-query.ts",
+    "wiring": "Core worktree name-status and patch diff query an independent transient external index; cached/tree diffs retain direct route.",
+    "contract": "Preserve exact source index/HEAD/refs/worktree/metadata, native diff outputs and later external writes; reject unknown locks, links or changed observations.",
+    "tradeoff": "Extra index-copy/hash/receipt/cleanup work and repeated stat-only content reads. No persistent cache, hardlink, symlink, global config or alteration of native user Git.",
+    "fallbackRejected": "diff.autoRefreshIndex=false alone kept the old copied index but reported1200 modified paths instead of2."
+  },
+  "primarySources": {
+    "nodeAssertionError": "https://github.com/nodejs/node/blob/v24.14.1/lib/internal/assert/assertion_error.js#L66",
+    "nodeMyersDiff": "https://github.com/nodejs/node/blob/v24.14.1/lib/internal/assert/myers_diff.js#L32",
+    "gitDiff": "https://github.com/git/git/blob/v2.53.0/builtin/diff.c#L222",
+    "gitAutoRefreshDocumentation": "https://github.com/git/git/blob/v2.53.0/Documentation/config/diff.adoc#L1",
+    "gitIndexFormat": "https://git-scm.com/docs/index-format#_index_entry"
+  },
+  "rawReceipts": [
+    {
+      "label": "repro-status1200-01/result.json",
+      "bytes": 3789,
+      "sha256": "0da4693fa09ada4211bf781d885c9970a36d34a1d33f097df875ea0fbd5faad4",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "repro-status1200-01/OWNED-MEMORY-DETAILS.json",
+      "bytes": 5134,
+      "sha256": "6b9d565aad250e9e5035ed953968305ba898d224a4dff71f8e103b30967d6835",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "repro-status1200-01/STAGES.json",
+      "bytes": 20385,
+      "sha256": "dd520565fadfe1c39566bac95bb08a9c9b353e2fc7e78c6d0a22baf523072018",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "repro-status1200-02/result.json",
+      "bytes": 3953,
+      "sha256": "54d1bbd4d1591fb13b63094118bf4a6129ecb2bb8dddb872c5a50e1defa4c5ec",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "repro-status1200-02/MEMORY-SUMMARY.json",
+      "bytes": 806,
+      "sha256": "63c64d33dff31a44f243a542d7c5441dff7dea109e794ea5c092a24ee887d025",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "repro-status1200-02/buffer-mismatch-db99391a-8095-4c50-b83a-4216282699fd.json",
+      "bytes": 1358,
+      "sha256": "db3dc892a75a0faa746e9ff02addb090bfe55e2888a09a883e0219f19235bcd6",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "captured-index-observer-01/result.json",
+      "bytes": 5210,
+      "sha256": "007a21b6936bbc9c20d8615c3547a1209735e4809d4877bc17a8ec2bef359a41",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "diff-auto-refresh-probe-01/result.json",
+      "bytes": 154799,
+      "sha256": "3056f8e5e12c3a13726e09174d7d16978878533e15104cd4cc9092a1404e0b7c",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "bounded-assert-unit-01/BEFORE.json",
+      "bytes": 625,
+      "sha256": "07815d8151afdb69b9a9eeca134b398f96353498f7266d890fc42dab373b9e7c",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "bounded-assert-unit-01/AFTER.json",
+      "bytes": 533,
+      "sha256": "c8fcad865e0feea5b48af3eb81492f51d171b125c53a8f2747377037df7b577d",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "bounded-assert-unit-01/RESULT.json",
+      "bytes": 26061,
+      "sha256": "5a4afbaffd5a1f66ec95e7321b424295908d74b15cc646e3356b3333ea94b572",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "directed-query-v6-01/result.json",
+      "bytes": 4034,
+      "sha256": "860131f4f44f52ff8465da2dc84268a25b0b08da67404e0961a3b0da38ad174c",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "directed-query-v6-01/SOURCE-MANIFEST.json",
+      "bytes": 35003,
+      "sha256": "a13699d9c36cd7b795bf930d0c24684e602c868db1b7fe1fe7d4f8cc7d25a2e7",
+      "location": "external owned campaign archive; portable facts projected here"
+    },
+    {
+      "label": "directed-query-v6-01/AFTER-MANIFEST.json",
+      "bytes": 35003,
+      "sha256": "a13699d9c36cd7b795bf930d0c24684e602c868db1b7fe1fe7d4f8cc7d25a2e7",
+      "location": "external owned campaign archive; portable facts projected here"
+    }
+  ],
+  "directedGate": {
+    "label": "directed-query-v6-01",
+    "status": "PASS",
+    "selected": "querygate",
+    "sourceFingerprint": "f72502adcfd332e3109ad3e82ec845731f376cfc41d5e4a44be5ce89a6c4a825",
+    "inputCount": 205,
+    "sourceUnchanged": true,
+    "counts": {
+      "tests": 25,
+      "suites": 0,
+      "pass": 25,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 129536.6691
+    },
+    "exitCode": 0,
+    "startedAt": "2026-11-04T17:15:35.686Z",
+    "endedAt": "2026-11-04T17:17:46.606Z",
+    "fullFinalValidation": "PENDING",
+    "r02": "PASS in separate file"
+  },
+  "r02r03Gate": {
+    "label": "repro-r02-file-v6-01",
+    "scope": "Whole R02/R03 test file only; never merged with another campaign",
+    "status": "PASS",
+    "counts": {
+      "tests": 6,
+      "suites": 0,
+      "pass": 6,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 174444.0856
+    },
+    "exitCode": 0,
+    "sourceFingerprint": "f72502adcfd332e3109ad3e82ec845731f376cfc41d5e4a44be5ce89a6c4a825",
+    "inputCount": 205,
+    "sourceUnchanged": true,
+    "startedAt": "2026-11-04T17:19:17.495Z",
+    "endedAt": "2026-11-04T17:22:13.162Z",
+    "rawReceipt": {
+      "label": "repro-r02-file-v6-01/result.json",
+      "bytes": 3943,
+      "sha256": "e4777c7d19ac8f77352dda498fb90e21889e6f1ddac4bb952cc22bbf4a0465cf"
+    }
+  }
+}

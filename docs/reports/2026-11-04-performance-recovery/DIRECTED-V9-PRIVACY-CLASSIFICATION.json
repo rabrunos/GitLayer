@@ -1,0 +1,31 @@
+{
+    "schema":  1,
+    "kind":  "root-publication-finding-classification",
+    "recordedAt":  "2026-11-05T00:08:07.0179397Z",
+    "auditSHA256":  "a58919579421204467e6b843efe5065853186081eeeb8068007d2fb13d7a9d47",
+    "publicInputSHA256":  "7db2c2e6bd81f7c4cc1f1e278ff694b797e3c9e3172e7c8147378cfc882e9e00",
+    "decisions":  [
+                      {
+                          "findingId":  "4b3f1a46ef2e12c1fcbd95508b2cbbd9249917f3a693db08f5bcd8c5e0cc8b07",
+                          "classification":  "PUBLIC_RUNTIME_INSTALLATION",
+                          "reason":  "Exact standard Program Files runtime executable verified; no user profile or credential component.",
+                          "acceptedForPublicEvidence":  true
+                      },
+                      {
+                          "findingId":  "33191f4cd19110b8aa148b2b975bba6734e109577be1a3ac452082fc2f868699",
+                          "classification":  "TOKENIZED_TECHNICAL_URI",
+                          "reason":  "Observer import uses the already-redacted STAGE2 token, not a private filesystem path.",
+                          "acceptedForPublicEvidence":  true
+                      },
+                      {
+                          "findingId":  "39daf4994549340c9eaee69348b196c58bc024593830d065c2e86220a77bafce",
+                          "classification":  "PUBLIC_RUNTIME_INSTALLATION",
+                          "reason":  "Exact standard Program Files runtime executable verified; no user profile or credential component.",
+                          "acceptedForPublicEvidence":  true
+                      }
+                  ],
+    "unclassifiedFindings":  0,
+    "sourceEdited":  false,
+    "automaticRedaction":  false,
+    "productSuccessInferred":  false
+}

@@ -1,0 +1,96 @@
+{
+    "schema":  1,
+    "nonce":  "ed01884e-969c-40e6-878c-a992e1c5ee2a",
+    "status":  "CLOSURE_PROVEN",
+    "quiet":  true,
+    "startedAt":  "2026-11-05T02:06:35.9283543+00:00",
+    "endedAt":  "2026-11-05T02:06:37.2315359+00:00",
+    "sourceFingerprint":  "698f7e3f647381eef19463a5a1fd07252ed875b6a83c5789f1282129ebd97dbc",
+    "priorPipelineOutcome":  "HALTED",
+    "priorPipelineQuiet":  false,
+    "originalResultsModified":  false,
+    "fullOutcome":  "PASS",
+    "fullCounts":  {
+                       "tests":  415,
+                       "suites":  0,
+                       "pass":  411,
+                       "fail":  0,
+                       "cancelled":  0,
+                       "skipped":  4,
+                       "todo":  0,
+                       "duration_ms":  7086036.8197
+                   },
+    "guardOutcome":  "COMPLETED",
+    "benchmarkQuiet":  true,
+    "exactIdentities":  128,
+    "queriedRecordedPIDs":  125,
+    "maximumBatchSize":  64,
+    "queryCount":  2,
+    "privateProof":  {
+                         "file":  "PROCESS-CLOSURE-PRIVATE.json",
+                         "sha256":  "79d5f4fe69cfdfac4b25121d63e121a5049fa0448a1870ec81f12930c335f91e"
+                     },
+    "sourceEvidence":  [
+                           {
+                               "label":  "stage-owner",
+                               "bytes":  190,
+                               "sha256":  "e53c7d41452ac85d784b86a2b50c2dde084ae39c9504be3f841f69a5b342d2a3"
+                           },
+                           {
+                               "label":  "pipeline-FINAL",
+                               "bytes":  17121,
+                               "sha256":  "2736b6db68fe19f820947bdf535ff9850c7e6fc99aee5073cc981b46a415f750"
+                           },
+                           {
+                               "label":  "pipeline-identity",
+                               "bytes":  167,
+                               "sha256":  "b994a10bd5d80235c487f84ef9ec46d807702241f330924932e63f7078213f00"
+                           },
+                           {
+                               "label":  "full-wrapper-identity",
+                               "bytes":  240,
+                               "sha256":  "4056a6ed04ed1c4e09fb345d51b49c8d7c473d121933bb5f07fd2ccf2db46692"
+                           },
+                           {
+                               "label":  "guard-process",
+                               "bytes":  641,
+                               "sha256":  "58990ad8f32e4a603b7ff21fe974e9a90f222d5987ed1791beae5895e1567238"
+                           },
+                           {
+                               "label":  "guard-execution",
+                               "bytes":  371,
+                               "sha256":  "07b9fe2eb1def9af3db93a103ba4be0c9d1e6a49b86a967c68fb90ce76616ee8"
+                           },
+                           {
+                               "label":  "full-result",
+                               "bytes":  2518,
+                               "sha256":  "9be7e11ab46a04bd0806c425528001072d8aa8b3f606006a0b4de2ec1e3575ce"
+                           },
+                           {
+                               "label":  "guard-result",
+                               "bytes":  800,
+                               "sha256":  "1ed099265510716c1f8470ca38a725bcb8f297c6459a1aeb9d8affc9f8da4ad0"
+                           },
+                           {
+                               "label":  "memory-NDJSON",
+                               "bytes":  3947556,
+                               "sha256":  "10c0c38c38b3c6d360fae321be68e6a5c3e433af3df0647c0a2360d208321ce6"
+                           },
+                           {
+                               "label":  "private-identities",
+                               "bytes":  3323209,
+                               "sha256":  "be5eea652c86b94174ff9be0b8a21324515a2e24988c08a5b26b3c7d4d9701d0"
+                           },
+                           {
+                               "label":  "benchmark-FINAL",
+                               "bytes":  42128,
+                               "sha256":  "ed12eb5a3197c709e0e21c093774ce2c8456edc5406fd1b68f90ce871440c4a3"
+                           }
+                       ],
+    "collectorSHA256":  "bed9637119738ca98ff65a82277ca8173a5dd8ec6c6f455467a8db8933b68d68",
+    "processSignalsSent":  false,
+    "globalProcessInventory":  false,
+    "taskComplete":  false,
+    "published":  false,
+    "qualification":  "A new readonly closure proof for the known external controller assertion. Full/benchmark outcomes retain their original meaning. No source edits, rerun or publication. This is a point-in-time observation; physical file IDs are not measured."
+}

@@ -1,0 +1,1770 @@
+{
+  "schema": 1,
+  "kind": "public-flat-node-tap-results",
+  "phase": "isolated-reproduction",
+  "originalStatus": "PASS",
+  "startedAt": "2026-11-04T22:41:09.597Z",
+  "endedAt": "2026-11-04T22:50:00.702Z",
+  "source": {
+    "inputs": [
+      "src",
+      "scripts",
+      "tests",
+      "package-lock.json",
+      "package.json",
+      "tsconfig.debug.json",
+      "tsconfig.json"
+    ],
+    "beforeFingerprint": "698f7e3f647381eef19463a5a1fd07252ed875b6a83c5789f1282129ebd97dbc",
+    "afterFingerprint": "698f7e3f647381eef19463a5a1fd07252ed875b6a83c5789f1282129ebd97dbc",
+    "sourceUnchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "count": 209,
+    "archive": "source/"
+  },
+  "command": {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "argv": [
+      "--import",
+      "tsx",
+      "--import",
+      "file:///<STAGE2>/observer-integrity-gates-v9.mjs",
+      "--test",
+      "--test-concurrency=1",
+      "--test-timeout=900000",
+      "--test-name-pattern",
+      ".*",
+      "--test-reporter=spec",
+      "--test-reporter-destination=stdout",
+      "--test-reporter=tap",
+      "--test-reporter-destination=stderr",
+      "tests/integration/index-query.test.ts",
+      "tests/integration/recovery-index-timestamp.test.ts",
+      "tests/integration/performance-recovery.test.ts",
+      "tests/integration/performance-journal-recovery.test.ts",
+      "tests/integration/recovery.test.ts"
+    ],
+    "timeoutMs": 3600000,
+    "declaredTestBudgetMs": 900000,
+    "scope": "Five explicit recovery/regression files, every declared test selected with pattern .*; concurrency1. Existing assertions, scales and individual budgets stay in the identified source. Not the full suite."
+  },
+  "process": {
+    "pid": "<OWNED_PID>",
+    "exitCode": 0,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "timeoutMs": 3600000,
+    "durationMs": 530427,
+    "termination": null
+  },
+  "phaseError": null,
+  "metadata": {
+    "officialGit": "C:\\Program Files\\Git\\cmd\\git.exe",
+    "environmentPolicy": "Isolated HOME/USERPROFILE/XDG/Git identity/config/credentials/TEMP. Five explicit files run serially on one identified source snapshot. Preserve new performance/recovery fixtures and historical atomic-stage/R02 evidence."
+  },
+  "complete": true,
+  "completeScope": "Only the complete consistent unindented Node summary in a verified final trailer matching the terminal result.summary. This flag is not a product PASS or a hierarchy claim.",
+  "nodeFinalSummary": {
+    "format": "Node.js TAP final summary",
+    "counts": {
+      "tests": 62,
+      "suites": 0,
+      "pass": 61,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "todo": 0,
+      "duration_ms": 530339.4439
+    },
+    "complete": true,
+    "consistent": true
+  },
+  "recordedSummary": {
+    "format": "Node.js TAP final summary",
+    "counts": {
+      "tests": 62,
+      "suites": 0,
+      "pass": 61,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "todo": 0,
+      "duration_ms": 530339.4439
+    },
+    "complete": true,
+    "consistent": true
+  },
+  "summaryMatchesRecorded": true,
+  "duplicateSummaryKeys": [],
+  "summaryTrailer": {
+    "firstLine": 445,
+    "lastLine": 452,
+    "followsAllParsedResults": true,
+    "trailingContent": [],
+    "verifiedFinalTrailer": true
+  },
+  "parsedResultCount": 62,
+  "resultCountMatchesDeclaredTests": true,
+  "results": [
+    {
+      "line": 3,
+      "indent": 0,
+      "indentText": "",
+      "id": "1",
+      "status": "ok",
+      "name": "index query preserves exact MAIN bytes with clean stat-only A and staged B versus disk C",
+      "rawName": "index query preserves exact MAIN bytes with clean stat-only A and staged B versus disk C",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2298.0444,
+      "durationText": "2298.0444",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 4,
+        "lastLine": 7,
+        "closed": true,
+        "sha256": "58edea1fd9b581256571c9c8ddcda354919aa0a8b262934cab424021f8ffb49e",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 10,
+      "indent": 0,
+      "indentText": "",
+      "id": "2",
+      "status": "ok",
+      "name": "index query preserves exact private bytes with clean stat-only A and staged B versus disk C",
+      "rawName": "index query preserves exact private bytes with clean stat-only A and staged B versus disk C",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2638.6309,
+      "durationText": "2638.6309",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 11,
+        "lastLine": 14,
+        "closed": true,
+        "sha256": "315edd20885cb64d79a1f679222b7884453fb1a5f378c7895977f63be59cfbf8",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 17,
+      "indent": 0,
+      "indentText": "",
+      "id": "3",
+      "status": "ok",
+      "name": "Core preview and patch queries keep private MAIN metadata refs and worktree byte-identical with zero stat entries",
+      "rawName": "Core preview and patch queries keep private MAIN metadata refs and worktree byte-identical with zero stat entries",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 31416.1448,
+      "durationText": "31416.1448",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 18,
+        "lastLine": 21,
+        "closed": true,
+        "sha256": "a0f69e30eb537c35791256a24dedec9fc1454fc4aa1742e5dec210c3d0f2813c",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 25,
+      "indent": 0,
+      "indentText": "",
+      "id": "4",
+      "status": "ok",
+      "name": "index query preserves an existing real index lock and retains query errors for inspection",
+      "rawName": "index query preserves an existing real index lock and retains query errors for inspection",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1163.0701,
+      "durationText": "1163.0701",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 26,
+        "lastLine": 29,
+        "closed": true,
+        "sha256": "89d8b70f2bcaa95899dfa1c5713e4d502ce09360c2cda5f34fbf0adf9c5e5134",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 33,
+      "indent": 0,
+      "indentText": "",
+      "id": "5",
+      "status": "ok",
+      "name": "index query of an absent unborn MAIN does not create the real index or mutate refs bytes",
+      "rawName": "index query of an absent unborn MAIN does not create the real index or mutate refs bytes",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 898.3095,
+      "durationText": "898.3095",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 34,
+        "lastLine": 37,
+        "closed": true,
+        "sha256": "202e23948ff21ffbd86746ab082a22d127431eb3c8ef4fe5679f6e0309e9ffab",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 40,
+      "indent": 0,
+      "indentText": "",
+      "id": "6",
+      "status": "ok",
+      "name": "index query refuses TEMP in the workspace or Git directory before making any temporary or repository change",
+      "rawName": "index query refuses TEMP in the workspace or Git directory before making any temporary or repository change",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 775.1611,
+      "durationText": "775.1611",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 41,
+        "lastLine": 44,
+        "closed": true,
+        "sha256": "37830ac9ac71a74e7d7cde5be3559e346366b51cf92c7200b579fff48dc5a9f3",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 47,
+      "indent": 0,
+      "indentText": "",
+      "id": "7",
+      "status": "ok",
+      "name": "index query rejects cached revisions output redirects and unsafe paths before any query side effects",
+      "rawName": "index query rejects cached revisions output redirects and unsafe paths before any query side effects",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1201.2922,
+      "durationText": "1201.2922",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 48,
+        "lastLine": 51,
+        "closed": true,
+        "sha256": "414bafcf9a71edb7eaea8a5896fab2a04370f99dd91ce4a4d6992b8329dff264",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 54,
+      "indent": 0,
+      "indentText": "",
+      "id": "8",
+      "status": "ok",
+      "name": "index query refuses a real owned writer at the copy boundary and retains later evidence",
+      "rawName": "index query refuses a real owned writer at the copy boundary and retains later evidence",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1232.3812,
+      "durationText": "1232.3812",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 55,
+        "lastLine": 58,
+        "closed": true,
+        "sha256": "94b619cebbc19e3e6501bf8581bd8e6d555bca70bdc64dc61639f5881e56cf22",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 62,
+      "indent": 0,
+      "indentText": "",
+      "id": "9",
+      "status": "ok",
+      "name": "index query refuses a real owned writer at the git boundary and retains later evidence",
+      "rawName": "index query refuses a real owned writer at the git boundary and retains later evidence",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2018.0113,
+      "durationText": "2018.0113",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 63,
+        "lastLine": 66,
+        "closed": true,
+        "sha256": "59bb8f1c694dfd0e7ff365a11d540210c0d2b6257f36c89f476bd5a418eb8cb0",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 70,
+      "indent": 0,
+      "indentText": "",
+      "id": "10",
+      "status": "ok",
+      "name": "index query refuses a real owned writer at the lock boundary and retains later evidence",
+      "rawName": "index query refuses a real owned writer at the lock boundary and retains later evidence",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1156.7544,
+      "durationText": "1156.7544",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 71,
+        "lastLine": 74,
+        "closed": true,
+        "sha256": "dd67ae13338944d91ab341d57e40c4ccf2d91c0e7d5147893473ca68995ee801",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 78,
+      "indent": 0,
+      "indentText": "",
+      "id": "11",
+      "status": "ok",
+      "name": "index query preserves scratch-lock evidence appearing during the Git query without broad cleanup",
+      "rawName": "index query preserves scratch-lock evidence appearing during the Git query without broad cleanup",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1182.7021,
+      "durationText": "1182.7021",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 79,
+        "lastLine": 82,
+        "closed": true,
+        "sha256": "28b5ee15de0365eaebe833593a3bfdccd1ebff713344ab33070bd6743cfe4a06",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 86,
+      "indent": 0,
+      "indentText": "",
+      "id": "12",
+      "status": "ok",
+      "name": "index query preserves unknown evidence appearing during the Git query without broad cleanup",
+      "rawName": "index query preserves unknown evidence appearing during the Git query without broad cleanup",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1712.3503,
+      "durationText": "1712.3503",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 87,
+        "lastLine": 90,
+        "closed": true,
+        "sha256": "3e38c6feab63b61563e2efb12ca27e4911d9bf89e8a4cb10f75fe6559cb11232",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 94,
+      "indent": 0,
+      "indentText": "",
+      "id": "13",
+      "status": "ok",
+      "name": "index query reports absent scratch evidence honestly after a simulated EIO following successful owned rmdir",
+      "rawName": "index query reports absent scratch evidence honestly after a simulated EIO following successful owned rmdir",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1182.7272,
+      "durationText": "1182.7272",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 95,
+        "lastLine": 98,
+        "closed": true,
+        "sha256": "5d2a6f70854fbade6429b7ed08492dcf7e3ffbd8fea3a9c8939673f78aca3c03",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 102,
+      "indent": 0,
+      "indentText": "",
+      "id": "14",
+      "status": "ok",
+      "name": "index query preserves racy B versus C for MAIN with default stat configuration",
+      "rawName": "index query preserves racy B versus C for MAIN with default stat configuration",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 7344.68,
+      "durationText": "7344.68",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 103,
+        "lastLine": 106,
+        "closed": true,
+        "sha256": "f034a259c45a4d6714cc5d71e8f4062111bf1d5a02d9d3f36b10bd841a7d463f",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 110,
+      "indent": 0,
+      "indentText": "",
+      "id": "15",
+      "status": "ok",
+      "name": "index query preserves racy B versus C for MAIN with trustctime false and checkStat minimal",
+      "rawName": "index query preserves racy B versus C for MAIN with trustctime false and checkStat minimal",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 7930.6979,
+      "durationText": "7930.6979",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 111,
+        "lastLine": 114,
+        "closed": true,
+        "sha256": "4df8008d32750f72577c3c45bd4259f729e053f46f1481eb9f7cafefc972cd21",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 118,
+      "indent": 0,
+      "indentText": "",
+      "id": "16",
+      "status": "ok",
+      "name": "index query preserves racy B versus C for private with default stat configuration",
+      "rawName": "index query preserves racy B versus C for private with default stat configuration",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 8111.9327,
+      "durationText": "8111.9327",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 119,
+        "lastLine": 122,
+        "closed": true,
+        "sha256": "2868a612c9fda862c59e421b767c5f87d7dd397a17ba7cdf98fb61ef1dc6e33d",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 126,
+      "indent": 0,
+      "indentText": "",
+      "id": "17",
+      "status": "ok",
+      "name": "index query preserves racy B versus C for private with trustctime false and checkStat minimal",
+      "rawName": "index query preserves racy B versus C for private with trustctime false and checkStat minimal",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 8191.2795,
+      "durationText": "8191.2795",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 127,
+        "lastLine": 130,
+        "closed": true,
+        "sha256": "6c642215547c0373ae371c7f270ab641b43aea8df00c184d98f6530a59eaf404",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 134,
+      "indent": 0,
+      "indentText": "",
+      "id": "18",
+      "status": "ok",
+      "name": "index query preserves racy timestamp safety under owned rounding interleaving",
+      "rawName": "index query preserves racy timestamp safety under owned rounding interleaving",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1565.8341,
+      "durationText": "1565.8341",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 135,
+        "lastLine": 138,
+        "closed": true,
+        "sha256": "ab1947749dbd868664ad5507dc99ff2f4db655a3b1bb77b22e4cc7615ce88104",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 142,
+      "indent": 0,
+      "indentText": "",
+      "id": "19",
+      "status": "ok",
+      "name": "index query preserves racy timestamp safety under owned unrepresentable interleaving",
+      "rawName": "index query preserves racy timestamp safety under owned unrepresentable interleaving",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1021.1359,
+      "durationText": "1021.1359",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 143,
+        "lastLine": 146,
+        "closed": true,
+        "sha256": "671c5b38d790202a8b7f6a3dfe3a7d004a15ea208f59a0191e73aac16cb78a38",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 150,
+      "indent": 0,
+      "indentText": "",
+      "id": "20",
+      "status": "ok",
+      "name": "index query preserves racy timestamp safety under owned write-error interleaving",
+      "rawName": "index query preserves racy timestamp safety under owned write-error interleaving",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1168.0754,
+      "durationText": "1168.0754",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 151,
+        "lastLine": 154,
+        "closed": true,
+        "sha256": "bcd0d872b08622c25ecff1aec9480d5512dd4932ada8847077b415d3d18b7985",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 158,
+      "indent": 0,
+      "indentText": "",
+      "id": "21",
+      "status": "ok",
+      "name": "index query preserves racy timestamp safety under owned prepared-tamper interleaving",
+      "rawName": "index query preserves racy timestamp safety under owned prepared-tamper interleaving",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1435.0238,
+      "durationText": "1435.0238",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 159,
+        "lastLine": 162,
+        "closed": true,
+        "sha256": "a4ffc2b80759e1c914f48da888a8fd9f53ac0fd665dd7a9535ca69dcf26e152d",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 166,
+      "indent": 0,
+      "indentText": "",
+      "id": "22",
+      "status": "ok",
+      "name": "index query preserves racy timestamp safety under owned zero-second-source interleaving",
+      "rawName": "index query preserves racy timestamp safety under owned zero-second-source interleaving",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1522.0377,
+      "durationText": "1522.0377",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 167,
+        "lastLine": 170,
+        "closed": true,
+        "sha256": "b58de2027ca4096f8e8782f484983baacdb47e1c06f52e21ebeb307c33e65779",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 174,
+      "indent": 0,
+      "indentText": "",
+      "id": "23",
+      "status": "ok",
+      "name": "index query preserves racy timestamp safety under owned overflow-source interleaving",
+      "rawName": "index query preserves racy timestamp safety under owned overflow-source interleaving",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1113.7296,
+      "durationText": "1113.7296",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 175,
+        "lastLine": 178,
+        "closed": true,
+        "sha256": "55c8dc38b9c80f53272f80df60fd4069644b3b9dfaf11427131099db0c7b5507",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 182,
+      "indent": 0,
+      "indentText": "",
+      "id": "24",
+      "status": "ok",
+      "name": "index query preserves racy timestamp safety under owned path-replaced-at-open interleaving",
+      "rawName": "index query preserves racy timestamp safety under owned path-replaced-at-open interleaving",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1002.3879,
+      "durationText": "1002.3879",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 183,
+        "lastLine": 186,
+        "closed": true,
+        "sha256": "11bbc019ad7763bed5c7347552930b29ac083c7e73c38a682fe3d51a9906b8b3",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 190,
+      "indent": 0,
+      "indentText": "",
+      "id": "25",
+      "status": "ok",
+      "name": "recovery tree validation preserves live MAIN and private B/C indices while matching official write-tree twice",
+      "rawName": "recovery tree validation preserves live MAIN and private B/C indices while matching official write-tree twice",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 3565.9526,
+      "durationText": "3565.9526",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 191,
+        "lastLine": 194,
+        "closed": true,
+        "sha256": "615bb4d59eefaa75790cb84b273071be006098ce19cbe68e07385d3d9ad42772",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 198,
+      "indent": 0,
+      "indentText": "",
+      "id": "26",
+      "status": "ok",
+      "name": "recovery tree validation rejects a controlled missing blob when cached equality alone succeeds and retains all evidence",
+      "rawName": "recovery tree validation rejects a controlled missing blob when cached equality alone succeeds and retains all evidence",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1358.3854,
+      "durationText": "1358.3854",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 199,
+        "lastLine": 202,
+        "closed": true,
+        "sha256": "38c065f1a8514198ad6fe72eba02b24a4c7933d14bf07deae34a130b4d9e7e67",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 206,
+      "indent": 0,
+      "indentText": "",
+      "id": "27",
+      "status": "ok",
+      "name": "GL19 journal coalescing owned process death after prepared backup and before backup-ready preserves source orphan evidence and coordinator lock",
+      "rawName": "GL19 journal coalescing owned process death after prepared backup and before backup-ready preserves source orphan evidence and coordinator lock",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 24623.0783,
+      "durationText": "24623.0783",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 207,
+        "lastLine": 210,
+        "closed": true,
+        "sha256": "f84488553e01f7258dac948198ad2a72782bab6bb0e2cbe00ba8336767b34091",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 213,
+      "indent": 0,
+      "indentText": "",
+      "id": "28",
+      "status": "ok",
+      "name": "GL19 journal coalescing unavailable backup-ready and failure journal leave target unchanged and recover earlier removals once",
+      "rawName": "GL19 journal coalescing unavailable backup-ready and failure journal leave target unchanged and recover earlier removals once",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 24632.548,
+      "durationText": "24632.548",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 214,
+        "lastLine": 217,
+        "closed": true,
+        "sha256": "a2f3842a5588215c431037193c4ffa820cf8da7f42f852739f3ec0c9299d0ca9",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 220,
+      "indent": 0,
+      "indentText": "",
+      "id": "29",
+      "status": "ok",
+      "name": "GL19 journal coalescing durable backup-ready before removal recovers present target and prior removals once",
+      "rawName": "GL19 journal coalescing durable backup-ready before removal recovers present target and prior removals once",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 24194.9351,
+      "durationText": "24194.9351",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 221,
+        "lastLine": 224,
+        "closed": true,
+        "sha256": "22b10a5c38697f8ab34ec4cb5245fa646e29b77bb6c473d18f627f87bad5ef17",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 227,
+      "indent": 0,
+      "indentText": "",
+      "id": "30",
+      "status": "ok",
+      "name": "GL19 journal coalescing durable backup-ready before first materialization still refuses V05 and preserves every byte",
+      "rawName": "GL19 journal coalescing durable backup-ready before first materialization still refuses V05 and preserves every byte",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 28572.3219,
+      "durationText": "28572.3219",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 228,
+        "lastLine": 231,
+        "closed": true,
+        "sha256": "a287356293ea795159490afc72809e624202f4c1396600cda039399ba79f24c6",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 234,
+      "indent": 0,
+      "indentText": "",
+      "id": "31",
+      "status": "ok",
+      "name": "GL19 journal coalescing equivalent path spellings share canonical BEFORE and AFTER and recover once",
+      "rawName": "GL19 journal coalescing equivalent path spellings share canonical BEFORE and AFTER and recover once",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 21891.9063,
+      "durationText": "21891.9063",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 235,
+        "lastLine": 238,
+        "closed": true,
+        "sha256": "a1f227ea9375168a886c12b4d652676e488be5db2d9eec34c9475d5696d871a3",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 241,
+      "indent": 0,
+      "indentText": "",
+      "id": "32",
+      "status": "ok",
+      "name": "GL19 doctor diagnoses each pending plan with invalid registry and preserves independent export",
+      "rawName": "GL19 doctor diagnoses each pending plan with invalid registry and preserves independent export",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 6215.8222,
+      "durationText": "6215.8222",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 242,
+        "lastLine": 245,
+        "closed": true,
+        "sha256": "c4d2e092a8402817b1cb8d1c9168e52ae5a8f72ed4579f34fa48fbd714084b9d",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 248,
+      "indent": 0,
+      "indentText": "",
+      "id": "33",
+      "status": "ok",
+      "name": "GL19 doctor identifies changed backup without restoring bytes",
+      "rawName": "GL19 doctor identifies changed backup without restoring bytes",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 3926.8859,
+      "durationText": "3926.8859",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 249,
+        "lastLine": 252,
+        "closed": true,
+        "sha256": "da1bf5b722d2ff02c52d5f689a04da8b937254910d32fca86049ee7b0a6355bf",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 255,
+      "indent": 0,
+      "indentText": "",
+      "id": "34",
+      "status": "ok",
+      "name": "GL19 doctor identifies missing backup without restoring bytes",
+      "rawName": "GL19 doctor identifies missing backup without restoring bytes",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 3944.1948,
+      "durationText": "3944.1948",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 256,
+        "lastLine": 259,
+        "closed": true,
+        "sha256": "388252852b5f6c02b714020377efa4ac7dca0bf6dc5843fac73415579ee495e0",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 262,
+      "indent": 0,
+      "indentText": "",
+      "id": "35",
+      "status": "ok",
+      "name": "GL19 doctor exposes V05 with and without recorded publication and keeps every journal",
+      "rawName": "GL19 doctor exposes V05 with and without recorded publication and keeps every journal",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 8776.8423,
+      "durationText": "8776.8423",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 263,
+        "lastLine": 266,
+        "closed": true,
+        "sha256": "27cf6b8a20856ba97c11eb3e12c6f08ac8380aad6852588313b0e3301c1b82b1",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 269,
+      "indent": 0,
+      "indentText": "",
+      "id": "36",
+      "status": "ok",
+      "name": "GL19 malformed journal does not hide an independently valid pending plan",
+      "rawName": "GL19 malformed journal does not hide an independently valid pending plan",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 3648.7724,
+      "durationText": "3648.7724",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 270,
+        "lastLine": 273,
+        "closed": true,
+        "sha256": "5ffe4dc5ae851858064f4e8e22603e983cbd5ec1208924761a3c1b1054dd0658",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 276,
+      "indent": 0,
+      "indentText": "",
+      "id": "37",
+      "status": "ok",
+      "name": "GL19 doctor identifies later bytes without masking another valid pending plan",
+      "rawName": "GL19 doctor identifies later bytes without masking another valid pending plan",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 5690.541,
+      "durationText": "5690.541",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 277,
+        "lastLine": 280,
+        "closed": true,
+        "sha256": "f02dee425b5235cb6066a7b0ffa2b669662fe037b3f7ff16825d0d5c5a7d45d0",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 283,
+      "indent": 0,
+      "indentText": "",
+      "id": "38",
+      "status": "ok",
+      "name": "GL19 interruption after durable commit preparation and before ref publication recovers old ref with staged B and disk C",
+      "rawName": "GL19 interruption after durable commit preparation and before ref publication recovers old ref with staged B and disk C",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 33478.4922,
+      "durationText": "33478.4922",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 284,
+        "lastLine": 287,
+        "closed": true,
+        "sha256": "05dafda594e14ea41e35ad6602660e4d18458405caf1cf5904b34a50cc0999df",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 291,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "1",
+      "status": "ok",
+      "name": "EIO",
+      "rawName": "EIO",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 16985.7396,
+      "durationText": "16985.7396",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 292,
+        "lastLine": 295,
+        "closed": true,
+        "sha256": "d20cb0d64806efc1aab36326a27d780a998c651ab372e2aa377d9d71b59a1d84",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 297,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "2",
+      "status": "ok",
+      "name": "EPERM",
+      "rawName": "EPERM",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 17555.8507,
+      "durationText": "17555.8507",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 298,
+        "lastLine": 301,
+        "closed": true,
+        "sha256": "b377f0a901b1161940bf3ca91691f2e8a3d7c2bff4cbe2d4425ff15d078f0b04",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 303,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "3",
+      "status": "ok",
+      "name": "EACCES",
+      "rawName": "EACCES",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 16372.9331,
+      "durationText": "16372.9331",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 304,
+        "lastLine": 307,
+        "closed": true,
+        "sha256": "c2ab26e1ac21095310d450d613500fa54ca4c417bb1fad5c23a406105e32c2c9",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 309,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "4",
+      "status": "ok",
+      "name": "ENOSPC",
+      "rawName": "ENOSPC",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 16969.7433,
+      "durationText": "16969.7433",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 310,
+        "lastLine": 313,
+        "closed": true,
+        "sha256": "7240745585243ecd42328782f41812bdcd74a31b552a7b02698e716c7e1c26ac",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 315,
+      "indent": 0,
+      "indentText": "",
+      "id": "39",
+      "status": "ok",
+      "name": "GL19 synthetic I/O fault codes after durable commit publication recover once with B staged and C on disk",
+      "rawName": "GL19 synthetic I/O fault codes after durable commit publication recover once with B staged and C on disk",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 111892.1871,
+      "durationText": "111892.1871",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 316,
+        "lastLine": 319,
+        "closed": true,
+        "sha256": "b906546f74f7dcad3523021211f7b2a3ea9f18faa5033c2819cf0ec57316822a",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 323,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "1",
+      "status": "ok",
+      "name": "EIO",
+      "rawName": "EIO",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2587.5164,
+      "durationText": "2587.5164",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 324,
+        "lastLine": 327,
+        "closed": true,
+        "sha256": "4eb72f250f12803039f9bc4b57479352dd6a547d4f970e4c574cffc19d114bd3",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 329,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "2",
+      "status": "ok",
+      "name": "EPERM",
+      "rawName": "EPERM",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2457.7436,
+      "durationText": "2457.7436",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 330,
+        "lastLine": 333,
+        "closed": true,
+        "sha256": "fed69794652a0896733012fefcf119445cdb60b054fe09722ac68b94371a001e",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 335,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "3",
+      "status": "ok",
+      "name": "EACCES",
+      "rawName": "EACCES",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 3036.5877,
+      "durationText": "3036.5877",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 336,
+        "lastLine": 339,
+        "closed": true,
+        "sha256": "cf0e186da62c67e4a79ed8633ec8e4ee028b36aa453c75fa883550e4e0d52755",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 341,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "4",
+      "status": "ok",
+      "name": "ENOSPC",
+      "rawName": "ENOSPC",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2388.6451,
+      "durationText": "2388.6451",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 342,
+        "lastLine": 345,
+        "closed": true,
+        "sha256": "c12d8094825f28b9e8d9e744a2d2acc1e450c5b5a4fe81aec92eb7d8615afbb3",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 347,
+      "indent": 0,
+      "indentText": "",
+      "id": "40",
+      "status": "ok",
+      "name": "GL19 simulated write-path failures preserve the original backup and journal before an independent retry",
+      "rawName": "GL19 simulated write-path failures preserve the original backup and journal before an independent retry",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 12765.6334,
+      "durationText": "12765.6334",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 348,
+        "lastLine": 351,
+        "closed": true,
+        "sha256": "18eaa4d09a579099d72e7d8ea26a72aef48c39b7a991feebe079e1b16dbea00e",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 354,
+      "indent": 0,
+      "indentText": "",
+      "id": "41",
+      "status": "ok",
+      "name": "GL19 abrupt termination of an owned process preserves lock journal backup and independent diagnostics",
+      "rawName": "GL19 abrupt termination of an owned process preserves lock journal backup and independent diagnostics",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 4900.8955,
+      "durationText": "4900.8955",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 355,
+        "lastLine": 358,
+        "closed": true,
+        "sha256": "e07e1dfa89a017844999772b4fceaaa640c6831b815d8256938b176e52161955",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 361,
+      "indent": 0,
+      "indentText": "",
+      "id": "42",
+      "status": "ok",
+      "name": "GL19 rollback preserves racy B/C detection and exact MAIN index with true-default legacy plan",
+      "rawName": "GL19 rollback preserves racy B/C detection and exact MAIN index with true-default legacy plan",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 13637.3266,
+      "durationText": "13637.3266",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 362,
+        "lastLine": 365,
+        "closed": true,
+        "sha256": "007479eda9096a25efc84ae03fa926b9e6c6b9f4dd460a2d3eeba340f28e9191",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 368,
+      "indent": 0,
+      "indentText": "",
+      "id": "43",
+      "status": "ok",
+      "name": "GL19 rollback preserves racy B/C detection and exact MAIN index with false-minimal legacy plan",
+      "rawName": "GL19 rollback preserves racy B/C detection and exact MAIN index with false-minimal legacy plan",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 14069.2307,
+      "durationText": "14069.2307",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 369,
+        "lastLine": 372,
+        "closed": true,
+        "sha256": "2a6437dc90f6bb19a255787dd3916a4f13e500f084e45989909c5243ab337faf",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 375,
+      "indent": 0,
+      "indentText": "",
+      "id": "44",
+      "status": "ok",
+      "name": "GL19 rollback preserves racy B/C detection and exact private index with true-default legacy plan",
+      "rawName": "GL19 rollback preserves racy B/C detection and exact private index with true-default legacy plan",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 31240.4898,
+      "durationText": "31240.4898",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 376,
+        "lastLine": 379,
+        "closed": true,
+        "sha256": "52131cf3cc3810243a3ac2d1264eb1b7be86ae3352c97d14cc58418201d24942",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 382,
+      "indent": 0,
+      "indentText": "",
+      "id": "45",
+      "status": "ok",
+      "name": "GL19 rollback preserves racy B/C detection and exact private index with false-minimal legacy plan",
+      "rawName": "GL19 rollback preserves racy B/C detection and exact private index with false-minimal legacy plan",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 29540.3406,
+      "durationText": "29540.3406",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 383,
+        "lastLine": 386,
+        "closed": true,
+        "sha256": "cd3be8e84fa0872054bb307d610a55d1f085ef27623b6a8c03028939bcb06e39",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 389,
+      "indent": 0,
+      "indentText": "",
+      "id": "46",
+      "status": "ok",
+      "name": "GL19 index rollback preserves published index backup journal and temporary on sync-EIO-after-effect",
+      "rawName": "GL19 index rollback preserves published index backup journal and temporary on sync-EIO-after-effect",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 12834.0572,
+      "durationText": "12834.0572",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 390,
+        "lastLine": 393,
+        "closed": true,
+        "sha256": "bf8cec0da2f79de7e5035cec0a98de18a79181bc02d5e8daa8674fe87632a745",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 396,
+      "indent": 0,
+      "indentText": "",
+      "id": "47",
+      "status": "ok",
+      "name": "GL19 index rollback preserves published index backup journal and temporary on timestamp-tamper-during-sync",
+      "rawName": "GL19 index rollback preserves published index backup journal and temporary on timestamp-tamper-during-sync",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 12305.5454,
+      "durationText": "12305.5454",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 397,
+        "lastLine": 400,
+        "closed": true,
+        "sha256": "18498a5d5e0faaaa2340e15787d1f9f399774847ee200ff6f2bdf8803355fb67",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 403,
+      "indent": 0,
+      "indentText": "",
+      "id": "48",
+      "status": "ok",
+      "name": "recovery validator accepts an exact journal and its intact durable backup",
+      "rawName": "recovery validator accepts an exact journal and its intact durable backup",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 119.4888,
+      "durationText": "119.4888",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 404,
+        "lastLine": 407,
+        "closed": true,
+        "sha256": "cff18573aa972f0c97ceeef43d7f0cfbb33e58ff329cc87c70c2754dba45aa50",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 409,
+      "indent": 0,
+      "indentText": "",
+      "id": "49",
+      "status": "ok",
+      "name": "changed or missing recovery backup causes refusal before any write",
+      "rawName": "changed or missing recovery backup causes refusal before any write",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 148.0263,
+      "durationText": "148.0263",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 410,
+        "lastLine": 413,
+        "closed": true,
+        "sha256": "fe73fdabbc255ab8e2803a9170144ab14b3eb736d8218cff325e19b6bfbc12cd",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 415,
+      "indent": 0,
+      "indentText": "",
+      "id": "50",
+      "status": "ok",
+      "name": "recovery refuses paths outside workspace and backups outside its own transaction",
+      "rawName": "recovery refuses paths outside workspace and backups outside its own transaction",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 147.8115,
+      "durationText": "147.8115",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 416,
+        "lastLine": 419,
+        "closed": true,
+        "sha256": "d1369e3e4ab8d71bd9512ce8bb508926311307c42cf68d1c3cd9a23e5b8d8eca",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 421,
+      "indent": 0,
+      "indentText": "",
+      "id": "51",
+      "status": "ok",
+      "name": "recovery rejects malformed plans, duplicate paths and unsafe prior registry identifiers",
+      "rawName": "recovery rejects malformed plans, duplicate paths and unsafe prior registry identifiers",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 164.9049,
+      "durationText": "164.9049",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 422,
+        "lastLine": 425,
+        "closed": true,
+        "sha256": "4adbc8e6cc39853b3b34ee1289436593064db26d1505da23a91ae9bdf35b5a77",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 427,
+      "indent": 0,
+      "indentText": "",
+      "id": "52",
+      "status": "ok",
+      "name": "recovery cannot overwrite journals, arbitrary Git internals or symlink targets",
+      "rawName": "recovery cannot overwrite journals, arbitrary Git internals or symlink targets # SKIP Windows account cannot create symlinks.",
+      "directive": "SKIP",
+      "directiveReason": "Windows account cannot create symlinks.",
+      "skipReason": "Windows account cannot create symlinks.",
+      "observedOutcome": "SKIP",
+      "durationMs": 150.4339,
+      "durationText": "150.4339",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 428,
+        "lastLine": 431,
+        "closed": true,
+        "sha256": "d7fb1a89562cdaa1c8c666e76e6236cb1f461c5181477489398b8e9e5a6f6536",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 433,
+      "indent": 0,
+      "indentText": "",
+      "id": "53",
+      "status": "ok",
+      "name": "recovery commit references must match the recorded traditional branch and prior OID",
+      "rawName": "recovery commit references must match the recorded traditional branch and prior OID",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 212.8913,
+      "durationText": "212.8913",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 434,
+        "lastLine": 437,
+        "closed": true,
+        "sha256": "b42813ca477c75b80c01b444baf03739b7041c0aa70e5d42d654b59b55b9db46",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 439,
+      "indent": 0,
+      "indentText": "",
+      "id": "54",
+      "status": "ok",
+      "name": "directory recovery accepts only validated workspace directories from deactivation",
+      "rawName": "directory recovery accepts only validated workspace directories from deactivation",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 713.9438,
+      "durationText": "713.9438",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 440,
+        "lastLine": 443,
+        "closed": true,
+        "sha256": "41dccbd1faf8a3784490daf43ccb05fdff46a967c42ff8bf8e7f90cda036a6ed",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    }
+  ],
+  "unparsedResultLikeLines": [],
+  "hierarchyInferred": false,
+  "campaignsAggregated": false,
+  "provenance": {
+    "helper": {
+      "bytes": 22023,
+      "sha256": "af63c5be113ece5ae6905a47b7355a79314f7983de1f81d4659d230dc1547cd9"
+    },
+    "result": {
+      "bytes": 5650,
+      "sha256": "b6be828634195c7154ad2741816081ac1e821477d65a5e859d633c44eba57c0d"
+    },
+    "tap": {
+      "bytes": 84197,
+      "sha256": "159b68567d62850d31db7d92a599c0256107b791b2772bc72915ef4e0f35d89a"
+    },
+    "started": {
+      "bytes": 3011,
+      "sha256": "46604122d279ca9dca283551e86e97f80c03544c988daf5890c6df9df0f65b18"
+    },
+    "rawStreamsPublished": false,
+    "rawDiagnosticValuesOmitted": [
+      "location",
+      "stack",
+      "expected",
+      "actual",
+      "operator",
+      "fixture diagnostics and other comments"
+    ],
+    "redactions": [
+      "Known stage/temp/profile/source roots, including repeated escaped separators",
+      "Owned process identifiers"
+    ],
+    "unknownAbsolutePathPolicy": "Refuse unknown absolute Windows/UNC and profile paths; only observed Git/Node installation roots may remain."
+  },
+  "limitations": [
+    "Flat rows retain original indentation and IDs without inventing parent/child relations.",
+    "Observed PASS/FAIL maps only ok/not ok; explicit SKIP/TODO directives are preserved separately, never converted into an environment classification.",
+    "Only immediately associated Node-style YAML diagnostics are parsed. Unsupported/ambiguous fields retain line ranges and hashes as unparsed metadata.",
+    "Cancelled parent/child semantics are not reconstructed; Node final totals remain authoritative for the recorded campaign.",
+    "A row-count mismatch or parsing ambiguity is declared and never corrected by inventing or removing results.",
+    "No totals are combined with a retry, reproduction, focus or other campaign."
+  ]
+}

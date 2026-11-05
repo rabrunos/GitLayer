@@ -1,0 +1,1420 @@
+{
+    "schema":  1,
+    "scope":  "Four integrity finding families: off-window, scratch query, staging copy/publication, index rollback. Probe success confirms defects, not product certification. Candidate fixes remain pending.",
+    "productCertification":  "NOT_CERTIFIED",
+    "candidateFixValidation":  "PENDING",
+    "findings":  [
+                     {
+                         "id":  "GL2-INTEGRITY-01",
+                         "candidateFix":  "Capture physical images before the clean proof, revalidate the entire plan before first removal, retain per-removal expected fingerprints",
+                         "rootCause":  "The physical removal image was captured after the clean-worktree query",
+                         "impact":  "Later C is removed without discard and retained only in a technical backup of a completed transaction",
+                         "location":  "src/core/index.ts:deactivateInternal",
+                         "status":  "CONFIRMED_DEFECT",
+                         "classification":  "PREEXISTING_IN_BASELINE_AND_CURRENT_V6",
+                         "observations":  [
+                                              {
+                                                  "rawIndices":  {
+                                                                     "MAINUnchanged":  true,
+                                                                     "privateUnchanged":  true
+                                                                 },
+                                                  "phase":  "current-v6",
+                                                  "journalState":  "completed",
+                                                  "laterDiskImageRemoved":  true,
+                                                  "offError":  null,
+                                                  "backupEqualsC":  true,
+                                                  "noDiscardRequested":  true,
+                                                  "recoverFirst":  [
+
+                                                                   ],
+                                                  "afterExists":  false,
+                                                  "process":  {
+                                                                  "exitCode":  0,
+                                                                  "outputTruncated":  false,
+                                                                  "signal":  null,
+                                                                  "durationMs":  130916,
+                                                                  "timedOut":  false
+                                                              },
+                                                  "beforeMode":  438,
+                                                  "realChanges":  {
+                                                                      "unstagedCount":  0,
+                                                                      "stagedCount":  0
+                                                                  },
+                                                  "invariants":  {
+                                                                     "refsUnchanged":  true,
+                                                                     "headUnchanged":  true,
+                                                                     "treesUnchanged":  true,
+                                                                     "mainSemanticUnchanged":  true,
+                                                                     "privateSemanticUnchanged":  true,
+                                                                     "committedAndStagedA":  true,
+                                                                     "recoveryDidNotRestore":  true
+                                                                 },
+                                                  "injectionPoint":  "after-real-changes-clean-before-return",
+                                                  "recoverSecond":  [
+
+                                                                    ],
+                                                  "afterRecoveryDiskAbsent":  true,
+                                                  "status":  "CONFIRMED_DEFECT",
+                                                  "offReturnedState":  "inactive",
+                                                  "fixtureBytesBeforeObservedReceipt":  69120,
+                                                  "backupSha256":  "03c9b8cb3b77ad3f8a982377b1a339eee758356efe05fdd6adf5db745704c707"
+                                              },
+                                              {
+                                                  "rawIndices":  {
+                                                                     "MAINUnchanged":  true,
+                                                                     "privateUnchanged":  true
+                                                                 },
+                                                  "phase":  "baseline-d71",
+                                                  "journalState":  "completed",
+                                                  "laterDiskImageRemoved":  true,
+                                                  "offError":  null,
+                                                  "backupEqualsC":  true,
+                                                  "noDiscardRequested":  true,
+                                                  "recoverFirst":  [
+
+                                                                   ],
+                                                  "afterExists":  false,
+                                                  "process":  {
+                                                                  "exitCode":  0,
+                                                                  "outputTruncated":  false,
+                                                                  "signal":  null,
+                                                                  "durationMs":  48091,
+                                                                  "timedOut":  false
+                                                              },
+                                                  "beforeMode":  438,
+                                                  "realChanges":  {
+                                                                      "unstagedCount":  0,
+                                                                      "stagedCount":  0
+                                                                  },
+                                                  "invariants":  {
+                                                                     "refsUnchanged":  true,
+                                                                     "headUnchanged":  true,
+                                                                     "treesUnchanged":  true,
+                                                                     "mainSemanticUnchanged":  true,
+                                                                     "privateSemanticUnchanged":  true,
+                                                                     "committedAndStagedA":  true,
+                                                                     "recoveryDidNotRestore":  true
+                                                                 },
+                                                  "injectionPoint":  "after-real-changes-clean-before-return",
+                                                  "recoverSecond":  [
+
+                                                                    ],
+                                                  "afterRecoveryDiskAbsent":  true,
+                                                  "status":  "CONFIRMED_DEFECT",
+                                                  "offReturnedState":  "inactive",
+                                                  "fixtureBytesBeforeObservedReceipt":  82567,
+                                                  "backupSha256":  "03c9b8cb3b77ad3f8a982377b1a339eee758356efe05fdd6adf5db745704c707"
+                                              }
+                                          ]
+                     },
+                     {
+                         "id":  "GL2-INTEGRITY-02",
+                         "candidateFix":  "Use and verify a conservative scratch timestamp; retain official diff and source validation",
+                         "rootCause":  "Index bytes were copied but the native index timestamp boundary was not conserved",
+                         "impact":  "A newer scratch index mtime can make native diff miss racy worktree C",
+                         "location":  "src/core/index-query.ts:copyRegular-to-Git-query",
+                         "status":  "CONFIRMED_REGRESSION",
+                         "rows":  [
+                                      {
+                                          "indexSHA256":  "b80091ad0a0528b0cedf75609232881d0fc105047f32ac534aa6906e72635a7f",
+                                          "freshCopyMtimeNs":  "1793822127028654600",
+                                          "coreSourceRawBytesPreserved":  true,
+                                          "sourceIndexMtimeNs":  "1793822120540811300",
+                                          "indexBytes":  118,
+                                          "config":  {
+                                                         "label":  "trustctime-false-minimal",
+                                                         "trustctime":  "false",
+                                                         "checkStat":  "minimal"
+                                                     },
+                                          "preservedCopyMtimeNs":  "1793822120540811200",
+                                          "setup":  {
+                                                        "nativeIndexTimestampNotEdited":  true,
+                                                        "fileMtimeControlledAndRestored":  true,
+                                                        "waitedUntilCopyStrictlyNewer":  true,
+                                                        "A":  "AAAA\\n",
+                                                        "B":  "BBBB\\n",
+                                                        "C":  "CCCC\\n",
+                                                        "sameSize":  true,
+                                                        "sameWorktreeMtime":  true,
+                                                        "copyImplementation":  "Core copyRegular streaming helper"
+                                                    },
+                                          "HEADAndA_B_CPreserved":  true,
+                                          "detected":  {
+                                                           "nativeOriginal":  true,
+                                                           "nativeFreshCopy":  false,
+                                                           "nativePreservedCopy":  true,
+                                                           "nativeConservativeEpoch1Copy":  true,
+                                                           "coreQuery":  false
+                                                       },
+                                          "workfileBMtimeNs":  "1793822125000000000",
+                                          "workfileCMtimeNs":  "1793822125000000000",
+                                          "sourceRawBytesAfterNativeQueryPreserved":  true,
+                                          "outputs":  {
+                                                          "nativeOriginal":  "M\u0000racy.txt\u0000",
+                                                          "nativeFreshCopy":  "",
+                                                          "nativePreservedCopy":  "M\u0000racy.txt\u0000",
+                                                          "nativeConservativeEpoch1Copy":  "M\u0000racy.txt\u0000",
+                                                          "coreQuery":  ""
+                                                      }
+                                      },
+                                      {
+                                          "indexSHA256":  "1e49a11c7924986cd694f21df0e78a29e15bd5fa6d930ffcbe2cffb9c4595a90",
+                                          "freshCopyMtimeNs":  "1793822148298429400",
+                                          "coreSourceRawBytesPreserved":  true,
+                                          "sourceIndexMtimeNs":  "1793822142289804400",
+                                          "indexBytes":  118,
+                                          "config":  {
+                                                         "label":  "trustctime-true-default",
+                                                         "trustctime":  "true",
+                                                         "checkStat":  "default"
+                                                     },
+                                          "preservedCopyMtimeNs":  "1793822142289804800",
+                                          "setup":  {
+                                                        "nativeIndexTimestampNotEdited":  true,
+                                                        "fileMtimeControlledAndRestored":  true,
+                                                        "waitedUntilCopyStrictlyNewer":  true,
+                                                        "A":  "AAAA\\n",
+                                                        "B":  "BBBB\\n",
+                                                        "C":  "CCCC\\n",
+                                                        "sameSize":  true,
+                                                        "sameWorktreeMtime":  true,
+                                                        "copyImplementation":  "Core copyRegular streaming helper"
+                                                    },
+                                          "HEADAndA_B_CPreserved":  true,
+                                          "detected":  {
+                                                           "nativeOriginal":  true,
+                                                           "nativeFreshCopy":  false,
+                                                           "nativePreservedCopy":  true,
+                                                           "nativeConservativeEpoch1Copy":  true,
+                                                           "coreQuery":  false
+                                                       },
+                                          "workfileBMtimeNs":  "1793822146000000000",
+                                          "workfileCMtimeNs":  "1793822146000000000",
+                                          "sourceRawBytesAfterNativeQueryPreserved":  true,
+                                          "outputs":  {
+                                                          "nativeOriginal":  "M\u0000racy.txt\u0000",
+                                                          "nativeFreshCopy":  "",
+                                                          "nativePreservedCopy":  "M\u0000racy.txt\u0000",
+                                                          "nativeConservativeEpoch1Copy":  "M\u0000racy.txt\u0000",
+                                                          "coreQuery":  ""
+                                                      }
+                                      }
+                                  ],
+                         "classification":  "INTRODUCED_BY_CURRENT_V6_SCRATCH_QUERY"
+                     },
+                     {
+                         "initialPublicationComparison":  {
+                                                              "originalRawReceiptSha256":  "c35b44b019272410b0c07579876a451921a02c771d4256aa4a584e92e08603af",
+                                                              "qualificationSha256":  "478ad0fef513a30cab0080010581919b79775a6932be62bb1223e2952eda831d",
+                                                              "originalFlagsPreserved":  true,
+                                                              "reason":  "add-other was compared with untouched original index; not equivalent native Git publication",
+                                                              "status":  "INCONCLUSIVE_COMPARISON",
+                                                              "rows":  4
+                                                          },
+                         "selectedAdd":  {
+                                             "selection":  "ONLY frontier selected-add from first receipt",
+                                             "selectedRows":  4,
+                                             "rows":  [
+                                                          {
+                                                              "generatedBeforeCallback":  null,
+                                                              "workfileBMtimeNs":  "1793823519000000000",
+                                                              "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "source":  "baseline",
+                                                              "planned":  {
+                                                                              "exists":  true,
+                                                                              "hash":  "63fe19af1e37813f22bf1773e68f0bfc9ee154b3aec136aa81aaecc402926e36",
+                                                                              "mode":  438
+                                                                          },
+                                                              "plannedCalls":  1,
+                                                              "after":  {
+                                                                            "hash":  "63fe19af1e37813f22bf1773e68f0bfc9ee154b3aec136aa81aaecc402926e36",
+                                                                            "mode":  438,
+                                                                            "exists":  true
+                                                                        },
+                                                              "beforePublishCalls":  1,
+                                                              "publishedDiff":  null,
+                                                              "originalDiff":  null,
+                                                              "sourceIndexMtimeNs":  "1793823511768167400",
+                                                              "worktreeCPreserved":  true,
+                                                              "workfileCMtimeNs":  "1793823519000000000",
+                                                              "cOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6",
+                                                              "publishedMtimeNs":  "1793823522485437700",
+                                                              "scratchMtimeNs":  "1793823521355099300",
+                                                              "HEADAndCommittedAPreserved":  true,
+                                                              "frontier":  "selected-add",
+                                                              "actualOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "nativeSources":  {
+                                                                                    "oracleSHA256":  "3789654c1d069c1045ac13de218891ca1071fd325590bde0029d415198514570",
+                                                                                    "generatedByOfficialGit":  true,
+                                                                                    "indexTimestampNeverEdited":  true,
+                                                                                    "sourceSHA256":  "63fe19af1e37813f22bf1773e68f0bfc9ee154b3aec136aa81aaecc402926e36",
+                                                                                    "oracleTimestampNeverEdited":  true
+                                                                                },
+                                                              "status":  "CONFIRMED_DEFECT",
+                                                              "config":  {
+                                                                             "label":  "true-default",
+                                                                             "trustctime":  "true",
+                                                                             "checkStat":  "default"
+                                                                         },
+                                                              "confirmed":  true,
+                                                              "oracleOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6"
+                                                          },
+                                                          {
+                                                              "generatedBeforeCallback":  null,
+                                                              "workfileBMtimeNs":  "1793823558000000000",
+                                                              "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "source":  "baseline",
+                                                              "planned":  {
+                                                                              "exists":  true,
+                                                                              "hash":  "735dbb88d97ca5cf4d10a842dd45e5f3f5098d67b8d9a41374a5a0448584fe3a",
+                                                                              "mode":  438
+                                                                          },
+                                                              "plannedCalls":  1,
+                                                              "after":  {
+                                                                            "hash":  "735dbb88d97ca5cf4d10a842dd45e5f3f5098d67b8d9a41374a5a0448584fe3a",
+                                                                            "mode":  438,
+                                                                            "exists":  true
+                                                                        },
+                                                              "beforePublishCalls":  1,
+                                                              "publishedDiff":  null,
+                                                              "originalDiff":  null,
+                                                              "sourceIndexMtimeNs":  "1793823550531729300",
+                                                              "worktreeCPreserved":  true,
+                                                              "workfileCMtimeNs":  "1793823558000000000",
+                                                              "cOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6",
+                                                              "publishedMtimeNs":  "1793823561317581100",
+                                                              "scratchMtimeNs":  "1793823560330071100",
+                                                              "HEADAndCommittedAPreserved":  true,
+                                                              "frontier":  "selected-add",
+                                                              "actualOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "nativeSources":  {
+                                                                                    "oracleSHA256":  "5f785f12e5ce66309a335d726d558c0cd44d5fb26ba42a8659119bd579ad8d2a",
+                                                                                    "generatedByOfficialGit":  true,
+                                                                                    "indexTimestampNeverEdited":  true,
+                                                                                    "sourceSHA256":  "735dbb88d97ca5cf4d10a842dd45e5f3f5098d67b8d9a41374a5a0448584fe3a",
+                                                                                    "oracleTimestampNeverEdited":  true
+                                                                                },
+                                                              "status":  "CONFIRMED_DEFECT",
+                                                              "config":  {
+                                                                             "label":  "false-minimal",
+                                                                             "trustctime":  "false",
+                                                                             "checkStat":  "minimal"
+                                                                         },
+                                                              "confirmed":  true,
+                                                              "oracleOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6"
+                                                          },
+                                                          {
+                                                              "generatedBeforeCallback":  null,
+                                                              "workfileBMtimeNs":  "1793823592000000000",
+                                                              "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "source":  "currentV6",
+                                                              "planned":  {
+                                                                              "exists":  true,
+                                                                              "hash":  "5ac674feebb437f351bdc36bb19df9101b1084f96472e2ff0ed4109ae62d8d02",
+                                                                              "mode":  438
+                                                                          },
+                                                              "plannedCalls":  1,
+                                                              "after":  {
+                                                                            "hash":  "5ac674feebb437f351bdc36bb19df9101b1084f96472e2ff0ed4109ae62d8d02",
+                                                                            "mode":  438,
+                                                                            "exists":  true
+                                                                        },
+                                                              "beforePublishCalls":  1,
+                                                              "publishedDiff":  null,
+                                                              "originalDiff":  null,
+                                                              "sourceIndexMtimeNs":  "1793823585157242400",
+                                                              "worktreeCPreserved":  true,
+                                                              "workfileCMtimeNs":  "1793823592000000000",
+                                                              "cOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6",
+                                                              "publishedMtimeNs":  "1793823595323784500",
+                                                              "scratchMtimeNs":  "1793823594283452800",
+                                                              "HEADAndCommittedAPreserved":  true,
+                                                              "frontier":  "selected-add",
+                                                              "actualOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "nativeSources":  {
+                                                                                    "oracleSHA256":  "3adb145a83b319d3e9d50a6ccc1d10af6d863ca088e037dc07d6f98517b440fc",
+                                                                                    "generatedByOfficialGit":  true,
+                                                                                    "indexTimestampNeverEdited":  true,
+                                                                                    "sourceSHA256":  "5ac674feebb437f351bdc36bb19df9101b1084f96472e2ff0ed4109ae62d8d02",
+                                                                                    "oracleTimestampNeverEdited":  true
+                                                                                },
+                                                              "status":  "CONFIRMED_DEFECT",
+                                                              "config":  {
+                                                                             "label":  "true-default",
+                                                                             "trustctime":  "true",
+                                                                             "checkStat":  "default"
+                                                                         },
+                                                              "confirmed":  true,
+                                                              "oracleOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6"
+                                                          },
+                                                          {
+                                                              "generatedBeforeCallback":  null,
+                                                              "workfileBMtimeNs":  "1793823622000000000",
+                                                              "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "source":  "currentV6",
+                                                              "planned":  {
+                                                                              "exists":  true,
+                                                                              "hash":  "e2e250c3c3b0ebb4c6745028228250d4921908c44181dc439bc657206aa50abf",
+                                                                              "mode":  438
+                                                                          },
+                                                              "plannedCalls":  1,
+                                                              "after":  {
+                                                                            "hash":  "e2e250c3c3b0ebb4c6745028228250d4921908c44181dc439bc657206aa50abf",
+                                                                            "mode":  438,
+                                                                            "exists":  true
+                                                                        },
+                                                              "beforePublishCalls":  1,
+                                                              "publishedDiff":  null,
+                                                              "originalDiff":  null,
+                                                              "sourceIndexMtimeNs":  "1793823615050115900",
+                                                              "worktreeCPreserved":  true,
+                                                              "workfileCMtimeNs":  "1793823622000000000",
+                                                              "cOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6",
+                                                              "publishedMtimeNs":  "1793823625850306700",
+                                                              "scratchMtimeNs":  "1793823624904274400",
+                                                              "HEADAndCommittedAPreserved":  true,
+                                                              "frontier":  "selected-add",
+                                                              "actualOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "nativeSources":  {
+                                                                                    "oracleSHA256":  "3deeb62ba7ce574682c4f36d9d8e86d59e11a80fd4f77a6057f413a93c4ed409",
+                                                                                    "generatedByOfficialGit":  true,
+                                                                                    "indexTimestampNeverEdited":  true,
+                                                                                    "sourceSHA256":  "e2e250c3c3b0ebb4c6745028228250d4921908c44181dc439bc657206aa50abf",
+                                                                                    "oracleTimestampNeverEdited":  true
+                                                                                },
+                                                              "status":  "CONFIRMED_DEFECT",
+                                                              "config":  {
+                                                                             "label":  "false-minimal",
+                                                                             "trustctime":  "false",
+                                                                             "checkStat":  "minimal"
+                                                                         },
+                                                              "confirmed":  true,
+                                                              "oracleOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6"
+                                                          }
+                                                      ],
+                                             "excludedOtherPathRows":  4
+                                         },
+                         "id":  "GL2-INTEGRITY-03",
+                         "rootCause":  "Both source-to-scratch and generated-index-to-lock copies lost the native index temporal boundary",
+                         "classification":  "PREEXISTING_IN_BASELINE_AND_CURRENT_V6",
+                         "impact":  "A selected C can remain unstaged as B after copying the native index; publishing a fresh copy can hide unstaged C from native diff",
+                         "candidateFix":  "Shared FD-based timestamp helper at both boundaries; preserve hashes locks publication tokens and staging durability barriers",
+                         "publication":  {
+                                             "selection":  "ONLY publication-between-add-and-lock from equivalent same-scratch follow-up",
+                                             "selectedRows":  4,
+                                             "rows":  [
+                                                          {
+                                                              "generatedBeforeCallback":  {
+                                                                                              "mtimeNs":  "1793823871187894800",
+                                                                                              "sha256":  "2707a69947884a59064244924f89ca55514ddf8321ca51756473d082237150bd"
+                                                                                          },
+                                                              "workfileBMtimeNs":  "1793823885000000000",
+                                                              "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "source":  "baseline",
+                                                              "planned":  {
+                                                                              "exists":  true,
+                                                                              "hash":  "2707a69947884a59064244924f89ca55514ddf8321ca51756473d082237150bd",
+                                                                              "mode":  438
+                                                                          },
+                                                              "plannedCalls":  1,
+                                                              "after":  {
+                                                                            "hash":  "2707a69947884a59064244924f89ca55514ddf8321ca51756473d082237150bd",
+                                                                            "mode":  438,
+                                                                            "exists":  true
+                                                                        },
+                                                              "beforePublishCalls":  1,
+                                                              "publishedDiff":  "",
+                                                              "originalDiff":  "M\u0000racy.txt\u0000",
+                                                              "sourceIndexMtimeNs":  "1793823870260798600",
+                                                              "worktreeCPreserved":  true,
+                                                              "workfileCMtimeNs":  "1793823885000000000",
+                                                              "cOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6",
+                                                              "publishedMtimeNs":  "1793823886516041500",
+                                                              "scratchMtimeNs":  "1793823871187894800",
+                                                              "HEADAndCommittedAPreserved":  true,
+                                                              "frontier":  "publication-between-add-and-lock",
+                                                              "actualOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "nativeSources":  {
+                                                                                    "oracleSHA256":  "f7e800da0e1d566e6c1e364482e2751c94640a08b8b617181d6c56e0b4d089d0",
+                                                                                    "generatedByOfficialGit":  true,
+                                                                                    "indexTimestampNeverEdited":  true,
+                                                                                    "sourceSHA256":  "55345a57d65f92db0274eb1a30581e11d5047c9f3aebd5a6075ccfcd478951b0",
+                                                                                    "oracleTimestampNeverEdited":  true
+                                                                                },
+                                                              "status":  "CONFIRMED_DEFECT",
+                                                              "config":  {
+                                                                             "label":  "true-default",
+                                                                             "trustctime":  "true",
+                                                                             "checkStat":  "default"
+                                                                         },
+                                                              "confirmed":  true,
+                                                              "oracleOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c"
+                                                          },
+                                                          {
+                                                              "generatedBeforeCallback":  {
+                                                                                              "mtimeNs":  "1793823892192397700",
+                                                                                              "sha256":  "14a0f637c97129f3fdade5ff41ef3dfc9d963f7af004ef83c98ec8f3926baf5a"
+                                                                                          },
+                                                              "workfileBMtimeNs":  "1793823903000000000",
+                                                              "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "source":  "baseline",
+                                                              "planned":  {
+                                                                              "exists":  true,
+                                                                              "hash":  "14a0f637c97129f3fdade5ff41ef3dfc9d963f7af004ef83c98ec8f3926baf5a",
+                                                                              "mode":  438
+                                                                          },
+                                                              "plannedCalls":  1,
+                                                              "after":  {
+                                                                            "hash":  "14a0f637c97129f3fdade5ff41ef3dfc9d963f7af004ef83c98ec8f3926baf5a",
+                                                                            "mode":  438,
+                                                                            "exists":  true
+                                                                        },
+                                                              "beforePublishCalls":  1,
+                                                              "publishedDiff":  "",
+                                                              "originalDiff":  "M\u0000racy.txt\u0000",
+                                                              "sourceIndexMtimeNs":  "1793823888939225700",
+                                                              "worktreeCPreserved":  true,
+                                                              "workfileCMtimeNs":  "1793823903000000000",
+                                                              "cOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6",
+                                                              "publishedMtimeNs":  "1793823904535083600",
+                                                              "scratchMtimeNs":  "1793823892192397700",
+                                                              "HEADAndCommittedAPreserved":  true,
+                                                              "frontier":  "publication-between-add-and-lock",
+                                                              "actualOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "nativeSources":  {
+                                                                                    "oracleSHA256":  "ccccdb2646de90d757fe71249417b8e46a14072bfabefa40ee841ea05d7ab82b",
+                                                                                    "generatedByOfficialGit":  true,
+                                                                                    "indexTimestampNeverEdited":  true,
+                                                                                    "sourceSHA256":  "d56ec7559ab4878784e25f4315f3a03bc5c8d6984e71bc2d81d27186890536f1",
+                                                                                    "oracleTimestampNeverEdited":  true
+                                                                                },
+                                                              "status":  "CONFIRMED_DEFECT",
+                                                              "config":  {
+                                                                             "label":  "false-minimal",
+                                                                             "trustctime":  "false",
+                                                                             "checkStat":  "minimal"
+                                                                         },
+                                                              "confirmed":  true,
+                                                              "oracleOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c"
+                                                          },
+                                                          {
+                                                              "generatedBeforeCallback":  {
+                                                                                              "mtimeNs":  "1793823909164998400",
+                                                                                              "sha256":  "697866b75b9829067453461723db49638b9a4da89efd274e19180e4e7e477c94"
+                                                                                          },
+                                                              "workfileBMtimeNs":  "1793823922000000000",
+                                                              "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "source":  "currentV6",
+                                                              "planned":  {
+                                                                              "exists":  true,
+                                                                              "hash":  "697866b75b9829067453461723db49638b9a4da89efd274e19180e4e7e477c94",
+                                                                              "mode":  438
+                                                                          },
+                                                              "plannedCalls":  1,
+                                                              "after":  {
+                                                                            "hash":  "697866b75b9829067453461723db49638b9a4da89efd274e19180e4e7e477c94",
+                                                                            "mode":  438,
+                                                                            "exists":  true
+                                                                        },
+                                                              "beforePublishCalls":  1,
+                                                              "publishedDiff":  "",
+                                                              "originalDiff":  "M\u0000racy.txt\u0000",
+                                                              "sourceIndexMtimeNs":  "1793823907641223300",
+                                                              "worktreeCPreserved":  true,
+                                                              "workfileCMtimeNs":  "1793823922000000000",
+                                                              "cOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6",
+                                                              "publishedMtimeNs":  "1793823923616626100",
+                                                              "scratchMtimeNs":  "1793823909164998400",
+                                                              "HEADAndCommittedAPreserved":  true,
+                                                              "frontier":  "publication-between-add-and-lock",
+                                                              "actualOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "nativeSources":  {
+                                                                                    "oracleSHA256":  "45e36e894e0477398d5e2da267999fb7e49f72d5236a4b3c59339f7e01153d5d",
+                                                                                    "generatedByOfficialGit":  true,
+                                                                                    "indexTimestampNeverEdited":  true,
+                                                                                    "sourceSHA256":  "5f3f59112e3ac0733e651d3acb6a164017bfa66019fe8ed76d7f80d17860275a",
+                                                                                    "oracleTimestampNeverEdited":  true
+                                                                                },
+                                                              "status":  "CONFIRMED_DEFECT",
+                                                              "config":  {
+                                                                             "label":  "true-default",
+                                                                             "trustctime":  "true",
+                                                                             "checkStat":  "default"
+                                                                         },
+                                                              "confirmed":  true,
+                                                              "oracleOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c"
+                                                          },
+                                                          {
+                                                              "generatedBeforeCallback":  {
+                                                                                              "mtimeNs":  "1793823936776920400",
+                                                                                              "sha256":  "37eb12d80910d6a58631caed1c10c8c8845520d8968bc77db023f7dd27538358"
+                                                                                          },
+                                                              "workfileBMtimeNs":  "1793823946000000000",
+                                                              "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "source":  "currentV6",
+                                                              "planned":  {
+                                                                              "exists":  true,
+                                                                              "hash":  "37eb12d80910d6a58631caed1c10c8c8845520d8968bc77db023f7dd27538358",
+                                                                              "mode":  438
+                                                                          },
+                                                              "plannedCalls":  1,
+                                                              "after":  {
+                                                                            "hash":  "37eb12d80910d6a58631caed1c10c8c8845520d8968bc77db023f7dd27538358",
+                                                                            "mode":  438,
+                                                                            "exists":  true
+                                                                        },
+                                                              "beforePublishCalls":  1,
+                                                              "publishedDiff":  "",
+                                                              "originalDiff":  "M\u0000racy.txt\u0000",
+                                                              "sourceIndexMtimeNs":  "1793823932491439600",
+                                                              "worktreeCPreserved":  true,
+                                                              "workfileCMtimeNs":  "1793823946000000000",
+                                                              "cOID":  "9ffe2de606e0a89bbd1262ceb9701cf2be294ec6",
+                                                              "publishedMtimeNs":  "1793823947561126400",
+                                                              "scratchMtimeNs":  "1793823936776920400",
+                                                              "HEADAndCommittedAPreserved":  true,
+                                                              "frontier":  "publication-between-add-and-lock",
+                                                              "actualOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                              "nativeSources":  {
+                                                                                    "oracleSHA256":  "7e72c2f41938f7b1fe47c98a92fa56112ac2e76d2e48cd4ff4982414f677b388",
+                                                                                    "generatedByOfficialGit":  true,
+                                                                                    "indexTimestampNeverEdited":  true,
+                                                                                    "sourceSHA256":  "d7de842a5ee854c18a229463c7f52971791eadf2e6463b2bc0567b42ab600bb7",
+                                                                                    "oracleTimestampNeverEdited":  true
+                                                                                },
+                                                              "status":  "CONFIRMED_DEFECT",
+                                                              "config":  {
+                                                                             "label":  "false-minimal",
+                                                                             "trustctime":  "false",
+                                                                             "checkStat":  "minimal"
+                                                                         },
+                                                              "confirmed":  true,
+                                                              "oracleOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c"
+                                                          }
+                                                      ],
+                                             "sameNativeGeneratedScratchCompared":  true
+                                         },
+                         "location":  "src/core/index-stage.ts",
+                         "argvSnapshotStrengthening":  {
+                                                           "classification":  "CONSISTENCY_STRENGTHENING",
+                                                           "notCountedAsAnotherConfirmedDefect":  true,
+                                                           "priorProbesCoveredArrayMutation":  false
+                                                       },
+                         "status":  "CONFIRMED_DEFECT",
+                         "stageIndexSha256BothSources":  "69d981eabe8f706a30614e9d176ef07e6d3af7b876a2cc21e18e28efb444c321"
+                     },
+                     {
+                         "id":  "GL2-INTEGRITY-04",
+                         "failureType":  "Controlled existing failpoint exception, not process termination power loss or physical IO error",
+                         "rootCause":  "Legacy backup image has bytes and mode but no proven original index mtime",
+                         "classification":  "PREEXISTING_IN_BASELINE_AND_CURRENT_V6",
+                         "impact":  "Restoring exact B raw bytes with a newer index mtime makes native diff conceal C; C bytes remain on disk",
+                         "candidateFix":  "Conservative epoch-plus-one-second timestamp on validated MAIN/private restoration temporary only, synchronized via proven FD; all plan backup hash V05 and revocation guards remain required",
+                         "noJournalSchemaChangeRequired":  true,
+                         "location":  "src/core/index.ts:rollback",
+                         "rows":  [
+                                      {
+                                          "workfileBMtimeNs":  "1793824214000000000",
+                                          "restoredDiff":  "",
+                                          "config":  {
+                                                         "label":  "true-default",
+                                                         "trustctime":  "true",
+                                                         "checkStat":  "default"
+                                                     },
+                                          "setup":  {
+                                                        "nativeSourceIndexMtimeNeverEdited":  true,
+                                                        "onlyOwnedWorkfileMtimeControlledAndRestored":  true,
+                                                        "sameSize":  true,
+                                                        "sameWorktreeMtime":  true,
+                                                        "failpoint":  "after-stage-index-publication",
+                                                        "recovery":  "actual Core recover after genuine pending journal",
+                                                        "rawOriginalIndexBeforeMatchesJournalAndBackup":  true
+                                                    },
+                                          "sourceIndexMtimeNs":  "1793824209224050600",
+                                          "recoveredCount":  1,
+                                          "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                          "originalDiff":  "M\u0000racy.txt\u0000",
+                                          "restoredSHA256":  "1e4b768070d3ff895f676d5082a2a6ef9b882efffb662aff314d0da7bbd844f2",
+                                          "restoredMtimeNs":  "1793824233538406900",
+                                          "status":  "CONFIRMED_DEFECT",
+                                          "confirmed":  true,
+                                          "source":  "baseline",
+                                          "workfileCMtimeNs":  "1793824214000000000",
+                                          "HEADAndCommittedAPreserved":  true,
+                                          "backupPathIntentionallyOmitted":  true,
+                                          "sourceSHA256":  "1e4b768070d3ff895f676d5082a2a6ef9b882efffb662aff314d0da7bbd844f2",
+                                          "otherPathStageRolledBack":  true,
+                                          "journalAfter":  {
+                                                               "exists":  true,
+                                                               "hash":  "621f9461ee4801366c24b6d1fd2a17605a54f38612090ee83bcd8685ea64814c",
+                                                               "mode":  438
+                                                           },
+                                          "repeatedRecoveredCount":  0,
+                                          "BStagedAndCDiskPreserved":  true,
+                                          "actualCoreRecoverCalled":  true,
+                                          "failpoint":  "after-stage-index-publication",
+                                          "publishedSHA256":  "621f9461ee4801366c24b6d1fd2a17605a54f38612090ee83bcd8685ea64814c",
+                                          "journalBefore":  {
+                                                                "hash":  "1e4b768070d3ff895f676d5082a2a6ef9b882efffb662aff314d0da7bbd844f2",
+                                                                "mode":  438,
+                                                                "exists":  true
+                                                            },
+                                          "backupMtimeNs":  "1793824228036745200",
+                                          "failureCode":  "INJECTED_FAILURE",
+                                          "afterDiffTimestampPreserved":  true
+                                      },
+                                      {
+                                          "workfileBMtimeNs":  "1793824258000000000",
+                                          "restoredDiff":  "",
+                                          "config":  {
+                                                         "label":  "false-minimal",
+                                                         "trustctime":  "false",
+                                                         "checkStat":  "minimal"
+                                                     },
+                                          "setup":  {
+                                                        "nativeSourceIndexMtimeNeverEdited":  true,
+                                                        "onlyOwnedWorkfileMtimeControlledAndRestored":  true,
+                                                        "sameSize":  true,
+                                                        "sameWorktreeMtime":  true,
+                                                        "failpoint":  "after-stage-index-publication",
+                                                        "recovery":  "actual Core recover after genuine pending journal",
+                                                        "rawOriginalIndexBeforeMatchesJournalAndBackup":  true
+                                                    },
+                                          "sourceIndexMtimeNs":  "1793824252316492200",
+                                          "recoveredCount":  1,
+                                          "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                          "originalDiff":  "M\u0000racy.txt\u0000",
+                                          "restoredSHA256":  "a3fa7673f270c15976d770cafd36b80338a4ee57a561e799a01f4eaf23486c51",
+                                          "restoredMtimeNs":  "1793824269788577100",
+                                          "status":  "CONFIRMED_DEFECT",
+                                          "confirmed":  true,
+                                          "source":  "baseline",
+                                          "workfileCMtimeNs":  "1793824258000000000",
+                                          "HEADAndCommittedAPreserved":  true,
+                                          "backupPathIntentionallyOmitted":  true,
+                                          "sourceSHA256":  "a3fa7673f270c15976d770cafd36b80338a4ee57a561e799a01f4eaf23486c51",
+                                          "otherPathStageRolledBack":  true,
+                                          "journalAfter":  {
+                                                               "exists":  true,
+                                                               "hash":  "bd6c5f342ce184fda9ef0e20e3bd54fed2ea3b85d77bbe8f7f2f753d736dd393",
+                                                               "mode":  438
+                                                           },
+                                          "repeatedRecoveredCount":  0,
+                                          "BStagedAndCDiskPreserved":  true,
+                                          "actualCoreRecoverCalled":  true,
+                                          "failpoint":  "after-stage-index-publication",
+                                          "publishedSHA256":  "bd6c5f342ce184fda9ef0e20e3bd54fed2ea3b85d77bbe8f7f2f753d736dd393",
+                                          "journalBefore":  {
+                                                                "hash":  "a3fa7673f270c15976d770cafd36b80338a4ee57a561e799a01f4eaf23486c51",
+                                                                "mode":  438,
+                                                                "exists":  true
+                                                            },
+                                          "backupMtimeNs":  "1793824265692982300",
+                                          "failureCode":  "INJECTED_FAILURE",
+                                          "afterDiffTimestampPreserved":  true
+                                      },
+                                      {
+                                          "workfileBMtimeNs":  "1793824288000000000",
+                                          "restoredDiff":  "",
+                                          "config":  {
+                                                         "label":  "true-default",
+                                                         "trustctime":  "true",
+                                                         "checkStat":  "default"
+                                                     },
+                                          "setup":  {
+                                                        "nativeSourceIndexMtimeNeverEdited":  true,
+                                                        "onlyOwnedWorkfileMtimeControlledAndRestored":  true,
+                                                        "sameSize":  true,
+                                                        "sameWorktreeMtime":  true,
+                                                        "failpoint":  "after-stage-index-publication",
+                                                        "recovery":  "actual Core recover after genuine pending journal",
+                                                        "rawOriginalIndexBeforeMatchesJournalAndBackup":  true
+                                                    },
+                                          "sourceIndexMtimeNs":  "1793824282726234500",
+                                          "recoveredCount":  1,
+                                          "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                          "originalDiff":  "M\u0000racy.txt\u0000",
+                                          "restoredSHA256":  "1eb26693f0996247a97378d9c7078a7a1e5381715a324879468e205472f458da",
+                                          "restoredMtimeNs":  "1793824315106862200",
+                                          "status":  "CONFIRMED_DEFECT",
+                                          "confirmed":  true,
+                                          "source":  "currentV6",
+                                          "workfileCMtimeNs":  "1793824288000000000",
+                                          "HEADAndCommittedAPreserved":  true,
+                                          "backupPathIntentionallyOmitted":  true,
+                                          "sourceSHA256":  "1eb26693f0996247a97378d9c7078a7a1e5381715a324879468e205472f458da",
+                                          "otherPathStageRolledBack":  true,
+                                          "journalAfter":  {
+                                                               "exists":  true,
+                                                               "hash":  "076547e6cab99cf265597b69e6ba81177cf5cd4b712ea8b61eb6da354199e8c6",
+                                                               "mode":  438
+                                                           },
+                                          "repeatedRecoveredCount":  0,
+                                          "BStagedAndCDiskPreserved":  true,
+                                          "actualCoreRecoverCalled":  true,
+                                          "failpoint":  "after-stage-index-publication",
+                                          "publishedSHA256":  "076547e6cab99cf265597b69e6ba81177cf5cd4b712ea8b61eb6da354199e8c6",
+                                          "journalBefore":  {
+                                                                "hash":  "1eb26693f0996247a97378d9c7078a7a1e5381715a324879468e205472f458da",
+                                                                "mode":  438,
+                                                                "exists":  true
+                                                            },
+                                          "backupMtimeNs":  "1793824307612382000",
+                                          "failureCode":  "INJECTED_FAILURE",
+                                          "afterDiffTimestampPreserved":  true
+                                      },
+                                      {
+                                          "workfileBMtimeNs":  "1793824329000000000",
+                                          "restoredDiff":  "",
+                                          "config":  {
+                                                         "label":  "false-minimal",
+                                                         "trustctime":  "false",
+                                                         "checkStat":  "minimal"
+                                                     },
+                                          "setup":  {
+                                                        "nativeSourceIndexMtimeNeverEdited":  true,
+                                                        "onlyOwnedWorkfileMtimeControlledAndRestored":  true,
+                                                        "sameSize":  true,
+                                                        "sameWorktreeMtime":  true,
+                                                        "failpoint":  "after-stage-index-publication",
+                                                        "recovery":  "actual Core recover after genuine pending journal",
+                                                        "rawOriginalIndexBeforeMatchesJournalAndBackup":  true
+                                                    },
+                                          "sourceIndexMtimeNs":  "1793824323212697000",
+                                          "recoveredCount":  1,
+                                          "bOID":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                          "originalDiff":  "M\u0000racy.txt\u0000",
+                                          "restoredSHA256":  "d868b70b70a26b7fa1fe12d10eeee8cc4e609bd4b5f6344f3e605ece590b081f",
+                                          "restoredMtimeNs":  "1793824341045167500",
+                                          "status":  "CONFIRMED_DEFECT",
+                                          "confirmed":  true,
+                                          "source":  "currentV6",
+                                          "workfileCMtimeNs":  "1793824329000000000",
+                                          "HEADAndCommittedAPreserved":  true,
+                                          "backupPathIntentionallyOmitted":  true,
+                                          "sourceSHA256":  "d868b70b70a26b7fa1fe12d10eeee8cc4e609bd4b5f6344f3e605ece590b081f",
+                                          "otherPathStageRolledBack":  true,
+                                          "journalAfter":  {
+                                                               "exists":  true,
+                                                               "hash":  "5d877c0aa6e8927485d29155f8aa787919cdb8dd88072a51ee6ae38e1dd2783d",
+                                                               "mode":  438
+                                                           },
+                                          "repeatedRecoveredCount":  0,
+                                          "BStagedAndCDiskPreserved":  true,
+                                          "actualCoreRecoverCalled":  true,
+                                          "failpoint":  "after-stage-index-publication",
+                                          "publishedSHA256":  "5d877c0aa6e8927485d29155f8aa787919cdb8dd88072a51ee6ae38e1dd2783d",
+                                          "journalBefore":  {
+                                                                "hash":  "d868b70b70a26b7fa1fe12d10eeee8cc4e609bd4b5f6344f3e605ece590b081f",
+                                                                "mode":  438,
+                                                                "exists":  true
+                                                            },
+                                          "backupMtimeNs":  "1793824334301595400",
+                                          "failureCode":  "INJECTED_FAILURE",
+                                          "afterDiffTimestampPreserved":  true
+                                      }
+                                  ],
+                         "status":  "CONFIRMED_DEFECT"
+                     }
+                 ],
+    "sources":  {
+                    "sourceCopiesUnchanged":  true,
+                    "currentV6":  {
+                                      "functionalInputCountFromEarlierGate":  205,
+                                      "coreAndCliManifest":  [
+                                                                 {
+                                                                     "file":  "src/core/branch-protection.ts",
+                                                                     "bytes":  25110,
+                                                                     "sha256":  "530fe59190262f3256f89e23c3e9c32d71f108deec9360928c15f9ff8ff6c74d"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/demo.ts",
+                                                                     "bytes":  6303,
+                                                                     "sha256":  "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/editing-boundary.ts",
+                                                                     "bytes":  8847,
+                                                                     "sha256":  "a8c8cf1cf27770949d611e6315dff50924ba5a06fd1dd6f02dd7d089c5aa60a3"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/errors.ts",
+                                                                     "bytes":  467,
+                                                                     "sha256":  "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/git.ts",
+                                                                     "bytes":  22121,
+                                                                     "sha256":  "82ed40225a58db144545b54d1106725c78abfb7c883762f1d773c179bad08e1a"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/ignore.ts",
+                                                                     "bytes":  3328,
+                                                                     "sha256":  "3d0fa49bae842dfeed7e45f5f934509b8e40bc064e2b3832789868d2981f524b"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/index-query.ts",
+                                                                     "bytes":  17033,
+                                                                     "sha256":  "75eda39cf3ce9f00666ece8f1713f430691a6c9ad68cb6328d55002c6aa93405"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/index-stage.ts",
+                                                                     "bytes":  13854,
+                                                                     "sha256":  "69d981eabe8f706a30614e9d176ef07e6d3af7b876a2cc21e18e28efb444c321"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/index.ts",
+                                                                     "bytes":  117791,
+                                                                     "sha256":  "7b738fd8cdd745320ab52924517033ebff4ab299099ef40127ba84b70e39174b"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/layer-rename.ts",
+                                                                     "bytes":  19188,
+                                                                     "sha256":  "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/layout.ts",
+                                                                     "bytes":  16173,
+                                                                     "sha256":  "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/ownership-state.ts",
+                                                                     "bytes":  1372,
+                                                                     "sha256":  "4686ed8a7613600fbba4eff9324067e4baf64ab56b7b508651c5a039ca9263f8"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/paths.ts",
+                                                                     "bytes":  7365,
+                                                                     "sha256":  "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/platform.ts",
+                                                                     "bytes":  5247,
+                                                                     "sha256":  "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/recovery.ts",
+                                                                     "bytes":  21358,
+                                                                     "sha256":  "71357a5310afaedbfce0028df80b83a1d6288a0edd0b7aa4fc2c1282ffdc4f23"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/rescue.ts",
+                                                                     "bytes":  24310,
+                                                                     "sha256":  "f94f17cb4eb76afd7167657dacb3a85b915d33d617402cc943fadf78b4c979c1"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/core/storage.ts",
+                                                                     "bytes":  20673,
+                                                                     "sha256":  "d21fd3cc5637e497b499ce49c4a46a75d2f53ac82c50ff366a354c6362e65ac3"
+                                                                 },
+                                                                 {
+                                                                     "file":  "src/cli/index.ts",
+                                                                     "bytes":  27035,
+                                                                     "sha256":  "345a04436519f740e017cfc0ada8f1359d6ea2d454f897f81a19ef29f03b442c"
+                                                                 }
+                                                             ],
+                                      "coreFileCount":  17,
+                                      "cliFileCount":  1,
+                                      "racyVerification":  "All 205 inputs checked before and after by the racy harness",
+                                      "offWindowVerification":  "18 copied Core/CLI sources plus matching active-source hashes before and after; the 205-input fingerprint is inherited from the earlier gate, not recomputed by this repro",
+                                      "coreFingerprint":  "aab512270756d7888e5c1af60df6cc4b17d08a4376f4161552190a7115d32b35",
+                                      "functionalFingerprintFromEarlierGate":  "f72502adcfd332e3109ad3e82ec845731f376cfc41d5e4a44be5ce89a6c4a825"
+                                  },
+                    "racySourceUnchanged":  true,
+                    "baseline":  {
+                                     "coreAndCliManifest":  [
+                                                                {
+                                                                    "file":  "src/core/branch-protection.ts",
+                                                                    "bytes":  25110,
+                                                                    "sha256":  "530fe59190262f3256f89e23c3e9c32d71f108deec9360928c15f9ff8ff6c74d"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/demo.ts",
+                                                                    "bytes":  6303,
+                                                                    "sha256":  "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/editing-boundary.ts",
+                                                                    "bytes":  8847,
+                                                                    "sha256":  "a8c8cf1cf27770949d611e6315dff50924ba5a06fd1dd6f02dd7d089c5aa60a3"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/errors.ts",
+                                                                    "bytes":  467,
+                                                                    "sha256":  "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/git.ts",
+                                                                    "bytes":  21199,
+                                                                    "sha256":  "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/ignore.ts",
+                                                                    "bytes":  3328,
+                                                                    "sha256":  "3d0fa49bae842dfeed7e45f5f934509b8e40bc064e2b3832789868d2981f524b"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/index-stage.ts",
+                                                                    "bytes":  13854,
+                                                                    "sha256":  "69d981eabe8f706a30614e9d176ef07e6d3af7b876a2cc21e18e28efb444c321"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/index.ts",
+                                                                    "bytes":  115601,
+                                                                    "sha256":  "a74b1d3eb88cbf354064b64051b1a4df6871cd3affa6b2c678a3a4bba071f7f6"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/layer-rename.ts",
+                                                                    "bytes":  19188,
+                                                                    "sha256":  "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/layout.ts",
+                                                                    "bytes":  16173,
+                                                                    "sha256":  "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/ownership-state.ts",
+                                                                    "bytes":  1372,
+                                                                    "sha256":  "4686ed8a7613600fbba4eff9324067e4baf64ab56b7b508651c5a039ca9263f8"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/paths.ts",
+                                                                    "bytes":  7365,
+                                                                    "sha256":  "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/platform.ts",
+                                                                    "bytes":  5247,
+                                                                    "sha256":  "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/recovery.ts",
+                                                                    "bytes":  21358,
+                                                                    "sha256":  "71357a5310afaedbfce0028df80b83a1d6288a0edd0b7aa4fc2c1282ffdc4f23"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/rescue.ts",
+                                                                    "bytes":  21380,
+                                                                    "sha256":  "bd50b1cf30a62839d1a3413a9c4f14a23a6888d75a83f81cf8b8b6eb7386b79e"
+                                                                },
+                                                                {
+                                                                    "file":  "src/core/storage.ts",
+                                                                    "bytes":  17064,
+                                                                    "sha256":  "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+                                                                },
+                                                                {
+                                                                    "file":  "src/cli/index.ts",
+                                                                    "bytes":  27035,
+                                                                    "sha256":  "345a04436519f740e017cfc0ada8f1359d6ea2d454f897f81a19ef29f03b442c"
+                                                                }
+                                                            ],
+                                     "commit":  "d71ccc7d188500a22e56ea93c70ac946dba9db60"
+                                 },
+                    "stageAndRollback":  {
+                                             "baselineCoreFiles":  16,
+                                             "scope":  "Only the immutable baseline/current-v6 Core snapshots were imported and checked. No current active-worktree certification is inferred.",
+                                             "currentV6CoreFingerprint":  "aab512270756d7888e5c1af60df6cc4b17d08a4376f4161552190a7115d32b35",
+                                             "activeWorktreeAudited":  false,
+                                             "baselineCoreFingerprint":  "49e48c0604fbbf37587f7eee5b1b7b4dad8fcb1f6712c3318626e9f79a43fe4b",
+                                             "immutableSnapshotsUnchanged":  true,
+                                             "currentV6CoreFiles":  17
+                                         }
+                },
+    "experiments":  {
+                        "offWindow":  {
+                                          "quietProofAt":  "2026-11-04T19:59:27.0587509Z",
+                                          "timeBudgetMs":  1200000,
+                                          "retryDurationMs":  182593,
+                                          "experimentTimeNotProductLatency":  true,
+                                          "diskBudgetBytes":  134217728,
+                                          "originalRoundDeadline":  "2026-11-04T20:13:59.672Z",
+                                          "startedAt":  "2026-11-04T19:55:54.809Z",
+                                          "diskBudgetIsNotFilesystemQuota":  true,
+                                          "measuredWholeRunBytesBeforeFinalAndQuietReceipt":  810710,
+                                          "endedAt":  "2026-11-04T19:58:57.402Z",
+                                          "ownProcessesAbsent":  true,
+                                          "argvShape":  [
+                                                            "\u003cnode\u003e",
+                                                            "--max-old-space-size=512",
+                                                            "\u003cexternal-repro\u003e/repro.mjs",
+                                                            "worker",
+                                                            "\u003cphase-config.json\u003e"
+                                                        ],
+                                          "technicalRetryDeadline":  "2026-11-04T20:15:54.809Z",
+                                          "heapOptionDoesNotCapExternalMemory":  true
+                                      },
+                        "racy":  {
+                                     "gitVersion":  "git version 2.53.0.windows.2",
+                                     "createdAt":  "2026-11-04T19:56:10.254Z",
+                                     "actualDirectGitInvocations":  45,
+                                     "processExitCodeReportedByExecutor":  0,
+                                     "diskMeasurementBoundary":  "Before writing RESULTS.json; not physical IO bytes",
+                                     "elapsedMs":  56049,
+                                     "budget":  {
+                                                    "timeMs":  900000,
+                                                    "diskBytes":  134217728,
+                                                    "measuredDiskBytes":  175794
+                                                },
+                                     "experimentTimeNotProductLatency":  true,
+                                     "status":  "CONFIRMED_REGRESSION",
+                                     "directCountQualification":  "Harness native direct calls only; no claim to all Core or OS descendants"
+                                 },
+                        "stageSelectedAdd":  {
+                                                 "budget":  {
+                                                                "timeMs":  900000,
+                                                                "diskBytes":  134217728,
+                                                                "actualDiskBytes":  310797
+                                                            },
+                                                 "excludedRows":  4,
+                                                 "endedAt":  "2026-11-04T20:20:46.774Z",
+                                                 "experimentTimeNotProductLatency":  true,
+                                                 "process":  {
+                                                                 "exitCode":  0,
+                                                                 "termination":  null,
+                                                                 "outputTruncated":  false,
+                                                                 "timedOut":  false
+                                                             },
+                                                 "startedAt":  "2026-11-04T20:18:28.241Z",
+                                                 "sourceCopiesUnchanged":  true,
+                                                 "inventoryBeforeFinalResultReceipt":  true,
+                                                 "observerCountScope":  "Direct native observer calls only; Core Git calls and OS descendants excluded",
+                                                 "status":  "CONFIRMED_PREEXISTING_DEFECT",
+                                                 "activeWorktreeAudited":  false,
+                                                 "selectedRows":  4,
+                                                 "observerDirectGitInvocations":  164,
+                                                 "postProcess":  {
+                                                                     "scope":  "Owned worker/direct-child proof when present plus awaited supervisor closure; no OS-wide process inventory claimed",
+                                                                     "zeroWorkerAndDirectChildrenPresent":  true,
+                                                                     "separateProofAvailable":  true
+                                                                 }
+                                             },
+                        "stagePublicationEquivalent":  {
+                                                           "budget":  {
+                                                                          "timeMs":  900000,
+                                                                          "diskBytes":  134217728,
+                                                                          "actualDiskBytes":  193844
+                                                                      },
+                                                           "excludedRows":  0,
+                                                           "endedAt":  "2026-11-04T20:25:52.553Z",
+                                                           "experimentTimeNotProductLatency":  true,
+                                                           "process":  {
+                                                                           "exitCode":  0,
+                                                                           "termination":  null,
+                                                                           "outputTruncated":  false,
+                                                                           "timedOut":  false
+                                                                       },
+                                                           "startedAt":  "2026-11-04T20:24:28.355Z",
+                                                           "sourceCopiesUnchanged":  true,
+                                                           "inventoryBeforeFinalResultReceipt":  true,
+                                                           "observerCountScope":  "Direct native observer calls only; Core Git calls and OS descendants excluded",
+                                                           "status":  "CONFIRMED_PREEXISTING_PUBLICATION_DEFECT",
+                                                           "activeWorktreeAudited":  false,
+                                                           "selectedRows":  4,
+                                                           "observerDirectGitInvocations":  84,
+                                                           "postProcess":  {
+                                                                               "scope":  "Owned worker/direct-child proof when present plus awaited supervisor closure; no OS-wide process inventory claimed",
+                                                                               "zeroWorkerAndDirectChildrenPresent":  true,
+                                                                               "separateProofAvailable":  true
+                                                                           }
+                                                       },
+                        "indexRollback":  {
+                                              "budget":  {
+                                                             "timeMs":  900000,
+                                                             "diskBytes":  134217728,
+                                                             "actualDiskBytes":  742075
+                                                         },
+                                              "excludedRows":  0,
+                                              "endedAt":  "2026-11-04T20:32:25.108Z",
+                                              "experimentTimeNotProductLatency":  true,
+                                              "process":  {
+                                                              "exitCode":  0,
+                                                              "termination":  null,
+                                                              "outputTruncated":  false,
+                                                              "timedOut":  false
+                                                          },
+                                              "startedAt":  "2026-11-04T20:29:45.220Z",
+                                              "sourceCopiesUnchanged":  true,
+                                              "inventoryBeforeFinalResultReceipt":  true,
+                                              "observerCountScope":  "Direct native observer calls only; Core Git calls and OS descendants excluded",
+                                              "status":  "CONFIRMED_PREEXISTING_DEFECT",
+                                              "activeWorktreeAudited":  false,
+                                              "selectedRows":  4,
+                                              "observerDirectGitInvocations":  68,
+                                              "postProcess":  {
+                                                                  "scope":  "Owned worker/direct-child proof when present plus awaited supervisor closure; no OS-wide process inventory claimed",
+                                                                  "zeroWorkerAndDirectChildrenPresent":  null,
+                                                                  "separateProofAvailable":  false
+                                                              }
+                                          }
+                    },
+    "incompleteAttempts":  [
+                               {
+                                   "exitCode":  1,
+                                   "status":  "NO_PRODUCT_EXECUTION",
+                                   "evidenceKind":  "Observed tool result; no fixture or per-run receipt was created",
+                                   "id":  "off-window-launch-before-fixture",
+                                   "reason":  "PowerShell New-Item -LiteralPath parameter unavailable, followed by absent Node module"
+                               },
+                               {
+                                   "notConvertedToSkipOrEnvBlocked":  true,
+                                   "id":  "off-window-long-path-setup",
+                                   "preserved":  true,
+                                   "workerExitCode":  1,
+                                   "controllerExitCode":  0,
+                                   "injectionExecuted":  false,
+                                   "reason":  "Git Filename too long on a generated transaction ref lock",
+                                   "status":  "SETUP_FAILED",
+                                   "sourcesUnchanged":  true
+                               },
+                               {
+                                   "notConvertedToSkipOrEnvBlocked":  true,
+                                   "status":  "INCONCLUSIVE_PRECONDITION_FAILED",
+                                   "preserved":  true,
+                                   "id":  "racy-initial-copyFile-control",
+                                   "reason":  "fs.copyFile preserved mtime on this Windows environment; fresh-copy mtime precondition failed before comparative queries"
+                               },
+                               {
+                                   "id":  "stage-initial-publication-other-path-comparison",
+                                   "notConvertedToSkipOrEnvBlocked":  true,
+                                   "qualificationSha256":  "478ad0fef513a30cab0080010581919b79775a6932be62bb1223e2952eda831d",
+                                   "excludedRows":  4,
+                                   "status":  "INCONCLUSIVE_COMPARISON",
+                                   "rawFlagsPreserved":  true
+                               }
+                           ],
+    "newTests":  {
+                     "timestampExecution":  "NOT_RUN",
+                     "count":  4,
+                     "newTimestampParentsReportedByImplementer":  11,
+                     "execution":  "NOT_RUN",
+                     "byteOracle":  "Buffer.equals on all bytes via tests/helpers/assert-bytes.ts; bounded boolean assertion diagnostics",
+                     "cases":  [
+                                   "Later C after clean query with independent A/B/C origins",
+                                   "Second-file edit prevents the first removal",
+                                   "Explicit discard refuses an edit newer than the captured plan",
+                                   "Later C during the loop survives rollback of the first removal"
+                               ],
+                     "path":  "tests/integration/deactivation-concurrency.test.ts",
+                     "sha256":  "e86e2777ce09365b30cadc227770fb7e5f2f19e945d505195933ab021ce2b6a7",
+                     "queryTimestampParentCount":  11,
+                     "staging":  {
+                                     "sha256":  "6d993be7e8b17425207e81cd759e41e89d948bd1e94c6cf306240d241db3d203",
+                                     "execution":  "NOT_RUN",
+                                     "parentCount":  12,
+                                     "path":  "tests/integration/staging-racy.test.ts",
+                                     "cases":  [
+                                                   "MAIN/private times default/minimal selected-add: four parents",
+                                                   "MAIN/private times default/minimal publication: four parents",
+                                                   "External source timestamp writer",
+                                                   "External publication-lock timestamp writer",
+                                                   "Unrepresentable source timestamp",
+                                                   "Caller argv snapshotted before asynchronous preparation"
+                                               ],
+                                     "countProvisionalUntilOwnerFreeze":  false
+                                 },
+                     "recovery":  {
+                                      "cases":  [
+                                                    "MAIN/private times default/minimal legacy-plan recovery: four parents",
+                                                    "Sync EIO after effect preserves original published index backup journal and temporary",
+                                                    "Timestamp tamper during sync preserves evidence and refuses publication"
+                                                ],
+                                      "path":  "tests/integration/recovery-index-timestamp.test.ts",
+                                      "sha256":  "865bc3126bc5ca0d2516fbc9f9d1eace9fb3d072f0e3bcd15f77181222da6d70",
+                                      "parentCount":  6,
+                                      "execution":  "NOT_RUN"
+                                  }
+                 },
+    "rawEvidence":  [
+                        {
+                            "label":  "off-window-retry-harness",
+                            "sha256":  "f81ce73d9041563f885d76aa08a5779beee2b53b8ee4be00957ec6cba7d3f6dd",
+                            "bytes":  8667,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "off-window-retry-final-receipt",
+                            "sha256":  "cd03f16579970a650f27c0ce0a8e6c2325909e5f7f09687c8aeb08274a9e31a7",
+                            "bytes":  12939,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "off-window-current-process",
+                            "sha256":  "7f7375f6a899c94c984643aa838186cd47293368ee096ca8b66a82e979c18cae",
+                            "bytes":  1513,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "off-window-baseline-process",
+                            "sha256":  "5d6b70c8b01598804078fd75611b2a5c75e0c482b0d74fd35d118fbea4f220cc",
+                            "bytes":  1514,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "off-window-current-observation",
+                            "sha256":  "4c8ed47fd247c73cd0812e527e40ea1e554e75e056ef34cd6a1c72be11f922df",
+                            "bytes":  18578,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "off-window-baseline-observation",
+                            "sha256":  "e7bc7a1bca5802ae7cdec03281c0edaf4cf0dd21101a36e92cc668dc46e58838",
+                            "bytes":  19688,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "off-window-quiet-proof",
+                            "sha256":  "72eadeb3651300fd259a557a76feaa4b20a263921926ce618484db4ed25f0f1e",
+                            "bytes":  749,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "off-window-first-setup-final",
+                            "sha256":  "143cb32b8e98be08c79bad27e936a892436f3a56fec4ab13a39255d77adb3779",
+                            "bytes":  12606,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "off-window-first-setup-error",
+                            "sha256":  "1599eb90057a4b36bf3ac3a7d16479a07ce3d6c1d8a73bf83be0f2f250da2f31",
+                            "bytes":  2872,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "racy-first-attempt-failure",
+                            "sha256":  "3a5c157f323a74789f2356eac13f2d3b9bab78c591c060e536705b63706bb668",
+                            "bytes":  5642,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "racy-confirmed-results",
+                            "sha256":  "d0208d693da47a34a894e7b9818f0a3b9e1df37753ad8799914ac99ca90a3478",
+                            "bytes":  25983,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "racy-confirmed-harness",
+                            "sha256":  "ac81c95d8fddf96026bc49572a7923d1fd3e67f02eed22760a0d376861a5b0c3",
+                            "bytes":  11307,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "stage-selected-add-results-with-other-path-rows-excluded",
+                            "sha256":  "c35b44b019272410b0c07579876a451921a02c771d4256aa4a584e92e08603af",
+                            "bytes":  93981,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "stage-inconclusive-publication-qualification",
+                            "sha256":  "478ad0fef513a30cab0080010581919b79775a6932be62bb1223e2952eda831d",
+                            "bytes":  813,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "stage-equivalent-publication-results",
+                            "sha256":  "c40b36b1aa1c4d692d7cf89cfa78c252b99aec7689f26e1478eb436af4edef9e",
+                            "bytes":  54429,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "rollback-racy-results",
+                            "sha256":  "228a82ebdc2a75b9a44c8b09465622cb3545b976c1ca734e35e47b7833006eb1",
+                            "bytes":  48702,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "stage-first-harness",
+                            "sha256":  "402948e4bddf30e20fb06980f8625c0142f83b6c48c5f434e993bd3d453562e3",
+                            "bytes":  12492,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "stage-equivalent-publication-harness",
+                            "sha256":  "9ae6b4f2243f9c17a2b0f69b94320c765c03f3df55bca648850ddf81dd745f9a",
+                            "bytes":  13294,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "rollback-racy-harness",
+                            "sha256":  "85bdcc11bc3b837468121ddb2a0bfd2494207a53904d41e26ee2b9413e8baefc",
+                            "bytes":  13211,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "stageSelectedAdd-SUPERVISOR.json",
+                            "sha256":  "4dded0b5ef6f48f72f4331e1fc474f1d1e10421e5261ac692bd302f55dd1fc95",
+                            "bytes":  819,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "stageSelectedAdd-POST-PROCESS-PROOF.json",
+                            "sha256":  "2e06314b59cafbe5a9d1d547c2e233fe8cb06480da43e80aba8d28abe3aae7d9",
+                            "bytes":  475,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "stagePublicationEquivalent-SUPERVISOR.json",
+                            "sha256":  "351b4be83780c6d131f5492c3f2dee0336274167e558609a7b55d64707915566",
+                            "bytes":  819,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "stagePublicationEquivalent-POST-PROCESS-PROOF.json",
+                            "sha256":  "bc68cea17a3287b8162a6400f83881133f184f29faded5fb2b0511a5ded2a69a",
+                            "bytes":  421,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        },
+                        {
+                            "label":  "indexRollback-SUPERVISOR.json",
+                            "sha256":  "7ac8c1fbeabef1c33b5dda67fc9e304cb924b06037d9e2e196c95b0dda37a100",
+                            "bytes":  822,
+                            "externalPathIntentionallyOmitted":  true,
+                            "rawPreserved":  true
+                        }
+                    ],
+    "primarySources":  [
+                           "https://git-scm.com/docs/racy-git.html",
+                           "https://github.com/git/git/blob/v2.53.0/read-cache.c",
+                           "https://github.com/git/git/blob/v2.53.0/statinfo.h",
+                           "https://github.com/git/git/blob/v2.53.0/read-cache-ll.h"
+                       ],
+    "limits":  [
+                   "Windows/NTFS observations do not certify other platforms or filesystems.",
+                   "Probe exit zero means the defect oracle completed, not that the product passed.",
+                   "Off-window began while the candidate suite was active; the suite was coordinated to stop after racy confirmation. Experiment times are not product benchmarks.",
+                   "The racy fixture controls workfile metadata; it does not estimate occurrence frequency in ordinary use.",
+                   "The original index mtime was never modified by the racy probe.",
+                   "Timestamp-preserving and epoch1 copies are prototypes, not certification of the later fix.",
+                   "No live repository, project remote or global Git configuration was used as a fixture.",
+                   "Raw external evidence remains retained; public projection omits personal paths and process identifiers."
+               ],
+    "previousTwoFindingProjection":  {
+                                         "externalCopiesPreserved":  true,
+                                         "privatePathOmitted":  true,
+                                         "jsonSha256":  "7654a0c30cf625ef7e52737130c76ce6678d22f1119eda0dbbab7f0a65446c2d",
+                                         "markdownSha256":  "58324e9f345cb53a30e81fd5572109737fc11af1b33cf99d6f6472413399beda"
+                                     }
+}

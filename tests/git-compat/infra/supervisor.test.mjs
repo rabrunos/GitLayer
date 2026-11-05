@@ -6,12 +6,13 @@ import crypto from 'node:crypto';
 import { reconcileWorkerResult } from '../../../scripts/git-compat/supervisor.mjs';
 import { cleanupFixture, createFixture, execute, fileHash, isolatedEnvironment, json, project, relative, sha256, validateResult } from '../../../scripts/git-compat/lib.mjs';
 import { classifyKnown } from '../../../scripts/git-compat/runner.mjs';
+import { externalFixtureParent } from '../../../scripts/git-compat/fixture-parent.mjs';
 
 const id = 'supervisor-' + new Date().toISOString().replace(/[:.]/g, '-') + '-' + crypto.randomBytes(3).toString('hex');
 const evidenceParent = process.env.GIT_COMPAT_INFRA_EVIDENCE_ROOT;
 if (evidenceParent && !path.isAbsolute(evidenceParent)) throw Error('GIT_COMPAT_INFRA_EVIDENCE_ROOT must be absolute');
 const packageRoot = evidenceParent ? path.join(evidenceParent, id) : path.join(project, 'artifacts/git-compat/auxiliary/review-r02', id);
-const group = createFixture(path.join(project, '.workshop/git-compat-infra'), 'supervisor');
+const group = createFixture(externalFixtureParent(project), 'supervisor');
 const worker = path.join(project, 'tests/git-compat/fixtures/supervisor-worker.mjs');
 const environmentPath = 'environment.json';
 json(path.join(packageRoot, environmentPath), { role: 'Synthetic supervisor controls, no product or Git execution', platform: process.platform, node: process.version, nodeExecutable: process.execPath, isolatedEnvironment: true });

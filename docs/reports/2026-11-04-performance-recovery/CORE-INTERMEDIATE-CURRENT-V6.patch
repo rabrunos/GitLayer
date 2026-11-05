@@ -1,0 +1,910 @@
+diff --git a/src/core/git.ts b/src/core/git.ts
+index 17dbe33a1d85b5d2c3cb2b894ebb3110b6807bc1..21eafd3c4b7efa220917a11420f9c2c0277d1074 100644
+--- a/src/core/git.ts
++++ b/src/core/git.ts
+@@ -95,7 +95,7 @@ export async function git(cwd: string, args: string[], options: GitOptions = {})
+   const localArgs = [...args];
+   if (diffCommands.has(localArgs[0]!)) localArgs.splice(1, 0, '--no-ext-diff', '--no-textconv');
+   // A pure rev-parse query must see the real hooks location for diagnostics.
+-  const inspectHooks = args[0] === 'rev-parse' && args.includes('--git-path') && args.at(-1) === 'hooks';
++  const inspectHooks = args[0] === 'rev-parse' && args.some((arg, index) => arg === '--git-path' && args[index + 1] === 'hooks');
+   const globalArgs = [
+     '--no-pager', '-c', 'color.ui=false', '-c', 'core.quotepath=false',
+     '-c', 'core.fsmonitor=false', ...(inspectHooks ? [] : ['-c', `core.hooksPath=${DISABLED_GIT_HOOKS}`]),
+@@ -174,19 +174,28 @@ export async function discover(cwd: string): Promise<RepoInfo> {
+     throw new LabError('BARE_REPOSITORY', 'Repositórios bare não possuem workspace e não são suportados.');
+   }
+   const root = await realpath(await gitText(cwd, ['rev-parse', '--show-toplevel']));
+-  const internal = async (name: string): Promise<string> =>
+-    path.resolve(root, await gitText(root, ['rev-parse', '--path-format=absolute', '--git-path', name]));
+-  const [gitDir, commonDir, exclude, index, branch, headResult] = await Promise.all([
+-    gitText(root, ['rev-parse', '--absolute-git-dir']),
+-    gitText(root, ['rev-parse', '--path-format=absolute', '--git-common-dir']),
+-    internal('info/exclude'), internal('index'),
++  // Resolve these paths together, after canonicalizing the workspace just as
++  // before. Nothing is cached: another operation discovers the current Git
++  // topology again, including gitfiles and separate Git directories.
++  const [locations, branch, headResult] = await Promise.all([
++    gitText(root, ['rev-parse', '--path-format=absolute', '--absolute-git-dir', '--git-common-dir', '--git-path', 'info/exclude', '--git-path', 'index']),
+     gitText(root, ['symbolic-ref', '--quiet', '--short', 'HEAD'], { ok: [0, 1] }),
+     git(root, ['rev-parse', '--verify', 'HEAD^{commit}'], { ok: [0, 128] }),
+   ]);
+-  return { root, gitDir: path.resolve(gitDir), commonDir: path.resolve(commonDir), exclude, index,
++  const [gitDir, commonDir, exclude, index] = resolvedPaths(root, locations, 4);
++  return { root, gitDir: gitDir!, commonDir: commonDir!, exclude: exclude!, index: index!,
+     branch, head: headResult.code === 0 ? headResult.stdout.toString('utf8').trim() : '' };
+ }
+ 
++/** rev-parse emits one line per requested path; reject incomplete output. */
++function resolvedPaths(root: string, output: string, count: number): string[] {
++  const paths = output.split(/\r?\n/u);
++  if (paths.length !== count || paths.some(value => !value)) {
++    throw new LabError('INVALID_GIT_OUTPUT', 'O Git retornou caminhos internos incompletos ou ambíguos.');
++  }
++  return paths.map(value => path.resolve(root, value));
++}
++
+ /** Raw config excludes our command-scope safety overrides so requirements remain visible. */
+ async function originalConfig(root: string): Promise<Map<string, string[]>> {
+   const bytes = (await git(root, ['config', '--null', '--show-scope', '--list'])).stdout;
+@@ -239,20 +248,27 @@ export async function assertSupported(repoOrPath: RepoInfo | string, requireComm
+     }
+     if (key === 'core.splitindex' && truthy(value)) throw new LabError('SPLIT_INDEX', 'Split index não foi habilitado para Layers na v0.1.');
+   }
++  const operations = ['MERGE_HEAD', 'CHERRY_PICK_HEAD', 'REVERT_HEAD', 'REBASE_HEAD', 'rebase-merge', 'rebase-apply', 'sequencer', 'BISECT_LOG'];
++  const incomplete = ['shallow', 'objects/info/alternates', 'info/grafts'];
++  const internalNames = [...operations, ...incomplete, 'hooks', 'info/attributes'];
++  // One fresh query replaces thirteen child processes. Keep every filesystem
++  // check, and inspect the real hooks path even in this grouped pure query.
++  const locations = resolvedPaths(repo.root, await gitText(repo.root, ['rev-parse', '--path-format=absolute', ...internalNames.flatMap(name => ['--git-path', name])]), internalNames.length);
++  const internal = new Map(internalNames.map((name, index) => [name, locations[index]!]));
+   const exists = async (name: string): Promise<boolean> => {
+-    const absolute = await gitText(repo.root, ['rev-parse', '--path-format=absolute', '--git-path', name]);
++    const absolute = internal.get(name)!;
+     try { await lstat(absolute); return true; }
+     catch (error) { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return false; throw error; }
+   };
+-  for (const name of ['MERGE_HEAD', 'CHERRY_PICK_HEAD', 'REVERT_HEAD', 'REBASE_HEAD', 'rebase-merge', 'rebase-apply', 'sequencer', 'BISECT_LOG']) {
++  for (const name of operations) {
+     if (await exists(name)) throw new LabError('GIT_OPERATION_IN_PROGRESS', `Operação Git externa em andamento: ${name}`);
+   }
+-  for (const name of ['shallow', 'objects/info/alternates', 'info/grafts']) {
++  for (const name of incomplete) {
+     if (await exists(name)) throw new LabError('INCOMPLETE_REPOSITORY', `Repositório incompleto/alternativo não suportado: ${name}`);
+   }
+   const replaceRefs = await gitText(repo.root, ['for-each-ref', '--format=%(refname)', 'refs/replace/']);
+   if (replaceRefs) throw new LabError('REPLACE_OBJECTS', 'Referências de substituição de objetos não são suportadas.');
+-  const hooksDir = await gitText(repo.root, ['rev-parse', '--path-format=absolute', '--git-path', 'hooks']);
++  const hooksDir = internal.get('hooks')!;
+   const hooksConfig = config.get('core.hookspath')?.at(-1);
+   const hooksDisabled = hooksConfig === DISABLED_GIT_HOOKS || hooksConfig === os.devNull ||
+     (process.platform === 'win32' && /^nul$/iu.test(hooksConfig ?? ''));
+@@ -276,7 +292,7 @@ export async function assertSupported(repoOrPath: RepoInfo | string, requireComm
+   const objects = await gitText(repo.root, ['rev-list', '--objects', '--all', '--missing=print']);
+   if (objects.split('\n').some(line => line.startsWith('?'))) throw new LabError('MISSING_OBJECTS', 'Há objetos Git ausentes; Layers foram suspensas.');
+   // An attribute control in the private info directory applies to every projection.
+-  const infoAttributes = await gitText(repo.root, ['rev-parse', '--path-format=absolute', '--git-path', 'info/attributes']);
++  const infoAttributes = internal.get('info/attributes')!;
+   try {
+     const text = await readFile(infoAttributes, 'utf8');
+     if (/\b(?:filter|working-tree-encoding|ident)(?:=|\s|$)/mu.test(text)) {
+diff --git a/src/core/index-query.ts b/src/core/index-query.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..abf0e1fcd425caf367907e2731fb5f8fb4b200bc
+--- /dev/null
++++ b/src/core/index-query.ts
+@@ -0,0 +1,211 @@
++import * as fs from 'node:fs/promises';
++import path from 'node:path';
++import os from 'node:os';
++import { createHash, randomUUID } from 'node:crypto';
++import { git, type GitResult, type RepoInfo } from './git.js';
++import { LabError } from './errors.js';
++import { assertNoPathLinks } from './layout.js';
++import { validatePath } from './paths.js';
++import { atomicJSON, copyRegular, fingerprint, readJSON, sameFingerprint, type Fingerprint } from './storage.js';
++
++const codeOf = (error: unknown): string | undefined => (error as NodeJS.ErrnoException | undefined)?.code;
++const within = (parent: string, file: string): boolean => {
++  const relative = path.relative(path.toNamespacedPath(path.resolve(parent)), path.toNamespacedPath(path.resolve(file)));
++  return relative === '' || (relative !== '..' && !relative.startsWith('..' + path.sep) && !path.isAbsolute(relative));
++};
++const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
++interface Identity { dev: number; ino: number; nlink: number; size: number; mode: number; mtimeMs: number; ctimeMs: number }
++interface SourceImage { fingerprint: Fingerprint; identity: Identity | null }
++const sameIdentity = (left: Identity | null, right: Identity | null): boolean => left === null || right === null ? left === right :
++  left.dev === right.dev && left.ino === right.ino && left.nlink === right.nlink && left.size === right.size && left.mode === right.mode && left.mtimeMs === right.mtimeMs && left.ctimeMs === right.ctimeMs;
++const changed = (sourceIndex: string, reason: string): never => { throw new LabError('EXTERNAL_EDIT', 'O indice mudou durante a consulta. O escritor externo e seus dados foram preservados.', { sourceIndex, reason }); };
++
++async function noLock(file: string): Promise<void> {
++  await assertNoPathLinks(path.dirname(file));
++  try { await fs.lstat(file); }
++  catch (error) { if (codeOf(error) === 'ENOENT') return; throw error; }
++  throw new LabError('LOCKED', 'Lock nativo existente foi preservado; a consulta nao remove locks.', { path: file });
++}
++async function identity(file: string): Promise<Identity | null> {
++  await assertNoPathLinks(file);
++  try {
++    const stat = await fs.lstat(file);
++    if (!stat.isFile() || stat.isSymbolicLink() || stat.nlink !== 1) throw new LabError('UNSAFE_PATH', 'O indice deve ser arquivo regular independente.', { path: file });
++    return { dev: stat.dev, ino: stat.ino, nlink: stat.nlink, size: stat.size, mode: stat.mode, mtimeMs: stat.mtimeMs, ctimeMs: stat.ctimeMs };
++  } catch (error) { if (codeOf(error) === 'ENOENT') return null; throw error; }
++}
++async function observeSource(source: string): Promise<SourceImage> {
++  await noLock(source + '.lock');
++  const before = await identity(source), observed = await fingerprint(source), after = await identity(source);
++  if (!sameIdentity(before, after) || observed.exists !== (after !== null)) changed(source, 'index-changed-during-observation');
++  await noLock(source + '.lock'); return { fingerprint: observed, identity: after };
++}
++async function revalidateSource(source: string, expected: SourceImage): Promise<void> {
++  const current = await observeSource(source);
++  if (!sameFingerprint(expected.fingerprint, current.fingerprint) || !sameIdentity(expected.identity, current.identity)) changed(source, 'index-changed-after-snapshot');
++}
++function validateArguments(args: string[]): void {
++  const separator = args.indexOf('--'), flags = new Set(['--name-status', '-z', '--no-renames']);
++  if (args[0] !== 'diff' || separator < 1 || args.some(arg => typeof arg !== 'string' || arg.includes('\0')) || args.slice(1, separator).some(arg => !flags.has(arg))) {
++    throw new LabError('INVALID_ARGUMENT', 'Consulta requer diff worktree com flags de leitura conhecidas e separador --.');
++  }
++  for (const file of args.slice(separator + 1)) validatePath(file);
++}
++
++/**
++ * A read-only Core query must not let Git's automatic stat refresh rewrite the
++ * real index. Disabling refresh can expose stat-only paths as false changes;
++ * replacing diff with different plumbing can also change native semantics.
++ * Instead, give the unchanged official diff argv/defaults a fresh independent
++ * index copy. Only that disposable copy may receive Git's normal refresh.
++ *
++ * Criteria: no source/index/ref/metadata writes; no live-index cache; bounded
++ * copy memory; an absent source remains absent (never a fabricated empty file);
++ * source hashes, modes, identities and locks checked before/after the query.
++ * This is optimistic observation, not serialization of unrelated Git writers
++ * or an ACL against actors writing inside the private temporary directory.
++ */
++export async function queryIndexDiff(repo: RepoInfo, index: string, args: string[]): Promise<GitResult> {
++  args = [...args]; // Validate and execute one immutable argv observation across awaits.
++  validateArguments(args);
++  if (!path.isAbsolute(index)) throw new LabError('INVALID_ARGUMENT', 'O indice da consulta deve ser absoluto.');
++  const source = path.resolve(index);
++  if (source !== path.resolve(repo.index) && !within(repo.gitDir, source)) throw new LabError('UNSAFE_PATH', 'O indice nao pertence ao repositorio consultado.', { sourceIndex: source });
++  const before = await observeSource(source);
++  const requestedParent = path.resolve(os.tmpdir()); await assertNoPathLinks(requestedParent);
++  const parent = await fs.realpath(requestedParent), parentStat = await fs.lstat(parent);
++  if (!parentStat.isDirectory() || parentStat.isSymbolicLink()) throw new LabError('UNSAFE_PATH', 'O temporario precisa ser um diretorio regular externo.');
++  const protectedRoots: string[] = [];
++  for (const candidate of new Set([repo.root, repo.gitDir, repo.commonDir])) {
++    await assertNoPathLinks(candidate); protectedRoots.push(await fs.realpath(candidate));
++  }
++  if (protectedRoots.some(root => within(root, parent))) throw new LabError('UNSAFE_PATH', 'TEMP dentro do workspace ou do armazenamento Git foi recusado antes de criar a copia.', { sourceIndex: source });
++  const nonce = randomUUID(), directory = await fs.mkdtemp(path.join(parent, 'git-layer-index-query-' + nonce + '-'));
++  const acquired = await fs.lstat(directory), receipt = path.join(directory, 'owner.json'), scratch = path.join(directory, 'index');
++  let ownerFingerprint: Fingerprint | undefined, ownerIdentity: Identity | null = null, scratchIdentity: Identity | null = null;
++  let copied: Fingerprint | undefined, scratchAfter: Fingerprint | undefined, phase = 'created';
++  const removed: string[] = [];
++  const owner: any = { schema: 1, kind: 'git-layer-index-query', nonce, parent, directory, sourceIndex: source, sourceBefore: before.fingerprint, scratch: 'index', createdAt: new Date().toISOString(), phase };
++  const assertDirectory = async () => {
++    await assertNoPathLinks(parent); await assertNoPathLinks(directory);
++    const current = await fs.lstat(directory), actualParent = await fs.realpath(path.dirname(directory));
++    if (!current.isDirectory() || current.isSymbolicLink() || current.dev !== acquired.dev || current.ino !== acquired.ino || actualParent !== parent || protectedRoots.some(root => within(root, directory))) {
++      throw new LabError('UNSAFE_PATH', 'O diretorio temporario mudou; seus arquivos foram preservados.', { directory });
++    }
++    const currentParent = await fs.lstat(parent);
++    if (currentParent.dev !== parentStat.dev || currentParent.ino !== parentStat.ino) throw new LabError('UNSAFE_PATH', 'O pai temporario mudou; dados preservados.', { directory });
++  };
++  const assertOwner = async () => {
++    await assertDirectory();
++    const data = await readJSON<any>(receipt, value => value.kind === 'git-layer-index-query' && value.nonce === nonce && value.parent === parent && value.directory === directory && value.sourceIndex === source);
++    if (ownerFingerprint && (!sameFingerprint(ownerFingerprint, await fingerprint(receipt)) || !sameIdentity(ownerIdentity, await identity(receipt)))) throw new LabError('EXTERNAL_EDIT', 'O recibo temporario mudou e foi preservado.', { receipt });
++    return data;
++  };
++  const writeReceipt = async (next: string, extra: Record<string, unknown> = {}) => {
++    if (ownerFingerprint) await assertOwner(); else {
++      await assertDirectory();
++      try { await fs.lstat(receipt); throw new LabError('EXTERNAL_EDIT', 'O nome do recibo temporario esta ocupado; entrada preservada.', { receipt }); }
++      catch (error) { if (codeOf(error) !== 'ENOENT') throw error; }
++    }
++    phase = next; Object.assign(owner, extra, { phase, updatedAt: new Date().toISOString() });
++    await atomicJSON(receipt, owner); ownerFingerprint = await fingerprint(receipt); ownerIdentity = await identity(receipt);
++  };
++  // This observation never follows a changed directory/link or repairs it.
++  // A failed unlink/rmdir may already have taken effect before rejecting, so
++  // confirmed removals are not a substitute for these post-failure facts.
++  const observeRetention = async () => {
++    type Presence = { state: string; kind?: string; identityMatches?: boolean | null; errorCode?: string | null };
++    const notObserved: Presence = { state: 'not-observed' };
++    const result: { retention: 'complete' | 'partial' | 'unavailable' | 'identity-changed'; retained: boolean | null; directory: Presence; index: Presence; owner: Presence } = {
++      retention: 'unavailable', retained: null, directory: notObserved, index: notObserved, owner: notObserved
++    };
++    try {
++      await assertNoPathLinks(parent);
++      const currentParent = await fs.lstat(parent);
++      if (!currentParent.isDirectory() || currentParent.isSymbolicLink() || currentParent.dev !== parentStat.dev || currentParent.ino !== parentStat.ino) {
++        return { ...result, retention: 'identity-changed' as const, retained: false, directory: { state: 'not-observed', errorCode: 'PARENT_IDENTITY_CHANGED' } };
++      }
++      let current: Awaited<ReturnType<typeof fs.lstat>>;
++      try { current = await fs.lstat(directory); }
++      catch (error) {
++        if (codeOf(error) === 'ENOENT') return { ...result, retained: false, directory: { state: 'absent' }, index: { state: 'absent' }, owner: { state: 'absent' } };
++        throw error;
++      }
++      if (!current.isDirectory() || current.isSymbolicLink() || current.dev !== acquired.dev || current.ino !== acquired.ino) {
++        return { ...result, retention: 'identity-changed' as const, retained: false, directory: { state: 'identity-changed', kind: current.isSymbolicLink() ? 'symlink' : current.isDirectory() ? 'directory' : 'other' } };
++      }
++      result.retained = true; result.directory = { state: 'present', kind: 'directory', identityMatches: true };
++      const presence = async (file: string, expected: Identity | null): Promise<Presence> => {
++        try {
++          const stat = await fs.lstat(file);
++          if (!stat.isFile() || stat.isSymbolicLink() || stat.nlink !== 1) return { state: 'identity-changed', kind: stat.isSymbolicLink() ? 'symlink' : stat.isDirectory() ? 'directory' : 'other', identityMatches: false };
++          return { state: 'present', kind: 'file', identityMatches: expected ? sameIdentity(expected, stat) : null };
++        } catch (error) { return codeOf(error) === 'ENOENT' ? { state: 'absent' } : { state: 'unavailable', errorCode: codeOf(error) ?? null }; }
++      };
++      result.index = await presence(scratch, scratchIdentity); result.owner = await presence(receipt, ownerIdentity);
++      const after = await fs.lstat(directory), afterParent = await fs.lstat(parent);
++      if (!after.isDirectory() || after.isSymbolicLink() || after.dev !== acquired.dev || after.ino !== acquired.ino || afterParent.dev !== parentStat.dev || afterParent.ino !== parentStat.ino) {
++        return { ...result, retention: 'identity-changed' as const, retained: false, directory: { state: 'identity-changed' }, index: notObserved, owner: notObserved };
++      }
++      if ([result.index, result.owner].some(file => file.state === 'identity-changed' || file.identityMatches === false)) result.retention = 'identity-changed';
++      else {
++        const copyPresent = before.fingerprint.exists ? copied !== undefined && result.index.state === 'present' && result.index.identityMatches === true : result.index.state === 'absent' || result.index.state === 'present' && result.index.identityMatches === true;
++        result.retention = copyPresent && result.owner.state === 'present' && result.owner.identityMatches === true ? 'complete' : 'partial';
++      }
++      return result;
++    } catch (error) {
++      if (error instanceof LabError && error.code === 'UNSAFE_PATH') return { ...result, retention: 'identity-changed' as const, retained: false, directory: { state: 'not-observed', errorCode: error.code } };
++      return { ...result, retention: 'unavailable' as const, retained: null, directory: { state: 'unavailable', errorCode: codeOf(error) ?? null } };
++    }
++  };
++  try {
++    await assertDirectory(); await fs.chmod(directory, 0o700); await writeReceipt('created');
++    await noLock(scratch + '.lock');
++    if (before.fingerprint.exists) {
++      copied = await copyRegular(source, scratch, before.fingerprint.mode);
++      if (!sameFingerprint(copied, before.fingerprint) || !sameFingerprint(await fingerprint(scratch), before.fingerprint)) changed(source, 'index-copy-mismatch');
++      scratchIdentity = await identity(scratch);
++    } else if ((await fingerprint(scratch)).exists) changed(source, 'unexpected-scratch-index');
++    await revalidateSource(source, before); await assertOwner();
++    await writeReceipt('prepared', { copy: copied ?? null });
++    const expectedScratch = copied ?? { exists: false, hash: '', mode: 0 };
++    if (!sameFingerprint(await fingerprint(scratch), expectedScratch)) changed(source, 'private-index-changed-before-query');
++    await noLock(scratch + '.lock');
++    const result = await git(repo.root, args, { index: scratch }); // awaits Git close before any cleanup
++    phase = 'query-completed';
++    await noLock(scratch + '.lock'); await revalidateSource(source, before); await assertOwner();
++    scratchIdentity = await identity(scratch); scratchAfter = await fingerprint(scratch);
++    if (!sameIdentity(scratchIdentity, await identity(scratch))) changed(source, 'private-index-changed-after-query');
++    if (copied && !scratchAfter.exists) changed(source, 'private-index-disappeared-after-query');
++    await writeReceipt('validated', { scratchAfter, sourceAfter: before.fingerprint, git: { argv: [...args], exitCode: result.code, stdoutSHA256: digest(result.stdout), stderrSHA256: digest(result.stderr) } });
++    // Delete only the exact proven files. Unknown artifacts/native locks are
++    // preserved; recursive deletion and broad temporary cleanup are forbidden.
++    await assertOwner(); await noLock(scratch + '.lock');
++    const names = await fs.readdir(directory);
++    if (names.some(name => !['index', 'owner.json'].includes(name))) throw new LabError('UNSAFE_PATH', 'Artefato temporario desconhecido foi preservado.', { directory });
++    if (!sameFingerprint(await fingerprint(scratch), scratchAfter) || !sameIdentity(scratchIdentity, await identity(scratch))) changed(source, 'private-index-changed-before-cleanup');
++    phase = 'cleanup';
++    if (scratchAfter.exists) { await fs.unlink(scratch); removed.push('index'); }
++    await assertOwner(); await fs.unlink(receipt); removed.push('owner.json');
++    await assertDirectory(); await fs.rmdir(directory);
++    return result;
++  } catch (error) {
++    const failedPhase = phase;
++    const cause = { name: error instanceof Error ? error.name : 'Error', code: codeOf(error) ?? 'INDEX_QUERY_FAILED', message: error instanceof Error ? error.message : String(error) };
++    let receiptFailure: unknown = null;
++    // Cleanup is not an atomic multi-file deletion. A late cleanup failure
++    // reports exact removals and recreates only our nonce-owned receipt.
++    if (removed.includes('owner.json')) { ownerFingerprint = undefined; ownerIdentity = null; }
++    try { await writeReceipt('failed', { failedPhase, error: cause, removedBeforeFailure: removed, copy: copied ?? null, scratchAfter: scratchAfter ?? null }); }
++    catch (failure) { receiptFailure = { code: codeOf(failure) ?? null, message: failure instanceof Error ? failure.message : String(failure) }; }
++    const filePresence = await observeRetention();
++    const originalDetails = error instanceof LabError && error.details && typeof error.details === 'object' ? error.details : {};
++    throw new LabError(cause.code, cause.message, { ...originalDetails, indexQuery: {
++      directory, receipt, sourceIndex: source, nonce, phase: failedPhase,
++      retention: filePresence.retention, retained: filePresence.retained, filePresence,
++      copyCompleted: copied !== undefined, removalsConfirmed: [...removed], removedBeforeFailure: [...removed],
++      removalConfirmationScope: 'Only successful unlink returns are listed; a syscall may take effect before throwing. filePresence reports the later read-only observation.',
++      receiptFailure
++    } });
++  }
++}
+diff --git a/src/core/index.ts b/src/core/index.ts
+index 0e5d3a1f9015163e528119c004d6e088c56f0ff2..71581545d4f32be07e277b54ec9019f3b77c16f1 100644
+--- a/src/core/index.ts
++++ b/src/core/index.ts
+@@ -14,8 +14,9 @@ import { validateRecovery, recoveryBeforeWorkspace, recoveryWorkspaceImages, ass
+ import { validOwnershipMetadata, type EditingOwnership, type WorkspaceOwnership } from './ownership-state.js';
+ import { captureEditingBoundary } from './editing-boundary.js';
+ import { stageIndex } from './index-stage.js';
++import { queryIndexDiff } from './index-query.js';
+ import { prepareLayerRename, applyLayerRename, rollbackLayerRename } from './layer-rename.js';
+-import { atomicJSON, readJSON, withLock, Transaction, listTransactions, fingerprint, sameFingerprint, failpoint } from './storage.js';
++import { atomicJSON, readJSON, withLock, Transaction, listTransactions, fingerprint, sameFingerprint, copyRegular, failpoint } from './storage.js';
+ export { LabError, git, gitText, validatePath };
+ export interface Layer { id:string; name:string; ref:string; oid:string; indexBase:string; state:'inactive'|'active'|'parked'|'recovery-required'; reservations:string[]; shelf?:string; remote?:string }
+ interface Registry { schema:1; layers:Layer[] }
+@@ -35,7 +36,7 @@ type EditingObservation={missing:{path:string;owner:string|null}[];candidates:st
+ /** Shared domain service. No checkout of Layers and no synthetic HEAD. */
+ export class GitLayers {
+   repo:RepoInfo; dir:string; private registry:Registry={schema:1,layers:[]}; private workspace:Workspace;
+-  private tx?:Transaction; private recoveryFiles:RecoveryFile[]=[]; private publicationCheck?:()=>Promise<void>;
++  private tx?:Transaction; private recoveryFiles:RecoveryFile[]=[]; private publicationCheck?:()=>Promise<void>; private transactionTrees?:Map<string,GitEntry[]>;
+   private constructor(repo:RepoInfo,dir:string){this.repo=repo;this.dir=dir;this.workspace={schema:1,head:repo.head,branch:repo.branch};}
+   static async open(root:string):Promise<GitLayers>{const repo=await discover(root);const lab=new GitLayers(repo,await resolveLayerDirectory(repo.gitDir));await lab.load();return lab;}
+   static async init(root:string):Promise<GitLayers>{await fs.mkdir(root,{recursive:true});try{await discover(root);}catch(e){if(await exists(path.join(root,'.git')))throw e;await git(root,['init','-b','main']);} const lab=await GitLayers.open(root);await lab.init();return lab;}
+@@ -61,10 +62,18 @@ export class GitLayers {
+   private layer(name:string,active=false){const l=this.registry.layers.find(l=>l.name===name);if(!l)throw new LabError('LAYER_UNKNOWN',`Layer ${name} não registrada.`);if(active&&l.state!=='active'&&this.workspace.branchLayer!==name)throw new LabError('LAYER_INACTIVE',`Ative a Layer ${name} antes desta operação.`);return l;}
+   private index(l:Layer){return this.workspace.branchLayer===l.name?this.repo.index:this.privateIndex(l);}
+   private privateIndex(l:Layer){return path.join(this.dir,'indexes',`${l.id}.index`);}
+-  private async save(){if(this.workspace.baseReservations?.length){const committed=new Set((await treeEntries(this.repo.root,this.repo.head)).map(e=>e.path));if(this.workspace.editing)this.workspace.editing.acceptedBase=[...new Set([...this.workspace.editing.acceptedBase??[],...this.workspace.baseReservations.filter(p=>committed.has(p))])];this.workspace.baseReservations=this.workspace.baseReservations.filter(p=>!committed.has(p));}if(!validOwnershipMetadata(this.workspace))throw new LabError('METADATA_INVALID','Estado de propriedade não pode ser publicado.');await this.writeJSON(path.join(this.dir,'registry.json'),this.registry);await this.writeJSON(path.join(this.dir,'workspace.json'),this.workspace);for(const l of this.registry.layers)await this.writeJSON(path.join(this.dir,'reservations',`${l.id}.json`),{schema:1,paths:l.reservations});}
+-  private async track(file:string){if(!this.tx)return;let f=this.recoveryFiles.find(x=>x.path===file);if(!f){f={path:file,before:await fingerprint(file),backup:await this.tx.backup(file,`file-${this.recoveryFiles.length}`)};if(f.backup&&!sameFingerprint(await fingerprint(f.backup),f.before))throw new LabError('EXTERNAL_EDIT',`Arquivo mudou antes do backup: ${file}`);this.recoveryFiles.push(f);this.tx.data.recovery.files=this.recoveryFiles;await this.tx.record('backup-ready',{path:file});}}
+-  private async after(file:string,expected?:any){const current=await fingerprint(file);if(this.tx){const f=this.recoveryFiles.find(x=>x.path===file);if(f)f.after=expected??current;await this.tx.record('write-completed',{path:file});}if(expected&&!sameFingerprint(current,expected))throw new LabError('EXTERNAL_EDIT',`O resultado físico diverge da operação: ${file}`);}
+-  private async writeJSON(file:string,value:unknown){const planned=await fingerprint(file);await this.track(file);if(!sameFingerprint(planned,await fingerprint(file)))throw new LabError('EXTERNAL_EDIT',`Metadado mudou: ${file}`);await atomicJSON(file,value);await this.after(file);}
++  /** Only immutable object IDs are reused, within one locked mutation. Live indices/refs never are. */
++  private async entries(ref:string,index?:string):Promise<GitEntry[]>{
++    if(!this.tx||!this.transactionTrees||index||!/^[0-9a-f]{40,64}$/.test(ref))return treeEntries(this.repo.root,ref,index);
++    const cached=this.transactionTrees.get(ref);if(cached)return cached.map(entry=>({...entry}));
++    const entries=await treeEntries(this.repo.root,ref);
++    if(this.transactionTrees.size<64&&entries.length+[...this.transactionTrees.values()].reduce((count,tree)=>count+tree.length,0)<=100000)this.transactionTrees.set(ref,entries.map(entry=>({...entry})));
++    return entries;
++  }
++  private async save(){if(this.workspace.baseReservations?.length){const committed=new Set((await this.entries(this.repo.head)).map(e=>e.path));if(this.workspace.editing)this.workspace.editing.acceptedBase=[...new Set([...this.workspace.editing.acceptedBase??[],...this.workspace.baseReservations.filter(p=>committed.has(p))])];this.workspace.baseReservations=this.workspace.baseReservations.filter(p=>!committed.has(p));}if(!validOwnershipMetadata(this.workspace))throw new LabError('METADATA_INVALID','Estado de propriedade não pode ser publicado.');await this.writeJSON(path.join(this.dir,'registry.json'),this.registry);await this.writeJSON(path.join(this.dir,'workspace.json'),this.workspace);for(const l of this.registry.layers)await this.writeJSON(path.join(this.dir,'reservations',`${l.id}.json`),{schema:1,paths:l.reservations});}
++  private async track(file:string){file=path.resolve(file);if(!this.tx||this.recoveryFiles.some(entry=>entry.path===file))return;await this.tx.backupTracked(file,`file-${this.recoveryFiles.length}`,await fingerprint(file),this.recoveryFiles);}
++  private async after(file:string,expected?:any){file=path.resolve(file);const current=await fingerprint(file);if(this.tx){const f=this.recoveryFiles.find(x=>x.path===file);if(f)f.after=expected??current;await this.tx.record('write-completed',{path:file});}if(expected&&!sameFingerprint(current,expected))throw new LabError('EXTERNAL_EDIT',`O resultado físico diverge da operação: ${file}`);}
++  private async writeJSON(file:string,value:unknown){const planned=await fingerprint(file);if(planned.exists&&planned.hash===hash(JSON.stringify(value,null,2)+'\n'))return;await this.track(file);if(!sameFingerprint(planned,await fingerprint(file)))throw new LabError('EXTERNAL_EDIT',`Metadado mudou: ${file}`);await atomicJSON(file,value);await this.after(file);}
+   /** A managed publication invalidates old absence authority even before a later disk query. */
+   private async beginKnownMaterialization(file:string):Promise<string|undefined>{
+     const relative=path.relative(this.repo.root,file).split(path.sep).join('/');
+@@ -105,6 +114,14 @@ export class GitLayers {
+     if(!sameFingerprint(planned,await fingerprint(file))){await fs.unlink(tmp);throw new LabError('EXTERNAL_EDIT',`O destino mudou durante a operação: ${file}`);}
+     const temporaryMode=comparableFileMode((await fs.stat(tmp)).mode);await fs.rename(tmp,file);await this.after(file,{exists:true,hash:hash(bytes),mode:temporaryMode});await this.completeKnownMaterialization(materialization);
+   }
++  private async writeCopy(file:string,source:string,mode:number,expected:any,sourceHash:string){
++    await this.track(file);const materialization=await this.beginKnownMaterialization(file);
++    const tmp=`${file}.git-layer-${randomUUID()}`;
++    const copied=await copyRegular(source,tmp,mode);
++    if(copied.hash!==sourceHash)throw new LabError('EXTERNAL_EDIT',`A materializa\u00e7\u00e3o privada mudou antes da publica\u00e7\u00e3o: ${source}`);
++    if(!sameFingerprint(expected,await fingerprint(file))){await fs.unlink(tmp);throw new LabError('EXTERNAL_EDIT',`O destino mudou durante a operação: ${file}`);}
++    await fs.rename(tmp,file);await this.after(file,copied);await this.completeKnownMaterialization(materialization);
++  }
+   private async remove(file:string,expected?:any){const planned=expected??await fingerprint(file);await this.track(file);if(!sameFingerprint(planned,await fingerprint(file)))throw new LabError('EXTERNAL_EDIT',`O arquivo mudou antes de ser removido: ${file}`);await fs.unlink(file);await this.after(file,{exists:false,hash:'',mode:0});}
+   private async pruneLayerDirectories(paths: string[], retainedPaths: string[]): Promise<void> {
+     const ancestors = (files: string[]): Set<string> => {
+@@ -151,10 +168,10 @@ export class GitLayers {
+       if(this.workspace.branchLayer&&this.repo.branch!==this.workspace.branch)throw new LabError('EXTERNAL_HEAD','Saída nativa do modo Layer como branch: estado preservado; volte à branch anterior para sair pela CLI.');
+       await this.verifyExcludes();await this.owners();this.workspace={...this.workspace,head:this.repo.head,branch:this.repo.branch};
+     }
++    const layerRefs=new Map((this.registry.layers.length?await gitText(this.repo.root,['for-each-ref','--format=%(refname)%00%(objectname)','refs/heads/layer/']):'').split('\n').filter(Boolean).map(line=>{const [ref,oid]=line.split('\0');return [ref!,oid!] as const;}));
+     for(const l of this.registry.layers){
+-      const result=await git(this.repo.root,['rev-parse','--verify',l.ref],{ok:[0,128]});
+-      if(result.code!==0)throw new LabError('EXTERNAL_REF',`Referência ${l.ref} removida/renomeada externamente; dados preservados.`);
+-      const oid=result.stdout.toString().trim();
++      const oid=layerRefs.get(l.ref);
++      if(!oid)throw new LabError('EXTERNAL_REF',`Referência ${l.ref} removida/renomeada externamente; dados preservados.`);
+       if(this.workspace.branchLayer===l.name){l.oid=oid;l.indexBase=oid;}
+       else if(oid!==l.oid||l.indexBase!==l.oid)throw new LabError('EXTERNAL_REF',`Referência da Layer ${l.name} mudou externamente; índice preservado.`);
+       await this.validateLayerIndex(l);
+@@ -168,7 +185,7 @@ export class GitLayers {
+     const index=this.workspace.branchLayer===l.name?this.privateIndex(l):this.index(l);
+     if(await exists(index+'.lock'))throw new LabError('LOCKED',`Lock do índice privado da Layer ${l.name} presente; nenhum lock será removido.`,{path:index+'.lock'});
+     if(!(await exists(index)))throw new LabError('INDEX_MISSING',`Índice privado da Layer ${l.name} ausente.`);
+-    await treeEntries(this.repo.root,'INDEX',index);
++    await this.entries('INDEX',index);
+     const reservations=await readJSON<any>(path.join(this.dir,'reservations',l.id+'.json'),v=>Array.isArray(v.paths)&&v.paths.every((p:any)=>typeof p==='string'&&!!validatePath(p)));
+     if(JSON.stringify(reservations.paths)!==JSON.stringify(l.reservations))throw new LabError('RESERVATIONS_INVALID',`Reservas inconsistentes na Layer ${l.name}.`);
+     const checkpoint=await gitText(this.repo.root,['rev-parse','--verify','refs/git-layers/state/'+l.id]);
+@@ -190,7 +207,7 @@ export class GitLayers {
+       await this.track(path.join(this.dir,'workspace.json'));
+     }
+     await this.tx.record('prepared');
+-      try{if(options.reconcile!==false)await this.syncEditingInternal();const value=await fn();if(this.publicationCheck)await this.publicationCheck();await this.save();if(kind==='rename-layer')failpoint('after-layer-rename-metadata');await this.tx.finish();return value;}catch(e){await this.tx.fail(e);if(!(e instanceof LabError&&e.code==='INJECTED_FAILURE')){try{await this.rollback(this.tx.data);await this.tx.finish();await this.refresh();for(const l of this.registry.layers){await this.checkpoint(l);if(this.workspace.branchLayer!==l.name)await this.reserveProtection(l.name);}}catch{/* keep journal and bytes, caller sees original error */}}throw e;}finally{this.tx=undefined;this.recoveryFiles=[];this.publicationCheck=undefined;}
++      try{this.transactionTrees=new Map();if(options.reconcile!==false)await this.syncEditingInternal();const value=await fn();if(this.publicationCheck)await this.publicationCheck();await this.save();if(kind==='rename-layer')failpoint('after-layer-rename-metadata');await this.tx.finish();return value;}catch(e){await this.tx.fail(e);if(!(e instanceof LabError&&e.code==='INJECTED_FAILURE')){try{await this.rollback(this.tx.data);await this.tx.finish();await this.refresh();for(const l of this.registry.layers){await this.checkpoint(l);if(this.workspace.branchLayer!==l.name)await this.reserveProtection(l.name);}}catch{/* keep journal and bytes, caller sees original error */}}throw e;}finally{this.tx=undefined;this.transactionTrees=undefined;this.recoveryFiles=[];this.publicationCheck=undefined;}
+   }
+   /** Stable no-target queries observe ownership without publishing a no-op transaction. */
+   private async syncEditingForStatus(){
+@@ -235,7 +252,7 @@ export class GitLayers {
+       assertRecoveryMaterializationState(this.repo,this.dir,f,current);
+       if(sameFingerprint(current,desired))continue;
+       if(!sameFingerprint(current,f.before)&&(!f.after||!sameFingerprint(current,f.after))&&!workspaceImages.some(entry=>entry.path===f.path&&sameFingerprint(current,entry.fingerprint)))throw new LabError('RECOVERY_CONFLICT',`Mudança posterior detectada: ${f.path}. Exporte os backups.`);
+-      if(f.backup){if(!sameFingerprint(await fingerprint(f.backup),f.before))throw new LabError('RECOVERY_CONFLICT',`Backup alterado: ${f.backup}`);await fs.mkdir(path.dirname(f.path),{recursive:true});const temporary=`${f.path}.recovery-${randomUUID()}`;const handle=await fs.open(temporary,'wx',f.before.mode);try{await handle.writeFile(image?.bytes??await fs.readFile(f.backup));await handle.chmod(desired.mode);await handle.sync();}finally{await handle.close();}if(!sameFingerprint(await fingerprint(f.path),current)){await fs.unlink(temporary);throw new LabError('RECOVERY_CONFLICT',`Arquivo mudou durante a recuperação: ${f.path}`);}await fs.rename(temporary,f.path);}else if(current.exists)await fs.unlink(f.path);
++      if(f.backup){if(!sameFingerprint(await fingerprint(f.backup),f.before))throw new LabError('RECOVERY_CONFLICT',`Backup alterado: ${f.backup}`);await fs.mkdir(path.dirname(f.path),{recursive:true});const temporary=`${f.path}.recovery-${randomUUID()}`;if(image){const handle=await fs.open(temporary,'wx',desired.mode);try{await handle.writeFile(image.bytes);await handle.chmod(desired.mode);await handle.sync();}finally{await handle.close();}}else{const copied=await copyRegular(f.backup,temporary,desired.mode);if(!sameFingerprint(copied,desired))throw new LabError('RECOVERY_CONFLICT',`Backup mudou durante a restauração: ${f.backup}`);}if(!sameFingerprint(await fingerprint(f.path),current)){await fs.unlink(temporary);throw new LabError('RECOVERY_CONFLICT',`Arquivo mudou durante a recuperação: ${f.path}`);}await fs.rename(temporary,f.path);}else if(current.exists)await fs.unlink(f.path);
+     }
+   }
+   async list(){await this.load();const known=structuredClone(this.registry.layers);for(const name of await this.candidates()){const ref='refs/heads/layer/'+name;known.push({id:'',name,ref,oid:await gitText(this.repo.root,['rev-parse','--verify',ref]),indexBase:'',state:'inactive',reservations:[]});}for(const remote of await this.remoteCandidates())known.push({id:'',...remote,indexBase:'',state:'inactive',reservations:[]});return known;}
+@@ -247,9 +264,9 @@ export class GitLayers {
+   }
+   private async recognizedLayerRevision(name:string){this.name(name);const local=await git(this.repo.root,['rev-parse','--verify','refs/heads/layer/'+name+'^{commit}'],{ok:[0,128]});if(local.code===0)return local.stdout.toString().trim();const remotes=(await this.remoteCandidates()).filter(candidate=>candidate.name===name);if(remotes.length!==1)throw new LabError(remotes.length?'LAYER_AMBIGUOUS':'LAYER_UNKNOWN','Escolha uma origem remota única ou crie explicitamente a branch local no Git.',remotes);return remotes[0]!.oid;}
+   private async localLayerRevision(name:string){this.name(name);const ref='refs/heads/layer/'+name;const local=await git(this.repo.root,['rev-parse','--verify',ref+'^{commit}'],{ok:[0,128]});if(local.code===0)return local.stdout.toString().trim();const remotes=(await this.remoteCandidates()).filter(candidate=>candidate.name===name);if(remotes.length!==1)throw new LabError(remotes.length?'LAYER_AMBIGUOUS':'LAYER_UNKNOWN',remotes.length?'Há várias origens remotas; crie explicitamente a branch local desejada no Git.':'Layer local/remota não encontrada.',remotes);await git(this.repo.root,['branch','--track','layer/'+name,remotes[0]!.ref]);return this.revision(ref);}
+-  private async ownPaths(l:Layer):Promise<string[]>{return [...new Set([...(await treeEntries(this.repo.root,l.oid)).map(e=>e.path),...(await treeEntries(this.repo.root,'INDEX',this.index(l))).map(e=>e.path),...l.reservations])];}
++  private async ownPaths(l:Layer):Promise<string[]>{return [...new Set([...(await this.entries(l.oid)).map(e=>e.path),...(await this.entries('INDEX',this.index(l))).map(e=>e.path),...l.reservations])];}
+   private async owners(extra?:Layer,baseRef?:string,workspace:Workspace=this.workspace):Promise<Map<string,string>>{
+-    const entries:{path:string,owner:string}[]=[];for(const e of await treeEntries(this.repo.root,baseRef??this.repo.head))entries.push({path:e.path,owner:'base'});if(!baseRef){for(const e of await treeEntries(this.repo.root,'INDEX'))entries.push({path:e.path,owner:'base'});for(const p of workspace.baseReservations??[])entries.push({path:p,owner:'base'});for(const p of workspace.editing?.acceptedBase??[])entries.push({path:p,owner:'base'});}
++    const entries:{path:string,owner:string}[]=[];for(const e of await this.entries(baseRef??this.repo.head))entries.push({path:e.path,owner:'base'});if(!baseRef){for(const e of await this.entries('INDEX'))entries.push({path:e.path,owner:'base'});for(const p of workspace.baseReservations??[])entries.push({path:p,owner:'base'});for(const p of workspace.editing?.acceptedBase??[])entries.push({path:p,owner:'base'});}
+     for(const l of this.registry.layers.filter(l=>l.state==='active'||l.id===extra?.id))for(const p of await this.ownPaths(l))entries.push({path:p,owner:l.name});
+     assertNoCollisions(entries);return new Map(entries.map(e=>[e.path,e.owner]));
+   }
+@@ -282,24 +299,24 @@ export class GitLayers {
+   private async updateExcludes(){const before=await fingerprint(this.repo.exclude);const text=await this.excludeText(await this.protectedPaths());await this.writeBytes(this.repo.exclude,text,undefined,before);await this.verifyExcludes();}
+   private async verifyExcludes(){
+     const paths=await this.protectedPaths();if(!paths.length)return;
+-    const base=new Set((await treeEntries(this.repo.root,'INDEX')).map(e=>e.path));const contamination=paths.filter(p=>base.has(p));if(contamination.length)throw new LabError('BASE_CONTAMINATED','Arquivos de Layer preparados externamente na branch de trabalho. Retire somente esses caminhos do índice principal com Git restore --staged; preserve o disco e revise commits nativos.',{paths:contamination});
++    const base=new Set((await this.entries('INDEX')).map(e=>e.path));const contamination=paths.filter(p=>base.has(p));if(contamination.length)throw new LabError('BASE_CONTAMINATED','Arquivos de Layer preparados externamente na branch de trabalho. Retire somente esses caminhos do índice principal com Git restore --staged; preserve o disco e revise commits nativos.',{paths:contamination});
+     const ignored=(await git(this.repo.root,['check-ignore','--no-index','-z','--stdin'],{input:paths.join('\0')+'\0',ok:[0,1]})).stdout.toString().split('\0');const set=new Set(ignored);
+     const missing=paths.filter(p=>!set.has(p));if(missing.length)throw new LabError('IGNORE_UNSAFE','Exclusão inefetiva; .gitignore pode anular a proteção. Confira git check-ignore -v --no-index e revise negações antes de preparar arquivos.',{paths:missing});
+   }
+   private async checkpoint(l:Layer){if(this.workspace.branchLayer===l.name)return gitText(this.repo.root,['write-tree']);await this.track(this.index(l));const tree=await gitText(this.repo.root,['write-tree'],{index:this.index(l)});await this.after(this.index(l));const state=`refs/git-layers/state/${l.id}`;const prev=(await git(this.repo.root,['rev-parse','--verify',state],{ok:[0,128]})).stdout.toString().trim();if(prev&&this.tx)await git(this.repo.root,['update-ref',`refs/git-layers/transactions/${this.tx.id}/${l.id}`,prev]);await git(this.repo.root,['update-ref',state,tree,...(prev?[prev]:[])]);return tree;}
+   async create(name:string){this.name(name);return this.mutate('create',async()=>{await git(this.repo.root,['check-ref-format',`refs/heads/layer/${name}`]);if(this.registry.layers.some(l=>l.name===name))throw new LabError('LAYER_EXISTS','Layer já registrada.');const ref=`refs/heads/layer/${name}`;const present=await git(this.repo.root,['show-ref','--verify','--quiet',ref],{ok:[0,1]});if(present.code===0)throw new LabError('LAYER_EXISTS','Branch existente. Use register explicitamente.');const empty=await gitText(this.repo.root,['mktree'],{input:''});const oid=await gitText(this.repo.root,['commit-tree',empty,'-m','Git Layers Lab: inicialização de árvore vazia (commit raiz)'],{env:identity});await git(this.repo.root,['update-ref',ref,oid,'']);const created=await this.registerInternal(name,oid);await this.reserveProtection(name);return created;});}
+   async register(name:string){this.name(name);return this.mutate('register',async()=>{if(this.registry.layers.some(l=>l.name===name))throw new LabError('LAYER_EXISTS','Layer já registrada.');const oid=await this.localLayerRevision(name);const registered=await this.registerInternal(name,oid);await this.reserveProtection(name);return registered;});}
+-  private async registerInternal(name:string,oid:string){await treeEntries(this.repo.root,oid);const l:Layer={id:randomUUID(),name,ref:`refs/heads/layer/${name}`,oid,indexBase:oid,state:'inactive',reservations:[]};await fs.mkdir(path.join(this.dir,'indexes'),{recursive:true});await this.track(this.index(l));await git(this.repo.root,['read-tree',oid],{index:this.index(l)});await this.after(this.index(l));failpoint('after-register-index');await this.checkpoint(l);this.registry.layers.push(l);return structuredClone(l);}
++  private async registerInternal(name:string,oid:string){await this.entries(oid);const l:Layer={id:randomUUID(),name,ref:`refs/heads/layer/${name}`,oid,indexBase:oid,state:'inactive',reservations:[]};await fs.mkdir(path.join(this.dir,'indexes'),{recursive:true});await this.track(this.index(l));await git(this.repo.root,['read-tree',oid],{index:this.index(l)});await this.after(this.index(l));failpoint('after-register-index');await this.checkpoint(l);this.registry.layers.push(l);return structuredClone(l);}
+   private layerPath(p:string){validatePath(p);if(p.split('/').some(x=>['.gitignore','.gitattributes','.gitmodules'].includes(x.toLowerCase())))throw new LabError('LAYER_CONTROL_FILE',`${p}: arquivos de controle ficam na branch tradicional.`);return p;}
+   private async validateDestinations(paths:string[],allowOwned=false){const disk=await walk(this.repo.root);const owners=await this.owners();const entries=disk.filter(p=>!allowOwned||!owners.has(p)).map(p=>({path:p,owner:'arquivo local preexistente'}));assertNoCollisions([...entries,...paths.map(p=>({path:p,owner:'projeção a ativar'}))]);for(const p of paths){await safePath(this.repo.root,p);if(await exists(path.join(this.repo.root,p))&&!allowOwned)throw new LabError('LOCAL_COLLISION',`Arquivo preexistente não será sobrescrito: ${p}`);}}
+   private async diskSnapshot(paths:string[]){const result:{path:string,bytes:string|null,mode:number}[]=[];for(const p of paths){const full=await safePath(this.repo.root,p);const f=await fingerprint(full);result.push({path:p,bytes:f.exists?(await fs.readFile(full)).toString('base64'):null,mode:f.mode});}return result;}
+-  private async publish(snapshot:{path:string,bytes:string|null,mode:number}[]){for(const f of snapshot){const full=await safePath(this.repo.root,f.path);if(f.bytes===null){if(await exists(full))throw new LabError('EXTERNAL_EDIT',`Arquivo apareceu onde deveria permanecer ausente: ${f.path}`);}else await this.writeBytes(full,Buffer.from(f.bytes,'base64'),f.mode||0o644,{exists:false,hash:'',mode:0});}}
+-  private async materialize(l:Layer){const temporary=path.join(this.tx!.dir,'materialized');await fs.mkdir(temporary,{recursive:true});const entries=await treeEntries(this.repo.root,'INDEX',this.index(l));if(entries.length)await git(this.repo.root,['checkout-index','--all',`--prefix=${gitPath(temporary)}/`],{index:this.index(l)});const snapshot=[];for(const e of entries){const f=path.join(temporary,e.path);snapshot.push({path:e.path,bytes:(await fs.readFile(f)).toString('base64'),mode:e.mode==='100755'?0o755:0o644});}return snapshot;}
+-  async on(name:string){return this.mutate('activate',async()=>{let l=this.registry.layers.find(l=>l.name===name);if(!l){await this.registerInternal(this.name(name),await this.localLayerRevision(name));l=this.layer(name);}if(this.workspace.branchLayer===name)throw new LabError('LAYER_IS_BRANCH','Esta origem já é a branch de trabalho; não será projetada duas vezes.');if(l.state==='active')return l;const paths=await this.ownPaths(l);for(const p of paths)this.layerPath(p);await this.owners(l);await assertAttributes(this.repo.root,paths);await this.validateDestinations(paths);let snapshot;
+-    if(l.shelf){const shelf=await readJSON<any>(path.join(this.dir,'shelves',l.id,l.shelf,'shelf.json'),v=>Array.isArray(v.files)&&v.index==='index'&&v.oid===l.oid&&Array.isArray(v.reservations)&&v.reservations.every((p:any)=>typeof p==='string'&&!!this.layerPath(p))&&v.files.every((f:any)=>typeof f.path==='string'&&!!this.layerPath(f.path)&&(f.bytes===null||(typeof f.bytes==='string'&&Buffer.from(f.bytes,'base64').toString('base64')===f.bytes))&&Number.isInteger(f.mode)&&f.mode>=0&&f.mode<=511));for(const f of shelf.files)this.layerPath(f.path);if(new Set(shelf.files.map((f:any)=>f.path)).size!==shelf.files.length||shelf.files.some((f:any)=>!paths.includes(f.path)))throw new LabError('SHELF_INVALID','Shelf contém destinos não autorizados.');const shelfIndex=path.join(this.dir,'shelves',l.id,l.shelf,'index');await fingerprint(shelfIndex);const shelfEntries=await treeEntries(this.repo.root,'INDEX',shelfIndex);if(shelfEntries.some(e=>!paths.includes(e.path)))throw new LabError('SHELF_INVALID','Índice da shelf contém outro proprietário.');await this.track(this.index(l));await fs.copyFile(shelfIndex,this.index(l));await this.after(this.index(l));l.reservations=shelf.reservations;snapshot=shelf.files;}else snapshot=await this.materialize(l);
+-    l.state='active';await this.owners();await this.updateExcludes();await this.publish(snapshot);failpoint('after-activate-files');delete l.shelf;await this.checkpoint(l);await this.reserveProtection(name);return l;});}
+-  private async changes(l:Layer){const staged=await this.changed(['diff','--cached','--name-status','-z','--no-renames',l.oid,'--'],this.index(l));const all=await this.ownPaths(l);const unstaged=all.length?await this.changed(['diff','--name-status','-z','--no-renames','--',...all],this.index(l)):[];const indexed=new Set((await treeEntries(this.repo.root,'INDEX',this.index(l))).map(e=>e.path));for(const p of l.reservations)if(!indexed.has(p)&&await exists(path.join(this.repo.root,p)))unstaged.push({path:p,status:'?'});return {staged,unstaged};}
+-  private async changed(args:string[],index?:string):Promise<Change[]>{const out=(await git(this.repo.root,args,{index})).stdout.toString().split('\0').filter(Boolean);const results:Change[]=[];for(let i=0;i<out.length;i+=2)results.push({status:out[i]!,path:out[i+1]!});return results;}
++  private async publish(snapshot:({path:string,bytes:string|null,mode:number}|{path:string,source:string,sourceHash:string,mode:number})[]){for(const f of snapshot){const full=await safePath(this.repo.root,f.path);if('source' in f){await this.writeCopy(full,f.source,f.mode,{exists:false,hash:'',mode:0},f.sourceHash);}else if(f.bytes===null){if(await exists(full))throw new LabError('EXTERNAL_EDIT',`Arquivo apareceu onde deveria permanecer ausente: ${f.path}`);}else await this.writeBytes(full,Buffer.from(f.bytes,'base64'),f.mode||0o644,{exists:false,hash:'',mode:0});}}
++  private async materialize(l:Layer){const temporary=path.join(this.tx!.dir,'materialized');await fs.mkdir(temporary,{recursive:true});const entries=await this.entries('INDEX',this.index(l));if(entries.length)await git(this.repo.root,['checkout-index','--all',`--prefix=${gitPath(temporary)}/`],{index:this.index(l)});const snapshot=[];for(const e of entries){const source=path.join(temporary,e.path),observed=await fingerprint(source);if(!observed.exists)throw new LabError('EXTERNAL_EDIT',`Materialized file disappeared: ${e.path}`);snapshot.push({path:e.path,source,sourceHash:observed.hash,mode:e.mode==='100755'?0o755:0o644});}return snapshot;}
++  async on(name:string){return withLock(this.dir,async()=>{await this.guard(true,true);const active=this.registry.layers.find(l=>l.name===name&&l.state==='active');if(active&&!this.workspace.editing&&!this.workspace.acknowledgedMissing?.length){await this.editingCandidates();return structuredClone(active);}return this.mutateLocked('activate',async()=>{let l=this.registry.layers.find(l=>l.name===name);if(!l){await this.registerInternal(this.name(name),await this.localLayerRevision(name));l=this.layer(name);}if(this.workspace.branchLayer===name)throw new LabError('LAYER_IS_BRANCH','Esta origem já é a branch de trabalho; não será projetada duas vezes.');if(l.state==='active')return l;const paths=await this.ownPaths(l);for(const p of paths)this.layerPath(p);await this.owners(l);await assertAttributes(this.repo.root,paths);await this.validateDestinations(paths);let snapshot;
++    if(l.shelf){const shelf=await readJSON<any>(path.join(this.dir,'shelves',l.id,l.shelf,'shelf.json'),v=>Array.isArray(v.files)&&v.index==='index'&&v.oid===l.oid&&Array.isArray(v.reservations)&&v.reservations.every((p:any)=>typeof p==='string'&&!!this.layerPath(p))&&v.files.every((f:any)=>typeof f.path==='string'&&!!this.layerPath(f.path)&&(f.bytes===null||(typeof f.bytes==='string'&&Buffer.from(f.bytes,'base64').toString('base64')===f.bytes))&&Number.isInteger(f.mode)&&f.mode>=0&&f.mode<=511));for(const f of shelf.files)this.layerPath(f.path);if(new Set(shelf.files.map((f:any)=>f.path)).size!==shelf.files.length||shelf.files.some((f:any)=>!paths.includes(f.path)))throw new LabError('SHELF_INVALID','Shelf contém destinos não autorizados.');const shelfIndex=path.join(this.dir,'shelves',l.id,l.shelf,'index');await fingerprint(shelfIndex);const shelfEntries=await this.entries('INDEX',shelfIndex);if(shelfEntries.some(e=>!paths.includes(e.path)))throw new LabError('SHELF_INVALID','Índice da shelf contém outro proprietário.');await this.track(this.index(l));await fs.copyFile(shelfIndex,this.index(l));await this.after(this.index(l));l.reservations=shelf.reservations;snapshot=shelf.files;}else snapshot=await this.materialize(l);
++    l.state='active';await this.owners();await this.updateExcludes();await this.publish(snapshot);failpoint('after-activate-files');delete l.shelf;await this.checkpoint(l);await this.reserveProtection(name);return l;});});}
++  private async changes(l:Layer){const staged=await this.changed(['diff','--cached','--name-status','-z','--no-renames',l.oid,'--'],this.index(l));const all=await this.ownPaths(l);const unstaged=all.length?await this.changed(['diff','--name-status','-z','--no-renames','--'],this.index(l)):[];const indexed=new Set((await this.entries('INDEX',this.index(l))).map(e=>e.path));for(const p of l.reservations)if(!indexed.has(p)&&await exists(path.join(this.repo.root,p)))unstaged.push({path:p,status:'?'});return {staged,unstaged};}
++  private async changed(args:string[],index?:string):Promise<Change[]>{const out=(await (args[0]==='diff'&&!args.includes('--cached')&&!args.includes('--staged')?queryIndexDiff(this.repo,index??this.repo.index,args):git(this.repo.root,args,{index}))).stdout.toString().split('\0').filter(Boolean);const results:Change[]=[];for(let i=0;i<out.length;i+=2)results.push({status:out[i]!,path:out[i+1]!});return results;}
+   /** Legacy callers get a refusal instead of the removed auto-park behavior. */
+   async off(name:string,park=false){if(park)throw new LabError('AUTO_PARK_REMOVED','GL-16: auto-guardar removido. Faça commit, cancele ou use descarte explícito.');return this.deactivate(name);}
+   async deactivate(name:string,options:{discard?:boolean}={}){return this.mutate('deactivate',()=>this.deactivateInternal(name,options.discard===true));}
+@@ -307,10 +324,10 @@ export class GitLayers {
+     if(this.workspace.branchLayer===name)throw new LabError('LAYER_IS_BRANCH','Saia do modo branch antes de desativar esta origem.');
+     const l=this.layer(name,true);const c=await this.changes(l);const dirty=!!(c.staged.length||c.unstaged.length||l.reservations.length);
+     if(dirty&&!discard)throw new LabError('LAYER_DIRTY','Há pendências: faça commit, cancele ou descarte explicitamente. Nada foi guardado nem descartado.',c);
+-    await this.editingCandidates();const paths=await this.ownPaths(l);const retainedPaths=[...await this.owners()].filter(([,owner])=>owner!==name).map(([p])=>p);const snapshot=await this.diskSnapshot(paths);
++    await this.editingCandidates();const paths=await this.ownPaths(l);const retainedPaths=[...await this.owners()].filter(([,owner])=>owner!==name).map(([p])=>p);const snapshot=[];for(const p of paths)snapshot.push({path:p,fingerprint:await fingerprint(await safePath(this.repo.root,p))});
+     // Persist the complete plan before the first removal, including size/IO validation.
+     this.tx!.data.deactivation={layer:name,discard,paths};await this.tx!.record('deactivation-planned');
+-    for(const f of snapshot){if(f.bytes===null)continue;await this.remove(await safePath(this.repo.root,f.path),{exists:true,hash:hash(Buffer.from(f.bytes,'base64')),mode:f.mode});}
++    for(const f of snapshot){if(!f.fingerprint.exists)continue;await this.remove(await safePath(this.repo.root,f.path),f.fingerprint);}
+     failpoint('after-deactivate-files');await this.pruneLayerDirectories(paths,retainedPaths);failpoint('after-deactivate-directories');
+     if(discard){await this.track(this.index(l));await git(this.repo.root,['read-tree',l.oid],{index:this.index(l)});await this.after(this.index(l));l.reservations=[];await this.checkpoint(l);}
+     l.state='inactive';if(this.workspace.editing?.layer===name)delete this.workspace.editing;await this.updateExcludes();return structuredClone(l);
+@@ -323,7 +340,7 @@ export class GitLayers {
+     const missing=[...new Set([...before,...[...owners].filter(([,owner])=>editing||includeBase||owner!=='base').map(([p])=>p)])].filter(p=>!present.has(p)&&!acknowledged.has(p)).sort().map(p=>({path:p,owner:owners.get(p)??null}));
+     const fresh=disk.filter(p=>!before.has(p)&&!owners.has(p));
+     const captured=(editing?.assigned??[]).filter(p=>present.has(p)&&owners.get(p)===editing?.layer);
+-    const committedBase=new Set((await treeEntries(this.repo.root,this.repo.head)).map(e=>e.path));
++    const committedBase=new Set((await this.entries(this.repo.head)).map(e=>e.path));
+     const nativeBaseNew=(!editing||includeBase)&&missing.length?[...owners].filter(([p,o])=>o==='base'&&!committedBase.has(p)&&!workspace.baseReservations?.includes(p)&&!editing?.acceptedBase?.includes(p)).map(([p])=>p):[];
+     const uncertainExisting=includeBase&&missing.some(entry=>entry.owner!==null)?disk.filter(p=>!owners.has(p)):[];
+     const candidates=[...new Set([...fresh,...captured,...nativeBaseNew,...uncertainExisting])].sort();
+@@ -366,7 +383,7 @@ export class GitLayers {
+         if(owner&&owner!=='base')this.layer(owner,true);
+         if(current){
+           if(!editing||current!==editing.layer||!(editing.assigned??[]).includes(r.to))throw new LabError('OWNERSHIP','O destino já tem origem explícita; transferência não suportada.',r);
+-          const l=this.layer(current,true),committed=new Set((await treeEntries(this.repo.root,l.oid)).map(e=>e.path)),indexed=new Set((await treeEntries(this.repo.root,'INDEX',this.index(l))).map(e=>e.path));
++          const l=this.layer(current,true),committed=new Set((await this.entries(l.oid)).map(e=>e.path)),indexed=new Set((await this.entries('INDEX',this.index(l))).map(e=>e.path));
+           if(committed.has(r.to)||indexed.has(r.to))throw new LabError('OWNERSHIP_REVIEW_STAGED','O candidato já está preparado ou commitado. Retire o staging sem alterar o disco e refaça a revisão; histórico commitado não é transferido.',{path:r.to,owner:current});
+         }
+         if(owner&&owner!=='base')this.layerPath(r.to);
+@@ -389,7 +406,7 @@ export class GitLayers {
+       for(const p of deleted){acknowledged.add(p);if(owners.get(p)==='base')this.forgetBaseOwnership(p);}
+       for(const p of independent){if(!owners.has(p)){if(editing){const l=this.layer(editing.layer,true);this.layerPath(p);l.reservations=[...new Set([...l.reservations,p])];}else this.workspace.baseReservations=[...new Set([...this.workspace.baseReservations??[],p])];}if(editing)editing.assigned=(editing.assigned??[]).filter(x=>x!==p);}
+       if(editing)editing.acceptedBase=[...new Set([...editing.acceptedBase??[],...acceptBase])];
+-      if(acceptBase.length){const committed=new Set((await treeEntries(this.repo.root,this.repo.head)).map(e=>e.path));this.workspace.baseReservations=[...new Set([...this.workspace.baseReservations??[],...acceptBase.filter(p=>!committed.has(p))])];}
++      if(acceptBase.length){const committed=new Set((await this.entries(this.repo.head)).map(e=>e.path));this.workspace.baseReservations=[...new Set([...this.workspace.baseReservations??[],...acceptBase.filter(p=>!committed.has(p))])];}
+       this.workspace.acknowledgedMissing=[...acknowledged];await this.owners();await this.updateExcludes();
+       this.publicationCheck=async()=>{if((await this.ownershipReviewInternal(false,review.missing.map(entry=>entry.path))).observationToken!==review.observationToken)throw new LabError('OWNERSHIP_REVIEW_STALE','Arquivos, Git ou regras de ignore mudaram antes da publicação; refaça a revisão.');};
+       return {renames,independent,deleted,acceptedBase:acceptBase,staging:'unchanged',files:'unchanged'};
+@@ -411,7 +428,7 @@ export class GitLayers {
+   /** Native unstaging cannot revoke an explicitly accepted base origin. */
+   private async retainAcceptedBase(){
+     const accepted=this.workspace.editing?.acceptedBase??[];if(!accepted.length)return;
+-    const committed=await treeEntries(this.repo.root,this.repo.head);
++    const committed=await this.entries(this.repo.head);
+     const tracked=new Set(committed.map(entry=>entry.path)),orphaned=accepted.filter(p=>!tracked.has(p));
+     if(orphaned.length)this.workspace.baseReservations=[...new Set([...this.workspace.baseReservations??[],...orphaned])];
+   }
+@@ -484,7 +501,7 @@ export class GitLayers {
+     const persisted=this.registry.layers.find(l=>l.name===name);let unreconciled:string[]=[];let logicalComplete=true;
+     try{if(this.workspace.editing?.layer===name)unreconciled=await this.editingCandidates();}catch(e){logicalComplete=false;impediments.push({code:(e as any).code,message:message(e)});}
+     const l=persisted?{...persisted,reservations:[...persisted.reservations,...unreconciled]}:undefined;let paths:string[]=[];let pending:any=null;
+-    if(!l){const oid=await this.recognizedLayerRevision(name);paths=(await treeEntries(this.repo.root,oid)).map(e=>e.path);if(action==='off')impediments.push({code:'LAYER_INACTIVE',message:'Layer reconhecida e ainda não ativada.'});if(action==='remove'&&(await git(this.repo.root,['show-ref','--verify','--quiet','refs/heads/layer/'+name],{ok:[0,1]})).code!==0)impediments.push({code:'LAYER_REMOTE_ONLY',message:'Não há referência local para remover; o remoto não será alterado.'});}
++    if(!l){const oid=await this.recognizedLayerRevision(name);paths=(await this.entries(oid)).map(e=>e.path);if(action==='off')impediments.push({code:'LAYER_INACTIVE',message:'Layer reconhecida e ainda não ativada.'});if(action==='remove'&&(await git(this.repo.root,['show-ref','--verify','--quiet','refs/heads/layer/'+name],{ok:[0,1]})).code!==0)impediments.push({code:'LAYER_REMOTE_ONLY',message:'Não há referência local para remover; o remoto não será alterado.'});}
+     else{paths=await this.ownPaths(l);if(l.state==='active')pending=await this.changes(l);if(this.workspace.branchLayer===name)impediments.push({code:'LAYER_IS_BRANCH',message:'Esta origem é a branch de trabalho.'});}
+     if(action==='on'&&l?.state!=='active')try{for(const p of paths)this.layerPath(p);if(l)await this.owners(l);else assertNoCollisions([...[...await this.owners()].map(([path,owner])=>({path,owner})),...paths.map(path=>({path,owner:'Layer a ativar'}))]);await this.validateDestinations(paths);}catch(e){impediments.push({code:(e as any).code,message:message(e)});}
+     if(pending&&(pending.staged.length||pending.unstaged.length||l!.reservations.length))impediments.push({code:'LAYER_DIRTY',message:'Faça commit, cancele ou escolha descarte explícito.'});
+@@ -518,16 +535,16 @@ export class GitLayers {
+     const prior=new Set(await this.ownPaths(l));for(const p of files)if(!prior.has(p))l.reservations.push(p);await this.owners();await this.updateExcludes();await this.editingCandidates();await this.stageIndexInternal(this.index(l),files,true);failpoint('after-stage-index');await this.checkpoint(l);failpoint('after-stage-checkpoint');return {paths:files};}
+   async unstage(name:string,paths:string[]){return this.mutate('unstage',async()=>{if(this.workspace.branchLayer===name)return this.unstageBaseInternal(paths);const l=this.layer(name,true);const files=await this.authorized(l,paths);await this.track(this.index(l));await git(this.repo.root,['restore','--staged',`--source=${l.oid}`,'--',...files],{index:this.index(l)});await this.after(this.index(l));await this.checkpoint(l);return {paths:files};},true,{reconcile:false});}
+   private async authorized(l:Layer,paths:string[]){const own=new Set(await this.ownPaths(l));const files=await this.expand(paths);for(const p of files)if(!own.has(p))throw new LabError('OWNERSHIP',`${p} não pertence à Layer ${l.name}.`);return files;}
+-  async release(name:string,paths:string[]){return this.mutate('release',async()=>{if(name==='base'){const committed=new Set((await treeEntries(this.repo.root,this.repo.head)).map(e=>e.path)),indexed=new Set((await treeEntries(this.repo.root,'INDEX')).map(e=>e.path));for(const p of paths){validatePath(p);if(committed.has(p)||indexed.has(p)||!this.workspace.baseReservations?.includes(p)&&!this.workspace.editing?.acceptedBase?.includes(p))throw new LabError('RELEASE_UNSAFE','Release base exige reserva explícita, sem HEAD ou staging.');}this.forgetBaseOwnership(...paths);for(const p of paths)await this.rememberUnownedPath(p);await this.updateExcludes();return {paths};}const l=this.layer(name,true);const committed=new Set((await treeEntries(this.repo.root,l.oid)).map(e=>e.path));const indexed=new Set((await treeEntries(this.repo.root,'INDEX',this.index(l))).map(e=>e.path));for(const p of paths){validatePath(p);if(committed.has(p)||indexed.has(p)||!l.reservations.includes(p))throw new LabError('RELEASE_UNSAFE','Release somente para reserva nunca commitada e sem staging.');}l.reservations=l.reservations.filter(p=>!paths.includes(p));if(this.workspace.editing?.layer===name){this.workspace.editing.before=[...new Set([...this.workspace.editing.before,...paths])];for(const p of paths)await this.rememberUnownedPath(p);}await this.updateExcludes();return {paths};});}
+-  async commit(name:string,msg:string){if(!msg.trim())throw new LabError('EMPTY_MESSAGE','Mensagem de commit vazia.');return this.mutate('commit-layer',async()=>{if(this.workspace.branchLayer===name)return this.baseCommitInternal(msg);const l=this.layer(name,true);const {staged}=await this.changes(l);if(!staged.length)throw new LabError('NOTHING_STAGED','Nenhuma alteração preparada.');await git(this.repo.root,['var','GIT_AUTHOR_IDENT']);await git(this.repo.root,['var','GIT_COMMITTER_IDENT']);const tree=await this.checkpoint(l);await this.owners();const oid=await gitText(this.repo.root,['commit-tree',tree,'-p',l.oid,'-F','-'],{input:msg+'\n'});this.tx!.data.recovery.commit={ref:l.ref,old:l.oid,new:oid,layerId:l.id};await this.tx!.record('commit-prepared',{oid});await this.editingCandidates();await git(this.repo.root,['update-ref',l.ref,oid,l.oid]);await this.tx!.record('commit-ref-updated',{oid});failpoint('after-commit-ref');l.oid=oid;l.indexBase=oid;const newPaths=new Set((await treeEntries(this.repo.root,oid)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!newPaths.has(p));await this.updateExcludes();return {oid,ref:l.ref,tree};});}
+-  async status(name?:string){await this.load();let safe=true;let error:any;if(this.workspace.editing||this.registry.layers.some(l=>l.state==='active'))try{await this.syncEditingForStatus();}catch(e){safe=false;error={code:(e as any).code,message:message(e),details:(e as any).details};}try{await this.guard(false);}catch(e){safe=false;error={code:(e as any).code,message:message(e),details:(e as any).details};}const base={staged:await this.changed(['diff','--cached','--name-status','-z','--no-renames',...(this.repo.head?[this.repo.head]:[]),'--']),unstaged:await this.changed(['diff','--name-status','-z','--no-renames','--'])};const indexedBase=new Set((await treeEntries(this.repo.root,'INDEX')).map(e=>e.path));for(const p of this.workspace.baseReservations??[])if(!indexedBase.has(p)&&await exists(path.join(this.repo.root,p)))base.unstaged.push({path:p,status:'?'});const layers=[];for(const l of this.registry.layers){let c={staged:[] as Change[],unstaged:[] as Change[]};try{if(l.state==='active')c=await this.changes(l);}catch(e){safe=false;error??={code:(e as any).code,message:message(e)};}if(!name||l.name===name)layers.push({...structuredClone(l),...(!safe&&error?.code==='RECOVERY_REQUIRED'?{previousState:l.state,state:'recovery-required' as const}:{}),...c});}let owners=new Map<string,string>();try{owners=await this.owners();}catch{}const untracked=(await git(this.repo.root,['ls-files','--others','--exclude-standard','-z'])).stdout.toString().split('\0').filter(p=>p&&!owners.has(p));const protection=await inspectBranchProtection(this.repo.root);if(!protection.healthy){safe=false;error={code:'PROTECTION_CONFLICT',message:'Proteção de branches inconsistente.',details:protection.problems};}const recognized=[...structuredClone(this.registry.layers),...(await this.candidates()).map(name=>({name,id:'',state:'inactive',remote:undefined})),...(await this.remoteCandidates()).map(remote=>({...remote,id:'',state:'inactive'}))];return {branch:this.repo.branch,head:this.repo.head,role:this.workspace.branchLayer?'layer-branch':'traditional',branchLayer:this.workspace.branchLayer??null,editingTarget:this.workspace.editing?.layer??null,editingObservation:'at-product-command',branchProtection:protection,nativeProtection:{universal:false,directDestructiveCommands:false,scope:'exclusões de staging comum e reservas opcionais de branch; Git direto conserva seu significado'},ownership:{baseReservations:this.workspace.baseReservations??[],acknowledgedMissing:this.workspace.acknowledgedMissing??[]},recognized:recognized.map(l=>({name:l.name,registered:!!l.id,active:l.state==='active',role:l.name===this.workspace.branchLayer&&!l.remote?'branch':'layer',remote:l.remote??null})),base,layers,untracked,safe,error};}
++  async release(name:string,paths:string[]){return this.mutate('release',async()=>{if(name==='base'){const committed=new Set((await this.entries(this.repo.head)).map(e=>e.path)),indexed=new Set((await this.entries('INDEX')).map(e=>e.path));for(const p of paths){validatePath(p);if(committed.has(p)||indexed.has(p)||!this.workspace.baseReservations?.includes(p)&&!this.workspace.editing?.acceptedBase?.includes(p))throw new LabError('RELEASE_UNSAFE','Release base exige reserva explícita, sem HEAD ou staging.');}this.forgetBaseOwnership(...paths);for(const p of paths)await this.rememberUnownedPath(p);await this.updateExcludes();return {paths};}const l=this.layer(name,true);const committed=new Set((await this.entries(l.oid)).map(e=>e.path));const indexed=new Set((await this.entries('INDEX',this.index(l))).map(e=>e.path));for(const p of paths){validatePath(p);if(committed.has(p)||indexed.has(p)||!l.reservations.includes(p))throw new LabError('RELEASE_UNSAFE','Release somente para reserva nunca commitada e sem staging.');}l.reservations=l.reservations.filter(p=>!paths.includes(p));if(this.workspace.editing?.layer===name){this.workspace.editing.before=[...new Set([...this.workspace.editing.before,...paths])];for(const p of paths)await this.rememberUnownedPath(p);}await this.updateExcludes();return {paths};});}
++  async commit(name:string,msg:string){if(!msg.trim())throw new LabError('EMPTY_MESSAGE','Mensagem de commit vazia.');return this.mutate('commit-layer',async()=>{if(this.workspace.branchLayer===name)return this.baseCommitInternal(msg);const l=this.layer(name,true);const {staged}=await this.changes(l);if(!staged.length)throw new LabError('NOTHING_STAGED','Nenhuma alteração preparada.');await git(this.repo.root,['var','GIT_AUTHOR_IDENT']);await git(this.repo.root,['var','GIT_COMMITTER_IDENT']);const tree=await this.checkpoint(l);await this.owners();const oid=await gitText(this.repo.root,['commit-tree',tree,'-p',l.oid,'-F','-'],{input:msg+'\n'});this.tx!.data.recovery.commit={ref:l.ref,old:l.oid,new:oid,layerId:l.id};await this.tx!.record('commit-prepared',{oid});await this.editingCandidates();await git(this.repo.root,['update-ref',l.ref,oid,l.oid]);await this.tx!.record('commit-ref-updated',{oid});failpoint('after-commit-ref');l.oid=oid;l.indexBase=oid;const newPaths=new Set((await this.entries(oid)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!newPaths.has(p));await this.updateExcludes();return {oid,ref:l.ref,tree};});}
++  async status(name?:string){await this.load();let safe=true;let error:any;if(this.workspace.editing||this.registry.layers.some(l=>l.state==='active'))try{await this.syncEditingForStatus();}catch(e){safe=false;error={code:(e as any).code,message:message(e),details:(e as any).details};}try{await this.guard(false);}catch(e){safe=false;error={code:(e as any).code,message:message(e),details:(e as any).details};}const base={staged:await this.changed(['diff','--cached','--name-status','-z','--no-renames',...(this.repo.head?[this.repo.head]:[]),'--']),unstaged:await this.changed(['diff','--name-status','-z','--no-renames','--'])};const indexedBase=new Set((await this.entries('INDEX')).map(e=>e.path));for(const p of this.workspace.baseReservations??[])if(!indexedBase.has(p)&&await exists(path.join(this.repo.root,p)))base.unstaged.push({path:p,status:'?'});const layers=[];for(const l of this.registry.layers){let c={staged:[] as Change[],unstaged:[] as Change[]};try{if(l.state==='active')c=await this.changes(l);}catch(e){safe=false;error??={code:(e as any).code,message:message(e),details:(e as any).details};}if(!name||l.name===name)layers.push({...structuredClone(l),...(!safe&&error?.code==='RECOVERY_REQUIRED'?{previousState:l.state,state:'recovery-required' as const}:{}),...c});}let owners=new Map<string,string>();try{owners=await this.owners();}catch{}const untracked=(await git(this.repo.root,['ls-files','--others','--exclude-standard','-z'])).stdout.toString().split('\0').filter(p=>p&&!owners.has(p));const protection=await inspectBranchProtection(this.repo.root);if(!protection.healthy){safe=false;error={code:'PROTECTION_CONFLICT',message:'Proteção de branches inconsistente.',details:protection.problems};}const recognized=[...structuredClone(this.registry.layers),...(await this.candidates()).map(name=>({name,id:'',state:'inactive',remote:undefined})),...(await this.remoteCandidates()).map(remote=>({...remote,id:'',state:'inactive'}))];return {branch:this.repo.branch,head:this.repo.head,role:this.workspace.branchLayer?'layer-branch':'traditional',branchLayer:this.workspace.branchLayer??null,editingTarget:this.workspace.editing?.layer??null,editingObservation:'at-product-command',branchProtection:protection,nativeProtection:{universal:false,directDestructiveCommands:false,scope:'exclusões de staging comum e reservas opcionais de branch; Git direto conserva seu significado'},ownership:{baseReservations:this.workspace.baseReservations??[],acknowledgedMissing:this.workspace.acknowledgedMissing??[]},recognized:recognized.map(l=>({name:l.name,registered:!!l.id,active:l.state==='active',role:l.name===this.workspace.branchLayer&&!l.remote?'branch':'layer',remote:l.remote??null})),base,layers,untracked,safe,error};}
+   async diff(name:string,staged=false,paths:string[]=[]){await this.guard(false);return this.diffInternal(name,staged,paths);}
+-  private async diffInternal(name:string,staged=false,paths:string[]=[]){for(const p of paths)validatePath(p);if(name==='base')return (await git(this.repo.root,['diff',...(staged?['--cached',...(this.repo.head?[this.repo.head]:[])]:[]),'--no-renames','--',...paths])).stdout.toString();const l=this.layer(name,true);const own=await this.ownPaths(l);const files=paths.length?await this.authorized(l,paths):own;if(!files.length)return '';return (await git(this.repo.root,['diff',...(staged?['--cached',l.oid]:[]),'--no-renames','--',...files],{index:this.index(l)})).stdout.toString();}
++  private async diffInternal(name:string,staged=false,paths:string[]=[]){for(const p of paths)validatePath(p);if(name==='base'){const args=['diff',...(staged?['--cached',...(this.repo.head?[this.repo.head]:[])]:[]),'--no-renames','--',...paths];return (await (staged?git(this.repo.root,args):queryIndexDiff(this.repo,this.repo.index,args))).stdout.toString();}const l=this.layer(name,true);const own=await this.ownPaths(l);const files=paths.length?await this.authorized(l,paths):own;if(!files.length)return '';const args=['diff',...(staged?['--cached',l.oid]:[]),'--no-renames','--',...(paths.length?files:[])];return (await (staged?git(this.repo.root,args,{index:this.index(l)}):queryIndexDiff(this.repo,this.index(l),args))).stdout.toString();}
+   async log(name='base'){await this.refresh();const ref=name==='base'?this.repo.head:await this.recognizedLayerRevision(name);if(!ref)return [];const output=await gitText(this.repo.root,['log','-50','--format=%H%x00%P%x00%an%x00%aI%x00%s',ref,'--']);return output?output.split('\n').map(line=>{const [oid,parents,author,date,subject]=line.split('\0');return {oid,parents:parents?.split(' ').filter(Boolean),author,date,subject};}):[];}
+   private async revision(rev:string){if(typeof rev!=='string'||rev.startsWith('-')||/[\0\r\n]/.test(rev))throw new LabError('INVALID_REV','Revisão inválida.');return gitText(this.repo.root,['rev-parse','--verify',`${rev}^{commit}`]);}
+   async show(rev:string){const oid=await this.revision(rev);return (await git(this.repo.root,['show','--format=fuller','--stat','--patch',oid,'--'])).stdout.toString();}
+   async compare(from:string,to:string){return (await git(this.repo.root,['diff',await this.revision(from),await this.revision(to),'--'])).stdout.toString();}
+-  async restore(name:string,paths:string[],confirmed=false){if(!confirmed)throw new LabError('CONFIRM_REQUIRED','Restaurar disco a partir do índice exige confirmação. Staging será preservado e cópias de recuperação serão criadas.');return this.mutate('restore',async()=>{const files=name==='base'?await this.baseAuthorized(paths):await this.authorized(this.layer(name,true),paths);const index=name==='base'?undefined:this.index(this.layer(name));const entries=await treeEntries(this.repo.root,'INDEX',index);const temporary=path.join(this.tx!.dir,'restore');await fs.mkdir(temporary,{recursive:true});const included=files.filter(p=>entries.some(e=>e.path===p));if(included.length)await git(this.repo.root,['checkout-index',`--prefix=${gitPath(temporary)}/`,'--',...included],{index});for(const p of files){const full=await safePath(this.repo.root,p);const entry=entries.find(e=>e.path===p);if(entry)await this.writeBytes(full,await fs.readFile(path.join(temporary,p)),entry.mode==='100755'?0o755:0o644);else if(await exists(full))await this.remove(full);}return {paths:files,backup:this.tx!.dir};},false);}
++  async restore(name:string,paths:string[],confirmed=false){if(!confirmed)throw new LabError('CONFIRM_REQUIRED','Restaurar disco a partir do índice exige confirmação. Staging será preservado e cópias de recuperação serão criadas.');return this.mutate('restore',async()=>{const files=name==='base'?await this.baseAuthorized(paths):await this.authorized(this.layer(name,true),paths);const index=name==='base'?undefined:this.index(this.layer(name));const entries=await this.entries('INDEX',index);const temporary=path.join(this.tx!.dir,'restore');await fs.mkdir(temporary,{recursive:true});const included=files.filter(p=>entries.some(e=>e.path===p));if(included.length)await git(this.repo.root,['checkout-index',`--prefix=${gitPath(temporary)}/`,'--',...included],{index});for(const p of files){const full=await safePath(this.repo.root,p);const entry=entries.find(e=>e.path===p);if(entry)await this.writeBytes(full,await fs.readFile(path.join(temporary,p)),entry.mode==='100755'?0o755:0o644);else if(await exists(full))await this.remove(full);}return {paths:files,backup:this.tx!.dir};},false);}
+   private async baseAuthorized(paths:string[]){const files=await this.expand(paths);const owners=await this.owners();for(const p of files){const owner=owners.get(p);if(owner&&owner!=='base')throw new LabError('OWNERSHIP',`Este arquivo pertence à Layer ${owner}. Prepare-o no painel dessa Layer.`,{path:p,owner});}return files;}
+   private async stageIndexInternal(index:string,files:string[],force=false){
+     const expected=await fingerprint(index);await this.track(index);
+@@ -543,8 +560,8 @@ export class GitLayers {
+   private async unstageBaseInternal(paths:string[]){
+     const initialIndex=await fingerprint(this.repo.index);
+     const files=await this.baseAuthorized(paths);
+-    const indexed=new Set((await treeEntries(this.repo.root,'INDEX')).map(entry=>entry.path));
+-    const committed=new Set((await treeEntries(this.repo.root,this.repo.head)).map(entry=>entry.path));
++    const indexed=new Set((await this.entries('INDEX')).map(entry=>entry.path));
++    const committed=new Set((await this.entries(this.repo.head)).map(entry=>entry.path));
+     if(!sameFingerprint(initialIndex,await fingerprint(this.repo.index)))throw new LabError('EXTERNAL_EDIT','O índice principal mudou durante a validação do unstage.');
+     // Native staging identifies a destination, never the source of an ambiguous rename.
+     // Observe before restore and retain only unambiguous or explicitly accepted base origins.
+@@ -574,7 +591,7 @@ export class GitLayers {
+     return {paths:files};
+   }
+   async baseCommit(msg:string){if(!msg.trim())throw new LabError('EMPTY_MESSAGE','Mensagem de commit vazia.');return this.mutate('commit-base',()=>this.baseCommitInternal(msg),false);}
+-  private async baseCommitInternal(msg:string){const changes=await this.changed(['diff','--cached','--name-status','-z',...(this.repo.head?[this.repo.head]:[]),'--']);if(!changes.length)throw new LabError('NOTHING_STAGED','Nada preparado na branch tradicional.');const owners=await this.owners();for(const c of changes)if(owners.get(c.path)&&owners.get(c.path)!=='base')throw new LabError('BASE_CONTAMINATED',`${c.path} pertence a uma Layer.`);await this.track(this.repo.index);const old=this.repo.head;const tree=await gitText(this.repo.root,['write-tree']);const oid=await gitText(this.repo.root,['commit-tree',tree,...(old?['-p',old]:[]),'-F','-'],{input:msg+'\n'});this.tx!.data.recovery.commit={ref:`refs/heads/${this.repo.branch}`,old,new:oid,base:true};await this.tx!.record('commit-prepared',{oid});await this.editingCandidates();await git(this.repo.root,['update-ref',`refs/heads/${this.repo.branch}`,oid,old]);await this.after(this.repo.index);await this.tx!.record('commit-ref-updated',{oid});failpoint('after-commit-ref');this.repo=await discover(this.repo.root);this.workspace={...this.workspace,schema:1,head:this.repo.head,branch:this.repo.branch};if(this.workspace.branchLayer){const l=this.layer(this.workspace.branchLayer);l.oid=oid;l.indexBase=oid;const committed=new Set((await treeEntries(this.repo.root,oid)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!committed.has(p));}return {oid,ref:`refs/heads/${this.repo.branch}`,tree};}
++  private async baseCommitInternal(msg:string){const changes=await this.changed(['diff','--cached','--name-status','-z',...(this.repo.head?[this.repo.head]:[]),'--']);if(!changes.length)throw new LabError('NOTHING_STAGED','Nada preparado na branch tradicional.');const owners=await this.owners();for(const c of changes)if(owners.get(c.path)&&owners.get(c.path)!=='base')throw new LabError('BASE_CONTAMINATED',`${c.path} pertence a uma Layer.`);await this.track(this.repo.index);const old=this.repo.head;const tree=await gitText(this.repo.root,['write-tree']);const oid=await gitText(this.repo.root,['commit-tree',tree,...(old?['-p',old]:[]),'-F','-'],{input:msg+'\n'});this.tx!.data.recovery.commit={ref:`refs/heads/${this.repo.branch}`,old,new:oid,base:true};await this.tx!.record('commit-prepared',{oid});await this.editingCandidates();await git(this.repo.root,['update-ref',`refs/heads/${this.repo.branch}`,oid,old]);await this.after(this.repo.index);await this.tx!.record('commit-ref-updated',{oid});failpoint('after-commit-ref');this.repo=await discover(this.repo.root);this.workspace={...this.workspace,schema:1,head:this.repo.head,branch:this.repo.branch};if(this.workspace.branchLayer){const l=this.layer(this.workspace.branchLayer);l.oid=oid;l.indexBase=oid;const committed=new Set((await this.entries(oid)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!committed.has(p));}return {oid,ref:`refs/heads/${this.repo.branch}`,tree};}
+   async configureIdentity(name:string,email:string){if(!name.trim()||!email.includes('@')||/[\r\n\0]/.test(name+email))throw new LabError('IDENTITY_INVALID','Nome/email inválidos.');return this.mutate('identity',async()=>{const config=await gitText(this.repo.root,['rev-parse','--path-format=absolute','--git-path','config']);await this.track(config);await git(this.repo.root,['config','--local','user.name',name]);await git(this.repo.root,['config','--local','user.email',email]);await this.after(config);return {name,email,scope:'local'};},false);}
+   async branches(){const out=await gitText(this.repo.root,['for-each-ref','--format=%(refname:short)%00%(objectname)','refs/heads/']);return out.split('\n').filter(Boolean).filter(s=>!s.startsWith('layer/')).map(line=>{const [name,oid]=line.split('\0');return {name,oid,current:name===this.repo.branch};});}
+   private async branchName(name:string){if(typeof name!=='string'||name.startsWith('-')||name.startsWith('layer/')||/[\0\n\r]/.test(name))throw new LabError('INVALID_BRANCH','Informe uma branch tradicional válida.');await git(this.repo.root,['check-ref-format',`refs/heads/${name}`]);return name;}
+@@ -585,18 +602,18 @@ export class GitLayers {
+   private async switchInternal(branch:string,openingName?:string,allowResume=true){
+     if(branch===this.repo.branch)return {branch,head:this.repo.head};
+     const staged=await this.changed(['diff','--cached','--name-status','-z',this.repo.head,'--']);const unstaged=await this.changed(['diff','--name-status','-z','--']);if(staged.length||unstaged.length)throw new LabError('BASE_DIRTY','Faça commit ou stash das alterações tracked da branch de trabalho antes de trocar.');
+-    const committedBase=new Set((await treeEntries(this.repo.root,this.repo.head)).map(e=>e.path));if((this.workspace.baseReservations??[]).some(p=>!committedBase.has(p)))throw new LabError('BASE_DIRTY','Arquivos pendentes da origem de trabalho exigem commit ou liberação explícita antes de trocar.');
++    const committedBase=new Set((await this.entries(this.repo.head)).map(e=>e.path));if((this.workspace.baseReservations??[]).some(p=>!committedBase.has(p)))throw new LabError('BASE_DIRTY','Arquivos pendentes da origem de trabalho exigem commit ou liberação explícita antes de trocar.');
+     if(this.workspace.editing)throw new LabError('EDITING_ACTIVE','Encerre o destino de edição antes de trocar a branch.');
+-    const target=await this.revision('refs/heads/'+branch);const targetEntries=await treeEntries(this.repo.root,target);const ownerMap=await this.owners();const currentBase=new Set((await treeEntries(this.repo.root,this.repo.head)).map(e=>e.path));
++    const target=await this.revision('refs/heads/'+branch);const targetEntries=await this.entries(target);const ownerMap=await this.owners();const currentBase=new Set((await this.entries(this.repo.head)).map(e=>e.path));
+     const opening=openingName?this.layer(openingName):undefined;const leaving=this.workspace.branchLayer?this.layer(this.workspace.branchLayer):undefined;const resume=allowResume&&!!leaving&&this.workspace.resumeLayer===leaving.name;
+     if(opening?.shelf)throw new LabError('LEGACY_SHELF','Resolva a shelf legada antes de abrir como branch.');
+     if(opening){const c=opening.state==='active'?await this.changes(opening):{staged:await this.changed(['diff','--cached','--name-status','-z',opening.oid,'--'],this.privateIndex(opening)),unstaged:[]};if(c.staged.length||c.unstaged.length||opening.reservations.length)throw new LabError('LAYER_DIRTY','Resolva pendências desta Layer antes de abri-la como branch.');}
+     const projected=this.registry.layers.filter(l=>l.state==='active'&&l.id!==opening?.id);const composition=targetEntries.map(e=>({path:e.path,owner:'branch de destino'}));
+     for(const l of projected)for(const p of await this.ownPaths(l))composition.push({path:p,owner:l.name});
+-    if(resume)for(const e of await treeEntries(this.repo.root,this.repo.head)){this.layerPath(e.path);composition.push({path:e.path,owner:leaving!.name});}
++    if(resume)for(const e of await this.entries(this.repo.head)){this.layerPath(e.path);composition.push({path:e.path,owner:leaving!.name});}
+     assertNoCollisions(composition);
+     const local=(await walk(this.repo.root)).filter(p=>!currentBase.has(p)&&!ownerMap.has(p));assertNoCollisions([...targetEntries.map(e=>({path:e.path,owner:'branch de destino'})),...local.map(p=>({path:p,owner:'arquivo local não gerenciado'}))]);
+-    const controlNames=new Set(['.gitignore','.gitattributes','.gitmodules']);const oldControls=(await treeEntries(this.repo.root,this.repo.head)).filter(e=>controlNames.has(path.basename(e.path)));const newControls=targetEntries.filter(e=>controlNames.has(path.basename(e.path)));if(projected.length&&JSON.stringify(oldControls)!==JSON.stringify(newControls)){
++    const controlNames=new Set(['.gitignore','.gitattributes','.gitmodules']);const oldControls=(await this.entries(this.repo.head)).filter(e=>controlNames.has(path.basename(e.path)));const newControls=targetEntries.filter(e=>controlNames.has(path.basename(e.path)));if(projected.length&&JSON.stringify(oldControls)!==JSON.stringify(newControls)){
+       // Read control objects before touching disk. Changed attributes/modules are still refused;
+       // .gitignore changes are allowed only if target rules cannot override managed exclusions.
+       const attributeEntries=(entries:GitEntry[])=>entries.filter(e=>path.basename(e.path)!=='.gitignore');
+@@ -622,7 +639,7 @@ export class GitLayers {
+   async captureConfirm(paths:string[]){return this.mutate('capture-confirm',async()=>{const review=await this.captureReview();const allowed=new Set(review.candidates.map(c=>c.path));if(!paths.length||paths.some(p=>!allowed.has(p)))throw new LabError('CAPTURE_SELECTION','Selecione somente candidatos atuais. Arquivos ignorados exigem seleção explícita.');const result=await this.addInternal(review.layer,paths);await this.remove(path.join(this.dir,'capture.json'));await this.writeJSON(path.join(this.dir,'captures',`${review.id}.json`),{schema:1,...review,state:'confirmed',selected:paths});return result;});}
+   async captureCancel(){return this.mutate('capture-cancel',async()=>{const s=await this.capture();await this.remove(path.join(this.dir,'capture.json'));await this.writeJSON(path.join(this.dir,'captures',`${s.id}.json`),{...s,state:'cancelled'});return {cancelled:true,filesPreserved:true};});}
+   async diffHunks(owner:string,p:string,staged=false){await this.guard(false);return this.diffHunksInternal(owner,p,staged);}
+-  private async diffHunksInternal(owner:string,p:string,staged=false){validatePath(p);const index=owner==='base'?undefined:this.index(this.layer(owner,true));const patch=await this.diffInternal(owner,staged,[p]);const entries=await treeEntries(this.repo.root,'INDEX',index);const entry=entries.find(e=>e.path===p);const disk=await fingerprint(await safePath(this.repo.root,p));const token=hash(JSON.stringify({owner,p,staged,head:owner==='base'?this.repo.head:this.layer(owner).oid,index:await fingerprint(index??this.repo.index),disk,oid:entry?.oid}));const hunks:{index:number,header:string,patch:string}[]=[];
++  private async diffHunksInternal(owner:string,p:string,staged=false){validatePath(p);const index=owner==='base'?undefined:this.index(this.layer(owner,true));const patch=await this.diffInternal(owner,staged,[p]);const entries=await this.entries('INDEX',index);const entry=entries.find(e=>e.path===p);const disk=await fingerprint(await safePath(this.repo.root,p));const token=hash(JSON.stringify({owner,p,staged,head:owner==='base'?this.repo.head:this.layer(owner).oid,index:await fingerprint(index??this.repo.index),disk,oid:entry?.oid}));const hunks:{index:number,header:string,patch:string}[]=[];
+     if(!entry||entry.mode!=='100644'||patch.includes('GIT binary patch')||patch.includes('Binary files')||patch.includes('old mode')||patch.includes('new mode')||patch.includes('deleted file')||patch.includes('new file'))return {token,patch,hunks,supported:false,reason:'Use o arquivo inteiro para binários, arquivos novos, exclusões ou mudanças de modo.'};
+     const lines=patch.split('\n');const first=lines.findIndex(l=>l.startsWith('@@ '));if(first<0)return {token,patch,hunks,supported:false};const header=lines.slice(0,first).join('\n')+'\n';let current:string[]=[];for(const line of lines.slice(first)){if(line.startsWith('@@ ')&&current.length){hunks.push({index:hunks.length,header:current[0]!,patch:header+current.join('\n')+'\n'});current=[];}current.push(line);}if(current.length){while(current.at(-1)==='')current.pop();hunks.push({index:hunks.length,header:current[0]!,patch:header+current.join('\n')+'\n'});}return {token,patch,hunks,supported:true};
+   }
+@@ -639,7 +656,7 @@ export class GitLayers {
+     const before=await fingerprint(source);const bytes=await fs.readFile(source);if(hash(bytes)!==before.hash)throw new LabError('EXTERNAL_EDIT','A origem mudou durante a renomeação.');await this.writeBytes(target,bytes,before.mode,{exists:false,hash:'',mode:0});await this.remove(source,before);this.workspace.acknowledgedMissing=[...new Set([...this.workspace.acknowledgedMissing??[],from])];if(!owner)await this.rememberUnownedPath(to);await this.updateExcludes();return {from,to,owner:owner??null};},false);}
+   async doctor(fsck=false){const checks:{name:string,ok:boolean,detail:any}[]=[];const check=async(name:string,fn:()=>Promise<unknown>)=>{try{checks.push({name,ok:true,detail:await fn()});}catch(e){checks.push({name,ok:false,detail:{code:(e as any).code,message:message(e)}});}};
+     await check('Locks e resgate independente',async()=>{const rescue=await doctorRepository(this.repo.root);if(!rescue.safe)throw new LabError('RECOVERY_REQUIRED','Diagnóstico de resgate encontrou impedimentos.',rescue.checks.filter(c=>!c.ok));return {safe:true};});
+-    await check('HEAD e recursos suportados',async()=>{await this.refresh();await assertSupported(this.repo,false);return {head:this.repo.head,branch:this.repo.branch,gitDir:this.repo.gitDir};});await check('Metadados, refs, índices, propriedade e exclusões',async()=>{await this.guard(false);return {layers:this.registry.layers.length,paths:(await this.owners()).size};});await check('Índice principal',async()=>{const entries=await treeEntries(this.repo.root,'INDEX');return {paths:entries.length,fingerprint:await fingerprint(this.repo.index)};});for(const l of this.registry.layers)await check(`Layer ${l.name}: objetos e checkpoint`,async()=>{const {index,checkpoint}=await this.validateLayerIndex(l);return {ref:l.ref,oid:l.oid,tree:checkpoint,checkpoint,indexRole:this.workspace.branchLayer===l.name?'retained-private':'layer-private',index,state:l.state,reservations:l.reservations,shelf:l.shelf};});
++    await check('HEAD e recursos suportados',async()=>{await this.refresh();await assertSupported(this.repo,false);return {head:this.repo.head,branch:this.repo.branch,gitDir:this.repo.gitDir};});await check('Metadados, refs, índices, propriedade e exclusões',async()=>{await this.guard(false);return {layers:this.registry.layers.length,paths:(await this.owners()).size};});await check('Índice principal',async()=>{const entries=await this.entries('INDEX');return {paths:entries.length,fingerprint:await fingerprint(this.repo.index)};});for(const l of this.registry.layers)await check(`Layer ${l.name}: objetos e checkpoint`,async()=>{const {index,checkpoint}=await this.validateLayerIndex(l);return {ref:l.ref,oid:l.oid,tree:checkpoint,checkpoint,indexRole:this.workspace.branchLayer===l.name?'retained-private':'layer-private',index,state:l.state,reservations:l.reservations,shelf:l.shelf};});
+     if(fsck)await check('git fsck',async()=>{const r=await git(this.repo.root,['fsck','--full','--no-reflogs'],{timeout:120000});return (r.stdout.toString()+r.stderr.toString()).trim()||'Objetos verificados.';});let transactions:any[]=[];await check('Journals',async()=>{transactions=await listTransactions(this.dir);if(transactions.length)throw new LabError('RECOVERY_REQUIRED','Journals pendentes.',transactions.map(t=>t.id));return {pending:0};});let spaceBytes=0;const sum=async(dir:string)=>{for(const e of await fs.readdir(dir,{withFileTypes:true}).catch(()=>[])){const p=path.join(dir,e.name);if(e.isDirectory())await sum(p);else if(e.isFile())spaceBytes+=(await fs.stat(p)).size;}};await sum(this.dir);return {safe:checks.every(c=>c.ok),checks,transactions,spaceBytes,capture:await exists(path.join(this.dir,'capture.json'))?await this.capture():null};
+   }
+   async recover(){if(await resolveLayerDirectory(this.repo.gitDir)!==this.dir)throw new LabError('LAYOUT_CHANGED','O layout mudou; reabra o repositório antes de recuperar.');return withLock(this.dir,async()=>{await this.refresh();const pending=await listTransactions(this.dir);
+@@ -649,7 +666,7 @@ export class GitLayers {
+       const retainedLayers=[...this.registry.layers,...pending.flatMap(data=>data.recovery.beforeRegistry.layers as Layer[])];
+       const plannedIndices=pending.flatMap(data=>data.recovery.files.filter((file:any)=>/^indexes\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.index$/u.test(path.relative(this.dir,file.path).split(path.sep).join('/'))).map((file:any)=>file.path as string));
+       for(const index of new Set([this.repo.index,...retainedLayers.map(l=>this.privateIndex(l)),...plannedIndices]))if(await exists(index+'.lock'))throw new LabError('LOCKED','Native index lock present; recovery preserved every journal and index.',{path:index+'.lock'});
+-      const recovered=[];for(const data of pending){const journal=path.join(this.dir,'transactions',data.id,'journal.json');await validateRecovery(this.repo,this.dir,data);const workspaceImages=await recoveryWorkspaceImages(this.repo,this.dir,data);for(const f of data.recovery.files){const cur=await fingerprint(f.path);if(!sameFingerprint(cur,f.before)&&(!f.after||!sameFingerprint(cur,f.after))&&!workspaceImages.some(image=>image.path===f.path&&sameFingerprint(cur,image.fingerprint)))throw new LabError('RECOVERY_CONFLICT',`Mudança posterior detectada: ${f.path}`);}const commit=data.recovery?.commit;if(commit){const current=await gitText(this.repo.root,['rev-parse','--verify',commit.ref]);if(current===commit.new){if(commit.base){this.repo=await discover(this.repo.root);if(this.repo.branch!==data.recovery.beforeWorkspace.branch||this.repo.head!==commit.new)throw new LabError('RECOVERY_CONFLICT','HEAD não corresponde ao commit interrompido.');this.registry=structuredClone(data.recovery.beforeRegistry);this.workspace={...recoveryBeforeWorkspace(data),schema:1,head:this.repo.head,branch:this.repo.branch};if(this.workspace.branchLayer){const l=this.layer(this.workspace.branchLayer);l.oid=current;l.indexBase=current;const committed=new Set((await treeEntries(this.repo.root,current)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!committed.has(p));}}else{this.registry=data.recovery.beforeRegistry;if(data.recovery.acknowledgements!==undefined)this.workspace=recoveryBeforeWorkspace(data);const l=this.registry.layers.find(l=>l.id===commit.layerId);if(!l)throw new LabError('RECOVERY_CONFLICT','Layer do commit não encontrada.');l.oid=current;l.indexBase=current;const committed=new Set((await treeEntries(this.repo.root,current)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!committed.has(p));}this.workspace=recoveryBeforeWorkspace(data,this.workspace);await this.save();await this.updateExcludes();}else if(current===commit.old)await this.rollback(data);else throw new LabError('RECOVERY_CONFLICT','Ref mudou após a falha; exporte os backups.');
++      const recovered=[];for(const data of pending){const journal=path.join(this.dir,'transactions',data.id,'journal.json');await validateRecovery(this.repo,this.dir,data);const workspaceImages=await recoveryWorkspaceImages(this.repo,this.dir,data);for(const f of data.recovery.files){const cur=await fingerprint(f.path);if(!sameFingerprint(cur,f.before)&&(!f.after||!sameFingerprint(cur,f.after))&&!workspaceImages.some(image=>image.path===f.path&&sameFingerprint(cur,image.fingerprint)))throw new LabError('RECOVERY_CONFLICT',`Mudança posterior detectada: ${f.path}`);}const commit=data.recovery?.commit;if(commit){const current=await gitText(this.repo.root,['rev-parse','--verify',commit.ref]);if(current===commit.new){if(commit.base){this.repo=await discover(this.repo.root);if(this.repo.branch!==data.recovery.beforeWorkspace.branch||this.repo.head!==commit.new)throw new LabError('RECOVERY_CONFLICT','HEAD não corresponde ao commit interrompido.');this.registry=structuredClone(data.recovery.beforeRegistry);this.workspace={...recoveryBeforeWorkspace(data),schema:1,head:this.repo.head,branch:this.repo.branch};if(this.workspace.branchLayer){const l=this.layer(this.workspace.branchLayer);l.oid=current;l.indexBase=current;const committed=new Set((await this.entries(current)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!committed.has(p));}}else{this.registry=data.recovery.beforeRegistry;if(data.recovery.acknowledgements!==undefined)this.workspace=recoveryBeforeWorkspace(data);const l=this.registry.layers.find(l=>l.id===commit.layerId);if(!l)throw new LabError('RECOVERY_CONFLICT','Layer do commit não encontrada.');l.oid=current;l.indexBase=current;const committed=new Set((await this.entries(current)).map(e=>e.path));l.reservations=l.reservations.filter(p=>!committed.has(p));}this.workspace=recoveryBeforeWorkspace(data,this.workspace);await this.save();await this.updateExcludes();}else if(current===commit.old)await this.rollback(data);else throw new LabError('RECOVERY_CONFLICT','Ref mudou após a falha; exporte os backups.');
+       }else if(data.recovery?.switch){
+         const sw=data.recovery.switch;const actual=await discover(this.repo.root);
+         if(actual.branch===sw.from&&actual.head===sw.fromOid)await this.rollback(data);
+@@ -658,11 +675,11 @@ export class GitLayers {
+           this.registry=structuredClone(data.recovery.beforeRegistry);
+           const owned=new Set<string>();
+           for(const l of this.registry.layers.filter(l=>l.state==='active')){
+-            for(const entry of await treeEntries(this.repo.root,l.oid))owned.add(entry.path);
+-            for(const entry of await treeEntries(this.repo.root,'INDEX',this.privateIndex(l)))owned.add(entry.path);
++            for(const entry of await this.entries(l.oid))owned.add(entry.path);
++            for(const entry of await this.entries('INDEX',this.privateIndex(l)))owned.add(entry.path);
+             for(const p of l.reservations)owned.add(p);
+           }
+-          if(sw.resumeName)for(const entry of await treeEntries(this.repo.root,sw.fromOid))owned.add(entry.path);
++          if(sw.resumeName)for(const entry of await this.entries(sw.fromOid))owned.add(entry.path);
+           // Validate every snapshot and backup before changing roles or writing bytes.
+           for(const f of sw.snapshots){this.layerPath(f.path);if(!owned.has(f.path)||(f.bytes!==null&&(typeof f.bytes!=='string'||Buffer.from(f.bytes,'base64').toString('base64')!==f.bytes))||!Number.isInteger(f.mode))throw new LabError('RECOVERY_INVALID','Retrato de projeção inválido.');const plan=data.recovery.files.find((x:any)=>x.path===path.join(this.repo.root,f.path));if(f.bytes!==null&&(!plan||!plan.backup||hash(Buffer.from(f.bytes,'base64'))!==plan.before.hash||f.mode!==plan.before.mode))throw new LabError('RECOVERY_INVALID','Projeção difere do backup.');}
+           this.repo=actual;
+diff --git a/src/core/rescue.ts b/src/core/rescue.ts
+index d38b55a422072ea11972032355909d2c398f0d7a..7ce3bfee98d6eb0aebaaaadd2894ce7a2f519adf 100644
+--- a/src/core/rescue.ts
++++ b/src/core/rescue.ts
+@@ -7,7 +7,8 @@ import { validOwnershipMetadata, type WorkspaceOwnership } from './ownership-sta
+ import { discover, git, treeEntries, assertSupported } from './git.js';
+ import { assertNoCollisions, validatePath } from './paths.js';
+ import { assertNoPathLinks, inspectLayerLayout } from './layout.js';
+-import { atomicJSON, fingerprint, listTransactions, readJSON } from './storage.js';
++import { atomicJSON, fingerprint, readTransaction, readJSON, sameFingerprint } from './storage.js';
++import { assertRecoveryMaterializationState, recoveryWorkspaceImages, validateRecovery } from './recovery.js';
+ 
+ const codeOf = (error: unknown) => (error as NodeJS.ErrnoException)?.code;
+ interface Check { name: string; ok: boolean; detail: unknown }
+@@ -82,26 +83,63 @@ export async function doctorRepository(root: string, fsck = false): Promise<{
+       workspace = await readJSON(path.join(directory, 'workspace.json'), value => validOwnershipMetadata(value) && typeof value.head === 'string' && typeof value.branch === 'string' && ['branchLayer', 'resumeLayer', 'returnBranch'].every(key => value[key] === undefined || typeof value[key] === 'string') && (value.editing === undefined || (value.editing && typeof value.editing.layer === 'string' && Array.isArray(value.editing.before) && value.editing.before.every((item: unknown) => typeof item === 'string' && !!validatePath(item)) && typeof value.editing.startedAt === 'string' && Number.isFinite(Date.parse(value.editing.startedAt)) && new Set(value.editing.before).size === value.editing.before.length && (value.editing.unassigned === undefined || (Array.isArray(value.editing.unassigned) && value.editing.unassigned.every((item: unknown) => typeof item === 'string' && !!validatePath(item)) && new Set(value.editing.unassigned).size === value.editing.unassigned.length && value.editing.unassigned.every((item: string) => value.editing.before.includes(item)))))));
+       return workspace;
+     });
+-    if (selectedLayout === directory && registry && workspace) await check('Workspace roles: ' + directory, async () => {
+-      const current = workspace!, layers = registry!.layers;
+-      if ((current.branchLayer && (current.branch !== 'layer/' + current.branchLayer || !layers.some(layer => layer.name === current.branchLayer && layer.state !== 'active'))) ||
+-          (current.resumeLayer && current.resumeLayer !== current.branchLayer) ||
+-          (current.editing && !layers.some(layer => layer.name === current.editing!.layer && layer.state === 'active' && layer.name !== current.branchLayer))) {
+-        throw new LabError('METADATA_INVALID', 'Workspace roles disagree with the registered Layers; metadata was preserved.');
+-      }
+-      return { branchLayer: current.branchLayer ?? null, resumeLayer: current.resumeLayer ?? null, editing: current.editing?.layer ?? null };
+-    });
++    if (selectedLayout === directory && registry && workspace) await check('Workspace roles: ' + directory, async () => {
++      const current = workspace!, layers = registry!.layers;
++      if ((current.branchLayer && (current.branch !== 'layer/' + current.branchLayer || !layers.some(layer => layer.name === current.branchLayer && layer.state !== 'active'))) ||
++          (current.resumeLayer && current.resumeLayer !== current.branchLayer) ||
++          (current.editing && !layers.some(layer => layer.name === current.editing!.layer && layer.state === 'active' && layer.name !== current.branchLayer))) {
++        throw new LabError('METADATA_INVALID', 'Workspace roles disagree with the registered Layers; metadata was preserved.');
++      }
++      return { branchLayer: current.branchLayer ?? null, resumeLayer: current.resumeLayer ?? null, editing: current.editing?.layer ?? null };
++    });
+     if (selectedLayout === directory) await check('Papel da branch e recursos suportados', async () => {
+       await assertSupported(repo, false);
+       if (repo.branch.startsWith('layer/') && workspace?.branchLayer !== repo.branch.slice(6)) throw new LabError('EXPLICIT_LAYER_REQUIRED', 'Layer aberta diretamente pelo Git, fora da entrada deliberada registrada.');
+       if (workspace?.branchLayer && repo.branch !== 'layer/' + workspace.branchLayer) throw new LabError('EXTERNAL_HEAD', 'HEAD saiu do modo Layer como branch fora da ferramenta; o contexto foi preservado.');
+       return { role: workspace?.branchLayer ? 'layer-branch' : 'traditional', branch: repo.branch, branchLayer: workspace?.branchLayer ?? null };
+     });
++    const pendingPlans: any[] = [];
+     await check('Journals: ' + directory, async () => {
+-      const pending = await listTransactions(directory); transactions.push(...pending);
+-      if (pending.length) throw new LabError('RECOVERY_REQUIRED', 'Transações incompletas foram preservadas.', { ids: pending.map(entry => entry.id) });
++      const folder = path.join(directory, 'transactions');
++      await assertNoPathLinks(folder);
++      let entries: import('node:fs').Dirent[];
++      try { entries = await fs.readdir(folder, { withFileTypes: true }); }
++      catch (error) { if (codeOf(error) === 'ENOENT') return { pending: 0 }; throw error; }
++      let invalidEntries = 0;
++      for (const entry of entries.sort((a, b) => a.name.localeCompare(b.name))) {
++        let journal: any;
++        try {
++          if (entry.isSymbolicLink() || !entry.isDirectory() || !/^[A-Za-z0-9_-]+$/.test(entry.name)) throw new LabError('METADATA_INVALID', 'Entrada inesperada no diretório de transações. Ela foi preservada para inspeção.', { path: path.join(folder, entry.name) });
++          journal = await readTransaction(directory, entry.name);
++        } catch (error) {
++          invalidEntries++;
++          await check('Journal: ' + path.join(folder, entry.name), async () => { throw error; });
++          continue;
++        }
++        // Retained completed history is still schema-checked, without flooding
++        // the diagnostic response with one successful check per old operation.
++        if (journal.state === 'completed') continue;
++        pendingPlans.push(journal); transactions.push(journal);
++        await check('Journal: ' + path.join(folder, entry.name), async () => ({ id: journal.id, kind: journal.kind, state: journal.state }));
++      }
++      if (invalidEntries) throw new LabError('METADATA_INVALID', 'Journals inválidos foram preservados. Os demais planos continuam diagnosticados individualmente.', { invalidEntries, pending: pendingPlans.map(entry => entry.id) });
++      if (pendingPlans.length) throw new LabError('RECOVERY_REQUIRED', 'Transações incompletas foram preservadas.', { ids: pendingPlans.map(entry => entry.id) });
+       return { pending: 0 };
+     });
++    // A valid plan is not a promise that recovery can finish. Ref/index locks,
++    // later edits and concurrent changes are still revalidated by recover().
++    for (const journal of pendingPlans) await check('Plano de recuperação: ' + journal.id, async () => {
++      await validateRecovery(repo, directory, journal);
++      const images = await recoveryWorkspaceImages(repo, directory, journal);
++      for (const file of journal.recovery.files) {
++        const current = await fingerprint(file.path);
++        assertRecoveryMaterializationState(repo, directory, file, current);
++        if (!sameFingerprint(current, file.before) && (!file.after || !sameFingerprint(current, file.after)) && !images.some(image => image.path === file.path && sameFingerprint(current, image.fingerprint))) {
++          throw new LabError('RECOVERY_CONFLICT', 'Mudança posterior detectada; arquivo, journal e backups preservados.', { reason: 'workspace-changed-after-transaction', path: file.path });
++        }
++      }
++      return { id: journal.id, kind: journal.kind, state: journal.state, planValid: true, currentImagesCompatible: true, scope: 'validated-plan-backups-and-current-images-only', recoveryAttempted: false };
++    });
+     // A retained legacy is historical evidence, not a second live index/ref set.
+     for (const layer of (!selectedLayout || selectedLayout === directory ? registry?.layers ?? [] : [])) {
+       await check('Lock do índice privado: ' + layer.name + ' em ' + directory, () => checkLock(path.join(directory, 'indexes', layer.id + '.index.lock')));
+@@ -111,13 +149,13 @@ export async function doctorRepository(root: string, fsck = false): Promise<{
+         if (!isWorkingBranch && (ref !== layer.oid || (layer.indexBase !== undefined && layer.indexBase !== ref))) throw new LabError('EXTERNAL_REF', 'A referência diverge dos metadados; nenhum índice foi reinicializado.', { ref, expected: layer.oid });
+         const reservations = await readJSON<{ paths: string[] }>(path.join(directory, 'reservations', layer.id + '.json'), value => Array.isArray(value.paths) && value.paths.every((item: unknown) => typeof item === 'string' && !!validatePath(item)));
+         if (JSON.stringify(reservations.paths) !== JSON.stringify(layer.reservations)) throw new LabError('RESERVATIONS_INVALID', 'Reservas inconsistentes; as duas versões foram preservadas.');
+-        const index = path.join(directory, 'indexes', layer.id + '.index');
+-        const retainedPrivate = await fingerprint(index);
++        const index = path.join(directory, 'indexes', layer.id + '.index');
++        const retainedPrivate = await fingerprint(index);
+         if (!retainedPrivate.exists) throw new LabError('INDEX_MISSING', 'The retained private index is missing; no replacement was created.', { path: index });
+         const paths = (await treeEntries(repo.root, ':index', index)).length;
+         const checkpoint = (await git(repo.root, ['rev-parse', '--verify', 'refs/git-layers/state/' + layer.id])).stdout.toString('utf8').trim();
+         if (checkpoint && (await git(repo.root, ['diff', '--cached', '--quiet', checkpoint, '--'], { index, ok: [0, 1] })).code !== 0) throw new LabError('CHECKPOINT_MISMATCH', 'Checkpoint diferente do índice; ambos foram preservados.');
+-        if (isWorkingBranch) return { ref, role: 'branch', index: 'principal', paths: (await treeEntries(repo.root, ':index')).length, privateIndex: 'retained-until-managed-exit', retainedPrivate: { path: index, paths, checkpoint, fingerprint: retainedPrivate, validated: true } };
++        if (isWorkingBranch) return { ref, role: 'branch', index: 'principal', paths: (await treeEntries(repo.root, ':index')).length, privateIndex: 'retained-until-managed-exit', retainedPrivate: { path: index, paths, checkpoint, fingerprint: retainedPrivate, validated: true } };
+         return { ref, paths };
+       });
+     }
+@@ -231,4 +269,4 @@ export async function exportRepositoryRecovery(root: string, destination: string
+     await atomicJSON(manifest, { ...data, error: { code: (error as { code?: string }).code ?? 'IO_ERROR', message: errorMessage(error) } }).catch(() => {});
+     throw error;
+   }
+-}
++}
+diff --git a/src/core/storage.ts b/src/core/storage.ts
+index 508d51b54a88d030cd1e3183cc2a131c472ca54d..fe62fa884e0733ddfff8707e5f8943bf14b06adc 100644
+--- a/src/core/storage.ts
++++ b/src/core/storage.ts
+@@ -103,7 +103,8 @@ export async function atomicJSON(file: string, value: unknown): Promise<void> {
+   }
+ }
+ 
+-async function readRegular(file: string, maxBytes?: number): Promise<{ bytes: Buffer; mode: number }> {
++/** Read through one proven regular-file handle and revalidate identity/content metadata. */
++async function consumeRegular(file: string, consume: (chunk: Buffer) => Promise<void> | void, maxBytes?: number): Promise<{ mode: number; hash: string }> {
+   await noLinks(file);
+   const before = await fs.lstat(file);
+   if (!before.isFile()) throw new LabError('UNSAFE_FILE_TYPE', 'É necessário um arquivo regular; links e diretórios são recusados.', { path: file });
+@@ -112,13 +113,43 @@ async function readRegular(file: string, maxBytes?: number): Promise<{ bytes: Bu
+     const opened = await handle.stat();
+     if (!opened.isFile() || opened.dev !== before.dev || opened.ino !== before.ino) throw new LabError('EXTERNAL_CHANGE', 'O arquivo mudou enquanto era aberto.', { path: file });
+     if (maxBytes !== undefined && opened.size > maxBytes) throw new LabError('METADATA_INVALID', 'Metadados excedem o limite de 64 MiB.', { path: file });
+-    const bytes = await handle.readFile();
+-    const after = await handle.stat();
+-    const current = await fs.lstat(file);
+-    if (after.size !== opened.size || after.mtimeMs !== opened.mtimeMs || after.ctimeMs !== opened.ctimeMs || after.mode !== opened.mode || current.dev !== opened.dev || current.ino !== opened.ino || current.size !== after.size || current.mtimeMs !== after.mtimeMs || current.ctimeMs !== after.ctimeMs || current.mode !== after.mode || current.isSymbolicLink()) {
++    const digest = createHash('sha256'), buffer = Buffer.allocUnsafe(256 * 1024);
++    let total = 0;
++    for (;;) {
++      const { bytesRead } = await handle.read(buffer, 0, buffer.length, null);
++      if (!bytesRead) break;
++      total += bytesRead;
++      if (maxBytes !== undefined && total > maxBytes) throw new LabError('METADATA_INVALID', 'Metadados excedem o limite de 64 MiB.', { path: file });
++      const chunk = buffer.subarray(0, bytesRead);
++      digest.update(chunk);
++      await consume(chunk);
++    }
++    const after = await handle.stat(), current = await fs.lstat(file);
++    if (total !== opened.size || after.size !== opened.size || after.mtimeMs !== opened.mtimeMs || after.ctimeMs !== opened.ctimeMs || after.mode !== opened.mode || current.dev !== opened.dev || current.ino !== opened.ino || current.size !== after.size || current.mtimeMs !== after.mtimeMs || current.ctimeMs !== after.ctimeMs || current.mode !== after.mode || current.isSymbolicLink()) {
+       throw new LabError('EXTERNAL_CHANGE', 'O arquivo mudou durante a leitura; a operação foi interrompida.', { path: file });
+     }
+-    return { bytes, mode: comparableFileMode(opened.mode) };
++    return { mode: comparableFileMode(opened.mode), hash: digest.digest('hex') };
++  } finally { await handle.close(); }
++}
++
++async function readRegular(file: string, maxBytes?: number): Promise<{ bytes: Buffer; mode: number }> {
++  const chunks: Buffer[] = [];
++  const result = await consumeRegular(file, chunk => { chunks.push(Buffer.from(chunk)); }, maxBytes);
++  return { bytes: Buffer.concat(chunks), mode: result.mode };
++}
++
++/** Copy independent bytes into a new exclusive file, with bounded memory and a durable result. */
++export async function copyRegular(source: string, destination: string, mode?: number): Promise<Fingerprint> {
++  const target = path.resolve(destination);
++  await ensureDirectory(path.dirname(target));
++  await noLinks(target);
++  const handle = await fs.open(target, constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL | OPEN_NOFOLLOW, 0o600);
++  try {
++    const result = await consumeRegular(path.resolve(source), async chunk => { await handle.writeFile(chunk); });
++    await handle.chmod(mode ?? result.mode);
++    await handle.sync();
++    const actualMode = comparableFileMode((await handle.stat()).mode);
++    return { exists: true, hash: result.hash, mode: actualMode };
+   } finally { await handle.close(); }
+ }
+ 
+@@ -186,8 +217,8 @@ export interface Fingerprint { hash: string; mode: number; exists: boolean }
+ 
+ export async function fingerprint(file: string): Promise<Fingerprint> {
+   try {
+-    const result = await readRegular(path.resolve(file));
+-    return { hash: createHash('sha256').update(result.bytes).digest('hex'), mode: result.mode, exists: true };
++    const result = await consumeRegular(path.resolve(file), () => {});
++    return { hash: result.hash, mode: result.mode, exists: true };
+   } catch (error) {
+     if (codeOf(error) === 'ENOENT') return { hash: '', mode: 0, exists: false };
+     throw error;
+@@ -205,6 +236,7 @@ export function failpoint(name: string): void {
+ 
+ interface JournalStep { step: string; at: string; details?: unknown }
+ interface JournalBackup { source: string; copy: string | null; label: string; fingerprint: Fingerprint; at: string }
++export interface TrackedRecoveryFile { path: string; backup: string | null; before: Fingerprint; after?: Fingerprint }
+ interface JournalData {
+   schema: 1;
+   id: string;
+@@ -260,33 +292,50 @@ export class Transaction {
+     await this.persist();
+   }
+ 
+-  /** Return a durable absolute copy; absence is recorded explicitly as null. */
+-  async backup(file: string, label: string): Promise<string | null> {
++  /** Prepare independent durable bytes only; callers must publish their journal before returning. */
++  private async prepareBackup(file: string, label: string): Promise<JournalBackup> {
+     if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,150}$/.test(label)) throw new LabError('INVALID_ARGUMENT', 'Rótulo de backup inválido.');
+     const source = path.resolve(file);
+-    let contents: { bytes: Buffer; mode: number };
+-    try { contents = await readRegular(source); }
+-    catch (error) {
+-      if (codeOf(error) !== 'ENOENT') throw error;
+-      this.data.backups.push({ source, copy: null, label, fingerprint: { exists: false, hash: '', mode: 0 }, at: new Date().toISOString() });
+-      await this.persist();
+-      return null;
++    // Establish absence before creating a copy; errors other than ENOENT remain visible.
++    let present = true;
++    try { await noLinks(source); await fs.lstat(source); }
++    catch (error) { if (codeOf(error) !== 'ENOENT') throw error; present = false; }
++    if (!present) {
++      return { source, copy: null, label, fingerprint: { exists: false, hash: '', mode: 0 }, at: new Date().toISOString() };
+     }
+-    const expected: Fingerprint = { hash: createHash('sha256').update(contents.bytes).digest('hex'), mode: contents.mode, exists: true };
+     const backupDirectory = path.join(this.dir, 'backups');
+     await ensureDirectory(backupDirectory);
+     const copy = path.join(backupDirectory, `${randomUUID()}-${label}`);
+-    const handle = await fs.open(copy, constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL | OPEN_NOFOLLOW, 0o600);
+-    try {
+-      await handle.writeFile(contents.bytes);
+-      await handle.chmod(contents.mode);
+-      await handle.sync();
+-    } finally { await handle.close(); }
++    const expected = await copyRegular(source, copy);
+     await syncDirectory(backupDirectory);
+     if (!sameFingerprint(expected, await fingerprint(source))) throw new LabError('EXTERNAL_CHANGE', 'O arquivo mudou durante o backup. A cópia foi preservada e a operação foi interrompida.', { path: source, backup: copy });
+-    this.data.backups.push({ source, copy, label, fingerprint: expected, at: new Date().toISOString() });
++    return { source, copy, label, fingerprint: expected, at: new Date().toISOString() };
++  }
++
++  /** Return a durable absolute copy and durable journal entry; absence is explicit. */
++  async backup(file: string, label: string): Promise<string | null> {
++    const entry = await this.prepareBackup(file, label);
++    this.data.backups.push(entry);
+     await this.persist();
+-    return copy;
++    return entry.copy;
++  }
++
++  /** Publish backup plus recovery authority together, before the tracked caller can mutate. */
++  async backupTracked(file: string, label: string, before: Fingerprint, files: TrackedRecoveryFile[]): Promise<TrackedRecoveryFile> {
++    if (!Array.isArray(files) || this.data.recovery?.files !== files) throw new LabError('RECOVERY_INVALID', 'O plano de arquivos deve compartilhar a lista da transação.');
++    const source = path.resolve(file);
++    if (files.some(entry => entry.path === source)) throw new LabError('RECOVERY_INVALID', 'O arquivo já possui um plano de recuperação nesta transação.');
++    const original = { ...before }, entry = await this.prepareBackup(file, label);
++    if (entry.source !== source || original.exists !== (entry.copy !== null) || !sameFingerprint(entry.fingerprint, original) || entry.copy !== null && !sameFingerprint(await fingerprint(entry.copy), original)) {
++      throw new LabError('EXTERNAL_EDIT', `Arquivo mudou antes do backup: ${file}`);
++    }
++    const tracked = { path: entry.source, before: original, backup: entry.copy };
++    this.data.backups.push(entry);
++    files.push(tracked);
++    // record() atomically persists both arrays and awaits the same durability
++    // boundary that track() previously published after backup()'s own persist.
++    await this.record('backup-ready', { path: entry.source });
++    return tracked;
+   }
+ 
+   async finish(): Promise<void> { this.data.state = 'completed'; await this.record('completed'); }
+@@ -302,6 +351,15 @@ export class Transaction {
+   }
+ }
+ 
++/** Read one strict journal for independent diagnostics without loading other entries. */
++export async function readTransaction(directory: string, id: string): Promise<any> {
++  if (!/^[A-Za-z0-9_-]+$/.test(id)) throw new LabError('METADATA_INVALID', 'Identificador de transação inválido; a entrada foi preservada.', { id });
++  const folder = path.resolve(directory, 'transactions', id);
++  const journal = await readJSON<JournalData>(path.join(folder, 'journal.json'), isJournal);
++  if (journal.id !== id) throw new LabError('METADATA_INVALID', 'Identificador da transação não corresponde ao seu diretório.', { path: folder });
++  return journal;
++}
++
+ /** Return unfinished journals only; invalid entries cause a safe error. */
+ export async function listTransactions(directory: string): Promise<any[]> {
+   const transactions = path.resolve(directory, 'transactions');
+@@ -312,8 +370,7 @@ export async function listTransactions(directory: string): Promise<any[]> {
+   const pending: JournalData[] = [];
+   for (const entry of entries.sort((a, b) => a.name.localeCompare(b.name))) {
+     if (entry.isSymbolicLink() || !entry.isDirectory() || !/^[A-Za-z0-9_-]+$/.test(entry.name)) throw new LabError('METADATA_INVALID', 'Entrada inesperada no diretório de transações. Ela foi preservada para inspeção.', { path: path.join(transactions, entry.name) });
+-    const journal = await readJSON<JournalData>(path.join(transactions, entry.name, 'journal.json'), isJournal);
+-    if (journal.id !== entry.name) throw new LabError('METADATA_INVALID', 'Identificador da transação não corresponde ao seu diretório.', { path: path.join(transactions, entry.name) });
++    const journal = await readTransaction(directory, entry.name);
+     if (journal.state !== 'completed') pending.push(journal);
+   }
+   return pending;

@@ -8,6 +8,7 @@ import { context,createFixture,cleanupFixture,isolatedEnvironment,resolveGit,pro
 import { loadMatrix,loadCases,parseArgs,selectCases,selectionOutcome,SelectionError,baseResult,counts,validateBundle } from '../../../scripts/git-compat/runner.mjs';
 import { VALID_SCOPES } from '../../../scripts/git-compat/registry.mjs';
 import { validateOutputRoot } from '../../../scripts/git-compat/output-root.mjs';
+import { externalFixtureParent } from '../../../scripts/git-compat/fixture-parent.mjs';
 import { proveExecutionFingerprint,extendMatrixReference } from '../cases/harness.mjs';
 import { evaluateExpectation,validateExpectation,expectationFingerprint } from '../helpers/expectations.mjs';
 
@@ -54,7 +55,7 @@ async function runnerContract(c,label,args,expected,{timeout=30000}={}) {
   return execution;
 }
 function fixture(t,label) {
-  const owned=createFixture(path.join(project,'.workshop','git-compat-infra'),label);
+  const owned=createFixture(externalFixtureParent(project),label);
   t.after(()=>cleanupFixture(owned));
   const gitPath=resolveGit(),c=context({root:owned.root,repo:path.join(owned.root,'repo'),gitPath,env:isolatedEnvironment(owned.root,gitPath),buildDir:path.join(owned.root,'unused-build'),artifactDir:path.join(owned.root,'evidence'),packageRoot:owned.root});
   return c;

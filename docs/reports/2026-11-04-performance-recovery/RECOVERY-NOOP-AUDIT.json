@@ -1,0 +1,271 @@
+{
+    "schema":  1,
+    "kind":  "allowlisted native command audit for repeated recovery physical idempotence",
+    "generatedAt":  "2026-11-04T22:29:37.1738617Z",
+    "status":  "COMPLETED_COMMAND_AUDIT_ONLY",
+    "productCertification":  "NOT_APPROVED",
+    "originalPartialFailuresReclassified":  false,
+    "originalReceipt":  {
+                            "label":  "recover-repeat-command-audit/RESULTS.json",
+                            "bytes":  7954,
+                            "sha256":  "2c45074d07c4fe8bd442191586f5b8dc5680c46fcff10c1d34b4cec80e53c982"
+                        },
+    "sourceInventoryReceipt":  {
+                                   "label":  "recover-repeat-command-audit/SOURCE-BEFORE.json",
+                                   "bytes":  32891,
+                                   "sha256":  "86dc6a76213d5221441d1f7818c26f3828b56ef8b64b40b598560a8ebd6fda25",
+                                   "fileCount":  73,
+                                   "excludes":  "atime",
+                                   "objectAlternatesFound":  0,
+                                   "sourceCodeHashes":  [
+                                                            {
+                                                                "file":  "src/core/index.ts",
+                                                                "sha256":  "8caf84240484e4d72d2d0462117541f17530f7f27521dd5c62a27e9cdda8bb48"
+                                                            },
+                                                            {
+                                                                "file":  "src/core/git.ts",
+                                                                "sha256":  "82ed40225a58db144545b54d1106725c78abfb7c883762f1d773c179bad08e1a"
+                                                            }
+                                                        ]
+                               },
+    "harness":  {
+                    "label":  "audit-recover-repeat-commands.mjs",
+                    "bytes":  8544,
+                    "sha256":  "a15bcb233fe175190fffd87469e791339ec82f64533c9eb26cf44e39e05297d3",
+                    "hashObservationScope":  "Observed during public projection; not an automatic harness before/after manifest"
+                },
+    "gateContext":  {
+                        "snapshot":  "current-v8",
+                        "functionalInputCount":  209,
+                        "startedFingerprint":  "4ecc0d4bee8edf46fa3011bc5ded80ce2cdd081f436f4728459edc37b6b137ed",
+                        "stateAtDocumentation":  "RUNNING_WITH_TWO_OBSERVED_PRIVATE_REPEAT_FAILURES",
+                        "terminalCounts":  null,
+                        "failureParents":  [
+                                               37,
+                                               38
+                                           ],
+                        "failureBoundary":  "Physical statReceipt equality after a repeated already-completed recovery",
+                        "oracleRelaxed":  false,
+                        "historicalObservation":  "This preserves the partial V8 context when the command audit was first documented; gateResultAfterCompletion records its terminal FAIL."
+                    },
+    "experiment":  {
+                       "startedAt":  "2026-11-04T22:24:23.731Z",
+                       "endedAt":  "2026-11-04T22:24:24.248Z",
+                       "timeBudgetMs":  300000,
+                       "diskBudgetBytes":  134217728,
+                       "logicalBytesBeforeResults":  35048,
+                       "sourceIndexSHA256":  "ea127473fc2a0d66900971f6900d55203bf92d2320564f86f0c231ad749ae1fd",
+                       "sourceIndexBytes":  225,
+                       "checkpointOID":  "3ab1012847d8af911c35decce2e8ea03da6bda20",
+                       "directGitInvocations":  4,
+                       "sourceFixtureInventoryBeforeAfterUnchanged":  true,
+                       "objectCopiesIndependent":  true,
+                       "coreMethodsExecuted":  false,
+                       "productTestsExecuted":  false,
+                       "gitOptionalLocks":  "0",
+                       "indexCopyTimestamp":  "Conservative value at least 1ms before observed source; existing cached entry times are older",
+                       "sourceAtimeCompared":  false
+                   },
+    "rows":  [
+                 {
+                     "command":  "cached-quiet",
+                     "args":  [
+                                  "diff",
+                                  "--no-ext-diff",
+                                  "--no-textconv",
+                                  "--cached",
+                                  "--quiet",
+                                  "3ab1012847d8af911c35decce2e8ea03da6bda20",
+                                  "--"
+                              ],
+                     "before":  {
+                                    "bytes":  225,
+                                    "sha256":  "ea127473fc2a0d66900971f6900d55203bf92d2320564f86f0c231ad749ae1fd",
+                                    "mode":  "33206",
+                                    "nlink":  "1",
+                                    "mtimeNs":  "1793830738461000000",
+                                    "ctimeNs":  "1793831063848472000"
+                                },
+                     "after":  {
+                                   "bytes":  225,
+                                   "sha256":  "ea127473fc2a0d66900971f6900d55203bf92d2320564f86f0c231ad749ae1fd",
+                                   "mode":  "33206",
+                                   "nlink":  "1",
+                                   "mtimeNs":  "1793830738461000000",
+                                   "ctimeNs":  "1793831063848472000"
+                               },
+                     "changes":  {
+                                     "bytes":  false,
+                                     "physicalIdentity":  false,
+                                     "mtime":  false,
+                                     "ctime":  false
+                                 },
+                     "nativeDiff":  "M\u0000layer-racy.txt\u0000",
+                     "treeMatchesCheckpoint":  null
+                 },
+                 {
+                     "command":  "write-tree",
+                     "args":  [
+                                  "write-tree"
+                              ],
+                     "before":  {
+                                    "bytes":  225,
+                                    "sha256":  "ea127473fc2a0d66900971f6900d55203bf92d2320564f86f0c231ad749ae1fd",
+                                    "mode":  "33206",
+                                    "nlink":  "1",
+                                    "mtimeNs":  "1793830738461000000",
+                                    "ctimeNs":  "1793831063959880900"
+                                },
+                     "after":  {
+                                   "bytes":  225,
+                                   "sha256":  "ea127473fc2a0d66900971f6900d55203bf92d2320564f86f0c231ad749ae1fd",
+                                   "mode":  "33206",
+                                   "nlink":  "1",
+                                   "mtimeNs":  "1793831064004763700",
+                                   "ctimeNs":  "1793831064004763700"
+                               },
+                     "changes":  {
+                                     "bytes":  false,
+                                     "physicalIdentity":  true,
+                                     "mtime":  true,
+                                     "ctime":  true
+                                 },
+                     "nativeDiff":  "M\u0000layer-racy.txt\u0000",
+                     "treeMatchesCheckpoint":  true
+                 }
+             ],
+    "proposedProductChange":  {
+                                  "state":  "SUPERSEDED_AS_STANDALONE_SKIP",
+                                  "scope":  "Only the final checkpoint loop of recover",
+                                  "condition":  "recovered.length || moved || acknowledged",
+                                  "requirements":  [
+                                                       "Keep all existing validation and no early return",
+                                                       "Keep branch protection reservation/revalidation",
+                                                       "Do not alter the six idempotence test oracles",
+                                                       "After implementation require a new source freeze and relevant tests"
+                                                   ],
+                                  "claimOfBenefit":  "No product latency improvement measured by this command audit",
+                                  "previousState":  "PROPOSED_PENDING_IMPLEMENTATION_AND_VALIDATION",
+                                  "supersededBy":  "V9 fixed native write-tree validation on an independent scratch index when no checkpoint rebuild is needed; original checkpoint path stays for recovered/moved/acknowledged states"
+                              },
+    "qualifications":  [
+                           "Two command variants on independent copies of one retained private index; not universal Git behavior.",
+                           "The cached diff preserved bytes and physical metadata in this experiment; write-tree preserved bytes/tree but replaced physical identity and timestamps.",
+                           "All native final worktree diffs still detected C; no corruption or hidden worktree C was observed.",
+                           "All original fixture files were inventoried before/after including bytes and identities/times, excluding atime; no Core method or product test was run by this audit.",
+                           "Direct Git calls exclude unobserved descendants. Experiment timestamps are not product latency.",
+                           "Public fields are explicitly constructed; personal paths, process IDs, technical refs and raw environment/configuration values are omitted.",
+                           "The V8 gate fingerprint comes from its frozen/start context; this small audit recorded two source file hashes rather than a whole-functional before/after manifest.",
+                           "The original standalone-skip proposal was superseded after the missing-object counterprobe; this audit itself neither implemented product code nor reclassified the original V8 failures. The V9 decision and its limited directed result are recorded separately."
+                       ],
+    "primarySources":  [
+                           "https://git-scm.com/docs/git-write-tree",
+                           "https://github.com/git-for-windows/git/blob/v2.53.0.windows.2/cache-tree.c#L723"
+                       ],
+    "updatedAt":  "2026-11-04T22:56:16.7869225Z",
+    "missingObjectCounterprobe":  {
+                                      "status":  "CONFIRMED_CHECKPOINT_OBJECT_EXISTENCE_CHECK_WOULD_BE_LOST",
+                                      "originalReceipt":  {
+                                                              "label":  "recover-missing-object-check/RESULTS.json",
+                                                              "bytes":  4933,
+                                                              "sha256":  "e6bbc8b57682f8394f47f1549e8198e40f4580859136588716aff06f31afa64a"
+                                                          },
+                                      "startedAt":  "2026-11-04T22:29:46.875Z",
+                                      "endedAt":  "2026-11-04T22:29:47.142Z",
+                                      "derivedIndex":  {
+                                                           "bytes":  192,
+                                                           "sha256":  "2839ac838c97b13085ab6f8e21a3890af4c02f7abc9fcf5af2c12cdf222b1039",
+                                                           "removedOptionalExtensions":  [
+                                                                                             {
+                                                                                                 "name":  "TREE",
+                                                                                                 "offset":  172,
+                                                                                                 "bytes":  33
+                                                                                             }
+                                                                                         ],
+                                                           "entriesPreserved":  [
+                                                                                    {
+                                                                                        "name":  "layer-other.txt",
+                                                                                        "oid":  "fe56f281efbafe4b2d4969bbaac3e576121d7cc8",
+                                                                                        "mode":  33188
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "layer-racy.txt",
+                                                                                        "oid":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                                                        "mode":  33188
+                                                                                    }
+                                                                                ],
+                                                           "checksumRecomputed":  true
+                                                       },
+                                      "copiedBlob":  {
+                                                         "oid":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                                         "sha256":  "701316f76f6e9c6c4d901b84ab4053c68536558d7ed13d818cce7aba2ec82632",
+                                                         "originalObjectUntouched":  true,
+                                                         "preservedOutsideObjectStore":  true
+                                                     },
+                                      "rows":  [
+                                                   {
+                                                       "command":  "cached-quiet",
+                                                       "args":  [
+                                                                    "diff",
+                                                                    "--no-ext-diff",
+                                                                    "--no-textconv",
+                                                                    "--cached",
+                                                                    "--quiet",
+                                                                    "3ab1012847d8af911c35decce2e8ea03da6bda20",
+                                                                    "--"
+                                                                ],
+                                                       "indexInitialSHA256":  "2839ac838c97b13085ab6f8e21a3890af4c02f7abc9fcf5af2c12cdf222b1039",
+                                                       "exitCode":  0,
+                                                       "signal":  null,
+                                                       "indexAfterSHA256":  "2839ac838c97b13085ab6f8e21a3890af4c02f7abc9fcf5af2c12cdf222b1039"
+                                                   },
+                                                   {
+                                                       "command":  "write-tree",
+                                                       "args":  [
+                                                                    "write-tree"
+                                                                ],
+                                                       "indexInitialSHA256":  "2839ac838c97b13085ab6f8e21a3890af4c02f7abc9fcf5af2c12cdf222b1039",
+                                                       "exitCode":  128,
+                                                       "signal":  null,
+                                                       "indexAfterSHA256":  "2839ac838c97b13085ab6f8e21a3890af4c02f7abc9fcf5af2c12cdf222b1039"
+                                                   }
+                                               ],
+                                      "directGitInvocations":  2,
+                                      "budgetMs":  300000,
+                                      "diskBudgetBytes":  134217728,
+                                      "logicalBytesBeforeResults":  1609,
+                                      "originalsPreserved":  true,
+                                      "coreMethodsExecuted":  false,
+                                      "productTestsExecuted":  false
+                                  },
+    "gateResultAfterCompletion":  {
+                                      "snapshot":  "current-v8",
+                                      "status":  "FAIL",
+                                      "tests":  70,
+                                      "pass":  68,
+                                      "fail":  2,
+                                      "skipped":  0,
+                                      "cancelled":  0,
+                                      "todo":  0,
+                                      "endedAt":  "2026-11-04T22:31:13.887Z",
+                                      "sourceUnchanged":  true,
+                                      "fingerprint":  "4ecc0d4bee8edf46fa3011bc5ded80ce2cdd081f436f4728459edc37b6b137ed",
+                                      "receiptSHA256":  "2baa69e8a5771920388e179f70aa6f178e4003bfce8a696f7548b96ba9b5ed03"
+                                  },
+    "currentDecision":  {
+                            "snapshot":  "current-v9",
+                            "functionalFingerprint":  "698f7e3f647381eef19463a5a1fd07252ed875b6a83c5789f1282129ebd97dbc",
+                            "implementation":  "queryIndexTree fixed write-tree argv reuses index-query worker on independent copy; no omission of native object validation",
+                            "liveIndexAndRefsAndLayerJSONPublication":  false,
+                            "nativeGitObjectsMayBeCreatedOrFreshened":  true,
+                            "normalPreviewAndStatusUnchanged":  true,
+                            "directedRecovery5":  {
+                                                      "tests":  62,
+                                                      "pass":  61,
+                                                      "fail":  0,
+                                                      "skipped":  1,
+                                                      "status":  "PASS",
+                                                      "fullSuiteStillPending":  true
+                                                  }
+                        }
+}

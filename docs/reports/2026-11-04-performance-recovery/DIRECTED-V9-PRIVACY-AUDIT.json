@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "kind": "independent-local-publication-audit",
+  "status": "ROOT_REVIEW_REQUIRED",
+  "startedAt": "2026-11-05T00:06:48.601Z",
+  "nonce": "2d795095-3a05-4081-9e7d-93e0abccc0b0",
+  "helper": {
+    "label": "audit-helper",
+    "bytes": 18250,
+    "sha256": "808cb5d967beb9f8f898eb5487cd2ace2c064b3fdacebb68452db2464e0bfd55"
+  },
+  "allowlist": {
+    "label": "explicit-allowlist",
+    "bytes": 936,
+    "sha256": "daebe24a64defa475e4426141ae87fd6578d712ea6825bb2e015df1a5c6c947d"
+  },
+  "scope": "Only explicit new report/projection outputs. No raw streams, workspace traversal, Git, product tests, repair or publication.",
+  "counts": {
+    "files": 1,
+    "candidates": 3,
+    "informational": 0
+  },
+  "results": [
+    {
+      "label": "recovery5-v9-public-tap",
+      "role": "projected-evidence",
+      "format": "json",
+      "input": {
+        "label": "recovery5-v9-public-tap",
+        "bytes": 54008,
+        "sha256": "7db2c2e6bd81f7c4cc1f1e278ff694b797e3c9e3172e7c8147378cfc882e9e00"
+      },
+      "valid": true,
+      "issues": [],
+      "findings": [
+        {
+          "id": "4b3f1a46ef2e12c1fcbd95508b2cbbd9249917f3a693db08f5bcd8c5e0cc8b07",
+          "kind": "WINDOWS_DRIVE_PATH",
+          "classification": "UNCLASSIFIED_ROOT_REVIEW",
+          "locator": {
+            "format": "json",
+            "structuralPath": [
+              {
+                "objectKeyIndex": 7
+              },
+              {
+                "objectKeyIndex": 0
+              }
+            ],
+            "keyOrValue": "value",
+            "offsetScope": "original decoded UTF8 string"
+          },
+          "encodingPass": 0,
+          "decodedCharacterOffset": 0,
+          "matchedValueSHA256": "836fafb1e6d8c94222b39c75a5701f27577e033dc8c423224715d81966dd0977",
+          "matchedCharacters": 10,
+          "rawValuePublished": false
+        },
+        {
+          "id": "33191f4cd19110b8aa148b2b975bba6734e109577be1a3ac452082fc2f868699",
+          "kind": "FILE_URI",
+          "classification": "UNCLASSIFIED_ROOT_REVIEW",
+          "locator": {
+            "format": "json",
+            "structuralPath": [
+              {
+                "objectKeyIndex": 7
+              },
+              {
+                "objectKeyIndex": 1
+              },
+              {
+                "arrayIndex": 3
+              }
+            ],
+            "keyOrValue": "value",
+            "offsetScope": "original decoded UTF8 string"
+          },
+          "encodingPass": 0,
+          "decodedCharacterOffset": 0,
+          "matchedValueSHA256": "de85814ad9cb4769a090f611dc4f82e7aa8aca812c00aa095d4ad459e8545880",
+          "matchedCharacters": 8,
+          "rawValuePublished": false
+        },
+        {
+          "id": "39daf4994549340c9eaee69348b196c58bc024593830d065c2e86220a77bafce",
+          "kind": "WINDOWS_DRIVE_PATH",
+          "classification": "UNCLASSIFIED_ROOT_REVIEW",
+          "locator": {
+            "format": "json",
+            "structuralPath": [
+              {
+                "objectKeyIndex": 10
+              },
+              {
+                "objectKeyIndex": 0
+              }
+            ],
+            "keyOrValue": "value",
+            "offsetScope": "original decoded UTF8 string"
+          },
+          "encodingPass": 0,
+          "decodedCharacterOffset": 0,
+          "matchedValueSHA256": "836fafb1e6d8c94222b39c75a5701f27577e033dc8c423224715d81966dd0977",
+          "matchedCharacters": 10,
+          "rawValuePublished": false
+        }
+      ],
+      "nodesVisited": 1562,
+      "stringsInspected": 2019,
+      "findingLimitReached": false,
+      "decision": "Findings are candidates; only root can classify technical examples, public installations or private data."
+    }
+  ],
+  "provenance": {
+    "inputReceipts": [
+      {
+        "label": "stage-marker",
+        "bytes": 190,
+        "sha256": "e53c7d41452ac85d784b86a2b50c2dde084ae39c9504be3f841f69a5b342d2a3"
+      },
+      {
+        "label": "benchmark-FINAL",
+        "bytes": 42128,
+        "sha256": "ed12eb5a3197c709e0e21c093774ce2c8456edc5406fd1b68f90ce871440c4a3"
+      },
+      {
+        "label": "explicit-allowlist",
+        "bytes": 936,
+        "sha256": "daebe24a64defa475e4426141ae87fd6578d712ea6825bb2e015df1a5c6c947d"
+      },
+      {
+        "label": "projection-marker-0",
+        "bytes": 339,
+        "sha256": "7c9c32c22c84685b1ba5b5aec1b1b4ff2d853bcf1346fde58c99439043284a32"
+      },
+      {
+        "label": "recovery5-v9-public-tap",
+        "bytes": 54008,
+        "sha256": "7db2c2e6bd81f7c4cc1f1e278ff694b797e3c9e3172e7c8147378cfc882e9e00"
+      },
+      {
+        "label": "audit-helper",
+        "bytes": 18250,
+        "sha256": "808cb5d967beb9f8f898eb5487cd2ace2c064b3fdacebb68452db2464e0bfd55"
+      }
+    ],
+    "unchangedRechecked": true,
+    "benchmarkQuietRequired": true
+  },
+  "limits": {
+    "maxFileBytes": 67108864,
+    "maxTotalBytes": 268435456,
+    "maxStringCharacters": 8388608,
+    "maxNodes": 200000,
+    "maxDepth": 64,
+    "maxFindings": 10000,
+    "maxDecodePasses": 4
+  },
+  "policy": {
+    "inputsEdited": false,
+    "automaticRedaction": false,
+    "automaticRemoval": false,
+    "examplesClassifiedAutomatically": false,
+    "rootClassificationRequired": true,
+    "rawMatchedValuesPublished": false,
+    "numericOwnedPidsAreNotSecretsByThemselves": true
+  },
+  "limitations": [
+    "Candidate scan, not proof of universal absence of secrets or personal information.",
+    "No base64/compression/archive decoding, natural-language identity inference or reconstruction of hidden data.",
+    "Derived offsets refer to decoded views; JSON structural paths use object-key order and array indices without echoing private key names.",
+    "Public installation paths and intentional technical examples remain findings until root classification; evidence is never removed automatically.",
+    "A NO_CANDIDATES result is not a product PASS, suite result, remote CI check or authorization to publish."
+  ],
+  "endedAt": "2026-11-05T00:06:48.615Z"
+}

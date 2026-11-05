@@ -6,6 +6,7 @@ import crypto from 'node:crypto';
 import {project,createFixture,cleanupFixture,isolatedEnvironment,context,fileHash,json,relative} from '../../../scripts/git-compat/lib.mjs';
 import {validateOutputRoot} from '../../../scripts/git-compat/output-root.mjs';
 import {inspectZipNames} from './zip-fixtures.mjs';
+import {externalFixtureParent} from '../../../scripts/git-compat/fixture-parent.mjs';
 
 // The process cwd deliberately remains short. This exercises long file I/O,
 // not CreateProcess's separate Windows working-directory limitation.
@@ -17,7 +18,7 @@ test('Windows ZIP preserves paths beyond MAX_PATH without changing policy',{skip
     const parent=validateOutputRoot(evidenceParent,{projectRoot:project});fs.mkdirSync(parent,{recursive:true});
     evidenceRoot=path.join(parent,'zip-long-'+crypto.randomUUID());fs.mkdirSync(evidenceRoot);
   }
-  const fixture=createFixture(path.join(project,'.workshop/git-compat-infra'),'zl');
+  const fixture=createFixture(externalFixtureParent(project),'zl');
   const artifactDir=evidenceRoot??path.join(fixture.root,'evidence');
   const c=context({root:fixture.root,repo:path.join(fixture.root,'cwd'),gitPath:process.execPath,env:isolatedEnvironment(fixture.root,process.execPath),artifactDir,packageRoot:evidenceRoot??fixture.root,fixture});
   const ps=path.join(c.env.SystemRoot,'System32/WindowsPowerShell/v1.0/powershell.exe');

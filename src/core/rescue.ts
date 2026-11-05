@@ -7,7 +7,8 @@ import { validOwnershipMetadata, type WorkspaceOwnership } from './ownership-sta
 import { discover, git, treeEntries, assertSupported } from './git.js';
 import { assertNoCollisions, validatePath } from './paths.js';
 import { assertNoPathLinks, inspectLayerLayout } from './layout.js';
-import { atomicJSON, fingerprint, listTransactions, readJSON } from './storage.js';
+import { atomicJSON, fingerprint, readTransaction, readJSON, sameFingerprint } from './storage.js';
+import { assertRecoveryMaterializationState, recoveryWorkspaceImages, validateRecovery } from './recovery.js';
 
 const codeOf = (error: unknown) => (error as NodeJS.ErrnoException)?.code;
 interface Check { name: string; ok: boolean; detail: unknown }
@@ -97,10 +98,47 @@ export async function doctorRepository(root: string, fsck = false): Promise<{
       if (workspace?.branchLayer && repo.branch !== 'layer/' + workspace.branchLayer) throw new LabError('EXTERNAL_HEAD', 'HEAD saiu do modo Layer como branch fora da ferramenta; o contexto foi preservado.');
       return { role: workspace?.branchLayer ? 'layer-branch' : 'traditional', branch: repo.branch, branchLayer: workspace?.branchLayer ?? null };
     });
+    const pendingPlans: any[] = [];
     await check('Journals: ' + directory, async () => {
-      const pending = await listTransactions(directory); transactions.push(...pending);
-      if (pending.length) throw new LabError('RECOVERY_REQUIRED', 'Transações incompletas foram preservadas.', { ids: pending.map(entry => entry.id) });
+      const folder = path.join(directory, 'transactions');
+      await assertNoPathLinks(folder);
+      let entries: import('node:fs').Dirent[];
+      try { entries = await fs.readdir(folder, { withFileTypes: true }); }
+      catch (error) { if (codeOf(error) === 'ENOENT') return { pending: 0 }; throw error; }
+      let invalidEntries = 0;
+      for (const entry of entries.sort((a, b) => a.name.localeCompare(b.name))) {
+        let journal: any;
+        try {
+          if (entry.isSymbolicLink() || !entry.isDirectory() || !/^[A-Za-z0-9_-]+$/.test(entry.name)) throw new LabError('METADATA_INVALID', 'Entrada inesperada no diretório de transações. Ela foi preservada para inspeção.', { path: path.join(folder, entry.name) });
+          journal = await readTransaction(directory, entry.name);
+        } catch (error) {
+          invalidEntries++;
+          await check('Journal: ' + path.join(folder, entry.name), async () => { throw error; });
+          continue;
+        }
+        // Retained completed history is still schema-checked, without flooding
+        // the diagnostic response with one successful check per old operation.
+        if (journal.state === 'completed') continue;
+        pendingPlans.push(journal); transactions.push(journal);
+        await check('Journal: ' + path.join(folder, entry.name), async () => ({ id: journal.id, kind: journal.kind, state: journal.state }));
+      }
+      if (invalidEntries) throw new LabError('METADATA_INVALID', 'Journals inválidos foram preservados. Os demais planos continuam diagnosticados individualmente.', { invalidEntries, pending: pendingPlans.map(entry => entry.id) });
+      if (pendingPlans.length) throw new LabError('RECOVERY_REQUIRED', 'Transações incompletas foram preservadas.', { ids: pendingPlans.map(entry => entry.id) });
       return { pending: 0 };
+    });
+    // A valid plan is not a promise that recovery can finish. Ref/index locks,
+    // later edits and concurrent changes are still revalidated by recover().
+    for (const journal of pendingPlans) await check('Plano de recuperação: ' + journal.id, async () => {
+      await validateRecovery(repo, directory, journal);
+      const images = await recoveryWorkspaceImages(repo, directory, journal);
+      for (const file of journal.recovery.files) {
+        const current = await fingerprint(file.path);
+        assertRecoveryMaterializationState(repo, directory, file, current);
+        if (!sameFingerprint(current, file.before) && (!file.after || !sameFingerprint(current, file.after)) && !images.some(image => image.path === file.path && sameFingerprint(current, image.fingerprint))) {
+          throw new LabError('RECOVERY_CONFLICT', 'Mudança posterior detectada; arquivo, journal e backups preservados.', { reason: 'workspace-changed-after-transaction', path: file.path });
+        }
+      }
+      return { id: journal.id, kind: journal.kind, state: journal.state, planValid: true, currentImagesCompatible: true, scope: 'validated-plan-backups-and-current-images-only', recoveryAttempted: false };
     });
     // A retained legacy is historical evidence, not a second live index/ref set.
     for (const layer of (!selectedLayout || selectedLayout === directory ? registry?.layers ?? [] : [])) {

@@ -95,7 +95,7 @@ export async function git(cwd: string, args: string[], options: GitOptions = {})
   const localArgs = [...args];
   if (diffCommands.has(localArgs[0]!)) localArgs.splice(1, 0, '--no-ext-diff', '--no-textconv');
   // A pure rev-parse query must see the real hooks location for diagnostics.
-  const inspectHooks = args[0] === 'rev-parse' && args.includes('--git-path') && args.at(-1) === 'hooks';
+  const inspectHooks = args[0] === 'rev-parse' && args.some((arg, index) => arg === '--git-path' && args[index + 1] === 'hooks');
   const globalArgs = [
     '--no-pager', '-c', 'color.ui=false', '-c', 'core.quotepath=false',
     '-c', 'core.fsmonitor=false', ...(inspectHooks ? [] : ['-c', `core.hooksPath=${DISABLED_GIT_HOOKS}`]),
@@ -174,17 +174,26 @@ export async function discover(cwd: string): Promise<RepoInfo> {
     throw new LabError('BARE_REPOSITORY', 'Repositórios bare não possuem workspace e não são suportados.');
   }
   const root = await realpath(await gitText(cwd, ['rev-parse', '--show-toplevel']));
-  const internal = async (name: string): Promise<string> =>
-    path.resolve(root, await gitText(root, ['rev-parse', '--path-format=absolute', '--git-path', name]));
-  const [gitDir, commonDir, exclude, index, branch, headResult] = await Promise.all([
-    gitText(root, ['rev-parse', '--absolute-git-dir']),
-    gitText(root, ['rev-parse', '--path-format=absolute', '--git-common-dir']),
-    internal('info/exclude'), internal('index'),
+  // Resolve these paths together, after canonicalizing the workspace just as
+  // before. Nothing is cached: another operation discovers the current Git
+  // topology again, including gitfiles and separate Git directories.
+  const [locations, branch, headResult] = await Promise.all([
+    gitText(root, ['rev-parse', '--path-format=absolute', '--absolute-git-dir', '--git-common-dir', '--git-path', 'info/exclude', '--git-path', 'index']),
     gitText(root, ['symbolic-ref', '--quiet', '--short', 'HEAD'], { ok: [0, 1] }),
     git(root, ['rev-parse', '--verify', 'HEAD^{commit}'], { ok: [0, 128] }),
   ]);
-  return { root, gitDir: path.resolve(gitDir), commonDir: path.resolve(commonDir), exclude, index,
+  const [gitDir, commonDir, exclude, index] = resolvedPaths(root, locations, 4);
+  return { root, gitDir: gitDir!, commonDir: commonDir!, exclude: exclude!, index: index!,
     branch, head: headResult.code === 0 ? headResult.stdout.toString('utf8').trim() : '' };
+}
+
+/** rev-parse emits one line per requested path; reject incomplete output. */
+function resolvedPaths(root: string, output: string, count: number): string[] {
+  const paths = output.split(/\r?\n/u);
+  if (paths.length !== count || paths.some(value => !value)) {
+    throw new LabError('INVALID_GIT_OUTPUT', 'O Git retornou caminhos internos incompletos ou ambíguos.');
+  }
+  return paths.map(value => path.resolve(root, value));
 }
 
 /** Raw config excludes our command-scope safety overrides so requirements remain visible. */
@@ -239,20 +248,27 @@ export async function assertSupported(repoOrPath: RepoInfo | string, requireComm
     }
     if (key === 'core.splitindex' && truthy(value)) throw new LabError('SPLIT_INDEX', 'Split index não foi habilitado para Layers na v0.1.');
   }
+  const operations = ['MERGE_HEAD', 'CHERRY_PICK_HEAD', 'REVERT_HEAD', 'REBASE_HEAD', 'rebase-merge', 'rebase-apply', 'sequencer', 'BISECT_LOG'];
+  const incomplete = ['shallow', 'objects/info/alternates', 'info/grafts'];
+  const internalNames = [...operations, ...incomplete, 'hooks', 'info/attributes'];
+  // One fresh query replaces thirteen child processes. Keep every filesystem
+  // check, and inspect the real hooks path even in this grouped pure query.
+  const locations = resolvedPaths(repo.root, await gitText(repo.root, ['rev-parse', '--path-format=absolute', ...internalNames.flatMap(name => ['--git-path', name])]), internalNames.length);
+  const internal = new Map(internalNames.map((name, index) => [name, locations[index]!]));
   const exists = async (name: string): Promise<boolean> => {
-    const absolute = await gitText(repo.root, ['rev-parse', '--path-format=absolute', '--git-path', name]);
+    const absolute = internal.get(name)!;
     try { await lstat(absolute); return true; }
     catch (error) { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return false; throw error; }
   };
-  for (const name of ['MERGE_HEAD', 'CHERRY_PICK_HEAD', 'REVERT_HEAD', 'REBASE_HEAD', 'rebase-merge', 'rebase-apply', 'sequencer', 'BISECT_LOG']) {
+  for (const name of operations) {
     if (await exists(name)) throw new LabError('GIT_OPERATION_IN_PROGRESS', `Operação Git externa em andamento: ${name}`);
   }
-  for (const name of ['shallow', 'objects/info/alternates', 'info/grafts']) {
+  for (const name of incomplete) {
     if (await exists(name)) throw new LabError('INCOMPLETE_REPOSITORY', `Repositório incompleto/alternativo não suportado: ${name}`);
   }
   const replaceRefs = await gitText(repo.root, ['for-each-ref', '--format=%(refname)', 'refs/replace/']);
   if (replaceRefs) throw new LabError('REPLACE_OBJECTS', 'Referências de substituição de objetos não são suportadas.');
-  const hooksDir = await gitText(repo.root, ['rev-parse', '--path-format=absolute', '--git-path', 'hooks']);
+  const hooksDir = internal.get('hooks')!;
   const hooksConfig = config.get('core.hookspath')?.at(-1);
   const hooksDisabled = hooksConfig === DISABLED_GIT_HOOKS || hooksConfig === os.devNull ||
     (process.platform === 'win32' && /^nul$/iu.test(hooksConfig ?? ''));
@@ -276,7 +292,7 @@ export async function assertSupported(repoOrPath: RepoInfo | string, requireComm
   const objects = await gitText(repo.root, ['rev-list', '--objects', '--all', '--missing=print']);
   if (objects.split('\n').some(line => line.startsWith('?'))) throw new LabError('MISSING_OBJECTS', 'Há objetos Git ausentes; Layers foram suspensas.');
   // An attribute control in the private info directory applies to every projection.
-  const infoAttributes = await gitText(repo.root, ['rev-parse', '--path-format=absolute', '--git-path', 'info/attributes']);
+  const infoAttributes = internal.get('info/attributes')!;
   try {
     const text = await readFile(infoAttributes, 'utf8');
     if (/\b(?:filter|working-tree-encoding|ident)(?:=|\s|$)/mu.test(text)) {

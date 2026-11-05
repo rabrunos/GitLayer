@@ -1,0 +1,806 @@
+{
+  "schema": 1,
+  "kind": "public-flat-node-tap-results",
+  "phase": "isolated-reproduction",
+  "originalStatus": "PASS",
+  "startedAt": "2026-11-04T17:15:35.686Z",
+  "endedAt": "2026-11-04T17:17:46.606Z",
+  "source": {
+    "inputs": [
+      "src",
+      "scripts",
+      "tests",
+      "package-lock.json",
+      "package.json",
+      "tsconfig.debug.json",
+      "tsconfig.json"
+    ],
+    "beforeFingerprint": "f72502adcfd332e3109ad3e82ec845731f376cfc41d5e4a44be5ce89a6c4a825",
+    "afterFingerprint": "f72502adcfd332e3109ad3e82ec845731f376cfc41d5e4a44be5ce89a6c4a825",
+    "sourceUnchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "count": 205,
+    "archive": "source/"
+  },
+  "command": {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "argv": [
+      "--import",
+      "tsx",
+      "--import",
+      "file:///<STAGE2>/repro-observer-preload.mjs",
+      "--test",
+      "--test-concurrency=1",
+      "--test-timeout=900000",
+      "--test-name-pattern",
+      ".*",
+      "--test-reporter=spec",
+      "--test-reporter-destination=stdout",
+      "--test-reporter=tap",
+      "--test-reporter-destination=stderr",
+      "tests/integration/index-query.test.ts",
+      "tests/unit/assert-bytes.test.ts",
+      "tests/integration/performance-streaming.test.ts"
+    ],
+    "timeoutMs": 3600000,
+    "declaredTestBudgetMs": 900000,
+    "scope": "Explicit directed file selection with all original assertions, scales and declared per-test budgets preserved; not the full suite."
+  },
+  "process": {
+    "pid": "<OWNED_PID>",
+    "exitCode": 0,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "timeoutMs": 3600000,
+    "durationMs": 129611,
+    "termination": null
+  },
+  "phaseError": null,
+  "metadata": {
+    "officialGit": "C:\\Program Files\\Git\\cmd\\git.exe",
+    "environmentPolicy": "Isolated HOME/USERPROFILE/XDG/Git identity/config/credentials/TEMP. Exact declared test budget and assertions from the identified current source. One test file/case at a time. All evidence retained."
+  },
+  "complete": true,
+  "completeScope": "Only the complete consistent unindented Node summary in a verified final trailer matching the terminal result.summary. This flag is not a product PASS or a hierarchy claim.",
+  "nodeFinalSummary": {
+    "format": "Node.js TAP final summary",
+    "counts": {
+      "tests": 25,
+      "suites": 0,
+      "pass": 25,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 129536.6691
+    },
+    "complete": true,
+    "consistent": true
+  },
+  "recordedSummary": {
+    "format": "Node.js TAP final summary",
+    "counts": {
+      "tests": 25,
+      "suites": 0,
+      "pass": 25,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 129536.6691
+    },
+    "complete": true,
+    "consistent": true
+  },
+  "summaryMatchesRecorded": true,
+  "duplicateSummaryKeys": [],
+  "summaryTrailer": {
+    "firstLine": 182,
+    "lastLine": 189,
+    "followsAllParsedResults": true,
+    "trailingContent": [],
+    "verifiedFinalTrailer": true
+  },
+  "parsedResultCount": 25,
+  "resultCountMatchesDeclaredTests": true,
+  "results": [
+    {
+      "line": 3,
+      "indent": 0,
+      "indentText": "",
+      "id": "1",
+      "status": "ok",
+      "name": "index query preserves exact MAIN bytes with clean stat-only A and staged B versus disk C",
+      "rawName": "index query preserves exact MAIN bytes with clean stat-only A and staged B versus disk C",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1976.6482,
+      "durationText": "1976.6482",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 4,
+        "lastLine": 7,
+        "closed": true,
+        "sha256": "b7d773485c01a92b8d85d82383f837b23ae108b11b3aa5ea9e91480d4f1096a4",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 10,
+      "indent": 0,
+      "indentText": "",
+      "id": "2",
+      "status": "ok",
+      "name": "index query preserves exact private bytes with clean stat-only A and staged B versus disk C",
+      "rawName": "index query preserves exact private bytes with clean stat-only A and staged B versus disk C",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1509.4076,
+      "durationText": "1509.4076",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 11,
+        "lastLine": 14,
+        "closed": true,
+        "sha256": "80df78f7c4efa121d7bc5a80137e5d46a3497a57ae105d75c8631e3bbe456fd5",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 17,
+      "indent": 0,
+      "indentText": "",
+      "id": "3",
+      "status": "ok",
+      "name": "Core preview and patch queries keep private MAIN metadata refs and worktree byte-identical with zero stat entries",
+      "rawName": "Core preview and patch queries keep private MAIN metadata refs and worktree byte-identical with zero stat entries",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 29320.0358,
+      "durationText": "29320.0358",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 18,
+        "lastLine": 21,
+        "closed": true,
+        "sha256": "f01c06a7282850d9e25d5efd3c696e5c71f66d300e6bdfc947800ba0efe618eb",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 25,
+      "indent": 0,
+      "indentText": "",
+      "id": "4",
+      "status": "ok",
+      "name": "index query preserves an existing real index lock and retains query errors for inspection",
+      "rawName": "index query preserves an existing real index lock and retains query errors for inspection",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 922.3481,
+      "durationText": "922.3481",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 26,
+        "lastLine": 29,
+        "closed": true,
+        "sha256": "305be751bab3455e8f7abc17265b9da4671f5b38c1a0bd9cda6b9651d6b0ce80",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 33,
+      "indent": 0,
+      "indentText": "",
+      "id": "5",
+      "status": "ok",
+      "name": "index query of an absent unborn MAIN does not create the real index or mutate refs bytes",
+      "rawName": "index query of an absent unborn MAIN does not create the real index or mutate refs bytes",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 575.4436,
+      "durationText": "575.4436",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 34,
+        "lastLine": 37,
+        "closed": true,
+        "sha256": "1b4a90d9bdfd46884ff897dd67fa611e184743a01ca010d0b7bdd25f7587a53c",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 40,
+      "indent": 0,
+      "indentText": "",
+      "id": "6",
+      "status": "ok",
+      "name": "index query refuses TEMP in the workspace or Git directory before making any temporary or repository change",
+      "rawName": "index query refuses TEMP in the workspace or Git directory before making any temporary or repository change",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1524.5311,
+      "durationText": "1524.5311",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 41,
+        "lastLine": 44,
+        "closed": true,
+        "sha256": "f68d03393dab203a7625a5cb8207df2d85e2c90745aed3f3c9982e69627dcefb",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 47,
+      "indent": 0,
+      "indentText": "",
+      "id": "7",
+      "status": "ok",
+      "name": "index query rejects cached revisions output redirects and unsafe paths before any query side effects",
+      "rawName": "index query rejects cached revisions output redirects and unsafe paths before any query side effects",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1266.753,
+      "durationText": "1266.753",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 48,
+        "lastLine": 51,
+        "closed": true,
+        "sha256": "af12ca9a2694326a5de2f207eefcaa15039e6f2f7ea5796bd0c1a2ccc7618857",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 54,
+      "indent": 0,
+      "indentText": "",
+      "id": "8",
+      "status": "ok",
+      "name": "index query refuses a real owned writer at the copy boundary and retains later evidence",
+      "rawName": "index query refuses a real owned writer at the copy boundary and retains later evidence",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1316.9446,
+      "durationText": "1316.9446",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 55,
+        "lastLine": 58,
+        "closed": true,
+        "sha256": "2621e3813bbd377e4f545c37f18fc06063df0e431afa8508648c3bc0588c4d86",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 62,
+      "indent": 0,
+      "indentText": "",
+      "id": "9",
+      "status": "ok",
+      "name": "index query refuses a real owned writer at the git boundary and retains later evidence",
+      "rawName": "index query refuses a real owned writer at the git boundary and retains later evidence",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2085.4341,
+      "durationText": "2085.4341",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 63,
+        "lastLine": 66,
+        "closed": true,
+        "sha256": "44b3cd32364ed2bf74ef37a5316b66c346e7036822c5886ade1a1714f15bda93",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 70,
+      "indent": 0,
+      "indentText": "",
+      "id": "10",
+      "status": "ok",
+      "name": "index query refuses a real owned writer at the lock boundary and retains later evidence",
+      "rawName": "index query refuses a real owned writer at the lock boundary and retains later evidence",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1054.1639,
+      "durationText": "1054.1639",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 71,
+        "lastLine": 74,
+        "closed": true,
+        "sha256": "b18ceb9bd3322ea421cc1dc73b2ed7955297f0d57f874fabf8dcb82ea4001ce1",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 78,
+      "indent": 0,
+      "indentText": "",
+      "id": "11",
+      "status": "ok",
+      "name": "index query preserves scratch-lock evidence appearing during the Git query without broad cleanup",
+      "rawName": "index query preserves scratch-lock evidence appearing during the Git query without broad cleanup",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1228.2979,
+      "durationText": "1228.2979",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 79,
+        "lastLine": 82,
+        "closed": true,
+        "sha256": "238ecfe78e646642a3f3fc03454c3d26763e3edd446c11c7740157b2a356d242",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 86,
+      "indent": 0,
+      "indentText": "",
+      "id": "12",
+      "status": "ok",
+      "name": "index query preserves unknown evidence appearing during the Git query without broad cleanup",
+      "rawName": "index query preserves unknown evidence appearing during the Git query without broad cleanup",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1520.0384,
+      "durationText": "1520.0384",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 87,
+        "lastLine": 90,
+        "closed": true,
+        "sha256": "218ebd69acddfad917f1e31b80be25a6b00ad08c4c4afa6830e1bb0f1f69b209",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 94,
+      "indent": 0,
+      "indentText": "",
+      "id": "13",
+      "status": "ok",
+      "name": "index query reports absent scratch evidence honestly after a simulated EIO following successful owned rmdir",
+      "rawName": "index query reports absent scratch evidence honestly after a simulated EIO following successful owned rmdir",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1924.804,
+      "durationText": "1924.804",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 95,
+        "lastLine": 98,
+        "closed": true,
+        "sha256": "e748daf1f1cce371797fe764cc96aa3ac24b51ab0c311b69e6810ec6e600caa5",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 102,
+      "indent": 0,
+      "indentText": "",
+      "id": "14",
+      "status": "ok",
+      "name": "streamed fingerprints and exclusive copies preserve exact binary bytes, physical modes and independent backups",
+      "rawName": "streamed fingerprints and exclusive copies preserve exact binary bytes, physical modes and independent backups",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 158.9108,
+      "durationText": "158.9108",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 103,
+        "lastLine": 106,
+        "closed": true,
+        "sha256": "e1abc4edd8b42a7b4c6a41b3d029c414c25c24f175d4b61e7a2bd982516c7c67",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 109,
+      "indent": 0,
+      "indentText": "",
+      "id": "15",
+      "status": "ok",
+      "name": "100 MiB fingerprint, independent copy and durable backup complete below a 64 MiB payload-memory budget in an owned child",
+      "rawName": "100 MiB fingerprint, independent copy and durable backup complete below a 64 MiB payload-memory budget in an owned child",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1737.1508,
+      "durationText": "1737.1508",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 110,
+        "lastLine": 113,
+        "closed": true,
+        "sha256": "5e8aab62b20c236aadbd304ca009716d9b77ef5cbfc09fff05a683c6d16145b3",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 117,
+      "indent": 0,
+      "indentText": "",
+      "id": "16",
+      "status": "ok",
+      "name": "repeated activation preserves committed A, staged B, disk C, main index and independent native history",
+      "rawName": "repeated activation preserves committed A, staged B, disk C, main index and independent native history",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 29388.9135,
+      "durationText": "29388.9135",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 118,
+        "lastLine": 121,
+        "closed": true,
+        "sha256": "ad21b77c84d46cf97fa2d651ae5ace52b2030177f51691c7788f5d9bf298fd59",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 124,
+      "indent": 0,
+      "indentText": "",
+      "id": "17",
+      "status": "ok",
+      "name": "persistent Core detects fresh native main-index contamination and external Layer refs after grouped discovery",
+      "rawName": "persistent Core detects fresh native main-index contamination and external Layer refs after grouped discovery",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 17682.143,
+      "durationText": "17682.143",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 125,
+        "lastLine": 128,
+        "closed": true,
+        "sha256": "f606420c2d161f5fb515a42c710b52e503a7776ffca6600cc15fed6ec7b5401d",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 131,
+      "indent": 0,
+      "indentText": "",
+      "id": "18",
+      "status": "ok",
+      "name": "activation refuses a prepared private source changed after its materialization snapshot without publishing altered bytes",
+      "rawName": "activation refuses a prepared private source changed after its materialization snapshot without publishing altered bytes",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 13446.3872,
+      "durationText": "13446.3872",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 132,
+        "lastLine": 135,
+        "closed": true,
+        "sha256": "e654a9a7c32103c75588cd04093a5a16dbbeddb899267eec0247a499902c1b90",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 138,
+      "indent": 0,
+      "indentText": "",
+      "id": "19",
+      "status": "ok",
+      "name": "Layer status and default diff with 1200 indexed paths use bounded argv and preserve staged B versus disk C",
+      "rawName": "Layer status and default diff with 1200 indexed paths use bounded argv and preserve staged B versus disk C",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 19613.0061,
+      "durationText": "19613.0061",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 139,
+        "lastLine": 142,
+        "closed": true,
+        "sha256": "61bfd42f500000019846e157b81f50cecde8d16923034d426747cfc29ca564f2",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 145,
+      "indent": 0,
+      "indentText": "",
+      "id": "20",
+      "status": "ok",
+      "name": "bounded byte assertion compares separate equal buffers and empty buffers exactly",
+      "rawName": "bounded byte assertion compares separate equal buffers and empty buffers exactly",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.862,
+      "durationText": "0.862",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 146,
+        "lastLine": 149,
+        "closed": true,
+        "sha256": "3f1c03143b481380f1dfe9292daaa2b415747f025987a7a3d9baa77593bbfcae",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 151,
+      "indent": 0,
+      "indentText": "",
+      "id": "21",
+      "status": "ok",
+      "name": "bounded byte assertion diagnoses length without attaching buffers",
+      "rawName": "bounded byte assertion diagnoses length without attaching buffers",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2.6169,
+      "durationText": "2.6169",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 152,
+        "lastLine": 155,
+        "closed": true,
+        "sha256": "7ecd8377067cd719abad984cd4e87b3f8bc2a113e922374fb8820a12936f440c",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 157,
+      "indent": 0,
+      "indentText": "",
+      "id": "22",
+      "status": "ok",
+      "name": "bounded byte assertion diagnoses front without attaching buffers",
+      "rawName": "bounded byte assertion diagnoses front without attaching buffers",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.3389,
+      "durationText": "0.3389",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 158,
+        "lastLine": 161,
+        "closed": true,
+        "sha256": "d4760c436b693d2e6e9260bf061f89d57352ea3c06fc58985ddc85acd54c6f12",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 163,
+      "indent": 0,
+      "indentText": "",
+      "id": "23",
+      "status": "ok",
+      "name": "bounded byte assertion diagnoses middle without attaching buffers",
+      "rawName": "bounded byte assertion diagnoses middle without attaching buffers",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.2613,
+      "durationText": "0.2613",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 164,
+        "lastLine": 167,
+        "closed": true,
+        "sha256": "b1e98defda6f05434bbb615bc2b927fe7e249203ef20ec58c1130ed0ac7f35c2",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 169,
+      "indent": 0,
+      "indentText": "",
+      "id": "24",
+      "status": "ok",
+      "name": "bounded byte assertion diagnoses end without attaching buffers",
+      "rawName": "bounded byte assertion diagnoses end without attaching buffers",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.3205,
+      "durationText": "0.3205",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 170,
+        "lastLine": 173,
+        "closed": true,
+        "sha256": "75b59252c48e56abaceecbf145d40d6165776239b38c1e265cd68c6595d61277",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 175,
+      "indent": 0,
+      "indentText": "",
+      "id": "25",
+      "status": "ok",
+      "name": "byte assertion failures keep diagnostics and observed RSS bounded in an owned heap-limited child",
+      "rawName": "byte assertion failures keep diagnostics and observed RSS bounded in an owned heap-limited child",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 143.9035,
+      "durationText": "143.9035",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 176,
+        "lastLine": 179,
+        "closed": true,
+        "sha256": "cef299f4a17a17af49d6938c3629d85fde4a424bdcb226ec13a06da961ce3965",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    }
+  ],
+  "unparsedResultLikeLines": [],
+  "hierarchyInferred": false,
+  "campaignsAggregated": false,
+  "provenance": {
+    "helper": {
+      "bytes": 22023,
+      "sha256": "af63c5be113ece5ae6905a47b7355a79314f7983de1f81d4659d230dc1547cd9"
+    },
+    "result": {
+      "bytes": 4034,
+      "sha256": "860131f4f44f52ff8465da2dc84268a25b0b08da67404e0961a3b0da38ad174c"
+    },
+    "tap": {
+      "bytes": 30427,
+      "sha256": "fe8975496f5c1a1cd6b13636704e54b8ea4ad175845286628461fb181c567690"
+    },
+    "started": {
+      "bytes": 2656,
+      "sha256": "b9176024ca4530a7588337afe6b9495bc6e2236193ecb5c404577c3c43104bb7"
+    },
+    "rawStreamsPublished": false,
+    "rawDiagnosticValuesOmitted": [
+      "location",
+      "stack",
+      "expected",
+      "actual",
+      "operator",
+      "fixture diagnostics and other comments"
+    ],
+    "redactions": [
+      "Known stage/temp/profile/source roots, including repeated escaped separators",
+      "Owned process identifiers"
+    ],
+    "unknownAbsolutePathPolicy": "Refuse unknown absolute Windows/UNC and profile paths; only observed Git/Node installation roots may remain."
+  },
+  "limitations": [
+    "Flat rows retain original indentation and IDs without inventing parent/child relations.",
+    "Observed PASS/FAIL maps only ok/not ok; explicit SKIP/TODO directives are preserved separately, never converted into an environment classification.",
+    "Only immediately associated Node-style YAML diagnostics are parsed. Unsupported/ambiguous fields retain line ranges and hashes as unparsed metadata.",
+    "Cancelled parent/child semantics are not reconstructed; Node final totals remain authoritative for the recorded campaign.",
+    "A row-count mismatch or parsing ambiguity is declared and never corrected by inventing or removing results.",
+    "No totals are combined with a retry, reproduction, focus or other campaign."
+  ]
+}

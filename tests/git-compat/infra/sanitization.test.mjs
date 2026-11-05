@@ -4,12 +4,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { sanitizeArtifactRoot } from '../../../scripts/git-compat/sanitize-history.mjs';
 import { project, createFixture, cleanupFixture, fileHash, json, walk, relative } from '../../../scripts/git-compat/lib.mjs';
+import { externalFixtureParent } from '../../../scripts/git-compat/fixture-parent.mjs';
 
 const snapshot = root => Object.fromEntries(walk(root).map(file => [relative(root, file), fileHash(file)]));
 const classification = result => ({ execution_status: result.execution_status, product_status: result.product_status, known_failure: result.known_failure, known_issue_id: result.known_issue_id, failure_category: result.failure_category, assertion_passed: result.assertions.map(a => a.passed) });
 
 test('portable offline redaction preserves raw evidence, binary/source bytes, failures and updates declared hashes', t => {
-  const f = createFixture(path.join(project, '.workshop/git-compat-infra'), 'redaction'); t.after(() => cleanupFixture(f));
+  const f = createFixture(externalFixtureParent(project), 'redaction'); t.after(() => cleanupFixture(f));
   const root = path.join(f.root, 'artifacts'), dir = path.join(root, 'runs/r1/cases/c1'), backup = path.join(f.root, 'raw'); fs.mkdirSync(dir, { recursive: true });
   const host = 'C:\\Users\\Synthetic Person', stream = path.join(dir, '1.stderr'); fs.writeFileSync(stream, 'failure at ' + host + '\\file; S-1-5-21-123-456\n');
   const raw = fs.readFileSync(stream), result = { execution_status: 'FAIL', assertions: [{ passed: false, expected: 'preserved', observed: 'not preserved' }], error: 'failure at ' + host, evidence: [{ path: 'runs/r1/cases/c1/1.stderr', sha256: fileHash(stream), bytes: raw.length }] };
@@ -24,7 +25,7 @@ test('portable offline redaction preserves raw evidence, binary/source bytes, fa
 });
 
 test('existing summaries and nested result homonyms are generic text while authoritative hashes and classifications survive', t => {
-  const f = createFixture(path.join(project, '.workshop/git-compat-infra'), 'redaction-layout'); t.after(() => cleanupFixture(f));
+  const f = createFixture(externalFixtureParent(project), 'redaction-layout'); t.after(() => cleanupFixture(f));
   const root = path.join(f.root, 'artifacts'), dir = path.join(root, 'runs/r-layout/cases/c-authority'), backup = path.join(f.root, 'raw');
   fs.mkdirSync(dir, { recursive: true });
   const host = 'C:\\Users\\Synthetic Person';
@@ -65,7 +66,7 @@ test('existing summaries and nested result homonyms are generic text while autho
 });
 
 test('single-run input uses artifact-base paths and leaves nearby existing summaries untouched', t => {
-  const f = createFixture(path.join(project, '.workshop/git-compat-infra'), 'redaction-run'); t.after(() => cleanupFixture(f));
+  const f = createFixture(externalFixtureParent(project), 'redaction-run'); t.after(() => cleanupFixture(f));
   const base = path.join(f.root, 'artifacts'), root = path.join(base, 'runs/one'), dir = path.join(root, 'cases/c1'), backup = path.join(f.root, 'raw'), host = 'C:\\Users\\Synthetic Person';
   const generic = path.join(dir, 'evidence/result.json'); json(generic, { literal: host, execution_status: 'FAIL', evidence: [{ path: 'unrelated/missing' }] });
   const nearby = path.join(base, 'existing/e1/results.json'); json(nearby, { id: 'e1', path: host, results: [{ exit: 1 }] }); const nearbyRaw = fs.readFileSync(nearby);
@@ -91,7 +92,7 @@ test('invalid authoritative shapes fail before text writes in dry-run and real m
     { kind: 'run-invalid-evidence-path', run: [{ evidence: [{ path: null }] }], expected: /evidence entries require a path/ },
   ];
   for (const item of invalid) {
-    const f = createFixture(path.join(project, '.workshop/git-compat-infra'), 'redaction-invalid'); t.after(() => cleanupFixture(f));
+    const f = createFixture(externalFixtureParent(project), 'redaction-invalid'); t.after(() => cleanupFixture(f));
     const root = path.join(f.root, 'artifacts'), dir = path.join(root, 'runs/bad/cases/c1'), backup = path.join(f.root, 'raw'), host = 'C:\\Users\\Synthetic Person'; fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, '0.stderr'), host);
     json(path.join(root, 'runs/bad/results.json'), item.run);

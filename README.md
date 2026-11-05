@@ -4,6 +4,8 @@
 
 O produto principal é o **Core e a CLI**, que usam o Git oficial local. O workshop Electron é um laboratório manual separado. A implementação de 02/11/2026 acrescenta destino explícito de edição, ciclo de vida de Layers, prévias, abertura deliberada como branch, migração/resgate e build independente. O [relatório público de fechamento](docs/reports/2026-11-02-closure/REPORT.md) e a [matriz dos 27 requisitos](docs/reports/2026-11-02-closure/requirements.json) distinguem 20 implementados, sete parciais, execuções e limites; não há certificação automática de compatibilidade universal.
 
+A [Etapa 2 — desempenho e recuperação](docs/reports/2026-11-04-performance-recovery/README.md), de 04/11/2026, acrescenta otimizações do Core/CLI e diagnósticos de recuperação. As medições mostram ganhos e regressões. Full V9 concluiu 411 PASS/quatro SKIP em 415; infraestrutura V11 113 PASS/113; matriz V11 355 PASS/seis ENV_BLOCKED/zero FAIL em 361. Typecheck/build/smoke V9 passaram com Core/runtime/corpus equivalentes. Cópia nova do commit e publicação estão PENDENTES; consulte o [estado atual](docs/STATUS.md). Não há promoção de requisitos parciais nem nova distribuição pública nesta missão.
+
 ```powershell
 npm.cmd run build:core
 node dist-core/cli/index.js --help

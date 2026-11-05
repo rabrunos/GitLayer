@@ -10,6 +10,7 @@ import { captureBaseline, snapshotSources, compareManifests, unchanged, manifest
 import { baseResult, counts, classifyKnown, validateBundle } from './runner.mjs';
 import { reconcileWorkerResult } from './supervisor.mjs';
 import { validateOutputRoot } from './output-root.mjs';
+import { externalFixtureParent } from './fixture-parent.mjs';
 
 const inScope = s => ['OFFICIAL_GIT_HEADLESS', 'HARNESS_HEADLESS', 'OFFICIAL_CONTRIB_IF_PROVEN'].includes(s.scope);
 export async function runMain(args = process.argv.slice(2)) {
@@ -22,9 +23,10 @@ export async function runMain(args = process.argv.slice(2)) {
   const outcome = selectionOutcome(selected, options);
   if (options.list) { console.log(JSON.stringify({ outcome, options, specified: matrix.length, implemented_cases: cases.length, selected: selected.map(({ run, ...c }) => c), omitted: cases.filter(c => !selected.includes(c)).map(c => c.id + '/' + c.variant), spec_only: matrix.filter(s => !cases.some(c => c.id === s.id)).map(s => ({ id: s.id, scope: s.scope, title: s.title })) }, null, 2)); return; }
   const started = Date.now(), id = 'run-' + new Date().toISOString().replace(/[:.]/g, '-') + '-' + crypto.randomBytes(4).toString('hex');
+  const fixtureParent = externalFixtureParent(project);
   const packageRoot = validateOutputRoot(options.out ?? path.join(project, 'artifacts/git-compat'), { projectRoot: project });
   const runDir = path.join(packageRoot, 'runs', id); fs.mkdirSync(runDir, { recursive: true });
-  const workParent = path.join(project, '.workshop/git-compat', id); fs.mkdirSync(workParent, { recursive: true });
+  const workingFixture = createFixture(fixtureParent, 'glc'), workParent = workingFixture.root;
   const gitPath = resolveGit(), inputs = runnerInputs(selectedMatrixPath), before = captureBaseline({ runnerInputs: inputs, gitPath });
   json(path.join(runDir, 'baseline-before.json'), before);
   const archived = snapshotSources(runDir,{extraInputs:[relative(project,selectedMatrixPath)]});
@@ -104,6 +106,13 @@ export async function runMain(args = process.argv.slice(2)) {
   json(path.join(runDir, 'baseline-after.json'), after);
   const sourceUnchanged = unchanged(productDelta), runnerUnchanged = unchanged(runnerDelta);
   const summary = { schema_version: '3.0', id, outcome: fatal ? 'INFRASTRUCTURE_ERROR' : outcome, started_at: new Date(started).toISOString(), ended_at: new Date().toISOString(), duration_ms: Date.now() - started, sourceFingerprint, runnerFingerprint, runnerFingerprintEnd: manifestFingerprint(after.runner), runner_unchanged: runnerUnchanged, source_unchanged: sourceUnchanged, productDelta, runnerDelta, options, counts: counts(results), selected: queue.length, worker_processes: workerProcesses, matrix_input: relative(project, selectedMatrixPath), baseline: 'baseline-before.json', source_snapshot: 'source-manifest.json', fatal };
+  summary.working_storage = { external: true, ownership: 'nonce-and-ancestry', fixture_id: path.basename(workParent), retained: true };
+  // Preserve failed/unknown child cleanup for inspection. Successful cases and
+  // transient build outputs are removed only through the owned-root protocol.
+  if (!options['keep-fixtures'] && !fatal && !results.some(result => result.cleanup && result.cleanup !== 'OWNED_FIXTURE_REMOVED')) {
+    try { cleanupFixture(workingFixture); summary.working_storage.retained = false; summary.working_storage.cleanup = 'OWNED_FIXTURE_REMOVED'; }
+    catch (error) { summary.working_storage.cleanup = String(error.message); summary.fatal = fatal = 'External working fixture cleanup failed: ' + error.message; }
+  }
   json(path.join(runDir, 'results.json'), results); fs.writeFileSync(path.join(runDir, 'results.jsonl'), results.map(r => JSON.stringify(r)).join('\n') + '\n');
   try { validateBundle(packageRoot, results, matrix, summary.counts); } catch (e) { summary.validation_error = String(e.stack ?? e); }
   summary.exit_code = fatal || summary.validation_error || !sourceUnchanged || !runnerUnchanged ? 2 : results.some(r => r.execution_status === 'FAIL' && r.known_failure !== 'XFAIL_STRICT') ? 1 : results.some(r => r.known_failure === 'XPASS_NEEDS_REVIEW') ? 3 : 0;

@@ -7,6 +7,7 @@ import { assessRunIntegrity } from '../../../scripts/git-compat/report-integrity
 import { project, createFixture, cleanupFixture, isolatedEnvironment, execute, json, fileHash, relative } from '../../../scripts/git-compat/lib.mjs';
 import { baseResult, counts } from '../../../scripts/git-compat/runner.mjs';
 import { fileManifest, manifestFingerprint } from '../../../scripts/git-compat/audit.mjs';
+import { externalFixtureParent } from '../../../scripts/git-compat/fixture-parent.mjs';
 
 const evidenceParent = process.env.GIT_COMPAT_INFRA_EVIDENCE_ROOT ?? path.join(project, 'artifacts/git-compat/auxiliary/report-integrity');
 if (!path.isAbsolute(evidenceParent)) throw Error('GIT_COMPAT_INFRA_EVIDENCE_ROOT must be absolute');
@@ -17,7 +18,7 @@ const read = p => JSON.parse(fs.readFileSync(p, 'utf8'));
 const hash = data => crypto.createHash('sha256').update(data).digest('hex');
 
 function syntheticRun(t, mode) {
-  const fixture = createFixture(path.join(project, '.workshop/git-compat-infra'), 'report');
+  const fixture = createFixture(externalFixtureParent(project), 'report');
   t.after(() => cleanupFixture(fixture));
   const renderer = path.join(fixture.root, 'renderer');
   fs.cpSync(path.join(project, 'scripts/git-compat'), path.join(renderer, 'scripts/git-compat'), { recursive: true, errorOnExist: true, force: false });

@@ -6,6 +6,7 @@ import crypto from 'node:crypto';
 import {validateDocumentation,writeDocumentationResult,docsOptions} from '../../../scripts/git-compat/docs.mjs';
 import {createFixture,cleanupFixture,project} from '../../../scripts/git-compat/lib.mjs';
 import {validateOutputRoot} from '../../../scripts/git-compat/output-root.mjs';
+import {externalFixtureParent} from '../../../scripts/git-compat/fixture-parent.mjs';
 
 const hash=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 
@@ -18,7 +19,7 @@ test('documentation validator: fourteen independent positive and negative contro
     fs.mkdirSync(parent,{recursive:true});
     evidenceRoot=path.join(parent,'docs-controls-'+crypto.randomUUID());fs.mkdirSync(evidenceRoot);
   }
-  const fixture=createFixture(path.join(project,'.workshop/git-compat-infra'),'docs'),root=fixture.root,records=[];
+  const fixture=createFixture(externalFixtureParent(project),'docs'),root=fixture.root,records=[];
   const historical=path.join(project,'docs/git-compat/DOCUMENTATION-VALIDATION.json'),historicalHash=hash(historical);
   try{
     const initial=validateDocumentation(),targets=new Set([...initial.input_manifest.map(f=>f.path),...initial.links.filter(l=>l.passed).map(l=>l.resolved)]);

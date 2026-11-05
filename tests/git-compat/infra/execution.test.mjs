@@ -5,9 +5,10 @@ import test from 'node:test';
 import crypto from 'node:crypto';
 import { project, context, createFixture, cleanupFixture, isolatedEnvironment, execute, json, relative } from '../../../scripts/git-compat/lib.mjs';
 import { fileManifest } from '../../../scripts/git-compat/audit.mjs';
+import { externalFixtureParent } from '../../../scripts/git-compat/fixture-parent.mjs';
 
 test('binary subprocess evidence preserves bytes which are not valid UTF-8', async t => {
-  const f = createFixture(path.join(project, '.workshop/git-compat-infra'), 'binary'); t.after(() => cleanupFixture(f));
+  const f = createFixture(externalFixtureParent(project), 'binary'); t.after(() => cleanupFixture(f));
   const c = context({ root: f.root, repo: path.join(f.root, 'repo'), artifactDir: path.join(f.root, 'evidence'), packageRoot: f.root, gitPath: process.execPath, env: isolatedEnvironment(f.root, process.execPath) });
   const r = await c.run(process.execPath, ['-e', 'process.stdout.write(Buffer.from([0,255,128,10]));process.stderr.write("diagnostic")']);
   assert.deepEqual(r.stdoutBuffer, Buffer.from([0, 255, 128, 10]));
@@ -17,7 +18,7 @@ test('binary subprocess evidence preserves bytes which are not valid UTF-8', asy
 });
 
 test('nested linked sources cannot disappear from an audit manifest', t => {
-  const f = createFixture(path.join(project, '.workshop/git-compat-infra'), 'audit-links');
+  const f = createFixture(externalFixtureParent(project), 'audit-links');
   t.after(() => cleanupFixture(f));
   fs.mkdirSync(path.join(f.root, 'src'));
   fs.mkdirSync(path.join(f.root, 'external'));
@@ -29,7 +30,7 @@ test('nested linked sources cannot disappear from an audit manifest', t => {
 });
 
 test('exited parent PID is never signalled and descendant-held pipes have a bounded drain', { timeout: 30000 }, async t => {
-  const f = createFixture(path.join(project, '.workshop/git-compat-infra'), 'pipe-drain');
+  const f = createFixture(externalFixtureParent(project), 'pipe-drain');
   const nonce = crypto.randomUUID(), evidenceParent = process.env.GIT_COMPAT_INFRA_EVIDENCE_ROOT;
   if (evidenceParent && !path.isAbsolute(evidenceParent)) throw Error('GIT_COMPAT_INFRA_EVIDENCE_ROOT must be absolute');
   const evidence = path.join(evidenceParent ?? path.join(project, 'artifacts/git-compat/auxiliary/review-r02'), 'pipe-drain-' + nonce);

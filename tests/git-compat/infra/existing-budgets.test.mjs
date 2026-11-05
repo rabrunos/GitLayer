@@ -7,14 +7,14 @@ import crypto from 'node:crypto';
 import {parseExistingArgs,existingProcessRecord,existingProcessSucceeded,persistExistingStreams} from '../../../scripts/git-compat/existing.mjs';
 import {createFixture,cleanupFixture,execute,isolatedEnvironment,project} from '../../../scripts/git-compat/lib.mjs';
 import {validateOutputRoot} from '../../../scripts/git-compat/output-root.mjs';
-import {validateFixtureParent} from '../../../scripts/git-compat/fixture-parent.mjs';
+import {validateFixtureParent,externalFixtureParent} from '../../../scripts/git-compat/fixture-parent.mjs';
 
 const records=[];
 const evidenceParent=process.env.GIT_COMPAT_INFRA_EVIDENCE_ROOT;
 let evidenceRoot;
 if(evidenceParent){if(!path.isAbsolute(evidenceParent))throw Error('GIT_COMPAT_INFRA_EVIDENCE_ROOT must be absolute');const parent=validateOutputRoot(evidenceParent,{projectRoot:project});fs.mkdirSync(parent,{recursive:true});evidenceRoot=path.join(parent,'existing-budgets-'+crypto.randomUUID());fs.mkdirSync(evidenceRoot);}
 function evidence(name,expected,observed){const record={name,expected,observed};records.push(record);if(evidenceRoot)fs.writeFileSync(path.join(evidenceRoot,name+'.json'),JSON.stringify(record,null,2)+'\n',{flag:'wx'});assert.deepEqual(observed,expected);}
-function own(t){const f=createFixture(path.join(project,'.workshop/git-compat-infra'),'budget');t.after(()=>cleanupFixture(f));return f;}
+function own(t){const f=createFixture(externalFixtureParent(project),'budget');t.after(()=>cleanupFixture(f));return f;}
 const nativeParent=()=>validateFixtureParent(process.env.GIT_COMPAT_EXTERNAL_FIXTURE_PARENT??os.tmpdir(),{projectRoot:project});
 
 test('existing budgets have explicit defaults and exact inclusive integer bounds',t=>{

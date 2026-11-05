@@ -32,24 +32,49 @@ export const cases=[
     const history=fs.readFileSync(path.join(project,'docs/git-compat/history/REVISAO-AGENTS-v2.md'),'utf8');
     const paths=[];
     for(const match of agents.matchAll(/\]\(([^)]+)\)/g)){const rel=match[1].split('#')[0];if(!rel||/^[a-z]+:/i.test(rel))continue;paths.push(rel);c.eq('AGENTS link '+rel,fs.existsSync(path.resolve(project,rel)),true);}
-    // Stage1B repository instructions are current; the report is an index, not the original user prompt.
+    // AGENTS records the current stage2 mission; report indexes document it and grant no authorization themselves.
     const authorityFile='AGENTS.md', authority=agents, currentScope=agents.split('Na preparação')[0];
-    const reportIndexFile='docs/reports/2026-11-03-security-compatibility-implementation/README.md', reportIndex=fs.readFileSync(path.join(project,reportIndexFile),'utf8');
+    const reportIndexFile='docs/reports/2026-11-04-performance-recovery/README.md', reportIndex=fs.readFileSync(path.join(project,reportIndexFile),'utf8');
+    const historicalReportIndexFile='docs/reports/2026-11-03-security-compatibility-implementation/README.md', historicalReportIndex=fs.readFileSync(path.join(project,historicalReportIndexFile),'utf8');
     const priorAuthorityFile='docs/decisions/2026-11-02-closure.md', priorAuthority=fs.readFileSync(path.join(project,priorAuthorityFile),'utf8');
+    function stage2Authorization(document) {
+      const scope=document.split('Na preparação')[0];
+      const paragraph=scope.split(/\r?\n\s*\r?\n/u).find(text=>/^A \*\*Etapa 2 de 04\/11\/2026\*\*/u.test(text))??'';
+      return /desempenho e recuperação do Core\/CLI/u.test(paragraph) &&
+        /autorização da missão/u.test(paragraph) &&
+        ['benchmarks','implementação','testes','documentação'].every(word=>paragraph.includes(word)) &&
+        /\bcommit\s+e\s+push\s+em\s+main\s+sem\s+força\b/u.test(paragraph) &&
+        paragraph.includes('](docs/reports/2026-11-04-performance-recovery/README.md)') &&
+        paragraph.includes('As garantias de segurança da etapa 1B abaixo permanecem.');
+    }
+    const authorizationControls=[
+      {name:'current stage2 mission',document:agents,expected:true},
+      {name:'push absent',document:agents.replace('commit e push em main sem força','commit em main sem força'),expected:false},
+      {name:'main absent',document:agents.replace('commit e push em main sem força','commit e push em develop sem força'),expected:false},
+      {name:'force permission is not no-force authority',document:agents.replace('commit e push em main sem força','commit e push em main com força'),expected:false},
+      {name:'stage2 report absent',document:agents.replace('](docs/reports/2026-11-04-performance-recovery/README.md)','](docs/STATUS.md)'),expected:false},
+      {name:'historical stage1B is not current stage2',document:agents.replace('A **Etapa 2 de 04/11/2026**','A **Etapa histórica de 04/11/2026**'),expected:false},
+      {name:'Core CLI scope absent',document:agents.replace('desempenho e recuperação do Core/CLI','desempenho e recuperação do laboratório'),expected:false},
+      {name:'mission authorization absent',document:agents.replace('autorização da missão','referência histórica'),expected:false},
+      {name:'inherited stage1B safeguards absent',document:agents.replace('As garantias de segurança da etapa 1B abaixo permanecem.',''),expected:false},
+    ].map(({name,document,expected})=>({name,expected,observed:stage2Authorization(document)}));
+    for(const control of authorizationControls)c.eq('Current authority control: '+control.name,control.observed,control.expected);
     c.ok('Historical restrictions remain explicitly scoped to older rounds', /restrição pertence à rodada histórica/u.test(agents) && /não é uma proibição permanente/u.test(agents));
-    c.ok('Current authorization overrides prior publication prohibition', /A tarefa atual de \*\*03\/11\/2026 — etapa 1B\*\*/u.test(currentScope) && /Autoriza Core, CLI, testes, scripts, documentação, commit e push para \*\*main local e GitHub\*\*, sem força\./u.test(currentScope) && /sua autorização são históricos e permanecem documentados\./u.test(currentScope));
-    c.ok('Current scope points to preserved authorization source', authorityFile==='AGENTS.md' && paths.includes(reportIndexFile) && currentScope.includes('[relatório 1B]('+reportIndexFile+')'));
-    c.ok('Current task source expressly authorizes project publication', /Autoriza Core, CLI, testes, scripts, documentação, commit e push para \*\*main local e GitHub\*\*, sem força\./u.test(currentScope));
+    c.ok('Current authorization overrides prior publication prohibition',stage2Authorization(currentScope) && /sua autorização são históricos e permanecem documentados\./u.test(currentScope));
+    c.ok('Current scope points to preserved authorization source',authorityFile==='AGENTS.md' && paths.includes(reportIndexFile) && stage2Authorization(currentScope));
+    c.ok('Current task source expressly authorizes project publication',stage2Authorization(currentScope));
     c.ok('future engineering autonomy explicit',agents.includes('Em tarefa futura'));
     c.ok('real Git preservation explicit',agents.includes('Use objetos, refs e índices do Git real'));
     c.ok('history explains reasons',history.length>1000);
     c.eq('Current authority is the inspected AGENTS repository instruction',authority,agents);
     c.ok('Current scope retains explicit no-force publication safeguards',agents.includes('Não usar force, force-with-lease, mirror ou envio indiscriminado de refs.'));
     c.ok('Current scope excludes real migration desktop plugins and public distribution',currentScope.includes('Não introduzir auto-park, duplicação permanente de arquivos, worktrees sincronizadas, migração real, desktop/plugins ou distribuição pública.'));
-    c.ok('Current report index preserves the approved investigation linkage',reportIndex.includes('../2026-11-03-security-compatibility-investigation/README.md'));
+    c.ok('Historical stage1B report remains linked without claiming it is the current task',paths.includes(historicalReportIndexFile) && /A tarefa de \*\*03\/11\/2026 — etapa 1B\*\*/u.test(currentScope));
+    c.ok('Historical stage1B report index preserves the approved investigation linkage',historicalReportIndex.includes('../2026-11-03-security-compatibility-investigation/README.md'));
+    c.eq('Historical stage1B report index remains byte-for-byte immutable',fileHash(path.join(project,historicalReportIndexFile)),'9351b3b5e938a284eb8f1b84226531d0e9d44dd308e74f5188ed67b99847a63d');
     c.ok('Prior closure preserves its explicit historical publication authorization',/Estão autorizados commits, fetch, push e a integração/u.test(priorAuthority));
     c.eq('Prior closure text remains byte-for-byte immutable',fileHash(path.join(project,priorAuthorityFile)),'b1a18c17b3ab2f13003c08bb2e89b6d27a7e4c02fabce4c789cf3fab52cb24a2');
-    json(path.join(c.artifactDir,'instruction-proof.json'),{links:paths,currentAuthority:authorityFile,currentAuthoritySha256:fileHash(path.join(project,authorityFile)),currentAuthorityRole:'Versioned repository instructions for the approved stage1B; not a captured original user prompt.',reportIndex:reportIndexFile,reportIndexSha256:fileHash(path.join(project,reportIndexFile)),reportIndexRole:'Documentation index only; not the original user prompt or an independent authorization grant.',priorAuthority:priorAuthorityFile,priorAuthoritySha256:fileHash(path.join(project,priorAuthorityFile)),priorAuthorityRole:'Preserved historical 2026-11-02 closure authority; not the current stage1B task.',historySha256:fileHash(path.join(project,'docs/git-compat/history/REVISAO-AGENTS-v2.md')),note:'Text/links checked; product behavior is not certified by prose.'});
+    json(path.join(c.artifactDir,'instruction-proof.json'),{links:paths,currentAuthority:authorityFile,currentAuthoritySha256:fileHash(path.join(project,authorityFile)),currentAuthorityRole:'Versioned repository instructions for the approved stage2 mission; not a captured original user prompt.',authorizationControls,reportIndex:reportIndexFile,reportIndexSha256:fileHash(path.join(project,reportIndexFile)),reportIndexRole:'Documentation index only; not the original user prompt or an independent authorization grant.',historicalReportIndex:historicalReportIndexFile,historicalReportIndexSha256:fileHash(path.join(project,historicalReportIndexFile)),historicalReportIndexRole:'Preserved historical stage1B documentation index; not the current task.',priorAuthority:priorAuthorityFile,priorAuthoritySha256:fileHash(path.join(project,priorAuthorityFile)),priorAuthorityRole:'Preserved historical 2026-11-02 closure authority; not the current stage2 task.',historySha256:fileHash(path.join(project,'docs/git-compat/history/REVISAO-AGENTS-v2.md')),note:'Text/links and synthetic authorization controls checked; product behavior is not certified by prose.'});
   }),
   make('MODEL-011','Behavior oracle accepts index stat refresh and rejects actual byte changes',async c=>{
     await c.init();const observe=async()=>({head:(await c.git(['rev-parse','HEAD'])).stdout.trim(),index:(await c.git(['ls-files','--stage','-z'])).stdout,bytes:c.read('base.txt')});

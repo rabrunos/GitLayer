@@ -1,0 +1,338 @@
+{
+    "schema":  1,
+    "kind":  "public allowlisted projection of private recovery index audit and exact native replay",
+    "generatedAt":  "2026-11-04T21:52:34.3781434Z",
+    "status":  "EXACT_NATIVE_REPLAY_MATCH",
+    "productCertification":  "NOT_APPROVED",
+    "originalGateReclassified":  false,
+    "originals":  [
+                      {
+                          "label":  "integrity-gate-v7-01/result.json",
+                          "bytes":  6355,
+                          "sha256":  "f7e70fa78fb444e5a8e5dd94b496429654fff8ae625e02b498450dba0c75f90a"
+                      },
+                      {
+                          "label":  "private-recovery-readonly-audit/RESULTS.json",
+                          "bytes":  41692,
+                          "sha256":  "525c276b16fb7f3d102d19d89a136bd2f1f69627e58a73b95f240b92a90f8d6f"
+                      },
+                      {
+                          "label":  "private-recovery-native-replay/RESULTS.json",
+                          "bytes":  5498,
+                          "sha256":  "bc8446c6ce07545beb7b630ad7b4c2f264ac8485b90866896c36aa6d24ddab46"
+                      }
+                  ],
+    "harnesses":  [
+                      {
+                          "label":  "audit-private-recovery-index.mjs",
+                          "bytes":  8584,
+                          "sha256":  "fd30e2308d9378f15d25ca45dcd4d1fe2794ca1329e8b9ac8f43f76782ae7729",
+                          "hashObservationScope":  "Observed when projecting; raw results do not record an automatic harness before/after manifest"
+                      },
+                      {
+                          "label":  "replay-private-recovery-index.mjs",
+                          "bytes":  6612,
+                          "sha256":  "200a1d6770288ac3325b4b6f10758a928b61692e2e20752efc8d21a40ac5753b",
+                          "hashObservationScope":  "Observed when projecting; raw results do not record an automatic harness before/after manifest"
+                      }
+                  ],
+    "gate":  {
+                 "status":  "FAIL",
+                 "startedAt":  "2026-11-04T20:42:37.291Z",
+                 "endedAt":  "2026-11-04T21:33:28.828Z",
+                 "process":  {
+                                 "exitCode":  1,
+                                 "timedOut":  false,
+                                 "outputTruncated":  false,
+                                 "durationMs":  3049313
+                             },
+                 "summary":  {
+                                 "tests":  70,
+                                 "pass":  67,
+                                 "fail":  3,
+                                 "cancelled":  0,
+                                 "skipped":  0,
+                                 "todo":  0,
+                                 "complete":  true,
+                                 "consistent":  true
+                             },
+                 "source":  {
+                                "beforeFingerprint":  "902c595b8a1477487f88f3fb8f98bbacef0008881e52e232b11d4face1380ba1",
+                                "afterFingerprint":  "902c595b8a1477487f88f3fb8f98bbacef0008881e52e232b11d4face1380ba1",
+                                "unchanged":  true,
+                                "count":  209,
+                                "coreFiles":  18,
+                                "coreFingerprint":  "40d2992ce900f8bd14d152b8b94b1f7098ad90d9fa73e51acaa10da654a22957",
+                                "cliFiles":  1
+                            },
+                 "selection":  {
+                                   "files":  [
+                                                 "tests/integration/index-query.test.ts",
+                                                 "tests/integration/deactivation-concurrency.test.ts",
+                                                 "tests/integration/staging-racy.test.ts",
+                                                 "tests/integration/recovery-index-timestamp.test.ts",
+                                                 "tests/unit/assert-bytes.test.ts",
+                                                 "tests/integration/performance-streaming.test.ts",
+                                                 "tests/integration/security-atomic-stage.test.ts",
+                                                 "tests/integration/review-target-preview.test.ts"
+                                             ],
+                                   "allFilesStarted":  true,
+                                   "topPlans":  [
+                                                    70
+                                                ],
+                                   "topLevelCompleted":  70,
+                                   "completeTopPlan":  true,
+                                   "concurrency":  1,
+                                   "endpointCapMs":  3600000
+                               }
+             },
+    "audit":  {
+                  "startedAt":  "2026-11-04T21:20:27.320Z",
+                  "endedAt":  "2026-11-04T21:20:39.178Z",
+                  "timeBudgetMs":  300000,
+                  "diskBudgetBytes":  134217728,
+                  "directGitInvocations":  26,
+                  "fixturesModifiedReported":  false,
+                  "productSourcesModifiedReported":  false
+              },
+    "replay":  {
+                   "startedAt":  "2026-11-04T21:22:15.040Z",
+                   "endedAt":  "2026-11-04T21:22:17.182Z",
+                   "timeBudgetMs":  300000,
+                   "diskBudgetBytes":  134217728,
+                   "directGitInvocations":  4,
+                   "originalFixturesModifiedReported":  false,
+                   "productSourcesModifiedReported":  false,
+                   "commands":  [
+                                    {
+                                        "argv":  [
+                                                     "write-tree"
+                                                 ],
+                                        "indexRole":  "independent-owned-private-index-copy",
+                                        "exitCode":  0,
+                                        "stdoutSHA256":  "148a6a7fcddfacdd0b382e234ba74f467afc0ab503d44e4e309a98b2d56d9115",
+                                        "stderrSHA256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                    },
+                                    {
+                                        "argv":  [
+                                                     "diff",
+                                                     "--no-ext-diff",
+                                                     "--no-textconv",
+                                                     "--name-status",
+                                                     "-z",
+                                                     "--no-renames",
+                                                     "--",
+                                                     "layer-racy.txt"
+                                                 ],
+                                        "indexRole":  "independent-owned-private-index-copy",
+                                        "exitCode":  0,
+                                        "stdoutSHA256":  "61fb857b009a108da616c9d0f8ec56f643abb5b9bb30959afd2475772b5e0c12",
+                                        "stderrSHA256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                    },
+                                    {
+                                        "argv":  [
+                                                     "write-tree"
+                                                 ],
+                                        "indexRole":  "independent-owned-private-index-copy",
+                                        "exitCode":  0,
+                                        "stdoutSHA256":  "148a6a7fcddfacdd0b382e234ba74f467afc0ab503d44e4e309a98b2d56d9115",
+                                        "stderrSHA256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                    },
+                                    {
+                                        "argv":  [
+                                                     "diff",
+                                                     "--no-ext-diff",
+                                                     "--no-textconv",
+                                                     "--name-status",
+                                                     "-z",
+                                                     "--no-renames",
+                                                     "--",
+                                                     "layer-racy.txt"
+                                                 ],
+                                        "indexRole":  "independent-owned-private-index-copy",
+                                        "exitCode":  0,
+                                        "stdoutSHA256":  "61fb857b009a108da616c9d0f8ec56f643abb5b9bb30959afd2475772b5e0c12",
+                                        "stderrSHA256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                    }
+                                ]
+               },
+    "rows":  [
+                 {
+                     "case":  "private-true-default",
+                     "originalTest":  "GL19 rollback preserves racy B/C detection and exact private index with true-default legacy plan",
+                     "journalStateObserved":  "completed",
+                     "indexVersion":  2,
+                     "indexEntries":  2,
+                     "audit":  {
+                                   "backupBytes":  225,
+                                   "backupSHA256":  "fa55e6d1edf8fc8258d1f56d7fd427a8d5151a39f01c3671cb7d8bed4ec484cc",
+                                   "currentBytes":  225,
+                                   "currentSHA256":  "fca889fbad81438e83a7683825ea6c56d13aa31772ab62c52e98f2b692ed6937",
+                                   "firstDifferenceOffset":  131,
+                                   "differentBytes":  21,
+                                   "differenceOffsets":  [
+                                                             131,
+                                                             205,
+                                                             206,
+                                                             207,
+                                                             208,
+                                                             209,
+                                                             210,
+                                                             211,
+                                                             212,
+                                                             213,
+                                                             214,
+                                                             215,
+                                                             216,
+                                                             217,
+                                                             218,
+                                                             219,
+                                                             220,
+                                                             221,
+                                                             222,
+                                                             223,
+                                                             224
+                                                         ],
+                                   "checksumOffset":  205,
+                                   "racyEntryCachedSizeBefore":  5,
+                                   "racyEntryCachedSizeAfter":  0,
+                                   "racyEntryOIDBefore":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                   "racyEntryOIDAfter":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                   "fixtureUnchanged":  true,
+                                   "inventoryBeforeAfterSHA256":  "67a33d1f5f76d2d77f2498b8d60ed6e112c1bd03ca99a3c4b5c8943b18c284aa",
+                                   "fixtureLogicalBytes":  73458,
+                                   "nativeDiffStatus":  "M",
+                                   "nativeDiffPath":  "layer-racy.txt",
+                                   "committedAPreserved":  true,
+                                   "stagedBPreserved":  true,
+                                   "diskCPreserved":  true
+                               },
+                     "replay":  {
+                                    "beforeSHA256":  "fa55e6d1edf8fc8258d1f56d7fd427a8d5151a39f01c3671cb7d8bed4ec484cc",
+                                    "preparedMtimeNs":  "1000000000",
+                                    "afterSHA256":  "fca889fbad81438e83a7683825ea6c56d13aa31772ab62c52e98f2b692ed6937",
+                                    "afterBytes":  225,
+                                    "actualSHA256":  "fca889fbad81438e83a7683825ea6c56d13aa31772ab62c52e98f2b692ed6937",
+                                    "byteIdenticalToActual":  true,
+                                    "differences":  [
+
+                                                    ],
+                                    "writeTreeOID":  "3ab1012847d8af911c35decce2e8ea03da6bda20",
+                                    "actualCheckpointOID":  "3ab1012847d8af911c35decce2e8ea03da6bda20",
+                                    "treeEqual":  true,
+                                    "detectsC":  true,
+                                    "fixtureUnchanged":  true,
+                                    "sourceAndBackupAndRefsUnchanged":  true,
+                                    "inventoryBeforeAfterSHA256":  "8c186c2fc4094680efb992e13354d72aed9b810e9f50b2e84c2e1a6a072a4bed",
+                                    "fixtureLogicalBytes":  73458
+                                }
+                 },
+                 {
+                     "case":  "private-false-minimal",
+                     "originalTest":  "GL19 rollback preserves racy B/C detection and exact private index with false-minimal legacy plan",
+                     "journalStateObserved":  "completed",
+                     "indexVersion":  2,
+                     "indexEntries":  2,
+                     "audit":  {
+                                   "backupBytes":  225,
+                                   "backupSHA256":  "82512313b19c70f8a2b955de04ddd20283d229d1bd3f4ce9b074e2c9eaff26e4",
+                                   "currentBytes":  225,
+                                   "currentSHA256":  "5596155259a8eeac5568b2e0d8b73fb75b1fa42d959325e4f9f98bd8aba27533",
+                                   "firstDifferenceOffset":  131,
+                                   "differentBytes":  21,
+                                   "differenceOffsets":  [
+                                                             131,
+                                                             205,
+                                                             206,
+                                                             207,
+                                                             208,
+                                                             209,
+                                                             210,
+                                                             211,
+                                                             212,
+                                                             213,
+                                                             214,
+                                                             215,
+                                                             216,
+                                                             217,
+                                                             218,
+                                                             219,
+                                                             220,
+                                                             221,
+                                                             222,
+                                                             223,
+                                                             224
+                                                         ],
+                                   "checksumOffset":  205,
+                                   "racyEntryCachedSizeBefore":  5,
+                                   "racyEntryCachedSizeAfter":  0,
+                                   "racyEntryOIDBefore":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                   "racyEntryOIDAfter":  "a07e2435607dcf6da1a9cfdddb160e2f78139a7c",
+                                   "fixtureUnchanged":  true,
+                                   "inventoryBeforeAfterSHA256":  "44cda6dbaaf0a2b698d71912bf6a4798428be0aacededb6c958d71f7872b0d67",
+                                   "fixtureLogicalBytes":  73462,
+                                   "nativeDiffStatus":  "M",
+                                   "nativeDiffPath":  "layer-racy.txt",
+                                   "committedAPreserved":  true,
+                                   "stagedBPreserved":  true,
+                                   "diskCPreserved":  true
+                               },
+                     "replay":  {
+                                    "beforeSHA256":  "82512313b19c70f8a2b955de04ddd20283d229d1bd3f4ce9b074e2c9eaff26e4",
+                                    "preparedMtimeNs":  "1000000000",
+                                    "afterSHA256":  "5596155259a8eeac5568b2e0d8b73fb75b1fa42d959325e4f9f98bd8aba27533",
+                                    "afterBytes":  225,
+                                    "actualSHA256":  "5596155259a8eeac5568b2e0d8b73fb75b1fa42d959325e4f9f98bd8aba27533",
+                                    "byteIdenticalToActual":  true,
+                                    "differences":  [
+
+                                                    ],
+                                    "writeTreeOID":  "3ab1012847d8af911c35decce2e8ea03da6bda20",
+                                    "actualCheckpointOID":  "3ab1012847d8af911c35decce2e8ea03da6bda20",
+                                    "treeEqual":  true,
+                                    "detectsC":  true,
+                                    "fixtureUnchanged":  true,
+                                    "sourceAndBackupAndRefsUnchanged":  true,
+                                    "inventoryBeforeAfterSHA256":  "acc0523da43a73194d7df26f3b90561fb6d21eef957a5895e78cda3c6db36652",
+                                    "fixtureLogicalBytes":  73462
+                                }
+                 }
+             ],
+    "failedGateCases":  {
+                            "diagnosticOrder":  {
+                                                    "case":  "path-replaced-at-open",
+                                                    "observedCode":  "UNSAFE_PATH",
+                                                    "expectedCode":  "EXTERNAL_EDIT",
+                                                    "metadataWriteObserved":  false,
+                                                    "candidateCorrection":  "Prove opened FD identity before observing a replaced path; new validation pending"
+                                                },
+                            "privateRawOracle":  {
+                                                     "caseCount":  2,
+                                                     "classification":  "Final pre-checkpoint raw-byte expectation contradicted by exact official Git write-tree replay",
+                                                     "correctedOracle":  "Exact raw B at restoration rename before checkpoint, and exact final index versus native write-tree replay",
+                                                     "candidateValidation":  "PENDING"
+                                                 }
+                        },
+    "qualifications":  [
+                           "The original V7 gate remains FAIL with all three failures preserved. Replay explains two expectations, not a retroactive product PASS.",
+                           "Two retained private SHA-1/index-v2 fixtures only; no power-loss or cross-platform certification.",
+                           "The derived replay used official Git on independent exclusive copies, isolated environment, epoch1 FD stamping and fsync; it did not call Core or modify original fixture bytes, refs, backups or journals.",
+                           "Original fixture inventory includes identities and mtime/ctime but excludes atime.",
+                           "Source unchanged fingerprint belongs to the archived V7 gate; replay reports no source modification but did not record a separate whole-functional source manifest.",
+                           "Direct Git invocations exclude unobserved descendants. Experiment time is not product latency.",
+                           "Public fields are explicitly constructed; absolute paths, PIDs, private technical refs and environment values are omitted."
+                       ],
+    "primarySources":  [
+                           "https://git-scm.com/docs/racy-git",
+                           "https://git-scm.com/docs/git-write-tree",
+                           "https://github.com/git-for-windows/git/blob/v2.53.0.windows.2/read-cache.c#L2397",
+                           "https://github.com/git-for-windows/git/blob/v2.53.0.windows.2/read-cache.c#L2718",
+                           "https://github.com/git-for-windows/git/blob/v2.53.0.windows.2/cache-tree.c#L723"
+                       ],
+    "sourceCodeInterpretation":  {
+                                     "version":  "Git for Windows v2.53.0.windows.2",
+                                     "mechanism":  "ce_smudge_racily_clean_entry verifies content and zeroes sd_size; do_write_index invokes it for non-up-to-date racy entries",
+                                     "writeTreeIndexWrite":  "Conditional on cache-tree state; no claim that every write-tree rewrites the index",
+                                     "proofScope":  "Interpretation supported by the exact native replay of these two retained fixtures; no broader product certification"
+                                 }
+}

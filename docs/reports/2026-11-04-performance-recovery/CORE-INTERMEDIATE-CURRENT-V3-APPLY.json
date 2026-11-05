@@ -1,0 +1,272 @@
+{
+  "schema": 1,
+  "status": "PASS",
+  "scope": "Official Git reconstruction of intermediate current-v3 from initial baseline only; not validation of final current-v6",
+  "baselineCommit": "d71ccc7d188500a22e56ea93c70ac946dba9db60",
+  "patch": {
+    "file": "CORE-INTERMEDIATE-CURRENT-V3.patch",
+    "bytes": 322752,
+    "sha256": "5affac3ec29ff798caf6e5d9e7e164cb136539b15cdbc5ed2695609f49ffb065"
+  },
+  "manifestBeforeSha256": "c106b21aacea501888695d3eccd9ff7e65c70ae4a8ae6c7df900dadec4e98ccc",
+  "startedAt": "2026-11-04T17:24:45.744Z",
+  "finishedAt": "2026-11-04T17:24:45.993Z",
+  "rawBytePolicy": "No line-ending conversion or LF tolerance",
+  "filesBefore": [
+    {
+      "file": "src/core/branch-protection.ts",
+      "bytes": 25110,
+      "sha256": "530fe59190262f3256f89e23c3e9c32d71f108deec9360928c15f9ff8ff6c74d"
+    },
+    {
+      "file": "src/core/demo.ts",
+      "bytes": 6303,
+      "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+    },
+    {
+      "file": "src/core/editing-boundary.ts",
+      "bytes": 8847,
+      "sha256": "a8c8cf1cf27770949d611e6315dff50924ba5a06fd1dd6f02dd7d089c5aa60a3"
+    },
+    {
+      "file": "src/core/errors.ts",
+      "bytes": 467,
+      "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+    },
+    {
+      "file": "src/core/git.ts",
+      "bytes": 21199,
+      "sha256": "1ebb2abd6d3d51fa1207f495b4899723eb02b2a909d072e0c866cac16a1cd771"
+    },
+    {
+      "file": "src/core/ignore.ts",
+      "bytes": 3328,
+      "sha256": "3d0fa49bae842dfeed7e45f5f934509b8e40bc064e2b3832789868d2981f524b"
+    },
+    {
+      "file": "src/core/index-stage.ts",
+      "bytes": 13854,
+      "sha256": "69d981eabe8f706a30614e9d176ef07e6d3af7b876a2cc21e18e28efb444c321"
+    },
+    {
+      "file": "src/core/index.ts",
+      "bytes": 115601,
+      "sha256": "a74b1d3eb88cbf354064b64051b1a4df6871cd3affa6b2c678a3a4bba071f7f6"
+    },
+    {
+      "file": "src/core/layer-rename.ts",
+      "bytes": 19188,
+      "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+    },
+    {
+      "file": "src/core/layout.ts",
+      "bytes": 16173,
+      "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+    },
+    {
+      "file": "src/core/ownership-state.ts",
+      "bytes": 1372,
+      "sha256": "4686ed8a7613600fbba4eff9324067e4baf64ab56b7b508651c5a039ca9263f8"
+    },
+    {
+      "file": "src/core/paths.ts",
+      "bytes": 7365,
+      "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+    },
+    {
+      "file": "src/core/platform.ts",
+      "bytes": 5247,
+      "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+    },
+    {
+      "file": "src/core/recovery.ts",
+      "bytes": 21358,
+      "sha256": "71357a5310afaedbfce0028df80b83a1d6288a0edd0b7aa4fc2c1282ffdc4f23"
+    },
+    {
+      "file": "src/core/rescue.ts",
+      "bytes": 21380,
+      "sha256": "bd50b1cf30a62839d1a3413a9c4f14a23a6888d75a83f81cf8b8b6eb7386b79e"
+    },
+    {
+      "file": "src/core/storage.ts",
+      "bytes": 17064,
+      "sha256": "eb4e90fe6c0e41934e543f66418e61638e129054b4048aa64b7885940d057109"
+    }
+  ],
+  "filesAfter": [
+    {
+      "file": "src/core/branch-protection.ts",
+      "bytes": 25110,
+      "sha256": "530fe59190262f3256f89e23c3e9c32d71f108deec9360928c15f9ff8ff6c74d"
+    },
+    {
+      "file": "src/core/demo.ts",
+      "bytes": 6303,
+      "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+    },
+    {
+      "file": "src/core/editing-boundary.ts",
+      "bytes": 8847,
+      "sha256": "a8c8cf1cf27770949d611e6315dff50924ba5a06fd1dd6f02dd7d089c5aa60a3"
+    },
+    {
+      "file": "src/core/errors.ts",
+      "bytes": 467,
+      "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+    },
+    {
+      "file": "src/core/git.ts",
+      "bytes": 22121,
+      "sha256": "82ed40225a58db144545b54d1106725c78abfb7c883762f1d773c179bad08e1a"
+    },
+    {
+      "file": "src/core/ignore.ts",
+      "bytes": 3328,
+      "sha256": "3d0fa49bae842dfeed7e45f5f934509b8e40bc064e2b3832789868d2981f524b"
+    },
+    {
+      "file": "src/core/index-stage.ts",
+      "bytes": 13854,
+      "sha256": "69d981eabe8f706a30614e9d176ef07e6d3af7b876a2cc21e18e28efb444c321"
+    },
+    {
+      "file": "src/core/index.ts",
+      "bytes": 117648,
+      "sha256": "0a44a31baa991c437f5b84ed51f121217d82470c61dd81a0e3a26b93af8bb7cb"
+    },
+    {
+      "file": "src/core/layer-rename.ts",
+      "bytes": 19188,
+      "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+    },
+    {
+      "file": "src/core/layout.ts",
+      "bytes": 16173,
+      "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+    },
+    {
+      "file": "src/core/ownership-state.ts",
+      "bytes": 1372,
+      "sha256": "4686ed8a7613600fbba4eff9324067e4baf64ab56b7b508651c5a039ca9263f8"
+    },
+    {
+      "file": "src/core/paths.ts",
+      "bytes": 7365,
+      "sha256": "53642e4feb52c4c72c46e85d2ff2cb1bb1aebf2896b3f56883e77ceb26309b88"
+    },
+    {
+      "file": "src/core/platform.ts",
+      "bytes": 5247,
+      "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+    },
+    {
+      "file": "src/core/recovery.ts",
+      "bytes": 21358,
+      "sha256": "71357a5310afaedbfce0028df80b83a1d6288a0edd0b7aa4fc2c1282ffdc4f23"
+    },
+    {
+      "file": "src/core/rescue.ts",
+      "bytes": 24310,
+      "sha256": "f94f17cb4eb76afd7167657dacb3a85b915d33d617402cc943fadf78b4c979c1"
+    },
+    {
+      "file": "src/core/storage.ts",
+      "bytes": 18957,
+      "sha256": "a8ae4beda82c68bfe8c63687e513087d28383d2ba7413f7aac25d598aba78cb2"
+    }
+  ],
+  "gitExecutableSha256": "37c5725818d602e951ba2563b870d62763322956b73373da4c33a0b566a80bc9",
+  "commands": [
+    {
+      "executableLabel": "Official Git for Windows executable, absolute path",
+      "argv": [
+        "--version"
+      ],
+      "cwd": "<FIXTURE>/repo",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 52,
+      "stdout": "git version 2.53.0.windows.2\n",
+      "stderr": ""
+    },
+    {
+      "executableLabel": "Official Git for Windows executable, absolute path",
+      "argv": [
+        "-c",
+        "core.autocrlf=false",
+        "init",
+        "-b",
+        "main",
+        "--template=<FIXTURE>\\empty-template"
+      ],
+      "cwd": "<FIXTURE>/repo",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 67,
+      "stdout": "Initialized empty Git repository in <STAGE2>/gl-patch-apply-v3-4VA9b6/repo/.git/\n",
+      "stderr": ""
+    },
+    {
+      "executableLabel": "Official Git for Windows executable, absolute path",
+      "argv": [
+        "-c",
+        "core.autocrlf=false",
+        "apply",
+        "--check",
+        "--whitespace=nowarn",
+        "<PROJECT>\\docs\\reports\\2026-11-04-performance-recovery\\CORE-INTERMEDIATE-CURRENT-V3.patch"
+      ],
+      "cwd": "<FIXTURE>/repo",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 58,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "executableLabel": "Official Git for Windows executable, absolute path",
+      "argv": [
+        "-c",
+        "core.autocrlf=false",
+        "apply",
+        "--whitespace=nowarn",
+        "<PROJECT>\\docs\\reports\\2026-11-04-performance-recovery\\CORE-INTERMEDIATE-CURRENT-V3.patch"
+      ],
+      "cwd": "<FIXTURE>/repo",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 59,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "fixtureRetained": true,
+  "error": null,
+  "rawReceipt": {
+    "label": "patch-apply-v3-01/RESULT.json",
+    "bytes": 11587,
+    "sha256": "42d29147eee38c286374f45dba72ade568fbd69063e56a93fe168449dc3dedf2"
+  },
+  "benchmarkClockStarted": false,
+  "publicProjectionPrivacy": {
+    "schema": 1,
+    "kind": "explicit-owned-stage-root-display-redaction",
+    "originalPublicDocument": {
+      "bytes": 7809,
+      "sha256": "235e069fee668dd674bdd6e21fd6dd0d19a39247dbac28ba4f0186563cd98fc1"
+    },
+    "redactions": [
+      {
+        "jsonPointer": "/commands/1/stdout",
+        "originalStringSHA256": "02fe3d4853b62ba2650c98288e14044937907ceabf55aec9124a21c69eec130e",
+        "projectedStringSHA256": "8b0d9b9e3b711b84789eedd6d9d74e1cdf0499a58a4beed3501ed5ea31a58fc0",
+        "occurrences": 1,
+        "replacement": "<STAGE2>"
+      }
+    ],
+    "rawComparisonDigestsUnchanged": true,
+    "originalRawEvidenceModified": false,
+    "qualification": "Only the exact owned Stage 2 root in the listed displayed stdout/argv strings is replaced with <STAGE2>. Recorded source, patch, index and raw-receipt digests, outcomes and comparison policy remain unchanged; original public bytes are preserved in the external ownership-marked archive."
+  }
+}

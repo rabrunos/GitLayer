@@ -1,0 +1,435 @@
+{
+  "schema": 1,
+  "kind": "git-layer-materialization-experiment",
+  "complete": true,
+  "createdAt": "2026-11-04T13:42:12.675Z",
+  "platform": {
+    "node": "v24.14.1",
+    "uv": "1.51.0",
+    "os": "win32",
+    "release": "10.0.26200",
+    "architecture": "x64"
+  },
+  "filesystem": {
+    "DriveLetter": "C",
+    "FileSystem": "NTFS",
+    "AllocationUnitSize": 4096,
+    "DriveType": "Fixed",
+    "Size": 999002468352,
+    "SizeRemaining": 78383968256
+  },
+  "conditions": {
+    "sourceMiB": 100,
+    "samples": 3,
+    "peakDiskBudgetMiB": 1024,
+    "plannedPeakLogicalMiB": 528,
+    "timeBudgetMs": 300000,
+    "warmCache": "No OS cache flush; random 1MiB block repeated to source size and Git blob created before timing; methods rotated across samples.",
+    "nativeCopyOperationExcludesFlush": true,
+    "verificationOutsideTiming": true,
+    "physicalIoBytesMeasured": false,
+    "p95": "Not reported for three samples.",
+    "coreTransactionBenchmark": false
+  },
+  "source": {
+    "sha256": "777327cb6072e3dd474903a4c179116eff7f9de78bf54a86a54072b37577b845",
+    "bytes": 104857600,
+    "oid": "8c50f3786f6efb0ca0127579561a834d7d447f25"
+  },
+  "sourceFingerprintsBefore": [
+    {
+      "file": "scripts/benchmark-materialization.mjs",
+      "sha256": "639dfc5dc5617e69009f9ab73e5a89fb05dd72a22510ce89dc4628287da61b63",
+      "bytes": 14328
+    },
+    {
+      "file": "src/core/storage.ts",
+      "sha256": "a8ae4beda82c68bfe8c63687e513087d28383d2ba7413f7aac25d598aba78cb2",
+      "bytes": 18957
+    },
+    {
+      "file": "src/core/platform.ts",
+      "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179",
+      "bytes": 5247
+    },
+    {
+      "file": "scripts/git-compat/lib.mjs",
+      "sha256": "bd36f29ee217d5bcfd2b2af38dd3e93090574b9b8ade0482b747eab3034f0b81",
+      "bytes": 23585
+    }
+  ],
+  "sourceFingerprints": [
+    {
+      "file": "scripts/benchmark-materialization.mjs",
+      "sha256": "639dfc5dc5617e69009f9ab73e5a89fb05dd72a22510ce89dc4628287da61b63",
+      "bytes": 14328
+    },
+    {
+      "file": "src/core/storage.ts",
+      "sha256": "a8ae4beda82c68bfe8c63687e513087d28383d2ba7413f7aac25d598aba78cb2",
+      "bytes": 18957
+    },
+    {
+      "file": "src/core/platform.ts",
+      "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179",
+      "bytes": 5247
+    },
+    {
+      "file": "scripts/git-compat/lib.mjs",
+      "sha256": "bd36f29ee217d5bcfd2b2af38dd3e93090574b9b8ade0482b747eab3034f0b81",
+      "bytes": 23585
+    }
+  ],
+  "sourcesStable": true,
+  "summary": [
+    {
+      "method": "copyFile",
+      "completed": 3,
+      "failed": 0,
+      "medianDurableMs": 268.2510000000184,
+      "minimumMs": 170.08110000001034,
+      "maximumMs": 650.4186999999947,
+      "p95Ms": null
+    },
+    {
+      "method": "copyFile-FICLONE_FORCE",
+      "completed": 0,
+      "failed": 3,
+      "medianDurableMs": null,
+      "minimumMs": null,
+      "maximumMs": null,
+      "p95Ms": null
+    },
+    {
+      "method": "copyFile-FICLONE-fallback",
+      "completed": 3,
+      "failed": 0,
+      "medianDurableMs": 283.0081999999966,
+      "minimumMs": 258.24340000000666,
+      "maximumMs": 308.37470000001485,
+      "p95Ms": null
+    },
+    {
+      "method": "copyRegular-safe-stream",
+      "completed": 3,
+      "failed": 0,
+      "medianDurableMs": 1448.4630999999936,
+      "minimumMs": 1079.579700000002,
+      "maximumMs": 11349.605800000005,
+      "p95Ms": null
+    },
+    {
+      "method": "git-checkout-index",
+      "completed": 3,
+      "failed": 0,
+      "medianDurableMs": 2125.285199999984,
+      "minimumMs": 1035.055800000031,
+      "maximumMs": 2998.8266000000003,
+      "p95Ms": null
+    }
+  ],
+  "results": [
+    {
+      "method": "copyFile",
+      "sample": 1,
+      "bytes": 104857600,
+      "operationMs": 231.5940999999948,
+      "additionalFlushMs": 418.8245999999999,
+      "durableMs": 650.4186999999947,
+      "durableInOperation": false,
+      "gitSubprocesses": 0,
+      "ioCounters": {
+        "fsRead": 100,
+        "fsWrite": 0,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    },
+    {
+      "method": "copyFile-FICLONE-fallback",
+      "sample": 1,
+      "bytes": 104857600,
+      "operationMs": 125.24679999999353,
+      "additionalFlushMs": 157.76140000000305,
+      "durableMs": 283.0081999999966,
+      "durableInOperation": false,
+      "gitSubprocesses": 0,
+      "ioCounters": {
+        "fsRead": 100,
+        "fsWrite": 0,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    },
+    {
+      "method": "copyRegular-safe-stream",
+      "sample": 1,
+      "bytes": 104857600,
+      "operationMs": 11349.605800000005,
+      "additionalFlushMs": null,
+      "durableMs": 11349.605800000005,
+      "durableInOperation": true,
+      "gitSubprocesses": 0,
+      "ioCounters": {
+        "fsRead": 401,
+        "fsWrite": 400,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    },
+    {
+      "method": "git-checkout-index",
+      "sample": 1,
+      "bytes": 104857600,
+      "operationMs": 1732.2958999999973,
+      "additionalFlushMs": 1266.530700000003,
+      "durableMs": 2998.8266000000003,
+      "durableInOperation": false,
+      "gitSubprocesses": 1,
+      "ioCounters": {
+        "fsRead": 2,
+        "fsWrite": 0,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    },
+    {
+      "method": "copyFile-FICLONE-fallback",
+      "sample": 2,
+      "bytes": 104857600,
+      "operationMs": 125.44729999999981,
+      "additionalFlushMs": 182.92740000001504,
+      "durableMs": 308.37470000001485,
+      "durableInOperation": false,
+      "gitSubprocesses": 0,
+      "ioCounters": {
+        "fsRead": 100,
+        "fsWrite": 0,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    },
+    {
+      "method": "copyRegular-safe-stream",
+      "sample": 2,
+      "bytes": 104857600,
+      "operationMs": 1079.579700000002,
+      "additionalFlushMs": null,
+      "durableMs": 1079.579700000002,
+      "durableInOperation": true,
+      "gitSubprocesses": 0,
+      "ioCounters": {
+        "fsRead": 401,
+        "fsWrite": 400,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    },
+    {
+      "method": "git-checkout-index",
+      "sample": 2,
+      "bytes": 104857600,
+      "operationMs": 1297.7751999999746,
+      "additionalFlushMs": 827.5100000000093,
+      "durableMs": 2125.285199999984,
+      "durableInOperation": false,
+      "gitSubprocesses": 1,
+      "ioCounters": {
+        "fsRead": 2,
+        "fsWrite": 0,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    },
+    {
+      "method": "copyFile",
+      "sample": 2,
+      "bytes": 104857600,
+      "operationMs": 112.06020000000717,
+      "additionalFlushMs": 156.19080000001122,
+      "durableMs": 268.2510000000184,
+      "durableInOperation": false,
+      "gitSubprocesses": 0,
+      "ioCounters": {
+        "fsRead": 100,
+        "fsWrite": 0,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    },
+    {
+      "method": "copyFile-FICLONE-fallback",
+      "sample": 3,
+      "bytes": 104857600,
+      "operationMs": 124.52490000001853,
+      "additionalFlushMs": 133.71849999998813,
+      "durableMs": 258.24340000000666,
+      "durableInOperation": false,
+      "gitSubprocesses": 0,
+      "ioCounters": {
+        "fsRead": 100,
+        "fsWrite": 0,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    },
+    {
+      "method": "copyRegular-safe-stream",
+      "sample": 3,
+      "bytes": 104857600,
+      "operationMs": 1448.4630999999936,
+      "additionalFlushMs": null,
+      "durableMs": 1448.4630999999936,
+      "durableInOperation": true,
+      "gitSubprocesses": 0,
+      "ioCounters": {
+        "fsRead": 401,
+        "fsWrite": 400,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    },
+    {
+      "method": "git-checkout-index",
+      "sample": 3,
+      "bytes": 104857600,
+      "operationMs": 864.282200000016,
+      "additionalFlushMs": 170.773600000015,
+      "durableMs": 1035.055800000031,
+      "durableInOperation": false,
+      "gitSubprocesses": 1,
+      "ioCounters": {
+        "fsRead": 2,
+        "fsWrite": 0,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    },
+    {
+      "method": "copyFile",
+      "sample": 3,
+      "bytes": 104857600,
+      "operationMs": 57.80060000001686,
+      "additionalFlushMs": 112.28049999999348,
+      "durableMs": 170.08110000001034,
+      "durableInOperation": false,
+      "gitSubprocesses": 0,
+      "ioCounters": {
+        "fsRead": 100,
+        "fsWrite": 0,
+        "unit": "OS counters; not byte counts"
+      },
+      "independence": {
+        "destinationEditPreservesSource": true,
+        "sourceEditPreservesDestination": true
+      },
+      "physicalCoWProven": false
+    }
+  ],
+  "errors": [
+    {
+      "method": "copyFile-FICLONE_FORCE",
+      "sample": 1,
+      "operationMs": 0.5841999999975087,
+      "code": "ENOSYS",
+      "message": "ENOSYS: function not implemented, copyfile '<fixture>\\repository\\source.bin' -> '<fixture>\\destinations\\0-copyFile-FICLONE_FORCE\\copy.bin'",
+      "independenceCompleted": false
+    },
+    {
+      "method": "copyFile-FICLONE_FORCE",
+      "sample": 2,
+      "operationMs": 0.5780000000086147,
+      "code": "ENOSYS",
+      "message": "ENOSYS: function not implemented, copyfile '<fixture>\\repository\\source.bin' -> '<fixture>\\destinations\\1-copyFile-FICLONE_FORCE\\copy.bin'",
+      "independenceCompleted": false
+    },
+    {
+      "method": "copyFile-FICLONE_FORCE",
+      "sample": 3,
+      "operationMs": 0.13280000002123415,
+      "code": "ENOSYS",
+      "message": "ENOSYS: function not implemented, copyfile '<fixture>\\repository\\source.bin' -> '<fixture>\\destinations\\2-copyFile-FICLONE_FORCE\\copy.bin'",
+      "independenceCompleted": false
+    }
+  ],
+  "hardlink": {
+    "created": true,
+    "sourceChangedThroughOtherName": true,
+    "adopted": false
+  },
+  "memory": {
+    "maxObservedRssBytes": 109719552,
+    "maxObservedExternalBytes": 54287921,
+    "intervalMs": 10
+  },
+  "resourceAccounting": {
+    "logicalWritesAtLeastBytes": 1363148800,
+    "checksumReadBytes": 7759462400,
+    "peakDiskLimitIsNotCumulativeIoLimit": true,
+    "maxMeasuredLogicalFixtureBytes": 314691086,
+    "physicalAllocatedBytesMeasured": false
+  },
+  "elapsedMs": 239349.5868,
+  "limits": [
+    "Flags/API success and independence do not prove shared physical extents or copy-on-write.",
+    "Raw copy/Git checkout-index omit Core ownership, backups, journals, CAS and final publication.",
+    "copyRegular includes source validation, hashing and fsync; native rows have separately measured destination fsync.",
+    "No power-loss certification; no direct native FSCTL block-clone prototype.",
+    "No Linux execution unless platform.os explicitly reports linux."
+  ],
+  "campaign": "r3",
+  "qualification": {
+    "window": "Concurrent team validation created severe contention; latency ranking is inconclusive.",
+    "physicalCoWProven": false,
+    "linuxExecuted": false,
+    "gitVersion": "2.53.0.windows.2",
+    "repeatableScript": "scripts/benchmark-materialization.mjs",
+    "previousLoadedCampaign": null,
+    "gitCounterSemantics": "gitSubprocesses counts direct helper invocations within each sample; completed checkout-index rows each made one successful direct invocation. Git descendants were not observed. Setup invocations are outside these per-sample counts.",
+    "rawResultSHA256": "6ff75f08d646274307635c712e603eb94aaa9feb042b911940b7a7d19e31dbcd"
+  }
+}

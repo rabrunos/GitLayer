@@ -6,6 +6,7 @@ import crypto from 'node:crypto';
 import { cleanupFixture, createFixture, execute, fileHash, isolatedEnvironment, json, project, relative, resolveGit, safeEvidence, within } from '../../../scripts/git-compat/lib.mjs';
 import { fileManifest, manifestFingerprint } from '../../../scripts/git-compat/audit.mjs';
 import { inspectZipNames } from './zip-fixtures.mjs';
+import { externalFixtureParent } from '../../../scripts/git-compat/fixture-parent.mjs';
 
 const id = 'portability-' + new Date().toISOString().replace(/[:.]/g, '-') + '-' + crypto.randomBytes(3).toString('hex');
 const evidenceParent = process.env.GIT_COMPAT_INFRA_EVIDENCE_ROOT;
@@ -19,7 +20,7 @@ test('fresh copy accepts an authorized source baseline and reports its archived 
   const parentBefore = fileManifest(project, ['src']);
   // The short exclusive root matters on Windows: Git appends transaction UUIDs
   // to its private refs. It is never an existing checkout or a user repository.
-  const fixture = createFixture(project, 'p'), copyRoot = fixture.root;
+  const fixture = createFixture(externalFixtureParent(project), 'p'), copyRoot = fixture.root;
   const dependencyLink = path.join(copyRoot, 'node_modules'), dependencies = fs.realpathSync(path.join(project, 'node_modules'));
   const commands = [], proof = { role: 'R-01 reusable fresh-copy end-to-end control; no changes to parent product', parentSourceFingerprintBefore: manifestFingerprint(parentBefore), fixture: '<FRESH-COPY>', privateBriefInitiallyAbsent: null };
   let env;
@@ -47,6 +48,9 @@ test('fresh copy accepts an authorized source baseline and reports its archived 
     assert.equal(fs.lstatSync(dependencyLink).isSymbolicLink(), true); assert.equal(fs.realpathSync(dependencyLink), dependencies);
     const gitPath = resolveGit(), environmentFixture = createFixture(copyRoot, 'env');
     env = isolatedEnvironment(environmentFixture.root, gitPath);
+    // The copied checkout owns HOME/TEMP; nested Git fixtures require a separately validated external parent.
+    env.GIT_COMPAT_EXTERNAL_FIXTURE_PARENT = externalFixtureParent(project);
+    assert.equal(within(copyRoot, env.GIT_COMPAT_EXTERNAL_FIXTURE_PARENT), false, 'nested fixture parent must remain outside the copied checkout');
     await run('01-git-init', gitPath, ['init', '-b', 'main', copyRoot]);
     const matrixFile = path.join(copyRoot, 'tests/git-compat/scenarios.json'), originalFile = path.join(copyRoot, 'docs/git-compat/reference/03-Cenarios-Git-Layers-v2.json');
     const matrix = read(matrixFile).scenarios ?? read(matrixFile), originals = read(originalFile).scenarios;

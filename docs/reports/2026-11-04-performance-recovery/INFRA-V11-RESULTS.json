@@ -1,0 +1,3100 @@
+{
+  "schema": 1,
+  "kind": "public-flat-node-tap-results",
+  "phase": "infra",
+  "originalStatus": "PASS",
+  "startedAt": "2026-11-05T03:46:19.828Z",
+  "endedAt": "2026-11-05T03:47:59.082Z",
+  "source": {
+    "inputs": [
+      "src",
+      "scripts",
+      "tests",
+      "package-lock.json",
+      "package.json",
+      "tsconfig.debug.json",
+      "tsconfig.json"
+    ],
+    "beforeFingerprint": "5cc41446889657aee4f4622a0d5ab3ed46483a01f937cab7218a8c297415b44d",
+    "afterFingerprint": "5cc41446889657aee4f4622a0d5ab3ed46483a01f937cab7218a8c297415b44d",
+    "sourceUnchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "count": 209,
+    "archive": "source/"
+  },
+  "command": {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "argv": [
+      "--test",
+      "--test-concurrency=1",
+      "--test-timeout=900000",
+      "--test-reporter=spec",
+      "--test-reporter-destination=stdout",
+      "--test-reporter=tap",
+      "--test-reporter-destination=stderr",
+      "tests/git-compat/infra/*.test.mjs"
+    ],
+    "timeoutMs": 1800000,
+    "nodeTest": true,
+    "npmEquivalent": "npm.cmd run compat:infra",
+    "scope": "Same infrastructure corpus and concurrency as package.json compat:infra; explicit per-test budget and evidence reporters."
+  },
+  "process": {
+    "pid": "<OWNED_PID>",
+    "exitCode": 0,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "timeoutMs": 1800000,
+    "durationMs": 98660,
+    "termination": null
+  },
+  "phaseError": null,
+  "metadata": {
+    "node": "v24.14.1",
+    "platform": "win32",
+    "arch": "x64",
+    "release": "10.0.26200",
+    "officialGit": "C:\\Program Files\\Git\\cmd\\git.exe",
+    "timeoutMs": 1800000,
+    "testTimeoutMs": 900000,
+    "nodeTest": true,
+    "scope": "Same infrastructure corpus and concurrency as package.json compat:infra; explicit per-test budget and evidence reporters.",
+    "environmentPolicy": "isolated HOME/USERPROFILE/XDG/config/identity/credentials/editors/temporary paths; no shell; no host configuration edits",
+    "performanceFixturePolicy": {
+      "environmentFlag": "GL_STAGE2_PRESERVE_FIXTURES=1",
+      "retainPassedAndFailed": true,
+      "ownershipReceipts": "Each performance fixture validates its marker/nonce and ancestry, then emits its retained root in TAP diagnostics and writes a local retention receipt."
+    }
+  },
+  "complete": true,
+  "completeScope": "Only the complete consistent unindented Node summary in a verified final trailer matching the terminal result.summary. This flag is not a product PASS or a hierarchy claim.",
+  "nodeFinalSummary": {
+    "format": "Node.js TAP final summary",
+    "counts": {
+      "tests": 113,
+      "suites": 0,
+      "pass": 113,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 98593.7141
+    },
+    "complete": true,
+    "consistent": true
+  },
+  "recordedSummary": {
+    "format": "Node.js TAP final summary",
+    "counts": {
+      "tests": 113,
+      "suites": 0,
+      "pass": 113,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 98593.7141
+    },
+    "complete": true,
+    "consistent": true
+  },
+  "summaryMatchesRecorded": true,
+  "duplicateSummaryKeys": [],
+  "summaryTrailer": {
+    "firstLine": 729,
+    "lastLine": 736,
+    "followsAllParsedResults": true,
+    "trailingContent": [],
+    "verifiedFinalTrailer": true
+  },
+  "parsedResultCount": 113,
+  "resultCountMatchesDeclaredTests": true,
+  "results": [
+    {
+      "line": 3,
+      "indent": 0,
+      "indentText": "",
+      "id": "1",
+      "status": "ok",
+      "name": "Inspector locator ignores matching lines in other methods and accepts variable generated filesystem bindings",
+      "rawName": "Inspector locator ignores matching lines in other methods and accepts variable generated filesystem bindings",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1.521,
+      "durationText": "1.521",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 4,
+        "lastLine": 7,
+        "closed": true,
+        "sha256": "2a495a511d86351759157677ef1ee800defa2fab6796f7596d654f4a48c2a36b",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 9,
+      "indent": 0,
+      "indentText": "",
+      "id": "2",
+      "status": "ok",
+      "name": "Inspector locator refuses missing, duplicated, unclosed or ambiguous methods before any child can start",
+      "rawName": "Inspector locator refuses missing, duplicated, unclosed or ambiguous methods before any child can start",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1.9265,
+      "durationText": "1.9265",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 10,
+        "lastLine": 13,
+        "closed": true,
+        "sha256": "7de99e7406fb70a583700d812cae3dbe724969ee1a64232b6842b67007b31c14",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 15,
+      "indent": 0,
+      "indentText": "",
+      "id": "3",
+      "status": "ok",
+      "name": "Inspector commit checkpoint requires durable journal then publication barrier before the unique assignment",
+      "rawName": "Inspector commit checkpoint requires durable journal then publication barrier before the unique assignment",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.3918,
+      "durationText": "0.3918",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 16,
+        "lastLine": 19,
+        "closed": true,
+        "sha256": "0722bde56813db053c18976a0dd8eea62204d96a4862389c4d6baa0b5a6b684b",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 23,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "1",
+      "status": "ok",
+      "name": "baseline and historical AGENTS root context",
+      "rawName": "baseline and historical AGENTS root context",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 255.3174,
+      "durationText": "255.3174",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 24,
+        "lastLine": 27,
+        "closed": true,
+        "sha256": "3996599890af30529368e45dc3a4242909c79d69d15170cf8ea71806f64ea6a4",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 29,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "2",
+      "status": "ok",
+      "name": "new scenario ID accepted",
+      "rawName": "new scenario ID accepted",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 253.8176,
+      "durationText": "253.8176",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 30,
+        "lastLine": 33,
+        "closed": true,
+        "sha256": "901fc488f3ef9d77ab5758b8a9be545e3f4519a47a9c940f0b0f7b79c737b259",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 35,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "3",
+      "status": "ok",
+      "name": "original scenario removal rejected",
+      "rawName": "original scenario removal rejected",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 250.5493,
+      "durationText": "250.5493",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 36,
+        "lastLine": 39,
+        "closed": true,
+        "sha256": "134c7cedf9b840667d02f85f756aa8e1be4fe063ea52b46419cb7fbbe6d2400a",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 41,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "4",
+      "status": "ok",
+      "name": "duplicate scenario ID rejected",
+      "rawName": "duplicate scenario ID rejected",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 244.5666,
+      "durationText": "244.5666",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 42,
+        "lastLine": 45,
+        "closed": true,
+        "sha256": "da9edefb654c2f38f962e3d99d5ccb962d670d1bf0f2e964e94fa3a966e9538f",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 47,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "5",
+      "status": "ok",
+      "name": "changed original reference rejected",
+      "rawName": "changed original reference rejected",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 243.1004,
+      "durationText": "243.1004",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 48,
+        "lastLine": 51,
+        "closed": true,
+        "sha256": "384c65f4d1774219413149626f7381b19805db4591aa21def31adb26a99c1717",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 53,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "6",
+      "status": "ok",
+      "name": "duplicate headings, Unicode spaces, references and code controls",
+      "rawName": "duplicate headings, Unicode spaces, references and code controls",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 247.0819,
+      "durationText": "247.0819",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 54,
+        "lastLine": 57,
+        "closed": true,
+        "sha256": "8af73dbf38430d661bc42a64ff0220a65c3893d4c160ba2dee4ef4766ac8f27c",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 59,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "7",
+      "status": "ok",
+      "name": "broken local link rejected",
+      "rawName": "broken local link rejected",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 249.9461,
+      "durationText": "249.9461",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 60,
+        "lastLine": 63,
+        "closed": true,
+        "sha256": "c60e8be4e898392bdd5d19a4760f5439d7ccaba37d9001305f81c97c6798f61c",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 65,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "8",
+      "status": "ok",
+      "name": "missing Markdown anchor rejected",
+      "rawName": "missing Markdown anchor rejected",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 245.3599,
+      "durationText": "245.3599",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 66,
+        "lastLine": 69,
+        "closed": true,
+        "sha256": "b6072edb7b47768716a9109358e1136f014225ce97f703f43bcded2bb04d0ed0",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 71,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "9",
+      "status": "ok",
+      "name": "absolute and escaping links rejected",
+      "rawName": "absolute and escaping links rejected",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 246.5807,
+      "durationText": "246.5807",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 72,
+        "lastLine": 75,
+        "closed": true,
+        "sha256": "40a8533f1203aea0668f735fc27bc2a02e8bce5473443fa8d0b902b4ffaab978",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 77,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "10",
+      "status": "ok",
+      "name": "unclosed fence rejected",
+      "rawName": "unclosed fence rejected",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 244.1602,
+      "durationText": "244.1602",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 78,
+        "lastLine": 81,
+        "closed": true,
+        "sha256": "3e2352496c496aa88f891fcdc41b6e3b6dd8573a50afbf0d2b432e9f173674b9",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 83,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "11",
+      "status": "ok",
+      "name": "new output succeeds; existing output and linked parent preserved",
+      "rawName": "new output succeeds; existing output and linked parent preserved",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 8.5854,
+      "durationText": "8.5854",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 84,
+        "lastLine": 87,
+        "closed": true,
+        "sha256": "f97ad586c68ea04258616674ceaade7d055559aaf19e688571a9448872eb85cf",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 89,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "12",
+      "status": "ok",
+      "name": "historical output path refused",
+      "rawName": "historical output path refused",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.189,
+      "durationText": "0.189",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 90,
+        "lastLine": 93,
+        "closed": true,
+        "sha256": "c8dce8bcf6b12c5a1413f24283938386bcdd054ad96c5649668946043baf8240",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 95,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "13",
+      "status": "ok",
+      "name": "invalid or repeated options rejected",
+      "rawName": "invalid or repeated options rejected",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.2101,
+      "durationText": "0.2101",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 96,
+        "lastLine": 99,
+        "closed": true,
+        "sha256": "645b94a570632c2c647e640ef728f17f95c586994c389b2dde1c495b08c07ebb",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 101,
+      "indent": 4,
+      "indentText": "    ",
+      "id": "14",
+      "status": "ok",
+      "name": "restored fixture and historical audit unchanged",
+      "rawName": "restored fixture and historical audit unchanged",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 239.039,
+      "durationText": "239.039",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 102,
+        "lastLine": 105,
+        "closed": true,
+        "sha256": "57c65bfb5ed882725b508916de666ef382984f04a6e389d017d4bf004f25b5e6",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 107,
+      "indent": 0,
+      "indentText": "",
+      "id": "4",
+      "status": "ok",
+      "name": "documentation validator: fourteen independent positive and negative controls",
+      "rawName": "documentation validator: fourteen independent positive and negative controls",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 3065.3807,
+      "durationText": "3065.3807",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 108,
+        "lastLine": 111,
+        "closed": true,
+        "sha256": "4bf4179f6bca6565371e224c67787bff4ba40ec933e61b7b4c9d48b13c844441",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 114,
+      "indent": 0,
+      "indentText": "",
+      "id": "5",
+      "status": "ok",
+      "name": "default budgets are 30 seconds for raw/run/Git and 90 seconds for the CLI, recorded without waiting",
+      "rawName": "default budgets are 30 seconds for raw/run/Git and 90 seconds for the CLI, recorded without waiting",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 249.5385,
+      "durationText": "249.5385",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 115,
+        "lastLine": 118,
+        "closed": true,
+        "sha256": "fc058a67d252790e027fd791355374a0b136aeec06c8c6cdf114303a3288c49a",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 120,
+      "indent": 0,
+      "indentText": "",
+      "id": "6",
+      "status": "ok",
+      "name": "the fake composite CLI exceeds the command budget and succeeds within its configured CLI budget with binary evidence",
+      "rawName": "the fake composite CLI exceeds the command budget and succeeds within its configured CLI budget with binary evidence",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2077.8002,
+      "durationText": "2077.8002",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 121,
+        "lastLine": 124,
+        "closed": true,
+        "sha256": "104a2cb23059b3d99dc4677326d1cd02c7a307f98d1c73cceec7979ed3d1fea7",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 126,
+      "indent": 0,
+      "indentText": "",
+      "id": "7",
+      "status": "ok",
+      "name": "run and Git-shaped invocations of the same real Node process retain the shorter command budget",
+      "rawName": "run and Git-shaped invocations of the same real Node process retain the shorter command budget",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2013.129,
+      "durationText": "2013.129",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 127,
+        "lastLine": 130,
+        "closed": true,
+        "sha256": "680bcf93d447210f46464212629bf89859955e26da26de55c6987b985e9c0db6",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 132,
+      "indent": 0,
+      "indentText": "",
+      "id": "8",
+      "status": "ok",
+      "name": "an explicit shorter CLI override still rejects timeout even when its termination signal/code is allowed",
+      "rawName": "an explicit shorter CLI override still rejects timeout even when its termination signal/code is allowed",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 464.2088,
+      "durationText": "464.2088",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 133,
+        "lastLine": 136,
+        "closed": true,
+        "sha256": "901e1616448dfdec918a63d829fa56f9e9225b53f23f07d0723a285afcc7bc1c",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 138,
+      "indent": 0,
+      "indentText": "",
+      "id": "9",
+      "status": "ok",
+      "name": "an explicit larger CLI override takes precedence over the configured CLI budget",
+      "rawName": "an explicit larger CLI override takes precedence over the configured CLI budget",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2076.8749,
+      "durationText": "2076.8749",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 139,
+        "lastLine": 142,
+        "closed": true,
+        "sha256": "f968889809d4d7a469fb46bf1a1d0eae0fc0a72327e5f7eaaaf0b3c5937e96dc",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 144,
+      "indent": 0,
+      "indentText": "",
+      "id": "10",
+      "status": "ok",
+      "name": "invalid default and explicit budgets reject before process creation",
+      "rawName": "invalid default and explicit budgets reject before process creation",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 10.0285,
+      "durationText": "10.0285",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 145,
+        "lastLine": 148,
+        "closed": true,
+        "sha256": "9b51361d97bd1052a84e7b5f05457c0a2e2af781d97acb20fc0d9526919ea203",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 150,
+      "indent": 0,
+      "indentText": "",
+      "id": "11",
+      "status": "ok",
+      "name": "a shorter owning-process deadline remains a supervised infrastructure FAIL with its effective budget",
+      "rawName": "a shorter owning-process deadline remains a supervised infrastructure FAIL with its effective budget",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 478.3313,
+      "durationText": "478.3313",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 151,
+        "lastLine": 154,
+        "closed": true,
+        "sha256": "a0e58aff407e2cd048cfdb5f828683dcc24cbe4c852ee2c1eb21ec8b36da0d2b",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 156,
+      "indent": 0,
+      "indentText": "",
+      "id": "12",
+      "status": "ok",
+      "name": "a spawn failure retains the configured budget in error metadata without claiming execution success",
+      "rawName": "a spawn failure retains the configured budget in error metadata without claiming execution success",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 11.0211,
+      "durationText": "11.0211",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 157,
+        "lastLine": 160,
+        "closed": true,
+        "sha256": "1530e244aba064b132b251e9685ee6f4d58443068388d5695eb59725a98ef75b",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 162,
+      "indent": 0,
+      "indentText": "",
+      "id": "13",
+      "status": "ok",
+      "name": "binary subprocess evidence preserves bytes which are not valid UTF-8",
+      "rawName": "binary subprocess evidence preserves bytes which are not valid UTF-8",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 79.0019,
+      "durationText": "79.0019",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 163,
+        "lastLine": 166,
+        "closed": true,
+        "sha256": "2e9d1c9fe3d10f64bad4eb170e2a92a9259279cec8b3c84f93b9d43d231530cf",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 168,
+      "indent": 0,
+      "indentText": "",
+      "id": "14",
+      "status": "ok",
+      "name": "nested linked sources cannot disappear from an audit manifest",
+      "rawName": "nested linked sources cannot disappear from an audit manifest",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 7.4298,
+      "durationText": "7.4298",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 169,
+        "lastLine": 172,
+        "closed": true,
+        "sha256": "4ac00114daf10fcdea154264ac9d580a1fdf6908f914282b6c73ff490afb2f88",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 175,
+      "indent": 0,
+      "indentText": "",
+      "id": "15",
+      "status": "ok",
+      "name": "exited parent PID is never signalled and descendant-held pipes have a bounded drain",
+      "rawName": "exited parent PID is never signalled and descendant-held pipes have a bounded drain",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 7124.3275,
+      "durationText": "7124.3275",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 176,
+        "lastLine": 179,
+        "closed": true,
+        "sha256": "a3d4b2662bff6839b5ad1327fe3ce052587e4c9feda076148fd9cb1051e65883",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 181,
+      "indent": 0,
+      "indentText": "",
+      "id": "16",
+      "status": "ok",
+      "name": "existing budgets have explicit defaults and exact inclusive integer bounds",
+      "rawName": "existing budgets have explicit defaults and exact inclusive integer bounds",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 13.4142,
+      "durationText": "13.4142",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 182,
+        "lastLine": 185,
+        "closed": true,
+        "sha256": "7a3b0f58df06d8b9691a6ee003cd02d0bc0a01d920dd715207501a63b827e768",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 187,
+      "indent": 0,
+      "indentText": "",
+      "id": "17",
+      "status": "ok",
+      "name": "existing rejects malformed budgets, missing/repeated options before mkdir",
+      "rawName": "existing rejects malformed budgets, missing/repeated options before mkdir",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 6.651,
+      "durationText": "6.651",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 188,
+        "lastLine": 191,
+        "closed": true,
+        "sha256": "c3f6e85e022985f9d9022a58411c15b203a29c59c14dbe680900d1278913b31a",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 193,
+      "indent": 0,
+      "indentText": "",
+      "id": "18",
+      "status": "ok",
+      "name": "existing record helper persists actual PID, termination, budgets, exit and signal",
+      "rawName": "existing record helper persists actual PID, termination, budgets, exit and signal",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 6.2445,
+      "durationText": "6.2445",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 194,
+        "lastLine": 197,
+        "closed": true,
+        "sha256": "f5d163c59a3360f4660d929242a93f12576a578a4da9d155da9f1ba819a617e9",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 200,
+      "indent": 0,
+      "indentText": "",
+      "id": "19",
+      "status": "ok",
+      "name": "existing captures a short real owned-child timeout and retains raw streams",
+      "rawName": "existing captures a short real owned-child timeout and retains raw streams",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 219.3582,
+      "durationText": "219.3582",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 201,
+        "lastLine": 204,
+        "closed": true,
+        "sha256": "18bd488b66b75bc26ed43ab33d37bdd6523564a8601825b56b444108a492c17e",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 206,
+      "indent": 0,
+      "indentText": "",
+      "id": "20",
+      "status": "ok",
+      "name": "output-root validation blocks every protected tree before creating directories",
+      "rawName": "output-root validation blocks every protected tree before creating directories",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 14.7535,
+      "durationText": "14.7535",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 207,
+        "lastLine": 210,
+        "closed": true,
+        "sha256": "7a4ef7f012217f179c2cfac4ce89218e61b212c2da959eec25695bf18b4680d3",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 212,
+      "indent": 0,
+      "indentText": "",
+      "id": "21",
+      "status": "ok",
+      "name": "output-root validation rejects linked and non-directory ancestors",
+      "rawName": "output-root validation rejects linked and non-directory ancestors",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 10.4217,
+      "durationText": "10.4217",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 213,
+        "lastLine": 216,
+        "closed": true,
+        "sha256": "6f534b38598b084666c9e7d851124536f6e5bfc4ba430459e140b0661d4b3fc7",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 218,
+      "indent": 0,
+      "indentText": "",
+      "id": "22",
+      "status": "ok",
+      "name": "the real existing CLI rejects invalid suites and protected output before setup or test execution",
+      "rawName": "the real existing CLI rejects invalid suites and protected output before setup or test execution",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 797.7005,
+      "durationText": "797.7005",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 219,
+        "lastLine": 222,
+        "closed": true,
+        "sha256": "089a1865c0ac4f9aa037eb0f632735059a9c9454ec191a26c68238d7a1e5dc8d",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 224,
+      "indent": 0,
+      "indentText": "",
+      "id": "23",
+      "status": "ok",
+      "name": "existing refuses repository TEMP parents and accepts a read-only explicit owned external override",
+      "rawName": "existing refuses repository TEMP parents and accepts a read-only explicit owned external override",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 529.3748,
+      "durationText": "529.3748",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 225,
+        "lastLine": 228,
+        "closed": true,
+        "sha256": "6b097fc23f2d761d27fb8e989da1a4d40632cb1f67e5614fe7880043628a3955",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 230,
+      "indent": 0,
+      "indentText": "",
+      "id": "24",
+      "status": "ok",
+      "name": "existing evidence preserves real binary child streams and Unicode or TAP summaries",
+      "rawName": "existing evidence preserves real binary child streams and Unicode or TAP summaries",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 73.2179,
+      "durationText": "73.2179",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 231,
+        "lastLine": 234,
+        "closed": true,
+        "sha256": "2049e0c9d3bb5a383cbedbb0f9acf46170d6173ec4b79636af76d427557a3258",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 236,
+      "indent": 0,
+      "indentText": "",
+      "id": "25",
+      "status": "ok",
+      "name": "source preservation includes a truly untracked fixture file and accepts the next authorized baseline",
+      "rawName": "source preservation includes a truly untracked fixture file and accepts the next authorized baseline",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 712.1058,
+      "durationText": "712.1058",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 237,
+        "lastLine": 240,
+        "closed": true,
+        "sha256": "8107546d8d622ee033f2971b7bd46c2189981ca910e0a5d1a157207658887c87",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 242,
+      "indent": 0,
+      "indentText": "",
+      "id": "26",
+      "status": "ok",
+      "name": "the original reference IDs remain present while a legitimate extra scenario has its own result",
+      "rawName": "the original reference IDs remain present while a legitimate extra scenario has its own result",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 87.2337,
+      "durationText": "87.2337",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 243,
+        "lastLine": 246,
+        "closed": true,
+        "sha256": "9850d139c0100e3be22e36bb97c5bc952c415981daccd690c349d224627e332c",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 248,
+      "indent": 0,
+      "indentText": "",
+      "id": "27",
+      "status": "ok",
+      "name": "working-matrix denominators follow legitimate additions without a preparation-era constant",
+      "rawName": "working-matrix denominators follow legitimate additions without a preparation-era constant",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 78.6055,
+      "durationText": "78.6055",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 249,
+        "lastLine": 252,
+        "closed": true,
+        "sha256": "8aeb5a9235e7de8be4582a141fdeb537b410ff2ab9588a55fd5e09c1303450e7",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 254,
+      "indent": 0,
+      "indentText": "",
+      "id": "28",
+      "status": "ok",
+      "name": "matrix files permit legitimate extensions and reject unregistered scopes before any execution",
+      "rawName": "matrix files permit legitimate extensions and reject unregistered scopes before any execution",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 192.0302,
+      "durationText": "192.0302",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 255,
+        "lastLine": 258,
+        "closed": true,
+        "sha256": "50133851890db33e11c23c12fadc6b1b846bbc3c9911d0a1e1ee5ee66c2ff2fe",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 260,
+      "indent": 0,
+      "indentText": "",
+      "id": "29",
+      "status": "ok",
+      "name": "selection validates every public selector and keeps empty execution distinct from inspection",
+      "rawName": "selection validates every public selector and keeps empty execution distinct from inspection",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 97.8378,
+      "durationText": "97.8378",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 261,
+        "lastLine": 264,
+        "closed": true,
+        "sha256": "c63498e5a0cee783ea5502b9639ee5969cd627283a90ee76a98c9d43bb5fc6b7",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 266,
+      "indent": 0,
+      "indentText": "",
+      "id": "30",
+      "status": "ok",
+      "name": "real runner CLI rejects typos, specification-only IDs and empty intersections before creating a report",
+      "rawName": "real runner CLI rejects typos, specification-only IDs and empty intersections before creating a report",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2218.8369,
+      "durationText": "2218.8369",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 267,
+        "lastLine": 270,
+        "closed": true,
+        "sha256": "cf4c5144ea909f892eb3b67fa935a2a158d329d597f0df61e6c755ce7cc37c1b",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 272,
+      "indent": 0,
+      "indentText": "",
+      "id": "31",
+      "status": "ok",
+      "name": "real runner CLI labels list, deliberately empty execution and retry without failures without a test PASS",
+      "rawName": "real runner CLI labels list, deliberately empty execution and retry without failures without a test PASS",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 5157.3693,
+      "durationText": "5157.3693",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 273,
+        "lastLine": 276,
+        "closed": true,
+        "sha256": "f8eeff9614ef665bd9db95b1e721923227ee35cd1417ce3092f05fe1a2cdce10",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 278,
+      "indent": 0,
+      "indentText": "",
+      "id": "32",
+      "status": "ok",
+      "name": "retry validates status and identity before filtering and selects only an available failed variant",
+      "rawName": "retry validates status and identity before filtering and selects only an available failed variant",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1517.675,
+      "durationText": "1517.675",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 279,
+        "lastLine": 282,
+        "closed": true,
+        "sha256": "1fcb7a41bffa474a7dc0e12f7996c162c91aee9d3f4a3fb92855bd0b0a98bc34",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 284,
+      "indent": 0,
+      "indentText": "",
+      "id": "33",
+      "status": "ok",
+      "name": "a known gap requires the complete exact observation and the relevant runtime",
+      "rawName": "a known gap requires the complete exact observation and the relevant runtime",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 6.4027,
+      "durationText": "6.4027",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 285,
+        "lastLine": 288,
+        "closed": true,
+        "sha256": "230e30e7896a29a785ff3a0b4bf54d8d06a0751ac2acb7687f26b18234885631",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 290,
+      "indent": 0,
+      "indentText": "",
+      "id": "34",
+      "status": "ok",
+      "name": "unrelated legitimate source changes do not freeze a strict known observation",
+      "rawName": "unrelated legitimate source changes do not freeze a strict known observation",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1.5271,
+      "durationText": "1.5271",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 291,
+        "lastLine": 294,
+        "closed": true,
+        "sha256": "39e7e0652e730364f00a6b9dd4923e62d1a0cf4df5630f91545205393da2e68e",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 296,
+      "indent": 0,
+      "indentText": "",
+      "id": "35",
+      "status": "ok",
+      "name": "recorded observations and environment do not change retrospectively with caller objects",
+      "rawName": "recorded observations and environment do not change retrospectively with caller objects",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1.4808,
+      "durationText": "1.4808",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 297,
+        "lastLine": 300,
+        "closed": true,
+        "sha256": "b54015d08fd8e46c7123dd16cb62af2728c094bb2572ef1c461ecd392cf998c8",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 302,
+      "indent": 0,
+      "indentText": "",
+      "id": "36",
+      "status": "ok",
+      "name": "a real desired outcome is recognized after a product fix and remains visible for review",
+      "rawName": "a real desired outcome is recognized after a product fix and remains visible for review",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1.273,
+      "durationText": "1.273",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 303,
+        "lastLine": 306,
+        "closed": true,
+        "sha256": "8f91bfc7f013d9811258a7ae626c879b7facb9273858cc7510a560dc4701c629",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 308,
+      "indent": 0,
+      "indentText": "",
+      "id": "37",
+      "status": "ok",
+      "name": "an explicit successor expectation can retire a gap without rewriting historical evidence",
+      "rawName": "an explicit successor expectation can retire a gap without rewriting historical evidence",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1.5038,
+      "durationText": "1.5038",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 309,
+        "lastLine": 312,
+        "closed": true,
+        "sha256": "4535a6472f8fdc341a4f214302c5b6455cf816d3a57f23665c788c432f681739",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 314,
+      "indent": 0,
+      "indentText": "",
+      "id": "38",
+      "status": "ok",
+      "name": "malformed or incomplete observations cannot receive an approval",
+      "rawName": "malformed or incomplete observations cannot receive an approval",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2.3445,
+      "durationText": "2.3445",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 315,
+        "lastLine": 318,
+        "closed": true,
+        "sha256": "12e6a125372f5c0650da299c1f2e15ebe8e217c2965b4f66a5d7175d460c0475",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 320,
+      "indent": 0,
+      "indentText": "",
+      "id": "39",
+      "status": "ok",
+      "name": "external infrastructure fixtures validate their parent before creation and preserve nonce ownership",
+      "rawName": "external infrastructure fixtures validate their parent before creation and preserve nonce ownership",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 7.2221,
+      "durationText": "7.2221",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 321,
+        "lastLine": 324,
+        "closed": true,
+        "sha256": "82832a478e0c4d3bae24aed9978dddf1d7681cddd19c786f76c425d68c7c4e8c",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 326,
+      "indent": 0,
+      "indentText": "",
+      "id": "40",
+      "status": "ok",
+      "name": "real matrix runner refuses a Git fixture parent before producing output or domain fixtures",
+      "rawName": "real matrix runner refuses a Git fixture parent before producing output or domain fixtures",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 243.4759,
+      "durationText": "243.4759",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 327,
+        "lastLine": 330,
+        "closed": true,
+        "sha256": "76725e9a15b902651cfe929d001869ed64aabe9984364d51b36494829bb762cb",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 332,
+      "indent": 0,
+      "indentText": "",
+      "id": "41",
+      "status": "ok",
+      "name": "implementation matrix keeps every original ID and selected MODEL coverage explicitly non-exhaustive",
+      "rawName": "implementation matrix keeps every original ID and selected MODEL coverage explicitly non-exhaustive",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 20.437,
+      "durationText": "20.437",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 333,
+        "lastLine": 336,
+        "closed": true,
+        "sha256": "5ee638c66d4163225ec9b32bd97ef30c5528eb7e3e3f44dabee117b5a857bedf",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 338,
+      "indent": 0,
+      "indentText": "",
+      "id": "42",
+      "status": "ok",
+      "name": "headless snapshot inventories new layers and retained legacy separately without calling product",
+      "rawName": "headless snapshot inventories new layers and retained legacy separately without calling product",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 994.7315,
+      "durationText": "994.7315",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 339,
+        "lastLine": 342,
+        "closed": true,
+        "sha256": "b63d2fb3b93de3813e8d8515d2202b9ad8a7a9a96a3e503cab7d817682a932ca",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 344,
+      "indent": 0,
+      "indentText": "",
+      "id": "43",
+      "status": "ok",
+      "name": "implementation closure preserves partial status and reports previous full-suite delta without certifying current full coverage",
+      "rawName": "implementation closure preserves partial status and reports previous full-suite delta without certifying current full coverage",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 14.1178,
+      "durationText": "14.1178",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 345,
+        "lastLine": 348,
+        "closed": true,
+        "sha256": "446f0879d641317a80770bf7929f8641e9e716e35f0e1bc540bdcbe45160e4d2",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 350,
+      "indent": 0,
+      "indentText": "",
+      "id": "44",
+      "status": "ok",
+      "name": "implementation closure refuses missing, duplicate, pending or unhashed requirements and unclosed final state",
+      "rawName": "implementation closure refuses missing, duplicate, pending or unhashed requirements and unclosed final state",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1.2109,
+      "durationText": "1.2109",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 351,
+        "lastLine": 354,
+        "closed": true,
+        "sha256": "ef7018972bbc8d9f5efecc246df42d39c9461d175569706604466d58cfcacefc",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 356,
+      "indent": 0,
+      "indentText": "",
+      "id": "45",
+      "status": "ok",
+      "name": "implementation closure refuses altered evidence, path traversal, stale current sources and missing terminal executions",
+      "rawName": "implementation closure refuses altered evidence, path traversal, stale current sources and missing terminal executions",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2.6723,
+      "durationText": "2.6723",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 357,
+        "lastLine": 360,
+        "closed": true,
+        "sha256": "18bac2c42c2bcdaf0d865fded636d1876782424a9fb4a56f0f31e39a4714fceb",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 362,
+      "indent": 0,
+      "indentText": "",
+      "id": "46",
+      "status": "ok",
+      "name": "implementation closure requires stable result fingerprint and current-snapshot focused plus typecheck inputs",
+      "rawName": "implementation closure requires stable result fingerprint and current-snapshot focused plus typecheck inputs",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2.6602,
+      "durationText": "2.6602",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 363,
+        "lastLine": 366,
+        "closed": true,
+        "sha256": "f4fe5cd3ab6f233026bcb594af6aa8de37227efe42d503cd0ae5d596c8c4a68a",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 368,
+      "indent": 0,
+      "indentText": "",
+      "id": "47",
+      "status": "ok",
+      "name": "implementation closure refuses source manifest references without matching archived source bytes",
+      "rawName": "implementation closure refuses source manifest references without matching archived source bytes",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.7877,
+      "durationText": "0.7877",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 369,
+        "lastLine": 372,
+        "closed": true,
+        "sha256": "b3d0fe15d71e9889090d8fbab6eaddc73e6e5139626195d6c5b2c0a66174d23d",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 374,
+      "indent": 0,
+      "indentText": "",
+      "id": "48",
+      "status": "ok",
+      "name": "implementation closure accepts honestly declared failed final checks without converting them into product PASS",
+      "rawName": "implementation closure accepts honestly declared failed final checks without converting them into product PASS",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.6129,
+      "durationText": "0.6129",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 375,
+        "lastLine": 378,
+        "closed": true,
+        "sha256": "f7e77978a99b7b7368b4695efed05da0c3d9d49afc9c56fcf0ede48bae87e689",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 380,
+      "indent": 0,
+      "indentText": "",
+      "id": "49",
+      "status": "ok",
+      "name": "implementation package argument parsing imports without launching Git, PowerShell, product, build or package",
+      "rawName": "implementation package argument parsing imports without launching Git, PowerShell, product, build or package",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1.342,
+      "durationText": "1.342",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 381,
+        "lastLine": 384,
+        "closed": true,
+        "sha256": "a9be5e0466b0a179ff50003c5729e1ac1a3033d03143e5e1ef7f0a3c74a55185",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 386,
+      "indent": 0,
+      "indentText": "",
+      "id": "50",
+      "status": "ok",
+      "name": "new package and closure scripts contain no unresolved identifiers in semantic JavaScript analysis",
+      "rawName": "new package and closure scripts contain no unresolved identifiers in semantic JavaScript analysis",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1081.3347,
+      "durationText": "1081.3347",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 387,
+        "lastLine": 390,
+        "closed": true,
+        "sha256": "bb4ee4a3c9a0f3d2a04a0b01dad6eedf905c3e1658e5d36876f22d7204f93de0",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 392,
+      "indent": 0,
+      "indentText": "",
+      "id": "51",
+      "status": "ok",
+      "name": "scenario preservation compares immutable original bytes and derives extensible matrix counts from unique rows",
+      "rawName": "scenario preservation compares immutable original bytes and derives extensible matrix counts from unique rows",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.8551,
+      "durationText": "0.8551",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 393,
+        "lastLine": 396,
+        "closed": true,
+        "sha256": "8538628191f6c6fbdda1d7bbba696e92ace91d36caea2756591d5b84bef630da",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 398,
+      "indent": 0,
+      "indentText": "",
+      "id": "52",
+      "status": "ok",
+      "name": "previous-focused execution retains its own source delta and failure without becoming a current result",
+      "rawName": "previous-focused execution retains its own source delta and failure without becoming a current result",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.9977,
+      "durationText": "0.9977",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 399,
+        "lastLine": 402,
+        "closed": true,
+        "sha256": "f6ef9bb74ad410bb4603a970f2acab16e66e4070085d2015b89ff6c2b4f19cc8",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 404,
+      "indent": 0,
+      "indentText": "",
+      "id": "53",
+      "status": "ok",
+      "name": "patch normalization rewrites metadata only and preserves identical prefixes in hunk and binary payload",
+      "rawName": "patch normalization rewrites metadata only and preserves identical prefixes in hunk and binary payload",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.6648,
+      "durationText": "0.6648",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 405,
+        "lastLine": 408,
+        "closed": true,
+        "sha256": "3dda54d666f1adfa550beb2ad17af5073e97f662e8e5127f38a72da69bc57c3a",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 410,
+      "indent": 0,
+      "indentText": "",
+      "id": "54",
+      "status": "ok",
+      "name": "official Git reconstructs exact text, Unicode, spaced paths, internal prefixes, added/deleted and binary files from normalized patch",
+      "rawName": "official Git reconstructs exact text, Unicode, spaced paths, internal prefixes, added/deleted and binary files from normalized patch",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 541.0274,
+      "durationText": "541.0274",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 411,
+        "lastLine": 414,
+        "closed": true,
+        "sha256": "c994bc75908a36205ad3a3c19672825fd4d2e572c6b0642b67b09ee9060201e3",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 417,
+      "indent": 0,
+      "indentText": "",
+      "id": "55",
+      "status": "ok",
+      "name": "fresh copy accepts an authorized source baseline and reports its archived execution after a later edit without private brief",
+      "rawName": "fresh copy accepts an authorized source baseline and reports its archived execution after a later edit without private brief",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 38479.2089,
+      "durationText": "38479.2089",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 418,
+        "lastLine": 421,
+        "closed": true,
+        "sha256": "9b434a26128f19d49e05c3f16a182ffc071cae03c6a16f628a58d1803daac786",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 424,
+      "indent": 0,
+      "indentText": "",
+      "id": "56",
+      "status": "ok",
+      "name": "report integrity: valid-selected-pass",
+      "rawName": "report integrity: valid-selected-pass",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1448.3445,
+      "durationText": "1448.3445",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 425,
+        "lastLine": 428,
+        "closed": true,
+        "sha256": "1a8292dc3ae7c7e864b3d6623b9984c7e4217822d945f4e8b1e43619d48d0573",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 430,
+      "indent": 0,
+      "indentText": "",
+      "id": "57",
+      "status": "ok",
+      "name": "report integrity: valid-failed-execution-remains-unapproved",
+      "rawName": "report integrity: valid-failed-execution-remains-unapproved",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1286.811,
+      "durationText": "1286.811",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 431,
+        "lastLine": 434,
+        "closed": true,
+        "sha256": "f5deb56cbe9a94345904ad8147e1e515d5b99a393457b3250b2c609957f69624",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 436,
+      "indent": 0,
+      "indentText": "",
+      "id": "58",
+      "status": "ok",
+      "name": "report integrity: env-blocked-only-is-administrative-success",
+      "rawName": "report integrity: env-blocked-only-is-administrative-success",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1303.3496,
+      "durationText": "1303.3496",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 437,
+        "lastLine": 440,
+        "closed": true,
+        "sha256": "6309cd81cb34d2a86ce943928f1dde27f327a370087fc41c9b09b8c1f2a9402b",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 442,
+      "indent": 0,
+      "indentText": "",
+      "id": "59",
+      "status": "ok",
+      "name": "report integrity: explicit-empty-is-administrative-success",
+      "rawName": "report integrity: explicit-empty-is-administrative-success",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1295.7424,
+      "durationText": "1295.7424",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 443,
+        "lastLine": 446,
+        "closed": true,
+        "sha256": "d5be168dad7163c2ecec9feed51f86a6a43b32ed097ddad1fe3de4acc644d2f1",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 448,
+      "indent": 0,
+      "indentText": "",
+      "id": "60",
+      "status": "ok",
+      "name": "report integrity: forged-zero-exit-over-fail",
+      "rawName": "report integrity: forged-zero-exit-over-fail",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 194.1546,
+      "durationText": "194.1546",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 449,
+        "lastLine": 452,
+        "closed": true,
+        "sha256": "17f19eb9b9a96f1b0301a65e9e6942b5a87974ef055b6e8dc85f2adf40b8ef7c",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 454,
+      "indent": 0,
+      "indentText": "",
+      "id": "61",
+      "status": "ok",
+      "name": "report integrity: unfinished-selected-worker",
+      "rawName": "report integrity: unfinished-selected-worker",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 191.6249,
+      "durationText": "191.6249",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 455,
+        "lastLine": 458,
+        "closed": true,
+        "sha256": "73b6c35b949035a612d20fd394ed7a7b03c22aa0f37469d825c73b4a533bbe3e",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 460,
+      "indent": 0,
+      "indentText": "",
+      "id": "62",
+      "status": "ok",
+      "name": "report integrity: unselected-pass-cannot-inflate-results",
+      "rawName": "report integrity: unselected-pass-cannot-inflate-results",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 195.42,
+      "durationText": "195.42",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 461,
+        "lastLine": 464,
+        "closed": true,
+        "sha256": "ff683efe89cbd1e083ca4c6b7d82c0eb31fcec8fbf07a73d3b7c3aec39a08e3f",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 466,
+      "indent": 0,
+      "indentText": "",
+      "id": "63",
+      "status": "ok",
+      "name": "report integrity: interrupted-run-cannot-claim-zero",
+      "rawName": "report integrity: interrupted-run-cannot-claim-zero",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 182.7824,
+      "durationText": "182.7824",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 467,
+        "lastLine": 470,
+        "closed": true,
+        "sha256": "1408cf7b0d96f28b800ec4b3e13647c4a0a5686cbf3233fab748a14e3048ad01",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 472,
+      "indent": 0,
+      "indentText": "",
+      "id": "64",
+      "status": "ok",
+      "name": "report integrity: xpass-cannot-claim-zero",
+      "rawName": "report integrity: xpass-cannot-claim-zero",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 187.4725,
+      "durationText": "187.4725",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 473,
+        "lastLine": 476,
+        "closed": true,
+        "sha256": "a43f02f7dd0a83d484208eb61f6f00986e6587edf42836522a0606603e548787",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 478,
+      "indent": 0,
+      "indentText": "",
+      "id": "65",
+      "status": "ok",
+      "name": "report integrity: unregistered-xfail-is-rejected",
+      "rawName": "report integrity: unregistered-xfail-is-rejected",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 183.7622,
+      "durationText": "183.7622",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 479,
+        "lastLine": 482,
+        "closed": true,
+        "sha256": "6e40b620eb013f37420c0fba4bf6d5c36fd968c8a8993a67265cd132fbe353a2",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 484,
+      "indent": 0,
+      "indentText": "",
+      "id": "66",
+      "status": "ok",
+      "name": "report integrity: infrastructure-cannot-use-semantic-xfail",
+      "rawName": "report integrity: infrastructure-cannot-use-semantic-xfail",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 182.1364,
+      "durationText": "182.1364",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 485,
+        "lastLine": 488,
+        "closed": true,
+        "sha256": "46cab41d3116cc2f4a821e1d870742b7b3928d815a4c528812226ef375734a8e",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 490,
+      "indent": 0,
+      "indentText": "",
+      "id": "67",
+      "status": "ok",
+      "name": "report integrity: xfail-wrong-source",
+      "rawName": "report integrity: xfail-wrong-source",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 183.6869,
+      "durationText": "183.6869",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 491,
+        "lastLine": 494,
+        "closed": true,
+        "sha256": "04d722afd6ceb06170a67396c39f6461f5f356400b23d15ef82246045aa6f4c6",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 496,
+      "indent": 0,
+      "indentText": "",
+      "id": "68",
+      "status": "ok",
+      "name": "report integrity: xfail-wrong-signature",
+      "rawName": "report integrity: xfail-wrong-signature",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 213.2651,
+      "durationText": "213.2651",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 497,
+        "lastLine": 500,
+        "closed": true,
+        "sha256": "e00e83ddaffb3d0866fb94c2613523b85e4b093654c1cf935cad8dd2aa086539",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 502,
+      "indent": 0,
+      "indentText": "",
+      "id": "69",
+      "status": "ok",
+      "name": "report integrity: run-registry-must-match-frozen-registry",
+      "rawName": "report integrity: run-registry-must-match-frozen-registry",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 183.8947,
+      "durationText": "183.8947",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 503,
+        "lastLine": 506,
+        "closed": true,
+        "sha256": "050d9f6132b75d451c6a821b320cfe1f2931e3d85e8b20aab80764c266b5b7f3",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 508,
+      "indent": 0,
+      "indentText": "",
+      "id": "70",
+      "status": "ok",
+      "name": "report integrity: strict-registered-xfail-has-no-passed-test",
+      "rawName": "report integrity: strict-registered-xfail-has-no-passed-test",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1267.113,
+      "durationText": "1267.113",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 509,
+        "lastLine": 512,
+        "closed": true,
+        "sha256": "614701d0c006aec67474c78e7b26c3e75ef5da6309942e5f1e306e09b45159fe",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 514,
+      "indent": 0,
+      "indentText": "",
+      "id": "71",
+      "status": "ok",
+      "name": "report integrity: valid-run-allow-incomplete-is-forensic",
+      "rawName": "report integrity: valid-run-allow-incomplete-is-forensic",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1233.8744,
+      "durationText": "1233.8744",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 515,
+        "lastLine": 518,
+        "closed": true,
+        "sha256": "e8fb5ea5084c7f7039246fdf9da2fc1c96457cbf7ea6275c970cce0988024e7e",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 520,
+      "indent": 0,
+      "indentText": "",
+      "id": "72",
+      "status": "ok",
+      "name": "report integrity: contradictory-run-allow-incomplete-is-forensic",
+      "rawName": "report integrity: contradictory-run-allow-incomplete-is-forensic",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1266.1175,
+      "durationText": "1266.1175",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 521,
+        "lastLine": 524,
+        "closed": true,
+        "sha256": "e0b2d7154af5a4f86fd2d449f5eb5577838448b1cbecaa35d479aae220000e8c",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 564,
+      "indent": 0,
+      "indentText": "",
+      "id": "73",
+      "status": "ok",
+      "name": "report phase keeps historical context and boilerplate as the default",
+      "rawName": "report phase keeps historical context and boilerplate as the default",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1.0985,
+      "durationText": "1.0985",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 565,
+        "lastLine": 568,
+        "closed": true,
+        "sha256": "8130bc80cf8df11917c420d4ce1049031d4cf44fe334982906f1eb83a60d2162",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 570,
+      "indent": 0,
+      "indentText": "",
+      "id": "74",
+      "status": "ok",
+      "name": "explicit implementation separates user authorization from technical choices without approving results",
+      "rawName": "explicit implementation separates user authorization from technical choices without approving results",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.8672,
+      "durationText": "0.8672",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 571,
+        "lastLine": 574,
+        "closed": true,
+        "sha256": "79996bb1f5dff4b91174bad437a46d31164f5db3549f174c357c9557788cdb4e",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 576,
+      "indent": 0,
+      "indentText": "",
+      "id": "75",
+      "status": "ok",
+      "name": "only a selected frozen implementation recipe selects the implementation prose automatically",
+      "rawName": "only a selected frozen implementation recipe selects the implementation prose automatically",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.2542,
+      "durationText": "0.2542",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 577,
+        "lastLine": 580,
+        "closed": true,
+        "sha256": "acc2cf5ea88b3951372b7ab8a7527dfe49024e774324ffbe61d368845f3c0a73",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 582,
+      "indent": 0,
+      "indentText": "",
+      "id": "76",
+      "status": "ok",
+      "name": "unknown, contradictory or malformed phase declarations fail instead of silently changing scope",
+      "rawName": "unknown, contradictory or malformed phase declarations fail instead of silently changing scope",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 0.3349,
+      "durationText": "0.3349",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 583,
+        "lastLine": 586,
+        "closed": true,
+        "sha256": "10c5cb31c7ca44d19f1f61649d2cbe12b65a6be2a44648a3e30d56273f8d4256",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 588,
+      "indent": 0,
+      "indentText": "",
+      "id": "77",
+      "status": "ok",
+      "name": "real renderer ZIP uses phase aware prose and preserves historical default in independent synthetic runs",
+      "rawName": "real renderer ZIP uses phase aware prose and preserves historical default in independent synthetic runs",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2144.5558,
+      "durationText": "2144.5558",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 589,
+        "lastLine": 592,
+        "closed": true,
+        "sha256": "135ca1ab30625a8b08886fb04ffebe675b391916f4a25e585f4d9dc094655d1a",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 594,
+      "indent": 0,
+      "indentText": "",
+      "id": "78",
+      "status": "ok",
+      "name": "R01 current runtime contracts bind executable cases while preserving the complete historical catalog",
+      "rawName": "R01 current runtime contracts bind executable cases while preserving the complete historical catalog",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 99.7024,
+      "durationText": "99.7024",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 595,
+        "lastLine": 598,
+        "closed": true,
+        "sha256": "e48b8626ba3af73af520a500836cd04d501fd514556b779e0a5ac70323db9b7b",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 600,
+      "indent": 0,
+      "indentText": "",
+      "id": "79",
+      "status": "ok",
+      "name": "R01 generated current contracts remain deterministic and valid across discard/recommit boundaries",
+      "rawName": "R01 generated current contracts remain deterministic and valid across discard/recommit boundaries",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 10.9762,
+      "durationText": "10.9762",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 601,
+        "lastLine": 604,
+        "closed": true,
+        "sha256": "b037c0a73ef63604fb02e30fe9a7c43c915e4cc9c6315dd87d65ad6597d566a3",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 606,
+      "indent": 0,
+      "indentText": "",
+      "id": "80",
+      "status": "ok",
+      "name": "R01 reporter identifies current executable expectations without reclassifying execution or historical runs",
+      "rawName": "R01 reporter identifies current executable expectations without reclassifying execution or historical runs",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 1.1631,
+      "durationText": "1.1631",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 607,
+        "lastLine": 610,
+        "closed": true,
+        "sha256": "ab758bf9eeacb78531199f96b403ea64595cec1bc5cf1c8a02fb266baa6a8676",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 612,
+      "indent": 0,
+      "indentText": "",
+      "id": "81",
+      "status": "ok",
+      "name": "portable offline redaction preserves raw evidence, binary/source bytes, failures and updates declared hashes",
+      "rawName": "portable offline redaction preserves raw evidence, binary/source bytes, failures and updates declared hashes",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 48.1895,
+      "durationText": "48.1895",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 613,
+        "lastLine": 616,
+        "closed": true,
+        "sha256": "3f00a8a7e5364ed5feed695ed05ea022d2829d8c0460faaa5f2df97f00ffd928",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 618,
+      "indent": 0,
+      "indentText": "",
+      "id": "82",
+      "status": "ok",
+      "name": "existing summaries and nested result homonyms are generic text while authoritative hashes and classifications survive",
+      "rawName": "existing summaries and nested result homonyms are generic text while authoritative hashes and classifications survive",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 99.0095,
+      "durationText": "99.0095",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 619,
+        "lastLine": 622,
+        "closed": true,
+        "sha256": "b555ee07b58aba30d3bcbb1f64a80a08747d47df03e0c06bad8a9444b30b9c92",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 624,
+      "indent": 0,
+      "indentText": "",
+      "id": "83",
+      "status": "ok",
+      "name": "single-run input uses artifact-base paths and leaves nearby existing summaries untouched",
+      "rawName": "single-run input uses artifact-base paths and leaves nearby existing summaries untouched",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 44.6106,
+      "durationText": "44.6106",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 625,
+        "lastLine": 628,
+        "closed": true,
+        "sha256": "7c8c4244900657185d7b8e680921a855516ed65a878f0e62c8a750bf78f05caa",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 630,
+      "indent": 0,
+      "indentText": "",
+      "id": "84",
+      "status": "ok",
+      "name": "invalid authoritative shapes fail before text writes in dry-run and real modes",
+      "rawName": "invalid authoritative shapes fail before text writes in dry-run and real modes",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 134.5204,
+      "durationText": "134.5204",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 631,
+        "lastLine": 634,
+        "closed": true,
+        "sha256": "f5825b8e50a602f9c70ef10f1af4926e368de8ec44a3c024fd46f140f3d59377",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 637,
+      "indent": 0,
+      "indentText": "",
+      "id": "85",
+      "status": "ok",
+      "name": "accepts a structurally valid matching PASS only after normal exit 0",
+      "rawName": "accepts a structurally valid matching PASS only after normal exit 0",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 102.4281,
+      "durationText": "102.4281",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 638,
+        "lastLine": 641,
+        "closed": true,
+        "sha256": "ef7a66153ac74c663873f0bd8e8e0f2ed1fe709d68ae430f13e8eaa827b589f4",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 643,
+      "indent": 0,
+      "indentText": "",
+      "id": "86",
+      "status": "ok",
+      "name": "valid PASS JSON cannot override a later exit 7",
+      "rawName": "valid PASS JSON cannot override a later exit 7",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 187.1933,
+      "durationText": "187.1933",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 644,
+        "lastLine": 647,
+        "closed": true,
+        "sha256": "0145e330bd8a5bb8d6a0d60203fdbbc37232975f5ce942fc955166cb8b464271",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 649,
+      "indent": 0,
+      "indentText": "",
+      "id": "87",
+      "status": "ok",
+      "name": "valid PASS JSON with a live handle becomes timeout failure",
+      "rawName": "valid PASS JSON with a live handle becomes timeout failure",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 982.6639,
+      "durationText": "982.6639",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 650,
+        "lastLine": 653,
+        "closed": true,
+        "sha256": "1473fabc9433b0a7c9f05d3de4ce8f04c8e7de0b8c09ba317a191e94802d3518",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 655,
+      "indent": 0,
+      "indentText": "",
+      "id": "88",
+      "status": "ok",
+      "name": "valid PASS JSON cannot override a real output-limit termination",
+      "rawName": "valid PASS JSON cannot override a real output-limit termination",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 236.2729,
+      "durationText": "236.2729",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 656,
+        "lastLine": 659,
+        "closed": true,
+        "sha256": "146ea1bb09a137129672ce5fd8cd8562cc77ea9980521c81758d6a91a53570f0",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 661,
+      "indent": 0,
+      "indentText": "",
+      "id": "89",
+      "status": "ok",
+      "name": "abrupt termination after a deterministic PASS handshake is infrastructure failure",
+      "rawName": "abrupt termination after a deterministic PASS handshake is infrastructure failure",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 92.1076,
+      "durationText": "92.1076",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 662,
+        "lastLine": 665,
+        "closed": true,
+        "sha256": "1a6aac3c7b1025f05f3497155ec78af758218abbbda313148af246d074b96097",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 667,
+      "indent": 0,
+      "indentText": "",
+      "id": "90",
+      "status": "ok",
+      "name": "malformed worker JSON remains available as bytes and fails closed",
+      "rawName": "malformed worker JSON remains available as bytes and fails closed",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 90.5106,
+      "durationText": "90.5106",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 668,
+        "lastLine": 671,
+        "closed": true,
+        "sha256": "ebdcf35dc77bf769437c827a62a15bdeedf8d8171d7807a9c0617786d14f89b6",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 673,
+      "indent": 0,
+      "indentText": "",
+      "id": "91",
+      "status": "ok",
+      "name": "missing worker JSON is visible despite process exit 0",
+      "rawName": "missing worker JSON is visible despite process exit 0",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 87.1261,
+      "durationText": "87.1261",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 674,
+        "lastLine": 677,
+        "closed": true,
+        "sha256": "99bc61ed0b8790430b8e18c12ddfbbbc447438c11c54a06a294ec94acda93578",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 679,
+      "indent": 0,
+      "indentText": "",
+      "id": "92",
+      "status": "ok",
+      "name": "a structurally valid proposal with a foreign identity cannot replace selection",
+      "rawName": "a structurally valid proposal with a foreign identity cannot replace selection",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 92.1934,
+      "durationText": "92.1934",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 680,
+        "lastLine": 683,
+        "closed": true,
+        "sha256": "3b766d9e580082990f15d2201065dc2971e61cf4a22cb40997c1f05a634b125d",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 685,
+      "indent": 0,
+      "indentText": "",
+      "id": "93",
+      "status": "ok",
+      "name": "schema validation failure is supervised instead of crashing the run",
+      "rawName": "schema validation failure is supervised instead of crashing the run",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 91.2079,
+      "durationText": "91.2079",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 686,
+        "lastLine": 689,
+        "closed": true,
+        "sha256": "db72266ce99e8bbfb29bf3965f3db9ee7e897feb9ca762ea5f8045290eacac2d",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 691,
+      "indent": 0,
+      "indentText": "",
+      "id": "94",
+      "status": "ok",
+      "name": "preserves the worker case FAIL with fail0 without promoting it to PASS",
+      "rawName": "preserves the worker case FAIL with fail0 without promoting it to PASS",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 97.3735,
+      "durationText": "97.3735",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 692,
+        "lastLine": 695,
+        "closed": true,
+        "sha256": "e7247ded9f20fe9e0d30493c7eca2bd1ca9c5afde6b1e58993b01f948bce7271",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 697,
+      "indent": 0,
+      "indentText": "",
+      "id": "95",
+      "status": "ok",
+      "name": "preserves the worker case FAIL with fail1 without promoting it to PASS",
+      "rawName": "preserves the worker case FAIL with fail1 without promoting it to PASS",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 90.5258,
+      "durationText": "90.5258",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 698,
+        "lastLine": 701,
+        "closed": true,
+        "sha256": "96ee7d5b475e0617b5df001a35c9774217d123a07eef164d787714b0a46db91a",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 703,
+      "indent": 0,
+      "indentText": "",
+      "id": "96",
+      "status": "ok",
+      "name": "a worker cannot grant itself XFAIL",
+      "rawName": "a worker cannot grant itself XFAIL",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 90.6014,
+      "durationText": "90.6014",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 704,
+        "lastLine": 707,
+        "closed": true,
+        "sha256": "c4f15c725140fbd79c8e2759ff05bbcaa86cf3db4c326ba33b9d7cfa0e88ba9e",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 709,
+      "indent": 0,
+      "indentText": "",
+      "id": "97",
+      "status": "ok",
+      "name": "real spawn errors are retained as infrastructure evidence",
+      "rawName": "real spawn errors are retained as infrastructure evidence",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 13.5688,
+      "durationText": "13.5688",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 710,
+        "lastLine": 713,
+        "closed": true,
+        "sha256": "38cdd04641e707b627db6d32412dad3b97a46f7336c07bdc6300156b5413b156",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 716,
+      "indent": 0,
+      "indentText": "",
+      "id": "98",
+      "status": "ok",
+      "name": "Windows ZIP preserves paths beyond MAX_PATH without changing policy",
+      "rawName": "Windows ZIP preserves paths beyond MAX_PATH without changing policy",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 2180.1813,
+      "durationText": "2180.1813",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 717,
+        "lastLine": 720,
+        "closed": true,
+        "sha256": "56cce3ca235679c55b86c6b25a06eb7e06fdffd5c9e92cf1de6c1ec60dc558ec",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    },
+    {
+      "line": 723,
+      "indent": 0,
+      "indentText": "",
+      "id": "99",
+      "status": "ok",
+      "name": "R-04 real Windows ZIP names, standard reader, Unicode/empty entries and safety controls",
+      "rawName": "R-04 real Windows ZIP names, standard reader, Unicode/empty entries and safety controls",
+      "directive": null,
+      "directiveReason": null,
+      "skipReason": null,
+      "observedOutcome": "PASS",
+      "durationMs": 8125.2306,
+      "durationText": "8125.2306",
+      "error": null,
+      "diagnostic": {
+        "firstLine": 724,
+        "lastLine": 727,
+        "closed": true,
+        "sha256": "12bfa654036d4b577067be0dfbbe3c36956c842a91e4cf308f036a81549ee8dc",
+        "omittedKeys": [
+          "type"
+        ]
+      },
+      "unparsed": []
+    }
+  ],
+  "unparsedResultLikeLines": [],
+  "hierarchyInferred": false,
+  "campaignsAggregated": false,
+  "provenance": {
+    "helper": {
+      "bytes": 22023,
+      "sha256": "af63c5be113ece5ae6905a47b7355a79314f7983de1f81d4659d230dc1547cd9"
+    },
+    "result": {
+      "bytes": 2421,
+      "sha256": "e4805080f4ed782f6101fd44cfbef8845588b1649b7f6308730d304d5ed9810c"
+    },
+    "tap": {
+      "bytes": 28695,
+      "sha256": "e754d7d5405a0aae6a3a1f78736b6950490cce422e3349173ac481b4acb606d9"
+    },
+    "started": {
+      "bytes": 1723,
+      "sha256": "651c34f9c9a9658c03c063d7e4a3a13ede63994e57df04a3b667e1ecb7f168ba"
+    },
+    "rawStreamsPublished": false,
+    "rawDiagnosticValuesOmitted": [
+      "location",
+      "stack",
+      "expected",
+      "actual",
+      "operator",
+      "fixture diagnostics and other comments"
+    ],
+    "redactions": [
+      "Known stage/temp/profile/source roots, including repeated escaped separators",
+      "Owned process identifiers"
+    ],
+    "unknownAbsolutePathPolicy": "Refuse unknown absolute Windows/UNC and profile paths; only observed Git/Node installation roots may remain."
+  },
+  "limitations": [
+    "Flat rows retain original indentation and IDs without inventing parent/child relations.",
+    "Observed PASS/FAIL maps only ok/not ok; explicit SKIP/TODO directives are preserved separately, never converted into an environment classification.",
+    "Only immediately associated Node-style YAML diagnostics are parsed. Unsupported/ambiguous fields retain line ranges and hashes as unparsed metadata.",
+    "Cancelled parent/child semantics are not reconstructed; Node final totals remain authoritative for the recorded campaign.",
+    "A row-count mismatch or parsing ambiguity is declared and never corrected by inventing or removing results.",
+    "No totals are combined with a retry, reproduction, focus or other campaign."
+  ]
+}

@@ -103,7 +103,8 @@ export async function atomicJSON(file: string, value: unknown): Promise<void> {
   }
 }
 
-async function readRegular(file: string, maxBytes?: number): Promise<{ bytes: Buffer; mode: number }> {
+/** Read through one proven regular-file handle and revalidate identity/content metadata. */
+async function consumeRegular(file: string, consume: (chunk: Buffer) => Promise<void> | void, maxBytes?: number): Promise<{ mode: number; hash: string }> {
   await noLinks(file);
   const before = await fs.lstat(file);
   if (!before.isFile()) throw new LabError('UNSAFE_FILE_TYPE', 'É necessário um arquivo regular; links e diretórios são recusados.', { path: file });
@@ -112,13 +113,43 @@ async function readRegular(file: string, maxBytes?: number): Promise<{ bytes: Bu
     const opened = await handle.stat();
     if (!opened.isFile() || opened.dev !== before.dev || opened.ino !== before.ino) throw new LabError('EXTERNAL_CHANGE', 'O arquivo mudou enquanto era aberto.', { path: file });
     if (maxBytes !== undefined && opened.size > maxBytes) throw new LabError('METADATA_INVALID', 'Metadados excedem o limite de 64 MiB.', { path: file });
-    const bytes = await handle.readFile();
-    const after = await handle.stat();
-    const current = await fs.lstat(file);
-    if (after.size !== opened.size || after.mtimeMs !== opened.mtimeMs || after.ctimeMs !== opened.ctimeMs || after.mode !== opened.mode || current.dev !== opened.dev || current.ino !== opened.ino || current.size !== after.size || current.mtimeMs !== after.mtimeMs || current.ctimeMs !== after.ctimeMs || current.mode !== after.mode || current.isSymbolicLink()) {
+    const digest = createHash('sha256'), buffer = Buffer.allocUnsafe(256 * 1024);
+    let total = 0;
+    for (;;) {
+      const { bytesRead } = await handle.read(buffer, 0, buffer.length, null);
+      if (!bytesRead) break;
+      total += bytesRead;
+      if (maxBytes !== undefined && total > maxBytes) throw new LabError('METADATA_INVALID', 'Metadados excedem o limite de 64 MiB.', { path: file });
+      const chunk = buffer.subarray(0, bytesRead);
+      digest.update(chunk);
+      await consume(chunk);
+    }
+    const after = await handle.stat(), current = await fs.lstat(file);
+    if (total !== opened.size || after.size !== opened.size || after.mtimeMs !== opened.mtimeMs || after.ctimeMs !== opened.ctimeMs || after.mode !== opened.mode || current.dev !== opened.dev || current.ino !== opened.ino || current.size !== after.size || current.mtimeMs !== after.mtimeMs || current.ctimeMs !== after.ctimeMs || current.mode !== after.mode || current.isSymbolicLink()) {
       throw new LabError('EXTERNAL_CHANGE', 'O arquivo mudou durante a leitura; a operação foi interrompida.', { path: file });
     }
-    return { bytes, mode: comparableFileMode(opened.mode) };
+    return { mode: comparableFileMode(opened.mode), hash: digest.digest('hex') };
+  } finally { await handle.close(); }
+}
+
+async function readRegular(file: string, maxBytes?: number): Promise<{ bytes: Buffer; mode: number }> {
+  const chunks: Buffer[] = [];
+  const result = await consumeRegular(file, chunk => { chunks.push(Buffer.from(chunk)); }, maxBytes);
+  return { bytes: Buffer.concat(chunks), mode: result.mode };
+}
+
+/** Copy independent bytes into a new exclusive file, with bounded memory and a durable result. */
+export async function copyRegular(source: string, destination: string, mode?: number): Promise<Fingerprint> {
+  const target = path.resolve(destination);
+  await ensureDirectory(path.dirname(target));
+  await noLinks(target);
+  const handle = await fs.open(target, constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL | OPEN_NOFOLLOW, 0o600);
+  try {
+    const result = await consumeRegular(path.resolve(source), async chunk => { await handle.writeFile(chunk); });
+    await handle.chmod(mode ?? result.mode);
+    await handle.sync();
+    const actualMode = comparableFileMode((await handle.stat()).mode);
+    return { exists: true, hash: result.hash, mode: actualMode };
   } finally { await handle.close(); }
 }
 
@@ -186,8 +217,8 @@ export interface Fingerprint { hash: string; mode: number; exists: boolean }
 
 export async function fingerprint(file: string): Promise<Fingerprint> {
   try {
-    const result = await readRegular(path.resolve(file));
-    return { hash: createHash('sha256').update(result.bytes).digest('hex'), mode: result.mode, exists: true };
+    const result = await consumeRegular(path.resolve(file), () => {});
+    return { hash: result.hash, mode: result.mode, exists: true };
   } catch (error) {
     if (codeOf(error) === 'ENOENT') return { hash: '', mode: 0, exists: false };
     throw error;
@@ -205,6 +236,7 @@ export function failpoint(name: string): void {
 
 interface JournalStep { step: string; at: string; details?: unknown }
 interface JournalBackup { source: string; copy: string | null; label: string; fingerprint: Fingerprint; at: string }
+export interface TrackedRecoveryFile { path: string; backup: string | null; before: Fingerprint; after?: Fingerprint }
 interface JournalData {
   schema: 1;
   id: string;
@@ -260,33 +292,50 @@ export class Transaction {
     await this.persist();
   }
 
-  /** Return a durable absolute copy; absence is recorded explicitly as null. */
-  async backup(file: string, label: string): Promise<string | null> {
+  /** Prepare independent durable bytes only; callers must publish their journal before returning. */
+  private async prepareBackup(file: string, label: string): Promise<JournalBackup> {
     if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,150}$/.test(label)) throw new LabError('INVALID_ARGUMENT', 'Rótulo de backup inválido.');
     const source = path.resolve(file);
-    let contents: { bytes: Buffer; mode: number };
-    try { contents = await readRegular(source); }
-    catch (error) {
-      if (codeOf(error) !== 'ENOENT') throw error;
-      this.data.backups.push({ source, copy: null, label, fingerprint: { exists: false, hash: '', mode: 0 }, at: new Date().toISOString() });
-      await this.persist();
-      return null;
+    // Establish absence before creating a copy; errors other than ENOENT remain visible.
+    let present = true;
+    try { await noLinks(source); await fs.lstat(source); }
+    catch (error) { if (codeOf(error) !== 'ENOENT') throw error; present = false; }
+    if (!present) {
+      return { source, copy: null, label, fingerprint: { exists: false, hash: '', mode: 0 }, at: new Date().toISOString() };
     }
-    const expected: Fingerprint = { hash: createHash('sha256').update(contents.bytes).digest('hex'), mode: contents.mode, exists: true };
     const backupDirectory = path.join(this.dir, 'backups');
     await ensureDirectory(backupDirectory);
     const copy = path.join(backupDirectory, `${randomUUID()}-${label}`);
-    const handle = await fs.open(copy, constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL | OPEN_NOFOLLOW, 0o600);
-    try {
-      await handle.writeFile(contents.bytes);
-      await handle.chmod(contents.mode);
-      await handle.sync();
-    } finally { await handle.close(); }
+    const expected = await copyRegular(source, copy);
     await syncDirectory(backupDirectory);
     if (!sameFingerprint(expected, await fingerprint(source))) throw new LabError('EXTERNAL_CHANGE', 'O arquivo mudou durante o backup. A cópia foi preservada e a operação foi interrompida.', { path: source, backup: copy });
-    this.data.backups.push({ source, copy, label, fingerprint: expected, at: new Date().toISOString() });
+    return { source, copy, label, fingerprint: expected, at: new Date().toISOString() };
+  }
+
+  /** Return a durable absolute copy and durable journal entry; absence is explicit. */
+  async backup(file: string, label: string): Promise<string | null> {
+    const entry = await this.prepareBackup(file, label);
+    this.data.backups.push(entry);
     await this.persist();
-    return copy;
+    return entry.copy;
+  }
+
+  /** Publish backup plus recovery authority together, before the tracked caller can mutate. */
+  async backupTracked(file: string, label: string, before: Fingerprint, files: TrackedRecoveryFile[]): Promise<TrackedRecoveryFile> {
+    if (!Array.isArray(files) || this.data.recovery?.files !== files) throw new LabError('RECOVERY_INVALID', 'O plano de arquivos deve compartilhar a lista da transação.');
+    const source = path.resolve(file);
+    if (files.some(entry => entry.path === source)) throw new LabError('RECOVERY_INVALID', 'O arquivo já possui um plano de recuperação nesta transação.');
+    const original = { ...before }, entry = await this.prepareBackup(file, label);
+    if (entry.source !== source || original.exists !== (entry.copy !== null) || !sameFingerprint(entry.fingerprint, original) || entry.copy !== null && !sameFingerprint(await fingerprint(entry.copy), original)) {
+      throw new LabError('EXTERNAL_EDIT', `Arquivo mudou antes do backup: ${file}`);
+    }
+    const tracked = { path: entry.source, before: original, backup: entry.copy };
+    this.data.backups.push(entry);
+    files.push(tracked);
+    // record() atomically persists both arrays and awaits the same durability
+    // boundary that track() previously published after backup()'s own persist.
+    await this.record('backup-ready', { path: entry.source });
+    return tracked;
   }
 
   async finish(): Promise<void> { this.data.state = 'completed'; await this.record('completed'); }
@@ -302,6 +351,15 @@ export class Transaction {
   }
 }
 
+/** Read one strict journal for independent diagnostics without loading other entries. */
+export async function readTransaction(directory: string, id: string): Promise<any> {
+  if (!/^[A-Za-z0-9_-]+$/.test(id)) throw new LabError('METADATA_INVALID', 'Identificador de transação inválido; a entrada foi preservada.', { id });
+  const folder = path.resolve(directory, 'transactions', id);
+  const journal = await readJSON<JournalData>(path.join(folder, 'journal.json'), isJournal);
+  if (journal.id !== id) throw new LabError('METADATA_INVALID', 'Identificador da transação não corresponde ao seu diretório.', { path: folder });
+  return journal;
+}
+
 /** Return unfinished journals only; invalid entries cause a safe error. */
 export async function listTransactions(directory: string): Promise<any[]> {
   const transactions = path.resolve(directory, 'transactions');
@@ -312,8 +370,7 @@ export async function listTransactions(directory: string): Promise<any[]> {
   const pending: JournalData[] = [];
   for (const entry of entries.sort((a, b) => a.name.localeCompare(b.name))) {
     if (entry.isSymbolicLink() || !entry.isDirectory() || !/^[A-Za-z0-9_-]+$/.test(entry.name)) throw new LabError('METADATA_INVALID', 'Entrada inesperada no diretório de transações. Ela foi preservada para inspeção.', { path: path.join(transactions, entry.name) });
-    const journal = await readJSON<JournalData>(path.join(transactions, entry.name, 'journal.json'), isJournal);
-    if (journal.id !== entry.name) throw new LabError('METADATA_INVALID', 'Identificador da transação não corresponde ao seu diretório.', { path: path.join(transactions, entry.name) });
+    const journal = await readTransaction(directory, entry.name);
     if (journal.state !== 'completed') pending.push(journal);
   }
   return pending;

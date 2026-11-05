@@ -1,0 +1,25 @@
+{
+    "schema":  1,
+    "kind":  "root-publication-finding-classification",
+    "recordedAt":  "2026-11-05T02:01:01.6926915Z",
+    "auditSHA256":  "9608114db76cb7ccb5fd87354b78fb52c5ecf3d67de03ad8fb2aa08447646b6f",
+    "publicInputSHA256":  "57cb324f4b725fc9e3a412e91682d71fce8fe3af0699e9edd1d7cd12a1037c9c",
+    "decisions":  [
+                      {
+                          "findingId":  "4b3f1a46ef2e12c1fcbd95508b2cbbd9249917f3a693db08f5bcd8c5e0cc8b07",
+                          "classification":  "PUBLIC_RUNTIME_INSTALLATION",
+                          "reason":  "Exact standard Program Files Node/Git executable verified; no private profile, account or credential component.",
+                          "acceptedForPublicEvidence":  true
+                      },
+                      {
+                          "findingId":  "543e102cec2cab02aaf7e4a821586feb13fdf2c1092cf567a5013b5a87e27836",
+                          "classification":  "PUBLIC_RUNTIME_INSTALLATION",
+                          "reason":  "Exact standard Program Files Node/Git executable verified; no private profile, account or credential component.",
+                          "acceptedForPublicEvidence":  true
+                      }
+                  ],
+    "unclassifiedFindings":  0,
+    "sourceEdited":  false,
+    "automaticRedaction":  false,
+    "productSuccessInferred":  false
+}

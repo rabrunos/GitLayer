@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "kind": "root-reviewed-privacy-classification",
+  "recordedAt": "2026-11-05T02:49:41.513Z",
+  "inputSHA256": "2850e5cf8e43b6cd947c42c0e8e15b82c1920bed7175dc5e03a360e3a0fac6c4",
+  "auditSHA256": "7261fd64ee35f153fbb75f43cf9d6e523485c054f9398364911d251c81bad2a5",
+  "rootApproved": true,
+  "scope": "Only the two exact findings in the hash-pinned failed infrastructure TAP projection.",
+  "classifications": [
+    {
+      "findingID": "4b3f1a46ef2e12c1fcbd95508b2cbbd9249917f3a693db08f5bcd8c5e0cc8b07",
+      "classification": "PUBLIC_RUNTIME_INSTALLATION",
+      "fullValue": "C:\\Program Files\\nodejs\\node.exe",
+      "fullValueSHA256": "9fc98d629f2c0874ab3eb8d89d492417a2a0b86a41510a7bb810f62ffca18290",
+      "reason": "Observed absolute installation of the official Node/Git runtime; no profile, fixture data or credential."
+    },
+    {
+      "findingID": "543e102cec2cab02aaf7e4a821586feb13fdf2c1092cf567a5013b5a87e27836",
+      "classification": "PUBLIC_RUNTIME_INSTALLATION",
+      "fullValue": "C:\\Program Files\\Git\\cmd\\git.exe",
+      "fullValueSHA256": "6150ff2962014c83de3d991e1d5571eb9e6471ee59d10d34819056e8875c0c03",
+      "reason": "Observed absolute installation of the official Node/Git runtime; no profile, fixture data or credential."
+    }
+  ],
+  "inputsChanged": false,
+  "originalTestStatus": "FAIL",
+  "testApprovalInferred": false
+}

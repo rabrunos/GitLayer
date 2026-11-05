@@ -1,0 +1,1936 @@
+{
+  "schema": 1,
+  "kind": "git-layer-validation-array-sharding-conservation",
+  "sourceWhole": {
+    "bytes": 28890737,
+    "sha256": "c479536525ac90b0c1a441ebfd4829399b5f14fefd2437ed9c5fcdfbd4a9ddd5"
+  },
+  "selection": {
+    "campaignIndex": 0,
+    "campaignId": "broad-v10-failed",
+    "evidenceIndex": 3,
+    "evidenceFile": "matrix/runs/run-2026-11-05T03-04-41-817Z-6882a5bc/results.json",
+    "expectedRows": 386,
+    "identityKeys": [
+      "scenario_id",
+      "variant_id"
+    ],
+    "mainFile": "VALIDATION-BROAD-V10-FAILED.json",
+    "manifestFile": "VALIDATION-BROAD-V10-FAILED-SHARDS.json",
+    "chunkDirectory": "broad-v10-failed"
+  },
+  "location": [
+    "campaigns",
+    0,
+    "associatedEvidence",
+    3,
+    "data"
+  ],
+  "layout": {
+    "mainFile": "VALIDATION-BROAD-V10-FAILED.json",
+    "chunkDirectory": "broad-v10-failed",
+    "chunkRows": 25,
+    "manifestFile": "VALIDATION-BROAD-V10-FAILED-SHARDS.json",
+    "chunkCount": 16,
+    "rowCount": 386
+  },
+  "identityKeys": [
+    "scenario_id",
+    "variant_id"
+  ],
+  "orderedRowIdentities": [
+    [
+      "ENV-001",
+      "native"
+    ],
+    [
+      "ENV-002",
+      "native-advanced"
+    ],
+    [
+      "ENV-003",
+      "native"
+    ],
+    [
+      "ENV-004",
+      "native"
+    ],
+    [
+      "ENV-004",
+      "product-cli-separate-gitdir"
+    ],
+    [
+      "ENV-005",
+      "native"
+    ],
+    [
+      "ENV-006",
+      "native"
+    ],
+    [
+      "ENV-007",
+      "native"
+    ],
+    [
+      "ENV-008",
+      "native"
+    ],
+    [
+      "ENV-009",
+      "native-advanced"
+    ],
+    [
+      "ENV-010",
+      "native"
+    ],
+    [
+      "ENV-011",
+      "native"
+    ],
+    [
+      "ENV-012",
+      "native-advanced"
+    ],
+    [
+      "ENV-013",
+      "cli-headless-lifecycle"
+    ],
+    [
+      "ENV-014",
+      "native-advanced"
+    ],
+    [
+      "INIT-001",
+      "native"
+    ],
+    [
+      "INIT-002",
+      "native"
+    ],
+    [
+      "INIT-003",
+      "native"
+    ],
+    [
+      "INIT-004",
+      "native"
+    ],
+    [
+      "INIT-005",
+      "native"
+    ],
+    [
+      "INIT-006",
+      "native"
+    ],
+    [
+      "INIT-007",
+      "native"
+    ],
+    [
+      "INIT-008",
+      "native"
+    ],
+    [
+      "INIT-009",
+      "native"
+    ],
+    [
+      "INIT-010",
+      "native"
+    ],
+    [
+      "INIT-011",
+      "native"
+    ],
+    [
+      "INIT-012",
+      "native-advanced"
+    ],
+    [
+      "INDEX-001",
+      "native-add-dot-layer"
+    ],
+    [
+      "INDEX-002",
+      "native"
+    ],
+    [
+      "INDEX-003",
+      "native"
+    ],
+    [
+      "INDEX-004",
+      "native"
+    ],
+    [
+      "INDEX-005",
+      "native"
+    ],
+    [
+      "INDEX-006",
+      "native"
+    ],
+    [
+      "INDEX-006",
+      "forced-native-add-diagnosed"
+    ],
+    [
+      "INDEX-007",
+      "native-vs-managed-mixed-batch"
+    ],
+    [
+      "INDEX-008",
+      "real-conpty"
+    ],
+    [
+      "INDEX-009",
+      "native-advanced"
+    ],
+    [
+      "INDEX-010",
+      "native"
+    ],
+    [
+      "INDEX-011",
+      "native"
+    ],
+    [
+      "INDEX-012",
+      "native"
+    ],
+    [
+      "INDEX-013",
+      "native"
+    ],
+    [
+      "INDEX-014",
+      "native"
+    ],
+    [
+      "INDEX-015",
+      "native"
+    ],
+    [
+      "INDEX-016",
+      "native"
+    ],
+    [
+      "INDEX-017",
+      "native"
+    ],
+    [
+      "INDEX-018",
+      "native-advanced"
+    ],
+    [
+      "INDEX-019",
+      "layer-index-native-roundtrip"
+    ],
+    [
+      "INDEX-020",
+      "index-selection-subprocess-isolation"
+    ],
+    [
+      "COMMIT-001",
+      "native"
+    ],
+    [
+      "COMMIT-002",
+      "native"
+    ],
+    [
+      "COMMIT-003",
+      "native"
+    ],
+    [
+      "COMMIT-004",
+      "native"
+    ],
+    [
+      "COMMIT-005",
+      "native"
+    ],
+    [
+      "COMMIT-006",
+      "native"
+    ],
+    [
+      "COMMIT-007",
+      "native"
+    ],
+    [
+      "COMMIT-008",
+      "native"
+    ],
+    [
+      "COMMIT-009",
+      "native"
+    ],
+    [
+      "COMMIT-010",
+      "native"
+    ],
+    [
+      "COMMIT-011",
+      "native-advanced"
+    ],
+    [
+      "COMMIT-012",
+      "native"
+    ],
+    [
+      "COMMIT-013",
+      "native"
+    ],
+    [
+      "COMMIT-014",
+      "native-add-then-native-commit"
+    ],
+    [
+      "BRANCH-001",
+      "native"
+    ],
+    [
+      "BRANCH-002",
+      "native"
+    ],
+    [
+      "BRANCH-003",
+      "native"
+    ],
+    [
+      "BRANCH-004",
+      "native"
+    ],
+    [
+      "BRANCH-005",
+      "native"
+    ],
+    [
+      "BRANCH-006",
+      "native"
+    ],
+    [
+      "BRANCH-007",
+      "native"
+    ],
+    [
+      "BRANCH-008",
+      "native"
+    ],
+    [
+      "BRANCH-009",
+      "native"
+    ],
+    [
+      "BRANCH-010",
+      "native"
+    ],
+    [
+      "BRANCH-011",
+      "native"
+    ],
+    [
+      "BRANCH-012",
+      "native"
+    ],
+    [
+      "BRANCH-013",
+      "native"
+    ],
+    [
+      "BRANCH-014",
+      "native"
+    ],
+    [
+      "BRANCH-015",
+      "native-advanced"
+    ],
+    [
+      "BRANCH-016",
+      "absolute-checkout-inactive"
+    ],
+    [
+      "BRANCH-016",
+      "absolute-checkout-active"
+    ],
+    [
+      "BRANCH-017",
+      "absolute-switch-inactive"
+    ],
+    [
+      "BRANCH-017",
+      "absolute-switch-active"
+    ],
+    [
+      "BRANCH-018",
+      "managed-refusal-native-bypass"
+    ],
+    [
+      "BRANCH-019",
+      "native-ref-list-vs-registration"
+    ],
+    [
+      "BRANCH-020",
+      "native"
+    ],
+    [
+      "MERGE-001",
+      "native"
+    ],
+    [
+      "MERGE-001",
+      "core-merge-not-implemented-native-ff"
+    ],
+    [
+      "MERGE-002",
+      "native"
+    ],
+    [
+      "MERGE-003",
+      "native"
+    ],
+    [
+      "MERGE-004",
+      "native"
+    ],
+    [
+      "MERGE-005",
+      "native"
+    ],
+    [
+      "MERGE-006",
+      "native"
+    ],
+    [
+      "MERGE-007",
+      "native"
+    ],
+    [
+      "MERGE-008",
+      "native"
+    ],
+    [
+      "MERGE-009",
+      "native"
+    ],
+    [
+      "MERGE-010",
+      "native"
+    ],
+    [
+      "MERGE-011",
+      "native"
+    ],
+    [
+      "MERGE-012",
+      "native"
+    ],
+    [
+      "MERGE-013",
+      "native"
+    ],
+    [
+      "MERGE-014",
+      "native"
+    ],
+    [
+      "MERGE-015",
+      "native"
+    ],
+    [
+      "REWRITE-001",
+      "native"
+    ],
+    [
+      "REWRITE-002",
+      "native"
+    ],
+    [
+      "REWRITE-003",
+      "native"
+    ],
+    [
+      "REWRITE-004",
+      "native"
+    ],
+    [
+      "REWRITE-005",
+      "native"
+    ],
+    [
+      "REWRITE-006",
+      "native"
+    ],
+    [
+      "REWRITE-007",
+      "native"
+    ],
+    [
+      "REWRITE-008",
+      "native"
+    ],
+    [
+      "REWRITE-009",
+      "native"
+    ],
+    [
+      "REWRITE-010",
+      "native"
+    ],
+    [
+      "REWRITE-011",
+      "native"
+    ],
+    [
+      "REWRITE-012",
+      "native"
+    ],
+    [
+      "REWRITE-013",
+      "native"
+    ],
+    [
+      "REWRITE-014",
+      "native-advanced"
+    ],
+    [
+      "REWRITE-015",
+      "native-advanced"
+    ],
+    [
+      "STASH-001",
+      "native"
+    ],
+    [
+      "STASH-002",
+      "native"
+    ],
+    [
+      "STASH-003",
+      "native"
+    ],
+    [
+      "STASH-003",
+      "native-stash-all-projected-layer"
+    ],
+    [
+      "STASH-004",
+      "native"
+    ],
+    [
+      "STASH-005",
+      "real-conpty"
+    ],
+    [
+      "STASH-006",
+      "native"
+    ],
+    [
+      "STASH-007",
+      "native"
+    ],
+    [
+      "STASH-008",
+      "native"
+    ],
+    [
+      "STASH-009",
+      "native-advanced"
+    ],
+    [
+      "STASH-010",
+      "native"
+    ],
+    [
+      "STASH-011",
+      "native"
+    ],
+    [
+      "STASH-011",
+      "native-clean-including-ignored"
+    ],
+    [
+      "STASH-011",
+      "native-clean-only-ignored"
+    ],
+    [
+      "STASH-012",
+      "real-conpty"
+    ],
+    [
+      "STASH-013",
+      "native"
+    ],
+    [
+      "REMOTE-001",
+      "native"
+    ],
+    [
+      "REMOTE-002",
+      "native"
+    ],
+    [
+      "REMOTE-003",
+      "native"
+    ],
+    [
+      "REMOTE-004",
+      "native"
+    ],
+    [
+      "REMOTE-005",
+      "native"
+    ],
+    [
+      "REMOTE-006",
+      "native"
+    ],
+    [
+      "REMOTE-007",
+      "native"
+    ],
+    [
+      "REMOTE-008",
+      "native"
+    ],
+    [
+      "REMOTE-009",
+      "native"
+    ],
+    [
+      "REMOTE-010",
+      "native"
+    ],
+    [
+      "REMOTE-011",
+      "native"
+    ],
+    [
+      "REMOTE-012",
+      "native"
+    ],
+    [
+      "REMOTE-013",
+      "native"
+    ],
+    [
+      "REMOTE-014",
+      "native-advanced"
+    ],
+    [
+      "REMOTE-015",
+      "transport-extra"
+    ],
+    [
+      "REMOTE-016",
+      "local-push-commit-not-stage"
+    ],
+    [
+      "WORKTREE-001",
+      "native"
+    ],
+    [
+      "WORKTREE-002",
+      "coverage-gaps"
+    ],
+    [
+      "WORKTREE-003",
+      "native"
+    ],
+    [
+      "WORKTREE-004",
+      "native"
+    ],
+    [
+      "WORKTREE-005",
+      "native"
+    ],
+    [
+      "WORKTREE-006",
+      "native"
+    ],
+    [
+      "WORKTREE-007",
+      "native"
+    ],
+    [
+      "WORKTREE-008",
+      "dirty-nested-local-submodules"
+    ],
+    [
+      "WORKTREE-009",
+      "native"
+    ],
+    [
+      "WORKTREE-010",
+      "native"
+    ],
+    [
+      "WORKTREE-011",
+      "native"
+    ],
+    [
+      "WORKTREE-012",
+      "native"
+    ],
+    [
+      "WORKTREE-013",
+      "untracked-cache-and-controlled-fsmonitor"
+    ],
+    [
+      "WORKTREE-014",
+      "native"
+    ],
+    [
+      "WORKTREE-014",
+      "native-worktree-selects-layer"
+    ],
+    [
+      "PATH-001",
+      "native"
+    ],
+    [
+      "PATH-002",
+      "case-rename-physical-filesystem"
+    ],
+    [
+      "PATH-003",
+      "long-path-and-ntfs-name-protection"
+    ],
+    [
+      "PATH-004",
+      "native"
+    ],
+    [
+      "PATH-005",
+      "native"
+    ],
+    [
+      "PATH-006",
+      "native"
+    ],
+    [
+      "PATH-007",
+      "native"
+    ],
+    [
+      "PATH-008",
+      "native"
+    ],
+    [
+      "PATH-009",
+      "native"
+    ],
+    [
+      "PATH-010",
+      "native"
+    ],
+    [
+      "PATH-011",
+      "owned-hardlink-junction-boundaries"
+    ],
+    [
+      "PATH-012",
+      "native-advanced"
+    ],
+    [
+      "PATH-012",
+      "native-advanced-process-filter"
+    ],
+    [
+      "PATH-013",
+      "native-advanced"
+    ],
+    [
+      "PATH-013",
+      "native-advanced-textconv"
+    ],
+    [
+      "PATH-014",
+      "native"
+    ],
+    [
+      "PATH-015",
+      "native"
+    ],
+    [
+      "INSPECT-001",
+      "native"
+    ],
+    [
+      "INSPECT-002",
+      "native"
+    ],
+    [
+      "INSPECT-003",
+      "native"
+    ],
+    [
+      "INSPECT-004",
+      "native"
+    ],
+    [
+      "INSPECT-005",
+      "native"
+    ],
+    [
+      "INSPECT-006",
+      "native"
+    ],
+    [
+      "INSPECT-007",
+      "native"
+    ],
+    [
+      "INSPECT-008",
+      "native"
+    ],
+    [
+      "INSPECT-009",
+      "native"
+    ],
+    [
+      "INSPECT-010",
+      "native"
+    ],
+    [
+      "INSPECT-011",
+      "native"
+    ],
+    [
+      "INSPECT-012",
+      "native"
+    ],
+    [
+      "INSPECT-013",
+      "native"
+    ],
+    [
+      "INSPECT-014",
+      "bugreport-diagnose-disposable-output"
+    ],
+    [
+      "PATCH-001",
+      "native"
+    ],
+    [
+      "PATCH-002",
+      "native"
+    ],
+    [
+      "PATCH-003",
+      "native"
+    ],
+    [
+      "PATCH-004",
+      "native"
+    ],
+    [
+      "PATCH-005",
+      "native"
+    ],
+    [
+      "PATCH-006",
+      "native"
+    ],
+    [
+      "PATCH-007",
+      "native"
+    ],
+    [
+      "PATCH-008",
+      "native"
+    ],
+    [
+      "PATCH-009",
+      "native"
+    ],
+    [
+      "PATCH-010",
+      "native"
+    ],
+    [
+      "PATCH-011",
+      "native"
+    ],
+    [
+      "PATCH-012",
+      "native"
+    ],
+    [
+      "OBJECT-001",
+      "native"
+    ],
+    [
+      "OBJECT-002",
+      "native"
+    ],
+    [
+      "OBJECT-003",
+      "native"
+    ],
+    [
+      "OBJECT-004",
+      "native"
+    ],
+    [
+      "OBJECT-005",
+      "native"
+    ],
+    [
+      "OBJECT-006",
+      "native"
+    ],
+    [
+      "OBJECT-007",
+      "native"
+    ],
+    [
+      "OBJECT-008",
+      "native"
+    ],
+    [
+      "OBJECT-009",
+      "native"
+    ],
+    [
+      "OBJECT-010",
+      "native"
+    ],
+    [
+      "OBJECT-011",
+      "coverage-gaps"
+    ],
+    [
+      "OBJECT-012",
+      "native"
+    ],
+    [
+      "REF-001",
+      "native"
+    ],
+    [
+      "REF-002",
+      "native"
+    ],
+    [
+      "REF-003",
+      "native"
+    ],
+    [
+      "REF-004",
+      "native"
+    ],
+    [
+      "REF-005",
+      "native"
+    ],
+    [
+      "REF-006",
+      "native-advanced"
+    ],
+    [
+      "REF-007",
+      "native"
+    ],
+    [
+      "REF-008",
+      "gc-retains-private-staged-objects"
+    ],
+    [
+      "REF-009",
+      "native"
+    ],
+    [
+      "REF-010",
+      "native"
+    ],
+    [
+      "REF-011",
+      "native"
+    ],
+    [
+      "REF-012",
+      "native"
+    ],
+    [
+      "REF-013",
+      "native"
+    ],
+    [
+      "REF-014",
+      "native"
+    ],
+    [
+      "REF-015",
+      "real-journals-and-private-retention-measured"
+    ],
+    [
+      "PROTO-001",
+      "native"
+    ],
+    [
+      "PROTO-002",
+      "native"
+    ],
+    [
+      "PROTO-003",
+      "native-optional"
+    ],
+    [
+      "PROTO-004",
+      "transport-extra"
+    ],
+    [
+      "PROTO-005",
+      "native-optional"
+    ],
+    [
+      "PROTO-006",
+      "official-http-push-loopback-webdav"
+    ],
+    [
+      "PROTO-007",
+      "native"
+    ],
+    [
+      "PROTO-008",
+      "native"
+    ],
+    [
+      "PROTO-009",
+      "native"
+    ],
+    [
+      "PROTO-010",
+      "native-optional"
+    ],
+    [
+      "PROTO-011",
+      "native-optional"
+    ],
+    [
+      "PROTO-012",
+      "native-advanced"
+    ],
+    [
+      "TOOLS-001",
+      "native-optional"
+    ],
+    [
+      "TOOLS-002",
+      "specification"
+    ],
+    [
+      "TOOLS-003",
+      "legacy-transport"
+    ],
+    [
+      "TOOLS-004",
+      "native"
+    ],
+    [
+      "TOOLS-005",
+      "native"
+    ],
+    [
+      "TOOLS-006",
+      "native"
+    ],
+    [
+      "TOOLS-007",
+      "native"
+    ],
+    [
+      "TOOLS-008",
+      "native-advanced"
+    ],
+    [
+      "TOOLS-009",
+      "native-advanced"
+    ],
+    [
+      "TOOLS-010",
+      "native"
+    ],
+    [
+      "TOOLS-011",
+      "native-optional-powershell"
+    ],
+    [
+      "TOOLS-011",
+      "native-optional-cmd"
+    ],
+    [
+      "TOOLS-011",
+      "native-optional-bash"
+    ],
+    [
+      "TOOLS-012",
+      "specification"
+    ],
+    [
+      "TOOLS-013",
+      "native-optional"
+    ],
+    [
+      "TOOLS-014",
+      "specification"
+    ],
+    [
+      "TOOLS-015",
+      "specification"
+    ],
+    [
+      "LEGACY-001",
+      "legacy-transport"
+    ],
+    [
+      "LEGACY-002",
+      "legacy-transport"
+    ],
+    [
+      "LEGACY-003",
+      "specification"
+    ],
+    [
+      "LEGACY-004",
+      "specification"
+    ],
+    [
+      "LEGACY-005",
+      "specification"
+    ],
+    [
+      "LEGACY-006",
+      "specification"
+    ],
+    [
+      "LEGACY-007",
+      "specification"
+    ],
+    [
+      "LEGACY-008",
+      "specification"
+    ],
+    [
+      "LAYER-001",
+      "zero-layers-native-daily"
+    ],
+    [
+      "LAYER-002",
+      "two-disjoint-real-layers"
+    ],
+    [
+      "LAYER-003",
+      "commit-one-preserves-other-owners"
+    ],
+    [
+      "LAYER-004",
+      "same-bytes-local-collision"
+    ],
+    [
+      "LAYER-005",
+      "base-owned-add-refused"
+    ],
+    [
+      "LAYER-006",
+      "collision-one-first"
+    ],
+    [
+      "LAYER-006",
+      "collision-two-first"
+    ],
+    [
+      "LAYER-007",
+      "reserve-unstage-release"
+    ],
+    [
+      "LAYER-008",
+      "delete-stage-recreate-owner"
+    ],
+    [
+      "LAYER-009",
+      "native-vs-managed-owner-rename"
+    ],
+    [
+      "LAYER-010",
+      "park-four-dimensions"
+    ],
+    [
+      "LAYER-011",
+      "capture-scope-confirm"
+    ],
+    [
+      "LAYER-011",
+      "capture-scope-cancel"
+    ],
+    [
+      "LAYER-012",
+      "capture-off-cancel-trap"
+    ],
+    [
+      "LAYER-013",
+      "capture-stale-edited"
+    ],
+    [
+      "LAYER-013",
+      "capture-stale-removed"
+    ],
+    [
+      "LAYER-014",
+      "external-ref-advanced-preserves-index"
+    ],
+    [
+      "LAYER-015",
+      "external-ref-delete"
+    ],
+    [
+      "LAYER-015",
+      "external-ref-rename"
+    ],
+    [
+      "LAYER-016",
+      "missing-lifecycle-cli-surface"
+    ],
+    [
+      "LAYOUT-001",
+      "specification"
+    ],
+    [
+      "LAYOUT-002",
+      "specification"
+    ],
+    [
+      "LAYOUT-003",
+      "specification"
+    ],
+    [
+      "LAYOUT-004",
+      "specification"
+    ],
+    [
+      "LAYOUT-005",
+      "specification"
+    ],
+    [
+      "LAYOUT-006",
+      "specification"
+    ],
+    [
+      "LAYOUT-007",
+      "specification"
+    ],
+    [
+      "LAYOUT-008",
+      "specification"
+    ],
+    [
+      "LAYOUT-009",
+      "specification"
+    ],
+    [
+      "LAYOUT-010",
+      "specification"
+    ],
+    [
+      "LAYOUT-011",
+      "native-index-v2-v4-copy"
+    ],
+    [
+      "LAYOUT-012",
+      "native-objects-private-coordination"
+    ],
+    [
+      "RECOVERY-001",
+      "two-writers-observed-barrier"
+    ],
+    [
+      "RECOVERY-002",
+      "reader-during-observed-materialization"
+    ],
+    [
+      "RECOVERY-003",
+      "external-ref-after-observed-preflight"
+    ],
+    [
+      "RECOVERY-004",
+      "real-product-storage-lock-owner-killed"
+    ],
+    [
+      "RECOVERY-005",
+      "real-death-after-backup-before-unlink"
+    ],
+    [
+      "RECOVERY-006",
+      "real-death-after-layer-ref-publication"
+    ],
+    [
+      "RECOVERY-007",
+      "real-death-after-first-materialized-file"
+    ],
+    [
+      "RECOVERY-008",
+      "failpoint-after-stage-index"
+    ],
+    [
+      "RECOVERY-008",
+      "failpoint-after-stage-checkpoint"
+    ],
+    [
+      "RECOVERY-009",
+      "malformed-registry"
+    ],
+    [
+      "RECOVERY-009",
+      "future-workspace"
+    ],
+    [
+      "RECOVERY-009",
+      "missing-workspace"
+    ],
+    [
+      "RECOVERY-010",
+      "backup-changed"
+    ],
+    [
+      "RECOVERY-010",
+      "backup-missing"
+    ],
+    [
+      "RECOVERY-011",
+      "real-exclusive-index-file-handle"
+    ],
+    [
+      "RECOVERY-012",
+      "switch-snapshot-json-limit-49mib"
+    ],
+    [
+      "RECOVERY-013",
+      "gc-between-private-index-and-retention-ref"
+    ],
+    [
+      "RECOVERY-014",
+      "reopen-recover-idempotence"
+    ],
+    [
+      "HARNESS-001",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-002",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-003",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-004",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-005",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-006",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-007",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-008",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-009",
+      "measured-product-scan-size-10-1000"
+    ],
+    [
+      "HARNESS-010",
+      "measured-completed-journal-scan-0-100-1000"
+    ],
+    [
+      "HARNESS-011",
+      "portable-and-selection"
+    ],
+    [
+      "HARNESS-012",
+      "portable-and-selection"
+    ],
+    [
+      "HARNESS-013",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-014",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-015",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-016",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-017",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-018",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-019",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-020",
+      "portable-and-selection"
+    ],
+    [
+      "HARNESS-021",
+      "portable-and-selection"
+    ],
+    [
+      "HARNESS-022",
+      "negative-controls"
+    ],
+    [
+      "HARNESS-023",
+      "negative-controls"
+    ],
+    [
+      "HOOK-001",
+      "native"
+    ],
+    [
+      "HOOK-002",
+      "native"
+    ],
+    [
+      "HOOK-003",
+      "native"
+    ],
+    [
+      "HOOK-004",
+      "native-optional"
+    ],
+    [
+      "HOOK-005",
+      "native"
+    ],
+    [
+      "HOOK-006",
+      "native"
+    ],
+    [
+      "HOOK-007",
+      "native-optional"
+    ],
+    [
+      "HOOK-008",
+      "native"
+    ],
+    [
+      "HOOK-009",
+      "native"
+    ],
+    [
+      "HOOK-010",
+      "native"
+    ],
+    [
+      "HOOK-011",
+      "coverage-gaps"
+    ],
+    [
+      "HOOK-012",
+      "native-optional"
+    ],
+    [
+      "MODEL-001",
+      "on-off-roundtrip-three-times"
+    ],
+    [
+      "MODEL-002",
+      "disjoint-activation-commutes"
+    ],
+    [
+      "MODEL-003",
+      "park-staged-dirty-absence-roundtrip"
+    ],
+    [
+      "MODEL-004",
+      "mixed-owner-batch-permutations"
+    ],
+    [
+      "MODEL-005",
+      "seeded-owner-independence"
+    ],
+    [
+      "MODEL-006",
+      "seeded-real-cli-state-sequence"
+    ],
+    [
+      "MODEL-007",
+      "seeded-native-and-managed-sequence"
+    ],
+    [
+      "MODEL-008",
+      "implementation-handled-stage"
+    ],
+    [
+      "MODEL-008",
+      "implementation-handled-rename"
+    ],
+    [
+      "MODEL-008",
+      "implementation-handled-deactivate"
+    ],
+    [
+      "MODEL-008",
+      "implementation-handled-openbranch"
+    ],
+    [
+      "MODEL-009",
+      "diagnostic-export-evidence-monotonic"
+    ],
+    [
+      "MODEL-010",
+      "coverage-gaps-sha1-files"
+    ],
+    [
+      "MODEL-010",
+      "coverage-gaps-sha1-reftable"
+    ],
+    [
+      "MODEL-010",
+      "coverage-gaps-sha256-files"
+    ],
+    [
+      "MODEL-010",
+      "coverage-gaps-sha256-reftable"
+    ],
+    [
+      "MODEL-011",
+      "portable-and-selection"
+    ],
+    [
+      "HARNESS-024",
+      "supervisor-final-process-state"
+    ],
+    [
+      "HARNESS-025",
+      "selection-and-expectation-evolution"
+    ],
+    [
+      "HARNESS-026",
+      "fresh-copy-and-archived-report"
+    ],
+    [
+      "IMPL-001",
+      "native-default-recognition"
+    ],
+    [
+      "IMPL-002",
+      "composition-editing-target"
+    ],
+    [
+      "IMPL-003",
+      "assign-preexisting-explicitly"
+    ],
+    [
+      "IMPL-004",
+      "dirty-off-preview-discard"
+    ],
+    [
+      "IMPL-004",
+      "interactive-newcomer-preview-cancel-confirm"
+    ],
+    [
+      "IMPL-005",
+      "layer-lifecycle-and-external-ref"
+    ],
+    [
+      "IMPL-006",
+      "deliberate-branch-with-other-layer"
+    ],
+    [
+      "IMPL-007",
+      "native-protection-and-explicit-bypass"
+    ],
+    [
+      "IMPL-008",
+      "raw-rescue-invalid-metadata-lock"
+    ],
+    [
+      "IMPL-009",
+      "explicit-layout-migration"
+    ],
+    [
+      "IMPL-010",
+      "share-local-bare-and-recognize-clone"
+    ],
+    [
+      "IMPL-011",
+      "native-whole-commit-and-optional-hunk"
+    ]
+  ],
+  "rowIdentitiesSha256": "ff1c444d879286a0465e834f96b95051a4b6817d09e014c843cb308e771a78d3",
+  "sourceMeasure": {
+    "nodes": 507768,
+    "maxDepth": 13
+  },
+  "compact": {
+    "file": "VALIDATION-BROAD-V10-FAILED.json",
+    "bytes": 2083200,
+    "sha256": "2e68452834d4fdc352e40ad5405652ad9ce370329bf7f91b64c248e6a5008847",
+    "nodes": 37213,
+    "maxDepth": 10
+  },
+  "chunks": [
+    {
+      "file": "broad-v10-failed/results-0001.json",
+      "bytes": 1220725,
+      "sha256": "3f8dab6036c4c10a181077b681362828e211bde3516cd1e04390a07eb28f920d",
+      "nodes": 27695,
+      "maxDepth": 5,
+      "index": 0,
+      "firstRow": 0,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "4851258559c4d8b046c92cc169366ff4ebf9c4e2db83c399c0710484e3ebc15a"
+    },
+    {
+      "file": "broad-v10-failed/results-0002.json",
+      "bytes": 1238352,
+      "sha256": "e698c8dde2a425d11038ece5bd5b9993d8b57371251e78a0f48e87ebe0a71230",
+      "nodes": 28086,
+      "maxDepth": 7,
+      "index": 1,
+      "firstRow": 25,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "ab34e188c7326bc9eef20d980b474ad469a1c237991d18580e7d8ce87a5e23c3"
+    },
+    {
+      "file": "broad-v10-failed/results-0003.json",
+      "bytes": 1373573,
+      "sha256": "06fafd2318d10ea604bd37557eb647ace574838667cc228c7a05fde054ad3ed1",
+      "nodes": 31478,
+      "maxDepth": 5,
+      "index": 2,
+      "firstRow": 50,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "7ffbfb1bc79bd2c17f5b38d819462e0520f07824d5c5bc71b132f3394fc28444"
+    },
+    {
+      "file": "broad-v10-failed/results-0004.json",
+      "bytes": 1659660,
+      "sha256": "ca36aa967bd73a54842518bc154c9435367f57ee30233768aaec6a5d4574cfd0",
+      "nodes": 37695,
+      "maxDepth": 6,
+      "index": 3,
+      "firstRow": 75,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "860c6118dcc78d0ac8a64586a40f23cae9832039a2598190be1ac07934089b14"
+    },
+    {
+      "file": "broad-v10-failed/results-0005.json",
+      "bytes": 1928608,
+      "sha256": "64484fad68f0d4493b215335ff149791d8b6800462b2a7391a0611391f81fcec",
+      "nodes": 43787,
+      "maxDepth": 5,
+      "index": 4,
+      "firstRow": 100,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "04a770ba13dc17af77f3c3a698ff7c3ab083fbfc2627e980f93b8acd863aaf72"
+    },
+    {
+      "file": "broad-v10-failed/results-0006.json",
+      "bytes": 1720209,
+      "sha256": "c4d403179d5844ce68c111b126ffeacc07c6b228196a24b73ba6d75afabe8689",
+      "nodes": 35151,
+      "maxDepth": 6,
+      "index": 5,
+      "firstRow": 125,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "3f59f0424c7398a9f6f737bd93b2e7046cd66bbd16d15885459acc1a32d57f8a"
+    },
+    {
+      "file": "broad-v10-failed/results-0007.json",
+      "bytes": 1279196,
+      "sha256": "94fc95738ef3e674f056908b4ebdc2fd73a4ec7dfde0d3aea123395366b9fcb2",
+      "nodes": 28726,
+      "maxDepth": 5,
+      "index": 6,
+      "firstRow": 150,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "93e11bcebf419dcee93b3a13a030bd3ad21bb4920eac2ecb4d38031732782f7e"
+    },
+    {
+      "file": "broad-v10-failed/results-0008.json",
+      "bytes": 1420797,
+      "sha256": "f0550b98a179d0fdd9d810589aa859a459a556f9533c7efd3cc9ee9c48860437",
+      "nodes": 32505,
+      "maxDepth": 5,
+      "index": 7,
+      "firstRow": 175,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "47939d45fd0492a837ac6f1bb02e5accc5180ff388c0d500963e679ebca7b43c"
+    },
+    {
+      "file": "broad-v10-failed/results-0009.json",
+      "bytes": 1334198,
+      "sha256": "36e3db83d1e6847c855465253edb9a0c06af1657a20dd66285528b774d49cd19",
+      "nodes": 30437,
+      "maxDepth": 8,
+      "index": 8,
+      "firstRow": 200,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "93eb33ab669a846de996b16960c29c5227fa55f501bebf4a1865afb7350154bd"
+    },
+    {
+      "file": "broad-v10-failed/results-0010.json",
+      "bytes": 1232689,
+      "sha256": "3a926a5cd2374986c9532955ed61774370c069fadb439a92d2fb8cf5fd13b64c",
+      "nodes": 28005,
+      "maxDepth": 5,
+      "index": 9,
+      "firstRow": 225,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "ba8ccc6fadd3352203009ef095157a798b6a522c5fc2ec33ae6565f42883ee62"
+    },
+    {
+      "file": "broad-v10-failed/results-0011.json",
+      "bytes": 877193,
+      "sha256": "238a045f1d3746320f5a8659ab7fd321a1067a861048ca933d45e5999686c395",
+      "nodes": 19451,
+      "maxDepth": 7,
+      "index": 10,
+      "firstRow": 250,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "67ec28e9a1a8900b494a8cde3c64feb37b8d7b14299db208f1b2f881ed1cbb0d"
+    },
+    {
+      "file": "broad-v10-failed/results-0012.json",
+      "bytes": 848211,
+      "sha256": "b5cd14697dd8b928d33b509e1e9a0e46bf26e61c6437f390e37b861f0c2f547c",
+      "nodes": 18690,
+      "maxDepth": 8,
+      "index": 11,
+      "firstRow": 275,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "6be87e3971cb52fa0dbad35bac43075eb702d915729551fc9ac0c7debc473f23"
+    },
+    {
+      "file": "broad-v10-failed/results-0013.json",
+      "bytes": 1245835,
+      "sha256": "c9fd2f0cf7699492398a1975cdad664d5fc43cea3a1cf6b48dda401684839638",
+      "nodes": 26214,
+      "maxDepth": 6,
+      "index": 12,
+      "firstRow": 300,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "be7801e14b619047fab237d857fbcd62b8f944826e23cc2364c80e8f9d54d1d2"
+    },
+    {
+      "file": "broad-v10-failed/results-0014.json",
+      "bytes": 727916,
+      "sha256": "dddc6583ccffb25317614ef8ab4175ca61e7e464f793a396dced96db084a89c9",
+      "nodes": 16289,
+      "maxDepth": 6,
+      "index": 13,
+      "firstRow": 325,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "2b9b61ab616bf67b2fc3d0d876c8a23b3db361128bc99b2beb4e99d44cb3e2fe"
+    },
+    {
+      "file": "broad-v10-failed/results-0015.json",
+      "bytes": 2482553,
+      "sha256": "472723eb84a007883819d6eb9b139d977668fcd3bd7727492f9bac19b9f680d3",
+      "nodes": 51260,
+      "maxDepth": 8,
+      "index": 14,
+      "firstRow": 350,
+      "rowCount": 25,
+      "rowIdentitiesSha256": "c937fcef6ca2b8d2b98cc0c062fe5950352a87bf73a7fe829dd986bb1799d2c3"
+    },
+    {
+      "file": "broad-v10-failed/results-0016.json",
+      "bytes": 710683,
+      "sha256": "04d05d95b3a87e6a507f8b1512136ebaaceddb5c956a6e7b30245d978fad4e00",
+      "nodes": 15275,
+      "maxDepth": 8,
+      "index": 15,
+      "firstRow": 375,
+      "rowCount": 11,
+      "rowIdentitiesSha256": "31e66db3dcec0899cb6526bd82cb4b4a89a4acdd756fcf316a132c49fded4145"
+    }
+  ],
+  "transformation": "Replace only the explicit campaign/evidence data array; all other fields remain unchanged.",
+  "reconstruction": "Read chunks in recorded index order, concatenate without filtering/deduplication, replace only location.",
+  "originalWholePreserved": true,
+  "valuesRoundedOrOmitted": false,
+  "testsAggregated": false,
+  "startedAt": "2026-11-05T04:29:53.041Z",
+  "endedAt": "2026-11-05T04:29:54.571Z",
+  "nonce": "5f47ce15-8ede-46af-9f32-64a063966464",
+  "sourceProjection": {
+    "whole": {
+      "bytes": 28890737,
+      "sha256": "c479536525ac90b0c1a441ebfd4829399b5f14fefd2437ed9c5fcdfbd4a9ddd5"
+    },
+    "marker": {
+      "bytes": 348,
+      "sha256": "547365110378484743872dfc0ffe63e915dd90e7b0c829eb082055f7dfb12e47"
+    },
+    "nonce": "5d46e211-8586-4c75-b639-432e53dcefd6",
+    "projectorSha256": "5b28a19e687a11b8da046b1dcf2b126e46069db2cc64585448ea8d7f59940757",
+    "sourceDirectoryIdentityRevalidated": true
+  },
+  "generator": {
+    "bytes": 25547,
+    "sha256": "7ae35ffbf1474383e27ec2cde08e9be455876aea7cd8159afcd073a8769738a0"
+  },
+  "request": {
+    "bytes": 905,
+    "sha256": "a9fe62c30ffa3d059fb3b323e4e7fa4e912c25f965431cd4f239ece4f9b1fb81"
+  },
+  "conservation": {
+    "deepStrictEqual": true,
+    "exactPretty2PlusLFBytes": true,
+    "sourceWholeSha256": "c479536525ac90b0c1a441ebfd4829399b5f14fefd2437ed9c5fcdfbd4a9ddd5",
+    "reassembledWholeSha256": "c479536525ac90b0c1a441ebfd4829399b5f14fefd2437ed9c5fcdfbd4a9ddd5",
+    "sourceWholeBytes": 28890737,
+    "reassembledWholeBytes": 28890737,
+    "everyArrayRowAndIdentityPreserved": true,
+    "allOtherFieldsPreserved": true,
+    "duplicatesNotFiltered": true
+  },
+  "files": [
+    {
+      "file": ".projection-owned.json",
+      "bytes": 277,
+      "sha256": "a3ee620d5eb8a84267a9c6df0d6bc88060250050f299cea521a2532ec8dc2e2a"
+    },
+    {
+      "file": "broad-v10-failed/results-0001.json",
+      "bytes": 1220725,
+      "sha256": "3f8dab6036c4c10a181077b681362828e211bde3516cd1e04390a07eb28f920d"
+    },
+    {
+      "file": "broad-v10-failed/results-0002.json",
+      "bytes": 1238352,
+      "sha256": "e698c8dde2a425d11038ece5bd5b9993d8b57371251e78a0f48e87ebe0a71230"
+    },
+    {
+      "file": "broad-v10-failed/results-0003.json",
+      "bytes": 1373573,
+      "sha256": "06fafd2318d10ea604bd37557eb647ace574838667cc228c7a05fde054ad3ed1"
+    },
+    {
+      "file": "broad-v10-failed/results-0004.json",
+      "bytes": 1659660,
+      "sha256": "ca36aa967bd73a54842518bc154c9435367f57ee30233768aaec6a5d4574cfd0"
+    },
+    {
+      "file": "broad-v10-failed/results-0005.json",
+      "bytes": 1928608,
+      "sha256": "64484fad68f0d4493b215335ff149791d8b6800462b2a7391a0611391f81fcec"
+    },
+    {
+      "file": "broad-v10-failed/results-0006.json",
+      "bytes": 1720209,
+      "sha256": "c4d403179d5844ce68c111b126ffeacc07c6b228196a24b73ba6d75afabe8689"
+    },
+    {
+      "file": "broad-v10-failed/results-0007.json",
+      "bytes": 1279196,
+      "sha256": "94fc95738ef3e674f056908b4ebdc2fd73a4ec7dfde0d3aea123395366b9fcb2"
+    },
+    {
+      "file": "broad-v10-failed/results-0008.json",
+      "bytes": 1420797,
+      "sha256": "f0550b98a179d0fdd9d810589aa859a459a556f9533c7efd3cc9ee9c48860437"
+    },
+    {
+      "file": "broad-v10-failed/results-0009.json",
+      "bytes": 1334198,
+      "sha256": "36e3db83d1e6847c855465253edb9a0c06af1657a20dd66285528b774d49cd19"
+    },
+    {
+      "file": "broad-v10-failed/results-0010.json",
+      "bytes": 1232689,
+      "sha256": "3a926a5cd2374986c9532955ed61774370c069fadb439a92d2fb8cf5fd13b64c"
+    },
+    {
+      "file": "broad-v10-failed/results-0011.json",
+      "bytes": 877193,
+      "sha256": "238a045f1d3746320f5a8659ab7fd321a1067a861048ca933d45e5999686c395"
+    },
+    {
+      "file": "broad-v10-failed/results-0012.json",
+      "bytes": 848211,
+      "sha256": "b5cd14697dd8b928d33b509e1e9a0e46bf26e61c6437f390e37b861f0c2f547c"
+    },
+    {
+      "file": "broad-v10-failed/results-0013.json",
+      "bytes": 1245835,
+      "sha256": "c9fd2f0cf7699492398a1975cdad664d5fc43cea3a1cf6b48dda401684839638"
+    },
+    {
+      "file": "broad-v10-failed/results-0014.json",
+      "bytes": 727916,
+      "sha256": "dddc6583ccffb25317614ef8ab4175ca61e7e464f793a396dced96db084a89c9"
+    },
+    {
+      "file": "broad-v10-failed/results-0015.json",
+      "bytes": 2482553,
+      "sha256": "472723eb84a007883819d6eb9b139d977668fcd3bd7727492f9bac19b9f680d3"
+    },
+    {
+      "file": "broad-v10-failed/results-0016.json",
+      "bytes": 710683,
+      "sha256": "04d05d95b3a87e6a507f8b1512136ebaaceddb5c956a6e7b30245d978fad4e00"
+    },
+    {
+      "file": "VALIDATION-BROAD-V10-FAILED.json",
+      "bytes": 2083200,
+      "sha256": "2e68452834d4fdc352e40ad5405652ad9ce370329bf7f91b64c248e6a5008847"
+    }
+  ],
+  "budgets": {
+    "chunkRows": 25,
+    "fileBytes": 67108864,
+    "totalBytes": 201326592,
+    "sourceNodes": 1500000,
+    "outputNodes": 199999,
+    "depth": 64,
+    "stringCharacters": 8388608
+  },
+  "directorySync": [
+    {
+      "directory": "broad-v10-failed",
+      "supported": false,
+      "code": "EPERM",
+      "limitation": "Directory fsync unavailable; each written regular file was fsynced."
+    },
+    {
+      "directory": ".",
+      "supported": false,
+      "code": "EPERM",
+      "limitation": "Directory fsync unavailable; each written regular file was fsynced."
+    }
+  ],
+  "privacyAudit": "Required independently for each emitted public file; auditor limits were not raised.",
+  "originalInputEdited": false,
+  "repositoryEdited": false,
+  "cleanupAttempted": false
+}
