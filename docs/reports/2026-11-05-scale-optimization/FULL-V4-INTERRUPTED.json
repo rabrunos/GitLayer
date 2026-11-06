@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "kind": "interrupted-local-validation-phase",
+  "campaign": "full-v4-interrupted",
+  "phase": "full",
+  "status": "FAIL",
+  "finalResultPresent": true,
+  "startedAt": "2026-11-05T14:29:16.877Z",
+  "endedAt": "2026-11-05T14:43:56.150Z",
+  "command": {
+    "cwd": "<PROJECT>",
+    "executable": "<NODE.EXE>",
+    "argv": [
+      "--import",
+      "tsx",
+      "--test",
+      "--test-concurrency=2",
+      "--test-timeout=900000",
+      "--test-reporter=spec",
+      "--test-reporter-destination=stdout",
+      "--test-reporter=tap",
+      "--test-reporter-destination=stderr",
+      "tests/unit/*.test.ts",
+      "tests/unit/*.test.mjs",
+      "tests/integration/*.test.ts",
+      "tests/integration/*.test.mjs"
+    ],
+    "timeoutMs": 10800000,
+    "npmEquivalent": "npm.cmd test",
+    "scope": "Same corpus, concurrency and per-test timeout as package.json test; adds spec/TAP evidence reporters."
+  },
+  "source": {
+    "beforeFingerprint": "34f78b0b8e63d35816a38c8078170a91fc82b81ba27d7efbce8640cebb1262b7",
+    "afterFingerprint": "34f78b0b8e63d35816a38c8078170a91fc82b81ba27d7efbce8640cebb1262b7",
+    "countBefore": 223,
+    "countAfter": 223,
+    "sourceUnchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "beforeManifest": "SOURCE-MANIFEST-34f78b0b8e63d35816a38c8078170a91fc82b81ba27d7efbce8640cebb1262b7.json",
+    "afterManifest": "SOURCE-MANIFEST-34f78b0b8e63d35816a38c8078170a91fc82b81ba27d7efbce8640cebb1262b7.json",
+    "beforeManifestRawSHA256": "b3c20768466f13fc45a48b7f9e4f0ec72d840724fd8a82bd2dc808f02b78b332",
+    "afterManifestRawSHA256": "b3c20768466f13fc45a48b7f9e4f0ec72d840724fd8a82bd2dc808f02b78b332"
+  },
+  "process": {
+    "exitCode": 1,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "timeoutMs": 10800000,
+    "durationMs": 878462,
+    "termination": null
+  },
+  "summary": {
+    "format": "Node.js TAP final summary",
+    "counts": {},
+    "complete": false,
+    "consistent": false
+  },
+  "independentlyParsedTap": {
+    "format": "Node.js TAP final summary",
+    "counts": {},
+    "complete": false,
+    "consistent": false
+  },
+  "streams": {
+    "stdout": {
+      "file": "stdout.log",
+      "present": true,
+      "bytes": 10672,
+      "sha256": "5359bc8abd281f65ac577be23276368600e9b20610ed2bd8958506f180f36162",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    },
+    "stderr": {
+      "file": "stderr.log",
+      "present": true,
+      "bytes": 16811,
+      "sha256": "4b854913510ee107106a6a0bd109b5967ac53632ab0f60b4c55be80959eb56bd",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    }
+  },
+  "error": null,
+  "resultRawSHA256": "d3f7a6e73d18c688873fb67ebd72013c45895b34e036b82c5736936983f55bd9",
+  "projectComparison": {
+    "project": "<PROJECT>",
+    "fingerprint": "0ec883fe2a55b495d89c9c7a398aca4f82cfd1040ba125efdd35cfb9b3bd727c",
+    "count": 223,
+    "unchanged": false,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": [
+        "src/core/index.ts",
+        "src/core/recovery.ts"
+      ]
+    }
+  },
+  "qualification": "One named phase and one source snapshot; labels do not imply final approval. Never pool campaigns, retries, phases or partial TAP totals. This campaign was explicitly stopped after a separately confirmed integrity gap. FAIL here is the stopped process outcome, not a complete-suite test denominator. It is not final validation of the subsequent correction.",
+  "stop": {
+    "requestedAt": "2026-11-05T14:43:55.8243618Z",
+    "reason": "Confirmed external same-byte index replacement during recovery backup copy was overwritten; no final full-suite claim",
+    "observedAt": "2026-11-05T14:43:56.1224127Z",
+    "previouslyInventoriedCount": 11,
+    "remainingPreviouslyInventoriedCount": 0,
+    "nativeTaskkillExit": 128,
+    "qualification": "Only previously inventoried process IDs checked; no universal claim about unobserved descendants",
+    "requestedRawSHA256": "13299c5e99e0cf661e75c056411f5a92691e72eb108f0ecfc50df9ef8ebd7cca",
+    "observedRawSHA256": "4df74037ea7e319f8472a674abdc346064305fd843236afb8bacd63bab484bad"
+  },
+  "integrityFinding": {
+    "status": "CONFIRMED_EXTERNAL_REPRODUCTION",
+    "description": "After recovery preflight, while copying the backup, an external writer replaced staged index B with another inode containing the same bytes and a timestamp about 60 seconds later. The withdrawn candidate returned recovery success, restored A over that external index and completed its journal as schema 1.",
+    "classification": "Recovery final-frontier identity validation gap; not a report of lost workspace C bytes.",
+    "reproductionReceipt": "Separate reproduction and corrective tests are documented in RECOVERY.md; this file records the interrupted full campaign only."
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "schema": 1,
+  "kind": "managed-stage-checkpoint-recapture-reproductions",
+  "baselineCommit": "e8f2e3feba87224246a42337f77f702914df989e",
+  "finding": "Managed add durably recorded requested B. An official native read-tree then replaced the live index with C before checkpoint. Both snapshots returned success and accepted C as final AFTER/checkpoint.",
+  "observedExternalCOverwritten": false,
+  "distinctContentLossClaimed": false,
+  "requestedBAndExternalCObjectsAvailable": true,
+  "programProvenance": {
+    "actualExecutedProgram": "tool stdin",
+    "retainedPROBEFile": "A note only; not the independently executed source program",
+    "independentlyExecutedProgramSHA256": null,
+    "qualification": "The retained note is not relabeled as source. Raw receipts and the two source observations are retained. Later versioned directed regression tests are separate executions and do not retroactively certify this stdin program."
+  },
+  "baselineBundle": {
+    "artifact": "frozen baseline Core bundle",
+    "sha256": "e7a51363a11a0f87395af5c763729d618c198164e3778c3bbed38a0da60e2329",
+    "verification": "Hash in raw probe receipt matched a direct read of the retained bundle during public projection"
+  },
+  "method": "Owned isolated Git fixtures. Official Git creates and observes synthetic A/B/C objects and private index semantics; native writer ran while index.lock was absent. Captured B AFTER is compared with C and the final journal/checkpoint; no Git results were mocked.",
+  "probes": [
+    {
+      "rawReceiptSHA256": "69b5eaa1a14c92b901ef5a7ac27c70891f84472b90f203a5940c899bd364a2ac",
+      "rawReceiptBytes": 3182,
+      "schema": 1,
+      "variant": "baseline-e8f",
+      "gitVersion": "git version 2.53.0.windows.2",
+      "before": {
+        "head": "d16e8f6396f9d18b4d2585516c100992c69f79ff",
+        "mainSHA256": "5b709d3d1faf7671a95043a01caa6a5bbbe48ef7f6f2c6c0f2fa004905cf4117",
+        "layerRef": "03ff2d455eeb7fc91b7438ae44a951cf2e6ca052",
+        "checkpoint": "d7e7c175b8c5dccac30b4f90610d0bfec31bac18",
+        "disk": "Requested staged B\n"
+      },
+      "expected": {
+        "committedA": {
+          "blob": "be557473f8e4cd6b7307912993732d4db9c65b97",
+          "tree": "d7e7c175b8c5dccac30b4f90610d0bfec31bac18",
+          "oid": "03ff2d455eeb7fc91b7438ae44a951cf2e6ca052",
+          "text": "Committed A\n"
+        },
+        "requestedStageB": {
+          "blob": "d79a5974ba19a5d95802e74c706089ca38942279",
+          "text": "Requested staged B\n"
+        },
+        "externalStageC": {
+          "blob": "ae068e80621f12b44e85aa819f082c6992253e3f",
+          "tree": "2215486d7061d66deb1f2a308f878d040f344cb7",
+          "oid": "956ffb781eec45d5c7206bf5c7897e7dc5b41671",
+          "text": "External native staged C\n"
+        }
+      },
+      "injected": true,
+      "atB": {
+        "privateSHA256": "5c1137f8a20f3e2377f538e62e91cff551364e87be13a9ed2f453617c2a716ea",
+        "indexBlob": "d79a5974ba19a5d95802e74c706089ca38942279",
+        "nativeIndexText": "Requested staged B",
+        "checkpoint": "d7e7c175b8c5dccac30b4f90610d0bfec31bac18",
+        "durableAfter": {
+          "hash": "5c1137f8a20f3e2377f538e62e91cff551364e87be13a9ed2f453617c2a716ea",
+          "mode": 438,
+          "exists": true
+        },
+        "nativeIndexLockPresent": false
+      },
+      "atC": {
+        "privateSHA256": "a635bc4366b81ded899af91f768341c9e00c653bfcb1a332c165b814840252e3",
+        "indexBlob": "ae068e80621f12b44e85aa819f082c6992253e3f",
+        "nativeIndexText": "External native staged C",
+        "checkpoint": "d7e7c175b8c5dccac30b4f90610d0bfec31bac18",
+        "nativeIndexLockPresent": false
+      },
+      "returned": {
+        "paths": [
+          "layer.txt"
+        ]
+      },
+      "after": {
+        "HEADPreserved": true,
+        "mainBytesPreserved": true,
+        "layerRef": "03ff2d455eeb7fc91b7438ae44a951cf2e6ca052",
+        "checkpoint": "2215486d7061d66deb1f2a308f878d040f344cb7",
+        "privateSHA256": "a635bc4366b81ded899af91f768341c9e00c653bfcb1a332c165b814840252e3",
+        "indexBlob": "ae068e80621f12b44e85aa819f082c6992253e3f",
+        "nativeIndexText": "External native staged C",
+        "disk": "Requested staged B\n",
+        "guardSafe": true,
+        "journalState": "completed",
+        "journalAfter": {
+          "hash": "a635bc4366b81ded899af91f768341c9e00c653bfcb1a332c165b814840252e3",
+          "mode": 438,
+          "exists": true
+        },
+        "requestedBObjectAvailable": true,
+        "externalCObjectAvailable": true,
+        "nativeIndexLockPresent": false
+      },
+      "sources": [
+        {
+          "path": "frozen e8f baseline core bundle",
+          "sha256": "e7a51363a11a0f87395af5c763729d618c198164e3778c3bbed38a0da60e2329"
+        }
+      ],
+      "mockedGitResults": false,
+      "nativeWriterRespectedIndexLock": true,
+      "observedExternalCOverwritten": false,
+      "distinctContentLossClaimed": false
+    },
+    {
+      "rawReceiptSHA256": "8db2fc640ed1027b776c048df6732fa2f582e92ac7b5ee92ff3e0a870736ec9b",
+      "rawReceiptBytes": 3569,
+      "schema": 1,
+      "variant": "frozen-v6",
+      "gitVersion": "git version 2.53.0.windows.2",
+      "before": {
+        "head": "d16e8f6396f9d18b4d2585516c100992c69f79ff",
+        "mainSHA256": "a34d08421c4b7cec2c44492bc7d5536f67fc8eceddf489b1586583095db64c6a",
+        "layerRef": "03ff2d455eeb7fc91b7438ae44a951cf2e6ca052",
+        "checkpoint": "d7e7c175b8c5dccac30b4f90610d0bfec31bac18",
+        "disk": "Requested staged B\n"
+      },
+      "expected": {
+        "committedA": {
+          "blob": "be557473f8e4cd6b7307912993732d4db9c65b97",
+          "tree": "d7e7c175b8c5dccac30b4f90610d0bfec31bac18",
+          "oid": "03ff2d455eeb7fc91b7438ae44a951cf2e6ca052",
+          "text": "Committed A\n"
+        },
+        "requestedStageB": {
+          "blob": "d79a5974ba19a5d95802e74c706089ca38942279",
+          "text": "Requested staged B\n"
+        },
+        "externalStageC": {
+          "blob": "ae068e80621f12b44e85aa819f082c6992253e3f",
+          "tree": "2215486d7061d66deb1f2a308f878d040f344cb7",
+          "oid": "956ffb781eec45d5c7206bf5c7897e7dc5b41671",
+          "text": "External native staged C\n"
+        }
+      },
+      "injected": true,
+      "atB": {
+        "privateSHA256": "d5065640829c19612ccf0bb8660639f34dcfde8073f877de1592c14b76cdd5a4",
+        "indexBlob": "d79a5974ba19a5d95802e74c706089ca38942279",
+        "nativeIndexText": "Requested staged B",
+        "checkpoint": "d7e7c175b8c5dccac30b4f90610d0bfec31bac18",
+        "durableAfter": {
+          "hash": "d5065640829c19612ccf0bb8660639f34dcfde8073f877de1592c14b76cdd5a4",
+          "mode": 438,
+          "exists": true
+        },
+        "nativeIndexLockPresent": false
+      },
+      "atC": {
+        "privateSHA256": "a635bc4366b81ded899af91f768341c9e00c653bfcb1a332c165b814840252e3",
+        "indexBlob": "ae068e80621f12b44e85aa819f082c6992253e3f",
+        "nativeIndexText": "External native staged C",
+        "checkpoint": "d7e7c175b8c5dccac30b4f90610d0bfec31bac18",
+        "nativeIndexLockPresent": false
+      },
+      "returned": {
+        "paths": [
+          "layer.txt"
+        ]
+      },
+      "after": {
+        "HEADPreserved": true,
+        "mainBytesPreserved": true,
+        "layerRef": "03ff2d455eeb7fc91b7438ae44a951cf2e6ca052",
+        "checkpoint": "2215486d7061d66deb1f2a308f878d040f344cb7",
+        "privateSHA256": "a635bc4366b81ded899af91f768341c9e00c653bfcb1a332c165b814840252e3",
+        "indexBlob": "ae068e80621f12b44e85aa819f082c6992253e3f",
+        "nativeIndexText": "External native staged C",
+        "disk": "Requested staged B\n",
+        "guardSafe": true,
+        "journalState": "completed",
+        "journalAfter": {
+          "hash": "a635bc4366b81ded899af91f768341c9e00c653bfcb1a332c165b814840252e3",
+          "mode": 438,
+          "exists": true
+        },
+        "requestedBObjectAvailable": true,
+        "externalCObjectAvailable": true,
+        "nativeIndexLockPresent": false
+      },
+      "sources": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "60014c58411cb4df2faaf9344274976b65b6275b65d7251ccf691e3a7195ce01"
+        },
+        {
+          "path": "src/core/index-stage.ts",
+          "sha256": "11c83a837dfc42c14d11809661870d29cbbf0cefc0f2c9eb5a90de795771457c"
+        },
+        {
+          "path": "src/core/storage.ts",
+          "sha256": "e5eb7b15a9015f1caaf0f0668c589e315adaeef8d8af4703fb4b8603750fe586"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "237592104e3ccc33752e758734b66885d3ac6d78b19876330726c172c707447c"
+        }
+      ],
+      "mockedGitResults": false,
+      "nativeWriterRespectedIndexLock": true,
+      "observedExternalCOverwritten": false,
+      "distinctContentLossClaimed": false
+    }
+  ],
+  "limitations": [
+    "Focused correctness reproductions, not full-suite results or performance benchmarks.",
+    "No independent whole-Core fingerprint is invented for the probe executions; only captured source or bundle hashes are asserted.",
+    "No observed overwrite or distinct staged-content loss is claimed.",
+    "The corrective directed tests and later complete validation campaigns have separate receipts and source snapshots."
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "schema": 1,
+  "kind": "closed-broad-v11-source-domains-and-environment",
+  "status": "PASS_SELECTED_MATRIX_CAMPAIGN",
+  "qualification": "One complete broad matrix on source c5f919. Counts are not pooled with failed broadV10, directed REC011 or the historical full V10 campaign. Native/environment coverage and product status remain separate.",
+  "startedAt": "2026-11-06T05:03:24.540Z",
+  "endedAt": "2026-11-06T05:29:51.189Z",
+  "innerStartedAt": "2026-11-06T05:03:25.245Z",
+  "innerEndedAt": "2026-11-06T05:29:26.081Z",
+  "innerDurationMs": 1560836,
+  "outerFunctionalSource": {
+    "count": 234,
+    "fingerprint": "c5f919feb2de4cb4ef81d6011dcf1193eca5441afcdb6023f065e202e61350fc",
+    "sourceUnchanged": true,
+    "projectComparisonUnchanged": true,
+    "coreCount": 22,
+    "coreFingerprint": "807ad17f66e41e3147792049797a48b56c919737734bbe2a847149a07909ee8b",
+    "archiveExact": true,
+    "archiveVerificationSHA256": "595a686176d1caafbd167590648c6f822b28932892b1d9e4f087f0bffc95ba13"
+  },
+  "innerDomains": {
+    "product": {
+      "count": 43,
+      "beforeFingerprint": "c5eca06ec0ff9ba4c4a78db9d4c4c995270d49c249ef191f17f3ba13cba2b1d7",
+      "afterFingerprint": "c5eca06ec0ff9ba4c4a78db9d4c4c995270d49c249ef191f17f3ba13cba2b1d7"
+    },
+    "runner": {
+      "count": 642,
+      "beforeFingerprint": "6b9a3e248b9720e320ce9a01f533f8e42ca6037b2aa955252a02e508bf912290",
+      "afterFingerprint": "6b9a3e248b9720e320ce9a01f533f8e42ca6037b2aa955252a02e508bf912290"
+    },
+    "archivedSourceManifest": {
+      "count": 685,
+      "fingerprint": "bf68fe232a70b27e8a167d5e1ea87b2856af75829dcd7ff3d5fad8a7d9155cbf",
+      "qualification": "Count/fingerprint of the inner snapshot manifest. No new physical rehash of all685 inner files is claimed here; the outer234 archive was independently verified."
+    }
+  },
+  "selection": {
+    "selectedVariants": 361,
+    "totalVariants": 386,
+    "totalScenarioIds": 358,
+    "notRunOutsideSelection": 25,
+    "notSelected": 5,
+    "outOfScope": 20
+  },
+  "execution": {
+    "PASS": 355,
+    "FAIL": 0,
+    "ENV_BLOCKED": 6,
+    "NOT_RUN": 25
+  },
+  "product": {
+    "DOCUMENTED_RESTRICTION": 27,
+    "NOT_ASSESSED": 288,
+    "PENDING_PRODUCT_SPEC": 12,
+    "PRODUCT_GAP": 1,
+    "VERIFIED_SUPPORTED": 58
+  },
+  "sourceUnchanged": true,
+  "runnerUnchanged": true,
+  "commands": {
+    "recordedCommandInvocations": 13081,
+    "rawSummaryField": "counts.processes",
+    "definition": "Sum of retained case commands arrays. This is neither an independently observed count of all OS descendant processes nor a physical process-tree census."
+  },
+  "environmentBlocked": [
+    {
+      "scenario": "INDEX-018",
+      "variant": "native-advanced",
+      "scope": "OFFICIAL_GIT_HEADLESS",
+      "phase": "NATIVE_BASELINE",
+      "selection": "SELECTED",
+      "implementation": "IMPLEMENTED",
+      "product": "NOT_ASSESSED",
+      "reason": "Effective Git add -h does not advertise --resolved; the resolved-staging operation was not executed.",
+      "limits": []
+    },
+    {
+      "scenario": "BRANCH-015",
+      "variant": "native-advanced",
+      "scope": "OFFICIAL_GIT_HEADLESS",
+      "phase": "NATIVE_BASELINE",
+      "selection": "SELECTED",
+      "implementation": "IMPLEMENTED",
+      "product": "NOT_ASSESSED",
+      "reason": "Effective Git branch does not advertise --delete-merged; no deletion operation was certified.",
+      "limits": []
+    },
+    {
+      "scenario": "REWRITE-015",
+      "variant": "native-advanced",
+      "scope": "OFFICIAL_GIT_HEADLESS",
+      "phase": "NATIVE_BASELINE",
+      "selection": "SELECTED",
+      "implementation": "IMPLEMENTED",
+      "product": "NOT_ASSESSED",
+      "reason": "Official history builtin absent from effective Git --list-cmds=builtins; no external git-history was launched.",
+      "limits": []
+    },
+    {
+      "scenario": "REMOTE-014",
+      "variant": "native-advanced",
+      "scope": "OFFICIAL_GIT_HEADLESS",
+      "phase": "NATIVE_BASELINE",
+      "selection": "SELECTED",
+      "implementation": "IMPLEMENTED",
+      "product": "NOT_ASSESSED",
+      "reason": "Official url-parse builtin absent in this Git; URL transport behavior is not inferred from help or a third-party parser.",
+      "limits": []
+    },
+    {
+      "scenario": "PROTO-007",
+      "variant": "native",
+      "scope": "OFFICIAL_GIT_HEADLESS",
+      "phase": "NATIVE_BASELINE",
+      "selection": "SELECTED",
+      "implementation": "IMPLEMENTED",
+      "product": "NOT_ASSESSED",
+      "reason": "git-shell is absent from the effective Git installation; inspected <ABSOLUTE_PATH>",
+      "limits": [
+        "No git-shell command was functionally executed; availability probe is not a shell compatibility PASS."
+      ]
+    },
+    {
+      "scenario": "TOOLS-003",
+      "variant": "legacy-transport",
+      "scope": "OFFICIAL_GIT_HEADLESS",
+      "phase": "NATIVE_BASELINE",
+      "selection": "SELECTED",
+      "implementation": "IMPLEMENTED",
+      "product": "NOT_ASSESSED",
+      "reason": "Gitweb CGI is absent from the effective official installation default and fixture-configured paths; isolated PATH daemon probes are recorded. No browser or server was started. This does not assert absence everywhere on the host.",
+      "limits": []
+    }
+  ],
+  "retainedEvidence": {
+    "outerPhase": {
+      "file": "VALIDATION-BROAD-V11.json",
+      "bytes": 3873,
+      "sha256": "1eab6a0cc22c33cdbc88f0cc687a5744f414526b0295edd5adf4d405a7bafd7c"
+    },
+    "outerRawResult": {
+      "bytes": 2949,
+      "sha256": "e88c8fc0ad29250b8103f2c5d0db21b466ef41ceb2bb64a741910cddad5ad086"
+    },
+    "outerRawSourceManifest": {
+      "bytes": 40029,
+      "sha256": "21063f39bb36a0ad9f83eb6fc1991c9cd1bb4db42582c01c1e41193df5a150b6"
+    },
+    "outerRawAfterManifest": {
+      "bytes": 40029,
+      "sha256": "21063f39bb36a0ad9f83eb6fc1991c9cd1bb4db42582c01c1e41193df5a150b6"
+    },
+    "rawSummary": {
+      "bytes": 1902,
+      "sha256": "13baaa7754dbf3c933fabc709f9abd3c4ee958fdf113e5f6172043be3432be3e"
+    },
+    "rawResults": {
+      "bytes": 21922096,
+      "sha256": "f2fa05dfec75f409cc72c8b04b49dea5628ae39a1a2170c77fd79aa10f1cb335"
+    },
+    "baselineBefore": {
+      "bytes": 132947,
+      "sha256": "ece316d84cd9774364b4dea90d25dba8103b9768d4942dc87fbc2c9d5f1112f3"
+    },
+    "baselineAfter": {
+      "bytes": 132947,
+      "sha256": "e20d355e552a7ce2ad8ed2413e0345d5b93dde05f374008f1c5c1d6a2d51c66c"
+    },
+    "innerSourceManifest": {
+      "bytes": 122883,
+      "sha256": "ec4e39c20ff0821e78653ccdc85391427a3f886db9bfe931d8eb5f042eb651d8"
+    }
+  },
+  "limits": [
+    "The historical full V10 PASS remains bound to fingerprint1c0646; equivalence/source-transition proof is a separate artifact.",
+    "All raw assertion expected/observed values, process IDs, host file identities and private paths remain external.",
+    "Environment blocked operations were not certified as executed features."
+  ],
+  "published": false
+}

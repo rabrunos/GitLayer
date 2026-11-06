@@ -1,0 +1,306 @@
+{
+  "schema": 1,
+  "status": "CONFIRMED_PRODUCT_DEFECT_PRE_CORRECTION",
+  "at": "2026-11-05T22:28:24.168Z",
+  "scope": "One isolated functional counterexample, not benchmark or full-suite certification; pre-correction Core672b71; only private extracted file changed after successful official checkout and before first Core fingerprint.",
+  "source": {
+    "coreValidatorTupleFingerprint": "672b71a890b5bd58b089bb567763dba3c432ac1f08ca020c45d6a3b9ef4f204d",
+    "coreFiles": [
+      {
+        "path": "src/core/activation-source.ts",
+        "sha256": "2c23041892b4ce9baf04be9ce7e83d1f193832c9f02a44283e904643a35dee0f"
+      },
+      {
+        "path": "src/core/branch-protection.ts",
+        "sha256": "530fe59190262f3256f89e23c3e9c32d71f108deec9360928c15f9ff8ff6c74d"
+      },
+      {
+        "path": "src/core/demo.ts",
+        "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+      },
+      {
+        "path": "src/core/disposable-projection.ts",
+        "sha256": "fe6758e3a0845b4843d377226d6185320b31da883d8532b4da88d55ce1d2e4a7"
+      },
+      {
+        "path": "src/core/editing-boundary.ts",
+        "sha256": "a8c8cf1cf27770949d611e6315dff50924ba5a06fd1dd6f02dd7d089c5aa60a3"
+      },
+      {
+        "path": "src/core/errors.ts",
+        "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+      },
+      {
+        "path": "src/core/git.ts",
+        "sha256": "82ed40225a58db144545b54d1106725c78abfb7c883762f1d773c179bad08e1a"
+      },
+      {
+        "path": "src/core/ignore.ts",
+        "sha256": "3d0fa49bae842dfeed7e45f5f934509b8e40bc064e2b3832789868d2981f524b"
+      },
+      {
+        "path": "src/core/index-query.ts",
+        "sha256": "f568c40d00e6987268b9e7b0994772707b52a6c71b99408f19fffa73f9d375b1"
+      },
+      {
+        "path": "src/core/index-stage.ts",
+        "sha256": "4eedf629827638b13fe5a59dc297344d2d9ee713433cafd81f7c73383e994479"
+      },
+      {
+        "path": "src/core/index-timestamp.ts",
+        "sha256": "da53966085085d11d9884703f1b5f7c41278c7e921703da268e123f18b4f1812"
+      },
+      {
+        "path": "src/core/index.ts",
+        "sha256": "9194a3c15d5a051d427f6ee33679fb96c3236c96c497b765133b568b8204bcc9"
+      },
+      {
+        "path": "src/core/layer-rename.ts",
+        "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+      },
+      {
+        "path": "src/core/layout.ts",
+        "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+      },
+      {
+        "path": "src/core/ownership-state.ts",
+        "sha256": "4686ed8a7613600fbba4eff9324067e4baf64ab56b7b508651c5a039ca9263f8"
+      },
+      {
+        "path": "src/core/paths.ts",
+        "sha256": "fa2805119dbc0eaff7e16b568ef89d5577a11cbdd395c663e4908cd9a41f0d65"
+      },
+      {
+        "path": "src/core/platform.ts",
+        "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+      },
+      {
+        "path": "src/core/publication.ts",
+        "sha256": "0d011234aba15ef71bb8bbb1e531b4577424cf7cedb6893aa0ce3eda83c28c8e"
+      },
+      {
+        "path": "src/core/recovery.ts",
+        "sha256": "adebf31ba417f7b558c9d0fa40858c22bc616c075732fe3a015da353201c1444"
+      },
+      {
+        "path": "src/core/rescue.ts",
+        "sha256": "f94f17cb4eb76afd7167657dacb3a85b915d33d617402cc943fadf78b4c979c1"
+      },
+      {
+        "path": "src/core/storage.ts",
+        "sha256": "283f77a7d2bca9b7e02b62597712d5bc8997d677dc084ebdcc70defd5ea09c4e"
+      }
+    ],
+    "actualExecutedProbeProgram": {
+      "file": "probe-materialized-before-fingerprint.mjs",
+      "bytes": 9260,
+      "sha256": "85765cd247d897e8afefac1332e4e2e4124052ac7ccffca9d22864c29ff7bcc4"
+    },
+    "officialGitExecutableSha256": "37c5725818d602e951ba2563b870d62763322956b73373da4c33a0b566a80bc9",
+    "sourceUnchangedDuringProbe": true
+  },
+  "trigger": {
+    "checkout": {
+      "at": "2026-11-05T22:22:50.776Z",
+      "code": 0,
+      "signal": null,
+      "executable": "<OFFICIAL_GIT>",
+      "prefix": "--prefix=<FIXTURE>/repo/.git/layers/transactions/95aef49b-ef65-4e1c-8b2c-08d2babe96cc/materialized/",
+      "source": "<FIXTURE>\\repo\\.git\\layers\\transactions\\95aef49b-ef65-4e1c-8b2c-08d2babe96cc\\materialized\\payload.bin",
+      "beforeHash": "0b57f7f67b0c198978ab11c21426f5303664d04fde5b98f28509c24566816986",
+      "beforeHex": "004141410d0aff01",
+      "afterHash": "6337f2e56e3d79a99cfbab323d3608b6713cbf31a29bf5b911e4dcc9eb898bd8",
+      "afterHex": "004343430d0aff01",
+      "injection": "AFTER genuine child close(code0), synchronously BEFORE Core Git close-handler resolves and BEFORE first materialized-file fingerprint"
+    },
+    "firstMaterializedSourceFingerprintOpen": {
+      "at": "2026-11-05T22:22:50.849Z",
+      "injectedAlready": true,
+      "sourceHex": "004343430d0aff01",
+      "flags": 0
+    },
+    "AHex": "004141410d0aff01",
+    "CHex": "004343430d0aff01",
+    "injectedExactlyOnce": true,
+    "injectionBoundary": "The genuine official child close(code0,signalnull) fires; its synchronous prepended observer verifies physicalA and overwrites that private file withC before Core Git close-handler resolves. The next first Core source open observesC. No fake Git output or target-workspace replacement."
+  },
+  "observed": {
+    "on": {
+      "success": true,
+      "state": "active",
+      "name": "a"
+    },
+    "before": {
+      "head": "40da6234485c02dd1aa2000bb5521b30925d0687\n",
+      "heads": "refs/heads/layer/a 59548c89e7c838a9e43feffb38b3bc92a2918b42\nrefs/heads/main 40da6234485c02dd1aa2000bb5521b30925d0687\n",
+      "mainIndexHash": "765a268f94526bbf8300fd1c5a95763e60873e23bb08ba3596a245e98c9aef0b",
+      "privateIndexHash": "c59afb98395c0271d39498892386da62371d0f274ddd0976860a3642d1761372",
+      "committedHex": "004141410d0aff01",
+      "indexedHex": "004141410d0aff01",
+      "checkpoint": "7c13ef1c0c481d096479c2b02ac714e2a47d0db8\n"
+    },
+    "after": {
+      "head": "40da6234485c02dd1aa2000bb5521b30925d0687\n",
+      "heads": "refs/heads/layer/a 59548c89e7c838a9e43feffb38b3bc92a2918b42\nrefs/heads/main 40da6234485c02dd1aa2000bb5521b30925d0687\n",
+      "mainIndexHash": "765a268f94526bbf8300fd1c5a95763e60873e23bb08ba3596a245e98c9aef0b",
+      "privateIndexHash": "c59afb98395c0271d39498892386da62371d0f274ddd0976860a3642d1761372",
+      "committedHex": "004141410d0aff01",
+      "indexedHex": "004141410d0aff01",
+      "checkpoint": "7c13ef1c0c481d096479c2b02ac714e2a47d0db8\n",
+      "diskExists": true,
+      "diskHex": "004343430d0aff01",
+      "sourceStillExists": false,
+      "status": {
+        "safe": true,
+        "error": null,
+        "layer": {
+          "state": "active",
+          "staged": [],
+          "unstaged": [
+            {
+              "status": "M",
+              "path": "payload.bin"
+            }
+          ]
+        }
+      }
+    },
+    "journals": [
+      {
+        "kind": "activate",
+        "state": "completed",
+        "sha256": "ba7d6bbd18dbc08386eb1b2a237f3a17f5f63a470c927f3ef794d4647fcf2245",
+        "targetAfter": {
+          "exists": true,
+          "hash": "6337f2e56e3d79a99cfbab323d3608b6713cbf31a29bf5b911e4dcc9eb898bd8",
+          "mode": 438
+        }
+      },
+      {
+        "kind": "register",
+        "state": "completed",
+        "sha256": "07266c7bb0a6a7400800c35c498c733bdca85c195a04e183c05ef24e6965283f",
+        "targetAfter": null
+      }
+    ],
+    "officialBlobs": {
+      "committed": "172040551c2e5d2d29cb5a00373b7ac95121cda6",
+      "indexed": "172040551c2e5d2d29cb5a00373b7ac95121cda6",
+      "workspace": "fb5b1e6c3848333a709d3d77068dec0fc27fc9e7"
+    },
+    "committedAndIndexedRemainA": true,
+    "workspaceIsDistinctC": true,
+    "HEADHeadsMainAndPrivateIndexBytesPreserved": true,
+    "statusSafe": true
+  },
+  "actualOfficialGitOracleCommands": [
+    {
+      "executable": "<OFFICIAL_GIT>",
+      "argv": [
+        "rev-parse",
+        "refs/heads/layer/a:payload.bin"
+      ],
+      "alternateIndex": null,
+      "exitCode": 0,
+      "stdout": "172040551c2e5d2d29cb5a00373b7ac95121cda6",
+      "stderr": ""
+    },
+    {
+      "executable": "<OFFICIAL_GIT>",
+      "argv": [
+        "rev-parse",
+        ":payload.bin"
+      ],
+      "alternateIndex": "<FIXTURE>\\repo\\.git\\layers\\indexes\\16b18e56-f06f-4038-aa08-a0995faa034b.index",
+      "exitCode": 0,
+      "stdout": "172040551c2e5d2d29cb5a00373b7ac95121cda6",
+      "stderr": ""
+    },
+    {
+      "executable": "<OFFICIAL_GIT>",
+      "argv": [
+        "hash-object",
+        "--no-filters",
+        "--",
+        "payload.bin"
+      ],
+      "alternateIndex": null,
+      "exitCode": 0,
+      "stdout": "fb5b1e6c3848333a709d3d77068dec0fc27fc9e7",
+      "stderr": ""
+    }
+  ],
+  "rawEvidence": [
+    {
+      "file": "MATERIALIZED-BEFORE-FINGERPRINT-REPRO.json",
+      "bytes": 13757,
+      "sha256": "13970e814eb19f52c453093e0991e9515653570eccc4bd4b0108d6da48a65f80"
+    },
+    {
+      "file": "MATERIALIZED-BEFORE-FINGERPRINT-ORACLES.json",
+      "bytes": 1609,
+      "sha256": "1cc257291731cc0b1f22ba7346bd6ca5f83c59e33f24aec07c04f25e0476b0f7"
+    },
+    {
+      "file": "MATERIALIZED-SOURCE-EXECUTION-RECEIPT.json",
+      "bytes": 2769,
+      "sha256": "7e483f5cf416d39782bb6d211afd5a1d4e6c47930b262367b9ee904176569e6e"
+    },
+    {
+      "file": "MATERIALIZED-SOURCE-LOADER-TRANSCRIPT.txt",
+      "bytes": 1152,
+      "sha256": "c70371195a4c765b8018fc17dfb56498c72ce62f93f0cd981fc90d146a5bd6b7"
+    }
+  ],
+  "execution": {
+    "actualProbeExitCode": 0,
+    "actualOracleAddendumExitCode": 0,
+    "actualExecutedVerifierProgram": {
+      "file": "verify-materialization-probe-oracles-v2.mjs",
+      "bytes": 3320,
+      "sha256": "5d50bfc05979185b173e68095b66082357323df415174f9cea9523d9acc35978"
+    },
+    "initialLoaderAttempt": {
+      "exitCode": 1,
+      "error": "ERR_UNSUPPORTED_ESM_URL_SCHEME",
+      "programLoaded": false,
+      "fixtureCreated": false,
+      "normalizedCommand": [
+        "node",
+        "--import",
+        "<PROJECT>\\node_modules\\tsx\\dist\\loader.mjs",
+        "<ARTIFACT>\\probe-materialized-before-fingerprint.mjs",
+        "<PROJECT>"
+      ]
+    },
+    "successfulProbeNormalizedCommand": [
+      "node",
+      "--import",
+      "<PROJECT_URL>/node_modules/tsx/dist/loader.mjs",
+      "<ARTIFACT>\\probe-materialized-before-fingerprint.mjs",
+      "<PROJECT>"
+    ],
+    "failedOracleEnvironmentAttempt": {
+      "exitCode": 1,
+      "error": "EEXIST existing home/hooks",
+      "gitQueriesExecuted": 0,
+      "newFixtureCreated": false
+    },
+    "logProvenance": "Loader stderr is a posthoc transcription of actual tool-captured output, not a byte-identical redirected raw stream; executed program files and raw JSON results are retained and hashed."
+  },
+  "controlFlowAtObservedSource": {
+    "file": "src/core/index.ts",
+    "materializeLine": 391,
+    "writeCopyLines": [
+      122,
+      128
+    ],
+    "gap": "After checkout, copy/ref/index verification precedes the FIRST extracted-file hash. That observedC hash becomes sourceHash. Copy/publication later verifies consistency withC but never compares its bytes to the bound Git blobOID. Existing tests cover source edits only after materialize returns."
+  },
+  "limitations": [
+    "This is a before-first-fingerprint source-binding defect, distinct from already documented final-check/existing-destination CAS windows.",
+    "Binary bytes include NUL, core.autocrlf=false, no external filters/encoding/ident; official Git confirms different blob OIDs, not merely benign EOL conversion.",
+    "Core.on returned active and status.safe=true but unstagedM exposesC afterward; safe does not mean clean. No commit was created forC and A/staging remained unchanged.",
+    "No source/runtime/Markdown/benchmark dataset was changed by this reproduction. The fixture/raw journals/programs are preserved externally; subsequent correction and functional validation are separate work."
+  ]
+}

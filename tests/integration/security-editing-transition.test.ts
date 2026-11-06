@@ -66,7 +66,7 @@ async function fixture(t: TestContext) {
     } finally {
       for (const key of Object.keys(process.env)) delete process.env[key];
       Object.assign(process.env, previous);
-      if (!evidenceRoot) cleanupFixture(owned);
+      if (!evidenceRoot) { if (process.env.GL_SECURITY_KEEP_FIXTURES === '1' || process.env.GL_STAGE2_PRESERVE_FIXTURES === '1') t.diagnostic(JSON.stringify({ kind: 'fixture-cleanup-skipped', test: t.name, root: owned.root, nonce: owned.nonce, cleanupSkipped: true, policy: 'GL_SECURITY_KEEP_FIXTURES=1 or GL_STAGE2_PRESERVE_FIXTURES=1; original owned fixture location; current filesystem state not reverified here' })); else cleanupFixture(owned); }
     }
   });
   return { get app() { return app; }, repo, env, write, read, git, domain, workspace, coherent, external, externalWrite, record, reopen };

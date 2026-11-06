@@ -7,12 +7,27 @@ import { compareManifests, fileManifest, manifestFingerprint, unchanged } from '
 import { externalFixtureParent, validateFixtureParent } from './git-compat/fixture-parent.mjs';
 import { validateOutputRoot } from './git-compat/output-root.mjs';
 
-export const phases = Object.freeze(['focus', 'full', 'infra', 'broad', 'typecheck', 'build', 'smoke']);
-const usage = 'node scripts/validate-performance-recovery.mjs --phase focus|full|infra|broad|typecheck|build|smoke --out NEW_EXTERNAL_DIRECTORY [--fixture-parent EXISTING_EXTERNAL_DIRECTORY]';
+export const phases = Object.freeze(['focus', 'full', 'infra', 'broad', 'typecheck', 'build', 'smoke', 'scale']);
+const usage = 'node scripts/validate-performance-recovery.mjs --phase scale|focus|full|infra|broad|typecheck|build|smoke --out NEW_EXTERNAL_DIRECTORY [--fixture-parent EXISTING_EXTERNAL_DIRECTORY]';
 const testFlags = concurrency => ['--test', '--test-concurrency=' + concurrency, '--test-timeout=900000', '--test-reporter=spec', '--test-reporter-destination=stdout', '--test-reporter=tap', '--test-reporter-destination=stderr'];
 
 export function phaseCommand(phase, out) {
   const focus = [
+    'tests/integration/checkpoint-symref.test.ts',
+    'tests/integration/git-ref.test.ts',
+    'tests/integration/materialized-source.test.ts',
+    'tests/integration/storage-git-blob.test.ts',
+    'tests/integration/git-stdout-consumer.test.ts',
+    'tests/integration/storage-buffer.test.mjs',
+    'tests/unit/publication.test.ts',
+    'tests/unit/disposable-projection.test.ts',
+    'tests/integration/initial-index-publication.test.ts',
+    'tests/integration/managed-stage-boundary.test.ts',
+    'tests/integration/activation-frontier.test.ts',
+    'tests/integration/scale-copy-failures.test.ts',
+    'tests/integration/scale-journal.test.ts',
+    'tests/integration/scale-refs.test.ts',
+    'tests/integration/publication-race.test.ts',
     'tests/unit/performance-validation.test.mjs',
     'tests/unit/assert-bytes.test.ts',
     'tests/integration/index-query.test.ts',
@@ -37,10 +52,29 @@ export function phaseCommand(phase, out) {
     'tests/integration/security-protection.test.ts',
   ];
   const commands = {
+    scale: { argv: ['--import', 'tsx', ...testFlags(2),
+      'tests/integration/checkpoint-symref.test.ts',
+      'tests/integration/git-ref.test.ts',
+      'tests/integration/materialized-source.test.ts',
+      'tests/integration/storage-git-blob.test.ts',
+      'tests/integration/git-stdout-consumer.test.ts',
+      'tests/integration/storage-buffer.test.mjs',
+      'tests/unit/performance-validation.test.mjs',
+      'tests/unit/paths.test.ts',
+      'tests/unit/publication.test.ts', 'tests/unit/disposable-projection.test.ts',
+      'tests/integration/initial-index-publication.test.ts',
+      'tests/integration/managed-stage-boundary.test.ts',
+      'tests/integration/activation-frontier.test.ts', 'tests/integration/scale-copy-failures.test.ts',
+      'tests/integration/publication-race.test.ts',
+      'tests/integration/scale-journal.test.ts', 'tests/integration/scale-refs.test.ts',
+      'tests/integration/performance-journal.test.ts', 'tests/integration/performance-journal-recovery.test.ts',
+      'tests/integration/performance-streaming.test.ts', 'tests/integration/deactivation-concurrency.test.ts',
+      'tests/integration/recovery-index-timestamp.test.ts',
+    ], timeoutMs: 60 * 60 * 1000, nodeTest: true, scope: 'Stage 2B directed integrity/durability gate; remaining 1B/2 regressions run in the separate full headless campaign.' },
     focus: { argv: ['--import', 'tsx', ...testFlags(2), ...focus], timeoutMs: 2 * 60 * 60 * 1000, nodeTest: true, scope: 'Directed performance/recovery, R-02/R-03 and selected D-01/D-02/D-03/D-04 regressions; full runs the remaining tests.' },
     full: { argv: ['--import', 'tsx', ...testFlags(2), 'tests/unit/*.test.ts', 'tests/unit/*.test.mjs', 'tests/integration/*.test.ts', 'tests/integration/*.test.mjs'], timeoutMs: 3 * 60 * 60 * 1000, nodeTest: true, npmEquivalent: 'npm.cmd test', scope: 'Same corpus, concurrency and per-test timeout as package.json test; adds spec/TAP evidence reporters.' },
     infra: { argv: [...testFlags(1), 'tests/git-compat/infra/*.test.mjs'], timeoutMs: 30 * 60 * 1000, nodeTest: true, npmEquivalent: 'npm.cmd run compat:infra', scope: 'Same infrastructure corpus and concurrency as package.json compat:infra; explicit per-test budget and evidence reporters.' },
-    broad: { argv: ['scripts/git-compat/runner.mjs', '--suite', 'broad', '--jobs', '2', '--seed', '20261104', '--out', path.join(out, 'matrix')], timeoutMs: 3 * 60 * 60 * 1000, scope: 'Broad compatibility matrix; its selected, executed and environment-blocked counts remain separate from headless tests.' },
+    broad: { argv: ['scripts/git-compat/runner.mjs', '--suite', 'broad', '--jobs', '2', '--seed', '20261105', '--out', path.join(out, 'matrix')], timeoutMs: 3 * 60 * 60 * 1000, scope: 'Broad compatibility matrix; its selected, executed and environment-blocked counts remain separate from headless tests.' },
     typecheck: { argv: ['node_modules/typescript/bin/tsc', '--noEmit'], timeoutMs: 120000, npmEquivalent: 'npm.cmd run typecheck' },
     build: { argv: ['scripts/build-core.mjs'], timeoutMs: 120000, npmEquivalent: 'npm.cmd run build:core', scope: 'Independent Core/CLI build in dist-core; no desktop build.' },
     smoke: { argv: ['scripts/smoke-core-cli.mjs', '--out', path.join(out, 'smoke')], timeoutMs: 30 * 60 * 1000, scope: 'Compiled, relocated Core/CLI smoke; not a full suite. The smoke also invokes the independent build.' },

@@ -7,6 +7,7 @@ import { execFileSync } from 'node:child_process';
 import test, { type TestContext } from 'node:test';
 import { GitLayers } from '../../src/core/index.js';
 import { Transaction } from '../../src/core/storage.js';
+import { readJournal, writeJournalFixture } from '../helpers/read-journal.js';
 import { createFixture, cleanupFixture, isolatedEnvironment, resolveGit } from '../../scripts/git-compat/lib.mjs';
 
 const officialGit = resolveGit();
@@ -451,7 +452,7 @@ function ackRaw(file: string): AckRaw {
 function ackWorkspace(f: AckFixture): any { return JSON.parse(fs.readFileSync(path.join(f.app.dir, 'workspace.json'), 'utf8')); }
 function ackJournals(f: AckFixture): Map<string, any> {
   const directory = path.join(f.app.dir, 'transactions');
-  return new Map(fs.readdirSync(directory).sort().map(id => [id, JSON.parse(fs.readFileSync(path.join(directory, id, 'journal.json'), 'utf8'))]));
+  return new Map(fs.readdirSync(directory).sort().map(id => [id, readJournal(path.join(directory, id, 'journal.json'))]));
 }
 function ackRefs(f: AckFixture): Map<string, string> { return new Map(f.git(['for-each-ref', '--format=%(refname) %(objectname)']).split('\n').filter(Boolean).map(line => line.split(' ') as [string, string])); }
 function ackBackupInventory(f: AckFixture): Record<string, unknown> {
@@ -541,7 +542,7 @@ test('D01 acknowledgement revocation survives a synthetic finish EIO rollback', 
     Transaction.prototype.finish = async function () {
       if (!fired && ackOwnTransaction(f, this, 'editing-sync')) {
         fired = true; assert(!ackWorkspace(f).acknowledgedMissing.includes('a.txt'));
-        const durable = JSON.parse(fs.readFileSync(path.join(this.dir, 'journal.json'), 'utf8'));
+        const durable = readJournal(path.join(this.dir, 'journal.json'));
         assert.deepEqual(durable.recovery.acknowledgements, { revoked: ['a.txt'], pending: [] });
         ackRealRename(f); throw ackSyntheticEio('finish after workspace publication');
       }
@@ -626,7 +627,7 @@ test('D01 acknowledgement pending observation survives synthetic completion pers
     const originalRecord = Transaction.prototype.record, originalFail = Transaction.prototype.fail; let fired = false, failFired = false, selected = '';
     Transaction.prototype.record = async function (step, details) {
       if (!fired && ackOwnTransaction(f, this, 'stage-base') && step === 'acknowledgement-observation-completed') {
-        fired = true; selected = this.id; const durable = JSON.parse(fs.readFileSync(path.join(this.dir, 'journal.json'), 'utf8'));
+        fired = true; selected = this.id; const durable = readJournal(path.join(this.dir, 'journal.json'));
         assert.deepEqual(durable.recovery.acknowledgements, { revoked: [], pending: ['a.txt'] }); assert(durable.steps.some((entry: any) => entry.step === 'acknowledgement-observation-pending'));
         assert(!durable.steps.some((entry: any) => entry.step === 'acknowledgement-observation-completed')); assert.deepEqual(this.data.recovery.acknowledgements, { revoked: ['a.txt'], pending: [] });
         ackRealRename(f); throw ackSyntheticEio('completed observation record unavailable');
@@ -664,7 +665,7 @@ test('D01 acknowledgement malformed recovery plans refuse before any write', { t
       ['missing original workspace plan', data => { data.recovery.files = data.recovery.files.filter((item: any) => item.path !== path.join(f.app.dir, 'workspace.json')); }],
     ];
     for (const [label, poison] of poisons) {
-      const data = JSON.parse(originalBytes.toString('utf8')); poison(data); fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
+      const data = JSON.parse(originalBytes.toString('utf8')); poison(data); writeJournalFixture(file, data);
       const independent = ackSnapshot(f, 'before invalid recovery: ' + label), metadata = inventory(f.app.dir);
       await assert.rejects(f.app.recover(), { code: 'RECOVERY_INVALID' });
       assert.deepEqual(ackSnapshot(f, 'after invalid recovery: ' + label), independent); assert.deepEqual(inventory(f.app.dir), metadata, 'Validation failure precedes every metadata or backup write');
@@ -871,14 +872,14 @@ test('D01 materialization interruption preserves revoked authority across recove
       const materializationPath = (details as { path?: string } | undefined)?.path;
       if (!fired && ackOwnTransaction(f, this, 'activate') && physicalGap && step === 'write-completed' && materializationPath === path.join(f.repo, 'a.txt')) {
         fired = true; selected = this.id; assert(fs.existsSync(path.join(f.repo, 'a.txt')));
-        const durable = JSON.parse(fs.readFileSync(path.join(this.dir, 'journal.json'), 'utf8')), entry = durable.recovery.files.find((item: any) => item.path === path.join(f.repo, 'a.txt'));
+        const durable = readJournal(path.join(this.dir, 'journal.json')), entry = durable.recovery.files.find((item: any) => item.path === path.join(f.repo, 'a.txt'));
         assert.equal(entry.before.exists, false); assert.equal(entry.after, undefined); assert(durable.recovery.acknowledgements.pending.includes('a.txt'));
         throw ackSyntheticEio('fixture-only missing physical publication fingerprint');
       }
       await originalRecord.call(this, step, details);
       if (!fired && ackOwnTransaction(f, this, 'activate') && materializationPath === 'a.txt' && (phase === 'pending-durable' && step === 'acknowledgement-materialization-pending' || phase === 'completed-EIO' && step === 'acknowledgement-materialization-completed')) {
         fired = true; selected = this.id;
-        const durable = JSON.parse(fs.readFileSync(path.join(this.dir, 'journal.json'), 'utf8'));
+        const durable = readJournal(path.join(this.dir, 'journal.json'));
         assert(durable.steps.some((entry: any) => entry.step === step && entry.details.path === 'a.txt'));
         if (phase === 'pending-durable') { assert(!fs.existsSync(path.join(f.repo, 'a.txt'))); assert(durable.recovery.acknowledgements.pending.includes('a.txt')); throw new LabError('INJECTED_FAILURE', 'Fixture-only interruption after durable pending and before publication'); }
         assert.equal(f.read('a.txt'), 'a A\n'); assert(durable.recovery.acknowledgements.revoked.includes('a.txt')); throw ackSyntheticEio('materialization completed durably');
@@ -960,7 +961,7 @@ test('D01 materialization recovery refuses legacy authority beside known bytes',
     assert(fired); const journal = ackNewJournal(f, before, 'activate'), file = path.join(f.app.dir, 'transactions', journal.id, 'journal.json'), originalBytes = fs.readFileSync(file), backup = ackOriginalWorkspaceBackup(f, journal, before);
     assert(journal.recovery.acknowledgements.revoked.includes('a.txt')); assert.equal(journal.recovery.files.find((item: any) => item.path === path.join(f.repo, 'a.txt')).after.exists, true);
     if (physical === 'recorded-after-present') ackRealRename(f);
-    const legacy = JSON.parse(originalBytes.toString('utf8')); delete legacy.recovery.acknowledgements;
+    const legacy = readJournal(file); delete legacy.recovery.acknowledgements;
     fs.writeFileSync(file, JSON.stringify(legacy, null, 2) + '\n');
     const legacyBefore = ackSnapshot(f, 'before legacy recovery refusal ' + physical), legacyMetadata = inventory(f.app.dir);
     await assert.rejects(f.app.recover(), (error: any) => { assert.equal(error.code, 'RECOVERY_CONFLICT'); assert.equal(error.details?.reason, physical === 'recorded-after-present' ? 'workspace-materialization-disappeared' : 'acknowledged-materialization-without-revocation'); const proof = error.details.paths.find((item: any) => item.path === 'a.txt'); assert(proof); assert.equal(proof.recordedAfterPresent, true); assert.equal(proof.present, physical !== 'recorded-after-present'); return true; });

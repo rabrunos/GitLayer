@@ -1,0 +1,355 @@
+{
+  "schema": 1,
+  "status": "OBSERVED_NATIVE_PREPARED_REF_BEHAVIOR",
+  "scope": "Closed isolated native Git prototype; no Core import, product regression certification, benchmark or complete-suite approval.",
+  "environment": {
+    "gitVersion": "git version 2.53.0.windows.2",
+    "executedPlatform": "Windows",
+    "refBackendScope": "The installed fixture Git backend only; no certification of other backends or operating systems."
+  },
+  "fixture": {
+    "exclusiveOwnedExternalFixture": true,
+    "markerParentVerifiedByProgram": true,
+    "markerNonceRetainedPrivately": true,
+    "originalFixtureAndHistoriesRetained": true,
+    "V3UsesExistingOwnedRepositoryAndNewIsolatedHome": "environment-v3",
+    "noExternalRepositoriesOrRemotes": true
+  },
+  "campaigns": [
+    {
+      "label": "V1",
+      "overallStatus": "FAIL",
+      "orchestratorExitCode": 1,
+      "program": {
+        "file": "probe.mjs",
+        "bytes": 8485,
+        "sha256": "572f0e50fe169fcce10e793edd186621efff96b451742581ace09fb9aaf094f8"
+      },
+      "result": {
+        "file": "RESULT.json",
+        "bytes": 6189,
+        "sha256": "27776efdaae4bb4e3d266b5dc7987d89c344356f43ed6c6074329cc618e0d690"
+      },
+      "nativeCalls": {
+        "file": "NATIVE-CALLS.jsonl",
+        "bytes": 6376,
+        "sha256": "ccfba84af3d8913071d9d32dde48c219abd93aa88e69cb8d73e2745081c9f8b4"
+      },
+      "completedObservationRows": 2,
+      "partialObservedOutcomes": [
+        "Direct prepared update committed normally.",
+        "Prepared symbolic-ref observation selected abort; the alias and tag were preserved."
+      ],
+      "failure": "The prototype incorrectly expected prepare to succeed for a dangling symref with expected zero. Native Git refused conservatively with exit128 because the dangling symref already existed; the whole V1 remains FAIL.",
+      "baselineRefOraclesEqualAfter": true,
+      "stderrProvenance": "Only actual tool-captured stderr, not a separately redirected raw log; no stderr-file hash invented."
+    },
+    {
+      "label": "V2",
+      "overallStatus": "SETUP_FAILED",
+      "orchestratorExitCode": 1,
+      "program": {
+        "file": "probe-v2.mjs",
+        "bytes": 8988,
+        "sha256": "8c1c014c9ee4953ba2764ca33ab89311eacdd828deb4bd5ced618ad1b26dccf7"
+      },
+      "failure": "EEXIST while creating the already existing repository directory, before the native setup/cases.",
+      "gitQueriesExecuted": 0,
+      "completedObservationRows": 0,
+      "resultFilePresent": false,
+      "stderrProvenance": "Actual tool-captured setup error retained in transcript; no RESULT-V2 or raw stderr file is invented."
+    },
+    {
+      "label": "V3",
+      "overallStatus": "PASS",
+      "orchestratorExitCode": 0,
+      "program": {
+        "file": "probe-v3.mjs",
+        "bytes": 9106,
+        "sha256": "c49cc96dd3d3fabf3e60b54f7b4a07cff6c40470e0a95a473ea115fe2abf6d98"
+      },
+      "result": {
+        "file": "RESULT-V3.json",
+        "bytes": 9559,
+        "sha256": "7f03bd5014a655564f273b76c56dde320afd72232dc5a9f6c94abc3399275973"
+      },
+      "nativeCalls": {
+        "file": "NATIVE-CALLS-V3.jsonl",
+        "bytes": 8864,
+        "sha256": "321af791e1420ba00fa5032d70ee6e3f4de2b2777a9eafc053f18a6cda2e700a"
+      },
+      "resultProgramHashMatchesRetainedProgram": true,
+      "resultCallsHashMatchesRetainedCalls": true,
+      "completedObservationRows": 5,
+      "baselineRefOraclesEqualAfter": true,
+      "baselineRefOracleFields": [
+        "HEAD OID",
+        "main branch OID",
+        "Layer branch OID",
+        "technical tag A OID"
+      ]
+    }
+  ],
+  "execution": {
+    "actualNormalizedCommands": [
+      [
+        "node",
+        "<FIXTURE>/probe.mjs"
+      ],
+      [
+        "node",
+        "<FIXTURE>/probe-v2.mjs"
+      ],
+      [
+        "node",
+        "<FIXTURE>/probe-v3.mjs"
+      ]
+    ],
+    "programsActuallyExecutedFromRetainedFiles": true,
+    "qualification": "The V3 case labels retain their literal -v2 suffix. They were executed by probe-v3.mjs and are not evidence from the setup-failed V2."
+  },
+  "nativeObjectManifest": {
+    "treeA": "629f53937773800f8254dfec118fa0d033ba6707",
+    "treeB": "dcb8309b6195f3ce17c1e633e25eaaab51da6371",
+    "construction": "Official Git hash-object, mktree and commit-tree in the owned fixture; technical fixture refs only."
+  },
+  "V3Cases": [
+    {
+      "label": "direct-v2",
+      "kind": "direct",
+      "decision": "commit direct ref",
+      "processExit": {
+        "code": 0,
+        "signal": null
+      },
+      "preparedLockObserved": true,
+      "preparedLockUnchangedByCompetitor": true,
+      "symbolicRefQueryExitUnderPreparedLock": 1,
+      "nativeCompetingWriterExit": 128,
+      "nativePrepareRejected": null,
+      "checkpointRefPreserved": false,
+      "tagAPreserved": true,
+      "foreignLockPreserved": null,
+      "nativeOwnLockRemovedAfterClose": true,
+      "artifactManifest": [
+        {
+          "file": "direct-v2-STARTED.json",
+          "bytes": 374,
+          "sha256": "0ce04bc652e9da3af310a5db4276cead4ee7e15980877ca33aca0b5458f8f910"
+        },
+        {
+          "file": "direct-v2-TRANSCRIPT.json",
+          "bytes": 684,
+          "sha256": "867cf138b93d7300e96075647738a65896e34aa3cd34d1e50660be56d49ce77a"
+        },
+        {
+          "file": "direct-v2-RESULT.json",
+          "bytes": 2062,
+          "sha256": "5ecf518f7a38b3ba49a1f51b46793f41f746e2920518cb85591ecc706a33a64a"
+        }
+      ]
+    },
+    {
+      "label": "alias-v2",
+      "kind": "alias",
+      "decision": "abort symbolic ref",
+      "processExit": {
+        "code": 0,
+        "signal": null
+      },
+      "preparedLockObserved": true,
+      "preparedLockUnchangedByCompetitor": true,
+      "symbolicRefQueryExitUnderPreparedLock": 0,
+      "nativeCompetingWriterExit": 128,
+      "nativePrepareRejected": null,
+      "checkpointRefPreserved": true,
+      "tagAPreserved": true,
+      "foreignLockPreserved": null,
+      "nativeOwnLockRemovedAfterClose": true,
+      "artifactManifest": [
+        {
+          "file": "alias-v2-STARTED.json",
+          "bytes": 372,
+          "sha256": "fc22d063f9b32ea4811f78f97d78f79a2e6cdd3ae9a4b19e26a3394edfc9e45c"
+        },
+        {
+          "file": "alias-v2-TRANSCRIPT.json",
+          "bytes": 679,
+          "sha256": "93f12ca27dfd6bf01d9552bc621d840f96140852c8bd54d520a201e15ad765b3"
+        },
+        {
+          "file": "alias-v2-RESULT.json",
+          "bytes": 2113,
+          "sha256": "141320cb5a17dcbd18ee5979c0685f510a111d73f973f6e0a88e6b4781bf81b4"
+        }
+      ]
+    },
+    {
+      "label": "dangling-v2",
+      "kind": "dangling",
+      "decision": "native prepare refused dangling symref",
+      "processExit": {
+        "code": 128,
+        "signal": null
+      },
+      "preparedLockObserved": null,
+      "preparedLockUnchangedByCompetitor": null,
+      "symbolicRefQueryExitUnderPreparedLock": null,
+      "nativeCompetingWriterExit": null,
+      "nativePrepareRejected": true,
+      "checkpointRefPreserved": true,
+      "tagAPreserved": true,
+      "foreignLockPreserved": null,
+      "nativeOwnLockRemovedAfterClose": true,
+      "artifactManifest": [
+        {
+          "file": "dangling-v2-STARTED.json",
+          "bytes": 378,
+          "sha256": "6faa103b842c9e40c23c599a686507ad2f6f406addccf4f53f2eaf0f620db4cd"
+        },
+        {
+          "file": "dangling-v2-TRANSCRIPT.json",
+          "bytes": 740,
+          "sha256": "85f6ab04031c8ee0aa91f7f53a0ae52e001f105668bdce0f61cbbd626dd30a6b"
+        },
+        {
+          "file": "dangling-v2-RESULT.json",
+          "bytes": 720,
+          "sha256": "5eda864ed9439888f8bce8c37ec8e3fcd0599a0b5e8bce536def9ebc2eb04563"
+        }
+      ]
+    },
+    {
+      "label": "eof-v2",
+      "kind": "eof-abort",
+      "decision": "EOF without commit",
+      "processExit": {
+        "code": 0,
+        "signal": null
+      },
+      "preparedLockObserved": true,
+      "preparedLockUnchangedByCompetitor": true,
+      "symbolicRefQueryExitUnderPreparedLock": 1,
+      "nativeCompetingWriterExit": 128,
+      "nativePrepareRejected": null,
+      "checkpointRefPreserved": true,
+      "tagAPreserved": true,
+      "foreignLockPreserved": null,
+      "nativeOwnLockRemovedAfterClose": true,
+      "artifactManifest": [
+        {
+          "file": "eof-v2-STARTED.json",
+          "bytes": 374,
+          "sha256": "20c74ba3e065c10935ed7dcfe2a3e7c755f77b103a8f449d17aa78b5e37bf383"
+        },
+        {
+          "file": "eof-v2-TRANSCRIPT.json",
+          "bytes": 655,
+          "sha256": "d18d1d4876c9ba867fbaa2ee2d997ec54fdceb74b7458df411517e43feeecc62"
+        },
+        {
+          "file": "eof-v2-RESULT.json",
+          "bytes": 2041,
+          "sha256": "1393963ac1ba132c912786e433fe24abb4f662709b7e5138478457e713288f5e"
+        }
+      ]
+    },
+    {
+      "label": "lock-v2",
+      "kind": "preexisting-lock",
+      "decision": "native prepare refused pre-existing foreign lock",
+      "processExit": {
+        "code": 128,
+        "signal": null
+      },
+      "preparedLockObserved": null,
+      "preparedLockUnchangedByCompetitor": null,
+      "symbolicRefQueryExitUnderPreparedLock": null,
+      "nativeCompetingWriterExit": null,
+      "nativePrepareRejected": null,
+      "checkpointRefPreserved": true,
+      "tagAPreserved": null,
+      "foreignLockPreserved": true,
+      "nativeOwnLockRemovedAfterClose": null,
+      "artifactManifest": [
+        {
+          "file": "lock-v2-STARTED.json",
+          "bytes": 382,
+          "sha256": "c0b8bf878b2532e83f707da575ee29f1cb8a64d118695f180ed4f32a91cfd71a"
+        },
+        {
+          "file": "lock-v2-TRANSCRIPT.json",
+          "bytes": 1134,
+          "sha256": "78d1e3f93986cd54a95dc02b1cd66e7a77794b644bc5da15d2b9a371ecd5632c"
+        },
+        {
+          "file": "lock-v2-RESULT.json",
+          "bytes": 565,
+          "sha256": "eaf6bef638dd0d006a9ac9617868b0723934c1dab198e0bc9fe569dc7e634f8b"
+        }
+      ]
+    }
+  ],
+  "nativeProtocol": [
+    "Send official update-ref --no-deref --stdin: start, planned expected-OID operation and prepare. Keep stdin open after prepare: ok.",
+    "Observe the ref with official symbolic-ref --quiet --no-recurse while the prepared native lock is held.",
+    "Commit the direct-ref case; abort the observed alias case. A competing official writer receives128 and does not alter the prepared lock.",
+    "EOF without commit causes native abort/release in the observed case. A pre-existing lock is refused and preserved."
+  ],
+  "conclusions": [
+    "A native prepared lock permits a read-only direct/symbolic type observation before authorizing commit, closing the demonstrated ordinary Git writer race for this prototype.",
+    "No-deref alone is insufficient: NO-DEREF-PROBE.json shows that expected-OID update can replace an alias. The prepared type guard separately refuses alias adoption.",
+    "The dangling zero-expected case is refused during native prepare, without replacing the dangling alias. Its128 is the expected conservative observation, not a successful update.",
+    "The native EOF and abort behavior released only locks owned by those observed native processes; the prototype did not delete disputed locks.",
+    "Node orchestrates the official Git transaction protocol; this does not create a parallel object store, version history, ref storage or versioning protocol."
+  ],
+  "privateArtifactManifest": [
+    {
+      "file": "probe.mjs",
+      "bytes": 8485,
+      "sha256": "572f0e50fe169fcce10e793edd186621efff96b451742581ace09fb9aaf094f8"
+    },
+    {
+      "file": "RESULT.json",
+      "bytes": 6189,
+      "sha256": "27776efdaae4bb4e3d266b5dc7987d89c344356f43ed6c6074329cc618e0d690"
+    },
+    {
+      "file": "NATIVE-CALLS.jsonl",
+      "bytes": 6376,
+      "sha256": "ccfba84af3d8913071d9d32dde48c219abd93aa88e69cb8d73e2745081c9f8b4"
+    },
+    {
+      "file": "probe-v2.mjs",
+      "bytes": 8988,
+      "sha256": "8c1c014c9ee4953ba2764ca33ab89311eacdd828deb4bd5ced618ad1b26dccf7"
+    },
+    {
+      "file": "probe-v3.mjs",
+      "bytes": 9106,
+      "sha256": "c49cc96dd3d3fabf3e60b54f7b4a07cff6c40470e0a95a473ea115fe2abf6d98"
+    },
+    {
+      "file": "RESULT-V3.json",
+      "bytes": 9559,
+      "sha256": "7f03bd5014a655564f273b76c56dde320afd72232dc5a9f6c94abc3399275973"
+    },
+    {
+      "file": "NATIVE-CALLS-V3.jsonl",
+      "bytes": 8864,
+      "sha256": "321af791e1420ba00fa5032d70ee6e3f4de2b2777a9eafc053f18a6cda2e700a"
+    },
+    {
+      "file": ".git-compat-owned.json",
+      "bytes": 111,
+      "sha256": "96aeddb117018c16e23f6f0a08b191546562a8675c7343e1eae449b5fbc7205b"
+    }
+  ],
+  "limits": [
+    "V1, V2 and V3 remain separate; partial V1 observations are not added to the five V3 scenarios to claim a larger passing campaign.",
+    "The baseline/after oracles compare refs, not an unrecorded raw MAIN-index byte oracle. This native prototype does not certify A/B/C Core staging.",
+    "No real power loss, all Git versions/backends or writers that bypass native locks through raw filesystem writes were tested or universally excluded.",
+    "Core helper implementation and its directed/full tests use later source and separate receipts.",
+    "Raw host paths, nonces, process IDs, command lines and stderr remain private; this public projection contains normalized behavior, counts and hashes only."
+  ]
+}

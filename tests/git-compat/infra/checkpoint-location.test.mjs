@@ -21,3 +21,44 @@ test('Inspector commit checkpoint requires durable journal then publication barr
   assert.equal(locateCheckpoint(lines,locator).lineNumber,6);
   const reversed=[...lines];[reversed[4],reversed[5]]=[reversed[5],reversed[4]];assert.throws(()=>locateCheckpoint(reversed,locator),assert.AssertionError);
 });
+
+
+test('Inspector prepared checkpoint retains all three ordered predecessors across the 13-line transaction setup', () => {
+  const locator = { method: 'mutateLocked', line: /^\s*if \(options\.reconcile !== false\) await this\.syncEditingInternal\(\);\s*$/, before: [/this\.tx = await Transaction\.begin\(/, /this\.tx\.data\.recovery = /, /await this\.tx\.record\("prepared"\)/], lookback: 16 };
+  const lines = [
+    '  async other(options) {',
+    '    this.tx = await Transaction.begin(this.dir, kind, metadata);',
+    '    this.tx.data.recovery = {};',
+    '    await this.tx.record("prepared");',
+    '    if (options.reconcile !== false) await this.syncEditingInternal();',
+    '  }',
+    '  async mutateLocked(kind, fn, options = {}) {',
+    '    this.tx = await Transaction.begin(this.dir, kind, metadata);',
+    '    this.recoveryFiles = [];',
+    '    this.recoveryFileMap.clear();',
+    '    this.tx.data.recovery = {files:this.recoveryFiles};',
+    '    if (options.revokedAcknowledgements?.length) {',
+    '      const previous = [], revoked = [];',
+    '      if (revoked.length) throw Error();',
+    '      this.tx.data.recovery.acknowledgements = {revoked,pending:[]};',
+    '      await this.track(workspaceFile);',
+    '    }',
+    '    await this.tx.record("prepared");',
+    '    try {',
+    '      this.transactionTrees = new Map();',
+    '      if (options.reconcile !== false) await this.syncEditingInternal();',
+    '      return await fn();',
+    '    } finally {}',
+    '  }',
+  ];
+  const location = locateCheckpoint(lines, locator);
+  assert.equal(location.lineNumber, 20); assert.equal(location.methodStart, 6);
+  assert.equal(location.lineNumber - 7, 13);
+  assert.deepEqual(location.orderedPredecessors, locator.before.map(pattern => pattern.source));
+  assert.throws(() => locateCheckpoint(lines, { ...locator, lookback: 12 }), assert.AssertionError);
+  for (const missing of [7, 10, 17]) assert.throws(() => locateCheckpoint(lines.filter((_, n) => n !== missing), locator), assert.AssertionError);
+  const reversed = [...lines]; [reversed[10], reversed[17]] = [reversed[17], reversed[10]];
+  assert.throws(() => locateCheckpoint(reversed, locator), assert.AssertionError);
+  const duplicate = [...lines]; duplicate.splice(21, 0, lines[20]);
+  assert.throws(() => locateCheckpoint(duplicate, locator), assert.AssertionError);
+});

@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "campaign": "recovery-boundary-and-all-index-lock-regressions-after-v4-counterexample",
+  "command": "node --import tsx --test --test-concurrency=1 --test-timeout=900000 --test-name-pattern='recovery revalidates|known B rollback|late MAIN index lock' tests/integration/activation-frontier.test.ts",
+  "result": { "exitCode": 0, "tests": 6, "pass": 6, "fail": 0, "cancelled": 0, "skip": 0, "todo": 0, "durationMs": 158397.8389 },
+  "cases": [
+    { "name": "durable shelf publication identity permits known B rollback once and completed recovery remains idempotent", "durationMs": 22662.3053 },
+    { "name": "recovery revalidates replacement during index backup copy and preserves repeated refusal", "durationMs": 38187.9255 },
+    { "name": "recovery revalidates timestamp during index backup copy and preserves repeated refusal", "durationMs": 31635.1189 },
+    { "name": "recovery revalidates native-lock during index backup copy and preserves repeated refusal", "durationMs": 28716.845 },
+    { "name": "explicit recovery preserves a late MAIN index lock during metadata restoration", "durationMs": 17511.2862 },
+    { "name": "automatic rollback preserves a late MAIN index lock during metadata restoration", "durationMs": 18778.8915 }
+  ],
+  "checks": [
+    { "command": "npm.cmd run typecheck", "exitCode": 0 },
+    { "command": "git -c core.whitespace=cr-at-eol diff --check", "exitCode": 0 }
+  ],
+  "sourceObservedAfter": [
+    { "path": "src/core/index.ts", "sha256": "0e0f7bdb4e85aea2d89a68f9525ed5f222296680a62c7f4e143ddd64276f5afc" },
+    { "path": "src/core/recovery.ts", "sha256": "f320a97a739d02caef5dad0c2c4a9582173bbf71049dff7f0f74bee6099999cc" },
+    { "path": "tests/integration/activation-frontier.test.ts", "sha256": "6aeb0167008789bace0e525b3f77942800489c72d86731cbd9815aa592bca52b" }
+  ],
+  "actualInterference": "Real fixture filesystem operations run after the first backup-read chunk, before private copy/restamp and final publication. Replacement uses independent equal-byte B and a later FD-applied mtime; timestamp-only keeps the inode; locks are exclusive real files preserved by Core.",
+  "oracles": ["Native Git staged B remains B after refusal", "Native Git backup image remains A", "Index bytes, inode and mtime remain the injected foreign image", "Backups and pending journal bytes unchanged across repeated recovery", "Native MAIN/private lock bytes preserved", "HEAD, MAIN bytes and refs preserved", "Exact known B recovery succeeds once and a repeated completed recovery preserves the index"],
+  "automaticRollbackErrorPolicy": "The synthetic original EIO remains the caller error when the automatic rollback is blocked by the late MAIN lock; the pending journal and lock remain. Subsequent explicit recover calls return LOCKED. This preserves the existing original-error policy.",
+  "scope": "Six selected regressions, not a complete frontier/full campaign and not added to earlier directed denominators. The subsequent full V5 has its own complete corpus, raw output receipts and frozen global source manifest in RESULTS.md.",
+  "independentReadOnlyReview": "Publication peer reviewed the target identity checks, all-index lock guard, automatic rollback reuse and explicit metadata/completion/checkpoint/protection boundaries; no blocker found in those optimistic boundaries.",
+  "provenance": "Counts, durations and exit codes were observed in executor outputs. Source hashes were observed after the directed run. No raw-output file hash or global before/after proof is invented by this projection.",
+  "universalFilesystemCAS": false,
+  "powerLossTest": false,
+  "newIdentityProofInventedForLegacyJournals": false
+}

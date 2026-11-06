@@ -64,7 +64,8 @@ export async function queryIndexDiff(repo: RepoInfo, index: string, args: string
 }
 
 /**
- * Recovery validation only, never a preview or a normal status/diff query.
+ * Object validation for recovery or an authorized transaction's independent
+ * index image, never a preview or a normal status/diff query.
  * Native write-tree may create or freshen Git objects, as ordinary Git does.
  * The live source/index, refs and Layer JSON are never publication targets.
  * Callers cannot supply argv: this entry point always runs exactly write-tree.

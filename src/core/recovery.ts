@@ -8,6 +8,7 @@ import { git, treeEntries } from './git.js';
 import { comparableFileMode } from './platform.js';
 import { collisionKey, safePath, validatePath } from './paths.js';
 import { fingerprint, sameFingerprint, type Fingerprint } from './storage.js';
+import { observeIndexIdentity, sameIndexIdentity, validDurableIndexIdentity, matchesDurableIndexIdentity } from './index-timestamp.js';
 
 interface RecoveryRepo { root: string; gitDir: string; exclude: string; index: string }
 const safeId = (value: unknown): value is string => typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$/.test(value);
@@ -48,6 +49,61 @@ function approvedRecoveryMetadata(repo:RecoveryRepo,dir:string,file:string):bool
     if (/^(reservations|captures)\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.json$/.test(relative)) return true;
     if (/^indexes\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.index$/.test(relative)) return true;
     return /^shelves\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\/shelf\.json$/.test(relative);
+}
+
+/** Precompute approved index names only; lock existence is always observed afresh. */
+export function recoveryIndexLockGuard(repo:RecoveryRepo,directory:string,plans:any|any[],additionalIndices:string[]=[]):()=>Promise<void>{
+  const dir=path.resolve(directory),indices=new Set<string>([path.resolve(repo.index),...additionalIndices]);
+  const privateIndex=(file:string)=>/^indexes\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.index$/u.test(path.relative(dir,file).split(path.sep).join('/'));
+  for(const data of Array.isArray(plans)?plans:[plans]){
+    for(const layer of data.recovery?.beforeRegistry?.layers??[])indices.add(path.join(dir,'indexes',layer.id+'.index'));
+    for(const file of data.recovery?.files??[])if(privateIndex(file.path))indices.add(file.path);
+  }
+  for(const file of indices)if(file!==path.resolve(repo.index)&&!privateIndex(file))invalid('Índice fora do escopo de recuperação.');
+  return async()=>{for(const index of indices){try{await lstat(index+'.lock');}catch(error){if((error as NodeJS.ErrnoException).code==='ENOENT')continue;throw error;}throw new LabError('LOCKED','Lock nativo de índice presente; recuperação preservou journals, índices e locks.',{path:index+'.lock'});}};
+}
+
+/** A managed add authorizes only its original Git context and planned checkpoint. */
+export async function managedIndexContext(repo:RecoveryRepo,directory:string,data:any,expectedCheckpoint?:string,ownIndexLock=false):Promise<string>{
+  const plan=data.recovery?.managedIndexPublication;if(!plan)return '';
+  const before=data.recovery.beforeWorkspace,checkpoint='refs/git-layers/state/'+plan.layerId,working='refs/heads/'+before.branch;
+  const locks=[repo.index+'.lock',...(ownIndexLock?[]:[plan.path+'.lock']),path.join(repo.gitDir,plan.ref+'.lock'),path.join(repo.gitDir,checkpoint+'.lock'),path.join(repo.gitDir,working+'.lock'),path.join(repo.gitDir,'packed-refs.lock')];
+  const checkLocks=async()=>{for(const file of locks){try{await lstat(file);}catch(error){if((error as NodeJS.ErrnoException).code==='ENOENT')continue;throw error;}throw new LabError('LOCKED','Lock Git externo foi preservado durante staging gerenciado.',{path:file});}};
+  await checkLocks();const result=await git(repo.root,['for-each-ref','--format=%(HEAD)%00%(refname)%00%(objectname)%00%(symref)',working,plan.ref,checkpoint]);
+  const refs=new Map(result.stdout.toString().split('\n').filter(Boolean).map(line=>{const[head,ref,oid,symbolic]=line.split('\0');return[ref!,{head,oid,symbolic}];})),current=refs.get(checkpoint)?.oid;
+  if([working,plan.ref,checkpoint].some(ref=>!!refs.get(ref)?.symbolic))throw new LabError('RECOVERY_CONFLICT','Referência simbólica externa foi preservada durante staging/recuperação.',{reason:'direct-ref-required',path:plan.path});
+  if(refs.get(working)?.oid!==before.head||refs.get(working)?.head!=='*'||refs.get(plan.ref)?.oid!==plan.oid||!current||(expectedCheckpoint!==undefined?current!==expectedCheckpoint:current!==plan.checkpoint&&(!plan.checkpointPublished||current!==plan.tree)))throw new LabError('RECOVERY_CONFLICT','HEAD, ref ou checkpoint mudou depois da fronteira de staging; referências e índices externos preservados.',{reason:'managed-stage-context-changed',path:plan.path});
+  await checkLocks();return current;
+}
+
+/** Reobserve a validated plan at each restore boundary; this does not authorize arbitrary paths. */
+export async function recoveryFileState(repo:RecoveryRepo,directory:string,data:any,file:any):Promise<Fingerprint>{
+  const index=file.path===path.resolve(repo.index)||/^indexes\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.index$/u.test(path.relative(path.resolve(directory),file.path).split(path.sep).join('/'));
+  const noLock=async()=>{if(!index)return;try{await lstat(file.path+'.lock');}catch(error){if((error as NodeJS.ErrnoException).code==='ENOENT')return;throw error;}throw new LabError('LOCKED','Lock nativo do índice apareceu durante a recuperação; índice, journal e lock foram preservados.',{path:file.path+'.lock'});};
+  await noLock();
+  const managed=data.recovery?.managedIndexPublication;
+  if(managed)await managedIndexContext(repo,directory,data);
+  if(managed?.path===file.path){
+    const before=await observeIndexIdentity(file.path),current=await fingerprint(file.path),after=await observeIndexIdentity(file.path);
+    const knownBefore=matchesDurableIndexIdentity(managed.before,after)&&sameFingerprint(current,file.before),knownAfter=managed.after!==null&&matchesDurableIndexIdentity(managed.after,after)&&sameFingerprint(current,file.after);
+    if(!sameIndexIdentity(before,after)||!knownBefore&&!knownAfter)throw new LabError('RECOVERY_CONFLICT','Índice externo não corresponde à imagem BEFORE/AFTER duravelmente autorizada pelo staging; índice e journal preservados.',{reason:'managed-index-identity-changed',path:file.path});
+    await managedIndexContext(repo,directory,data);await noLock();return current;
+  }
+  const creation=data.recovery?.createdIndexPublication;
+  if(creation?.path===file.path){
+    const before=await observeIndexIdentity(file.path),current=await fingerprint(file.path),after=await observeIndexIdentity(file.path);
+    const knownBefore=before===null&&after===null&&sameFingerprint(current,file.before),knownAfter=matchesDurableIndexIdentity(creation.after,after)&&sameFingerprint(current,file.after);
+    if(!sameIndexIdentity(before,after)||!knownBefore&&!knownAfter)throw new LabError('RECOVERY_CONFLICT','A identidade do índice criado não corresponde à publicação duravelmente autorizada; índice e journal preservados.',{reason:'created-index-identity-changed',path:file.path});
+    await noLock();return current;
+  }
+  const publication=data.recovery?.activationIndexPublication;
+  if(publication?.path===file.path){
+    const before=await observeIndexIdentity(file.path),current=await fingerprint(file.path),after=await observeIndexIdentity(file.path);
+    const knownBefore=matchesDurableIndexIdentity(publication.before,after)&&sameFingerprint(current,file.before),knownAfter=matchesDurableIndexIdentity(publication.after,after)&&sameFingerprint(current,file.after);
+    if(!sameIndexIdentity(before,after)||!knownBefore&&!knownAfter)throw new LabError('RECOVERY_CONFLICT','A identidade ou fronteira temporal do índice de ativação não corresponde à imagem duravelmente autorizada. Índice, journal e backups foram preservados.',{reason:'activation-index-identity-changed',path:file.path});
+    await noLock();return current;
+  }
+  const current=await fingerprint(file.path);if(managed)await managedIndexContext(repo,directory,data);await noLock();return current;
 }
 
 /** Read original facts only; absence of an optional legacy workspace plan creates no backup. */
@@ -226,6 +282,38 @@ export async function validateRecovery(repo: RecoveryRepo, directory: string, da
     if(planned.to.startsWith('layer/')&&(planned.openingName!==planned.to.slice(6)||!beforeRegistry.layers.some((l:any)=>l.name===planned.openingName)))invalid('Entrada Layer como branch não explícita no plano.');
     if(planned.from.startsWith('layer/')&&beforeWorkspace.branchLayer!==planned.from.slice(6))invalid('Saída Layer como branch sem estado anterior correspondente.');
     if(planned.resumeName&&planned.resumeName!==beforeWorkspace.branchLayer)invalid('Retomada de Layer inválida.');
+  }
+  if(recovery.managedIndexPublication!==undefined){
+    const plan=recovery.managedIndexPublication,layer=object(plan)&&beforeRegistry.layers.find((entry:any)=>entry.id===plan.layerId);
+    if(data.kind!=='stage'||!object(plan)||Object.keys(plan).sort().join(',')!=='after,before,checkpoint,checkpointPublished,layerId,oid,path,ref,tree'||typeof plan.checkpointPublished!=='boolean'||plan.checkpointPublished&&plan.tree===null||!layer||plan.path!==path.join(dir,'indexes',layer.id+'.index')||plan.ref!==layer.ref||plan.oid!==layer.oid||!oid(plan.checkpoint)||!validDurableIndexIdentity(plan.before)||beforeWorkspace.branchLayer===layer.name||recovery.createdIndexPublication!==undefined||recovery.activationIndexPublication!==undefined)invalid('Plano de staging gerenciado inválido.');
+    const file=recovery.files.find((entry:any)=>entry.path===plan.path);
+    if(!file?.before.exists||!file.backup||(plan.after===null?plan.tree!==null||file.after!==undefined:!validDurableIndexIdentity(plan.after)||!oid(plan.tree)||!file.after?.exists))invalid('Imagens BEFORE/AFTER do staging gerenciado inválidas.');
+    for(const tree of [plan.checkpoint,...(plan.tree===null?[]:[plan.tree])])if((await git(repo.root,['cat-file','-t',tree])).stdout.toString().trim()!=='tree')invalid('Checkpoint de staging não é árvore Git.');
+    await recoveryFileState(repo,dir,data,file);
+  }
+  if(recovery.managedIndexConflict!==undefined){
+    const conflict=recovery.managedIndexConflict,plan=recovery.managedIndexPublication;
+    if(!object(conflict)||Object.keys(conflict).sort().join(',')!=='path,reason'||conflict.path!==plan?.path||conflict.reason!=='source-changed')invalid('Marcador de conflito de staging inválido.');
+    throw new LabError('RECOVERY_CONFLICT','Staging externo detectado; plano, índice e referências preservados.',{reason:'managed-index-conflict',path:conflict.path});
+  }
+  if(recovery.createdIndexPublication!==undefined){
+    const creation=recovery.createdIndexPublication;
+    if(!['create','register','activate'].includes(data.kind)||!object(creation)||Object.keys(creation).sort().join(',')!=='after,path'||!absolute(creation.path)||path.dirname(creation.path)!==path.join(dir,'indexes')||!/^[-A-Za-z0-9]+\.index$/u.test(path.basename(creation.path))||!validDurableIndexIdentity(creation.after)||recovery.activationIndexPublication!==undefined)invalid('Testemunho de criação de índice inválido.');
+    const file=recovery.files.find((entry:any)=>entry.path===creation.path);
+    if(!file||file.before.exists||file.backup!==null||!file.after?.exists)invalid('Testemunho de criação sem ausência BEFORE/AFTER correspondente.');
+    await recoveryFileState(repo,dir,data,file);
+  }
+  if(recovery.activationIndexPublication!==undefined){
+    const publication=recovery.activationIndexPublication;
+    if(data.kind!=='activate'||!object(publication)||Object.keys(publication).sort().join(',')!=='after,before,path'||!absolute(publication.path)||path.dirname(publication.path)!==path.join(dir,'indexes')||!/^[-A-Za-z0-9]+\.index$/u.test(path.basename(publication.path))||!validDurableIndexIdentity(publication.before)||!validDurableIndexIdentity(publication.after))invalid('Testemunho de publicação do índice de ativação inválido.');
+    const file=recovery.files.find((entry:any)=>entry.path===publication.path);
+    if(!file||!file.before.exists||!file.after?.exists)invalid('Testemunho de índice sem BEFORE/AFTER correspondente.');
+    await recoveryFileState(repo,dir,data,file);
+  }
+  if(recovery.activationIndexConflict!==undefined){
+    const conflict=recovery.activationIndexConflict;
+    if(!object(conflict)||Object.keys(conflict).sort().join(',')!=='path,reason'||conflict.reason!=='identity-changed'||!absolute(conflict.path)||path.dirname(conflict.path)!==path.join(dir,'indexes')||!/^[-A-Za-z0-9]+\.index$/u.test(path.basename(conflict.path))||!recovery.files.some((file:any)=>file.path===conflict.path))invalid('Conflito de identidade do índice de ativação inválido.');
+    throw new LabError('RECOVERY_CONFLICT','A identidade física do índice publicado mudou externamente. Igualdade de bytes não autoriza restaurar seu timestamp ou staging anterior; journal, índice e backups foram preservados.',{reason:'activation-index-identity-changed',path:conflict.path});
   }
   if(acknowledgements!==undefined)await recoveryWorkspaceImages(repo,dir,data);
   await assertRecoveryMaterializationSafe(repo,dir,data);

@@ -32,29 +32,29 @@ export const cases=[
     const history=fs.readFileSync(path.join(project,'docs/git-compat/history/REVISAO-AGENTS-v2.md'),'utf8');
     const paths=[];
     for(const match of agents.matchAll(/\]\(([^)]+)\)/g)){const rel=match[1].split('#')[0];if(!rel||/^[a-z]+:/i.test(rel))continue;paths.push(rel);c.eq('AGENTS link '+rel,fs.existsSync(path.resolve(project,rel)),true);}
-    // AGENTS records the current stage2 mission; report indexes document it and grant no authorization themselves.
+    // Etapa 2B supersedes the current-task selector, preserving all historical authority checks.
     const authorityFile='AGENTS.md', authority=agents, currentScope=agents.split('Na preparação')[0];
-    const reportIndexFile='docs/reports/2026-11-04-performance-recovery/README.md', reportIndex=fs.readFileSync(path.join(project,reportIndexFile),'utf8');
+    const reportIndexFile='docs/reports/2026-11-05-scale-optimization/README.md', reportIndex=fs.readFileSync(path.join(project,reportIndexFile),'utf8');
     const historicalReportIndexFile='docs/reports/2026-11-03-security-compatibility-implementation/README.md', historicalReportIndex=fs.readFileSync(path.join(project,historicalReportIndexFile),'utf8');
     const priorAuthorityFile='docs/decisions/2026-11-02-closure.md', priorAuthority=fs.readFileSync(path.join(project,priorAuthorityFile),'utf8');
     function stage2Authorization(document) {
       const scope=document.split('Na preparação')[0];
-      const paragraph=scope.split(/\r?\n\s*\r?\n/u).find(text=>/^A \*\*Etapa 2 de 04\/11\/2026\*\*/u.test(text))??'';
-      return /desempenho e recuperação do Core\/CLI/u.test(paragraph) &&
+      const paragraph=scope.split(/\r?\n\s*\r?\n/u).find(text=>/^A \*\*Etapa 2B de 05\/11\/2026\*\*/u.test(text))??'';
+      return /escalabilidade e movimentação segura do Core\/CLI/u.test(paragraph) &&
         /autorização da missão/u.test(paragraph) &&
         ['benchmarks','implementação','testes','documentação'].every(word=>paragraph.includes(word)) &&
         /\bcommit\s+e\s+push\s+em\s+main\s+sem\s+força\b/u.test(paragraph) &&
-        paragraph.includes('](docs/reports/2026-11-04-performance-recovery/README.md)') &&
+        paragraph.includes('](docs/reports/2026-11-05-scale-optimization/README.md)') &&
         paragraph.includes('As garantias de segurança da etapa 1B abaixo permanecem.');
     }
     const authorizationControls=[
-      {name:'current stage2 mission',document:agents,expected:true},
+      {name:'current stage2B mission',document:agents,expected:true},
       {name:'push absent',document:agents.replace('commit e push em main sem força','commit em main sem força'),expected:false},
       {name:'main absent',document:agents.replace('commit e push em main sem força','commit e push em develop sem força'),expected:false},
       {name:'force permission is not no-force authority',document:agents.replace('commit e push em main sem força','commit e push em main com força'),expected:false},
-      {name:'stage2 report absent',document:agents.replace('](docs/reports/2026-11-04-performance-recovery/README.md)','](docs/STATUS.md)'),expected:false},
-      {name:'historical stage1B is not current stage2',document:agents.replace('A **Etapa 2 de 04/11/2026**','A **Etapa histórica de 04/11/2026**'),expected:false},
-      {name:'Core CLI scope absent',document:agents.replace('desempenho e recuperação do Core/CLI','desempenho e recuperação do laboratório'),expected:false},
+      {name:'stage2B report absent',document:agents.replace('](docs/reports/2026-11-05-scale-optimization/README.md)','](docs/STATUS.md)'),expected:false},
+      {name:'historical stage2 is not current stage2B',document:agents.replace('A **Etapa 2B de 05/11/2026**','A **Etapa histórica de 05/11/2026**'),expected:false},
+      {name:'Core CLI scope absent',document:agents.replace('escalabilidade e movimentação segura do Core/CLI','escalabilidade e movimentação segura do laboratório'),expected:false},
       {name:'mission authorization absent',document:agents.replace('autorização da missão','referência histórica'),expected:false},
       {name:'inherited stage1B safeguards absent',document:agents.replace('As garantias de segurança da etapa 1B abaixo permanecem.',''),expected:false},
     ].map(({name,document,expected})=>({name,expected,observed:stage2Authorization(document)}));

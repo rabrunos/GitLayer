@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "campaign": "focus-v1",
+  "status": "INTERRUPTED_FOR_CONFIRMED_INTEGRITY_FINDINGS",
+  "controllerStatus": "FAIL",
+  "startedAt": "2026-11-05T12:57:50.743Z",
+  "endedAt": "2026-11-05T13:11:15.650Z",
+  "command": "node scripts/validate-performance-recovery.mjs --phase focus --out <NEW_EXTERNAL_OUTPUT> --fixture-parent <VALIDATED_EXTERNAL_PARENT>",
+  "functionalInputCount": 220,
+  "beforeFingerprint": "b036c38ba44dfbac827b0712daa0af1b063e61f178bc1b4527b951451827a87e",
+  "afterFingerprint": "b036c38ba44dfbac827b0712daa0af1b063e61f178bc1b4527b951451827a87e",
+  "sourceUnchanged": true,
+  "testProcessExit": 1,
+  "timedOut": false,
+  "outputTruncated": false,
+  "durationMs": 804315,
+  "finalTapSummaryComplete": false,
+  "counts": null,
+  "reason": "Independent native-Git probes confirmed activation accepting a private index changed after guard and returning success after a local ref changed during materialization. This candidate was withdrawn before benchmarking final sources.",
+  "termination": {
+    "method": "taskkill own test PID /T /F after executable, argv and creation-boundary verification",
+    "exit": 1,
+    "qualification": "One enumerated descendant had already exited; all listed owned IDs were absent in the subsequent read-only process query. No unproved or reused PID was signalled. This is not a power-loss experiment."
+  },
+  "retainedRawStreams": {
+    "stdoutSHA256": "5848438204542117dcc7802571d0dbf4e655ad40bc4a9e186d2fd6eb0e10f844",
+    "stderrSHA256": "54a19d6d1ccd93aa158674dfed1bad05f0590b7abbe8f1215200ff2ef1ccebd7"
+  },
+  "qualification": "Incomplete campaign: no suite PASS, no invented final denominator and no sum with later executions. Raw logs and fixtures retained externally."
+}

@@ -1,0 +1,229 @@
+{
+  "schema": 1,
+  "status": "CONFIRMED_PRODUCT_DEFECT_BEFORE_DIRECT_REF_CORRECTION",
+  "scope": "One isolated Core managed-add reproduction; not a microcommand-only result, benchmark or complete-suite certification.",
+  "startedAt": "2026-11-05T22:35:46.054Z",
+  "endedAt": "2026-11-05T22:36:06.075Z",
+  "source": {
+    "coreFileCount": 21,
+    "files": [
+      {
+        "path": "src/core/activation-source.ts",
+        "bytes": 7577,
+        "sha256": "2c23041892b4ce9baf04be9ce7e83d1f193832c9f02a44283e904643a35dee0f"
+      },
+      {
+        "path": "src/core/branch-protection.ts",
+        "bytes": 25110,
+        "sha256": "530fe59190262f3256f89e23c3e9c32d71f108deec9360928c15f9ff8ff6c74d"
+      },
+      {
+        "path": "src/core/demo.ts",
+        "bytes": 6303,
+        "sha256": "1f5a0677a5e150fea696b99e88f290771c1acde70983fe74376dd9e137dbd6a1"
+      },
+      {
+        "path": "src/core/disposable-projection.ts",
+        "bytes": 7908,
+        "sha256": "fe6758e3a0845b4843d377226d6185320b31da883d8532b4da88d55ce1d2e4a7"
+      },
+      {
+        "path": "src/core/editing-boundary.ts",
+        "bytes": 8847,
+        "sha256": "a8c8cf1cf27770949d611e6315dff50924ba5a06fd1dd6f02dd7d089c5aa60a3"
+      },
+      {
+        "path": "src/core/errors.ts",
+        "bytes": 467,
+        "sha256": "ffa74e2853fabfc2d219ddad8242c277e4a843bf6a343f9bec056e623a35989c"
+      },
+      {
+        "path": "src/core/git.ts",
+        "bytes": 22919,
+        "sha256": "27433fcd34af5df75599eae9dfa3753b3eaa0b4d4582944dac0670c7afe5755e"
+      },
+      {
+        "path": "src/core/ignore.ts",
+        "bytes": 3328,
+        "sha256": "3d0fa49bae842dfeed7e45f5f934509b8e40bc064e2b3832789868d2981f524b"
+      },
+      {
+        "path": "src/core/index-query.ts",
+        "bytes": 18862,
+        "sha256": "f568c40d00e6987268b9e7b0994772707b52a6c71b99408f19fffa73f9d375b1"
+      },
+      {
+        "path": "src/core/index-stage.ts",
+        "bytes": 20889,
+        "sha256": "4eedf629827638b13fe5a59dc297344d2d9ee713433cafd81f7c73383e994479"
+      },
+      {
+        "path": "src/core/index-timestamp.ts",
+        "bytes": 8332,
+        "sha256": "da53966085085d11d9884703f1b5f7c41278c7e921703da268e123f18b4f1812"
+      },
+      {
+        "path": "src/core/index.ts",
+        "bytes": 141309,
+        "sha256": "ce07630be8615a55ff58ba0519c3c3e91eae3ac7c3ca5df8157f6a06409cefdb"
+      },
+      {
+        "path": "src/core/layer-rename.ts",
+        "bytes": 19188,
+        "sha256": "15f42c1c83657ae2f0ccf0316fb7acf141de4679d3196e5784c1cf8e1ba82336"
+      },
+      {
+        "path": "src/core/layout.ts",
+        "bytes": 16173,
+        "sha256": "b46cd14e42000baad3cce23643a087ba2f80a4aa933150d25694719755e3beae"
+      },
+      {
+        "path": "src/core/ownership-state.ts",
+        "bytes": 1372,
+        "sha256": "4686ed8a7613600fbba4eff9324067e4baf64ab56b7b508651c5a039ca9263f8"
+      },
+      {
+        "path": "src/core/paths.ts",
+        "bytes": 7428,
+        "sha256": "fa2805119dbc0eaff7e16b568ef89d5577a11cbdd395c663e4908cd9a41f0d65"
+      },
+      {
+        "path": "src/core/platform.ts",
+        "bytes": 5247,
+        "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+      },
+      {
+        "path": "src/core/publication.ts",
+        "bytes": 3731,
+        "sha256": "0d011234aba15ef71bb8bbb1e531b4577424cf7cedb6893aa0ce3eda83c28c8e"
+      },
+      {
+        "path": "src/core/recovery.ts",
+        "bytes": 32236,
+        "sha256": "adebf31ba417f7b558c9d0fa40858c22bc616c075732fe3a015da353201c1444"
+      },
+      {
+        "path": "src/core/rescue.ts",
+        "bytes": 24310,
+        "sha256": "f94f17cb4eb76afd7167657dacb3a85b915d33d617402cc943fadf78b4c979c1"
+      },
+      {
+        "path": "src/core/storage.ts",
+        "bytes": 40845,
+        "sha256": "7cabb3dfd61e7859e7022ead45a43f99fd8ed05899190a41804d7ee01dec2f1e"
+      }
+    ],
+    "fingerprintSHA256": "c83b413054d603d1bcdec8bf117c515795c5c87d78f91014b37ed9017459140b",
+    "fingerprintRecipe": "SHA256(JSON.stringify(files)), sorted by path.localeCompare; each entry contains project-relative path, byte length and SHA256.",
+    "beforeAndAfterExactlyEqual": true,
+    "qualification": "This 21-file Core manifest is the source actually imported for the probe, after the materialized-source candidate and before the direct-ref correction. It is not the V7 functional226 fingerprint or the later corrected source."
+  },
+  "execution": {
+    "program": {
+      "file": "PROBE.mjs",
+      "bytes": 6805,
+      "sha256": "7a1faba41b9f0f7e914aaf3031e6e62c591afd6d03c4c2f8d9948955217dcd0a"
+    },
+    "normalizedCommand": [
+      "node",
+      "--import",
+      "<PROJECT_URL>/node_modules/tsx/dist/loader.mjs",
+      "<FIXTURE>/PROBE.mjs",
+      "<PROJECT>",
+      "<FIXTURE>",
+      "<NONCE>"
+    ],
+    "successfulCoreProgramExecutions": 1,
+    "exitCode": 0,
+    "nativeDirectSetupAndOracleInvocations": 40,
+    "nativeCountScope": "Only official Git calls made by the independent probe observer; Core Git children are not counted by this array.",
+    "isolation": "Exclusive new external fixture, nonce/parent marker and Git-ancestor validation; isolated HOME/USERPROFILE/XDG/config/credentials and absolute official Git executable. No remote or personal repository.",
+    "retained": true
+  },
+  "preProgramAttempts": [
+    {
+      "stage": "fixture-program preparation",
+      "outcome": "PowerShell rejected unsupported New-Item LiteralPath parameter before creating the planned root; later writes consequently failed.",
+      "programWritten": false,
+      "programExecuted": false,
+      "fixtureCreated": false,
+      "productGitEffects": 0,
+      "evidence": "Actual tool-captured error, not a separately redirected raw log; no raw-log SHA256 invented."
+    },
+    {
+      "stage": "first bootstrap of successfully prepared fixture",
+      "exitCode": 1,
+      "error": "ERR_UNSUPPORTED_ESM_URL_SCHEME",
+      "reason": "Windows loader path supplied without file URL.",
+      "fixtureRootAlreadyPrepared": true,
+      "programLoaded": false,
+      "fixtureRepositoryCreatedByAttempt": false,
+      "productGitEffects": 0,
+      "evidence": "Actual tool-captured stderr, not a separately redirected raw log. Corrected file URL used in the sole successful Core execution."
+    }
+  ],
+  "trigger": {
+    "checkpoint": "refs/git-layers/state/<LAYER>",
+    "referent": "refs/tags/fixture-foreign",
+    "setup": "Official Git creates a technical fixture tag at tree A and changes the checkpoint into a symref to that tag with the same resolved OID A, before Core.add.",
+    "managedCall": "app.add('a', ['layer.txt'])",
+    "laterC": "The retained probe wraps only this fixture checkpointTree entry to write C after B was published to the private index and immediately before calling the unchanged original method. This preserves an explicit A/B/C comparison."
+  },
+  "before": {
+    "treeA": "0c4a9f1bff01c49e0ddf202410d6e1cb88dc1c53",
+    "checkpointOID": "0c4a9f1bff01c49e0ddf202410d6e1cb88dc1c53",
+    "checkpointIsSymrefToTechnicalTag": true,
+    "tagOID": "0c4a9f1bff01c49e0ddf202410d6e1cb88dc1c53",
+    "head": "0f1a96a28de4c31f489a03f383398d1f813109b2",
+    "workingBranch": "main",
+    "layerBranch": "7be0bee6b9a6debaac1c3004b242aff26fa2ee75",
+    "mainIndexSHA256": "572222dd08549c50d8f0be5def0752bda3f485886fc635a6ff67ca0cbf739d9a",
+    "privateIndexSHA256": "4a62903c17b2d437862c9802874d020fd0cd25b5b28598c38900f9a160ea697b"
+  },
+  "checkpointBoundary": {
+    "fixedRequestedTreeB": "a20bc120ef14c8e19e38801a9aad922ec680969c",
+    "expectedOldTreeA": "0c4a9f1bff01c49e0ddf202410d6e1cb88dc1c53",
+    "indexSHA256": "76b112b54d452f51f6e96b626735bc9eef46a1afe5262b5ed73d111b719c1cde",
+    "laterCSHA256": "744ce44b7440c9983fe15cc81e365df2e869fa4b313e82f2912a75284ed60a0b"
+  },
+  "observed": {
+    "managedAddReturnedSuccess": true,
+    "stageJournalCompleted": true,
+    "checkpointStillSymrefToTechnicalTag": true,
+    "checkpointOID": "a20bc120ef14c8e19e38801a9aad922ec680969c",
+    "tagOID": "a20bc120ef14c8e19e38801a9aad922ec680969c",
+    "foreignTagChangedAtoFixedB": true,
+    "privateIndexSHA256": "76b112b54d452f51f6e96b626735bc9eef46a1afe5262b5ed73d111b719c1cde",
+    "indexIsB": true,
+    "laterCPreserved": true,
+    "laterCSHA256": "744ce44b7440c9983fe15cc81e365df2e869fa4b313e82f2912a75284ed60a0b",
+    "headUnchanged": true,
+    "workingBranchUnchanged": true,
+    "layerBranchUnchanged": true,
+    "mainIndexBytesUnchanged": true
+  },
+  "privateRawEvidence": [
+    {
+      "file": "RAW.json",
+      "bytes": 27542,
+      "sha256": "e188e069574baeb24f9d601892c0a37b3400255e6153fa7d560d57f34486a233"
+    },
+    {
+      "file": "SUMMARY.json",
+      "bytes": 2046,
+      "sha256": "fa7f5ae95dd8067e816c89ac7991daee0ffb0331e7cd94de2a8db24466a9d553"
+    },
+    {
+      "file": ".git-compat-owned.json",
+      "bytes": 119,
+      "sha256": "74d0644d95817f74bde042e44075587c0d78d99dafd9bd3b3d56da16f32203bf"
+    }
+  ],
+  "limits": [
+    "Confirms an actual out-of-scope technical-tag ref change by managed Core staging, despite an equal resolved checkpoint OID before the operation.",
+    "Does not claim committed branch, HEAD, MAIN, B or C data loss; these observed values were preserved.",
+    "Does not attribute the defect to baseline e8 without a separate baseline run.",
+    "No repair, recovery, fixture cleanup or rerun was applied to this retained reproduction.",
+    "Corrected prepared-native-ref transactions and their tests belong to later source and separate receipts. Host paths, nonces, process IDs and raw command lines are omitted."
+  ]
+}

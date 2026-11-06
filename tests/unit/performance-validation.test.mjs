@@ -32,7 +32,13 @@ test('performance validation runs one explicit phase and rejects invalid selecto
   assert.equal(broad.argv.at(-1), path.join(out, 'matrix'));
   assert.equal(broad.argv[broad.argv.indexOf('--jobs') + 1], '2');
   assert.throws(() => phaseCommand('all', out), { code: 'VALIDATION_SELECTION_INVALID' });
-  assert.deepEqual(phases, ['focus', 'full', 'infra', 'broad', 'typecheck', 'build', 'smoke']);
+  assert.deepEqual(phases, ['focus', 'full', 'infra', 'broad', 'typecheck', 'build', 'smoke', 'scale']);
+  const scale = phaseCommand('scale', out);
+  for (const phase of ['focus', 'scale']) assert(phaseCommand(phase, out).argv.includes('tests/integration/storage-buffer.test.mjs'));
+  for (const file of ['initial-index-publication', 'managed-stage-boundary', 'activation-frontier', 'scale-copy-failures', 'scale-journal', 'scale-refs', 'materialized-source', 'storage-git-blob', 'git-stdout-consumer', 'checkpoint-symref', 'git-ref']) {
+    assert(scale.argv.includes('tests/integration/' + file + '.test.ts'));
+    assert(phaseCommand('focus', out).argv.includes('tests/integration/' + file + '.test.ts'));
+  }
 });
 
 test('performance validation parses only final TAP totals and keeps failures, skips and cancellation distinct', () => {

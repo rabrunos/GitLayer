@@ -1,0 +1,252 @@
+{
+  "schema": 1,
+  "kind": "read-only retained-fixture index TREE forensics",
+  "status": "CONFIRMED_RAW_INDEX_MUTATION_NO_OBSERVED_B_C_LOSS_IN_THESE_FIXTURES",
+  "scope": "Two failing V9 full-suite cases observed while the full continued; no rerun, product change, recovery, Git invocation or process termination was performed by this inspection.",
+  "source": {
+    "campaignFunctionalFingerprintAsReported": "b95074e1c5b79d47b86687849855cac90ac0b8c610849381f3257895adcb741f",
+    "campaignFunctionalCountAsReported": 234,
+    "campaignCoreTupleFingerprintAsReported": "a04cee4fdf75a0f5d07116ebb8058b09af2c53017f117779993a82d1be3d7e25",
+    "campaignCoreCountAsReported": 22,
+    "readOnlyObservedFiles": [
+      {
+        "path": "tests/integration/deactivation-concurrency.test.ts",
+        "bytes": 13452,
+        "sha256": "e86e2777ce09365b30cadc227770fb7e5f2f19e945d505195933ab021ce2b6a7"
+      },
+      {
+        "path": "tests/helpers/assert-bytes.ts",
+        "bytes": 1271,
+        "sha256": "6ca51dd7e2db34693212af666b126688650727e7ff73b5f4fbdbb4c5eacbac4e"
+      },
+      {
+        "path": "src/core/index.ts",
+        "bytes": 142511,
+        "sha256": "e4f9d32babcd73591858d671e6cc1cd43c0283eb1e114f508377a10e0bca6f8c"
+      },
+      {
+        "path": "src/core/index-query.ts",
+        "bytes": 18862,
+        "sha256": "f568c40d00e6987268b9e7b0994772707b52a6c71b99408f19fffa73f9d375b1"
+      }
+    ]
+  },
+  "method": "Inline read-only filesystem inspection from the tool transcript. Exact backup/current index parsing, native index checksum verification, retained official-Git receipt comparisons and inflation/hash validation of known fixture blobs. No separately retained executable forensic-program hash is invented.",
+  "liveLogObservation": {
+    "stream": "stderr.log",
+    "prefixBytes": 150855,
+    "prefixSHA256": "6295a76f0dbb22513a512950b0e9ad122a266845d15b5164219daa4864ab0d27",
+    "qualification": "Hash of the prefix actually read while the full was running, not a final closed-stream hash."
+  },
+  "cases": [
+    {
+      "testNumber": 98,
+      "name": "deactivation refuses later C after clean changes and preserves other origins staged B versus disk C",
+      "reportedDurationMs": 37251.0803,
+      "firstFailure": {
+        "kind": "ERR_ASSERTION",
+        "oracle": "exact raw private-index bytes",
+        "affectedLayer": "b",
+        "beforeBytes": 118,
+        "afterBytes": 137,
+        "expectedSHA256": "78e574a48ab3f5f856137c638974167a3539f005d7be149d5799c3c2f18463c7",
+        "actualSHA256": "9d824a67b27d12bc7dce855791e92968d9c8d279c91c657299dc396e14645d9e",
+        "firstDifferingOffset": 91,
+        "rawTAPBlockSHA256": "83e8b688ab1e56a093e8409af82f2d8724aafc87b3711b437086f63b1f43725e"
+      },
+      "ownership": {
+        "fixtureMarkerAndReceiptNonceMatched": true,
+        "parentAndRootDirectoryValidated": true,
+        "markerSHA256": "68167bacd2846062be1f003ad677abfb7cdae4ac689a3b13e2d00193f4a8bd93",
+        "retainedReceiptSHA256": "b438f6789f489acec0ea085c4689c5140b357ca4efd7837637702b092a3ac333"
+      },
+      "matchedBeforeImage": {
+        "source": "independent retained recovery backup matching the exact expected TAP hash",
+        "bytes": 118,
+        "sha256": "78e574a48ab3f5f856137c638974167a3539f005d7be149d5799c3c2f18463c7",
+        "matchesExpectedTAPHash": true
+      },
+      "indexStructure": {
+        "version": 2,
+        "entryCount": 1,
+        "headerAndEntireEntryBytesEqual": true,
+        "headerAndEntriesBytes": 84,
+        "headerAndEntriesSHA256": "e61bc1d011c8b6a794ae7d8c5918e6c719802eae94b9bd86a925e08fd95e8256",
+        "extensionsBefore": [
+          "TREE"
+        ],
+        "extensionsAfter": [
+          "TREE"
+        ],
+        "TREE": {
+          "beforeBytes": 6,
+          "afterBytes": 25,
+          "beforeBodyHex": "002d3120300a",
+          "afterHeader": "<NUL>1 0\n",
+          "afterTreeOID": "b5a5f4d18bebb32fc77d31e57d1d2ca68a2d1097"
+        },
+        "onlyTREEPayloadSizeAndTrailingChecksumAccountForDifference": true,
+        "bothIndexSHA1ChecksumsValid": true,
+        "cachedTreeEqualsEarlierFixedStagingTree": true
+      },
+      "semanticEvidence": {
+        "method": "Existing official Git ls-files --stage -z observations in retained fixture receipt, before/after the failed operation; no new Git invocation by this forensic inspection.",
+        "stdoutSHA256": [
+          "7c89ff76f6b23760d49900aa769ff4c4755eb706c51b431c530ad68e10a29ae9",
+          "7c89ff76f6b23760d49900aa769ff4c4755eb706c51b431c530ad68e10a29ae9"
+        ],
+        "identicalNativeStageOutput": true,
+        "stagedBlobOID": "6be6df00985f7ab36658ebc16af54f4842b6bca4",
+        "looseObjectReadOnlyInflationValidatedOID": true,
+        "blobBodyMatchesExpectedSyntheticB": true,
+        "blobBodySHA256": "0b94b63558f61607c277c033ff88cff3dfdcb6bbd600e496fdc8994226ab7bce",
+        "expectedSyntheticBLabel": "other B staged plus LF"
+      },
+      "physicalDiskEvidence": {
+        "targetIsExactLaterC": true,
+        "targetSHA256": "7ab291ddfdd6dcbfbfbe06e59229be8bf66d8533325930f33c24ef98a85d84dd",
+        "otherOriginDiskCExact": true,
+        "mainDiskCExact": true,
+        "qualification": "Synthetic fixture contents read from disk; this is not a claim that the later test-body assertions executed after the first failure."
+      },
+      "identityEvidence": {
+        "earlierSuccessfulStagingAFTERWitnessAvailable": true,
+        "identityChanged": true,
+        "inodeChanged": true,
+        "mtimeChanged": true,
+        "modeUnchanged": true,
+        "hostFileIdentifiersPublished": false
+      },
+      "transactionEvidence": {
+        "state": "completed",
+        "errorCode": "EXTERNAL_EDIT",
+        "journalSHA256": "907e1f11dd34d0cd06427a1736b13da4ce24227bea3003496e78760a29255b9c",
+        "stepNames": [
+          "prepared",
+          "failed",
+          "completed",
+          "backup-ready",
+          "write-completed",
+          "backup-ready",
+          "write-completed"
+        ],
+        "backupReadyStepsBeforeFailure": 0,
+        "stepsAfterCompleted": [
+          "backup-ready",
+          "write-completed",
+          "backup-ready",
+          "write-completed"
+        ],
+        "qualification": "The failed operation had no backup-ready/private-index plan before its failed/completed sequence; native checkpoint reconstruction subsequently added the observed private-index backups and AFTER records."
+      }
+    },
+    {
+      "testNumber": 100,
+      "name": "explicit deactivation discard does not adopt edits newer than its captured plan",
+      "reportedDurationMs": 19812.6382,
+      "firstFailure": {
+        "kind": "ERR_ASSERTION",
+        "oracle": "exact raw private-index bytes",
+        "affectedLayer": "a",
+        "beforeBytes": 126,
+        "afterBytes": 145,
+        "expectedSHA256": "3aee28854dac35ddd466fe45556309d28933c97c3d3fac7611fc8b67e525fb41",
+        "actualSHA256": "0e5dd57530d49cdfa7e9e256b0db5afdd5fe7a50df715be9e2851db1786aa374",
+        "firstDifferingOffset": 99,
+        "rawTAPBlockSHA256": "5b9bbc0b10ba123d476f1ffa7304b345d51a5bb24c131015e5fc0f574797ed52"
+      },
+      "ownership": {
+        "fixtureMarkerAndReceiptNonceMatched": true,
+        "parentAndRootDirectoryValidated": true,
+        "markerSHA256": "1ea3bf70031fb0e635b0605cfe17f6a50c52c4cc3679e6aa6fe776505e0aa3bc",
+        "retainedReceiptSHA256": "f0debe51e1668cf1008943dfbb49dff5ec989fe04f3a867bc474b84d422c83d8"
+      },
+      "matchedBeforeImage": {
+        "source": "independent retained recovery backup matching the exact expected TAP hash",
+        "bytes": 126,
+        "sha256": "3aee28854dac35ddd466fe45556309d28933c97c3d3fac7611fc8b67e525fb41",
+        "matchesExpectedTAPHash": true
+      },
+      "indexStructure": {
+        "version": 2,
+        "entryCount": 1,
+        "headerAndEntireEntryBytesEqual": true,
+        "headerAndEntriesBytes": 92,
+        "headerAndEntriesSHA256": "29de6e0b8b71858f1302a461c981ef0ccfa68a49fd6f73b3c64b005ab87963ca",
+        "extensionsBefore": [
+          "TREE"
+        ],
+        "extensionsAfter": [
+          "TREE"
+        ],
+        "TREE": {
+          "beforeBytes": 6,
+          "afterBytes": 25,
+          "beforeBodyHex": "002d3120300a",
+          "afterHeader": "<NUL>1 0\n",
+          "afterTreeOID": "63e20477515a3f0aa853f10905748836468ebf80"
+        },
+        "onlyTREEPayloadSizeAndTrailingChecksumAccountForDifference": true,
+        "bothIndexSHA1ChecksumsValid": true,
+        "cachedTreeEqualsEarlierFixedStagingTree": true
+      },
+      "semanticEvidence": {
+        "method": "Existing official Git ls-files --stage -z observations in retained fixture receipt, before/after the failed operation; no new Git invocation by this forensic inspection.",
+        "stdoutSHA256": [
+          "078ca68ee949373c24564da2ebf6a07e04d4ec980c016a4acc162b6ade9d47d8",
+          "078ca68ee949373c24564da2ebf6a07e04d4ec980c016a4acc162b6ade9d47d8"
+        ],
+        "identicalNativeStageOutput": true,
+        "stagedBlobOID": "3144def010a830f9429b49e0cc73cb438a181f76",
+        "looseObjectReadOnlyInflationValidatedOID": true,
+        "blobBodyMatchesExpectedSyntheticB": true,
+        "blobBodySHA256": "41838cbce1ed821ffe591ad841ca2d2cefaa402e41d69ce8a0052e9b41577563",
+        "expectedSyntheticBLabel": "B explicitly staged plus LF"
+      },
+      "physicalDiskEvidence": {
+        "targetIsExactLaterC": true,
+        "targetSHA256": "7ab291ddfdd6dcbfbfbe06e59229be8bf66d8533325930f33c24ef98a85d84dd",
+        "otherOriginDiskCExact": null,
+        "mainDiskCExact": null,
+        "qualification": "Synthetic fixture contents read from disk; this is not a claim that the later test-body assertions executed after the first failure."
+      },
+      "identityEvidence": {
+        "earlierSuccessfulStagingAFTERWitnessAvailable": true,
+        "identityChanged": true,
+        "inodeChanged": true,
+        "mtimeChanged": true,
+        "modeUnchanged": true,
+        "hostFileIdentifiersPublished": false
+      },
+      "transactionEvidence": {
+        "state": "completed",
+        "errorCode": "EXTERNAL_EDIT",
+        "journalSHA256": "0f016377d7dfff7d7f9d00d5441f4f24729555d188813eae49e82f6e9239044d",
+        "stepNames": [
+          "prepared",
+          "failed",
+          "completed",
+          "backup-ready",
+          "write-completed"
+        ],
+        "backupReadyStepsBeforeFailure": 0,
+        "stepsAfterCompleted": [
+          "backup-ready",
+          "write-completed"
+        ],
+        "qualification": "The failed operation had no backup-ready/private-index plan before its failed/completed sequence; native checkpoint reconstruction subsequently added the observed private-index backups and AFTER records."
+      }
+    }
+  ],
+  "classification": {
+    "confirmed": "Failed deactivation is followed by native checkpoint reconstruction that rewrites the live private index cache TREE and replaces its physical identity/mtime. Exact raw-index invariants are genuinely violated; this is not a schema-reader mismatch.",
+    "dataPreservedInReadOnlyEvidence": "Entire header/entry sections, staged blob OIDs/native stage output and the synthetic B blob contents remain exact; the later target C and other checked C fixture files remain on disk.",
+    "notClaimed": [
+      "No universal absence of data-loss risk is claimed.",
+      "No PASS for either failing test or its unexecuted later assertions is claimed.",
+      "No complete-suite outcome, latency attribution or product-health certification is claimed.",
+      "Potential correction, legacy timestamp-oracle transition and directed validation belong to later source/campaigns."
+    ]
+  },
+  "privacy": "Raw roots, nonces, process IDs, device/inode identifiers, user-profile paths and raw command lines are excluded. Retained originals remain private and unchanged."
+}

@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "kind": "confirmed-recovery-boundary-integrity-counterexample",
+  "sourceScope": "Frozen candidate V4, after the durable activation index witness was introduced but before repeating its validation at the actual restore boundary. This probe does not claim a baseline reproduction of this specific witness gap.",
+  "sources": [
+    { "path": "src/core/index.ts", "sha256": "0f8129627c1dc8d1e8fe7ea37cce8a6b5d2aa1a0637fa822e28f139bf6492e92" },
+    { "path": "src/core/recovery.ts", "sha256": "e42573b98869420166d5c72e34f734e38dee4bbbdac513f8c61cee52f62e0f56" },
+    { "path": "src/core/storage.ts", "sha256": "e5eb7b15a9015f1caaf0f0668c589e315adaeef8d8af4703fb4b8603750fe586" },
+    { "path": "src/core/index-timestamp.ts", "sha256": "da53966085085d11d9884703f1b5f7c41278c7e921703da268e123f18b4f1812" }
+  ],
+  "environment": { "gitVersion": "git version 2.53.0.windows.2", "platform": "win32-x64", "mockedGitResults": false, "repositorySourceEditsDuringProbe": false },
+  "setup": "Owned isolated repository; Layer commit A, legitimate legacy-shelf staged B, and a real interruption after the exact B index publication. The pending protected journal contains the BEFORE/AFTER fingerprint and durable index identity witness.",
+  "interference": {
+    "boundary": "After the first backup read chunk during recovery copyRegular, before the private copy returns, timestamp restoration and final target check.",
+    "operation": "Create an independent equal-byte B index, set its mtime by FD to 60 seconds later, fsync it, and rename it over the live private index.",
+    "sameBytesAndMode": true,
+    "inodeChanged": true,
+    "mtimeAdvanceNs": "60000000000"
+  },
+  "before": { "stagedNativeGitContent": "Legitimate staged B", "indexBytes": 137, "indexSHA256": "d41b5b0dc8e856ddb3ec1e09d0f4c052cbf695846f2f78f274c7873e6a06a36d", "journalState": "recovery-required", "durableIndexWitnessPresent": true },
+  "observed": {
+    "recoverReturnedSuccess": true,
+    "recoveredTransactions": 1,
+    "stagedNativeGitContent": "Layer committed A",
+    "indexSHA256": "4a62903c17b2d437862c9802874d020fd0cd25b5b28598c38900f9a160ea697b",
+    "foreignBBytesPreserved": false,
+    "journalSchema": 1,
+    "journalState": "completed",
+    "HEADPreserved": true,
+    "mainIndexBytesPreserved": true,
+    "localLayerRefPreserved": true,
+    "technicalCheckpointRemainedA": true
+  },
+  "result": "CONFIRMED_INTEGRITY_FAILURE: foreign staged B was replaced by A and the journal was completed. A successful preflight identity check was insufficient because the final restore target check compared only bytes/mode.",
+  "rawReceipt": { "bytes": 3467, "sha256": "8b5471cfc9206f6b42db10d1c35fe582852676017fbb6d9f5405ee9d7e4f07af" },
+  "retention": "Raw receipt and exact PROBE.mjs remain in the externally retained owned fixture. Host paths, fixture nonce and raw device/inode identifiers are omitted from this public projection.",
+  "correctiveDirection": "Reuse a single identity-bracketed fingerprint/lock guard at recovery preflight, each restore-loop entry including early continue, and the final rename/unlink boundary after copying/restamping the private temporary. Repeated refusal must preserve the foreign index, native locks, backup and journal.",
+  "finalValidation": "Directed regressions and subsequent full campaigns are separate from this failing V4 observation; see RESULTS.md. No power-loss or universal filesystem CAS guarantee is claimed."
+}

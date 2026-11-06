@@ -11,6 +11,16 @@ export interface IndexIdentity {
 export interface IndexTimestamp {
   sourceMtimeNs: string; requestedMtimeNs: string; observedMtimeNs: string; backwardsShiftNs: string;
 }
+export interface DurableIndexIdentity { dev: string; ino: string; nlink: 1; size: number; mode: number; mtimeNs: string }
+/** ctime is deliberately excluded: native rename can change it without changing the published entry. */
+export const durableIndexIdentity = (identity: IndexIdentity): DurableIndexIdentity => ({ dev: identity.dev, ino: identity.ino, nlink: 1, size: identity.size, mode: identity.mode, mtimeNs: identity.mtimeNs.toString() });
+export function validDurableIndexIdentity(value: any): value is DurableIndexIdentity {
+  return value !== null && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).sort().join(',') === 'dev,ino,mode,mtimeNs,nlink,size' &&
+    typeof value.dev === 'string' && /^(0|[1-9]\d{0,39})$/u.test(value.dev) && typeof value.ino === 'string' && /^(0|[1-9]\d{0,39})$/u.test(value.ino) && value.nlink === 1 &&
+    Number.isSafeInteger(value.size) && value.size >= 0 && Number.isSafeInteger(value.mode) && value.mode >= 0 && value.mode <= 0xffff && (value.mode & 0o170000) === 0o100000 &&
+    typeof value.mtimeNs === 'string' && /^[1-9]\d{0,18}$/u.test(value.mtimeNs) && BigInt(value.mtimeNs) >= 1_000_000_000n && BigInt(value.mtimeNs) < 0x1_0000_0000n * 1_000_000_000n;
+}
+export const matchesDurableIndexIdentity = (expected: DurableIndexIdentity, current: IndexIdentity | null): boolean => current !== null && expected.dev === current.dev && expected.ino === current.ino && expected.nlink === current.nlink && expected.size === current.size && expected.mode === current.mode && expected.mtimeNs === current.mtimeNs.toString();
 const codeOf = (error: unknown): string | undefined => (error as NodeJS.ErrnoException | undefined)?.code;
 const changed = (file: string, sourceIndex: string, reason: string): never => {
   throw new LabError('EXTERNAL_EDIT', 'A identidade do indice mudou durante a validacao temporal; operacao recusada.', { path: file, sourceIndex, reason });

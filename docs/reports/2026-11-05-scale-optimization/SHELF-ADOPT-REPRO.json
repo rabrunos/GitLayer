@@ -1,0 +1,48 @@
+{
+    "schema":  1,
+    "kind":  "candidate-v2-shelf-adoption-binding-reproduction",
+    "capturedAtUtc":  "2026-11-05T13:45:21.1832704Z",
+    "appliesTo":  "Intermediate Etapa 2B candidate V2, after activation-source binding was introduced; not the e8f2e3 baseline",
+    "referenceBaselineCommit":  "e8f2e3feba87224246a42337f77f702914df989e",
+    "rawProofSHA256":  "6763dfbc67585d45909ec002fbd1137e0f3c6125509d39786101e07ed2bca005",
+    "fixtureOwnershipMarkerVerified":  true,
+    "operation":  "Legacy shelf activation with committed A, staged B and later disk C",
+    "boundary":  "After publishPreparedIndexImage returns and before the original adoptPublishedIndex call",
+    "competingAction":  "Create exclusive new temporary containing exactly published B index bytes; set a later mtime through that temporary file handle; synchronize it; atomically rename it over the live index in the owned fixture",
+    "observation":  {
+                        "schema":  1,
+                        "kind":  "shelf-adopt-identical-index-replacement",
+                        "outcome":  "SUCCESS",
+                        "error":  null,
+                        "wrapped":  true,
+                        "adopted":  true,
+                        "sameIndexBytes":  true,
+                        "physicalIdentityChanged":  true,
+                        "mtimeAdvanced":  true,
+                        "mtimeAdvancedNs":  "59558963200",
+                        "privateCopyMtimeNoLaterThanOriginal":  true,
+                        "headPreserved":  true,
+                        "mainIndexPreserved":  true,
+                        "branchRefPreserved":  true,
+                        "stagedB":  true,
+                        "diskC":  true,
+                        "checkpointB":  true,
+                        "registryState":  "active",
+                        "expectedFutureBehavior":  "EXTERNAL_INDEX; do not adopt the foreign physical index image",
+                        "retained":  true,
+                        "sourceHashes":  {
+                                             "src/core/activation-source.ts":  "39a270bdd2238a2ebf63be52edade15f3d749e92cd1471b543eba786e7997065",
+                                             "src/core/index-stage.ts":  "ef7ef7125a3ee4944b2a5f6079ffe2452dbca886e7dfb70b21c3a22ecbb2d440",
+                                             "src/core/index.ts":  "f6c86d37752738e508f5611a1d077b6bc7a806bda5646829a45896274ea7032b"
+                                         }
+                    },
+    "integrityFinding":  "Fingerprint equality was used to refresh identity authority, accepting a foreign inode and newer racy-stat boundary without the publisher exact identity witness",
+    "claimsNotMade":  [
+                          "No C byte loss was observed or claimed",
+                          "This does not characterize the e8f2e3 baseline, which had no new shelf adoption wrapper",
+                          "This directed proof is not certification of the later exact-witness fix or final full suite"
+                      ],
+    "disposition":  "Candidate V2 validation withdrawn after source-stable closure of its owned process tree; fix requires exact published fingerprint plus physical/temporal identity witness before adoption",
+    "plannedRegression":  "Same-byte external replacement at this boundary must receive EXTERNAL_INDEX and remain preserved; it cannot produce successful activation",
+    "rawEvidenceRetained":  true
+}

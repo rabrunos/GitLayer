@@ -83,7 +83,8 @@ export async function safePath(root: string, input: string, allowMissing = true)
   for (let i = 0; i < parts.length; i++) {
     // Existing empty directories also participate in portable alias protection.
     const siblings = await readdir(current);
-    const alias = siblings.find(name => collisionKey(name) === collisionKey(parts[i]!) && name !== parts[i]);
+    const component = parts[i]!, componentKey = collisionKey(component);
+    const alias = siblings.find(name => name !== component && collisionKey(name) === componentKey);
     if (alias) throw new LabError('PATH_COLLISION', `Caminho existente difere apenas por caixa/Unicode: ${alias} / ${parts[i]}`);
     current = path.join(current, parts[i]!);
     let stat;

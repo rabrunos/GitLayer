@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "kind": "isolated-retained-source-descriptor-semantics",
+  "status": "PASS",
+  "startedAt": "2026-11-05T15:29:29.325Z",
+  "endedAt": "2026-11-05T15:29:29.591Z",
+  "runtime": {
+    "node": "v24.14.1",
+    "libuv": "1.51.0",
+    "platform": "win32",
+    "arch": "x64"
+  },
+  "programSHA256": "c053e9078980718132464a8bc455be4914c3bb17f55efe42fb6af1621ca8bbe5",
+  "sources": {
+    "before": [
+      {
+        "path": "src/core/publication.ts",
+        "sha256": "0d011234aba15ef71bb8bbb1e531b4577424cf7cedb6893aa0ce3eda83c28c8e"
+      },
+      {
+        "path": "src/core/storage.ts",
+        "sha256": "e5eb7b15a9015f1caaf0f0668c589e315adaeef8d8af4703fb4b8603750fe586"
+      },
+      {
+        "path": "src/core/platform.ts",
+        "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+      },
+      {
+        "path": "scripts/git-compat/lib.mjs",
+        "sha256": "bd36f29ee217d5bcfd2b2af38dd3e93090574b9b8ade0482b747eab3034f0b81"
+      }
+    ],
+    "after": [
+      {
+        "path": "src/core/publication.ts",
+        "sha256": "0d011234aba15ef71bb8bbb1e531b4577424cf7cedb6893aa0ce3eda83c28c8e"
+      },
+      {
+        "path": "src/core/storage.ts",
+        "sha256": "e5eb7b15a9015f1caaf0f0668c589e315adaeef8d8af4703fb4b8603750fe586"
+      },
+      {
+        "path": "src/core/platform.ts",
+        "sha256": "56da1f821bcb0d831d940dd1ddb482f4059c24d5a97d70af210b285e3dea1179"
+      },
+      {
+        "path": "scripts/git-compat/lib.mjs",
+        "sha256": "bd36f29ee217d5bcfd2b2af38dd3e93090574b9b8ade0482b747eab3034f0b81"
+      }
+    ],
+    "unchanged": true
+  },
+  "payload": {
+    "bytes": 64,
+    "initialSHA256": "d53eda7a637c99cc7fb566d96e9fa109bf15c478410a3f5eb4d4c4e26cd081f6",
+    "laterSHA256": "27d926a6708d6769d97d065e7a5a860ab496eab272c03d1cebc55ec71b954fa2",
+    "content": "Synthetic repeated-byte buffers only"
+  },
+  "cases": [
+    {
+      "method": "direct-link-unlink",
+      "publicationSucceeded": true,
+      "retainedSourceDescriptorOpenedBeforeValidation": true,
+      "validationHash": "d53eda7a637c99cc7fb566d96e9fa109bf15c478410a3f5eb4d4c4e26cd081f6",
+      "destinationHashBeforeDescriptorWrite": "d53eda7a637c99cc7fb566d96e9fa109bf15c478410a3f5eb4d4c4e26cd081f6",
+      "retainedDescriptorHashAfterWrite": "27d926a6708d6769d97d065e7a5a860ab496eab272c03d1cebc55ec71b954fa2",
+      "destinationHashAfterDescriptorWrite": "27d926a6708d6769d97d065e7a5a860ab496eab272c03d1cebc55ec71b954fa2",
+      "destinationChanged": true,
+      "descriptorAndDestinationSameObject": true,
+      "sourcePathExistsAfterPublication": false,
+      "destinationNlink": 1,
+      "sourceNlinkAfterPublication": null,
+      "writeBytes": 64,
+      "expectedIsolationObserved": true
+    },
+    {
+      "method": "direct-native-rename",
+      "publicationSucceeded": true,
+      "retainedSourceDescriptorOpenedBeforeValidation": true,
+      "validationHash": "d53eda7a637c99cc7fb566d96e9fa109bf15c478410a3f5eb4d4c4e26cd081f6",
+      "destinationHashBeforeDescriptorWrite": "d53eda7a637c99cc7fb566d96e9fa109bf15c478410a3f5eb4d4c4e26cd081f6",
+      "retainedDescriptorHashAfterWrite": "27d926a6708d6769d97d065e7a5a860ab496eab272c03d1cebc55ec71b954fa2",
+      "destinationHashAfterDescriptorWrite": "27d926a6708d6769d97d065e7a5a860ab496eab272c03d1cebc55ec71b954fa2",
+      "destinationChanged": true,
+      "descriptorAndDestinationSameObject": true,
+      "sourcePathExistsAfterPublication": false,
+      "destinationNlink": 1,
+      "sourceNlinkAfterPublication": null,
+      "writeBytes": 64,
+      "expectedIsolationObserved": true
+    },
+    {
+      "method": "independent-copy-then-link-unlink",
+      "publicationSucceeded": true,
+      "retainedSourceDescriptorOpenedBeforeValidation": true,
+      "validationHash": "d53eda7a637c99cc7fb566d96e9fa109bf15c478410a3f5eb4d4c4e26cd081f6",
+      "destinationHashBeforeDescriptorWrite": "d53eda7a637c99cc7fb566d96e9fa109bf15c478410a3f5eb4d4c4e26cd081f6",
+      "retainedDescriptorHashAfterWrite": "27d926a6708d6769d97d065e7a5a860ab496eab272c03d1cebc55ec71b954fa2",
+      "destinationHashAfterDescriptorWrite": "d53eda7a637c99cc7fb566d96e9fa109bf15c478410a3f5eb4d4c4e26cd081f6",
+      "destinationChanged": false,
+      "descriptorAndDestinationSameObject": false,
+      "sourcePathExistsAfterPublication": true,
+      "destinationNlink": 1,
+      "sourceNlinkAfterPublication": 1,
+      "writeBytes": 64,
+      "expectedIsolationObserved": true
+    }
+  ],
+  "qualification": "Three isolated filesystem observations, not Core activation, throughput, benchmark, power-loss certification, universal OS isolation or proof that direct movement is impossible. A retained writer descriptor of the extracted inode can mutate a moved destination; a different publication inode isolates that particular descriptor. The independent temporary and destination still need validation and can have their own external writers.",
+  "rawReceiptSHA256": "1c12bbdb78f8675ff2b26bf1dee463fd3d800456b2db53c9927da7e5539f7c9d",
+  "retention": "Raw receipt, nonce marker, program and synthetic payloads remain in the newly owned external fixture; no cleanup performed.",
+  "method": [
+    "Create three independent owned subdirectories and 64-byte synthetic prepared source files; flush each source.",
+    "Open a writable source descriptor before validation and retain it through publication.",
+    "Validate source fingerprint, then either publish the source itself using the actual publishNewFile helper, native fs.rename, or copyRegular to an independent temporary followed by publishNewFile.",
+    "Confirm the destination has the original hash immediately after publication.",
+    "Write and flush 64 changed bytes through the descriptor opened on the source before validation; hash destination and descriptor bytes independently.",
+    "Require same-object mutation for both movement methods and distinct-object preservation of the original destination for the independent-copy method; close only own handles."
+  ],
+  "observationCounts": {
+    "methods": 3,
+    "matchedExpectedSemantics": 3,
+    "coreActivations": 0,
+    "benchmarks": 0
+  }
+}

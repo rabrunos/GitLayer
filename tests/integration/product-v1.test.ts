@@ -6,6 +6,7 @@ import path from 'node:path';
 import os from 'node:os';
 import test, { type TestContext } from 'node:test';
 import { GitLayers } from '../../src/core/index.js';
+import { writeJournalFixture } from '../helpers/read-journal.js';
 
 // Independent observer: invoke the installed executable by absolute path/argv.
 const officialGit = execFileSync(process.platform === 'win32' ? 'where.exe' : '/usr/bin/which', [process.platform === 'win32' ? 'git.exe' : 'git'], { encoding:'utf8' }).trim().split(/\r?\n/)[0]!;
@@ -323,7 +324,7 @@ test('GL19 recovery validates optional prior workspace roles and editing before 
   for (const entry of cases) {
     const data=structuredClone(original);
     entry.poison(data.recovery.beforeWorkspace);
-    fs.writeFileSync(journal,JSON.stringify(data,null,2)+'\n');
+    writeJournalFixture(journal,data);
     const before=snapshot();
     const reopened=await GitLayers.open(f.repo);
     let error:any;

@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "kind": "interrupted-local-validation-phase",
+  "campaign": "full-v5-interrupted",
+  "phase": "full",
+  "status": "FAIL",
+  "finalResultPresent": true,
+  "startedAt": "2026-11-05T15:06:32.044Z",
+  "endedAt": "2026-11-05T15:45:23.806Z",
+  "command": {
+    "cwd": "<PROJECT>",
+    "executable": "<NODE.EXE>",
+    "argv": [
+      "--import",
+      "tsx",
+      "--test",
+      "--test-concurrency=2",
+      "--test-timeout=900000",
+      "--test-reporter=spec",
+      "--test-reporter-destination=stdout",
+      "--test-reporter=tap",
+      "--test-reporter-destination=stderr",
+      "tests/unit/*.test.ts",
+      "tests/unit/*.test.mjs",
+      "tests/integration/*.test.ts",
+      "tests/integration/*.test.mjs"
+    ],
+    "timeoutMs": 10800000,
+    "npmEquivalent": "npm.cmd test",
+    "scope": "Same corpus, concurrency and per-test timeout as package.json test; adds spec/TAP evidence reporters."
+  },
+  "source": {
+    "beforeFingerprint": "aea6cdb6a2faf6d68ae424272a2454f44d4e57e8b25683850e568030e20e1b31",
+    "afterFingerprint": "aea6cdb6a2faf6d68ae424272a2454f44d4e57e8b25683850e568030e20e1b31",
+    "countBefore": 223,
+    "countAfter": 223,
+    "sourceUnchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "beforeManifest": "SOURCE-MANIFEST-aea6cdb6a2faf6d68ae424272a2454f44d4e57e8b25683850e568030e20e1b31.json",
+    "afterManifest": "SOURCE-MANIFEST-aea6cdb6a2faf6d68ae424272a2454f44d4e57e8b25683850e568030e20e1b31.json",
+    "beforeManifestRawSHA256": "940c6e97e78441e8efce64c77b027a797cfb3a67a5be81a42cbdc71ef8f1e937",
+    "afterManifestRawSHA256": "940c6e97e78441e8efce64c77b027a797cfb3a67a5be81a42cbdc71ef8f1e937"
+  },
+  "process": {
+    "exitCode": 1,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "timeoutMs": 10800000,
+    "durationMs": 2327718,
+    "termination": null
+  },
+  "summary": {
+    "format": "Node.js TAP final summary",
+    "counts": {},
+    "complete": false,
+    "consistent": false
+  },
+  "independentlyParsedTap": {
+    "format": "Node.js TAP final summary",
+    "counts": {},
+    "complete": false,
+    "consistent": false
+  },
+  "streams": {
+    "stdout": {
+      "file": "stdout.log",
+      "present": true,
+      "bytes": 11583,
+      "sha256": "19fa96e44a9b486d1c626115b24ea8f297b20ede30dadb600475dc3de96bb1e2",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    },
+    "stderr": {
+      "file": "stderr.log",
+      "present": true,
+      "bytes": 18919,
+      "sha256": "899d1e629760de3f4be570d3e892c428269c5c9e3652589b21dd83a78d543725",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    }
+  },
+  "error": null,
+  "resultRawSHA256": "6b7d2c031055af517183b87a99788cd1dee9c5311c6a60b60a73121cf4d91bac",
+  "projectComparison": {
+    "project": "<PROJECT>",
+    "fingerprint": "aea6cdb6a2faf6d68ae424272a2454f44d4e57e8b25683850e568030e20e1b31",
+    "count": 223,
+    "unchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    }
+  },
+  "qualification": "One named phase and one source snapshot; labels do not imply final approval. Never pool campaigns, retries, phases or partial TAP totals. Explicitly withdrawn after a separately confirmed fresh-index retention defect. No final TAP denominator exists and no subsequent correction is approved by this receipt. Four closed V5 phases remain intermediate observations of the earlier source.",
+  "stop": {
+    "requestedAt": "2026-11-05T15:45:21.2727076Z",
+    "reason": "Confirmed fresh activation same-byte external index replacement detected before ActivationSource assignment was removed by automatic rollback; withdraw candidate",
+    "observedAt": "2026-11-05T15:45:22.3715781Z",
+    "previouslyInventoriedCount": 10,
+    "remainingPreviouslyInventoriedCount": 0,
+    "nativeTaskkillExit": 128,
+    "qualification": "Only previously inventoried IDs checked; no universal claim about unobserved descendants",
+    "requestedRawSHA256": "0ef2f079b2c8b7aad90c93239a61b0ff21e472150a2720b6a86ffa79dd2d7cb2",
+    "observedRawSHA256": "b428e26f54c48bfe49e6b41b9faa8a672713e8c81957053657972034b2bcdd88"
+  },
+  "integrityFinding": {
+    "status": "CONFIRMED_EXTERNAL_REPRODUCTIONS",
+    "description": "Two owned-fixture reproductions replaced a newly registered native index with an unknown equal-byte A inode, once after fresh validation token creation and once during validation. The candidate raised EXTERNAL_INDEX but automatic rollback then removed that foreign index and completed the journal as schema 1, before ActivationSource had been assigned.",
+    "classification": "Missing durable creation identity boundary in shared fresh registration; not a claim of distinct staged B or requested-version loss.",
+    "preserved": "HEAD, MAIN index, Layer ref and registry remained preserved in the independent reproductions.",
+    "reproductionReceipt": "Separate fresh-index reproduction receipts and corrective tests are documented in RECOVERY.md; this file records the interrupted full campaign only."
+  },
+  "orchestration": {
+    "overlapReceipt": "BROAD-V5-OVERLAP-INTERRUPTED.json",
+    "qualification": "Full V5 initially shared host load with typecheck/build/infra/smoke and briefly with the deliberately stopped broad attempt. This is validation chronology, not benchmark timing. No timeout occurred in this stopped root result."
+  }
+}

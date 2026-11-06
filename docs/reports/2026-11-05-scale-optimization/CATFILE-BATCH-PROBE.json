@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "kind": "rejected-native-batch-prototype",
+  "status": "REJECTED_NOT_ADOPTED",
+  "qualification": "A tiny isolated official Git behavior investigation, not a passed suite, performance measurement or broad attribute-compatibility certificate.",
+  "ownership": "Fresh external directory with validated marker/nonce. The native test repository, private index, materialized files, source programs and call records are retained; no product code was changed by this probe.",
+  "executionHistory": [
+    {
+      "program": "probe.mjs",
+      "source": {
+        "file": "probe.mjs",
+        "sha256": "dbc1fa7177fbb1b7d7c440d22d5f26f1b82e9e7d93ce96e747ab0890ae198ca3",
+        "bytes": 5184
+      },
+      "observedProcessExitCode": 1,
+      "outcome": "Diagnostic parser assertion failed: after consuming the header raw-size count, the next byte was CR(13), not expected LF(10).",
+      "rawStandaloneStdoutStderrFilesCaptured": false,
+      "observationSource": "Actual executed-tool result; no final RESULT.json was produced."
+    },
+    {
+      "program": "probe-v2.mjs",
+      "source": {
+        "file": "probe-v2.mjs",
+        "sha256": "b6012e08e8aaa7bec0143d6607632affd341cdad27d727871d845389058d3c57",
+        "bytes": 6549
+      },
+      "observedProcessExitCode": 1,
+      "outcome": "Diagnostic oracle-length parser assertion failed during the autocrlf=true comparison; no final RESULT-V2.json or global PASS was produced.",
+      "rawStandaloneStdoutStderrFilesCaptured": false,
+      "observationSource": "Actual executed-tool result, with each completed native invocation independently retained in CALLS-V2.jsonl."
+    }
+  ],
+  "nativeFacts": [
+    {
+      "argv": [
+        "cat-file",
+        "--batch",
+        "--filters"
+      ],
+      "exitCode": 0,
+      "firstHeader": "fbbee861521bd5355538b096fa3998541cd33909 blob 11",
+      "headerRawBlobBytes": 11,
+      "firstFilteredBodyHex": "616c7068610d0a626574610d0a",
+      "actualFirstFilteredBodyBytes": 13,
+      "body": "alpha CRLF beta CRLF",
+      "nativeStdoutSHA256": "03794016887d381cace1ae997928de2a6cd6bebf2188d1be81bef0a586920d9c",
+      "finding": "Raw object size does not frame the converted body. Do not parse arbitrary binary filtered output by this header size."
+    },
+    {
+      "argv": [
+        "hash-object",
+        "--path=one.crlf",
+        "--",
+        "<PRIVATE_FILE_1>",
+        "<PRIVATE_FILE_2>"
+      ],
+      "exitCode": 0,
+      "reportedOIDs": [
+        "fbbee861521bd5355538b096fa3998541cd33909",
+        "fbbee861521bd5355538b096fa3998541cd33909"
+      ],
+      "finding": "Multiple file arguments with one logical --path are accepted; no attribute-grouping product architecture was adopted."
+    },
+    {
+      "argv": [
+        "hash-object",
+        "--path=one.crlf",
+        "--stdin-paths"
+      ],
+      "exitCode": 129,
+      "diagnostic": "Can't use --stdin-paths with --path",
+      "finding": "Cannot use per-file logical path selection through this stdin-paths form."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://git-scm.com/docs/git-cat-file",
+      "purpose": "Official filtered and batch command documentation."
+    },
+    {
+      "url": "https://git-scm.com/docs/git-hash-object",
+      "purpose": "Official path-dependent hashing and stdin-paths documentation."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/git/git/master/builtin/cat-file.c",
+      "purpose": "Inspected official source prints the raw object header before the separately-sized transformed content. Not a hash-pinned copy of the installed executable source."
+    }
+  ],
+  "retainedEvidence": {
+    "nativeCalls": {
+      "file": "CALLS-V2.jsonl",
+      "sha256": "9d67123852b115b247387bc3f38b132fe84c1db6f7afd9a07f24bb707c0b4ffe",
+      "bytes": 12155
+    }
+  },
+  "decision": "Do not implement a size-delimited cat-file --batch --filters parser. Selected product route compares a same-FD Git raw-blob OID first, then uses single-object filtered stdout to EOF only when required.",
+  "limits": [
+    "Both diagnostic programs exited with assertions; native code0 observations are distinct from a probe-program PASS.",
+    "The scripts did not complete the proposed broad matrix for leading/trailing spaces, Unicode, staged-versus-disk attributes, autocrlf variants or SHA256 repositories. No broad compatibility result is claimed.",
+    "Leading spaces and Unicode existed in the tiny repository, but presence is not a completed compatibility campaign. Trailing-space components are outside the existing portable product path contract.",
+    "No parser accepting an untrusted filtered size was introduced. Diagnostic parsing using observed physical lengths is not a production protocol.",
+    "No version command completed in these programs; no installed Git version is invented from later runs.",
+    "Native Git filtered conversion can allocate the full transformed body; a bounded Node consumer does not prove bounded aggregate native RSS.",
+    "Raw private paths, nonces, process IDs, profiles and raw stdout/stderr bodies are deliberately excluded from this public receipt."
+  ]
+}

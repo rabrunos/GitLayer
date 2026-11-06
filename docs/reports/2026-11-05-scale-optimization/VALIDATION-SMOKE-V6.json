@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "kind": "local-validation-phase",
+  "campaign": "smoke-v6",
+  "phase": "smoke",
+  "status": "PASS",
+  "finalResultPresent": true,
+  "startedAt": "2026-11-05T16:07:16.373Z",
+  "endedAt": "2026-11-05T16:09:02.708Z",
+  "command": {
+    "cwd": "<PROJECT>",
+    "executable": "<NODE.EXE>",
+    "argv": [
+      "scripts/smoke-core-cli.mjs",
+      "--out",
+      "<EVIDENCE>\\smoke"
+    ],
+    "timeoutMs": 1800000,
+    "npmEquivalent": null,
+    "scope": "Compiled, relocated Core/CLI smoke; not a full suite. The smoke also invokes the independent build."
+  },
+  "source": {
+    "beforeFingerprint": "7a3dc62aabdd34c0db0d04c8dba71ad8e2f8b6c77eebe0525cdff4e2d1510e42",
+    "afterFingerprint": "7a3dc62aabdd34c0db0d04c8dba71ad8e2f8b6c77eebe0525cdff4e2d1510e42",
+    "countBefore": 224,
+    "countAfter": 224,
+    "sourceUnchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "beforeManifest": "SOURCE-MANIFEST-7a3dc62aabdd34c0db0d04c8dba71ad8e2f8b6c77eebe0525cdff4e2d1510e42.json",
+    "afterManifest": "SOURCE-MANIFEST-7a3dc62aabdd34c0db0d04c8dba71ad8e2f8b6c77eebe0525cdff4e2d1510e42.json",
+    "beforeManifestRawSHA256": "15d3859112ed8d921d1d261aa586abca6405c83e8619c77c777d0e2afd2b05da",
+    "afterManifestRawSHA256": "15d3859112ed8d921d1d261aa586abca6405c83e8619c77c777d0e2afd2b05da"
+  },
+  "process": {
+    "exitCode": 0,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "timeoutMs": 1800000,
+    "durationMs": 105721,
+    "termination": null
+  },
+  "summary": {
+    "format": "compiled-smoke",
+    "file": "smoke/smoke-2026-11-05T16-07-16-944Z-5d8705af/result.json",
+    "status": "PASS",
+    "commands": 82,
+    "snapshots": 4,
+    "steps": [
+      {
+        "name": "CLI create and compose two layers",
+        "status": "PASS"
+      },
+      {
+        "name": "CLI edit routes future files and ends without deactivation",
+        "status": "PASS"
+      },
+      {
+        "name": "CLI commits prepared B while disk C and base stage stay independent",
+        "status": "PASS"
+      },
+      {
+        "name": "CLI preview and discard require separate explicit choices",
+        "status": "PASS"
+      },
+      {
+        "name": "CLI rename preserves history and native protection has explicit entry",
+        "status": "PASS"
+      },
+      {
+        "name": "CLI removal requires confirmation and preserves the other origin",
+        "status": "PASS"
+      },
+      {
+        "name": "CLI doctor is scriptable and raw rescue works with corrupt metadata",
+        "status": "PASS"
+      }
+    ]
+  },
+  "independentlyParsedTap": null,
+  "streams": {
+    "stdout": {
+      "file": "stdout.log",
+      "present": true,
+      "bytes": 200,
+      "sha256": "14dc9a7a8a3f77da1c6a5a46c934ec8666c20b534f8bda0f2736bfdc388d14a5",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    },
+    "stderr": {
+      "file": "stderr.log",
+      "present": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    }
+  },
+  "error": null,
+  "resultRawSHA256": "99f78c50af2d887a989b275cdb7ac6269ea5e711046ac467a200e2555fa7887b",
+  "projectComparison": {
+    "project": "<PROJECT>",
+    "fingerprint": "7a3dc62aabdd34c0db0d04c8dba71ad8e2f8b6c77eebe0525cdff4e2d1510e42",
+    "count": 224,
+    "unchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    }
+  },
+  "qualification": "One named phase and one source snapshot; labels do not imply final approval. Never pool campaigns, retries, phases or partial TAP totals."
+}

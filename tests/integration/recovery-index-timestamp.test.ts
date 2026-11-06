@@ -8,6 +8,7 @@ import { syncBuiltinESMExports } from 'node:module';
 import test, { type TestContext } from 'node:test';
 import { GitLayers } from '../../src/core/index.js';
 import { assertBytesEqual } from '../helpers/assert-bytes.js';
+import { readJournal } from '../helpers/read-journal.js';
 import { createFixture, cleanupFixture, isolatedEnvironment, resolveGit } from '../../scripts/git-compat/lib.mjs';
 
 const officialGit = resolveGit();
@@ -61,7 +62,7 @@ function fixture(t: TestContext) {
   return { owned, env, repo, native, text, write, stat, statReceipt, events, finish, validateOwned };
 }
 
-async function interrupted(f: ReturnType<typeof fixture>, role: Role, config: typeof configurations[number]) {
+async function interrupted(f: ReturnType<typeof fixture>, role: Role, config: typeof configurations[number], protocol:'legacy'|'managed'='legacy') {
   for (const [key, value] of [['core.trustctime', config.trustctime], ['core.checkStat', config.checkStat], ['core.fsmonitor', 'false'], ['core.filemode', 'false']]) f.text(['config', '--local', key!, value!]);
   const app = await GitLayers.init(f.repo), racy = role === 'MAIN' ? 'racy.txt' : 'layer-racy.txt', other = role === 'MAIN' ? 'other.txt' : 'layer-other.txt';
   let index = path.join(f.repo, '.git', 'index'), committed = 'HEAD', layerId: string | undefined;
@@ -99,21 +100,32 @@ async function interrupted(f: ReturnType<typeof fixture>, role: Role, config: ty
   const published = fs.readFileSync(index); assert.notEqual(hash(published), hash(before)); assert.equal(f.text(['show', ':' + other], index), 'PPPP');
   const txRoot = path.join(app.dir, 'transactions');
   const pending = fs.readdirSync(txRoot).map(id => ({ id, journal: path.join(txRoot, id, 'journal.json') })).filter(entry => fs.existsSync(entry.journal)).map(entry => ({ ...entry, data: JSON.parse(fs.readFileSync(entry.journal, 'utf8')) })).filter(entry => entry.data.state !== 'completed');
-  assert.equal(pending.length, 1); const transaction = pending[0]!, plan = transaction.data.recovery.files.find((entry: any) => entry.path === index);
+  assert.equal(pending.length, 1); const transaction = pending[0]!;
+  if(protocol==='legacy'){
+    // Explicitly construct an old schema1 fixture. A file plan without timestamp
+    // fields is no longer a legacy protocol when the new managed guard remains.
+    f.validateOwned();const original=fs.readFileSync(transaction.journal),preserved=path.join(f.owned.root,'original-current-journal-'+transaction.id+'.json'),legacy=readJournal(transaction.journal);
+    fs.writeFileSync(preserved,original,{flag:'wx'});delete legacy.recovery.managedIndexPublication;delete legacy.recovery.managedIndexConflict;
+    assert.equal(legacy.schema,1);fs.writeFileSync(transaction.journal,JSON.stringify(legacy,null,2)+'\n');transaction.data=legacy;
+    f.events.push({kind:'explicit-legacy-schema1-fixture',original:preserved,originalSHA256:hash(original),legacySHA256:hash(fs.readFileSync(transaction.journal)),originalSchema:JSON.parse(original.toString()).schema,legacySchema:1,removedGuards:['managedIndexPublication','managedIndexConflict'],realDataMigration:false});
+  }else{assert.equal(transaction.data.schema,2);assert(transaction.data.recovery.managedIndexPublication);}
+  const plan = transaction.data.recovery.files.find((entry: any) => entry.path === index);
   assert(plan?.backup); assert.equal(plan.before.hash, hash(before)); assertBytesEqual(fs.readFileSync(plan.backup), before, 'Recovery backup has exact original B raw index');
   assert(!('timestamp' in plan) && !('mtimeNs' in plan), 'Legacy journal file plan needs no new timestamp field');
   f.events.push({ role, config, before: f.statReceipt(plan.backup), sourceBeforeMtimeNs: String(initialStat.mtimeNs), backupSHA256: hash(before), transaction: transaction.id, publishedSHA256: hash(published) });
-  return { app, role, layerId, treeB, index, before, published, initialStat, head, committed, committedOID, refs, racy, other, diffArgs, transaction, plan };
+  return { app, role, layerId, treeB, index, before, published, initialStat, head, committed, committedOID, refs, racy, other, diffArgs, transaction, plan, protocol };
 }
 
 type Prepared = Awaited<ReturnType<typeof interrupted>>;
 
 /**
- * The retained v7 failures were audited byte by byte and replayed with the
- * official Git: epoch-1s B plus write-tree produces exactly the private final
- * index, including native racy smudging (stat size 5 -> 0 and checksum only).
- * Evidence: audit 525c276b... and exact native replay bc8446c6... . Do not
- * replace this full-byte oracle with permission for arbitrary stat deltas.
+ * Exact counterfactual for the former live private write-tree checkpoint route.
+ * Retained v7 failures were audited/replayed with official Git: epoch-1s B
+ * can be smudged (stat size 5 -> 0 and checksum) by that native write-tree.
+ * The current checkpoint validates the same native tree on an independent
+ * copy; the restored live index must retain every original B byte and epoch1.
+ * Keep this replay file/hash as history, not permission for arbitrary deltas.
+ * Evidence: audit 525c276b... and exact native replay bc8446c6... .
  */
 function nativeCheckpointReplay(f: ReturnType<typeof fixture>, prepared: Prepared) {
   assert.equal(prepared.role, 'private'); f.validateOwned();
@@ -144,7 +156,7 @@ function nativeCheckpointReplay(f: ReturnType<typeof fixture>, prepared: Prepare
   assertBytesEqual(fs.readFileSync(prepared.transaction.journal), original.journal, 'Derived replay preserves pending journal');
   assertBytesEqual(fs.readFileSync(path.join(f.repo, '.git', 'index')), original.main, 'Derived private replay preserves MAIN index');
   assert.equal(f.text(['for-each-ref', '--format=%(refname)%00%(objectname)']), original.refs); assert.equal(f.text(['rev-parse', 'HEAD']), original.head);
-  f.events.push({ kind: 'exact-independent-native-checkpoint-replay', file: copy, beforeSHA256: hash(prepared.before), afterSHA256: hash(bytes), tree, exactComparisonRequired: true, originalIndexBackupJournalMainRefsPreserved: true });
+  f.events.push({ kind: 'exact-independent-native-checkpoint-replay', file: copy, beforeSHA256: hash(prepared.before), afterSHA256: hash(bytes), tree, exactComparisonRequired: true, comparisonRole: 'former-live-private-checkpoint-counterfactual', liveRawExpectation: 'exact-original-B', differsFromOriginal: !bytes.equals(prepared.before), originalIndexBackupJournalMainRefsPreserved: true });
   return { copy, bytes, tree, stage, flags };
 }
 type NativeReplay = ReturnType<typeof nativeCheckpointReplay>;
@@ -170,13 +182,14 @@ async function atRollbackPublication<T>(f: ReturnType<typeof fixture>, prepared:
 }
 
 function assertRecovered(f: ReturnType<typeof fixture>, prepared: Prepared, replay?: NativeReplay) {
-  const expected = prepared.role === 'MAIN' ? prepared.before : replay?.bytes; assert(expected, 'Private recovery requires its independent exact native replay');
-  assertBytesEqual(fs.readFileSync(prepared.index), expected, prepared.role === 'MAIN' ? 'MAIN rollback preserves exact original raw B index' : 'Private final index must match every byte of the official Git checkpoint replay');
-  if (prepared.role === 'MAIN') assert.equal(f.stat(prepared.index).mtimeNs, second, 'MAIN index keeps the exact conservative nonzero Git boundary');
-  else {
+  const guarded=prepared.protocol==='managed',expected = prepared.before; assert(expected, 'Recovery requires exact original B bytes');
+  assertBytesEqual(fs.readFileSync(prepared.index), expected, prepared.role === 'MAIN' ? 'MAIN rollback preserves exact original raw B index' : guarded?'Guarded private rollback preserves every original B byte without live write-tree':'Legacy private rollback preserves exact original B bytes while checkpoint refresh stays in its copy');
+  assert.equal(f.stat(prepared.index).mtimeNs, second, 'Restored index keeps the exact conservative nonzero Git boundary');
+  if(prepared.role==='private'){
     assert(replay && prepared.layerId); assertBytesEqual(f.native(['ls-files', '--stage', '-z'], prepared.index), replay.stage, 'Recovered path/mode/stage/blob OIDs match native replay');
     assertBytesEqual(f.native(['ls-files', '-v', '-z'], prepared.index), replay.flags, 'Recovered index flags match native replay');
     assert.equal(f.text(['rev-parse', 'refs/git-layers/state/' + prepared.layerId]), replay.tree, 'Recovered private checkpoint tree remains the original B tree');
+    assertBytesEqual(fs.readFileSync(replay.copy), replay.bytes, 'Former live write-tree counterfactual remains exactly retained');
   }
   const beforeRead = f.statReceipt(prepared.index);
   assert.equal(f.native(prepared.diffArgs, prepared.index).toString('utf8'), 'M\0' + prepared.racy + '\0', 'Official Git continues detecting C after rollback and checkpoint');
@@ -197,6 +210,13 @@ for (const role of ['MAIN', 'private'] as const) for (const config of configurat
   assertBytesEqual(fs.readFileSync(prepared.transaction.journal), completedJournal, 'Repeated completed recovery does not rewrite the journal'); assert.deepEqual(f.statReceipt(prepared.index), completedStat);
   f.events.push({ recovered: result.recovered, repeated: repeat.recovered, restored: completedStat, exactRawIndexSHA256: hash(prepared.before), nativeDiff: 'M\\0' + prepared.racy + '\\0' });
   f.finish();
+});
+
+for(const config of configurations)test('GL19 guarded managed rollback preserves exact original B index and racy C detection with '+config.label,budget,async t=>{
+  const f=fixture(t),prepared=await interrupted(f,'private',config,'managed'),replay=nativeCheckpointReplay(f,prepared);
+  const result=await atRollbackPublication(f,prepared,()=>prepared.app.recover());assert(result.recovered.includes(prepared.transaction.id));assertRecovered(f,prepared,replay);
+  const journal=fs.readFileSync(prepared.transaction.journal),identity=f.statReceipt(prepared.index);assert.deepEqual((await prepared.app.recover()).recovered,[]);assertRecovered(f,prepared,replay);assertBytesEqual(fs.readFileSync(prepared.transaction.journal),journal,'Repeated guarded recovery preserves completed journal');assert.deepEqual(f.statReceipt(prepared.index),identity);
+  f.events.push({kind:'guarded-exact-original-B',recovered:result.recovered,sourceSHA256:hash(prepared.before),finalSHA256:hash(fs.readFileSync(prepared.index)),nativeReplaySHA256:hash(replay.bytes),nativeDiff:'M\\0'+prepared.racy+'\\0',noArbitraryStatDeltaAllowed:true});f.finish();
 });
 
 for (const mode of ['sync-EIO-after-effect', 'timestamp-tamper-during-sync'] as const) test('GL19 index rollback preserves published index backup journal and temporary on ' + mode, budget, async t => {

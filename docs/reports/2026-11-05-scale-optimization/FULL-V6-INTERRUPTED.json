@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "kind": "interrupted-local-validation-phase",
+  "campaign": "full-v6-interrupted",
+  "phase": "full",
+  "status": "FAIL",
+  "finalResultPresent": true,
+  "startedAt": "2026-11-05T16:14:10.642Z",
+  "endedAt": "2026-11-05T17:12:36.904Z",
+  "command": {
+    "cwd": "<PROJECT>",
+    "executable": "<NODE.EXE>",
+    "argv": [
+      "--import",
+      "tsx",
+      "--test",
+      "--test-concurrency=2",
+      "--test-timeout=900000",
+      "--test-reporter=spec",
+      "--test-reporter-destination=stdout",
+      "--test-reporter=tap",
+      "--test-reporter-destination=stderr",
+      "tests/unit/*.test.ts",
+      "tests/unit/*.test.mjs",
+      "tests/integration/*.test.ts",
+      "tests/integration/*.test.mjs"
+    ],
+    "timeoutMs": 10800000,
+    "npmEquivalent": "npm.cmd test",
+    "scope": "Same corpus, concurrency and per-test timeout as package.json test; adds spec/TAP evidence reporters."
+  },
+  "source": {
+    "beforeFingerprint": "7a3dc62aabdd34c0db0d04c8dba71ad8e2f8b6c77eebe0525cdff4e2d1510e42",
+    "afterFingerprint": "7a3dc62aabdd34c0db0d04c8dba71ad8e2f8b6c77eebe0525cdff4e2d1510e42",
+    "countBefore": 224,
+    "countAfter": 224,
+    "sourceUnchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "beforeManifest": "SOURCE-MANIFEST-7a3dc62aabdd34c0db0d04c8dba71ad8e2f8b6c77eebe0525cdff4e2d1510e42.json",
+    "afterManifest": "SOURCE-MANIFEST-7a3dc62aabdd34c0db0d04c8dba71ad8e2f8b6c77eebe0525cdff4e2d1510e42.json",
+    "beforeManifestRawSHA256": "15d3859112ed8d921d1d261aa586abca6405c83e8619c77c777d0e2afd2b05da",
+    "afterManifestRawSHA256": "15d3859112ed8d921d1d261aa586abca6405c83e8619c77c777d0e2afd2b05da"
+  },
+  "process": {
+    "exitCode": 1,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "timeoutMs": 10800000,
+    "durationMs": 3505638,
+    "termination": null
+  },
+  "summary": {
+    "format": "Node.js TAP final summary",
+    "counts": {},
+    "complete": false,
+    "consistent": false
+  },
+  "independentlyParsedTap": {
+    "format": "Node.js TAP final summary",
+    "counts": {},
+    "complete": false,
+    "consistent": false
+  },
+  "streams": {
+    "stdout": {
+      "file": "stdout.log",
+      "present": true,
+      "bytes": 129274,
+      "sha256": "1dda5d79d83d71a35ff373c1001b7fded34a6f55997fbc5b12f126e6f513c1f7",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    },
+    "stderr": {
+      "file": "stderr.log",
+      "present": true,
+      "bytes": 185279,
+      "sha256": "a83d6162f75e062a286b9b9e4563b9f8df946417ae7386f5fab1fd39de177c9a",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    }
+  },
+  "error": null,
+  "resultRawSHA256": "69c4870b8b0d85b8534de7159741d1faf9e75a9b128b1e9385ed2cd59d5490fa",
+  "projectComparison": {
+    "project": "<PROJECT>",
+    "fingerprint": "0568f43010e39ff34bb6c659730cef236c97254b9cb99eead81e8c51faf9fe65",
+    "count": 224,
+    "unchanged": false,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": [
+        "src/core/index-stage.ts"
+      ]
+    }
+  },
+  "qualification": "One named phase and one source snapshot; labels do not imply final approval. Never pool campaigns, retries, phases or partial TAP totals. Intentionally stopped after a separately confirmed integrity defect; no final TAP denominator exists. Four closed V6 phases remain intermediate observations of the previous source, and no later correction is approved here.",
+  "stop": {
+    "canonicalCorrectionFile": "STOP-INVENTORY-CORRECTION-V3.json",
+    "canonicalCorrectionRawSHA256": "fd9958006828a691dac5ee9773deaa1d852f5acc2569aaa8e2d672ec14817374",
+    "schema": 3,
+    "observedAt": "2026-11-05T17:15:11.3709118Z",
+    "projectionGeneratedAt": "2026-11-05T17:17:11.282Z",
+    "supersedes": [
+      "STOP-INVENTORY-CORRECTION.json",
+      "STOP-INVENTORY-CORRECTION-V2.json"
+    ],
+    "initialInventoryCount": 11,
+    "chronologicallyOwnedPreinventoryCount": 7,
+    "excludedEarlierAssociations": 4,
+    "excludedSameIdentityStillRunningCount": 4,
+    "remainingSameIdentityPreinventoriedOwnedCount": 0,
+    "nativeExit": 0,
+    "reportedSuccessfulTerminations": 6,
+    "reportedSuccessMatchesPreinventoriedOwned": 4,
+    "reportedSuccessNotInPreinventory": 2,
+    "reportedSuccessOutsideKnownReportedParentTree": 0,
+    "creationTimesObservedForNewlyReportedChildren": false,
+    "method": "Parent edges plus chronological source identity filter exclude stale PID associations. Native taskkill targeted only validated root; successful messages include children spawned/reported after inventory. No further signal sent.",
+    "privacy": "Counts and qualifications only. Original process snapshots, command lines, associations and application details remain private and are not reproduced.",
+    "qualification": "Two children not present in initial snapshot are associated only through native termination parent reports. No universal closure or independent creation-time proof is claimed for unobserved descendants. Native exit 0 and zero remaining seven chronologically owned preinventoried identities are not universal process-tree closure. Two newly reported terminations have only native parent-edge association, without independently observed creation times.",
+    "reason": "Confirmed managed-stage checkpoint recapture of a later external native index C; candidate withdrawn.",
+    "initialInventoryCorrection": "Initial PID-parent associations were overinclusive: four associated processes predated the validated test root and were excluded. Those four same-identity processes remained running and were not targeted. No additional signals were sent."
+  },
+  "integrityFinding": {
+    "status": "CONFIRMED_EXTERNAL_REPRODUCTIONS",
+    "snapshots": [
+      "known baseline e8f2e3feba87224246a42337f77f702914df989e",
+      "withdrawn V6 candidate"
+    ],
+    "description": "After managed add durably prepared B, an official native read-tree replaced the live index with C before checkpoint creation. The observed operation returned success and recaptured C as AFTER/checkpoint instead of retaining the fixed managed result B.",
+    "notClaimed": "No overwrite or data loss was observed; B and C remained available in the controlled probes.",
+    "programProvenance": "The exact probe program for those executions was tool stdin. A PROBE.mjs file in the retained fixture was a note, not an independently executed program. No independent program hash is invented here.",
+    "reproductionReceipt": "Separate source/receipt facts and the subsequently versioned directed regression are documented in RECOVERY.md. This file records the withdrawn full campaign only."
+  }
+}

@@ -3,6 +3,7 @@ import { constants } from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { git, gitText, type RepoInfo } from './git.js';
+import { updateDirectRefs } from './git-ref.js';
 import { LabError } from './errors.js';
 import { fingerprint, sameFingerprint, failpoint, type Fingerprint, type Transaction } from './storage.js';
 import { OPEN_NOFOLLOW } from './platform.js';
@@ -81,7 +82,7 @@ export async function applyLayerRename(repo:RepoInfo,tx:Transaction,op:LayerRena
  op.copied={config:await recorded(tx,p.config,'rename-config-copied'),targetLog:await recorded(tx,p.targetLog,'rename-log-copied')};await copiedConfigIsSafe(repo,op,op.copied.config.backup!);if(!copiedLogIsSafe(await contents(op.copied.targetLog.backup??p.targetLog,op.copied.targetLog.fingerprint),await contents(op.sourceLog.backup??p.sourceLog,op.sourceLog.before),op))conflict('Reflog mudou antes do snapshot da cópia.');op.phase='copied';await tx.record('rename-native-copied');failpoint('after-rename-copy');
  const finalFile=path.join(tx.dir,'rename-final.config');await fs.writeFile(finalFile,await contents(p.config,op.copied.config.fingerprint),{flag:'wx',mode:op.copied.config.fingerprint.mode});const remove=await git(repo.root,['config','--file',finalFile,'--remove-section','branch.'+op.from.slice(11)],{ok:[0,128]});if(remove.code!==0&&!/no such section/iu.test(remove.stderr.toString()))conflict('Não foi possível preparar configuração final.');op.finalConfig=await fingerprint(finalFile);await tx.record('rename-final-config-prepared');
  await noLocks(repo,op);for(const [name,expected]of [['config',op.copied.config.fingerprint],['sourceLog',op.sourceLog.before],['targetLog',op.copied.targetLog.fingerprint]] as const)if(!sameFingerprint(await fingerprint(p[name]),expected))conflict('Metadados mudaram antes do CAS de rename.');
- await git(repo.root,['update-ref','--stdin'],{input:'start\nverify '+op.to+' '+op.oid+'\ndelete '+op.from+' '+op.oid+'\nprepare\ncommit\n'});op.phase='retired';await tx.record('rename-source-retired');failpoint('after-rename-retire');
+ await updateDirectRefs(repo.root,[{kind:'verify',ref:op.to,oldOid:op.oid},{kind:'delete',ref:op.from,oldOid:op.oid}]);op.phase='retired';await tx.record('rename-source-retired');failpoint('after-rename-retire');
  await replaceCompared(p.config,op.copied.config.fingerprint,await contents(finalFile,op.finalConfig),op.config.before.mode);if(!sameFingerprint(await fingerprint(p.config),op.finalConfig))conflict('Configuração final mudou após publicação.');op.phase='configured';await tx.record('rename-config-published');failpoint('after-rename-config');
 }
 
@@ -109,7 +110,7 @@ export async function rollbackLayerRename(repo:RenameRepo,directory:string,data:
  // Validate reservation ownership before removing its ref; unknown holder content is never deleted.
  if((await fingerprint(path.join(directory,'branch-protection','state.json'))).exists)await releaseLayerProtection(repo.root,op.to.slice('refs/heads/layer/'.length));
  await noCheckout(repo,op);
- if(to){await git(repo.root,['update-ref','-m','Git Layer rollback rename '+data.id,'--stdin'],{input:'start\n'+(from?'verify ':'create ')+op.from+' '+op.oid+'\ndelete '+op.to+' '+op.oid+'\nprepare\ncommit\n'});}
+ if(to){await updateDirectRefs(repo.root,[from?{kind:'verify',ref:op.from,oldOid:op.oid}:{kind:'create',ref:op.from,newOid:op.oid},{kind:'delete',ref:op.to,oldOid:op.oid}],'Git Layer rollback rename '+data.id);}
  const currentLog=await fingerprint(p.sourceLog);if(!sameFingerprint(currentLog,op.sourceLog.before)){
   if(!rollbackLogIsSafe(await contents(p.sourceLog,currentLog),op,data.id))conflict('Reflog da origem mudou durante rollback; preservado.');
   await replaceCompared(p.sourceLog,currentLog,op.sourceLog.before.exists?await contents(op.sourceLog.backup!,op.sourceLog.before):null,op.sourceLog.before.mode||0o600);

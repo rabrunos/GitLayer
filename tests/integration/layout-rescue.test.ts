@@ -8,7 +8,7 @@ import test, { type TestContext } from 'node:test';
 import { resolveGitExecutable } from '../../src/core/platform.js';
 import { inventoryLayerDirectory, inspectLayerLayout, migrateLayerLayout, resolveLayerDirectory } from '../../src/core/layout.js';
 import { doctorRepository, exportRepositoryRecovery } from '../../src/core/rescue.js';
-import { atomicJSON, fingerprint, Transaction } from '../../src/core/storage.js';
+import { atomicJSON, fingerprint, readJSON, Transaction } from '../../src/core/storage.js';
 import { discover } from '../../src/core/git.js';
 import { validateRecovery } from '../../src/core/recovery.js';
 import { GitLayers } from '../../src/core/index.js';
@@ -93,7 +93,7 @@ test('GL25: unknown destination and pending recovery are refused without losing 
   const tx = await Transaction.begin(f.legacy, 'interrupted', {});
   await tx.backup(path.join(f.root, 'base.txt'), 'base');
   await assert.rejects(() => migrateLayerLayout(f.root, { confirm: true }), { code: 'RECOVERY_REQUIRED' });
-  assert.equal(JSON.parse(await fs.readFile(path.join(tx.dir, 'journal.json'), 'utf8')).state, 'pending');
+  assert.equal((await readJSON<any>(path.join(tx.dir, 'journal.json'))).state, 'pending');
   await assert.rejects(() => fs.lstat(f.current), { code: 'ENOENT' });
 });
 

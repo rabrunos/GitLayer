@@ -1,0 +1,20 @@
+--- a/scripts/validate-performance-recovery.mjs
++++ b/validate-performance-recovery-retained-6h.mjs.template
+@@ -5,1 +5,1 @@
+-import { project, createFixture, execute, isolatedEnvironment, json, resolveGit } from './git-compat/lib.mjs';
++import { project, createFixture, execute, isolatedEnvironment, json, resolveGit } from '<PROJECT_URL>/scripts/git-compat/lib.mjs';
+@@ -6,1 +6,1 @@
+-import { compareManifests, fileManifest, manifestFingerprint, unchanged } from './git-compat/audit.mjs';
++import { compareManifests, fileManifest, manifestFingerprint, unchanged } from '<PROJECT_URL>/scripts/git-compat/audit.mjs';
+@@ -7,1 +7,1 @@
+-import { externalFixtureParent, validateFixtureParent } from './git-compat/fixture-parent.mjs';
++import { externalFixtureParent, validateFixtureParent } from '<PROJECT_URL>/scripts/git-compat/fixture-parent.mjs';
+@@ -8,1 +8,1 @@
+-import { validateOutputRoot } from './git-compat/output-root.mjs';
++import { validateOutputRoot } from '<PROJECT_URL>/scripts/git-compat/output-root.mjs';
+@@ -75,1 +75,1 @@
+-    full: { argv: ['--import', 'tsx', ...testFlags(2), 'tests/unit/*.test.ts', 'tests/unit/*.test.mjs', 'tests/integration/*.test.ts', 'tests/integration/*.test.mjs'], timeoutMs: 3 * 60 * 60 * 1000, nodeTest: true, npmEquivalent: 'npm.cmd test', scope: 'Same corpus, concurrency and per-test timeout as package.json test; adds spec/TAP evidence reporters.' },
++    full: { argv: ['--import', 'tsx', ...testFlags(2), 'tests/unit/*.test.ts', 'tests/unit/*.test.mjs', 'tests/integration/*.test.ts', 'tests/integration/*.test.mjs'], timeoutMs: 6 * 60 * 60 * 1000, nodeTest: true, npmEquivalent: 'npm.cmd test', scope: 'Same corpus, concurrency and per-test timeout as package.json test; adds spec/TAP evidence reporters.' },
+@@ -77,1 +77,1 @@
+-    broad: { argv: ['scripts/git-compat/runner.mjs', '--suite', 'broad', '--jobs', '2', '--seed', '20261105', '--out', path.join(out, 'matrix')], timeoutMs: 3 * 60 * 60 * 1000, scope: 'Broad compatibility matrix; its selected, executed and environment-blocked counts remain separate from headless tests.' },
++    broad: { argv: ['scripts/git-compat/runner.mjs', '--suite', 'broad', '--jobs', '2', '--seed', '20261105', '--keep-fixtures', '--out', path.join(out, 'matrix')], timeoutMs: 3 * 60 * 60 * 1000, scope: 'Broad compatibility matrix; its selected, executed and environment-blocked counts remain separate from headless tests.' },

@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "campaign": "scale-v2",
+  "status": "INTERRUPTED_FOR_CONFIRMED_SHELF_IDENTITY_GAP",
+  "controllerStatus": "FAIL",
+  "startedAt": "2026-11-05T13:32:02.567Z",
+  "endedAt": "2026-11-05T13:43:31.578Z",
+  "command": "node scripts/validate-performance-recovery.mjs --phase scale --out <NEW_EXTERNAL_OUTPUT> --fixture-parent <VALIDATED_EXTERNAL_PARENT>",
+  "functionalInputCount": 223,
+  "beforeFingerprint": "e4ad325258c052de30b62b61782160e9debba0afad8ce2e5e7d83204619f9180",
+  "afterFingerprint": "e4ad325258c052de30b62b61782160e9debba0afad8ce2e5e7d83204619f9180",
+  "sourceUnchanged": true,
+  "testProcessExit": 1,
+  "timedOut": false,
+  "outputTruncated": false,
+  "durationMs": 685786,
+  "finalTapSummaryComplete": false,
+  "counts": null,
+  "reason": "Peer review reproduced candidate-V2 shelf adoption accepting an equal-byte external index with another inode and later mtime. This was introduced by the new wrapper, not attributed to the baseline. No loss of C bytes was observed.",
+  "proof": "SHELF-ADOPT-REPRO.json",
+  "termination": {
+    "method": "taskkill own test PID /T /F after executable, argv, creation-boundary and descendant inventory verification",
+    "nativeExitCode": null,
+    "qualification": "The shell result was 0 after the final read-only query; the native taskkill exit was not captured separately. Its retained output includes successful terminations and already-ended/unsupported-operation errors. The subsequent query found none of the pre-inventoried owned IDs. No unproved or reused PID was signalled."
+  },
+  "retainedRawStreams": {
+    "stdoutSHA256": "c2d1e381748d858c8ea2d26c4e23447604b39cd1671123a03011b689432a8477",
+    "stderrSHA256": "1f9ab2b9c3673467c18d94a79de600b3eb69d441d636f73b9741551b0d2b87aa"
+  },
+  "qualification": "Intermediate incomplete campaign, not suite PASS. No invented denominator or pooling with final campaigns. Raw logs and fixtures retained externally."
+}

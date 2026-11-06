@@ -12,6 +12,7 @@ import { migrateLayerLayout, inventoryLayerDirectory } from '../../src/core/layo
 import { resolveGitExecutable } from '../../src/core/platform.js';
 
 async function fixture(t: TestContext) {
+  const preserve = process.env.GL_STAGE2_PRESERVE_FIXTURES === '1';
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'gitlayer-protection-'));
   const nonce = randomUUID(); await fs.writeFile(path.join(root, '.owner'), nonce);
   const repo = path.join(root, 'repo'), home = path.join(root, 'home'), template = path.join(root, 'template');
@@ -33,7 +34,11 @@ async function fixture(t: TestContext) {
     // Cleanup only a newly created root with exact nonce and expected ancestry.
     assert.equal(await fs.readFile(path.join(root, '.owner'),'utf8'), nonce);
     assert(path.dirname(root) === os.tmpdir() && path.basename(root).startsWith('gitlayer-protection-'));
-    await fs.rm(root, { recursive: true, force: true });
+    if (preserve) {
+      const receipt = { schema: 1, test: t.name, root, nonce, retained: true, policy: 'GL_STAGE2_PRESERVE_FIXTURES=1; retain pass/failure evidence after nonce and ancestry validation' };
+      await fs.writeFile(path.join(root, 'RETENTION-RECEIPT.json'), JSON.stringify(receipt, null, 2) + '\n', { flag: 'wx' });
+      t.diagnostic(JSON.stringify({ kind: 'retained-protection-fixture', ...receipt }));
+    } else await fs.rm(root, { recursive: true, force: true });
   });
   native(['-c','init.templateDir=' + template,'init','--initial-branch=main']);
   await fs.writeFile(path.join(repo, 'base.txt'), 'base\n'); native(['add','.']); native(['commit','-m','base']);

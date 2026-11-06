@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "kind": "local-validation-phase",
+  "campaign": "infra-v8",
+  "phase": "infra",
+  "status": "PASS",
+  "finalResultPresent": true,
+  "startedAt": "2026-11-05T23:11:26.562Z",
+  "endedAt": "2026-11-05T23:14:33.429Z",
+  "command": {
+    "cwd": "<PROJECT>",
+    "executable": "<NODE.EXE>",
+    "argv": [
+      "--test",
+      "--test-concurrency=1",
+      "--test-timeout=900000",
+      "--test-reporter=spec",
+      "--test-reporter-destination=stdout",
+      "--test-reporter=tap",
+      "--test-reporter-destination=stderr",
+      "tests/git-compat/infra/*.test.mjs"
+    ],
+    "timeoutMs": 1800000,
+    "npmEquivalent": "npm.cmd run compat:infra",
+    "scope": "Same infrastructure corpus and concurrency as package.json compat:infra; explicit per-test budget and evidence reporters."
+  },
+  "source": {
+    "beforeFingerprint": "749f16888c5cf0a8425e99608d03d0b8f61c2a2400a6cdad3f451fc312017d4b",
+    "afterFingerprint": "749f16888c5cf0a8425e99608d03d0b8f61c2a2400a6cdad3f451fc312017d4b",
+    "countBefore": 232,
+    "countAfter": 232,
+    "sourceUnchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "beforeManifest": "SOURCE-MANIFEST-749f16888c5cf0a8425e99608d03d0b8f61c2a2400a6cdad3f451fc312017d4b.json",
+    "afterManifest": "SOURCE-MANIFEST-749f16888c5cf0a8425e99608d03d0b8f61c2a2400a6cdad3f451fc312017d4b.json",
+    "beforeManifestRawSHA256": "30c145299fa91564acfb43715a584fca9c297073a9119b6d9084b0e4d696d7c5",
+    "afterManifestRawSHA256": "30c145299fa91564acfb43715a584fca9c297073a9119b6d9084b0e4d696d7c5"
+  },
+  "process": {
+    "exitCode": 0,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "timeoutMs": 1800000,
+    "durationMs": 185600,
+    "termination": null
+  },
+  "summary": {
+    "format": "Node.js TAP final summary",
+    "counts": {
+      "tests": 113,
+      "suites": 0,
+      "pass": 113,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 185507.0925
+    },
+    "complete": true,
+    "consistent": true
+  },
+  "independentlyParsedTap": {
+    "format": "Node.js TAP final summary",
+    "counts": {
+      "tests": 113,
+      "suites": 0,
+      "pass": 113,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 185507.0925
+    },
+    "complete": true,
+    "consistent": true
+  },
+  "streams": {
+    "stdout": {
+      "file": "stdout.log",
+      "present": true,
+      "bytes": 13564,
+      "sha256": "cd1cee33eea0b7d7ca2af55932c154e615349f33c103bf51dc842a594c63e172",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    },
+    "stderr": {
+      "file": "stderr.log",
+      "present": true,
+      "bytes": 28658,
+      "sha256": "7a2cff925eaa97435f746846f86e28ddf14e8c1ab2e6b326e76a9e81e5db13e5",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    }
+  },
+  "error": null,
+  "resultRawSHA256": "cdc06447c7b4344bfc0cad2136ae3d1fa44125b07400ba8321af5605d9f00ff2",
+  "projectComparison": {
+    "project": "<PROJECT>",
+    "fingerprint": "749f16888c5cf0a8425e99608d03d0b8f61c2a2400a6cdad3f451fc312017d4b",
+    "count": 232,
+    "unchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    }
+  },
+  "qualification": "One named phase and one source snapshot; labels do not imply final approval. Never pool campaigns, retries, phases or partial TAP totals."
+}

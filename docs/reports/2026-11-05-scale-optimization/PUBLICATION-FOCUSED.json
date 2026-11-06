@@ -1,0 +1,180 @@
+{
+    "schema":  1,
+    "kind":  "scale-publication-focused-evidence",
+    "capturedAtUtc":  "2026-11-05T13:00:57.5953623Z",
+    "provenance":  "Observed tool outputs from this local campaign; source hashes below are the later frozen review snapshot, not retroactive fingerprints for prior test executions.",
+    "runtime":  {
+                    "node":  "v24.14.1",
+                    "uv":  "1.51.0",
+                    "platform":  "win32",
+                    "arch":  "x64"
+                },
+    "volume":  {
+                   "fileSystem":  "NTFS",
+                   "allocationUnitBytes":  4096,
+                   "scope":  "Local fixture/workspace volume",
+                   "query":  "Get-Volume -DriveLetter C | Select-Object DriveLetter,FileSystem,AllocationUnitSize",
+                   "execution":  "PowerShell native read-only query, exit 0",
+                   "physicalAllocationMeasured":  false
+               },
+    "baseline":  {
+                     "commit":  "e8f2e3feba87224246a42337f77f702914df989e",
+                     "command":  "node --import tsx --test --test-concurrency=1 tests/integration/publication-race.test.ts",
+                     "testScope":  "Initial one-case race regression before product edits; real competing exclusive destination create at final rename syscall",
+                     "result":  "FAIL",
+                     "passed":  0,
+                     "failed":  1,
+                     "durationMs":  5219.4736,
+                     "assertion":  "Missing expected rejection; app.on returned success after competing destination creation",
+                     "exactTestFingerprintRecorded":  false,
+                     "evidenceRetainedLocally":  true,
+                     "postRunIndependentObservation":  {
+                                                           "targetSHA256":  "ee7439e2e9b8e962bd7a06d538971757895111c7e2acc8ef67e4214503b2b41d",
+                                                           "officialGitBlobSHA256":  "ee7439e2e9b8e962bd7a06d538971757895111c7e2acc8ef67e4214503b2b41d",
+                                                           "competingBytesSHA256":  "e95085562c68220c212c1f5aa74239f2258a72b836a01aafe7e541009ed01694",
+                                                           "targetMatchesGitBlob":  true,
+                                                           "targetMatchesCompetingBytes":  false,
+                                                           "registryLayerState":  "active",
+                                                           "officialGitArgv":  [
+                                                                                   "show",
+                                                                                   "layer/a:layer.txt"
+                                                                               ],
+                                                           "fixtureNonceVerified":  true,
+                                                           "note":  "Read later from the retained baseline fixture after marker verification; native Git observer only, no global safe.directory change. Initial restricted-account attempt refused dubious ownership and was retried under the same account that created the fixture."
+                                                       }
+                 },
+    "priorCandidateCampaigns":  [
+                                    {
+                                        "id":  "race-first-correction",
+                                        "scope":  "Initial one-case publication race regression",
+                                        "command":  "node --import tsx --test --test-concurrency=1 tests/integration/publication-race.test.ts",
+                                        "result":  "PASS",
+                                        "passed":  1,
+                                        "failed":  0,
+                                        "durationMs":  5242.5725,
+                                        "exactSourceFingerprintRecorded":  false
+                                    },
+                                    {
+                                        "id":  "publication-units-first",
+                                        "scope":  "13 publication unit cases before native-lock/directory additions",
+                                        "command":  "node --import tsx --test --test-concurrency=1 tests/unit/publication.test.ts",
+                                        "result":  "FAIL",
+                                        "passed":  12,
+                                        "failed":  1,
+                                        "durationMs":  410.5083,
+                                        "reason":  "Real Windows EPERM from fsync on read-only identity handle; payload had already been flushed by writer",
+                                        "correction":  "Do not claim FlushFileBuffers on read-only identity handle; preserve prior payload sync and supported parent-directory boundary",
+                                        "exactSourceFingerprintRecorded":  false
+                                    },
+                                    {
+                                        "id":  "publication-units-corrected",
+                                        "scope":  "Same 13 publication unit cases after handle correction",
+                                        "command":  "node --import tsx --test --test-concurrency=1 tests/unit/publication.test.ts",
+                                        "result":  "PASS",
+                                        "passed":  13,
+                                        "failed":  0,
+                                        "durationMs":  390.7456,
+                                        "exactSourceFingerprintRecorded":  false
+                                    },
+                                    {
+                                        "id":  "existing-streaming-focus",
+                                        "scope":  "Two selected existing A-B-C and prepared-source-change regressions",
+                                        "command":  "node --import tsx --test --test-concurrency=1 --test-name-pattern=\"repeated activation|activation refuses\" tests/integration/performance-streaming.test.ts",
+                                        "result":  "PASS",
+                                        "passed":  2,
+                                        "failed":  0,
+                                        "durationMs":  26604.2872,
+                                        "exactSourceFingerprintRecorded":  false
+                                    },
+                                    {
+                                        "id":  "publication-core-eight-first",
+                                        "scope":  "Race, three controlled interruption/recovery cases, later edit, three owned-child deaths",
+                                        "command":  "node --import tsx --test --test-concurrency=1 tests/integration/publication-race.test.ts",
+                                        "result":  "PASS",
+                                        "passed":  8,
+                                        "failed":  0,
+                                        "durationMs":  59016.0013,
+                                        "exactSourceFingerprintRecorded":  false
+                                    },
+                                    {
+                                        "id":  "publication-core-test-escape-regression",
+                                        "scope":  "Same eight cases after an erroneous handshake escape edit",
+                                        "command":  "node --import tsx --test --test-concurrency=1 tests/integration/publication-race.test.ts",
+                                        "result":  "FAIL",
+                                        "passed":  5,
+                                        "failed":  3,
+                                        "durationMs":  48066.0884,
+                                        "reason":  "Test child JavaScript SyntaxError before barrier; no product failure asserted",
+                                        "correction":  "Restored the correct double escape in the child source template",
+                                        "evidenceRetainedLocally":  true,
+                                        "exactSourceFingerprintRecorded":  false
+                                    },
+                                    {
+                                        "id":  "publication-core-eight-restored",
+                                        "scope":  "Same eight cases with handshake restored; prior to last rollback/disposal-success additions",
+                                        "command":  "node --import tsx --test --test-concurrency=1 tests/integration/publication-race.test.ts",
+                                        "result":  "PASS",
+                                        "passed":  8,
+                                        "failed":  0,
+                                        "durationMs":  69829.1618,
+                                        "exactSourceFingerprintRecorded":  false
+                                    },
+                                    {
+                                        "id":  "disposable-units-eight",
+                                        "scope":  "Eight cleanup cases before durable-journal-replacement guard/addition",
+                                        "command":  "node --import tsx --test --test-concurrency=1 tests/unit/disposable-projection.test.ts",
+                                        "result":  "PASS",
+                                        "passed":  8,
+                                        "failed":  0,
+                                        "durationMs":  807.0478,
+                                        "exactSourceFingerprintRecorded":  false
+                                    }
+                                ],
+    "latestFrozenSourceHashes":  [
+                                     {
+                                         "path":  "src/core/publication.ts",
+                                         "sha256":  "0d011234aba15ef71bb8bbb1e531b4577424cf7cedb6893aa0ce3eda83c28c8e"
+                                     },
+                                     {
+                                         "path":  "src/core/disposable-projection.ts",
+                                         "sha256":  "fe6758e3a0845b4843d377226d6185320b31da883d8532b4da88d55ce1d2e4a7"
+                                     },
+                                     {
+                                         "path":  "src/core/index.ts",
+                                         "sha256":  "ca67396693478dc2b9739d5d87bb54eb5857cb968cb38e04401fa88ed9eff839"
+                                     },
+                                     {
+                                         "path":  "tests/unit/publication.test.ts",
+                                         "sha256":  "124b59028f5d7954244a45b5cb727b444a18d78fce144038a409c1f16cc2c56c"
+                                     },
+                                     {
+                                         "path":  "tests/unit/disposable-projection.test.ts",
+                                         "sha256":  "40476422d91e0993dba99d454abb530437b96d5e54b1d56dc1985423c05dd8ef"
+                                     },
+                                     {
+                                         "path":  "tests/integration/publication-race.test.ts",
+                                         "sha256":  "e507a6fe902cf8455f9d8d4443d37f476fcac7dde59a148c2537d2a03a4e2499"
+                                     }
+                                 ],
+    "finalValidation":  {
+                            "status":  "PENDING_PARENT_FOCUSED_CAMPAIGN",
+                            "expectedDirectedCases":  {
+                                                          "publicationUnit":  15,
+                                                          "disposableUnit":  9,
+                                                          "publicationIntegration":  10
+                                                      },
+                            "currentResultsPath":  "RESULTS.md",
+                            "doNotSumDifferentCampaigns":  true
+                        },
+    "limits":  [
+                   "No real power loss",
+                   "Earlier campaigns in this receipt used synthetic EXDEV; later real C/D refusal is reported separately in COPY-FAILURE-FOCUSED.json",
+                   "ENOSPC and permission syscall errors are simulated where explicitly labeled",
+                   "Current native FileShare.None test awaits the parent final focused campaign",
+                   "A completed configured metadata recovery-export does not include workspace adjacent temporary aliases or later C bytes automatically",
+                   "No physical extents or CoW inspection",
+                   "No Linux runtime execution",
+                   "Historical focused successes do not certify later source changes"
+               ],
+    "followupEvidence":  "COPY-FAILURE-FOCUSED.json: later actual publication-copy prefix failure, existing-metadata rename error and real C/D EXDEV refusal, reported as a separate campaign"
+}

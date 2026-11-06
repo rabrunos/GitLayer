@@ -1,0 +1,447 @@
+{
+  "schema": 1,
+  "qualification": "Four separate focused executions. Counts are not added or presented as a full campaign. Each source assertion is restricted to the files actually hashed in that execution. Final full-suite validation belongs to RESULTS.md.",
+  "campaigns": [
+    {
+      "evidenceId": "gl-initial-index-directed-WF6IYf",
+      "rawReceipt": {
+        "file": "RESULT.json",
+        "bytes": 1980,
+        "sha256": "c69d876515849025a0e34055b1247b2e5380b619cbb9a2f78f86203e48756ce1"
+      },
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/integration/initial-index-publication.test.ts"
+      ],
+      "exitCode": 1,
+      "durationMs": 46002,
+      "tapCounts": {
+        "tests": 11,
+        "suites": 0,
+        "pass": 8,
+        "fail": 3,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 45948.613
+      },
+      "sourceScope": [
+        "src/core/index.ts",
+        "src/core/index-stage.ts",
+        "src/core/recovery.ts",
+        "tests/integration/initial-index-publication.test.ts"
+      ],
+      "sourcesBefore": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "0928ba3082aeca3fbddb0f9f13a1c4fd676142d476bc6ee7185275531b0f049e"
+        },
+        {
+          "path": "src/core/index-stage.ts",
+          "sha256": "11c83a837dfc42c14d11809661870d29cbbf0cefc0f2c9eb5a90de795771457c"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "237592104e3ccc33752e758734b66885d3ac6d78b19876330726c172c707447c"
+        },
+        {
+          "path": "tests/integration/initial-index-publication.test.ts",
+          "sha256": "7d9e8a3b552ccd9943d0c7c0bb75766cbe804e55aa45712bb68210430800043d"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "0928ba3082aeca3fbddb0f9f13a1c4fd676142d476bc6ee7185275531b0f049e"
+        },
+        {
+          "path": "src/core/index-stage.ts",
+          "sha256": "11c83a837dfc42c14d11809661870d29cbbf0cefc0f2c9eb5a90de795771457c"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "237592104e3ccc33752e758734b66885d3ac6d78b19876330726c172c707447c"
+        },
+        {
+          "path": "tests/integration/initial-index-publication.test.ts",
+          "sha256": "7d9e8a3b552ccd9943d0c7c0bb75766cbe804e55aa45712bb68210430800043d"
+        }
+      ],
+      "sourceUnchanged": true,
+      "streams": [
+        {
+          "file": "OUTPUT.tap",
+          "bytes": 5613,
+          "sha256": "26ded41491613f382a3346ce95f9448d8cf6bbe8a367273c741f09e7d9209c21"
+        },
+        {
+          "file": "STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "cases": [
+        "fresh activation preserves an unknown equal-byte index inside-validation",
+        "fresh activation preserves an unknown equal-byte index after-token",
+        "fresh activation preserves an unknown equal-byte index marker-record-failure",
+        "initial index publication does not replace an equal-byte destination created at the final link call",
+        "create refuses an index identity changed immediately after initial publication",
+        "register refuses an index identity changed immediately after initial publication",
+        "activate refuses an index identity changed immediately after initial publication",
+        "activate-timestamp refuses an index identity changed immediately after initial publication",
+        "registration refuses a transaction-local index changed to another official Git tree before validation",
+        "initial checkpoint uses an explicit zero-OID CAS and preserves a ref inserted at the actual Git spawn",
+        "known initial index publication can be rolled back once after the historical registration failpoint"
+      ]
+    },
+    {
+      "evidenceId": "gl-initial-index-directed-final-nnuDTu",
+      "rawReceipt": {
+        "file": "RESULT.json",
+        "bytes": 1986,
+        "sha256": "8a8bac95efb0393ecbbefff8324829911b35639581033f8cf3462f948ebc3fb1"
+      },
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/integration/initial-index-publication.test.ts"
+      ],
+      "exitCode": 0,
+      "durationMs": 47321,
+      "tapCounts": {
+        "tests": 11,
+        "suites": 0,
+        "pass": 11,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 47268.1011
+      },
+      "sourceScope": [
+        "src/core/index.ts",
+        "src/core/index-stage.ts",
+        "src/core/recovery.ts",
+        "tests/integration/initial-index-publication.test.ts"
+      ],
+      "sourcesBefore": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "0928ba3082aeca3fbddb0f9f13a1c4fd676142d476bc6ee7185275531b0f049e"
+        },
+        {
+          "path": "src/core/index-stage.ts",
+          "sha256": "11c83a837dfc42c14d11809661870d29cbbf0cefc0f2c9eb5a90de795771457c"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "237592104e3ccc33752e758734b66885d3ac6d78b19876330726c172c707447c"
+        },
+        {
+          "path": "tests/integration/initial-index-publication.test.ts",
+          "sha256": "850e0f289bbe68be6fd03b1aae5814353e612fdf78362c11dfa5791d57b2f5fa"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "0928ba3082aeca3fbddb0f9f13a1c4fd676142d476bc6ee7185275531b0f049e"
+        },
+        {
+          "path": "src/core/index-stage.ts",
+          "sha256": "11c83a837dfc42c14d11809661870d29cbbf0cefc0f2c9eb5a90de795771457c"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "237592104e3ccc33752e758734b66885d3ac6d78b19876330726c172c707447c"
+        },
+        {
+          "path": "tests/integration/initial-index-publication.test.ts",
+          "sha256": "850e0f289bbe68be6fd03b1aae5814353e612fdf78362c11dfa5791d57b2f5fa"
+        }
+      ],
+      "sourceUnchanged": true,
+      "streams": [
+        {
+          "file": "OUTPUT.tap",
+          "bytes": 2800,
+          "sha256": "d5de9a906be221035170eba812674fbd460ad80a4ee29aca1f17c86683fea05d"
+        },
+        {
+          "file": "STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "cases": [
+        "fresh activation preserves an unknown equal-byte index inside-validation",
+        "fresh activation preserves an unknown equal-byte index after-token",
+        "fresh activation preserves an unknown equal-byte index marker-record-failure",
+        "initial index publication does not replace an equal-byte destination created at the final link call",
+        "create refuses an index identity changed immediately after initial publication",
+        "register refuses an index identity changed immediately after initial publication",
+        "activate refuses an index identity changed immediately after initial publication",
+        "activate-timestamp refuses an index identity changed immediately after initial publication",
+        "registration refuses a transaction-local index changed to another official Git tree before validation",
+        "initial checkpoint uses an explicit zero-OID CAS and preserves a ref inserted at the actual Git spawn",
+        "known initial index publication can be rolled back once after the historical registration failpoint"
+      ]
+    },
+    {
+      "evidenceId": "gl-initial-index-regressions-9BJh7n",
+      "rawReceipt": {
+        "file": "RESULT.json",
+        "bytes": 2862,
+        "sha256": "b3cb3e5fde28109239bbddc58262c50606263fd1dccb478b54863457a6ccfaed"
+      },
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "--test-name-pattern=fresh activation registers|Core lifecycle with protection|protection may be enabled before Core initialization|GL19 external private index lock for journal-only",
+        "tests/integration/activation-frontier.test.ts",
+        "tests/integration/branch-protection.test.ts",
+        "tests/integration/product-v1.test.ts"
+      ],
+      "exitCode": 0,
+      "durationMs": 96982,
+      "tapCounts": {
+        "tests": 5,
+        "suites": 0,
+        "pass": 5,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 96887.5823
+      },
+      "sourceScope": [
+        "src/core/index.ts",
+        "src/core/index-stage.ts",
+        "src/core/recovery.ts",
+        "tests/integration/activation-frontier.test.ts",
+        "tests/integration/branch-protection.test.ts",
+        "tests/integration/product-v1.test.ts"
+      ],
+      "sourcesBefore": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "0928ba3082aeca3fbddb0f9f13a1c4fd676142d476bc6ee7185275531b0f049e"
+        },
+        {
+          "path": "src/core/index-stage.ts",
+          "sha256": "11c83a837dfc42c14d11809661870d29cbbf0cefc0f2c9eb5a90de795771457c"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "237592104e3ccc33752e758734b66885d3ac6d78b19876330726c172c707447c"
+        },
+        {
+          "path": "tests/integration/activation-frontier.test.ts",
+          "sha256": "6aeb0167008789bace0e525b3f77942800489c72d86731cbd9815aa592bca52b"
+        },
+        {
+          "path": "tests/integration/branch-protection.test.ts",
+          "sha256": "012f479c428b53a591cedd1b9f5892e4afbe58bb8b3dbfbdefd9793c47f39818"
+        },
+        {
+          "path": "tests/integration/product-v1.test.ts",
+          "sha256": "faaa895fefdb5ec914124ec3239d297227158f37650da6af961eb1a2365b671f"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "0928ba3082aeca3fbddb0f9f13a1c4fd676142d476bc6ee7185275531b0f049e"
+        },
+        {
+          "path": "src/core/index-stage.ts",
+          "sha256": "11c83a837dfc42c14d11809661870d29cbbf0cefc0f2c9eb5a90de795771457c"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "237592104e3ccc33752e758734b66885d3ac6d78b19876330726c172c707447c"
+        },
+        {
+          "path": "tests/integration/activation-frontier.test.ts",
+          "sha256": "6aeb0167008789bace0e525b3f77942800489c72d86731cbd9815aa592bca52b"
+        },
+        {
+          "path": "tests/integration/branch-protection.test.ts",
+          "sha256": "012f479c428b53a591cedd1b9f5892e4afbe58bb8b3dbfbdefd9793c47f39818"
+        },
+        {
+          "path": "tests/integration/product-v1.test.ts",
+          "sha256": "faaa895fefdb5ec914124ec3239d297227158f37650da6af961eb1a2365b671f"
+        }
+      ],
+      "sourceUnchanged": true,
+      "streams": [
+        {
+          "file": "OUTPUT.tap",
+          "bytes": 2499,
+          "sha256": "ab2785fefc35f25548b09559b1812796e48a17913a6e838812f380593592838b"
+        },
+        {
+          "file": "STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "cases": [
+        "fresh activation registers an unregistered native local Layer with durable initial reservations",
+        "fresh activation registers a unique remote-only candidate with durable initial reservations",
+        "Core lifecycle with protection opens a Layer deliberately, preserves others and guards renamed/new Layers",
+        "protection may be enabled before Core initialization without resetting native reservations",
+        "GL19 external private index lock for journal-only registration prevents rollback effects"
+      ]
+    },
+    {
+      "evidenceId": "gl-initial-index-directed-v2-ZqHgor",
+      "rawReceipt": {
+        "file": "RESULT.json",
+        "bytes": 2257,
+        "sha256": "94694cc0cbf0af141f861f64920deb327c878e73451da6a55968545e69d5a30a"
+      },
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/integration/initial-index-publication.test.ts"
+      ],
+      "exitCode": 0,
+      "durationMs": 51883,
+      "tapCounts": {
+        "tests": 12,
+        "suites": 0,
+        "pass": 12,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 51833.1415
+      },
+      "sourceScope": [
+        "src/core/index.ts",
+        "src/core/index-stage.ts",
+        "src/core/recovery.ts",
+        "src/core/index-query.ts",
+        "tests/integration/initial-index-publication.test.ts"
+      ],
+      "sourcesBefore": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "60014c58411cb4df2faaf9344274976b65b6275b65d7251ccf691e3a7195ce01"
+        },
+        {
+          "path": "src/core/index-stage.ts",
+          "sha256": "11c83a837dfc42c14d11809661870d29cbbf0cefc0f2c9eb5a90de795771457c"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "237592104e3ccc33752e758734b66885d3ac6d78b19876330726c172c707447c"
+        },
+        {
+          "path": "src/core/index-query.ts",
+          "sha256": "f568c40d00e6987268b9e7b0994772707b52a6c71b99408f19fffa73f9d375b1"
+        },
+        {
+          "path": "tests/integration/initial-index-publication.test.ts",
+          "sha256": "fb65cd1d98ae48ced08b9dec6196f828ae6c5c0991e9533f84cdb3b842bc492f"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "60014c58411cb4df2faaf9344274976b65b6275b65d7251ccf691e3a7195ce01"
+        },
+        {
+          "path": "src/core/index-stage.ts",
+          "sha256": "11c83a837dfc42c14d11809661870d29cbbf0cefc0f2c9eb5a90de795771457c"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "237592104e3ccc33752e758734b66885d3ac6d78b19876330726c172c707447c"
+        },
+        {
+          "path": "src/core/index-query.ts",
+          "sha256": "f568c40d00e6987268b9e7b0994772707b52a6c71b99408f19fffa73f9d375b1"
+        },
+        {
+          "path": "tests/integration/initial-index-publication.test.ts",
+          "sha256": "fb65cd1d98ae48ced08b9dec6196f828ae6c5c0991e9533f84cdb3b842bc492f"
+        }
+      ],
+      "sourceUnchanged": true,
+      "streams": [
+        {
+          "file": "OUTPUT.tap",
+          "bytes": 3070,
+          "sha256": "01ec05bef1795b90fd0c9335f5d0ab0e13344690d49583ec75b4da0a3bbe5ccf"
+        },
+        {
+          "file": "STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "cases": [
+        "fresh activation preserves an unknown equal-byte index inside-validation",
+        "fresh activation preserves an unknown equal-byte index after-token",
+        "fresh activation preserves an unknown equal-byte index marker-record-failure",
+        "a failed final creation observation leaves a protected checkpoint before an optional marker failure",
+        "initial index publication does not replace an equal-byte destination created at the final link call",
+        "create refuses an index identity changed immediately after initial publication",
+        "register refuses an index identity changed immediately after initial publication",
+        "activate refuses an index identity changed immediately after initial publication",
+        "activate-timestamp refuses an index identity changed immediately after initial publication",
+        "registration refuses a transaction-local index changed to another official Git tree before validation",
+        "initial checkpoint uses an explicit zero-OID CAS and preserves a ref inserted at the actual Git spawn",
+        "known initial index publication can be rolled back once after the historical registration failpoint"
+      ]
+    }
+  ],
+  "firstPassQualification": "The first pass retained all three failures and their owned fixtures. Two new assertions expected the later optional-marker reason although the earlier mandatory created-index identity guard correctly refused. The third hook changed the index during fingerprint open and correctly received EXTERNAL_CHANGE before the intended Git-tree assertion. The later test places that real native tree replacement before image observation and requires CHECKPOINT_MISMATCH/registration-image-tree. Physical preservation oracles were not removed.",
+  "finalDirectedQualification": "The last campaign contains twelve passing tests on the final shared-initialization implementation, including the protected failed checkpoint before an optional post-finish marker error. The five existing regressions passed on the shared initializer before the later narrow failure-record ordering/comment adjustment; they are not retroactively claimed on the final hash.",
+  "finalFunctionalManifestObservedAfterDirected": {
+    "inputs": [
+      "src",
+      "scripts",
+      "tests",
+      "package-lock.json",
+      "package.json",
+      "tsconfig.debug.json",
+      "tsconfig.json"
+    ],
+    "count": 224,
+    "fingerprint": "7a3dc62aabdd34c0db0d04c8dba71ad8e2f8b6c77eebe0525cdff4e2d1510e42",
+    "notBeforeAfterProofForEarlierCampaigns": true
+  },
+  "checks": {
+    "typecheck": {
+      "command": "npm.cmd run typecheck",
+      "observedExitCode": 0,
+      "qualification": "Observed directly after final code/comment/test changes; final complete validation has its own receipt."
+    },
+    "whitespace": {
+      "command": "git -c core.whitespace=cr-at-eol diff --check -- src/core/index.ts src/core/index-stage.ts src/core/recovery.ts src/core/index-query.ts tests/integration/initial-index-publication.test.ts",
+      "observedExitCode": 0
+    }
+  },
+  "reproduction": "INITIAL-INDEX-RETENTION-REPRO.json"
+}

@@ -1,0 +1,176 @@
+{
+  "schema": 1,
+  "kind": "retained-full-v9-d01-refusal-index-forensics",
+  "status": "OBSERVED_IMAGE_PRESERVATION_REGRESSION",
+  "qualification": "Read-only addendum from the already failed full V9 case, not a new test campaign or complete full summary.",
+  "source": {
+    "functionalFingerprint": "b95074e1c5b79d47b86687849855cac90ac0b8c610849381f3257895adcb741f",
+    "functionalInputs": 234,
+    "coreFingerprint": "a04cee4fdf75a0f5d07116ebb8058b09af2c53017f117779993a82d1be3d7e25",
+    "coreInputs": 22,
+    "test": "tests/integration/security-base-origin.test.ts",
+    "testSourceSHA256": "ee525d22cecc02133ded65534373223cd1c2c2deafb4e1482dd30a263d636780",
+    "failedAssertionLine": 112,
+    "indexSource": "src/core/index.ts",
+    "genericFailureRecheckpointLine": 246,
+    "livePrivateCheckpointLine": 360
+  },
+  "failure": {
+    "name": "D01 absent accepted base rename requires explicit resolution after mixed reset",
+    "tapNumber": 368,
+    "type": "testCodeFailure",
+    "code": "ERR_ASSERTION",
+    "durationMs": 79122.7478,
+    "nestedFailures": 0
+  },
+  "images": [
+    {
+      "name": "a",
+      "original": {
+        "bytes": 118,
+        "sha256": "bf82c9d8df507eacf764af5b7f106de30cb73195694b109bbdbd9dbd9b09deda",
+        "entryEnd": 84,
+        "headerSHA256": "7318a910b173634ac44d8b5e54db6fce8cfb284b7f2ddf4dce6b95135e7c4298",
+        "entriesSHA256": "c4a8d306dc2591067c42dec75fc24b1780a29d2e599fa0c1197fe2c98ce95ddb",
+        "entry": {
+          "path": "a.txt",
+          "oid": "b8e6d3a3ea0bac52901ed52a235ce68d712d49f3",
+          "flags": 5,
+          "stage": 0,
+          "mode": "100644"
+        },
+        "tree": {
+          "size": 6,
+          "dataHex": "002d3120300a"
+        }
+      },
+      "current": {
+        "bytes": 137,
+        "sha256": "58ddb9da2db88cbca0b4706b866b7aaea0096e2116cfd0ab9c4cda31740f23d0",
+        "entryEnd": 84,
+        "headerSHA256": "7318a910b173634ac44d8b5e54db6fce8cfb284b7f2ddf4dce6b95135e7c4298",
+        "entriesSHA256": "c4a8d306dc2591067c42dec75fc24b1780a29d2e599fa0c1197fe2c98ce95ddb",
+        "entry": {
+          "path": "a.txt",
+          "oid": "b8e6d3a3ea0bac52901ed52a235ce68d712d49f3",
+          "flags": 5,
+          "stage": 0,
+          "mode": "100644"
+        },
+        "tree": {
+          "size": 25,
+          "dataHex": "003120300ab464f8b6907bae8c74e68901b5c31879f909a692"
+        }
+      },
+      "firstDifferingOffset": 91,
+      "headerAndAllEntryBytesEqual": true,
+      "onlyTREEExtensionEncodingAndIndexTrailerDiffer": true,
+      "byteGrowth": 19,
+      "backedUpBeforeImageMatchesFailedAssertion": true,
+      "cachedTreeOid": "b464f8b6907bae8c74e68901b5c31879f909a692"
+    },
+    {
+      "name": "b",
+      "original": {
+        "bytes": 118,
+        "sha256": "c4bfc3863c685868cb2b7fb5983e4a7b1cd26d651e8138d165bc4eca0c136ed3",
+        "entryEnd": 84,
+        "headerSHA256": "7318a910b173634ac44d8b5e54db6fce8cfb284b7f2ddf4dce6b95135e7c4298",
+        "entriesSHA256": "27fd03621eecff9ce922304b394ade5c1466e751157537b4e812937b5ebe65c3",
+        "entry": {
+          "path": "b.txt",
+          "oid": "4283387efd0bd4c0247046c88574109e12fde8fb",
+          "flags": 5,
+          "stage": 0,
+          "mode": "100644"
+        },
+        "tree": {
+          "size": 6,
+          "dataHex": "002d3120300a"
+        }
+      },
+      "current": {
+        "bytes": 137,
+        "sha256": "7097002ab5d3c899f56e58c94485ba5789b58b77d382eb9da48a67bf49ce16b5",
+        "entryEnd": 84,
+        "headerSHA256": "7318a910b173634ac44d8b5e54db6fce8cfb284b7f2ddf4dce6b95135e7c4298",
+        "entriesSHA256": "27fd03621eecff9ce922304b394ade5c1466e751157537b4e812937b5ebe65c3",
+        "entry": {
+          "path": "b.txt",
+          "oid": "4283387efd0bd4c0247046c88574109e12fde8fb",
+          "flags": 5,
+          "stage": 0,
+          "mode": "100644"
+        },
+        "tree": {
+          "size": 25,
+          "dataHex": "003120300a5ebdcb2154103174b30b6bc324aa2b5ec26654d7"
+        }
+      },
+      "firstDifferingOffset": 91,
+      "headerAndAllEntryBytesEqual": true,
+      "onlyTREEExtensionEncodingAndIndexTrailerDiffer": true,
+      "byteGrowth": 19,
+      "backedUpBeforeImageMatchesFailedAssertion": true,
+      "cachedTreeOid": "5ebdcb2154103174b30b6bc324aa2b5ec26654d7"
+    }
+  ],
+  "domainObservation": {
+    "source": "Expected and actual domains printed in the closed TAP assertion",
+    "headEqual": true,
+    "workingBranchEqual": true,
+    "branchRefsEqual": true,
+    "stateRefsEqual": true,
+    "mainIndexSemanticEqual": true,
+    "mainIndexRawEqual": true,
+    "syntheticFileHashesSizesAndModesEqual": true,
+    "layerEntrySemanticsEqual": true,
+    "layerRawImagesEqual": false
+  },
+  "retainedJournal": {
+    "kind": "editing-sync",
+    "state": "completed",
+    "errorCode": "OWNERSHIP_AMBIGUOUS",
+    "failedThenCompleted": true,
+    "postCompletionWrites": [
+      "backup-ready",
+      "write-completed",
+      "backup-ready",
+      "write-completed"
+    ],
+    "pairedBeforeAfterImagesMatch": true,
+    "sha256": "cea15587707711a0f168749fb52122e5b1f4baf6e451a22652f43014fe089efb"
+  },
+  "staticPath": {
+    "reason": "Ownership reconciliation detects a missing accepted base path and a new candidate, throwing OWNERSHIP_AMBIGUOUS before the managed add executes.",
+    "route": "guard/editing-sync -> mutateLocked catch -> rollback -> finish/refresh -> generic checkpoint of every Layer -> live private write-tree",
+    "mainStageExceptionDoesNotApply": "The failing transaction kind is editing-sync, not stage or stage-base.",
+    "scope": "The private index native TREE caches changed. This evidence does not demonstrate changed staging entries, refs, MAIN bytes or workspace file contents."
+  },
+  "notExecutedAfterAssertion": [
+    "The remaining commit and deactivate refusal actions in the loop were not reached.",
+    "Explicit ownership resolution, reopening and deliberate base commit assertions after the loop were not reached."
+  ],
+  "retainedEvidence": {
+    "closedTapBlock": {
+      "file": "D01-368-TAP-BLOCK.private.txt",
+      "bytes": 4726,
+      "sha256": "228d5309118f8c3acb2a74308bf0754b6f71025a5621c84e79954af80890c22b",
+      "privateRaw": true
+    },
+    "productionManifestSHA256": "f3477c44719735140e6e8152ce1adc274b0540e62ee5e8281e8c89cc4f15b09a",
+    "forensicPreparerSHA256": "f808f9a77edaf781e2a3eaf475053bfdd83b4a3b267fe9b338d5c8a43adc9259"
+  },
+  "limits": [
+    "The raw expected images were retained transaction backups compared exactly, not inferred from Git tree semantics.",
+    "No new Core call, Git process, test, fixture or probe was executed. All fixture and archived source bytes were read only.",
+    "No final full result or later unexecuted assertion is certified; the growing stderr is represented only by its extracted closed block checksum.",
+    "Raw process IDs, host filesystem identities, profiles, fixture nonce and private absolute paths are omitted."
+  ],
+  "preparerHistory": {
+    "earlierWrapperStoppedBeforeWrite": true,
+    "earlierPreparerStoppedBeforeReceipt": true,
+    "earlierPreparerReason": "The extracted-block next-offset argument was placed inside Buffer.from; the guard refused before any receipt or evidence block write.",
+    "reason": "A read-only ancestry comparison used differently normalized path separators; no preparer or receipt file was created by that attempt."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "kind": "functional-source-archive-verification",
+  "status": "ARCHIVES_VERIFIED",
+  "qualification": "Post-hoc exact regular-file/domain/size/SHA256 verification of the one closed broad-phase archive. This status certifies archive correspondence only, not product support or a test campaign PASS.",
+  "sourceFingerprint": "c5f919feb2de4cb4ef81d6011dcf1193eca5441afcdb6023f065e202e61350fc",
+  "sourceInputs": 234,
+  "phases": [
+    {
+      "phase": "broad",
+      "status": "ARCHIVE_EXACT",
+      "phaseResultStatus": "PASS",
+      "files": 234,
+      "totalBytes": 3799848,
+      "fingerprint": "c5f919feb2de4cb4ef81d6011dcf1193eca5441afcdb6023f065e202e61350fc",
+      "archiveDomainEqualsManifest": true,
+      "allFileSizesAndSHA256Match": true,
+      "regularFilesAndStableReads": true,
+      "sourceManifestSHA256": "21063f39bb36a0ad9f83eb6fc1991c9cd1bb4db42582c01c1e41193df5a150b6",
+      "afterManifestSHA256": "21063f39bb36a0ad9f83eb6fc1991c9cd1bb4db42582c01c1e41193df5a150b6",
+      "resultSHA256": "e88c8fc0ad29250b8103f2c5d0db21b466ef41ceb2bb64a741910cddad5ad086"
+    }
+  ],
+  "verifierSHA256": "283af666113282b5120e1d74e38e87081c8efeef0aeaf790038dc457db02f952",
+  "privateIdentifiersExcluded": true
+}

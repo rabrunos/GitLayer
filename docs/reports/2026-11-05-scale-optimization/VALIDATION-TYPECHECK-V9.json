@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "kind": "local-validation-phase",
+  "campaign": "typecheck-v9",
+  "phase": "typecheck",
+  "status": "PASS",
+  "finalResultPresent": true,
+  "startedAt": "2026-11-06T00:11:17.816Z",
+  "endedAt": "2026-11-06T00:11:21.009Z",
+  "command": {
+    "cwd": "<PROJECT>",
+    "executable": "<NODE.EXE>",
+    "argv": [
+      "node_modules/typescript/bin/tsc",
+      "--noEmit"
+    ],
+    "timeoutMs": 120000,
+    "npmEquivalent": "npm.cmd run typecheck",
+    "scope": null
+  },
+  "source": {
+    "beforeFingerprint": "b95074e1c5b79d47b86687849855cac90ac0b8c610849381f3257895adcb741f",
+    "afterFingerprint": "b95074e1c5b79d47b86687849855cac90ac0b8c610849381f3257895adcb741f",
+    "countBefore": 234,
+    "countAfter": 234,
+    "sourceUnchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "beforeManifest": "SOURCE-MANIFEST-b95074e1c5b79d47b86687849855cac90ac0b8c610849381f3257895adcb741f.json",
+    "afterManifest": "SOURCE-MANIFEST-b95074e1c5b79d47b86687849855cac90ac0b8c610849381f3257895adcb741f.json",
+    "beforeManifestRawSHA256": "f3477c44719735140e6e8152ce1adc274b0540e62ee5e8281e8c89cc4f15b09a",
+    "afterManifestRawSHA256": "f3477c44719735140e6e8152ce1adc274b0540e62ee5e8281e8c89cc4f15b09a"
+  },
+  "process": {
+    "exitCode": 0,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "timeoutMs": 120000,
+    "durationMs": 2607,
+    "termination": null
+  },
+  "summary": null,
+  "independentlyParsedTap": null,
+  "streams": {
+    "stdout": {
+      "file": "stdout.log",
+      "present": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    },
+    "stderr": {
+      "file": "stderr.log",
+      "present": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stableAtObservation": true,
+      "final": true,
+      "observation": "Raw bytes hashed locally; stream content is not included in this projection"
+    }
+  },
+  "error": null,
+  "resultRawSHA256": "484d949f18d74933b055f34066580655b64a64f5a969f592eb1e8cc6e8d486b4",
+  "projectComparison": {
+    "project": "<PROJECT>",
+    "fingerprint": "b95074e1c5b79d47b86687849855cac90ac0b8c610849381f3257895adcb741f",
+    "count": 234,
+    "unchanged": true,
+    "delta": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    }
+  },
+  "qualification": "One named phase and one source snapshot; labels do not imply final approval. Never pool campaigns, retries, phases or partial TAP totals."
+}

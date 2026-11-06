@@ -1,0 +1,173 @@
+{
+  "schema": 1,
+  "kind": "sanitized-interrupted-validation-campaign",
+  "campaign": "V7",
+  "phase": "full",
+  "status": "INTERRUPTED_AFTER_TWO_TEST_TIMEOUTS",
+  "rawResultStatus": "FAIL",
+  "finalResultPresent": true,
+  "completeSuiteResult": false,
+  "startedAt": "2026-11-05T22:03:56.861Z",
+  "endedAt": "2026-11-05T22:22:47.055Z",
+  "command": {
+    "executable": "<NODE>/node.exe",
+    "argv": [
+      "--import",
+      "tsx",
+      "--test",
+      "--test-concurrency=2",
+      "--test-timeout=900000",
+      "--test-reporter=spec",
+      "--test-reporter-destination=stdout",
+      "--test-reporter=tap",
+      "--test-reporter-destination=stderr",
+      "tests/unit/*.test.ts",
+      "tests/unit/*.test.mjs",
+      "tests/integration/*.test.ts",
+      "tests/integration/*.test.mjs"
+    ],
+    "timeoutMs": 10800000,
+    "npmEquivalent": "npm.cmd test",
+    "qualification": "Actual normalized child argv. The two failing tests have a local 180000 ms budget that overrides the global 900000 ms test budget."
+  },
+  "source": {
+    "inputs": [
+      "src",
+      "scripts",
+      "tests",
+      "package-lock.json",
+      "package.json",
+      "tsconfig.debug.json",
+      "tsconfig.json"
+    ],
+    "beforeFingerprint": "1c5674ec0a9c42a0edb8ede973800e1e45b55683275c0eccc839d480e2e68fd9",
+    "afterFingerprint": "1c5674ec0a9c42a0edb8ede973800e1e45b55683275c0eccc839d480e2e68fd9",
+    "countBefore": 226,
+    "countAfter": 226,
+    "sourceUnchanged": true,
+    "delta": { "added": [], "removed": [], "changed": [] },
+    "publicManifest": "SOURCE-MANIFEST-1c5674ec0a9c42a0edb8ede973800e1e45b55683275c0eccc839d480e2e68fd9.json",
+    "publicManifestSHA256": "265b07707b8e0ba89f267a69fea10d18583c260d4880d460ae817afe1024001e",
+    "publicManifestFilesExactlyMatchBothRawManifests": true,
+    "beforeManifestRawSHA256": "71b90fabc59c00c12fa1aff6632e73f31254308af919caabc33f96b4ca8bf7cd",
+    "afterManifestRawSHA256": "71b90fabc59c00c12fa1aff6632e73f31254308af919caabc33f96b4ca8bf7cd"
+  },
+  "process": {
+    "exitCode": 1,
+    "signal": null,
+    "timedOut": false,
+    "outputTruncated": false,
+    "durationMs": 1129069,
+    "qualification": "The wrapper closed after the owned test process tree was stopped. timedOut=false is the wrapper timeout flag; it does not negate the two recorded individual test timeouts."
+  },
+  "summary": {
+    "format": "Node.js TAP final summary",
+    "counts": {},
+    "complete": false,
+    "consistent": false,
+    "independentlyObservedFinalTapSummary": false,
+    "qualification": "No final TAP totals were emitted. No pass/fail denominator is reconstructed from a partial stream or pooled with other campaigns."
+  },
+  "observedTimeouts": [
+    {
+      "number": 17,
+      "name": "durable shelf publication identity permits known B rollback once and completed recovery remains idempotent",
+      "reportedDurationMs": 180002.809,
+      "failureType": "testTimeoutFailure",
+      "error": "test timed out after 180000ms",
+      "code": "ERR_TEST_FAILURE"
+    },
+    {
+      "number": 18,
+      "name": "fresh activation registers an unregistered native local Layer with durable initial reservations",
+      "reportedDurationMs": 180002.7847,
+      "failureType": "testTimeoutFailure",
+      "error": "test timed out after 180000ms",
+      "code": "ERR_TEST_FAILURE",
+      "fixtureForensicsInThisReceipt": false
+    }
+  ],
+  "streams": {
+    "stdout": { "bytes": 4908, "sha256": "a9adaa3de96dd85aeeb3297a01412e43df8e8a1f4ff9028a003273f66e0315f3" },
+    "stderr": { "bytes": 8042, "sha256": "24938f9e41ea425c44fe79143e6706e0a6b96241b5712f84bd223764b9adc0d6" }
+  },
+  "privateRawEvidence": {
+    "result": { "bytes": 2299, "sha256": "cbec327ce8a5b99f8c5542aa53c3429731eaadc8a151c3d08d7cb83fe6e2b880" },
+    "started": { "bytes": 1757, "sha256": "fd7269f7dac388b1a17d9c56b1a047e138b31ed62f3328b3cad8724c84b7809c" },
+    "processRecord": { "bytes": 517, "sha256": "6ac794236912e01b41083387c67af4f521531b285ae6cd537098871be2a55b88" },
+    "beforeManifest": { "bytes": 38632, "sha256": "71b90fabc59c00c12fa1aff6632e73f31254308af919caabc33f96b4ca8bf7cd" },
+    "afterManifest": { "bytes": 38632, "sha256": "71b90fabc59c00c12fa1aff6632e73f31254308af919caabc33f96b4ca8bf7cd" },
+    "qualification": "Raw logs, host paths and process identity records remain private and unchanged. The functional source archive and actual command are bound above; no independently retained validation-runner source hash is invented here."
+  },
+  "stop": {
+    "rootIdentityValidated": true,
+    "inventoriedAt": "2026-11-05T22:22:46.2315032Z",
+    "sentAt": "2026-11-05T22:22:46.4921020Z",
+    "completedAt": "2026-11-05T22:22:49.3346637Z",
+    "chronologicalNodes": 15,
+    "staleParentCandidates": 0,
+    "nativeExitCode": 128,
+    "nativeErrorRetainedPrivately": true,
+    "observedSameIdentityRemaining": 0,
+    "preflightRaw": { "bytes": 10026, "sha256": "2b5d5b34c4a0c7b7a9be74087467ca29ce9f8636337204b1a350a5e2fa655395" },
+    "resultRaw": { "bytes": 2427, "sha256": "14eab4fbfb265ab69c4975d9d90ac0ab5df0e4cafd824683899bc257c86916b6" },
+    "retainedExecutedScript": { "file": "stop-owned-full.ps1", "bytes": 4403, "sha256": "17c5985935f7af7911ed2244de41d6bfc9e93c2345bbe8fe1476648a09636958" },
+    "qualification": "The stop targeted the identity-validated owned process tree. Native exit 128 is preserved as an error, not rewritten as successful termination. A later identity comparison observed none of the 15 inventoried chronological identities remaining; this is bounded observation, not universal descendant closure proof. No process IDs, command lines or unrelated application identities are published."
+  },
+  "readOnlyFixtureForensics": {
+    "testNumber": 17,
+    "observedAt": "2026-11-05T22:23:45.474Z",
+    "method": "Inline read-only Node filesystem inspection recorded in the tool transcript; no recovery call, test, Git command or standalone diagnostic program was executed or claimed.",
+    "testSource": "tests/integration/activation-frontier.test.ts",
+    "testSourceSHA256": "6aeb0167008789bace0e525b3f77942800489c72d86731cbd9815aa592bca52b",
+    "ownership": {
+      "markerParentMatches": true,
+      "noncePresent": true,
+      "expectedExclusiveFixturePrefix": true,
+      "markerSHA256": "0e42edfd158a5edb7f038ede06e033960570c5a77a353b2a6104cf7146a0f06e",
+      "markerBirthtime": "2026-11-05T22:15:49.342Z"
+    },
+    "phaseEvidence": {
+      "registerCompleted": "2026-11-05T22:17:23.050Z",
+      "activationPrepared": "2026-11-05T22:18:15.189Z",
+      "indexPublicationPrepared": "2026-11-05T22:18:41.475Z",
+      "injectedFailureDurable": "2026-11-05T22:18:44.329Z",
+      "explicitRecoveryJournalCompleted": "2026-11-05T22:19:24.713Z",
+      "indexLastWriteObserved": "2026-11-05T22:19:34.965Z",
+      "approximateMarkerPlusBudget": "2026-11-05T22:18:49.342Z",
+      "exactAwaitAtCutoff": "not recorded",
+      "qualification": "The recovery completion stamp is about 35.37 seconds after marker birthtime plus the local budget. These are wall-clock file/journal observations, not a synchronized monotonic test deadline. The later index timestamp is consistent with the source's post-journal checkpoint phase; its exact syscall is not established by timestamp alone."
+    },
+    "durableCurrent": {
+      "journalSchema": 1,
+      "journalState": "completed",
+      "journalBytes": 3934,
+      "journalSHA256": "c0f2bbc97e53657e1aaae1ec35c40183098ceac08bdc0da59a9e20a2f0778569",
+      "indexBytes": 137,
+      "indexSHA256": "4a62903c17b2d437862c9802874d020fd0cd25b5b28598c38900f9a160ea697b",
+      "indexEqualsBeforeAndBackup": true,
+      "indexEntryEqualsFixtureA": true,
+      "checkpointEqualsIndependentlyHashedSingleFileATree": true,
+      "branchEqualsRegisteredA": true,
+      "headEqualsBeforeWorkspace": true,
+      "workspaceTargetAbsent": true,
+      "locksPresentInOwnedLockDirectory": 0,
+      "shelfIndexBytes": 137,
+      "shelfIndexSHA256": "f1ff2056b28329be014bc5473d0da0130058a40937f41ee66ca6bd390d7b716a",
+      "shelfMetadataBytes": 231,
+      "shelfMetadataSHA256": "da30b74abe15122c0ce57b4ff468e8e253aab7b50ebd5427da8c656cd69d05af",
+      "indexAndJournalStableAcrossReadOnlyObservations": true
+    },
+    "limits": [
+      "The observed physical rollback and checkpoint state do not certify the remaining test assertions, repeated-recovery completion or a PASS for test 17.",
+      "The single-file A object/tree comparison used independent Git object-envelope SHA-1 calculations and index-byte inspection; no write-tree command was run.",
+      "The retained fixture and its recovery bytes were not changed by this inspection.",
+      "No cause of the delay is inferred from reported interactive host load."
+    ]
+  },
+  "qualification": [
+    "This interrupted full campaign is separate from the completed V7 fast phases and from any later isolated reproduction or full rerun.",
+    "No product data-loss defect or complete-suite PASS is established by this receipt.",
+    "An isolated reproduction remains necessary before attributing either timeout to a product failure or adjusting a test budget."
+  ]
+}

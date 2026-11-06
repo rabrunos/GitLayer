@@ -12,6 +12,10 @@ export interface GitOptions {
   ok?: number[];
   env?: Record<string, string>;
   timeout?: number;
+  /** Internal synchronous streaming consumer: stdout is neither retained nor capped at 64 MiB. */
+  consumeStdout?: (chunk: Buffer) => void;
+  /** Internal native update-ref transaction guard, invoked only after prepare holds all ref locks. */
+  afterPrepare?: () => Promise<void>;
 }
 export interface GitResult { stdout: Buffer; stderr: Buffer; code: number }
 export interface GitActivity { at: string; command: string[]; code: number; stderr: string; durationMs: number }
@@ -64,8 +68,22 @@ const gitEnv = new Set([
 
 /** The only Git process boundary. It never uses a shell or inherits repository redirection. */
 export async function git(cwd: string, args: string[], options: GitOptions = {}): Promise<GitResult> {
+  // Capture these new transaction inputs before resolving config/executable paths.
+  args = [...args];
+  const consumeStdout = options.consumeStdout, afterPrepare = options.afterPrepare, input = options.input;
+  if (consumeStdout !== undefined && typeof consumeStdout !== 'function') throw new LabError('INVALID_ARGUMENT', 'O consumidor de saída Git deve ser uma função síncrona.');
   if (!args.length || !commands.has(args[0]!) || args.some(a => typeof a !== 'string' || a.includes('\0'))) {
     throw new LabError('GIT_COMMAND_REFUSED', 'Comando Git inválido ou fora do conjunto local permitido.', { command: args[0] });
+  }
+  if (afterPrepare !== undefined) {
+    const shape = args.length === 3 || args.length === 5 && args[3] === '-m';
+    if (typeof afterPrepare !== 'function' || consumeStdout !== undefined || !shape || args[0] !== 'update-ref' || args[1] !== '--no-deref' || args[2] !== '--stdin' || typeof input !== 'string') {
+      throw new LabError('INVALID_ARGUMENT', 'A barreira prepare exige uma transação nativa update-ref sem dereference nem consumidor de saída.');
+    }
+    const lines = input.split('\n');
+    if (lines.length < 4 || lines[0] !== 'start' || lines.at(-2) !== 'prepare' || lines.at(-1) !== '' || lines.slice(1, -2).some(line => !/^(?:update|create|verify|delete) [^\r\n]+$/u.test(line))) {
+      throw new LabError('INVALID_ARGUMENT', 'A entrada da transação deve terminar em prepare, sem commit antecipado.');
+    }
   }
   if(args[0]==='remote'&&args.length!==1)throw new LabError('GIT_COMMAND_REFUSED','Somente a listagem local de remotos é usada pelo Core.');
   if (args[0] === 'worktree' && !['list','add','remove'].includes(args[1]??'')) {
@@ -104,7 +122,7 @@ export async function git(cwd: string, args: string[], options: GitOptions = {})
     '-c', 'credential.helper=', '-c', 'diff.external=',
     '-c', 'submodule.recurse=false', '-c', 'status.submoduleSummary=false',
   ];
-  if (attributeCommands.has(args[0]!)) {
+  if (attributeCommands.has(args[0]!) || args[0] === 'cat-file' && args.includes('--filters')) {
     // --no-textconv alone does not prevent a working-tree clean filter during
     // diff. Enumerating config is read-only and cannot invoke those filters.
     const configOutput = (await git(cwd, ['config', '--null', '--list'], { env: options.env })).stdout.toString('utf8');
@@ -127,7 +145,10 @@ export async function git(cwd: string, args: string[], options: GitOptions = {})
     const child = spawn(executable, [...globalArgs, ...localArgs], { cwd, env, shell: false, windowsHide: true, stdio: ['pipe', 'pipe', 'pipe'] });
     const stdout: Buffer[] = [], stderr: Buffer[] = [];
     let size = 0, finished = false, interrupted: LabError | undefined;
+    let prepareState: 'start' | 'prepare' | 'checking' | 'commit' | 'abort' | 'done' = 'start', protocolBuffer = '', preparedOutcome = '';
+    let guardRejected = false, guardError: unknown;
     const stop = (error: LabError): void => {
+      if (finished || interrupted) return;
       interrupted = error;
       child.kill('SIGKILL');
     };
@@ -137,19 +158,60 @@ export async function git(cwd: string, args: string[], options: GitOptions = {})
       if (size > outputLimit) { stop(new LabError('GIT_OUTPUT_LIMIT', 'A saída do Git excedeu o limite de 64 MiB.')); return; }
       list.push(chunk);
     };
-    child.stdout.on('data', (chunk: Buffer) => collect(stdout, chunk));
+    const protocolFailure = () => stop(new LabError('GIT_REF_TRANSACTION', 'Resposta inesperada da transação nativa de referências; nenhuma conclusão foi autorizada.'));
+    const preparedLine = (line: string) => {
+      if (line.length > 512) { protocolFailure(); return; }
+      if (prepareState === 'start' && line === 'start: ok') { prepareState = 'prepare'; return; }
+      if (prepareState === 'prepare' && line === 'prepare: ok') {
+        prepareState = 'checking';
+        Promise.resolve().then(() => afterPrepare!()).then(() => {
+          // A timeout/exit while the asynchronous guard ran never authorizes a late commit.
+          if (finished || interrupted || child.exitCode !== null || child.signalCode !== null) return;
+          prepareState = 'commit'; child.stdin.end('commit\n');
+        }, error => {
+          if (finished || interrupted || child.exitCode !== null || child.signalCode !== null) return;
+          guardRejected = true; guardError = error; prepareState = 'abort';
+          // Let Git release only its own prepared locks. A timeout can kill our
+          // process handle, but this boundary never deletes a leftover lock.
+          child.stdin.end('abort\n');
+        });
+        return;
+      }
+      if (prepareState === 'commit' && line === 'commit: ok' || prepareState === 'abort' && line === 'abort: ok') {
+        preparedOutcome = prepareState; prepareState = 'done'; return;
+      }
+      protocolFailure();
+    };
+    child.stdout.on('data', (chunk: Buffer) => {
+      if (!consumeStdout) {
+        collect(stdout, chunk);
+        if (afterPrepare && !interrupted) {
+          protocolBuffer += chunk.toString('utf8');
+          let end: number;
+          while (!interrupted && (end = protocolBuffer.indexOf('\n')) >= 0) { const line = protocolBuffer.slice(0, end); protocolBuffer = protocolBuffer.slice(end + 1); preparedLine(line); }
+          if (protocolBuffer.length > 512) protocolFailure();
+        }
+        return;
+      }
+      if (interrupted) return;
+      try { consumeStdout(chunk); }
+      catch (error) { stop(error instanceof LabError ? error : new LabError('GIT_OUTPUT_CONSUMER', 'Não foi possível validar a saída do Git.', { message: error instanceof Error ? error.message : String(error) })); }
+    });
     child.stderr.on('data', (chunk: Buffer) => collect(stderr, chunk));
     child.on('error', error => {
       if (finished) return;
       finished = true; clearTimeout(timer);
       recordActivity(localArgs, -1, error.message, started);
-      reject(new LabError((error as NodeJS.ErrnoException).code === 'ENOENT' ? 'GIT_NOT_FOUND' : 'GIT_PROCESS', 'Não foi possível iniciar o Git instalado no sistema.', { message: error.message }));
+      if (guardRejected) reject(guardError);
+      else if (interrupted) reject(interrupted);
+      else reject(new LabError((error as NodeJS.ErrnoException).code === 'ENOENT' ? 'GIT_NOT_FOUND' : 'GIT_PROCESS', 'Não foi possível iniciar o Git instalado no sistema.', { message: error.message }));
     });
     child.on('close', (code, signal) => {
       if (finished) return;
       finished = true; clearTimeout(timer);
       const result = { stdout: Buffer.concat(stdout), stderr: Buffer.concat(stderr), code: code ?? -1 };
       recordActivity(localArgs, result.code, result.stderr.toString('utf8'), started);
+      if (guardRejected) { reject(guardError); return; }
       if (interrupted) { reject(interrupted); return; }
       if (!(options.ok ?? [0]).includes(result.code)) {
         reject(new LabError('GIT_FAILED', result.stderr.toString('utf8').trim() || `Git terminou com código ${code ?? signal}.`, {
@@ -157,10 +219,14 @@ export async function git(cwd: string, args: string[], options: GitOptions = {})
         }));
         return;
       }
+      if (afterPrepare && (prepareState !== 'done' || preparedOutcome !== 'commit' || protocolBuffer !== '')) {
+        reject(new LabError('GIT_REF_TRANSACTION', 'A transação nativa terminou sem confirmação de commit.')); return;
+      }
       resolve(result);
     });
     child.stdin.on('error', () => { /* EPIPE is reported by the process result. */ });
-    child.stdin.end(options.input);
+    if (afterPrepare) child.stdin.write(input);
+    else child.stdin.end(input);
   });
 }
 
@@ -216,6 +282,16 @@ async function originalConfig(root: string): Promise<Map<string, string[]>> {
 function truthy(value: string): boolean { return /^(?:true|yes|on|1)$/iu.test(value) || value === ''; }
 
 /** Strict support envelope for managed Layers. No config is rewritten to make a repo fit. */
+/** Inspect controlled refs without requiring general feature support or rewriting metadata. */
+export async function assertDirectManagedRefs(root: string, workingRef?: string): Promise<void> {
+  if (workingRef !== undefined && (typeof workingRef !== 'string' || !workingRef.startsWith('refs/') || /[\u0000-\u0020\u007f]/u.test(workingRef))) throw new LabError('INVALID_ARGUMENT', 'Referência de trabalho inválida.');
+  const controlled = (ref: string) => ref.startsWith('refs/git-layers/') || ref.startsWith('refs/heads/layer/') || ref === workingRef;
+  const rows = (await gitText(root, ['for-each-ref', '--format=%(refname)%00%(symref)', 'refs/replace/', 'refs/git-layers/', 'refs/heads/layer/', ...(workingRef ? [workingRef] : [])])).split('\n').filter(Boolean).map(line => line.split('\0'));
+  if (rows.some(([ref]) => ref!.startsWith('refs/replace/'))) throw new LabError('REPLACE_OBJECTS', 'Referências de substituição de objetos não são suportadas.');
+  const indirect = rows.find(([ref, target]) => !!target && controlled(ref!));
+  if (indirect) throw new LabError('EXTERNAL_REF', 'A referência gerenciada deve ser direta; alias e destino foram preservados.', { reason: 'direct-ref-required', ref: indirect[0], target: indirect[1] });
+}
+
 export async function assertSupported(repoOrPath: RepoInfo | string, requireCommit = true): Promise<void> {
   const repo = typeof repoOrPath === 'string' ? await discover(repoOrPath) : repoOrPath;
   if (await gitText(repo.root, ['rev-parse', '--is-bare-repository']) !== 'false') {
@@ -266,8 +342,7 @@ export async function assertSupported(repoOrPath: RepoInfo | string, requireComm
   for (const name of incomplete) {
     if (await exists(name)) throw new LabError('INCOMPLETE_REPOSITORY', `Repositório incompleto/alternativo não suportado: ${name}`);
   }
-  const replaceRefs = await gitText(repo.root, ['for-each-ref', '--format=%(refname)', 'refs/replace/']);
-  if (replaceRefs) throw new LabError('REPLACE_OBJECTS', 'Referências de substituição de objetos não são suportadas.');
+  await assertDirectManagedRefs(repo.root);
   const hooksDir = internal.get('hooks')!;
   const hooksConfig = config.get('core.hookspath')?.at(-1);
   const hooksDisabled = hooksConfig === DISABLED_GIT_HOOKS || hooksConfig === os.devNull ||

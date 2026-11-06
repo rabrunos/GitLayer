@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "candidate": "Withdrawn V5 candidate before the shared initial-index publication correction",
+  "baselineReproductionClaimed": false,
+  "gitVersion": "git version 2.53.0.windows.2",
+  "method": "Owned external fixtures; official Git creates/observes commits, trees, branches and index semantics. The hooks perform a real equal-byte new-inode replacement with a later mtime before delegating all Git results. Exact scripts and raw receipts remain in the owned evidence roots.",
+  "finding": "Both activation attempts refused a detected source change, then automatic rollback removed the externally replaced equal-byte fresh private index and completed the journal. Registry remained empty: this was an unpublished transaction artifact. No distinct staged B content loss or wrong version delivery is claimed.",
+  "correction": "Shared create/register/first-activation initialization validates an independent index against the requested immutable Git tree; its exact created-index identity and AFTER are durably recorded before no-replace publication. Recovery requires the known created identity or original absence, independent of activationSource assignment or later conflict-marker persistence. The initial checkpoint uses native zero-OID compare-and-swap.",
+  "observations": [
+    {
+      "variant": "after-fresh-validated-token",
+      "rawEvidence": {
+        "fixture": "gl-fresh-index-retention-probe-BhVDWy",
+        "file": "FRESH-INDEX-RETENTION-PROBE.json",
+        "bytes": 3909,
+        "sha256": "a4f89b4a55223980160cfc9286a9e6c7a682149bc205b73fa80dc328a1fdfc76"
+      },
+      "sourceHashes": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "0e0f7bdb4e85aea2d89a68f9525ed5f222296680a62c7f4e143ddd64276f5afc"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "f320a97a739d02caef5dad0c2c4a9582173bbf71049dff7f0f74bee6099999cc"
+        }
+      ],
+      "error": {
+        "code": "EXTERNAL_INDEX",
+        "reason": "activation-source-changed",
+        "boundary": "initial-binding"
+      },
+      "replacement": {
+        "sameBytes": true,
+        "hash": "ffb75d9a2f28db2ad8a9e3504b2beeacb77d687c7ecd8601d59aa0b00a5f2343",
+        "changedInode": true,
+        "mtimeAdvancedNs": "60000001000",
+        "nativeIndexBlob": "Layer A",
+        "publishedLayerIdentity": false
+      },
+      "after": {
+        "indexExists": false,
+        "unknownReplacementRetained": false,
+        "worktreeLayerExists": false,
+        "HEADPreserved": true,
+        "mainBytesPreserved": true,
+        "localLayerRef": "47c74e4db79142beb2523aaf84c3b3b8159df4f0",
+        "registry": {
+          "schema": 1,
+          "layers": []
+        },
+        "journalSchema": 1,
+        "journalState": "completed",
+        "nativeProofBlob": "Layer A"
+      },
+      "mockedGitResults": false,
+      "distinctStagedBContentLossClaimed": false
+    },
+    {
+      "variant": "inside-fresh-validation",
+      "rawEvidence": {
+        "fixture": "gl-fresh-index-retention-probe-Xvyv6c",
+        "file": "FRESH-INDEX-RETENTION-PROBE.json",
+        "bytes": 3218,
+        "sha256": "0876e4b9879bff2c8854aeed9b583919e6360a793eecb74c498f0258ed898483"
+      },
+      "sourceHashes": [
+        {
+          "path": "src/core/index.ts",
+          "sha256": "0e0f7bdb4e85aea2d89a68f9525ed5f222296680a62c7f4e143ddd64276f5afc"
+        },
+        {
+          "path": "src/core/recovery.ts",
+          "sha256": "f320a97a739d02caef5dad0c2c4a9582173bbf71049dff7f0f74bee6099999cc"
+        }
+      ],
+      "error": {
+        "code": "EXTERNAL_INDEX",
+        "reason": "activation-source-changed",
+        "boundary": "index-during-validation"
+      },
+      "replacement": {
+        "sameBytes": true,
+        "hash": "ffb75d9a2f28db2ad8a9e3504b2beeacb77d687c7ecd8601d59aa0b00a5f2343",
+        "changedInode": true,
+        "mtimeAdvancedNs": "60000000300",
+        "nativeIndexBlob": "Layer A",
+        "publishedLayerIdentity": false
+      },
+      "after": {
+        "indexExists": false,
+        "unknownReplacementRetained": false,
+        "worktreeLayerExists": false,
+        "HEADPreserved": true,
+        "mainBytesPreserved": true,
+        "localLayerRef": "47c74e4db79142beb2523aaf84c3b3b8159df4f0",
+        "registry": {
+          "schema": 1,
+          "layers": []
+        },
+        "journalSchema": 1,
+        "journalState": "completed",
+        "nativeProofBlob": "Layer A"
+      },
+      "mockedGitResults": false,
+      "distinctStagedBContentLossClaimed": false
+    }
+  ],
+  "limitations": [
+    "The probe proves removal of an unknown equal-byte physical image, not loss of distinct index contents.",
+    "These are focused correctness observations, not activation benchmarks or whole-suite validation.",
+    "Only the two source hashes captured by each probe are asserted; the public receipt does not invent a whole-Core fingerprint."
+  ]
+}

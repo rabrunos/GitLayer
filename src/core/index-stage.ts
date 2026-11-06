@@ -10,14 +10,19 @@ import { validatePath } from './paths.js';
 import { comparableFileMode, OPEN_NOFOLLOW } from './platform.js';
 import { fingerprint, sameFingerprint, type Fingerprint } from './storage.js';
 import { observeIndexIdentity, preserveIndexTimestamp, sameIndexIdentity, type IndexIdentity } from './index-timestamp.js';
+import { publishNewFile } from './publication.js';
+import { queryIndexTree } from './index-query.js';
 
 export interface StageIndexOptions {
   expected: Fingerprint;
   /** Recheck Core ownership without guard/load or another index writer. */
   beforePublish: () => Promise<void>;
-  /** Durably record this AFTER fingerprint before the native lock is renamed. */
-  planned: (after: Fingerprint) => Promise<void>;
+  /** Durably record AFTER, publication identity and optional managed-tree proof before publication. */
+  planned: (after: Fingerprint, identity: IndexIdentity, proof?: ManagedStageProof) => Promise<void>;
 }
+export interface PublishedIndexImage { fingerprint: Fingerprint; identity: IndexIdentity }
+export interface ManagedStageProof { tree: string; beforeIdentity: IndexIdentity | null }
+export interface PublishedStagedIndex extends PublishedIndexImage, ManagedStageProof {}
 const codeOf = (error: unknown) => (error as NodeJS.ErrnoException | undefined)?.code;
 const digest = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const signature = (value: unknown) => digest(JSON.stringify(value));
@@ -132,14 +137,38 @@ async function syncDirectory(directory: string): Promise<void> {
  * directory and are never registered as recovery.files publication targets.
  */
 export async function stageIndex(repo: RepoInfo, index: string, directory: string, args: string[], options: StageIndexOptions): Promise<Fingerprint> {
-  args = [...args]; // The validated argv remains fixed across every await.
+  return (await stageAddIndex(repo, index, directory, args, options, false)).fingerprint;
+}
+
+/** Bind managed add to its independently validated fixed tree, never a later live index. */
+export async function stageIndexWithProof(repo: RepoInfo, index: string, directory: string, args: string[], options: StageIndexOptions): Promise<PublishedStagedIndex> {
+  const publication = await stageAddIndex(repo, index, directory, args, options, true);
+  if (!('tree' in publication)) changed('managed-stage-tree-missing');
+  return publication as PublishedStagedIndex;
+}
+
+async function stageAddIndex(repo: RepoInfo, index: string, directory: string, args: string[], options: StageIndexOptions, withProof: boolean): Promise<PublishedIndexImage | PublishedStagedIndex> {
+  args = [...args]; // Both public entry points clone/validate before their first await.
   if (!validFingerprint(options.expected)) throw new LabError('INVALID_ARGUMENT', 'Fingerprint anterior do índice inválido.');
   const expected = { ...options.expected }, separator = args.indexOf('--');
   if (args[0] !== 'add' || separator < 1 || separator === args.length - 1 ||
       args.slice(1, separator).some(arg => !['-A', '--all', '-f', '--force'].includes(arg))) {
     throw new LabError('INVALID_ARGUMENT', 'Preparação requer git add e caminhos explícitos após --.');
   }
-  const files = args.slice(separator + 1).map(validatePath), target = path.resolve(index), txDirectory = path.resolve(directory);
+  const files = args.slice(separator + 1).map(validatePath);
+  return prepareAndPublishIndex(repo, index, directory, files, { ...options, expected }, args, undefined, withProof);
+}
+
+/** Publish an already validated transaction-local image; this does not widen stage argv. */
+export async function publishPreparedIndexImage(repo: RepoInfo, index: string, directory: string, source: { path: string; fingerprint: Fingerprint }, files: string[], options: StageIndexOptions): Promise<PublishedIndexImage> {
+  files = [...files].map(validatePath);
+  if (!source || typeof source.path !== 'string' || !path.isAbsolute(source.path) || path.dirname(path.resolve(source.path)) !== path.resolve(directory) || path.resolve(source.path) === path.resolve(index) || !validFingerprint(source.fingerprint) || !source.fingerprint.exists || !validFingerprint(options.expected)) throw new LabError('INVALID_ARGUMENT', 'A publicação exige uma imagem independente da própria transação.');
+  const prepared = { path: path.resolve(source.path), fingerprint: { ...source.fingerprint } };
+  return prepareAndPublishIndex(repo, index, directory, files, { ...options, expected: { ...options.expected } }, undefined, prepared);
+}
+
+async function prepareAndPublishIndex(repo: RepoInfo, index: string, directory: string, files: string[], options: StageIndexOptions, args?: string[], image?: { path: string; fingerprint: Fingerprint }, withProof = false): Promise<PublishedIndexImage | PublishedStagedIndex> {
+  const expected = options.expected, target = path.resolve(index), txDirectory = path.resolve(directory);
   if (!path.isAbsolute(index) || !path.isAbsolute(directory) || !within(repo.gitDir, target) || !within(repo.gitDir, txDirectory) || path.basename(path.dirname(txDirectory)) !== 'transactions') {
     throw new LabError('UNSAFE_PATH', 'Índice e scratch devem pertencer ao armazenamento da transação.');
   }
@@ -148,9 +177,9 @@ export async function stageIndex(repo: RepoInfo, index: string, directory: strin
   await noLock(target + '.lock');
   const controls = controlFiles(repo.root, files), initial = await context(repo, controls, files, false);
   const original = await readCompared(target, expected);
-  const scratch = path.join(txDirectory, 'stage-' + randomUUID() + '.index');
+  const scratch = image?.path ?? path.join(txDirectory, 'stage-' + randomUUID() + '.index');
   // Absent/unborn indexes stay absent. An empty file is not an empty Git index.
-  if (original !== undefined) {
+  if (!image && original !== undefined) {
     let copiedIdentity: IndexIdentity | undefined;
     const handle = await fs.open(scratch, constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL | OPEN_NOFOLLOW, expected.mode);
     try {
@@ -171,10 +200,22 @@ export async function stageIndex(repo: RepoInfo, index: string, directory: strin
   await verifyObserved(target, expected, original?.identity ?? null);
   // The caller has validated attrs/ownership. The Git adapter preserves cwd,
   // literal paths and conversion rules while selecting this alternate index.
-  await git(repo.root, [...args], { index: scratch });
+  if (!image) await git(repo.root, [...args!], { index: scratch });
   const generated = await fingerprint(scratch);
   if (!generated.exists) changed('scratch-missing');
+  if (image && !sameFingerprint(generated, image.fingerprint)) changed('prepared-image-changed');
   const prepared = (await readCompared(scratch, generated))!, bytes = prepared.bytes;
+  let managedProof: ManagedStageProof | undefined;
+  if (withProof) {
+    if (image) changed('managed-stage-prepared-image');
+    // write-tree runs only on queryIndexTree's independent verified copy. The
+    // post-add source's bytes, identity and racy timestamp remain unchanged.
+    await verifyObserved(scratch, generated, prepared.identity);
+    const tree = (await queryIndexTree(repo, scratch)).stdout.toString().trim();
+    await verifyObserved(scratch, generated, prepared.identity);
+    if (!/^(?:[0-9a-f]{40}|[0-9a-f]{64})$/u.test(tree)) changed('managed-stage-tree');
+    managedProof = { tree, beforeIdentity: original ? { ...original.identity } : null };
+  }
   const mode = expected.exists ? expected.mode : generated.mode;
   const after: Fingerprint = { exists: true, hash: digest(bytes), mode };
   const lock = target + '.lock';
@@ -223,10 +264,12 @@ export async function stageIndex(repo: RepoInfo, index: string, directory: strin
     knownIdentity = stamped.identity;
     await handle.sync(); await handle.close(); handle = undefined;
     await verifyLock();
-    await options.planned({ ...after });
+    await options.planned({ ...after }, { ...knownIdentity! }, managedProof ? { tree: managedProof.tree, beforeIdentity: managedProof.beforeIdentity ? { ...managedProof.beforeIdentity } : null } : undefined);
     await revalidate(); await verifyLock();
     await verifyObserved(scratch, generated, prepared.identity);
-    await fs.rename(lock, target); published = true;
+    if (expected.exists) await fs.rename(lock, target);
+    else await publishNewFile(lock, target, after);
+    published = true;
     await syncDirectory(path.dirname(target));
     const publishedIdentity = await observeIndexIdentity(target);
     // Rename can update ctime on some filesystems; the stamped mtime and the
@@ -237,7 +280,8 @@ export async function stageIndex(repo: RepoInfo, index: string, directory: strin
     const actual = await fingerprint(target);
     if (!sameFingerprint(actual, after)) changed('published-index');
     if (!sameIndexIdentity(publishedIdentity, await observeIndexIdentity(target))) changed('published-index-temporal-identity');
-    return actual;
+    const publication: PublishedIndexImage = { fingerprint: actual, identity: { ...publishedIdentity! } };
+    return managedProof ? { ...publication, tree: managedProof.tree, beforeIdentity: managedProof.beforeIdentity ? { ...managedProof.beforeIdentity } : null } : publication;
   } catch (error) { failed = true; throw error; }
   finally {
     try { await handle?.close(); } catch (error) { if (!failed) throw error; }
