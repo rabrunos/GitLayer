@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "status": "PASS",
+  "scope": "Allowlisted fresh A receipt, roots normalized and stream metadata only; no raw logs or PIDs published.",
+  "file": "FRESH-COMMIT-A.json",
+  "bytes": 24424,
+  "sha256": "3e4ebab3930488011889b78313676e540ace1f3c0f2c861dc3a61cccc0e30b0b",
+  "personalHostPaths": false,
+  "observedProcessIds": false,
+  "rawLogsPublished": false,
+  "sourceAndCloneCodeStatusCleanObserved": true
+}

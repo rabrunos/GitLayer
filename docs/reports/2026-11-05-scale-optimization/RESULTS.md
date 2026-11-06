@@ -64,6 +64,8 @@ Recusas diante de interrupção, falta de objeto ou interferência não são est
 
 ## Cópia nova e publicação
 
-[Protocolo técnico e inventário preservado](PUBLICATION.md).
+A cópia nova local do commit de implementação **f213022bd121648fa4e9e1bb1ecf9af27c4c998b** concluiu **PASS**. [Recibo público](FRESH-COMMIT-A.json) e [auditoria de privacidade](FRESH-COMMIT-A-PRIVACY.json). Os 234 inputs do commit, projeto e clone têm fingerprint c5f919feb2de4cb4ef81d6011dcf1193eca5441afcdb6023f065e202e61350fc, sem diferença antes/depois. O clone não usa alternates nem objetos hardlinked.
 
-Commit, instalação pelo lockfile e cópias novas são etapas posteriores a esta captura dos resultados funcionais. Cada cópia exige igualdade dos 234 inputs commitados, clone sem hardlinks/alternates, npm ci --ignore-scripts --include=dev --no-audit --no-fund, typecheck, build Core/CLI, help e smoke relocado sem dependências. Elas não são outra execução da full/matriz. O recibo da cópia A será publicado no fechamento documental, conservando o SHA concreto testado; a cópia do commit documental e a cópia nova do GitHub serão verificadas após esses commits existirem. O SHA final e a igualdade local/origin/servidor serão informados no encerramento, sem antecipar o próprio hash neste arquivo.
+A instalação pelo lockfile, com scripts desativados, typecheck, build Core/CLI, help e smoke relocado sem dependências passaram. O smoke tem sete passos, 82 comandos e quatro snapshots. Nenhuma dessas contagens é somada à full, à infraestrutura ou à matriz; não houve nova full nem CI remoto nesse clone.
+
+O [fechamento documental](PUBLICATION.md) conserva esses 234 inputs, acrescentando o recibo de A. Sua cópia local pré-push e a cópia nova do GitHub só podem ser verificadas depois de o commit documental existir. O SHA final, os resultados dessas duas cópias e a igualdade HEAD/origin/main/servidor são informados no encerramento após a observação. Este documento preserva a evidência concreta de A sem antecipar o próprio hash.

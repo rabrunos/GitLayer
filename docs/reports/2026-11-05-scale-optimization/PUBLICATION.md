@@ -25,3 +25,7 @@ node validate-fresh-commit.mjs --execute --mode local --project <PROJECT> --expe
 ```
 
 Após publicar, --mode github clona a URL pública fixa do projeto. O driver preserva resultados/instalações em saídas próprias, não executa push, não limpa dados do usuário e não roda a full. A primeira cópia é deliberadamente posterior ao commit A; os campos PASS só são atestados em seu recibo depois da execução.
+
+## Cópia A observada
+
+O commit de implementação **f213022bd121648fa4e9e1bb1ecf9af27c4c998b** passou na [validação em cópia nova](FRESH-COMMIT-A.json), com [recibo de privacidade](FRESH-COMMIT-A-PRIVACY.json). Instalação, typecheck, build, help e smoke82/quatro/sete concluíram; código de origem e clone estavam limpos na observação independente anterior à gravação destes recibos. O fechamento B acrescenta somente documentação e evidências; a fonte funcional234/c5f919 permanece. A cópia local de B e a cópia GitHub são conferidas após B existir, sem reivindicar antecipadamente uma execução.
