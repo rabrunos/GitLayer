@@ -1,0 +1,94 @@
+TAP version 13
+# Subtest: T01: three real Git branches start inactive with independent roots
+ok 1 - T01: three real Git branches start inactive with independent roots
+  ---
+  duration_ms: 12485.5818
+  type: 'test'
+  ...
+# Subtest: T02: on/off materialize real files while HEAD and main index stay selected
+ok 2 - T02: on/off materialize real files while HEAD and main index stay selected
+  ---
+  duration_ms: 13337.4296
+  type: 'test'
+  ...
+# Subtest: T03: normal git add and commit omit committed and modified Layer files
+ok 3 - T03: normal git add and commit omit committed and modified Layer files
+  ---
+  duration_ms: 8765.3907
+  type: 'test'
+  ...
+# Subtest: T04: add dot takes free files across directories and skips both staged owners
+ok 4 - T04: add dot takes free files across directories and skips both staged owners
+  ---
+  duration_ms: 41665.2969
+  type: 'test'
+  ...
+# Subtest: T05: main and three Layers separate modifications and deletions
+ok 5 - T05: main and three Layers separate modifications and deletions
+  ---
+  duration_ms: 32640.999
+  type: 'test'
+  ...
+# Subtest: T06: explicit files stage only selected literal paths
+ok 6 - T06: explicit files stage only selected literal paths
+  ---
+  duration_ms: 10946.6098
+  type: 'test'
+  ...
+# Subtest: T07: native log/show/trees prove independent Layer ancestry and main commits
+ok 7 - T07: native log/show/trees prove independent Layer ancestry and main commits
+  ---
+  duration_ms: 51856.9228
+  type: 'test'
+  ...
+# Subtest: T08: commit records staged B and preserves unstaged C; off refuses dirty Layers
+ok 8 - T08: commit records staged B and preserves unstaged C; off refuses dirty Layers
+  ---
+  duration_ms: 15977.3382
+  type: 'test'
+  ...
+# Subtest: T09: repeated reactivation restores all contents without removing shared app directories
+ok 9 - T09: repeated reactivation restores all contents without removing shared app directories
+  ---
+  duration_ms: 14677.7775
+  type: 'test'
+  ...
+# Subtest: add dot and relative files use the invoking subdirectory
+ok 10 - add dot and relative files use the invoking subdirectory
+  ---
+  duration_ms: 12073.4634
+  type: 'test'
+  ...
+# Subtest: new free files retain normal .gitignore and info/exclude rules
+ok 11 - new free files retain normal .gitignore and info/exclude rules
+  ---
+  duration_ms: 13351.6925
+  type: 'test'
+  ...
+# Subtest: a staged deletion keeps ownership until commit, and own add can reintroduce it
+ok 12 - a staged deletion keeps ownership until commit, and own add can reintroduce it
+  ---
+  duration_ms: 22010.4093
+  type: 'test'
+  ...
+# Subtest: a main staged deletion keeps ownership when the file is recreated before commit
+ok 13 - a main staged deletion keeps ownership when the file is recreated before commit
+  ---
+  duration_ms: 7737.9103
+  type: 'test'
+  ...
+# Subtest: commit without a Layer reports no staging and refuses non-TTY pending interaction
+ok 14 - commit without a Layer reports no staging and refuses non-TTY pending interaction
+  ---
+  duration_ms: 10729.6607
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 268482.5062

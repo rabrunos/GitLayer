@@ -68,6 +68,6 @@ npm.cmd run benchmark:alternatives
 npm.cmd run benchmark:parallel
 ```
 
-Os scripts `benchmark:alternatives` e `benchmark:parallel` são comparações opcionais de estratégias. Os resultados finais desta rodada ainda serão consolidados no relatório de benchmarks.
+Os 14 testes da cópia nova passaram. Foram concluídas 15 amostras de benchmark: com 10.000 arquivos em diretórios compartilhados, as medianas da CLI foram 2,59 s para ativar, 1,62 s para desativar e 2,42 s para reativar. O relatório inclui conferência integral, custos iniciais e os cenários que ultrapassaram cinco segundos. Os scripts `benchmark:alternatives` e `benchmark:parallel` são comparações opcionais.
 
-Consulte [estado e validação](docs/STATUS.md), [arquitetura](docs/ARCHITECTURE.md), [benchmarks](docs/BENCHMARKS.md) e [remoções](docs/REMOVED.md). A implementação mínima é a nova base do projeto. A implementação anterior permanece no histórico Git, sem necessidade de conservar código morto. A missão autoriza integrar à main e publicar sem força após a validação final; o estado efetivo da entrega é registrado em STATUS. Resultados antigos não certificam esta versão.
+Consulte [estado e validação](docs/STATUS.md), [arquitetura](docs/ARCHITECTURE.md), [benchmarks](docs/BENCHMARKS.md) e [remoções](docs/REMOVED.md). A implementação mínima é a nova base do projeto. A implementação anterior permanece no histórico Git, sem necessidade de conservar código morto. Resultados antigos não certificam esta versão.

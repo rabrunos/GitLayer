@@ -1,18 +1,19 @@
 # Estado do laboratório
 
-Fase experimental mínima iniciada em 07/11/2026, inicialmente na branch `experimental/minimal-core`, a partir de `25a4ee5d4a810d458872a9f6e3cf0c8c0feb956e`. A arquitetura anterior permanece no histórico. O adendo da missão autoriza concluir a reconstrução, integrar normalmente à main e publicar no GitHub sem força; a publicação aguarda a validação final.
+A reconstrução de 07/11/2026 substituiu a implementação anterior por um Core e uma CLI em JavaScript, sem dependências npm ou build obrigatório. Layers são branches reais `layer/*`, com índices nativos e commits independentes; HEAD e índice convencionais permanecem selecionados. Não há modo de edição, desktop, engine transacional ou migração.
 
-O contrato atual usa branches reais `layer/*`, índices nativos independentes, atribuição pelo add, exclusão local e materialização em lote. Não há modo de edição, desktop, motor transacional ou migração. Consulte o [README](../README.md), a [arquitetura](ARCHITECTURE.md), as [limitações](LIMITATIONS.md) e as [remoções](REMOVED.md).
+A [validação da cópia nova](TESTS.md) concluiu **14/14 PASS**, zero falhas ou skips, com instalação pelo lockfile, sintaxe e status limpo. O commit interativo foi verificado em terminal real, inclusive cancelamento sem perder staging.
 
-A validação desta reconstrução é independente das campanhas históricas. Resultados funcionais e comandos executados serão registrados em [TESTS.md](TESTS.md); tempos, amostras e comparação de estratégias em [BENCHMARKS.md](BENCHMARKS.md). Até esses registros serem concluídos, não atribuir aprovação à suíte nova nem declarar atingida a meta de cinco segundos para 10.000 arquivos.
+A [campanha final](BENCHMARKS.md) concluiu **15/15 amostras verificadas**. Para 10.000 arquivos de 256 bytes em 100 diretórios compartilhados, as medianas de ativação/desativação/reativação foram **2,591/1,622/2,425 s** nos comandos completos e **4,488/2,072/4,210 s** incluindo a conferência externa. Na pasta exclusiva, ativação/reativação com conferência tiveram medianas **5,278/5,284 s**. A meta de cinco segundos não foi atingida em todos os cenários. O add inicial de 10.000 arquivos ainda levou cerca de 33,5–33,7 s.
 
-Reprodução local, sem build obrigatório:
+A extração usa oito workers nativos do Git; a remoção usa operações assíncronas em lotes de 64. Não há cache próprio de materialização. Fontes, resultados brutos e custos iniciais estão versionados, sem depender de arquivos privados. Consulte [README](../README.md), [arquitetura](ARCHITECTURE.md), [limitações](LIMITATIONS.md) e [remoções](REMOVED.md).
+
+A base partiu de `25a4ee5d4a810d458872a9f6e3cf0c8c0feb956e`, preservado no histórico, e foi iniciada em `experimental/minimal-core`. O adendo autorizou a integração normal e publicação na main sem força. Perfis, demonstrações e conteúdo local desconhecido foram preservados; os antigos builds e dependências identificados foram removidos. Os resultados acima pertencem exclusivamente à reconstrução atual.
 
 ```powershell
 npm.cmd run check
 npm.cmd test
 npm.cmd run benchmark
-npm.cmd run benchmark:alternatives
 ```
 
-Todos os testes e medições devem usar fixtures descartáveis novas. Os dados ignorados preservados no checkout não constituem resultados desta fase. O fechamento exige testes e medições finais, revisão do commit, verificação em cópia nova e publicação normal na main. Depois do push, conferir igualdade entre a main local, origin/main e o SHA observado no GitHub, registrando o resultado. Dados ignorados e não rastreados desconhecidos continuam preservados.
+Use somente repositórios descartáveis. As execuções são locais, no ambiente Windows documentado; não se atribuem resultados a CI remoto ou às campanhas históricas.
