@@ -1,4 +1,4 @@
-﻿# GitLayer
+# GitLayer
 
 Laboratório experimental mínimo: branches Git independentes cujos arquivos podem aparecer no mesmo diretório de trabalho da aplicação. O GitLayer seleciona índices nativos, direciona staging e commits e materializa ou retira arquivos. O HEAD convencional permanece selecionado.
 
@@ -65,6 +65,9 @@ npm.cmd run check
 npm.cmd test
 npm.cmd run benchmark
 npm.cmd run benchmark:alternatives
+npm.cmd run benchmark:parallel
 ```
 
-Consulte [estado e validação](docs/STATUS.md), [arquitetura](docs/ARCHITECTURE.md), [benchmarks](docs/BENCHMARKS.md) e [remoções](docs/REMOVED.md). A implementação anterior permanece no histórico Git; esta branch contém a nova base experimental. Resultados antigos não certificam esta versão.
+Os scripts `benchmark:alternatives` e `benchmark:parallel` são comparações opcionais de estratégias. Os resultados finais desta rodada ainda serão consolidados no relatório de benchmarks.
+
+Consulte [estado e validação](docs/STATUS.md), [arquitetura](docs/ARCHITECTURE.md), [benchmarks](docs/BENCHMARKS.md) e [remoções](docs/REMOVED.md). A implementação mínima é a nova base do projeto. A implementação anterior permanece no histórico Git, sem necessidade de conservar código morto. A missão autoriza integrar à main e publicar sem força após a validação final; o estado efetivo da entrega é registrado em STATUS. Resultados antigos não certificam esta versão.

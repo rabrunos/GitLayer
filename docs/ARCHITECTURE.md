@@ -1,4 +1,4 @@
-﻿# Arquitetura mínima
+# Arquitetura mínima
 
 JavaScript ESM com APIs nativas do Node.js e subprocessos Git por argv, sem shell e sem dependências npm. O coordenador não implementa objetos, formato de índice ou histórico. O estado versionado pertence ao Git.
 
@@ -16,11 +16,13 @@ O coordenador descobre os caminhos do repositório pelo Git. Não mantém cache 
 | Fluxo | Mecanismo |
 | --- | --- |
 | Criar | `mktree` para árvore vazia, `commit-tree` sem pai, `update-ref` para a branch e `read-tree` no índice próprio. |
-| Ativar | `GIT_INDEX_FILE` seleciona o índice; `checkout-index -a -f -u` extrai tudo em um processo e atualiza stat no índice. |
-| Desativar | `diff` compara índice, commit da Layer e disco; uma Layer limpa tem seus arquivos removidos pelo Node. Diretórios permanecem. |
+| Ativar | `GIT_INDEX_FILE` seleciona o índice; `git -c checkout.workers=8 checkout-index -a -f -u` extrai o lote com workers nativos e atualiza stat no índice. |
+| Desativar | `diff` compara índice, commit da Layer e disco; `fs.promises.unlink` remove os arquivos de uma Layer limpa em lotes de até 64. Diretórios permanecem. |
 | Preparar | `ls-files`, `ls-tree` e `add` selecionam próprios e novos livres; lotes NUL evitam argv por arquivo e limites de linha de comando. |
 | Commit | `write-tree` lê a árvore preparada; `commit-tree -p <tip-layer>` cria o commit; `update-ref` avança só a Layer. |
 | Estado e histórico | `diff`, `for-each-ref` e `log`, interpretados pelo próprio Git. |
+
+A escolha de oito workers veio da comparação dedicada `npm.cmd run benchmark:parallel`. O comando não sobrescreve o limiar nativo `checkout.thresholdForParallelism`; pequenos lotes seguem a decisão do Git. Uma invocação Git em lote coordena os workers nativos, sem uma invocação por arquivo. Na desativação, o Node usa o pool padrão do libuv e aguarda cada lote; o estado inativo só é salvo depois que todas as remoções terminam. Não há cache de arquivos, alteração do índice principal ou troca de HEAD.
 
 O primeiro commit é raiz independente, com árvore vazia. Commits seguintes apontam para o tip da própria Layer. Identidade e mensagem seguem o Git; não há troca temporária de HEAD ou chamada a `git commit` com índice alternativo.
 

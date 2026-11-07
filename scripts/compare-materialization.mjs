@@ -18,6 +18,7 @@ const report = {
     alternatives: 'Native checkout-index directly; native checkout-index into private directory then rename every file; native archive creation then tar extraction; cached per-file rename reactivation.',
     preparation: 'Each sample records the same explicit fixture/source/add/commit/initial-off preparation as benchmark.mjs. Private read-tree index creation is separately timed.',
     cache: 'Cached reactivation avoids Git extraction but adds first extraction/publication and retained materialization plus per-file off renames; ordinary OS caches are warm/uncontrolled.',
+    observer: 'Async content reads in batches of 64; initial baseline at commit 35e1638 used a synchronous observer.',
     order: 'Strategy order rotates per repetition. Preparation and filesystem removal between strategies are reported, outside activation times.',
   }, samples: [],
 };
@@ -26,13 +27,13 @@ fs.mkdirSync(path.dirname(output), { recursive: true });
 const checkpoint = () => fs.writeFileSync(output, JSON.stringify(report, null, 2) + '\n');
 checkpoint();
 for (let repetition = 1; repetition <= repetitions; repetition++) {
-  const { f, sample, files, verify, measure: measureCLI } = prepare(count, 'distributed');
+  const { f, sample, files, verify, measure: measureCLI } = await prepare(count, 'distributed');
   try {
     sample.currentCLI = {
-      firstOn: measureCLI(['on', 'scripts'], true),
-      off: measureCLI(['off', 'scripts'], false),
-      reactivate: measureCLI(['on', 'scripts'], true),
-      finalOff: measureCLI(['off', 'scripts'], false),
+      firstOn: await measureCLI(['on', 'scripts'], true),
+      off: await measureCLI(['off', 'scripts'], false),
+      reactivate: await measureCLI(['on', 'scripts'], true),
+      finalOff: await measureCLI(['off', 'scripts'], false),
     };
     const index = path.join(f.root, '.git', 'comparison-index');
     const cache = path.join(f.root, '.git', 'comparison-cache');
@@ -48,11 +49,11 @@ for (let repetition = 1; repetition <= repetitions; repetition++) {
     sample.repetition = repetition;
     sample.git = f.git(['--version']).trim();
     sample.strategies = {};
-    const measure = (action, present = true) => {
+    const measure = async (action, present = true) => {
       const start = performance.now();
-      action();
+      await action();
       const complete = performance.now();
-      verify(present);
+      await verify(present);
       const verified = performance.now();
       return { commandMs: complete - start, verifiedMs: verified - start, verificationMs: verified - complete };
     };
@@ -67,30 +68,30 @@ for (let repetition = 1; repetition <= repetitions; repetition++) {
       }
     };
     const strategies = [
-      ['checkoutIndexDirect', () => {
-        const result = measure(() => git(['checkout-index', '--all', '--force', '--index']));
-        result.cleanup = remove();
+      ['checkoutIndexDirect', async () => {
+        const result = await measure(() => git(['checkout-index', '--all', '--force', '--index']));
+        result.cleanup = await remove();
         return result;
       }],
-      ['checkoutTemporaryThenRename', () => {
+      ['checkoutTemporaryThenRename', async () => {
         let extractionMs;
         let publicationMs;
-        const result = measure(() => {
+        const result = await measure(() => {
           fs.mkdirSync(cache, { recursive: true });
           extractionMs = elapsed(() => git(['checkout-index', '--all', '--force', `--prefix=${cache.replaceAll('\\', '/')}/`])).ms;
           publicationMs = elapsed(() => renameEach(cache, f.root)).ms;
         });
         result.extractionMs = extractionMs;
         result.publicationMs = publicationMs;
-        result.cacheOff = measure(() => renameEach(f.root, cache), false);
-        result.cachedReactivate = measure(() => renameEach(cache, f.root));
-        result.cleanup = remove();
+        result.cacheOff = await measure(() => renameEach(f.root, cache), false);
+        result.cachedReactivate = await measure(() => renameEach(cache, f.root));
+        result.cleanup = await remove();
         return result;
       }],
-      ['archiveThenTar', () => {
+      ['archiveThenTar', async () => {
         let archiveMs;
         let extractionMs;
-        const result = measure(() => {
+        const result = await measure(() => {
           archiveMs = elapsed(() => git(['archive', '--format=tar', `--output=${archive}`, 'layer/scripts'])).ms;
           const tar = process.platform === 'win32' ? path.join(process.env.SystemRoot || 'C:/Windows', 'System32', 'tar.exe') : 'tar';
           extractionMs = elapsed(() => run(tar, ['-xf', archive, '-C', f.root], f.env)).ms;
@@ -98,7 +99,7 @@ for (let repetition = 1; repetition <= repetitions; repetition++) {
         result.archiveMs = archiveMs;
         result.extractionMs = extractionMs;
         result.archiveBytes = fs.statSync(archive).size;
-        result.cleanup = remove();
+        result.cleanup = await remove();
         return result;
       }],
     ];
@@ -106,7 +107,7 @@ for (let repetition = 1; repetition <= repetitions; repetition++) {
     const ordered = [...strategies.slice(offset), ...strategies.slice(0, offset)];
     sample.order = ordered.map(([name]) => name);
     for (const [name, strategy] of ordered) {
-      sample.strategies[name] = strategy();
+      sample.strategies[name] = await strategy();
       console.log(JSON.stringify({ repetition, count, strategy: name, ...sample.strategies[name] }));
     }
     sample.verified = true;

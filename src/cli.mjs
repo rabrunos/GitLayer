@@ -24,7 +24,7 @@ async function main() {
   switch (command) {
     case 'create': console.log(`${name}: ${core.create(name)}`); break;
     case 'on': core.on(name); console.log(`${name}: ativa`); break;
-    case 'off': core.off(name); console.log(`${name}: inativa`); break;
+    case 'off': await core.off(name); console.log(`${name}: inativa`); break;
     case 'add': {
       if (args[0] === '--') args.shift();
       const result = core.add(name, args.length ? args : ['.']);

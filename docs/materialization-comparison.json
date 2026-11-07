@@ -165,5 +165,7 @@
   "plannedRepetitions": 3,
   "completedRepetitions": 1,
   "interrupted": true,
-  "interruption": "Stopped own execution session after the first complete sample to investigate native parallel checkout; only recorded samples are claimed."
+  "interruption": "Stopped own execution session after the first complete sample to investigate native parallel checkout; only recorded samples are claimed.",
+  "interruptedRetainedFixture": "GitLayer-minimal-test-nUXDkG",
+  "benchmarkProcessRemainedAfterStop": false
 }

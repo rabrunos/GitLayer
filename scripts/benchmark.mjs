@@ -24,7 +24,12 @@ export function data(count, layout) {
   return { files, directoryCount, bytes: [...files.values()].reduce((sum, s) => sum + Buffer.byteLength(s), 0) };
 }
 
-export function prepare(count, layout) {
+export async function inBatches(items, action, size = 64) {
+  const entries = [...items];
+  for (let i = 0; i < entries.length; i += size) await Promise.all(entries.slice(i, i + size).map(action));
+}
+
+export async function prepare(count, layout) {
   const setup = elapsed(() => fixture());
   const f = setup.result;
   const sample = { count, layout, fixtureMs: setup.ms };
@@ -62,25 +67,24 @@ export function prepare(count, layout) {
   const mainIndex = f.mainIndex();
   assert.equal(f.files('layer/scripts').length, count);
   assert.equal(f.files('main').filter(p => generated.files.has(p)).length, 0);
-  const verify = present => {
-    for (const [p, content] of generated.files) {
-      if (present) assert.equal(f.read(p), content, p);
-      else assert.equal(fs.existsSync(path.join(f.root, p)), false, p);
-    }
-    for (const [p, content] of untouched) assert.equal(f.read(p), content, p);
+  const verify = async present => {
+    if (!present) for (const p of generated.files.keys()) assert.equal(fs.existsSync(path.join(f.root, p)), false, p);
+    await inBatches(present ? [...generated.files, ...untouched] : untouched, async ([p, content]) => {
+      assert.equal(await fs.promises.readFile(path.join(f.root, p), 'utf8'), content, p);
+    });
     assert.equal(f.head(), head, 'Conventional HEAD changed');
     assert.deepEqual(f.mainIndex(), mainIndex, 'Conventional index bytes changed');
   };
-  const measure = (command, present) => {
+  const measure = async (command, present) => {
     const start = performance.now();
     f.layer(command);
     const completed = performance.now();
-    verify(present);
+    await verify(present);
     const verified = performance.now();
     return { commandMs: completed - start, verifiedMs: verified - start, verificationMs: verified - completed };
   };
   // Measured preparation: removes generated source files, not an extraction from Git.
-  sample.initialOffPreparation = measure(['off', 'scripts'], false);
+  sample.initialOffPreparation = await measure(['off', 'scripts'], false);
   sample.files = generated.files.size;
   sample.bytes = generated.bytes;
   sample.directories = generated.directoryCount;
@@ -93,7 +97,7 @@ export function environment() {
     date: new Date().toISOString(), platform: process.platform, release: os.release(), arch: process.arch,
     cpu: os.cpus()[0]?.model, logicalCpus: os.availableParallelism(), totalMemoryBytes: os.totalmem(),
     node: process.version, gitExecutable: gitExe, fixtureVolume: path.parse(os.tmpdir()).root,
-    sources: ['src/core.mjs', 'src/cli.mjs', 'bin/git-layer', 'bin/git-layer.cmd', 'tests/helpers.mjs', 'scripts/benchmark.mjs', 'scripts/compare-materialization.mjs'].map(file => {
+    sources: ['src/core.mjs', 'src/cli.mjs', 'bin/git-layer', 'bin/git-layer.cmd', 'tests/helpers.mjs', 'scripts/benchmark.mjs', 'scripts/compare-materialization.mjs', 'scripts/compare-parallel.mjs'].map(file => {
       const bytes = fs.readFileSync(path.join(projectRoot, file));
       return { file, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') };
     }),
@@ -101,7 +105,7 @@ export function environment() {
   };
 }
 
-function main() {
+async function main() {
   const repetitions = Number(process.env.GIT_LAYER_BENCH_SAMPLES || 3);
   assert.ok(Number.isInteger(repetitions) && repetitions > 0);
   const report = {
@@ -112,6 +116,7 @@ function main() {
       preparation: 'Fixture initialization, other origins, Layer/index creation, empty on, source generation, add, commit and initial off are separately timed. No populated extraction precedes firstOn.',
       layouts: 'Distributed: up to 100 directories each containing main and companion Layer files. Exclusive: one Layer-only scripts directory.',
       files: '256-byte deterministic text files, no filesystem cache purge, no compression or sparse placeholders.',
+      observer: 'Async fs.promises.readFile in batches of 64; differs from synchronous observer in the initial materialization baseline. All files and bytes still checked.',
       integrity: 'Every file read and compared byte-for-byte after on/reactivate; every absent path checked after off; other-origin bytes, conventional HEAD and index bytes checked each time.',
       scope: 'Controlled disposable repositories; no concurrent writers, filters, hooks, LFS, collisions or recovery.',
     }, samples: [],
@@ -123,13 +128,13 @@ function main() {
   const shapes = [[10, 'distributed'], [100, 'distributed'], [1000, 'distributed'], [10000, 'distributed'], [10000, 'exclusive']];
   for (const [count, layout] of shapes) {
     for (let repetition = 1; repetition <= repetitions; repetition++) {
-      const { f, sample, measure } = prepare(count, layout);
+      const { f, sample, measure } = await prepare(count, layout);
       try {
         sample.repetition = repetition;
         sample.git = f.git(['--version']).trim();
-        sample.firstOn = measure(['on', 'scripts'], true);
-        sample.off = measure(['off', 'scripts'], false);
-        sample.reactivate = measure(['on', 'scripts'], true);
+        sample.firstOn = await measure(['on', 'scripts'], true);
+        sample.off = await measure(['off', 'scripts'], false);
+        sample.reactivate = await measure(['on', 'scripts'], true);
         sample.verified = true;
         report.samples.push(sample);
         checkpoint();
@@ -148,4 +153,6 @@ function main() {
   console.log(`Raw samples: ${output}`);
 }
 
-if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) main();
+if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
+  main().catch(error => { console.error(error); process.exitCode = 1; });
+}

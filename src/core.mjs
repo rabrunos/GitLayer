@@ -106,12 +106,12 @@ export class GitLayer {
     this.tip(name);
     if (this.active(name)) return;
     this.syncExclude();
-    this.git(['checkout-index', '-a', '-f', '-u'], { index: this.index(name) });
+    this.git(['-c', 'checkout.workers=8', 'checkout-index', '-a', '-f', '-u'], { index: this.index(name) });
     this.state.active.push(name);
     this.save();
   }
 
-  off(name) {
+  async off(name) {
     this.tip(name);
     if (!this.active(name)) return;
     const index = this.index(name);
@@ -119,7 +119,10 @@ export class GitLayer {
     const modified = this.git(['diff', '--quiet'], { index, allowFailure: true });
     if (staged.status > 1 || modified.status > 1) throw new Error((staged.stderr + modified.stderr).trim());
     if (staged.status !== 0 || modified.status !== 0) throw new Error(`Layer ${name} tem alterações; prepare e faça commit antes de off.`);
-    for (const file of this.indexFiles(index)) fs.unlinkSync(path.join(this.root, file));
+    const files = this.indexFiles(index);
+    for (let i = 0; i < files.length; i += 64) {
+      await Promise.all(files.slice(i, i + 64).map(file => fs.promises.unlink(path.join(this.root, file))));
+    }
     this.state.active = this.state.active.filter(n => n !== name);
     this.save();
   }

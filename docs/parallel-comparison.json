@@ -1,0 +1,198 @@
+{
+  "schema": 1,
+  "environment": {
+    "date": "2026-11-07T14:24:01.342Z",
+    "platform": "win32",
+    "release": "10.0.26200",
+    "arch": "x64",
+    "cpu": "Intel(R) Core(TM) i7-9700KF CPU @ 3.60GHz",
+    "logicalCpus": 8,
+    "totalMemoryBytes": 34271678464,
+    "node": "v24.14.1",
+    "gitExecutable": "C:/Program Files/Git/cmd/git.exe",
+    "fixtureVolume": "C:\\",
+    "sources": [
+      {
+        "file": "src/core.mjs",
+        "bytes": 8548,
+        "sha256": "a17a340e8a21df0f56d7038933237b4571b7b70e7c8280be9de770425b4436d2"
+      },
+      {
+        "file": "src/cli.mjs",
+        "bytes": 3609,
+        "sha256": "52f6702d5670c20084d38b7b1efdecdb3ff7b92f85164a2af233220b86c69dc8"
+      },
+      {
+        "file": "bin/git-layer",
+        "bytes": 58,
+        "sha256": "0b148a809c2fde80da525146f4a5009bc277ad7626db2c84e2e5a856b74af2eb"
+      },
+      {
+        "file": "bin/git-layer.cmd",
+        "bytes": 42,
+        "sha256": "d34e9b046e4468e1b15810201d620421e23d30413ea7f009c31a35885ecb2493"
+      },
+      {
+        "file": "tests/helpers.mjs",
+        "bytes": 3406,
+        "sha256": "d43a0695970bb5225cc8768cba6e98ef78703d318b9c068466e2b9431e6514b3"
+      },
+      {
+        "file": "scripts/benchmark.mjs",
+        "bytes": 8410,
+        "sha256": "11f4b81df6837478570e8f0ad5ac513f066c70bb1951096f2f9d30c7515410ba"
+      },
+      {
+        "file": "scripts/compare-materialization.mjs",
+        "bytes": 6547,
+        "sha256": "6f9337df4f8be212f4256a569c27adc6bd834f2f6167fc76323f8e186ee1928a"
+      },
+      {
+        "file": "scripts/compare-parallel.mjs",
+        "bytes": 4846,
+        "sha256": "bb108c2f94cd065f30ab7edb3c78c7e95403d13fd24bc107b31cca1cc11dc9ba"
+      }
+    ],
+    "caches": "Ordinary OS/Git caches; no cold-cache claim; no GitLayer materialization cache."
+  },
+  "count": 10000,
+  "layout": "distributed",
+  "samples": [
+    {
+      "phase": "probe",
+      "repetition": 1,
+      "workers": 1,
+      "removalMode": "sync",
+      "checkout": {
+        "commandMs": 9755.915599999993,
+        "verifiedMs": 12621.201099999991,
+        "verificationMs": 2865.285499999998
+      },
+      "removal": {
+        "commandMs": 1539.0978999999934,
+        "verifiedMs": 1979.7390000000014,
+        "verificationMs": 440.641100000008
+      },
+      "verified": true
+    },
+    {
+      "phase": "probe",
+      "repetition": 1,
+      "workers": 4,
+      "removalMode": "async",
+      "checkout": {
+        "commandMs": 2541.8759999999893,
+        "verifiedMs": 4654.407600000006,
+        "verificationMs": 2112.5316000000166
+      },
+      "removal": {
+        "commandMs": 637.9741999999969,
+        "verifiedMs": 1135.4911000000138,
+        "verificationMs": 497.5169000000169
+      },
+      "verified": true
+    },
+    {
+      "phase": "probe",
+      "repetition": 1,
+      "workers": 8,
+      "removalMode": "sync",
+      "checkout": {
+        "commandMs": 2205.2146000000066,
+        "verifiedMs": 5554.542200000025,
+        "verificationMs": 3349.3276000000187
+      },
+      "removal": {
+        "commandMs": 2046.0518999999913,
+        "verifiedMs": 2480.185199999978,
+        "verificationMs": 434.1332999999868
+      },
+      "verified": true
+    },
+    {
+      "phase": "confirmation",
+      "repetition": 1,
+      "workers": 8,
+      "removalMode": "async",
+      "checkout": {
+        "commandMs": 2192.7901999999885,
+        "verifiedMs": 4134.657399999996,
+        "verificationMs": 1941.8672000000079
+      },
+      "removal": {
+        "commandMs": 678.1221000000078,
+        "verifiedMs": 1264.619800000015,
+        "verificationMs": 586.4977000000072
+      },
+      "verified": true
+    },
+    {
+      "phase": "confirmation",
+      "repetition": 2,
+      "workers": 8,
+      "removalMode": "sync",
+      "checkout": {
+        "commandMs": 2439.3516000000236,
+        "verifiedMs": 5068.75,
+        "verificationMs": 2629.3983999999764
+      },
+      "removal": {
+        "commandMs": 1508.4721999999892,
+        "verifiedMs": 1951.2489999999816,
+        "verificationMs": 442.77679999999236
+      },
+      "verified": true
+    },
+    {
+      "phase": "confirmation",
+      "repetition": 3,
+      "workers": 8,
+      "removalMode": "async",
+      "checkout": {
+        "commandMs": 2674.089099999983,
+        "verifiedMs": 4719.423899999994,
+        "verificationMs": 2045.3348000000115
+      },
+      "removal": {
+        "commandMs": 651.0866000000096,
+        "verifiedMs": 1144.5,
+        "verificationMs": 493.41339999999036
+      },
+      "verified": true
+    }
+  ],
+  "method": {
+    "primary": "verifiedMs: complete command followed by verification of all file contents/absences, other origins, HEAD and conventional-index bytes.",
+    "command": "commandMs ends after the complete checkout or unlink of all files. Child processes have exited and all filesystem calls completed.",
+    "observer": "Async fs.promises.readFile in batches of 64. Different observer from the synchronous initial materialization baseline; all file bytes are still compared.",
+    "preparation": "One disposable fixture, source generation/add/commit/initial off explicitly timed by prepare; one independent native read-tree index.",
+    "probes": "Workers 1, 4 and 8, one complete extraction each, threshold zero via per-command -c only. Best observed commandMs selects the confirmation worker.",
+    "confirmations": "Three subsequent extractions with the selected worker on the same fixture. Separate from selection samples; no cold-cache claim.",
+    "removal": "Same file set removed completely after each extraction. Sync probes use unlinkSync; async uses fs.promises.unlink in batches of 64 with the default libuv pool. Each mode occurs three times."
+  },
+  "preparation": {
+    "count": 10000,
+    "layout": "distributed",
+    "fixtureMs": 2942.0139000000004,
+    "applicationAndCompanionSetupMs": 11011.2268,
+    "createAndIndexMs": 1334.5492999999988,
+    "emptyActivationMs": 1249.9862000000012,
+    "sourceFileGenerationMs": 29431.064899999998,
+    "addMs": 51040.0614,
+    "commitMs": 6141.252900000007,
+    "extraMaterializationPreparationMs": 0,
+    "initialOffPreparation": {
+      "commandMs": 9403.103300000002,
+      "verifiedMs": 10419.766400000008,
+      "verificationMs": 1016.6631000000052
+    },
+    "files": 10000,
+    "bytes": 2560000,
+    "directories": 100,
+    "sharedWithMainAndAnotherLayer": true
+  },
+  "git": "git version 2.53.0.windows.2",
+  "readTreeIndexMs": 150.34439999998722,
+  "selectedWorker": 8,
+  "completed": true
+}

@@ -11,6 +11,7 @@
     "check": "node scripts/check.mjs",
     "test": "node --test --test-concurrency=1 tests/lab.test.mjs",
     "benchmark": "node scripts/benchmark.mjs",
-    "benchmark:alternatives": "node scripts/compare-materialization.mjs"
+    "benchmark:alternatives": "node scripts/compare-materialization.mjs",
+    "benchmark:parallel": "node scripts/compare-parallel.mjs"
   }
 }
