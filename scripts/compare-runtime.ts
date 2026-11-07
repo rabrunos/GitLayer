@@ -8,6 +8,7 @@ import { environment, prepare, type Timing } from './benchmark.ts';
 import { gitExe, projectRoot } from '../tests/helpers.ts';
 
 type Runtime = 'javascript' | 'typescript';
+type BaselineKind = 'javascript' | 'compiled-typescript';
 interface RuntimeCycle {
   runtime: Runtime;
   on: Timing;
@@ -73,7 +74,9 @@ function summaries(samples: RuntimePair[]) {
 }
 
 const baselineRoot = process.argv[2];
-assert.ok(baselineRoot, 'Usage: node scripts/compare-runtime.ts <JavaScript baseline checkout> [output.json]');
+assert.ok(baselineRoot, 'Usage: node scripts/compare-runtime.ts <baseline checkout> [output.json]');
+const baselineKind = process.env.GIT_LAYER_BASELINE_KIND || 'javascript';
+assert.ok(baselineKind === 'javascript' || baselineKind === 'compiled-typescript');
 const roots: Record<Runtime, string> = { javascript: path.resolve(baselineRoot), typescript: projectRoot };
 const count = Number(process.env.GIT_LAYER_COMPARE_COUNT || 100);
 assert.ok(Number.isInteger(count) && count > 0);
@@ -82,14 +85,26 @@ assert.ok(layout === 'distributed' || layout === 'exclusive');
 const repetitions = Number(process.env.GIT_LAYER_BENCH_SAMPLES || 10);
 assert.ok(Number.isInteger(repetitions) && repetitions > 0);
 const output = path.resolve(process.argv[3] || path.join(projectRoot, 'docs', 'runtime-comparison.json'));
+const fileMetadata = (root: string, file: string) => {
+  const bytes = fs.readFileSync(path.join(root, file));
+  return { file, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') };
+};
 const sourceFiles = (runtime: Runtime) => {
-  const extension = runtime === 'javascript' ? 'mjs' : 'ts';
-  return [`src/core.${extension}`, `src/cli.${extension}`, 'bin/git-layer', 'bin/git-layer.cmd'].map(file => {
-    const bytes = fs.readFileSync(path.join(roots[runtime], file));
-    return { file, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') };
-  });
+  const extension = runtime === 'javascript' && baselineKind === 'javascript' ? 'mjs' : 'ts';
+  return [`src/core.${extension}`, `src/cli.${extension}`, 'bin/git-layer', 'bin/git-layer.cmd']
+    .map(file => fileMetadata(roots[runtime], file));
 };
 const sources = { javascript: sourceFiles('javascript'), typescript: sourceFiles('typescript') };
+const generatedAssets = baselineKind === 'compiled-typescript'
+  ? ['dist/core.js', 'dist/cli.js'].map(file => fileMetadata(roots.javascript, file)) : [];
+if (baselineKind === 'compiled-typescript') {
+  for (const file of ['src/core.ts', 'src/cli.ts']) {
+    const baselineSource = sources.javascript.find(source => source.file === file);
+    const nativeSource = sources.typescript.find(source => source.file === file);
+    assert.ok(baselineSource && nativeSource);
+    assert.equal(baselineSource.sha256, nativeSource.sha256, `Compiled and native runtimes must use identical canonical ${file}`);
+  }
+}
 const diagnosticFile = 'scripts/compare-runtime.ts';
 const diagnostic = { file: diagnosticFile, sha256: createHash('sha256').update(fs.readFileSync(path.join(projectRoot, diagnosticFile))).digest('hex') };
 const { f, sample: preparation, verify } = await prepare(count, layout);
@@ -99,10 +114,12 @@ const report: {
   schema: number;
   environment: ReturnType<typeof environment>;
   count: number;
+  baselineKind: BaselineKind;
   git: string;
   repetitions: number;
   layout: string;
   sources: typeof sources;
+  generatedAssets: typeof generatedAssets;
   diagnostic: typeof diagnostic;
   revisions: Record<Runtime, string>;
   method: Record<string, string>;
@@ -114,18 +131,24 @@ const report: {
   failed?: string;
   retainedFixture?: string;
 } = {
-  schema: 1, environment: environment(), count, git: f.git(['--version']).trim(), repetitions, layout, sources, diagnostic,
+  schema: 1, environment: environment(), count, baselineKind, git: f.git(['--version']).trim(), repetitions, layout, sources, generatedAssets, diagnostic,
   revisions: {
     javascript: f.git(['rev-parse', 'HEAD'], { cwd: roots.javascript }).trim(),
     typescript: f.git(['rev-parse', 'HEAD'], { cwd: roots.typescript }).trim(),
   },
   method: {
-    command: 'Complete git layer subprocess through the real launcher, including startup and every file operation; only the child PATH prefix selects JavaScript or TypeScript.',
+    command: 'Complete git layer subprocess through the real launcher, including startup and every file operation; only the child PATH prefix selects baseline JavaScript or native TypeScript.',
+    baseline: baselineKind === 'compiled-typescript'
+      ? 'The javascript role runs JavaScript emitted from the same canonical TypeScript Core and CLI as the native typescript role; matching canonical source hashes are required and generated assets are hashed separately.'
+      : 'The javascript role runs the original JavaScript baseline; the typescript role runs the migrated TypeScript natively.',
     fixture: 'One disposable repository, identical files, Git Layer index and refs for both runtimes; prepare() uses the TypeScript CLI and the existing ' + layout + ' layout.',
     observer: 'Original prepare().verify() checks all contents or absences, all other-origin contents, conventional HEAD and main-index bytes after every command.',
-    warmups: 'One complete on/off cycle per runtime, recorded separately; JavaScript warmup is the first populated Git extraction and TypeScript warmup follows it. Neither is included in paired summaries.',
-    pairs: repetitions + ' measured pairs; JavaScript/TypeScript order alternates each pair. Every cycle starts inactive, activates and verifies, then deactivates and verifies.',
-    delta: 'Positive deltas mean TypeScript is slower; each pair records absolute milliseconds and percentages for command, verification and their total.',
+    warmups: 'One complete on/off cycle per runtime, recorded separately; the javascript-role warmup is the first populated Git extraction and the native typescript-role warmup follows it. Neither is included in paired summaries.',
+    pairs: repetitions + ' measured pairs; baseline JavaScript/native TypeScript order alternates each pair. Every cycle starts inactive, activates and verifies, then deactivates and verifies.',
+    delta: (baselineKind === 'compiled-typescript'
+      ? 'Positive deltas mean native TypeScript is slower than JavaScript emitted from the same TypeScript source; '
+      : 'Positive deltas mean native TypeScript is slower than the original JavaScript baseline; ')
+      + 'each pair records absolute milliseconds and percentages for command, verification and their total.',
     limits: 'Local warm/uncontrolled OS caches and timing variation; no concurrent agent tests or benchmarks. Descriptive observations, not a statistical equivalence claim.',
   },
   preparation, warmups, samples,
