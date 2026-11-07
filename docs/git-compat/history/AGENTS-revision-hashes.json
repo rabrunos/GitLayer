@@ -1,7 +1,0 @@
-{
-  "before_sha256": "f61bfd346c88714bf32feed912c256c93e2443838d167fbcd37e9c3c565b4695",
-  "after_sha256": "2c3d83756079dc3bdd360d32405a88e2d6dc5c1dfd4b2dc735e57b846e83898e",
-  "diff_sha256": "b5b662e0a02345fa532b8778cf9e67e5d7af3718fdd4479b076a57f5d433d0bc",
-  "scope": "documentation only; no src paths touched",
-  "authority": "user task v2, U-09"
-}

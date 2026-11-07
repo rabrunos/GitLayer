@@ -1,7 +1,0 @@
-A full V10 e a matriz ampla V11 permanecem vinculadas aos snapshots em que foram executadas. A prova de escopo aprovada conecta a transição entre eles.
-
-- Full V10: fonte funcional `1c0646a4edef5a2616050417dcba89abb5fd3e1ff2ed1f7a94b01bc333f4045d`; 603 testes, 599 PASS, 4 SKIP e 0 FAIL. Recibo fechado `VALIDATION-FULL-V10.json`, SHA256 `ae7df3a4e6304188c76a65da5b951882b223d6361951baf013a5146ffa8e5582`.
-- Broad V11: fonte funcional `c5f919feb2de4cb4ef81d6011dcf1193eca5441afcdb6023f065e202e61350fc`; 361 variantes selecionadas, 355 PASS, 6 ENV_BLOCKED e 0 FAIL. Recibo fechado `VALIDATION-BROAD-V11.json`, SHA256 `1eab6a0cc22c33cdbc88f0cc687a5744f414526b0295edd5adf4d405a7bafd7c`.
-- Ligação de escopo: `SOURCE-TRANSITION-PROOF.json`, SHA256 `7c7cef0970c73a8876b24c5703f5950d6db1f751ed7f4efdbab4ad1efc2ba043`, produzido pelo checker SHA256 `033b06ec1b30a92f73b500fb007446df476b8fc8ece6b7135ac4413ef389bd04` e aprovado pelo coordenador. A mudança está restrita à receita `tests/git-compat/cases/additional.mjs`; os outros 233 arquivos funcionais, os 60 arquivos de entrada da full e os 22 arquivos do Core conservam seus bytes. A prova confere os archives funcionais de 234 arquivos.
-
-O fingerprint dos 22 arquivos do Core é `807ad17f66e41e3147792049797a48b56c919737734bbe2a847149a07909ee8b` nos dois snapshots. A full continua documentada no snapshot `1c0646`; a broad V11 documenta o snapshot `c5f919`. Cada campanha conserva seus próprios resultados e denominadores. Estas são evidências funcionais; as medições de desempenho pertencem à campanha separada.

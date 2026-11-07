@@ -1,9 +1,0 @@
-Trabalhe no repositório local GitLayer aberto nesta sessão. Coloquei o arquivo Git-Layers-Base-de-Validacao-v2.zip na raiz do projeto, normalmente C:\Dev\GitLayer.
-
-Leia primeiro o AGENTS.md e as instruções aplicáveis. Registre o estado inicial e preserve minhas alterações. Extraia o ZIP com segurança em uma pasta nova sob .workshop/briefs/. A raiz interna do pacote se chama Git-Layers-Base-v2. Se já existir uma extração, não misture os arquivos nem sobrescreva dados preexistentes.
-
-Leia os documentos do pacote e execute integralmente a missão de 05-Prompt-Codex.md, observando 06-Decisoes-e-Autonomia.md. A v2 substitui o material anterior.
-
-Esta tarefa autoriza revisar AGENTS/documentação e implementar a infraestrutura, os scripts e os testes headless. Não é uma rodada de implementação ou correção do produto: não altere Core/CLI/desktop, não abra o editor, não migre armazenamento e não instale mecanismos de interceptação. Corrija problemas dos próprios testes/infraestrutura; reproduza e registre defeitos do produto para a próxima etapa.
-
-Use Git oficial e fixtures descartáveis, sem afetar meus repositórios de uso, dados pessoais ou configuração global. Não faça commit nem push. Entregue o relatório completo e o ZIP de evidências nos caminhos definidos no prompt; eles serão enviados de volta ao ChatGPT para revisão.

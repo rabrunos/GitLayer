@@ -1,6 +1,0 @@
-npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
-
-> git-layers-lab@0.1.2 verify:package
-> node scripts/verify-workshop-package.mjs
-
-{"passed":true,"evidence":"/tmp/git-layers-workshop-a97qrfke/git-layers-lab-workshop/docs/evidence/WORKSHOP-PACKAGE.json","version":"0.1.2","productionFiles":76,"debugMaps":40,"nativeFiles":7}

@@ -1,9 +1,0 @@
-# Proposta externa estrita — RECOVERY-011
-
-Não aplicada ao projeto e não executada. Original SHA25639723049690326a71b6d7c50d6053f02ada84935360f643b275107f341f5510a preservado integralmente em additional.original.mjs. Somente o bloco RECOVERY-011 é substituído no candidato; produto, CLI, harness e demais receitas não mudam.
-
-O broad V10 original é FAIL neste caso e continua assim: o wrapper esperava exit4/GIT_FAILED, mas a observação real foi exit3/EBUSY em open do índice privado, antes de qualquer assertion. A source fingerprint da matriz é c5eca06ec0ff9ba4c4a78db9d4c4c995270d49c249ef191f17f3ba13cba2b1d7, com current index.ts9a2dd720... e Core22/807. A revisão estática localiza fingerprint na guarda anterior a mutateLocked e Transaction.begin. QueryIndexTree/checkpoint-copy não foram alcançados por essa rota. A CLI describeError usa exit3 para EBUSY, pois ele não pertence ao mapeamento exit4; não se fabrica GIT_FAILED nem se aceita uma allowlist genérica.
-
-O novo oráculo exige exatamente exit3/EBUSY e a mensagem de open do índice esperado. Antes do holder, persiste raw MAIN/privado e stat completo, stage nativo e blob A, HEAD/Layer/checkpoint/allrefs, disco e inventário de metadados/journals. Com FileShare.None confirmado, compara refs sem tentar ler o índice bloqueado. O finally encerra somente o holder de onSpawn já existente e aguarda o seu registro. Após release, persiste after antes das comparações e exige igualdade raw, modo/mtime/identidade, stage, disco, refs e inventário, incluindo ausência de nova transação; fsck oficial só roda após o release. Nenhum resultado dessas novas assertions é antecipado.
-
-O status DOCUMENTED_RESTRICTION, capabilities win32, timeout180000, assinatura da variante e limitações anteriores permanecem. Não existe alteração de Core, redução de validação, skip, relaxamento do supervisor nem conversão do FAIL histórico em PASS. A execução posterior cabe ao orquestrador depois do fechamento da broad congelada.

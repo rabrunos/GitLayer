@@ -1,93 +1,17 @@
-# Limitações do Core/CLI e do workshop
+# Limitações aceitas
 
-A campanha final da Etapa 2B concluiu com Core corrigido: primeira ativação 1k em 41,639 s (+6,216% frente à baseline medida), off mediano em 41,122 s (−14,211%) e reativação em 39,486 s (+7,847%). Dez mil arquivos concluíram first/off/react em 412,129/521,793/405,771 s, n1; a baseline 10k não concluiu no teto de 180 s, sem delta pareado. A meta de cinco segundos não foi atingida. A [validação](reports/2026-11-05-scale-optimization/RESULTS.md) registra full V10 com 599 PASS/quatro SKIP em 603, infraestrutura117/117 e broad V11 com 355 PASS/seis ENV_BLOCKED em 361; fontes e denominadores são separados. V7 e seus tempos são históricos anteriores às correções. O fallback de conversão pode executar um `cat-file --filters` por arquivo; stdout por streaming limita a retenção no Node, sem limitar a memória interna do Git.
+Este laboratório serve somente para repositórios descartáveis. A simplificação é deliberada e substitui as garantias da implementação anterior.
 
-O helper de refs usa locks e transações oficiais do Git, preservando aliases recusados e seus destinos. Não é interceptador do Git direto, ACL de arquivos internos ou recuperação automática de locks após perda de energia. `--no-deref` sozinho não é uma guarda de tipo. As transações continuam sujeitas às recusas conservadoras e ao contexto corrente; certificação geral ou em outro backend/plataforma não decorre dos probes Windows executados.
+- A aplicação e cada Layer possuem caminhos disjuntos. Diretórios podem ser compartilhados, mas um mesmo caminho não pode ter duas origens.
+- Não há escritores externos concorrentes, operações destrutivas externas, ataques ou necessidade de suportar topologias complexas. Worktrees, submódulos e configurações Git especiais ficam fora do laboratório.
+- Não há journals, backups transacionais, locks próprios, rollback, sincronização durável por arquivo ou recuperação após falhas de processo ou energia. Uma operação interrompida pode deixar estado parcial, exigindo recriar a fixture.
+- `on` materializa diretamente com Git. As premissas excluem colisões e arquivos externos ocupando os caminhos da Layer.
+- `off` exige Layer sem mudanças preparadas ou não preparadas. Não oferece descarte, shelf, estacionamento ou backup de pendências. Diretórios vazios permanecem.
+- O bloco `info/exclude` protege o add convencional comum. `git add -f`, comandos externos e negações em `.gitignore` de maior prioridade podem contorná-lo. Fixtures não usam negações conflitantes; isto não é uma ACL.
+- Não há hooks, assinaturas, LFS ou filtros externos no fluxo certificado. A criação de commits usa plumbing Git; não equivale a executar todos os comportamentos de `git commit`.
+- Não há migração, descoberta remota, transporte automático, editor, desktop, proteção avançada de branch ou compatibilidade com os metadados antigos.
+- Os caminhos do add são arquivos e diretórios literais; glob e magic pathspec não são suportados. O ponto `.` mantém o escopo do diretório atual e descendentes.
+- Índices e refs alterados externamente não são sincronizados. Não se deve editá-los fora do coordenador nem selecionar uma branch `layer/*` como HEAD enquanto o laboratório as coordena.
+- Não há garantia de desempenho universal. Arquivos maiores, antivírus, quantidade de diretórios e estado do filesystem afetam os tempos. Cinco segundos para 10.000 arquivos é uma meta, comprovável somente pelas amostras publicadas.
 
-**Etapa 2B — 05/11/2026:** os [limites da nova campanha](reports/2026-11-05-scale-optimization/LIMITATIONS.md) distinguem a redução de serialização do journal da latência total. Não há cache físico de projeção, rename direto da extração, rename de diretório ou reflink novo. A publicação sem substituição precisa de suporte à primitiva de link; falhas recusam sem fallback destrutivo. Uma interrupção entre dois nomes transitórios pode exigir inspeção manual. A limpeza automática abrange somente extrações descartáveis novas, comprovadas e sem dependências, após sucesso durável; dados antigos continuam preservados. Os resultados históricos abaixo não certificam o candidato alterado.
-
-A inicialização segura mantém `transactions/<id>/register-<UUID>.index`, uma imagem técnica por registro novo, fora da limpeza de `materialized/`. Um primeiro `on` descoberto pode reter essa imagem e também a cópia independente de validação da ativação; uma reativação já registrada não cria novamente a imagem de registro. Ambas têm custo proporcional ao índice, além dos índices vivos necessários. O testemunho durável de criação e as observações atuais recusam identidade/mtime externa, mas não fornecem compare-and-swap universal de filesystem. Uma recusa pode conservar estado parcial, journals e locks para inspeção; não significa estado saudável. PASS intermediário V5 não certifica as fontes corrigidas seguintes.
-
-Na recuperação do staging de Layer projetada, uma nova interrupção depois de restaurar o índice mas antes da conclusão pode exigir inspeção manual: a nova identidade restaurada está comprovada apenas na execução corrente. O reinício não infere esse testemunho por bytes iguais. A recusa conserva evidências e não equivale a recuperação concluída; continuam os limites de observação final contra escritores externos e de CAS apenas das refs Git autorizadas.
-
-**Registro histórico da Etapa 2 — 04/11/2026:** [medições e recuperação](reports/2026-11-04-performance-recovery/README.md) têm execuções locais concluídas: nove pares de benchmark V9, full V9 411 PASS/quatro SKIP em 415, infraestrutura V11 113 PASS/113 e matriz V11 355 PASS/seis ENV_BLOCKED/zero FAIL em 361. Typecheck/build/smoke V9 passaram com Core/runtime/corpus equivalentes ao V11. Há ganhos e regressões observados, inclusive recover-empty sem Layers +23,019% em n3 e pioras n1 com cinco Layers. Não há promessa universal de tempo, todas as escalas, Linux ou perda real de energia. Cópia nova do commit e publicação ainda estão pendentes; duração de teste não é latência do produto.
-
-A cópia temporária de índice usada nas consultas de worktree acrescenta leituras, cópia, recibos e verificações proporcionais ao índice; stat antigo pode exigir nova leitura de conteúdo em consultas posteriores. Ela preserva os bytes do índice vivo, sem promessa de latência universal. Falhas podem conservar um temporário completo, parcial, indisponível ou com identidade alterada: use a observação reportada e inspecione antes da limpeza manual, sem assumir que a cópia ainda exista. Esses temporários externos não entram em `recovery-export`; sua preservação exige tratamento separado. Os casos de consulta passaram na full V9, com bytes dos índices vivos preservados no alcance executado; [investigação e limites](reports/2026-11-04-performance-recovery/INDEX-QUERY.md) conservam a evidência. Isso não elimina interferência externa ou inspeção manual.
-
-Na Etapa 2B, backup/plano e AFTER usam deltas tipados; snapshots completos dos passos não incrementais, varreduras conservadoras, fanout de diretórios e leitura do histórico retido continuam custos de escala. Não há expurgo automático. Troca de branch e shelves legadas ainda podem acumular snapshots base64; a redução de memória da Etapa 2 cobre ativação/desativação normal, fingerprint, backup e restauração de backup. Reflink forçado retornou `ENOSYS` no runtime/volume NTFS medido naquela etapa; fallback bem-sucedido não prova CoW físico, nem o resultado exclui APIs/volumes não testados.
-
-**Etapa 1B, preservada como histórico:** GL-01/09/15/18/22 receberam foco das correções e continuaram parciais; GL-19/20 também conservaram seu alcance parcial. O total permanece em 20 implementados e sete parciais; as novas recusas/diagnósticos estão no [relatório](reports/2026-11-03-security-compatibility-implementation/REPORT.md). D-01/D-02 não são limites inevitáveis e recebem correções específicas. A resolução de propriedade pode exigir revisão adicional quando há ausências e criações simultâneas; essa recusa conservadora não prova uma renomeação. Sequências externas inteiramente entre consultas não são reconstruídas. As novas verificações não criam isolamento ACID nem proteção universal do disco.
-
-As exceções de arquivos anteriores são revalidadas por status/mutações que reconciliam o destino. Consultas somente leitura não reescrevem ignore; Git direto antes da reconciliação pode usar o bloco anterior. Recriar caminho antigo ausente pode exigir consulta antes do add comum.
-
-O envelope executado deve ser consultado nos resultados desta etapa. Suporte universal de versões Git, Linux, worktrees arbitrárias, escala e recuperação ampliada não decorre dos testes Windows. Downgrade para fontes anteriores aos novos metadados de propriedade não foi certificado.
-
-**Fase de 02/11/2026:** [novos contratos e limites](IMPLEMENTATION-2026-11-02.md) distinguem edição, abertura como branch, lifecycle, resgate e migração. GL-01/GL-22 não têm proteção universal de Git direto: `protect` usa reservas opt-in em worktrees, com bypass `--ignore-other-worktrees`; o target protege preparação nativa comum antes da observação e reconcilia propriedade nos comandos/consultas, mas force e ignore de maior prioridade continuam bypass. As seções gráficas abaixo e seus resultados são do workshop anterior, não execução desta rodada.
-
-## Estado da entrega
-
-**Core/CLI experimental, com requisitos parciais.** A validação usa comandos headless, Git oficial e fixtures descartáveis. As campanhas locais da [Etapa 2](reports/2026-11-04-performance-recovery/RESULTS.md) estão concluídas nos escopos e fontes identificados, com quatro SKIP da full e seis ENV_BLOCKED da matriz preservados. Cópia nova e publicação permanecem pendentes; os relatórios de [1B](reports/2026-11-03-security-compatibility-implementation/REPORT.md) e [02/11/2026](reports/2026-11-02-closure/REPORT.md) conservam seus resultados históricos, que não certificam fontes posteriores. Suporte e execução são dimensões distintas. O build `build:core` usa `dist-core/`, com Node e Git como requisitos de runtime. Não houve abertura ou desenvolvimento do laboratório nem teste gráfico nesta rodada.
-
-### Workshop legado — distribuição e execuções históricas
-
-As afirmações de Electron, Monaco, pacote portátil e validação gráfica abaixo descrevem o workshop anterior. O [TEST-REPORT.md](TEST-REPORT.md) conserva a procedência de suas execuções Windows; elas não certificam este snapshot do Core/CLI.
-
-O pacote é portátil para Windows 10/11 x64, sem instalador e sem assinatura digital. Não foi produzido pacote macOS ou ARM64 nativo. Git for Windows 2.43+ era o pré-requisito histórico do laboratório. A renomeação Core/CLI atual requer a feature `--show-ref-format`, presente na fonte Git 2.44; sem ela retorna `RENAME_UNSUPPORTED`. A execução deste fechamento usou Git 2.53.0.windows.2, sem campanha runtime 2.44/2.43. Veja o [envelope GL-20 e as fontes oficiais](reports/2026-11-02-closure/REPORT.md#gl-20-preservação-nativa-e-envelope-restante). O editor usa Electron embutido; a CLI interativa do terminal Windows exige Node.js instalado 22.12+. O launcher portátil com Electron atende comandos não interativos, mas não fornece TTY para `capture`.
-
-## Implementação existente e contrato atual
-
-- Core compartilhado, Git CLI real, refs convencionais, índices alternativos, checkpoints alcançáveis e commits independentes com atualização condicionada ao OID anterior.
-- Exclusões exatas no info/exclude, preservação de regras, detecção de negação, reservas persistentes e captura revisável legada. Shelves antigas são preservadas; o novo fluxo de desativação recusa auto-park.
-- Stage/unstage por arquivo e por hunk de arquivos regulares de texto já rastreados, sem mudanças de modo. Novos/removidos, binários e patches incompatíveis exigem arquivo inteiro. Tokens obsoletos são recusados.
-- Histórico de até 50 commits por chamada, detalhes e comparação. Renomear/excluir arquivos com backups.
-- Troca de branch com base tracked limpa e Layers preservadas. Mudanças em .gitignore/.gitattributes podem exigir resolver pendências/desativar Layers antes da troca.
-- Journals, backups e recuperação conservadora. Troca interrompida pode ser concluída quando plano, contexto, índices e arquivos continuam validáveis. Uma entrada física do workspace com BEFORE ausente e caminho atual ausente recusa com `RECOVERY_CONFLICT`/`workspace-materialization-disappeared`, inclusive sem AFTER durável ou confirmação anterior de ausência. Interrupção antes da escrita, publicação seguida de movimento externo e rollback parcial podem ser indistinguíveis. Metadados internos aprovados têm classificação estrita própria. O journal permanece pendente, pode exigir inspeção/recuperação manual e não é liberado por repetir `recover` ou resolver propriedade. Recusa tardia pode ocorrer após efeitos parciais em metadados. OID publicado não substitui validação de plano, backups, fingerprints e contexto. Veja [segurança](SAFETY.md#transações-e-recuperação); não há recuperação prometida de bytes nunca registrados.
-- Integração histórica do laboratório, preservada: desktop React/Monaco, UTF-8/EOL, temas, abas, rascunhos, diff/histórico, captura, demonstração, identidade local, branches, diagnóstico e exportação conectados ao Core.
-- Contrato preservado do laboratório: preload restrito, emissor IPC verificado, sandbox/contextIsolation ligados, Node desligado no renderer, CSP e bloqueio de navegação/rede.
-- Busca do Git no PATH e pastas convencionais do Windows, ambiente sem duplicação Path/PATH e tratamento de separadores.
-- Distribuição histórica do laboratório: CLI portátil com Node embutido, diagnóstico local e pacote .exe com DLLs, recursos, workers e licenças. O novo build Core/CLI separado usa Node instalado.
-
-O fechamento corrigiu o mascaramento de ignore do usuário e a omissão de newcomers na prévia: [prova dirigida](evidence/closure-2026-11-02/review-target-preview.json). A consulta lógica usa Git oficial com scratch externo transitório, sem escrita no repositório inspecionado. Isso não certifica toda regra/configuração possível nem elimina bypass nativo; os resultados amplos das fontes finais pertencem ao [relatório público](reports/2026-11-02-closure/REPORT.md).
-
-## Workshop legado — terminal e evidências históricas
-
-Terminal integrado real node-pty/xterm, PowerShell/ConPTY no Windows, Bash/PTY para desenvolvimento no host. O catálogo contém os 33 comandos CLI, com formulário, prévia e **Copiar comando**. A execução acontece após colar e pressionar Enter manualmente. O aplicativo não é um mecanismo de tarefas.
-
-Há testes do PowerShell/ConPTY real e do componente xterm no Electron Windows. Alterar a função prompt ou executar programas que removam o marcador da sessão pode deixar o indicador de estado desatualizado; a digitação normal continua sendo do terminal.
-
-Apenas um repositório Git por janela, sem workspace multirroot. As fontes do workshop abrem no VS Code; debug usa sourcemaps/perfil separados. Inspectors são verificados automaticamente; a interação física com F5 e todas as combinações de extensões do usuário não equivalem a esse teste.
-
-## Workshop legado — limites da validação gráfica histórica
-
-Nas execuções históricas registradas, Playwright verificou a janela real, edição/commit, fronteira IPC, assets locais, indicadores e terminal. A verificação Dev cobre reinício e restauração de rascunho. Isso não certifica acessibilidade completa, DPI físico, todos os diálogos, todos os conflitos de buffers ou toda combinação de software do Windows. Consulte as execuções efetivamente concluídas no relatório.
-
-A comparação de alteração externa usa conteúdo rotulado em leitura, sem mesclador de três vias. Binários/UTF-8 inválido são somente leitura; arquivos acima de 4 MiB não abrem para edição. Não há formatter automático. Uma morte abrupta pode perder a última alteração de buffer ainda não persistida.
-
-## Não implementado
-
-- Amend, criação/exclusão de tags, stash de escrita/pop, merge, cherry-pick, revert e resolução/continue/abort desses conflitos. Apenas stash-list está disponível como leitura.
-- Reconciliação automática de refs/índices de Layer alterados por terceiros; mutações são suspensas com diagnóstico/exportação.
-- Renomear/excluir árvores de diretórios recursivamente.
-- Instalador, assinatura digital, notarização, atualizador e manual do help interceptado pelo Git.
-- Isolamento ACID contra programas externos, recuperação de bytes nunca salvos ou copiados e observação contínua universal.
-- Transferência de propriedade, commit conjunto e merge de Layers. Rede, rebase interativo, bisect e cliente integral de todos os subcomandos Git permanecem fora da v0.1.
-
-## Envelope e cuidados específicos do Windows
-
-Um worktree principal normal, não bare, HEAD simbólico tradicional ou Layer aberta deliberadamente, histórico completo e sem operações externas pendentes. Reservas de worktrees próprias de `protect` são reconhecidas; múltiplos worktrees arbitrários continuam fora do envelope certificado. Layers exigem o primeiro commit. O nome de Layer base é reservado. Todo o workspace é validado; links, hardlinks, repositórios aninhados e nomes não portáteis podem suspender o modo gerenciado mesmo em arquivos ignorados.
-
-Symlinks/junctions reconhecidos pelo Node são recusados. Não há classificação completa de todos os reparse points de terceiros nem garantia de abertura atômica sem seguir links quando O_NOFOLLOW não existe. As verificações de lstat, links e identidade continuam ativas.
-
-Modos Git como 100755 são preservados no índice. No Windows, permissões físicas são comparadas pelo suporte a somente leitura/gravação do Node; não há promessa de semântica chmod POSIX. core.filemode=false não registra mudanças físicas de executabilidade. Transformações nativas LF/CRLF são suportadas; filtros/LFS e conversões por código externo são recusados.
-
-Arquivos somente leitura ou bloqueados por outro processo podem impedir substituição. Há tentativas curtas para gravações privadas do desktop, sem fallback destrutivo. Limites de caminho e políticas do Windows continuam se aplicando. Prefira pasta local curta, sem sincronizador concorrente.
-
-Unicode NFC, caixa, equivalências por componentes e nomes reservados portáteis são validados; nenhuma renomeação silenciosa é feita. .gitignore, .gitattributes e .gitmodules pertencem à base. Hooks/assinatura, fsmonitor externo, split/sparse index, alternates, replace refs e filtros externos são recusados.
-
-Planos lógicos de journals, arquivos JSON e shelves legadas têm limite de 64 MiB. O log incremental novo tem limite adicional de 256 MiB, com cada registro limitado a 64 MiB. Backups, shelves, refs de recuperação e rascunhos não têm expurgo automático nem criptografia. As escalas históricas e seus limites pertencem ao [relatório da Etapa 2](reports/2026-11-04-performance-recovery/BENCHMARKS.md); seus dois endpoints de 10.000 arquivos terminaram TIMEOUT_OWNED, sem on/off completos ou delta naquela escala. As medições novas ficam na [Etapa 2B](reports/2026-11-05-scale-optimization/BENCHMARKS.md), sem misturar campanhas. Não houve corte real de energia nem cobertura de todos os casos de interferência externa. O sucesso depois de avanço externo de ref em RECOVERY-003 pertence à caracterização histórica: o staging gerenciado atual exige recusa quando o contexto muda, com retenção conservadora do índice, arquivo e ref externa. Os [resultados das campanhas](reports/2026-11-05-scale-optimization/RESULTS.md) não promovem isso a serialização universal. Prontidão pública ampla não foi atestada. Locks preexistentes ou cuja posse não possa ser comprovada são preservados. Locks temporários criados e comprovadamente pertencentes à operação podem ser publicados ou removidos pelo protocolo descrito em [segurança](SAFETY.md).
-
-No interleaving de GC agressivo da Etapa 2B, a poda removeu a árvore B ainda sem ref de retenção. A publicação da ref foi recusada pelo Git, mas o rollback automático para A não concluiu: o validador atual também exige disponibilidade de `plan.tree` antes de entrar na restauração. Índice B, arquivo B no disco e backup A válido foram conservados em transação pendente. Isso é uma limitação do automatismo atual, não prova de impossibilidade de recuperar A ou justificativa para declarar estado saudável com dados do plano ausentes. A receita posterior e suas observações de status/recuperação têm campanha própria em [RESULTS](reports/2026-11-05-scale-optimization/RESULTS.md).
-
-## Histórico
-
-O relatório e as limitações da edição 0.1.0 foram preservados em history/. Seus resultados Linux e falhas de ambiente são históricos e não certificam Windows. As fixtures atuais usam os.tmpdir() em diretórios exclusivos, mantendo as asserções e a recusa de destinos que surjam após a validação.
+O alvo desta rodada é Windows x64 com Git oficial e Node.js 22 ou posterior. As versões efetivamente executadas e o alcance dos testes pertencem aos [resultados](STATUS.md), sem inferir suporte a plataformas não testadas. Dados locais antigos, ignorados ou pessoais não são migrados nem removidos.

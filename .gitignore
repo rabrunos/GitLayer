@@ -1,5 +1,7 @@
+# Estado local preservado da implementação anterior; não é parte do laboratório.
 node_modules/
 dist/
+dist-core/
 dist-debug/
 artifacts/
 .workshop/
@@ -8,5 +10,3 @@ __pycache__/
 *.tsbuildinfo
 *.zip
 *.log
-
-dist-core/

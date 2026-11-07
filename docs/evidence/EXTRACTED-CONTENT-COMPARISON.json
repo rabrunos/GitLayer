@@ -1,7 +1,0 @@
-{
-  "schema": 1,
-  "verifiedArchive": "git-layers-lab-preflight.zip",
-  "scope": "All non-document entries, including source, tests, build configuration, lockfile, workers, licenses and packaged Linux runtime",
-  "matchingFiles": 189,
-  "differences": []
-}

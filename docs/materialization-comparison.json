@@ -1,0 +1,169 @@
+{
+  "schema": 1,
+  "environment": {
+    "date": "2026-11-07T14:10:50.650Z",
+    "platform": "win32",
+    "release": "10.0.26200",
+    "arch": "x64",
+    "cpu": "Intel(R) Core(TM) i7-9700KF CPU @ 3.60GHz",
+    "logicalCpus": 8,
+    "totalMemoryBytes": 34271678464,
+    "node": "v24.14.1",
+    "gitExecutable": "C:/Program Files/Git/cmd/git.exe",
+    "fixtureVolume": "C:\\",
+    "sources": [
+      {
+        "file": "src/core.mjs",
+        "bytes": 8548,
+        "sha256": "a17a340e8a21df0f56d7038933237b4571b7b70e7c8280be9de770425b4436d2"
+      },
+      {
+        "file": "src/cli.mjs",
+        "bytes": 3609,
+        "sha256": "52f6702d5670c20084d38b7b1efdecdb3ff7b92f85164a2af233220b86c69dc8"
+      },
+      {
+        "file": "bin/git-layer",
+        "bytes": 58,
+        "sha256": "0b148a809c2fde80da525146f4a5009bc277ad7626db2c84e2e5a856b74af2eb"
+      },
+      {
+        "file": "bin/git-layer.cmd",
+        "bytes": 41,
+        "sha256": "88d16420e8964b68b4e3b7b4c0c5100c03faf76de4fd3e68014f8a3410458043"
+      },
+      {
+        "file": "tests/helpers.mjs",
+        "bytes": 3406,
+        "sha256": "d43a0695970bb5225cc8768cba6e98ef78703d318b9c068466e2b9431e6514b3"
+      },
+      {
+        "file": "scripts/benchmark.mjs",
+        "bytes": 7815,
+        "sha256": "a0b50864b1ce879a671a77ce2f339d1b5a942901dba4a3a393b739d708166b04"
+      },
+      {
+        "file": "scripts/compare-materialization.mjs",
+        "bytes": 6308,
+        "sha256": "ab5c503426783e381b974c72492b3d011e923e46ac00d93bf4d86e2693ae9c70"
+      }
+    ],
+    "caches": "Ordinary OS/Git caches; no cold-cache claim; no GitLayer materialization cache."
+  },
+  "count": 10000,
+  "layout": "distributed",
+  "repetitions": 3,
+  "method": {
+    "primary": "verifiedMs: complete strategy plus comparison of every file, conventional HEAD/index and the other origins.",
+    "command": "commandMs includes complete subprocess/file operations; no time-to-first-file measurement.",
+    "alternatives": "Native checkout-index directly; native checkout-index into private directory then rename every file; native archive creation then tar extraction; cached per-file rename reactivation.",
+    "preparation": "Each sample records the same explicit fixture/source/add/commit/initial-off preparation as benchmark.mjs. Private read-tree index creation is separately timed.",
+    "cache": "Cached reactivation avoids Git extraction but adds first extraction/publication and retained materialization plus per-file off renames; ordinary OS caches are warm/uncontrolled.",
+    "order": "Strategy order rotates per repetition. Preparation and filesystem removal between strategies are reported, outside activation times."
+  },
+  "samples": [
+    {
+      "count": 10000,
+      "layout": "distributed",
+      "fixtureMs": 4369.5475,
+      "applicationAndCompanionSetupMs": 14780.1312,
+      "createAndIndexMs": 1897.1357000000025,
+      "emptyActivationMs": 1668.2315000000017,
+      "sourceFileGenerationMs": 21584.7314,
+      "addMs": 51807.2918,
+      "commitMs": 3149.7177000000083,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 4385.924399999989,
+        "verifiedMs": 5266.2920999999915,
+        "verificationMs": 880.3677000000025
+      },
+      "files": 10000,
+      "bytes": 2560000,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "currentCLI": {
+        "firstOn": {
+          "commandMs": 24526.435200000007,
+          "verifiedMs": 56883.437999999995,
+          "verificationMs": 32357.002799999987
+        },
+        "off": {
+          "commandMs": 6710.01489999998,
+          "verifiedMs": 7784.148999999976,
+          "verificationMs": 1074.1340999999957
+        },
+        "reactivate": {
+          "commandMs": 24606.782000000007,
+          "verifiedMs": 43498.18059999999,
+          "verificationMs": 18891.398599999986
+        },
+        "finalOff": {
+          "commandMs": 11088.929199999984,
+          "verifiedMs": 13583.703199999989,
+          "verificationMs": 2494.774000000005
+        }
+      },
+      "readTreeIndexMs": 297.06769999998505,
+      "repetition": 1,
+      "git": "git version 2.53.0.windows.2",
+      "strategies": {
+        "checkoutIndexDirect": {
+          "commandMs": 24571.363100000017,
+          "verifiedMs": 50045.155,
+          "verificationMs": 25473.791899999982,
+          "cleanup": {
+            "commandMs": 6418.950799999991,
+            "verifiedMs": 7795.868999999948,
+            "verificationMs": 1376.9181999999564
+          }
+        },
+        "checkoutTemporaryThenRename": {
+          "commandMs": 55053.31880000001,
+          "verifiedMs": 75191.88949999999,
+          "verificationMs": 20138.570699999982,
+          "extractionMs": 27598.689300000027,
+          "publicationMs": 27452.772799999977,
+          "cacheOff": {
+            "commandMs": 30103.056099999987,
+            "verifiedMs": 31369.841999999946,
+            "verificationMs": 1266.785899999959
+          },
+          "cachedReactivate": {
+            "commandMs": 21099.38089999999,
+            "verifiedMs": 41230.32059999998,
+            "verificationMs": 20130.939699999988
+          },
+          "cleanup": {
+            "commandMs": 5733.384400000039,
+            "verifiedMs": 7094.192800000019,
+            "verificationMs": 1360.8083999999799
+          }
+        },
+        "archiveThenTar": {
+          "commandMs": 23837.482099999965,
+          "verifiedMs": 44388.586899999995,
+          "verificationMs": 20551.10480000003,
+          "archiveMs": 3759.430799999973,
+          "extractionMs": 20077.973899999983,
+          "archiveBytes": 10301440,
+          "cleanup": {
+            "commandMs": 4673.003100000031,
+            "verifiedMs": 5893.393199999991,
+            "verificationMs": 1220.3900999999605
+          }
+        }
+      },
+      "order": [
+        "checkoutIndexDirect",
+        "checkoutTemporaryThenRename",
+        "archiveThenTar"
+      ],
+      "verified": true
+    }
+  ],
+  "plannedRepetitions": 3,
+  "completedRepetitions": 1,
+  "interrupted": true,
+  "interruption": "Stopped own execution session after the first complete sample to investigate native parallel checkout; only recorded samples are claimed."
+}
