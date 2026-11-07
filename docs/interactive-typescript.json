@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "date": "2026-11-07T18:53:24.463Z",
+  "result": "passed",
+  "node": "v24.14.1",
+  "git": "git version 2.53.0.windows.2",
+  "committedRevision": "345e2ae9c9dcc35f04d5cc1fd3240679b87bec06",
+  "stdinTTY": true,
+  "inputs": [
+    "TypeScript interactive first",
+    "s",
+    ""
+  ],
+  "interactiveExitCode": 0,
+  "firstLayer": {
+    "name": "agents",
+    "beforeTip": "5b925b2659840f0eb470349c3ca2b7ad5d45a44d",
+    "afterTip": "5d3f6aa9f7102f06caab8cc452fa508b60c512f5",
+    "message": "TypeScript interactive first",
+    "committedContentVerified": true,
+    "stagingEmpty": true
+  },
+  "secondLayer": {
+    "name": "scripts",
+    "beforeTip": "a13c1b0f13e1abfd5a5847f565d6b63c9647fd83",
+    "afterTip": "a13c1b0f13e1abfd5a5847f565d6b63c9647fd83",
+    "cancelledByEmptyMessage": true,
+    "tipPreserved": true,
+    "stagingPreserved": true,
+    "staged": [
+      {
+        "status": "A",
+        "path": "shared/scripts.txt"
+      }
+    ],
+    "workingContentPreserved": true
+  },
+  "conventional": {
+    "headBefore": "758097fd1fa77e043fffe4898902880c61dd43bb",
+    "headAfter": "758097fd1fa77e043fffe4898902880c61dd43bb",
+    "branchBefore": "refs/heads/main",
+    "branchAfter": "refs/heads/main",
+    "mainIndexSha256Before": "e0f4af78f1ccce469df7da675c6f971db1bf0ffb78929fea2b98dafea38734ce",
+    "mainIndexSha256After": "e0f4af78f1ccce469df7da675c6f971db1bf0ffb78929fea2b98dafea38734ce",
+    "indexBytesEqual": true
+  },
+  "windowsCmdLauncher": {
+    "path": "bin/git-layer.cmd",
+    "command": "--cwd <new disposable fixture> list --json",
+    "exitCode": 0,
+    "outputMatchesCoreStatus": true
+  },
+  "sources": [
+    {
+      "file": "src/core.ts",
+      "bytes": 10888,
+      "sha256": "dc77b894d8cc839ee46615afcf8afb940c368d3177d1b4f324532a922f9bfa18"
+    },
+    {
+      "file": "src/cli.ts",
+      "bytes": 3996,
+      "sha256": "4ebc02cc555537cefceb9665e76e915d1aeec9521fc1cfe2779c4ff8bbfe863b"
+    },
+    {
+      "file": "bin/git-layer",
+      "bytes": 57,
+      "sha256": "a7c993c5c9ee2e0ee9661d62f92509a4b31a9e2d4c78b4e3c6e5e1ef3ed5fabb"
+    },
+    {
+      "file": "bin/git-layer.cmd",
+      "bytes": 41,
+      "sha256": "b6807aac346f470f796101504e98ccc430efd5b2fcc596c4bb45042000c9b36f"
+    },
+    {
+      "file": "tests/helpers.ts",
+      "bytes": 4776,
+      "sha256": "0cc797370f2c5ccabde32e27c1cb73cd94b21f7479d77473ff5ebe3299550b63"
+    }
+  ],
+  "fixtureCleaned": true
+}

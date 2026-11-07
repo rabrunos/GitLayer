@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-11-07T20:15:17.6578894Z",
+  "sourceCommit": "016d234548232e35ae817f9d83715e6b2b75e361",
+  "clone": "C:\\Users\\rabrunos\\AppData\\Local\\Temp\\GitLayer-emission-control-b5d3c5eeb99447ad874e77ab2247b682\\repo",
+  "purpose": "Temporary emitted-JavaScript control of the same TypeScript Core/CLI; no permanent build or canonical source changes.",
+  "versions": {
+    "node": "v24.14.1",
+    "git": "git version 2.53.0.windows.2",
+    "npm": "11.11.0",
+    "typescript": "7.0.2",
+    "nodeTypes": "22.20.5"
+  },
+  "installCommand": "npm.cmd ci --ignore-scripts --offline --no-audit --no-fund",
+  "emitCommand": "node_modules/.bin/tsc.cmd --project .workshop/tsconfig.emit.json",
+  "configuration": {
+    "file": ".workshop/tsconfig.emit.json",
+    "sha256": "2d799e1ac57a0efe13675df04f395bcb0c7d639dacfdce622cd9c7b5dd5ee087",
+    "content": {
+      "extends": "../tsconfig.json",
+      "include": [
+        "../src/**/*.ts"
+      ],
+      "compilerOptions": {
+        "noEmit": false,
+        "rootDir": "../src",
+        "outDir": "../dist",
+        "rewriteRelativeImportExtensions": true
+      }
+    }
+  },
+  "canonicalSources": [
+    {
+      "file": "src/core.ts",
+      "bytes": 10888,
+      "sha256": "dc77b894d8cc839ee46615afcf8afb940c368d3177d1b4f324532a922f9bfa18"
+    },
+    {
+      "file": "src/cli.ts",
+      "bytes": 3996,
+      "sha256": "4ebc02cc555537cefceb9665e76e915d1aeec9521fc1cfe2779c4ff8bbfe863b"
+    }
+  ],
+  "generatedFiles": [
+    {
+      "file": "dist/core.js",
+      "bytes": 10147,
+      "sha256": "55a385d13a3034b8df99b283431124a1cb986f5b7ede6b6efce1078fb8223142"
+    },
+    {
+      "file": "dist/cli.js",
+      "bytes": 4740,
+      "sha256": "8ab6c6b26813205ca8014ca25a1268409564dbbd476367b079521912d0736518"
+    }
+  ],
+  "launchers": [
+    {
+      "file": "bin/git-layer",
+      "sha256": "fc77c13824924e5097fd68a03743852dc83ec26d7ed4322cca62cffbccc9eed9",
+      "content": "#!/bin/sh\nexec node \"$(dirname \"$0\")/../dist/cli.js\" \"$@\"\n"
+    },
+    {
+      "file": "bin/git-layer.cmd",
+      "sha256": "6b090770e1323856ae70d4d1d755f6903b6a2261d136ec621ce505dbc8cb6703",
+      "content": "@echo off\r\nnode \"%~dp0..\\dist\\cli.js\" %*\r\n"
+    }
+  ],
+  "canonicalSourcesUnmodified": true,
+  "trackedChanges": [
+    "bin/git-layer",
+    "bin/git-layer.cmd"
+  ],
+  "performanceMeasurementsStarted": true,
+  "limits": "Only the two launchers in this disposable clone differ from the source commit; dist and the temporary config are generated/ignored artifacts. No measurement or performance conclusion has been made from this preparation. Parent driver will assert matching canonical hashes before comparing compiled and native execution in one fixture.",
+  "performanceMeasurementsStartedAtPreparation": false,
+  "completedControl": {
+    "report": "runtime-comparison-post-reboot-native-vs-emitted.json",
+    "nativeCommit": "aaa47e14c4df309d3d0aea655e98ebbae602b41b",
+    "pairs": 6,
+    "warmups": 2,
+    "allVerified": true,
+    "executionDecision": "Keep native TypeScript; emitted JavaScript is an experimental control only, not a permanent build.",
+    "limits": "Descriptive local timings; no statistical equivalence or universal speed claim."
+  }
+}

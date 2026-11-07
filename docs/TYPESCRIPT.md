@@ -15,7 +15,7 @@ O ponto de partida é `b4051c01ed09a42705439f18d6ca6c4a1f3f849b`: `main`, `origi
 | Comparação de paralelismo | `scripts/compare-parallel.mjs` | `scripts/compare-parallel.ts` |
 | Verificação | `scripts/check.mjs` | `tsc --noEmit` no manifesto |
 
-Os oito `.mjs` foram removidos. `scripts/compare-startup.ts` mede o custo de inicialização da CLI. Launchers shell e `.cmd`, manifesto, lockfile e atributos Git apontam para os `.ts`. Os nomes `.js` dentro das fixtures são dados arbitrários de repositórios simulados, não implementação JavaScript mantida.
+Os oito `.mjs` foram removidos. `scripts/compare-startup.ts` mede o custo de inicialização da CLI. `scripts/compare-runtime.ts` foi acrescentado para investigar diferenças materiais das campanhas com ciclos JS/TS alternados na mesma fixture, reutilizando preparo e observador existentes. São nove arquivos-fonte TypeScript ativos, sem novo comando do produto. Launchers shell e `.cmd`, manifesto, lockfile e atributos Git apontam para os `.ts`. Os nomes `.js` dentro das fixtures são dados arbitrários de repositórios simulados, não implementação JavaScript mantida.
 
 ## Execução e tipos
 
@@ -30,6 +30,8 @@ Os tipos descrevem nomes e refs de Layers, caminhos, índices, OIDs, resultados 
 Dependências diretas de desenvolvimento fixadas: TypeScript `7.0.2` e `@types/node` `22.20.5`. O lockfile também registra `undici-types` e os pacotes de plataforma do compilador TypeScript. A tipagem usa a linha Node 22 para respeitar o runtime mínimo. O compilador é ferramenta de desenvolvimento; a CLI não o importa.
 
 O Node recusa remoção de tipos em arquivos dentro de `node_modules`. Portanto esta modalidade executa o checkout fora desse diretório, conforme os launchers documentados. O pacote continua privado, sem prometer instalação npm como distribuição. Não se afirma suporte a plataformas ou versões de Node que não foram executadas.
+
+A decisão nativa foi mantida após medição: startup com acréscimo mediano de 37,791 ms e controle pareado contra JS emitido automaticamente da mesma fonte TS. A emissão não mostrou benefício consistente no off que motivou a investigação. Configuração de emissão e dois `.js` gerados existem somente no clone descartável do experimento, fora da implementação publicada. Os custos e limites completos estão no [relatório](BENCHMARKS.md).
 
 ## Arquitetura conservada
 

@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-11-07T19:39:07.074Z",
+  "event": "User reported an open game and said they had just closed it.",
+  "source": "User statement in the active conversation; game state was not instrumented by the benchmark.",
+  "priorReports": [
+    "benchmarks-javascript-baseline.json",
+    "benchmarks-typescript.json",
+    "startup-comparison.json",
+    "runtime-comparison-100.json",
+    "runtime-comparison-10000-shared.json",
+    "runtime-comparison-10000-exclusive.json"
+  ],
+  "interpretation": "Prior timings are preserved but are not treated as a controlled JavaScript/TypeScript performance comparison because game load may have affected them. No causal attribution is established from this statement alone.",
+  "plan": "Repeat complete JavaScript and TypeScript campaigns sequentially with newly created fixtures after this report; then refresh paired/startup diagnosis as needed and run the original complete materialization and parallel comparators.",
+  "reboot": {
+    "verifiedWindowsBootUtc": "2026-11-07T19:40:11.5000000Z",
+    "checkedAtUtc": "2026-11-07T19:44:00.5261252Z",
+    "node": "v24.14.1",
+    "resumedSourceCommit": "016d234548232e35ae817f9d83715e6b2b75e361",
+    "git": "2.53.0.windows.2",
+    "reportedByUser": true
+  },
+  "finalCampaignOutputs": [
+    "benchmarks-javascript-post-reboot.json",
+    "benchmarks-typescript-post-reboot.json",
+    "startup-comparison-post-reboot.json",
+    "runtime-comparison-post-reboot-100.json",
+    "runtime-comparison-post-reboot-10000-shared.json",
+    "runtime-comparison-post-reboot-10000-exclusive.json",
+    "materialization-comparison-typescript.json",
+    "parallel-comparison-typescript.json",
+    "runtime-comparison-post-reboot-native-vs-emitted.json",
+    "compiled-emission-experiment.json"
+  ],
+  "pause": {
+    "recordedAt": "2026-11-07T20:16:53.887Z",
+    "source": "User said they would open the game now and requested testing after they stop playing.",
+    "performanceProcessesActive": false,
+    "resumeRequiresUserToSayGamingHasEnded": true
+  },
+  "resume": {
+    "recordedAt": "2026-11-07T20:56:03.681Z",
+    "source": "User confirmed they stopped gaming.",
+    "sourceCommit": "aaa47e14c4df309d3d0aea655e98ebbae602b41b",
+    "nativeControlClone": "C:\\Users\\rabrunos\\AppData\\Local\\Temp\\GitLayer-native-emission-check-voBsXT\\repo",
+    "priorPostRebootMeasurementsPreserved": true
+  },
+  "performanceComplete": {
+    "recordedAt": "2026-11-07T21:13:05.187Z",
+    "mainJavaScript": 15,
+    "mainTypeScript": 15,
+    "startupSamplesPerRuntime": 30,
+    "referenceRuntimePairs": 22,
+    "sameSourceEmissionPairs": 6,
+    "materializationSamples": 3,
+    "parallelExtractions": 6,
+    "allVerified": true,
+    "morePerformancePlanned": false,
+    "userNotifiedGameMayReopen": true,
+    "execution": "native TypeScript, no mandatory build"
+  }
+}

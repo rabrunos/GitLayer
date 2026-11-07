@@ -1,0 +1,26 @@
+
+> git-layer-minimal-lab@0.2.0-experimental test
+> node --test --test-concurrency=1 tests/lab.test.ts
+
+✔ T01: three real Git branches start inactive with independent roots (14377.6213ms)
+✔ T02: on/off materialize real files while HEAD and main index stay selected (14650.0242ms)
+✔ T03: normal git add and commit omit committed and modified Layer files (12015.7822ms)
+✔ T04: add dot takes free files across directories and skips both staged owners (45710.0158ms)
+✔ T05: main and three Layers separate modifications and deletions (45435.8758ms)
+✔ T06: explicit files stage only selected literal paths (19753.2796ms)
+✔ T07: native log/show/trees prove independent Layer ancestry and main commits (54692.6658ms)
+✔ T08: commit records staged B and preserves unstaged C; off refuses dirty Layers (25069.5459ms)
+✔ T09: repeated reactivation restores all contents without removing shared app directories (17432.7091ms)
+✔ add dot and relative files use the invoking subdirectory (9230.9104ms)
+✔ new free files retain normal .gitignore and info/exclude rules (9053.4035ms)
+✔ a staged deletion keeps ownership until commit, and own add can reintroduce it (11165.8149ms)
+✔ a main staged deletion keeps ownership when the file is recreated before commit (3720.4885ms)
+✔ commit without a Layer reports no staging and refuses non-TTY pending interaction (4806.8141ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 287713.5322

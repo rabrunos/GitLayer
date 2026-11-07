@@ -1,0 +1,374 @@
+{
+  "schema": 1,
+  "environment": {
+    "date": "2026-11-07T21:04:28.337Z",
+    "platform": "win32",
+    "release": "10.0.26200",
+    "arch": "x64",
+    "cpu": "Intel(R) Core(TM) i7-9700KF CPU @ 3.60GHz",
+    "logicalCpus": 8,
+    "totalMemoryBytes": 34271678464,
+    "node": "v24.14.1",
+    "gitExecutable": "C:/Program Files/Git/cmd/git.exe",
+    "fixtureVolume": "C:\\",
+    "sources": [
+      {
+        "file": "src/core.ts",
+        "bytes": 10888,
+        "sha256": "dc77b894d8cc839ee46615afcf8afb940c368d3177d1b4f324532a922f9bfa18"
+      },
+      {
+        "file": "src/cli.ts",
+        "bytes": 3996,
+        "sha256": "4ebc02cc555537cefceb9665e76e915d1aeec9521fc1cfe2779c4ff8bbfe863b"
+      },
+      {
+        "file": "bin/git-layer",
+        "bytes": 57,
+        "sha256": "a7c993c5c9ee2e0ee9661d62f92509a4b31a9e2d4c78b4e3c6e5e1ef3ed5fabb"
+      },
+      {
+        "file": "bin/git-layer.cmd",
+        "bytes": 41,
+        "sha256": "b6807aac346f470f796101504e98ccc430efd5b2fcc596c4bb45042000c9b36f"
+      },
+      {
+        "file": "tests/helpers.ts",
+        "bytes": 4776,
+        "sha256": "0cc797370f2c5ccabde32e27c1cb73cd94b21f7479d77473ff5ebe3299550b63"
+      },
+      {
+        "file": "scripts/benchmark.ts",
+        "bytes": 9552,
+        "sha256": "2899b38a5d05fadb930de875c3ba044f98151b3ef7519f0b344c69e50d569483"
+      },
+      {
+        "file": "scripts/compare-materialization.ts",
+        "bytes": 7573,
+        "sha256": "43b0af7cbbe354f1ddd48b39e12cbe759d1e947d384ee6a3e5dabe80909257e4"
+      },
+      {
+        "file": "scripts/compare-parallel.ts",
+        "bytes": 5764,
+        "sha256": "5cecd1ce2559ecfcea9a923d8d7e9565058181e6f85de0648430186ca824a2e4"
+      },
+      {
+        "file": "scripts/compare-startup.ts",
+        "bytes": 4159,
+        "sha256": "dbe3d8f0b371f59ee1bd1b1b73a482b956e15e8387b9facb67c095b7259e4397"
+      }
+    ],
+    "caches": "Ordinary OS/Git caches; no cold-cache claim; no GitLayer materialization cache."
+  },
+  "count": 10000,
+  "layout": "distributed",
+  "repetitions": 3,
+  "method": {
+    "primary": "verifiedMs: complete strategy plus comparison of every file, conventional HEAD/index and the other origins.",
+    "command": "commandMs includes complete subprocess/file operations; no time-to-first-file measurement.",
+    "alternatives": "Native checkout-index directly; native checkout-index into private directory then rename every file; native archive creation then tar extraction; cached per-file rename reactivation.",
+    "preparation": "Each sample records the same explicit fixture/source/add/commit/initial-off preparation as benchmark.ts. Private read-tree index creation is separately timed.",
+    "cache": "Cached reactivation avoids Git extraction but adds first extraction/publication and retained materialization plus per-file off renames; ordinary OS caches are warm/uncontrolled.",
+    "observer": "Async content reads in batches of 64; initial baseline at commit 35e1638 used a synchronous observer.",
+    "order": "Strategy order rotates per repetition. Preparation and filesystem removal between strategies are reported, outside activation times."
+  },
+  "samples": [
+    {
+      "count": 10000,
+      "layout": "distributed",
+      "fixtureMs": 454.0903,
+      "applicationAndCompanionSetupMs": 3321.5253000000002,
+      "createAndIndexMs": 494.25950000000057,
+      "emptyActivationMs": 525.2120999999997,
+      "sourceFileGenerationMs": 4542.582300000001,
+      "addMs": 33178.125199999995,
+      "commitMs": 1357.3487999999998,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 1025.8989999999976,
+        "verifiedMs": 1386.204700000002,
+        "verificationMs": 360.30570000000444
+      },
+      "files": 10000,
+      "bytes": 2560000,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "currentCLI": {
+        "firstOn": {
+          "commandMs": 2006.2073999999993,
+          "verifiedMs": 3230.6587,
+          "verificationMs": 1224.4513000000006
+        },
+        "off": {
+          "commandMs": 1519.9058000000005,
+          "verifiedMs": 1875.8087000000014,
+          "verificationMs": 355.90290000000095
+        },
+        "reactivate": {
+          "commandMs": 1985.916799999999,
+          "verifiedMs": 3232.6447999999946,
+          "verificationMs": 1246.7279999999955
+        },
+        "finalOff": {
+          "commandMs": 1640.7479999999996,
+          "verifiedMs": 2307.0455999999976,
+          "verificationMs": 666.297599999998
+        }
+      },
+      "readTreeIndexMs": 95.68589999999676,
+      "repetition": 1,
+      "git": "git version 2.53.0.windows.2",
+      "strategies": {
+        "checkoutIndexDirect": {
+          "commandMs": 5259.114399999999,
+          "verifiedMs": 6539.788699999997,
+          "verificationMs": 1280.6742999999988,
+          "cleanup": {
+            "commandMs": 1171.5759000000035,
+            "verifiedMs": 1528.202400000002,
+            "verificationMs": 356.6264999999985
+          }
+        },
+        "checkoutTemporaryThenRename": {
+          "commandMs": 12666.606999999996,
+          "verifiedMs": 13876.7756,
+          "verificationMs": 1210.1686000000045,
+          "extractionMs": 4631.278299999998,
+          "publicationMs": 8034.97589999999,
+          "cacheOff": {
+            "commandMs": 4787.758499999996,
+            "verifiedMs": 5156.8898000000045,
+            "verificationMs": 369.1313000000082
+          },
+          "cachedReactivate": {
+            "commandMs": 7770.651099999988,
+            "verifiedMs": 9000.689099999989,
+            "verificationMs": 1230.0380000000005
+          },
+          "cleanup": {
+            "commandMs": 1145.0014999999985,
+            "verifiedMs": 1519.3905999999988,
+            "verificationMs": 374.3891000000003
+          }
+        },
+        "archiveThenTar": {
+          "commandMs": 5815.604000000007,
+          "verifiedMs": 7127.019700000004,
+          "verificationMs": 1311.4156999999977,
+          "archiveMs": 1979.816599999991,
+          "extractionMs": 3835.7253000000055,
+          "archiveBytes": 10301440,
+          "cleanup": {
+            "commandMs": 1155.6834999999992,
+            "verifiedMs": 1520.171199999997,
+            "verificationMs": 364.48769999999786
+          }
+        }
+      },
+      "order": [
+        "checkoutIndexDirect",
+        "checkoutTemporaryThenRename",
+        "archiveThenTar"
+      ],
+      "verified": true
+    },
+    {
+      "count": 10000,
+      "layout": "distributed",
+      "fixtureMs": 432.8755999999994,
+      "applicationAndCompanionSetupMs": 3318.5394000000088,
+      "createAndIndexMs": 501.7358000000095,
+      "emptyActivationMs": 790.5252000000037,
+      "sourceFileGenerationMs": 4620.148199999996,
+      "addMs": 33489.91619999999,
+      "commitMs": 1364.4581999999937,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 1028.3127000000095,
+        "verifiedMs": 1386.9274999999907,
+        "verificationMs": 358.6147999999812
+      },
+      "files": 10000,
+      "bytes": 2560000,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "currentCLI": {
+        "firstOn": {
+          "commandMs": 2269.2918000000063,
+          "verifiedMs": 3586.318100000004,
+          "verificationMs": 1317.0262999999977
+        },
+        "off": {
+          "commandMs": 1440.841000000015,
+          "verifiedMs": 1799.751900000003,
+          "verificationMs": 358.91089999998803
+        },
+        "reactivate": {
+          "commandMs": 2207.408599999995,
+          "verifiedMs": 3432.8201999999874,
+          "verificationMs": 1225.4115999999922
+        },
+        "finalOff": {
+          "commandMs": 1106.0497000000032,
+          "verifiedMs": 1468.3076,
+          "verificationMs": 362.2578999999969
+        }
+      },
+      "readTreeIndexMs": 65.32490000000689,
+      "repetition": 2,
+      "git": "git version 2.53.0.windows.2",
+      "strategies": {
+        "checkoutTemporaryThenRename": {
+          "commandMs": 9400.92259999999,
+          "verifiedMs": 10584.62969999999,
+          "verificationMs": 1183.7070999999996,
+          "extractionMs": 4307.1166000000085,
+          "publicationMs": 5093.515700000018,
+          "cacheOff": {
+            "commandMs": 4750.470499999996,
+            "verifiedMs": 5100.582799999975,
+            "verificationMs": 350.11229999997886
+          },
+          "cachedReactivate": {
+            "commandMs": 4792.150800000003,
+            "verifiedMs": 5958.122300000017,
+            "verificationMs": 1165.9715000000142
+          },
+          "cleanup": {
+            "commandMs": 1146.705500000011,
+            "verifiedMs": 1495.2356000000145,
+            "verificationMs": 348.5301000000036
+          }
+        },
+        "archiveThenTar": {
+          "commandMs": 5311.319500000012,
+          "verifiedMs": 6448.5522000000055,
+          "verificationMs": 1137.2326999999932,
+          "archiveMs": 1940.0852000000014,
+          "extractionMs": 3371.201299999986,
+          "archiveBytes": 10301440,
+          "cleanup": {
+            "commandMs": 1137.2082999999984,
+            "verifiedMs": 1486.2539999999863,
+            "verificationMs": 349.04569999998785
+          }
+        },
+        "checkoutIndexDirect": {
+          "commandMs": 4490.227399999974,
+          "verifiedMs": 5588.214099999983,
+          "verificationMs": 1097.9867000000086,
+          "cleanup": {
+            "commandMs": 1159.8343999999925,
+            "verifiedMs": 1510.4333000000042,
+            "verificationMs": 350.5989000000118
+          }
+        }
+      },
+      "order": [
+        "checkoutTemporaryThenRename",
+        "archiveThenTar",
+        "checkoutIndexDirect"
+      ],
+      "verified": true
+    },
+    {
+      "count": 10000,
+      "layout": "distributed",
+      "fixtureMs": 436.097700000013,
+      "applicationAndCompanionSetupMs": 3254.434899999993,
+      "createAndIndexMs": 507.606300000014,
+      "emptyActivationMs": 529.3882000000158,
+      "sourceFileGenerationMs": 4395.236899999989,
+      "addMs": 33523.7856,
+      "commitMs": 1370.412100000016,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 1017.0766000000003,
+        "verifiedMs": 1372.5256999999983,
+        "verificationMs": 355.449099999998
+      },
+      "files": 10000,
+      "bytes": 2560000,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "currentCLI": {
+        "firstOn": {
+          "commandMs": 2020.3126999999804,
+          "verifiedMs": 3256.951299999986,
+          "verificationMs": 1236.6386000000057
+        },
+        "off": {
+          "commandMs": 1185.5698999999731,
+          "verifiedMs": 1567.4974999999977,
+          "verificationMs": 381.92760000002454
+        },
+        "reactivate": {
+          "commandMs": 1941.4583000000275,
+          "verifiedMs": 3206.097700000013,
+          "verificationMs": 1264.6393999999855
+        },
+        "finalOff": {
+          "commandMs": 1037.875400000019,
+          "verifiedMs": 1393.4531000000134,
+          "verificationMs": 355.57769999999437
+        }
+      },
+      "readTreeIndexMs": 61.98850000000675,
+      "repetition": 3,
+      "git": "git version 2.53.0.windows.2",
+      "strategies": {
+        "archiveThenTar": {
+          "commandMs": 5302.301699999982,
+          "verifiedMs": 6419.232799999998,
+          "verificationMs": 1116.9311000000162,
+          "archiveMs": 1957.1398000000045,
+          "extractionMs": 3345.126199999999,
+          "archiveBytes": 10301440,
+          "cleanup": {
+            "commandMs": 1137.4770999999892,
+            "verifiedMs": 1487.9346000000078,
+            "verificationMs": 350.4575000000186
+          }
+        },
+        "checkoutIndexDirect": {
+          "commandMs": 4479.450000000012,
+          "verifiedMs": 5683.611499999999,
+          "verificationMs": 1204.1614999999874,
+          "cleanup": {
+            "commandMs": 1119.4587000000174,
+            "verifiedMs": 1487.6720000000205,
+            "verificationMs": 368.2133000000031
+          }
+        },
+        "checkoutTemporaryThenRename": {
+          "commandMs": 9432.974099999992,
+          "verifiedMs": 10636.68770000001,
+          "verificationMs": 1203.7136000000173,
+          "extractionMs": 4281.895600000047,
+          "publicationMs": 5150.815400000021,
+          "cacheOff": {
+            "commandMs": 4641.947900000028,
+            "verifiedMs": 4994.109600000025,
+            "verificationMs": 352.1616999999969
+          },
+          "cachedReactivate": {
+            "commandMs": 4723.525900000008,
+            "verifiedMs": 5872.156399999978,
+            "verificationMs": 1148.6304999999702
+          },
+          "cleanup": {
+            "commandMs": 1127.308000000019,
+            "verifiedMs": 1478.3170999999857,
+            "verificationMs": 351.00909999996657
+          }
+        }
+      },
+      "order": [
+        "archiveThenTar",
+        "checkoutIndexDirect",
+        "checkoutTemporaryThenRename"
+      ],
+      "verified": true
+    }
+  ]
+}

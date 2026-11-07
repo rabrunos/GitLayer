@@ -9,7 +9,7 @@ Este laboratório serve somente para repositórios descartáveis. A simplificaç
 - `off` exige Layer sem mudanças preparadas ou não preparadas. Não oferece descarte, shelf, estacionamento ou backup de pendências. Diretórios vazios permanecem.
 - O bloco `info/exclude` protege o add convencional comum. `git add -f`, comandos externos e negações em `.gitignore` de maior prioridade podem contorná-lo. Fixtures não usam negações conflitantes; isto não é uma ACL.
 - Não há hooks, assinaturas, LFS ou filtros externos no fluxo certificado. A criação de commits usa plumbing Git; não equivale a executar todos os comportamentos de `git commit`.
-- Não há migração, descoberta remota, transporte automático, editor, desktop, proteção avançada de branch ou compatibilidade com os metadados antigos.
+- Não há migração do armazenamento anterior, descoberta remota, transporte automático, editor, desktop, proteção avançada de branch ou compatibilidade com os metadados antigos.
 - Os caminhos do add são arquivos e diretórios literais; glob e magic pathspec não são suportados. O ponto `.` mantém o escopo do diretório atual e descendentes.
 - Índices e refs alterados externamente não são sincronizados. Não se deve editá-los fora do coordenador nem selecionar uma branch `layer/*` como HEAD enquanto o laboratório as coordena.
 - Não há garantia de desempenho universal. Arquivos maiores, antivírus, quantidade de diretórios e estado do filesystem afetam os tempos. Cinco segundos para 10.000 arquivos é uma meta, comprovável somente pelas amostras publicadas.

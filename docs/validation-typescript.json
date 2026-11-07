@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "date": "2026-11-07T19:01:50.180Z",
+  "initialCommit": "b4051c01ed09a42705439f18d6ca6c4a1f3f849b",
+  "testedCommit": "345e2ae9c9dcc35f04d5cc1fd3240679b87bec06",
+  "platform": "win32",
+  "release": "10.0.26200",
+  "arch": "x64",
+  "node": "v24.14.1",
+  "typescript": "7.0.2",
+  "nodeTypes": "22.20.5",
+  "npm": "11.11.0",
+  "git": "git version 2.53.0.windows.2",
+  "install": {
+    "command": "npm.cmd ci --ignore-scripts --offline --no-audit --no-fund",
+    "exitCode": 0
+  },
+  "staticCheck": {
+    "command": "npm.cmd run check (tsc --noEmit)",
+    "exitCode": 0,
+    "errors": 0
+  },
+  "functional": {
+    "command": "npm.cmd test",
+    "exitCode": 0,
+    "tests": 14,
+    "passed": 14,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 287713.5322,
+    "log": "tests-typescript.txt"
+  },
+  "interactive": {
+    "receipt": "interactive-typescript.json",
+    "passed": true,
+    "realTTY": true,
+    "windowsCmdLauncherPassed": true,
+    "runtimeValidatedBeforeNodeModulesInstall": true
+  },
+  "freshCloneClean": true,
+  "sourceMatchesDevelopmentCheckout": true,
+  "sources": [
+    {
+      "file": ".gitattributes",
+      "bytes": 117,
+      "sha256": "0985fef5d068d24ddb497649b07b8978f7362f9fe136e402e1ed4d465e75ec9f"
+    },
+    {
+      "file": "bin/git-layer",
+      "bytes": 57,
+      "sha256": "a7c993c5c9ee2e0ee9661d62f92509a4b31a9e2d4c78b4e3c6e5e1ef3ed5fabb"
+    },
+    {
+      "file": "bin/git-layer.cmd",
+      "bytes": 41,
+      "sha256": "b6807aac346f470f796101504e98ccc430efd5b2fcc596c4bb45042000c9b36f"
+    },
+    {
+      "file": "package-lock.json",
+      "bytes": 13423,
+      "sha256": "6682c4aa52927f3f92908d48d4da2dceb6d062ff34c180fe6c311abe0b423025"
+    },
+    {
+      "file": "package.json",
+      "bytes": 759,
+      "sha256": "bebee6000621d873e6422986756ac8a8e1accca252c495d97d7df63b3203d01b"
+    },
+    {
+      "file": "scripts/benchmark.ts",
+      "bytes": 9552,
+      "sha256": "2899b38a5d05fadb930de875c3ba044f98151b3ef7519f0b344c69e50d569483"
+    },
+    {
+      "file": "scripts/compare-materialization.ts",
+      "bytes": 7573,
+      "sha256": "43b0af7cbbe354f1ddd48b39e12cbe759d1e947d384ee6a3e5dabe80909257e4"
+    },
+    {
+      "file": "scripts/compare-parallel.ts",
+      "bytes": 5764,
+      "sha256": "5cecd1ce2559ecfcea9a923d8d7e9565058181e6f85de0648430186ca824a2e4"
+    },
+    {
+      "file": "scripts/compare-startup.ts",
+      "bytes": 4159,
+      "sha256": "dbe3d8f0b371f59ee1bd1b1b73a482b956e15e8387b9facb67c095b7259e4397"
+    },
+    {
+      "file": "src/cli.ts",
+      "bytes": 3996,
+      "sha256": "4ebc02cc555537cefceb9665e76e915d1aeec9521fc1cfe2779c4ff8bbfe863b"
+    },
+    {
+      "file": "src/core.ts",
+      "bytes": 10888,
+      "sha256": "dc77b894d8cc839ee46615afcf8afb940c368d3177d1b4f324532a922f9bfa18"
+    },
+    {
+      "file": "tests/helpers.ts",
+      "bytes": 4776,
+      "sha256": "0cc797370f2c5ccabde32e27c1cb73cd94b21f7479d77473ff5ebe3299550b63"
+    },
+    {
+      "file": "tests/lab.test.ts",
+      "bytes": 14028,
+      "sha256": "e7999dc1bf2dad674cd0054dd240cdfbbaa91f33a453aff8b9f73857232ee7ca"
+    },
+    {
+      "file": "tsconfig.json",
+      "bytes": 596,
+      "sha256": "a49b3338fc58f5f74693a933384c099d253c9667993b12b8f5bc733c328cb0c8"
+    }
+  ],
+  "additionalDiagnostic": {
+    "commit": "016d234548232e35ae817f9d83715e6b2b75e361",
+    "onlyAddedFile": "scripts/compare-runtime.ts",
+    "coreCliTestsHelpersAndExistingScriptsUnchanged": true,
+    "staticCommand": "npm.cmd run check (tsc --noEmit)",
+    "staticExitCode": 0,
+    "staticErrors": 0,
+    "totalTypeScriptSources": 9,
+    "sha256": "ed639b47d80fa2f5446086758ca43d0b5857cabb7fde68505cc495da3fb28f4e"
+  },
+  "emissionControlDiagnostic": {
+    "commit": "aaa47e14c4df309d3d0aea655e98ebbae602b41b",
+    "onlyChangedFile": "scripts/compare-runtime.ts",
+    "coreCliTestsAndConfigurationUnchanged": true,
+    "staticCommand": "npm.cmd run check (tsc --noEmit)",
+    "staticExitCode": 0,
+    "staticErrors": 0
+  }
+}

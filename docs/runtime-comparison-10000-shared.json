@@ -1,0 +1,600 @@
+{
+  "schema": 1,
+  "environment": {
+    "date": "2026-11-07T19:25:24.171Z",
+    "platform": "win32",
+    "release": "10.0.26200",
+    "arch": "x64",
+    "cpu": "Intel(R) Core(TM) i7-9700KF CPU @ 3.60GHz",
+    "logicalCpus": 8,
+    "totalMemoryBytes": 34271678464,
+    "node": "v24.14.1",
+    "gitExecutable": "C:/Program Files/Git/cmd/git.exe",
+    "fixtureVolume": "C:\\",
+    "sources": [
+      {
+        "file": "src/core.ts",
+        "bytes": 10888,
+        "sha256": "dc77b894d8cc839ee46615afcf8afb940c368d3177d1b4f324532a922f9bfa18"
+      },
+      {
+        "file": "src/cli.ts",
+        "bytes": 3996,
+        "sha256": "4ebc02cc555537cefceb9665e76e915d1aeec9521fc1cfe2779c4ff8bbfe863b"
+      },
+      {
+        "file": "bin/git-layer",
+        "bytes": 57,
+        "sha256": "a7c993c5c9ee2e0ee9661d62f92509a4b31a9e2d4c78b4e3c6e5e1ef3ed5fabb"
+      },
+      {
+        "file": "bin/git-layer.cmd",
+        "bytes": 41,
+        "sha256": "b6807aac346f470f796101504e98ccc430efd5b2fcc596c4bb45042000c9b36f"
+      },
+      {
+        "file": "tests/helpers.ts",
+        "bytes": 4776,
+        "sha256": "0cc797370f2c5ccabde32e27c1cb73cd94b21f7479d77473ff5ebe3299550b63"
+      },
+      {
+        "file": "scripts/benchmark.ts",
+        "bytes": 9552,
+        "sha256": "2899b38a5d05fadb930de875c3ba044f98151b3ef7519f0b344c69e50d569483"
+      },
+      {
+        "file": "scripts/compare-materialization.ts",
+        "bytes": 7573,
+        "sha256": "43b0af7cbbe354f1ddd48b39e12cbe759d1e947d384ee6a3e5dabe80909257e4"
+      },
+      {
+        "file": "scripts/compare-parallel.ts",
+        "bytes": 5764,
+        "sha256": "5cecd1ce2559ecfcea9a923d8d7e9565058181e6f85de0648430186ca824a2e4"
+      },
+      {
+        "file": "scripts/compare-startup.ts",
+        "bytes": 4159,
+        "sha256": "dbe3d8f0b371f59ee1bd1b1b73a482b956e15e8387b9facb67c095b7259e4397"
+      }
+    ],
+    "caches": "Ordinary OS/Git caches; no cold-cache claim; no GitLayer materialization cache."
+  },
+  "count": 10000,
+  "git": "git version 2.53.0.windows.2",
+  "repetitions": 6,
+  "layout": "distributed",
+  "sources": {
+    "javascript": [
+      {
+        "file": "src/core.mjs",
+        "bytes": 8698,
+        "sha256": "33b9c6f6a42391e1390083f8c9355f35035bb039dfc2096cbb93cffee70e78a5"
+      },
+      {
+        "file": "src/cli.mjs",
+        "bytes": 3615,
+        "sha256": "c4cb698f07633c24234418a2478ea333e4dea2ef3511cc6dfbd3c13b35c3aea0"
+      },
+      {
+        "file": "bin/git-layer",
+        "bytes": 58,
+        "sha256": "0b148a809c2fde80da525146f4a5009bc277ad7626db2c84e2e5a856b74af2eb"
+      },
+      {
+        "file": "bin/git-layer.cmd",
+        "bytes": 42,
+        "sha256": "d34e9b046e4468e1b15810201d620421e23d30413ea7f009c31a35885ecb2493"
+      }
+    ],
+    "typescript": [
+      {
+        "file": "src/core.ts",
+        "bytes": 10888,
+        "sha256": "dc77b894d8cc839ee46615afcf8afb940c368d3177d1b4f324532a922f9bfa18"
+      },
+      {
+        "file": "src/cli.ts",
+        "bytes": 3996,
+        "sha256": "4ebc02cc555537cefceb9665e76e915d1aeec9521fc1cfe2779c4ff8bbfe863b"
+      },
+      {
+        "file": "bin/git-layer",
+        "bytes": 57,
+        "sha256": "a7c993c5c9ee2e0ee9661d62f92509a4b31a9e2d4c78b4e3c6e5e1ef3ed5fabb"
+      },
+      {
+        "file": "bin/git-layer.cmd",
+        "bytes": 41,
+        "sha256": "b6807aac346f470f796101504e98ccc430efd5b2fcc596c4bb45042000c9b36f"
+      }
+    ]
+  },
+  "diagnostic": {
+    "file": "scripts/compare-runtime.ts",
+    "sha256": "ed639b47d80fa2f5446086758ca43d0b5857cabb7fde68505cc495da3fb28f4e"
+  },
+  "revisions": {
+    "javascript": "b4051c01ed09a42705439f18d6ca6c4a1f3f849b",
+    "typescript": "016d234548232e35ae817f9d83715e6b2b75e361"
+  },
+  "method": {
+    "command": "Complete git layer subprocess through the real launcher, including startup and every file operation; only the child PATH prefix selects JavaScript or TypeScript.",
+    "fixture": "One disposable repository, identical files, Git Layer index and refs for both runtimes; prepare() uses the TypeScript CLI and the existing distributed layout.",
+    "observer": "Original prepare().verify() checks all contents or absences, all other-origin contents, conventional HEAD and main-index bytes after every command.",
+    "warmups": "One complete on/off cycle per runtime, recorded separately; JavaScript warmup is the first populated Git extraction and TypeScript warmup follows it. Neither is included in paired summaries.",
+    "pairs": "6 measured pairs; JavaScript/TypeScript order alternates each pair. Every cycle starts inactive, activates and verifies, then deactivates and verifies.",
+    "delta": "Positive deltas mean TypeScript is slower; each pair records absolute milliseconds and percentages for command, verification and their total.",
+    "limits": "Local warm/uncontrolled OS caches and timing variation; no concurrent agent tests or benchmarks. Descriptive observations, not a statistical equivalence claim."
+  },
+  "preparation": {
+    "count": 10000,
+    "layout": "distributed",
+    "fixtureMs": 632.8951,
+    "applicationAndCompanionSetupMs": 4037.7242,
+    "createAndIndexMs": 734.7964000000002,
+    "emptyActivationMs": 670.0216,
+    "sourceFileGenerationMs": 6489.1813,
+    "addMs": 35518.0123,
+    "commitMs": 1678.4377000000022,
+    "extraMaterializationPreparationMs": 0,
+    "initialOffPreparation": {
+      "commandMs": 1610.735099999998,
+      "verifiedMs": 2061.1901,
+      "verificationMs": 450.45500000000175
+    },
+    "files": 10000,
+    "bytes": 2560000,
+    "directories": 100,
+    "sharedWithMainAndAnotherLayer": true
+  },
+  "warmups": [
+    {
+      "runtime": "javascript",
+      "on": {
+        "commandMs": 2694.0679999999993,
+        "verifiedMs": 4856.443800000001,
+        "verificationMs": 2162.3758000000016
+      },
+      "off": {
+        "commandMs": 1882.767899999999,
+        "verifiedMs": 2319.749799999998,
+        "verificationMs": 436.98189999999886
+      }
+    },
+    {
+      "runtime": "typescript",
+      "on": {
+        "commandMs": 3118.834999999999,
+        "verifiedMs": 5592.154799999997,
+        "verificationMs": 2473.3197999999975
+      },
+      "off": {
+        "commandMs": 1547.1775000000052,
+        "verifiedMs": 1967.6849999999977,
+        "verificationMs": 420.50749999999243
+      }
+    }
+  ],
+  "samples": [
+    {
+      "repetition": 1,
+      "order": [
+        "javascript",
+        "typescript"
+      ],
+      "javascript": {
+        "runtime": "javascript",
+        "on": {
+          "commandMs": 3935.1676000000007,
+          "verifiedMs": 7738.657999999996,
+          "verificationMs": 3803.490399999995
+        },
+        "off": {
+          "commandMs": 4755.823300000004,
+          "verifiedMs": 5547.389899999995,
+          "verificationMs": 791.566599999991
+        }
+      },
+      "typescript": {
+        "runtime": "typescript",
+        "on": {
+          "commandMs": 3945.6703000000125,
+          "verifiedMs": 7193.428400000004,
+          "verificationMs": 3247.758099999992
+        },
+        "off": {
+          "commandMs": 2332.426400000011,
+          "verifiedMs": 3147.599500000011,
+          "verificationMs": 815.1731
+        }
+      },
+      "delta": {
+        "on": {
+          "commandMs": 10.502700000011828,
+          "commandPercent": 0.266893333844582,
+          "verifiedMs": -545.2295999999915,
+          "verifiedPercent": -7.0455316671184045,
+          "verificationMs": -555.7323000000033,
+          "verificationPercent": -14.611113518256916
+        },
+        "off": {
+          "commandMs": -2423.3968999999925,
+          "commandPercent": -50.956411690064066,
+          "verifiedMs": -2399.7903999999835,
+          "verifiedPercent": -43.2598112492505,
+          "verificationMs": 23.606500000008964,
+          "verificationPercent": 2.982250640692676
+        }
+      }
+    },
+    {
+      "repetition": 2,
+      "order": [
+        "typescript",
+        "javascript"
+      ],
+      "javascript": {
+        "runtime": "javascript",
+        "on": {
+          "commandMs": 14531.827300000004,
+          "verifiedMs": 27333.319700000007,
+          "verificationMs": 12801.492400000003
+        },
+        "off": {
+          "commandMs": 7713.594199999992,
+          "verifiedMs": 9243.732000000018,
+          "verificationMs": 1530.137800000026
+        }
+      },
+      "typescript": {
+        "runtime": "typescript",
+        "on": {
+          "commandMs": 4314.144800000009,
+          "verifiedMs": 7822.998000000007,
+          "verificationMs": 3508.8531999999977
+        },
+        "off": {
+          "commandMs": 5698.670299999998,
+          "verifiedMs": 6912.182700000005,
+          "verificationMs": 1213.512400000007
+        }
+      },
+      "delta": {
+        "on": {
+          "commandMs": -10217.682499999995,
+          "commandPercent": -70.31244102384834,
+          "verifiedMs": -19510.3217,
+          "verifiedPercent": -71.37926133429008,
+          "verificationMs": -9292.639200000005,
+          "verificationPercent": -72.59028017702063
+        },
+        "off": {
+          "commandMs": -2014.9238999999943,
+          "commandPercent": -26.121725459708475,
+          "verifiedMs": -2331.5493000000133,
+          "verifiedPercent": -25.22303004890242,
+          "verificationMs": -316.625400000019,
+          "verificationPercent": -20.692606901157113
+        }
+      }
+    },
+    {
+      "repetition": 3,
+      "order": [
+        "javascript",
+        "typescript"
+      ],
+      "javascript": {
+        "runtime": "javascript",
+        "on": {
+          "commandMs": 12048.117700000003,
+          "verifiedMs": 29700.432,
+          "verificationMs": 17652.3143
+        },
+        "off": {
+          "commandMs": 3902.76979999998,
+          "verifiedMs": 4662.065600000002,
+          "verificationMs": 759.2958000000217
+        }
+      },
+      "typescript": {
+        "runtime": "typescript",
+        "on": {
+          "commandMs": 6736.034500000009,
+          "verifiedMs": 26364.263399999996,
+          "verificationMs": 19628.228899999987
+        },
+        "off": {
+          "commandMs": 5819.2984,
+          "verifiedMs": 7172.975100000011,
+          "verificationMs": 1353.676700000011
+        }
+      },
+      "delta": {
+        "on": {
+          "commandMs": -5312.083199999994,
+          "commandPercent": -44.09056528390317,
+          "verifiedMs": -3336.1686000000045,
+          "verifiedPercent": -11.232727523963304,
+          "verificationMs": 1975.9145999999892,
+          "verificationPercent": 11.193515855311897
+        },
+        "off": {
+          "commandMs": 1916.5286000000197,
+          "commandPercent": 49.10688301421287,
+          "verifiedMs": 2510.909500000009,
+          "verifiedPercent": 53.8583047823267,
+          "verificationMs": 594.3808999999892,
+          "verificationPercent": 78.28054626404784
+        }
+      }
+    },
+    {
+      "repetition": 4,
+      "order": [
+        "typescript",
+        "javascript"
+      ],
+      "javascript": {
+        "runtime": "javascript",
+        "on": {
+          "commandMs": 9527.483199999988,
+          "verifiedMs": 22109.36050000001,
+          "verificationMs": 12581.877300000022
+        },
+        "off": {
+          "commandMs": 9289.025200000004,
+          "verifiedMs": 11780.099000000017,
+          "verificationMs": 2491.073800000013
+        }
+      },
+      "typescript": {
+        "runtime": "typescript",
+        "on": {
+          "commandMs": 9721.70730000001,
+          "verifiedMs": 19950.848200000008,
+          "verificationMs": 10229.140899999999
+        },
+        "off": {
+          "commandMs": 4457.523999999976,
+          "verifiedMs": 5631.052499999991,
+          "verificationMs": 1173.528500000015
+        }
+      },
+      "delta": {
+        "on": {
+          "commandMs": 194.22410000002128,
+          "commandPercent": 2.0385667014350815,
+          "verifiedMs": -2158.512300000002,
+          "verifiedPercent": -9.76288889043173,
+          "verificationMs": -2352.7364000000234,
+          "verificationPercent": -18.699406645779476
+        },
+        "off": {
+          "commandMs": -4831.501200000028,
+          "commandPercent": -52.013005627329186,
+          "verifiedMs": -6149.046500000026,
+          "verifiedPercent": -52.19859782163136,
+          "verificationMs": -1317.545299999998,
+          "verificationPercent": -52.89065703312327
+        }
+      }
+    },
+    {
+      "repetition": 5,
+      "order": [
+        "javascript",
+        "typescript"
+      ],
+      "javascript": {
+        "runtime": "javascript",
+        "on": {
+          "commandMs": 10856.30190000002,
+          "verifiedMs": 25193.04110000003,
+          "verificationMs": 14336.73920000001
+        },
+        "off": {
+          "commandMs": 5433.942299999995,
+          "verifiedMs": 6859.729399999953,
+          "verificationMs": 1425.7870999999577
+        }
+      },
+      "typescript": {
+        "runtime": "typescript",
+        "on": {
+          "commandMs": 9803.068499999994,
+          "verifiedMs": 17347.23339999997,
+          "verificationMs": 7544.164899999974
+        },
+        "off": {
+          "commandMs": 4260.072999999975,
+          "verifiedMs": 5556.799899999984,
+          "verificationMs": 1296.7269000000088
+        }
+      },
+      "delta": {
+        "on": {
+          "commandMs": -1053.2334000000264,
+          "commandPercent": -9.701585398984017,
+          "verifiedMs": -7845.807700000063,
+          "verifiedPercent": -31.142757513304154,
+          "verificationMs": -6792.574300000037,
+          "verificationPercent": -47.378795172615206
+        },
+        "off": {
+          "commandMs": -1173.8693000000203,
+          "commandPercent": -21.602535234870295,
+          "verifiedMs": -1302.9294999999693,
+          "verifiedPercent": -18.993890633644792,
+          "verificationMs": -129.06019999994896,
+          "verificationPercent": -9.051856339558185
+        }
+      }
+    },
+    {
+      "repetition": 6,
+      "order": [
+        "typescript",
+        "javascript"
+      ],
+      "javascript": {
+        "runtime": "javascript",
+        "on": {
+          "commandMs": 7687.108999999997,
+          "verifiedMs": 13329.425300000003,
+          "verificationMs": 5642.316300000006
+        },
+        "off": {
+          "commandMs": 5263.010400000028,
+          "verifiedMs": 6952.353600000031,
+          "verificationMs": 1689.343200000003
+        }
+      },
+      "typescript": {
+        "runtime": "typescript",
+        "on": {
+          "commandMs": 9897.223600000027,
+          "verifiedMs": 26917.1434,
+          "verificationMs": 17019.919799999974
+        },
+        "off": {
+          "commandMs": 5452.441999999981,
+          "verifiedMs": 6633.105700000015,
+          "verificationMs": 1180.6637000000337
+        }
+      },
+      "delta": {
+        "on": {
+          "commandMs": 2210.11460000003,
+          "commandPercent": 28.750920534625315,
+          "verifiedMs": 13587.718099999998,
+          "verifiedPercent": 101.93776396346206,
+          "verificationMs": 11377.603499999968,
+          "verificationPercent": 201.64774349853369
+        },
+        "off": {
+          "commandMs": 189.4315999999526,
+          "commandPercent": 3.5993012668177813,
+          "verifiedMs": -319.24790000001667,
+          "verifiedPercent": -4.591939915139173,
+          "verificationMs": -508.67949999996927,
+          "verificationPercent": -30.11108104025093
+        }
+      }
+    }
+  ],
+  "summaries": {
+    "javascript": {
+      "on": {
+        "commandMs": {
+          "count": 6,
+          "median": 10191.892550000004,
+          "minimum": 3935.1676000000007,
+          "maximum": 14531.827300000004
+        },
+        "verifiedMs": {
+          "count": 6,
+          "median": 23651.20080000002,
+          "minimum": 7738.657999999996,
+          "maximum": 29700.432
+        },
+        "verificationMs": {
+          "count": 6,
+          "median": 12691.684850000012,
+          "minimum": 3803.490399999995,
+          "maximum": 17652.3143
+        }
+      },
+      "off": {
+        "commandMs": {
+          "count": 6,
+          "median": 5348.476350000012,
+          "minimum": 3902.76979999998,
+          "maximum": 9289.025200000004
+        },
+        "verifiedMs": {
+          "count": 6,
+          "median": 6906.041499999992,
+          "minimum": 4662.065600000002,
+          "maximum": 11780.099000000017
+        },
+        "verificationMs": {
+          "count": 6,
+          "median": 1477.9624499999918,
+          "minimum": 759.2958000000217,
+          "maximum": 2491.073800000013
+        }
+      }
+    },
+    "typescript": {
+      "on": {
+        "commandMs": {
+          "count": 6,
+          "median": 8228.870900000009,
+          "minimum": 3945.6703000000125,
+          "maximum": 9897.223600000027
+        },
+        "verifiedMs": {
+          "count": 6,
+          "median": 18649.040799999988,
+          "minimum": 7193.428400000004,
+          "maximum": 26917.1434
+        },
+        "verificationMs": {
+          "count": 6,
+          "median": 8886.652899999986,
+          "minimum": 3247.758099999992,
+          "maximum": 19628.228899999987
+        }
+      },
+      "off": {
+        "commandMs": {
+          "count": 6,
+          "median": 4954.982999999978,
+          "minimum": 2332.426400000011,
+          "maximum": 5819.2984
+        },
+        "verifiedMs": {
+          "count": 6,
+          "median": 6132.079100000003,
+          "minimum": 3147.599500000011,
+          "maximum": 7172.975100000011
+        },
+        "verificationMs": {
+          "count": 6,
+          "median": 1197.0880500000203,
+          "minimum": 815.1731,
+          "maximum": 1353.676700000011
+        }
+      }
+    },
+    "pairedDelta": {
+      "onMs": {
+        "count": 6,
+        "median": -521.3653500000073,
+        "minimum": -10217.682499999995,
+        "maximum": 2210.11460000003
+      },
+      "onPercent": {
+        "count": 6,
+        "median": -4.717346032569718,
+        "minimum": -70.31244102384834,
+        "maximum": 28.750920534625315
+      },
+      "offMs": {
+        "count": 6,
+        "median": -1594.3966000000073,
+        "minimum": -4831.501200000028,
+        "maximum": 1916.5286000000197
+      },
+      "offPercent": {
+        "count": 6,
+        "median": -23.862130347289387,
+        "minimum": -52.013005627329186,
+        "maximum": 49.10688301421287
+      }
+    }
+  },
+  "completed": true
+}
