@@ -1,0 +1,656 @@
+{
+  "schema": 1,
+  "environment": {
+    "date": "2026-11-07T18:30:19.821Z",
+    "platform": "win32",
+    "release": "10.0.26200",
+    "arch": "x64",
+    "cpu": "Intel(R) Core(TM) i7-9700KF CPU @ 3.60GHz",
+    "logicalCpus": 8,
+    "totalMemoryBytes": 34271678464,
+    "node": "v24.14.1",
+    "gitExecutable": "C:/Program Files/Git/cmd/git.exe",
+    "fixtureVolume": "C:\\",
+    "sources": [
+      {
+        "file": "src/core.mjs",
+        "bytes": 8698,
+        "sha256": "33b9c6f6a42391e1390083f8c9355f35035bb039dfc2096cbb93cffee70e78a5"
+      },
+      {
+        "file": "src/cli.mjs",
+        "bytes": 3615,
+        "sha256": "c4cb698f07633c24234418a2478ea333e4dea2ef3511cc6dfbd3c13b35c3aea0"
+      },
+      {
+        "file": "bin/git-layer",
+        "bytes": 58,
+        "sha256": "0b148a809c2fde80da525146f4a5009bc277ad7626db2c84e2e5a856b74af2eb"
+      },
+      {
+        "file": "bin/git-layer.cmd",
+        "bytes": 42,
+        "sha256": "d34e9b046e4468e1b15810201d620421e23d30413ea7f009c31a35885ecb2493"
+      },
+      {
+        "file": "tests/helpers.mjs",
+        "bytes": 3406,
+        "sha256": "d43a0695970bb5225cc8768cba6e98ef78703d318b9c068466e2b9431e6514b3"
+      },
+      {
+        "file": "scripts/benchmark.mjs",
+        "bytes": 8410,
+        "sha256": "11f4b81df6837478570e8f0ad5ac513f066c70bb1951096f2f9d30c7515410ba"
+      },
+      {
+        "file": "scripts/compare-materialization.mjs",
+        "bytes": 6547,
+        "sha256": "6f9337df4f8be212f4256a569c27adc6bd834f2f6167fc76323f8e186ee1928a"
+      },
+      {
+        "file": "scripts/compare-parallel.mjs",
+        "bytes": 4846,
+        "sha256": "bb108c2f94cd065f30ab7edb3c78c7e95403d13fd24bc107b31cca1cc11dc9ba"
+      }
+    ],
+    "caches": "Ordinary OS/Git caches; no cold-cache claim; no GitLayer materialization cache."
+  },
+  "repetitions": 3,
+  "method": {
+    "primary": "verifiedMs: wall clock from CLI invocation through full content/absence, other-origin content, HEAD and main-index-byte verification.",
+    "command": "commandMs: complete synchronous CLI process, including process startup and all command effects.",
+    "preparation": "Fixture initialization, other origins, Layer/index creation, empty on, source generation, add, commit and initial off are separately timed. No populated extraction precedes firstOn.",
+    "layouts": "Distributed: up to 100 directories each containing main and companion Layer files. Exclusive: one Layer-only scripts directory.",
+    "files": "256-byte deterministic text files, no filesystem cache purge, no compression or sparse placeholders.",
+    "observer": "Async fs.promises.readFile in batches of 64; differs from synchronous observer in the initial materialization baseline. All files and bytes still checked.",
+    "integrity": "Every file read and compared byte-for-byte after on/reactivate; every absent path checked after off; other-origin bytes, conventional HEAD and index bytes checked each time.",
+    "scope": "Controlled disposable repositories; no concurrent writers, filters, hooks, LFS, collisions or recovery."
+  },
+  "samples": [
+    {
+      "count": 10,
+      "layout": "distributed",
+      "fixtureMs": 2053.9826000000003,
+      "applicationAndCompanionSetupMs": 7597.5273,
+      "createAndIndexMs": 2053.6275000000005,
+      "emptyActivationMs": 2892.803900000001,
+      "sourceFileGenerationMs": 134.73629999999866,
+      "addMs": 9540.216499999999,
+      "commitMs": 2441.7738999999965,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 929.7947999999997,
+        "verifiedMs": 1075.8810000000012,
+        "verificationMs": 146.08620000000155
+      },
+      "files": 10,
+      "bytes": 2560,
+      "directories": 10,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 1,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 1815.1049999999996,
+        "verifiedMs": 1922.8371000000006,
+        "verificationMs": 107.73210000000108
+      },
+      "off": {
+        "commandMs": 2100.974699999999,
+        "verifiedMs": 2466.1539999999986,
+        "verificationMs": 365.1792999999998
+      },
+      "reactivate": {
+        "commandMs": 1607.0604999999996,
+        "verifiedMs": 1783.0763000000006,
+        "verificationMs": 176.01580000000104
+      },
+      "verified": true
+    },
+    {
+      "count": 10,
+      "layout": "distributed",
+      "fixtureMs": 1166.3965000000026,
+      "applicationAndCompanionSetupMs": 7399.769800000002,
+      "createAndIndexMs": 2641.825499999999,
+      "emptyActivationMs": 3802.7451,
+      "sourceFileGenerationMs": 13.535100000000966,
+      "addMs": 5201.474199999997,
+      "commitMs": 3595.714,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 2987.4242000000013,
+        "verifiedMs": 3204.5244999999995,
+        "verificationMs": 217.10029999999824
+      },
+      "files": 10,
+      "bytes": 2560,
+      "directories": 10,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 2,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 2664.3799999999974,
+        "verifiedMs": 2830.4179000000004,
+        "verificationMs": 166.037900000003
+      },
+      "off": {
+        "commandMs": 1625.7334999999948,
+        "verifiedMs": 1972.7297999999937,
+        "verificationMs": 346.9962999999989
+      },
+      "reactivate": {
+        "commandMs": 3403.7100999999966,
+        "verifiedMs": 3639.7811999999976,
+        "verificationMs": 236.07110000000102
+      },
+      "verified": true
+    },
+    {
+      "count": 10,
+      "layout": "distributed",
+      "fixtureMs": 1526.7792999999947,
+      "applicationAndCompanionSetupMs": 7450.037899999996,
+      "createAndIndexMs": 1990.1129000000074,
+      "emptyActivationMs": 2677.174100000004,
+      "sourceFileGenerationMs": 13.600300000005518,
+      "addMs": 6340.641999999993,
+      "commitMs": 5674.564599999998,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 1550.6293000000005,
+        "verifiedMs": 1783.2188000000024,
+        "verificationMs": 232.58950000000186
+      },
+      "files": 10,
+      "bytes": 2560,
+      "directories": 10,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 3,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 2020.790599999993,
+        "verifiedMs": 2175.508099999992,
+        "verificationMs": 154.71749999999884
+      },
+      "off": {
+        "commandMs": 1130.5269999999873,
+        "verifiedMs": 1228.5747999999876,
+        "verificationMs": 98.04780000000028
+      },
+      "reactivate": {
+        "commandMs": 2201.9168999999965,
+        "verifiedMs": 2504.761599999998,
+        "verificationMs": 302.84470000000147
+      },
+      "verified": true
+    },
+    {
+      "count": 100,
+      "layout": "distributed",
+      "fixtureMs": 2976.807400000005,
+      "applicationAndCompanionSetupMs": 15486.263000000006,
+      "createAndIndexMs": 1047.7312000000093,
+      "emptyActivationMs": 1248.1436000000103,
+      "sourceFileGenerationMs": 259.84169999998994,
+      "addMs": 3012.2728999999963,
+      "commitMs": 2174.4852999999857,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 966.8471000000136,
+        "verifiedMs": 1202.3961000000127,
+        "verificationMs": 235.54899999999907
+      },
+      "files": 100,
+      "bytes": 25600,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 1,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 1875.261999999988,
+        "verifiedMs": 2573.7554999999993,
+        "verificationMs": 698.4935000000114
+      },
+      "off": {
+        "commandMs": 2006.3013999999966,
+        "verifiedMs": 2344.1172999999835,
+        "verificationMs": 337.81589999998687
+      },
+      "reactivate": {
+        "commandMs": 2069.1472999999824,
+        "verifiedMs": 2742.5764999999956,
+        "verificationMs": 673.4292000000132
+      },
+      "verified": true
+    },
+    {
+      "count": 100,
+      "layout": "distributed",
+      "fixtureMs": 1812.7517999999982,
+      "applicationAndCompanionSetupMs": 13342.047900000005,
+      "createAndIndexMs": 2978.962900000013,
+      "emptyActivationMs": 4695.55349999998,
+      "sourceFileGenerationMs": 398.05509999999776,
+      "addMs": 7935.873099999997,
+      "commitMs": 5310.641600000003,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 1714.1905999999726,
+        "verifiedMs": 1996.4077999999863,
+        "verificationMs": 282.2172000000137
+      },
+      "files": 100,
+      "bytes": 25600,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 2,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 2101.140400000004,
+        "verifiedMs": 2401.4787999999826,
+        "verificationMs": 300.3383999999787
+      },
+      "off": {
+        "commandMs": 1220.4300000000221,
+        "verifiedMs": 1447.2922000000253,
+        "verificationMs": 226.8622000000032
+      },
+      "reactivate": {
+        "commandMs": 2093.1958999999915,
+        "verifiedMs": 2777.2711999999883,
+        "verificationMs": 684.0752999999968
+      },
+      "verified": true
+    },
+    {
+      "count": 100,
+      "layout": "distributed",
+      "fixtureMs": 1400.6517000000167,
+      "applicationAndCompanionSetupMs": 11031.10010000001,
+      "createAndIndexMs": 1899.4526999999944,
+      "emptyActivationMs": 2622.6486999999906,
+      "sourceFileGenerationMs": 427.61780000000726,
+      "addMs": 5591.159299999999,
+      "commitMs": 2992.2026999999944,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 1299.1543000000238,
+        "verifiedMs": 2018.3891000000003,
+        "verificationMs": 719.2347999999765
+      },
+      "files": 100,
+      "bytes": 25600,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 3,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 2786.006699999998,
+        "verifiedMs": 3455.1981000000087,
+        "verificationMs": 669.1914000000106
+      },
+      "off": {
+        "commandMs": 1457.0099000000046,
+        "verifiedMs": 1675.2497999999905,
+        "verificationMs": 218.23989999998594
+      },
+      "reactivate": {
+        "commandMs": 2066.73510000002,
+        "verifiedMs": 2366.545000000013,
+        "verificationMs": 299.8098999999929
+      },
+      "verified": true
+    },
+    {
+      "count": 1000,
+      "layout": "distributed",
+      "fixtureMs": 1588.117900000012,
+      "applicationAndCompanionSetupMs": 14229.930800000002,
+      "createAndIndexMs": 3156.3893999999855,
+      "emptyActivationMs": 2702.7527999999875,
+      "sourceFileGenerationMs": 4397.953100000013,
+      "addMs": 7639.906199999998,
+      "commitMs": 2777.353199999983,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 1207.1939999999886,
+        "verifiedMs": 2008.4105999999738,
+        "verificationMs": 801.2165999999852
+      },
+      "files": 1000,
+      "bytes": 256000,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 1,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 3528.357000000018,
+        "verifiedMs": 4984.903799999971,
+        "verificationMs": 1456.5467999999528
+      },
+      "off": {
+        "commandMs": 2366.4868000000133,
+        "verifiedMs": 3466.7666000000318,
+        "verificationMs": 1100.2798000000184
+      },
+      "reactivate": {
+        "commandMs": 4288.049400000018,
+        "verifiedMs": 6612.744400000025,
+        "verificationMs": 2324.695000000007
+      },
+      "verified": true
+    },
+    {
+      "count": 1000,
+      "layout": "distributed",
+      "fixtureMs": 1786.3678000000073,
+      "applicationAndCompanionSetupMs": 14018.778500000015,
+      "createAndIndexMs": 3204.9358000000357,
+      "emptyActivationMs": 1917.7527000000118,
+      "sourceFileGenerationMs": 2612.71259999997,
+      "addMs": 8029.00469999999,
+      "commitMs": 6270.817099999986,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 3890.1461000000127,
+        "verifiedMs": 5541.601200000034,
+        "verificationMs": 1651.455100000021
+      },
+      "files": 1000,
+      "bytes": 256000,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 2,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 3480.989899999986,
+        "verifiedMs": 4930.905399999989,
+        "verificationMs": 1449.9155000000028
+      },
+      "off": {
+        "commandMs": 1622.087899999984,
+        "verifiedMs": 1988.9358000000357,
+        "verificationMs": 366.8479000000516
+      },
+      "reactivate": {
+        "commandMs": 2785.853400000022,
+        "verifiedMs": 4311.109400000016,
+        "verificationMs": 1525.255999999994
+      },
+      "verified": true
+    },
+    {
+      "count": 1000,
+      "layout": "distributed",
+      "fixtureMs": 2094.8273000000045,
+      "applicationAndCompanionSetupMs": 10310.22119999997,
+      "createAndIndexMs": 1423.7018999999855,
+      "emptyActivationMs": 2012.851399999985,
+      "sourceFileGenerationMs": 2407.4971999999834,
+      "addMs": 12826.728300000017,
+      "commitMs": 3258.47570000001,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 1493.512400000007,
+        "verifiedMs": 1788.8317000000388,
+        "verificationMs": 295.31930000003194
+      },
+      "files": 1000,
+      "bytes": 256000,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 3,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 3335.91320000001,
+        "verifiedMs": 4635.645900000003,
+        "verificationMs": 1299.7326999999932
+      },
+      "off": {
+        "commandMs": 1710.8905999999843,
+        "verifiedMs": 2149.35619999998,
+        "verificationMs": 438.4655999999959
+      },
+      "reactivate": {
+        "commandMs": 3880.930800000031,
+        "verifiedMs": 6750.669200000004,
+        "verificationMs": 2869.738399999973
+      },
+      "verified": true
+    },
+    {
+      "count": 10000,
+      "layout": "distributed",
+      "fixtureMs": 2871.2402,
+      "applicationAndCompanionSetupMs": 9205.315599999973,
+      "createAndIndexMs": 1331.0229999999865,
+      "emptyActivationMs": 1721.0418000000063,
+      "sourceFileGenerationMs": 28682.365899999975,
+      "addMs": 55078.34889999998,
+      "commitMs": 4796.238899999997,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 5323.070999999996,
+        "verifiedMs": 6586.816400000011,
+        "verificationMs": 1263.7454000000143
+      },
+      "files": 10000,
+      "bytes": 2560000,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 1,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 8688.716000000015,
+        "verifiedMs": 17507.785399999993,
+        "verificationMs": 8819.069399999978
+      },
+      "off": {
+        "commandMs": 3242.86599999998,
+        "verifiedMs": 4263.426399999997,
+        "verificationMs": 1020.5604000000167
+      },
+      "reactivate": {
+        "commandMs": 12016.09600000002,
+        "verifiedMs": 25142.081600000034,
+        "verificationMs": 13125.985600000015
+      },
+      "verified": true
+    },
+    {
+      "count": 10000,
+      "layout": "distributed",
+      "fixtureMs": 2773.167299999972,
+      "applicationAndCompanionSetupMs": 9136.846800000058,
+      "createAndIndexMs": 1072.359300000011,
+      "emptyActivationMs": 1269.3747999999905,
+      "sourceFileGenerationMs": 19392.12180000008,
+      "addMs": 46473.28369999991,
+      "commitMs": 3773.9372999999905,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 5810.762199999997,
+        "verifiedMs": 7372.170000000042,
+        "verificationMs": 1561.4078000000445
+      },
+      "files": 10000,
+      "bytes": 2560000,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 2,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 9307.368099999963,
+        "verifiedMs": 12043.775400000042,
+        "verificationMs": 2736.407300000079
+      },
+      "off": {
+        "commandMs": 1607.173099999898,
+        "verifiedMs": 2040.5625999999465,
+        "verificationMs": 433.38950000004843
+      },
+      "reactivate": {
+        "commandMs": 2687.6576999999816,
+        "verifiedMs": 5448.334900000016,
+        "verificationMs": 2760.6772000000346
+      },
+      "verified": true
+    },
+    {
+      "count": 10000,
+      "layout": "distributed",
+      "fixtureMs": 648.7436999999918,
+      "applicationAndCompanionSetupMs": 4345.296800000011,
+      "createAndIndexMs": 738.3877000000793,
+      "emptyActivationMs": 702.8164000000106,
+      "sourceFileGenerationMs": 8068.796800000011,
+      "addMs": 36681.41379999998,
+      "commitMs": 1629.2452000000048,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 2045.9991000000155,
+        "verifiedMs": 2505.3987000000197,
+        "verificationMs": 459.3996000000043
+      },
+      "files": 10000,
+      "bytes": 2560000,
+      "directories": 100,
+      "sharedWithMainAndAnotherLayer": true,
+      "repetition": 3,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 3271.253700000001,
+        "verifiedMs": 8112.818899999955,
+        "verificationMs": 4841.565199999954
+      },
+      "off": {
+        "commandMs": 3874.2955000000075,
+        "verifiedMs": 4445.203000000096,
+        "verificationMs": 570.9075000000885
+      },
+      "reactivate": {
+        "commandMs": 3726.321899999981,
+        "verifiedMs": 8766.104700000025,
+        "verificationMs": 5039.7828000000445
+      },
+      "verified": true
+    },
+    {
+      "count": 10000,
+      "layout": "exclusive",
+      "fixtureMs": 803.702099999995,
+      "applicationAndCompanionSetupMs": 7531.605500000063,
+      "createAndIndexMs": 1717.281399999978,
+      "emptyActivationMs": 1404.2955000000075,
+      "sourceFileGenerationMs": 8513.091999999946,
+      "addMs": 38094.84369999997,
+      "commitMs": 3523.1637000000337,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 4262.302499999991,
+        "verifiedMs": 5079.394199999981,
+        "verificationMs": 817.0916999999899
+      },
+      "files": 10000,
+      "bytes": 2560000,
+      "directories": 1,
+      "sharedWithMainAndAnotherLayer": false,
+      "repetition": 1,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 16613.692099999986,
+        "verifiedMs": 24422.97370000009,
+        "verificationMs": 7809.281600000104
+      },
+      "off": {
+        "commandMs": 4604.537599999923,
+        "verifiedMs": 5899.411399999983,
+        "verificationMs": 1294.8738000000594
+      },
+      "reactivate": {
+        "commandMs": 13060.020900000003,
+        "verifiedMs": 20632.548700000043,
+        "verificationMs": 7572.52780000004
+      },
+      "verified": true
+    },
+    {
+      "count": 10000,
+      "layout": "exclusive",
+      "fixtureMs": 2029.6524000000209,
+      "applicationAndCompanionSetupMs": 8681.929900000105,
+      "createAndIndexMs": 1641.2186999999685,
+      "emptyActivationMs": 1562.8009999999776,
+      "sourceFileGenerationMs": 27974.12599999993,
+      "addMs": 52573.79579999996,
+      "commitMs": 3359.141799999983,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 5497.979799999972,
+        "verifiedMs": 6521.733499999973,
+        "verificationMs": 1023.7537000000011
+      },
+      "files": 10000,
+      "bytes": 2560000,
+      "directories": 1,
+      "sharedWithMainAndAnotherLayer": false,
+      "repetition": 2,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 13932.782799999928,
+        "verifiedMs": 20188.41169999994,
+        "verificationMs": 6255.628900000011
+      },
+      "off": {
+        "commandMs": 4313.148599999957,
+        "verifiedMs": 5212.622699999949,
+        "verificationMs": 899.4740999999922
+      },
+      "reactivate": {
+        "commandMs": 14430.91559999995,
+        "verifiedMs": 19166.49319999991,
+        "verificationMs": 4735.5775999999605
+      },
+      "verified": true
+    },
+    {
+      "count": 10000,
+      "layout": "exclusive",
+      "fixtureMs": 1166.341599999927,
+      "applicationAndCompanionSetupMs": 5920.734400000074,
+      "createAndIndexMs": 1142.2567000000272,
+      "emptyActivationMs": 1673.0376999999862,
+      "sourceFileGenerationMs": 24682.373700000113,
+      "addMs": 47618.40150000015,
+      "commitMs": 4716.416999999899,
+      "extraMaterializationPreparationMs": 0,
+      "initialOffPreparation": {
+        "commandMs": 6614.287299999967,
+        "verifiedMs": 7889.616599999834,
+        "verificationMs": 1275.3292999998666
+      },
+      "files": 10000,
+      "bytes": 2560000,
+      "directories": 1,
+      "sharedWithMainAndAnotherLayer": false,
+      "repetition": 3,
+      "git": "git version 2.53.0.windows.2",
+      "firstOn": {
+        "commandMs": 12939.945500000147,
+        "verifiedMs": 19714.522100000177,
+        "verificationMs": 6774.576600000029
+      },
+      "off": {
+        "commandMs": 3233.282399999909,
+        "verifiedMs": 3937.464199999813,
+        "verificationMs": 704.1817999999039
+      },
+      "reactivate": {
+        "commandMs": 10407.63739999989,
+        "verifiedMs": 17488.74769999995,
+        "verificationMs": 7081.1103000000585
+      },
+      "verified": true
+    }
+  ]
+}

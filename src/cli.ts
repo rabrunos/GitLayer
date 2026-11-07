@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { GitLayer } from './core.mjs';
+import { GitLayer, type LayerName } from './core.ts';
 import { createInterface } from 'node:readline/promises';
 
 const help = `GitLayer — laboratório experimental para repositórios descartáveis
@@ -13,28 +13,39 @@ const help = `GitLayer — laboratório experimental para repositórios descart�
   git layer --cwd <diretório> <comando>
 `;
 
-async function main() {
+function requireName(name: string | undefined): LayerName {
+  if (!name) throw new Error('Informe o nome da Layer.');
+  return name;
+}
+
+async function main(): Promise<void> {
   const args = process.argv.slice(2);
   let cwd = process.cwd();
-  if (args[0] === '--cwd') { args.shift(); cwd = args.shift(); if (!cwd) throw new Error('Falta diretório para --cwd.'); }
+  if (args[0] === '--cwd') {
+    args.shift();
+    const directory = args.shift();
+    if (!directory) throw new Error('Falta diretório para --cwd.');
+    cwd = directory;
+  }
   const command = args.shift();
   if (!command || ['help', '--help', '-h'].includes(command)) { console.log(help); return; }
   const core = new GitLayer(cwd);
   const name = args.shift();
   switch (command) {
     case 'create': console.log(`${name}: ${core.create(name)}`); break;
-    case 'on': core.on(name); console.log(`${name}: ativa`); break;
-    case 'off': await core.off(name); console.log(`${name}: inativa`); break;
+    case 'on': core.on(requireName(name)); console.log(`${name}: ativa`); break;
+    case 'off': await core.off(requireName(name)); console.log(`${name}: inativa`); break;
     case 'add': {
       if (args[0] === '--') args.shift();
-      const result = core.add(name, args.length ? args : ['.']);
+      const result = core.add(requireName(name), args.length ? args : ['.']);
       console.log(`${name}: ${result.updated} próprios atualizados, ${result.added} novos preparados`);
       break;
     }
     case 'commit': {
       if (name) {
-        if (args[0] !== '-m' || args.length !== 2) throw new Error('Uso: git layer commit <nome> -m <mensagem>');
-        console.log(`${name}: ${core.commit(name, args[1])}`);
+        const message = args[1];
+        if (args[0] !== '-m' || args.length !== 2 || message === undefined) throw new Error('Uso: git layer commit <nome> -m <mensagem>');
+        console.log(`${name}: ${core.commit(name, message)}`);
         break;
       }
       const pending = core.status().layers.filter(layer => layer.staged.length);
@@ -69,8 +80,8 @@ async function main() {
       }
       break;
     }
-    case 'log': process.stdout.write(core.log(name, args)); break;
+    case 'log': process.stdout.write(core.log(requireName(name), args)); break;
     default: throw new Error(`Comando desconhecido: ${command}\n${help}`);
   }
 }
-main().catch(error => { console.error(`git-layer: ${error.message}`); process.exitCode = 1; });
+main().catch((error: unknown) => { console.error(`git-layer: ${error instanceof Error ? error.message : String(error)}`); process.exitCode = 1; });

@@ -1,6 +1,6 @@
 # Arquitetura mínima
 
-JavaScript ESM com APIs nativas do Node.js e subprocessos Git por argv, sem shell e sem dependências npm. O coordenador não implementa objetos, formato de índice ou histórico. O estado versionado pertence ao Git.
+TypeScript ESM estrito, executado diretamente pelo Node.js, com APIs nativas e subprocessos Git por argv, sem shell e sem dependências externas de runtime. `tsc --noEmit` verifica a base; não há build obrigatório. O coordenador não implementa objetos, formato de índice ou histórico. O estado versionado pertence ao Git.
 
 ## Estado
 
@@ -10,6 +10,8 @@ JavaScript ESM com APIs nativas do Node.js e subprocessos Git por argv, sem shel
 - `.git/info/exclude`: bloco local gerenciado de caminhos exatos das Layers, preservando as demais regras locais.
 
 O coordenador descobre os caminhos do repositório pelo Git. Não mantém cache persistente de conteúdo nem cópia paralela dos arquivos versionados. O HEAD e o índice principal pertencem à branch convencional durante todos os comandos de Layers.
+
+O Core e a CLI estão em `src/core.ts` e `src/cli.ts`. Tipos de resultados Git, ativação, staging e status ficam junto ao Core; não há uma camada de abstração adicional. Imports relativos usam `.ts`, e imports somente de tipos usam `type`. A [migração tecnológica](TYPESCRIPT.md) documenta configuração, dependências e limites da execução nativa.
 
 ## Comandos nativos
 

@@ -5,13 +5,22 @@
   "description": "Coordenador experimental mínimo de branches e índices Git",
   "license": "UNLICENSED",
   "type": "module",
-  "bin": { "git-layer": "src/cli.mjs" },
-  "engines": { "node": ">=22" },
+  "bin": {
+    "git-layer": "src/cli.ts"
+  },
+  "engines": {
+    "node": "^22.18.0 || >=23.6.0"
+  },
   "scripts": {
-    "check": "node scripts/check.mjs",
-    "test": "node --test --test-concurrency=1 tests/lab.test.mjs",
-    "benchmark": "node scripts/benchmark.mjs",
-    "benchmark:alternatives": "node scripts/compare-materialization.mjs",
-    "benchmark:parallel": "node scripts/compare-parallel.mjs"
+    "check": "tsc --noEmit",
+    "test": "node --test --test-concurrency=1 tests/lab.test.ts",
+    "benchmark": "node scripts/benchmark.ts",
+    "benchmark:alternatives": "node scripts/compare-materialization.ts",
+    "benchmark:parallel": "node scripts/compare-parallel.ts",
+    "benchmark:startup": "node scripts/compare-startup.ts"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "typescript": "7.0.2"
   }
 }

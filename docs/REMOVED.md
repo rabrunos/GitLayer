@@ -1,5 +1,7 @@
 # O que foi removido
 
+A migração tecnológica posterior desta mesma data substituiu os sete fontes JavaScript ativos por TypeScript e retirou `scripts/check.mjs`, substituído por `tsc --noEmit`. Não se recuperou código da arquitetura antiga. O [inventário da migração](TYPESCRIPT.md) distingue essa troca de linguagem das remoções históricas descritas abaixo.
+
 A reconstrução parte de `25a4ee5d4a810d458872a9f6e3cf0c8c0feb956e`, com 731 arquivos rastreados no inventário inicial. A revisão anterior continua no histórico Git. A reconstrução foi iniciada em `experimental/minimal-core`; o adendo da missão autoriza integrá-la normalmente à main e publicar sem força após a validação final. O histórico não é reescrito e dispensa preservar arquivos mortos na nova base.
 
 Foram retirados desta base os componentes versionados da arquitetura anterior:

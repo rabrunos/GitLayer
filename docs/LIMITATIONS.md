@@ -13,5 +13,6 @@ Este laboratório serve somente para repositórios descartáveis. A simplificaç
 - Os caminhos do add são arquivos e diretórios literais; glob e magic pathspec não são suportados. O ponto `.` mantém o escopo do diretório atual e descendentes.
 - Índices e refs alterados externamente não são sincronizados. Não se deve editá-los fora do coordenador nem selecionar uma branch `layer/*` como HEAD enquanto o laboratório as coordena.
 - Não há garantia de desempenho universal. Arquivos maiores, antivírus, quantidade de diretórios e estado do filesystem afetam os tempos. Cinco segundos para 10.000 arquivos é uma meta, comprovável somente pelas amostras publicadas.
+- A execução nativa aceita somente sintaxe TypeScript removível e não lê `tsconfig.json`. A checagem de tipos é separada (`npm.cmd run check`). O checkout deve ficar fora de `node_modules`, onde o Node recusa remover tipos. Não há distribuição npm certificada. Veja a [migração](TYPESCRIPT.md).
 
-O alvo desta rodada é Windows x64 com Git oficial e Node.js 22 ou posterior. As versões efetivamente executadas e o alcance dos testes pertencem aos [resultados](STATUS.md), sem inferir suporte a plataformas não testadas. Dados locais antigos, ignorados ou pessoais não são migrados nem removidos.
+O alvo desta rodada é Windows x64 com Git oficial e Node.js 22.18+ ou 24+; a série 23 exige 23.6+. As versões efetivamente executadas e o alcance dos testes pertencem aos [resultados](STATUS.md), sem inferir suporte a plataformas não testadas. Dados locais antigos, ignorados ou pessoais não são migrados nem removidos.

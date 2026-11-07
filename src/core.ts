@@ -1,13 +1,38 @@
-import { spawnSync } from 'node:child_process';
+import { spawnSync, type SpawnSyncReturns } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 
+export type LayerName = string;
+export type LayerRef = `refs/heads/layer/${LayerName}`;
+export type RepositoryPath = string;
+export type GitIndexPath = string;
+export type GitObjectId = string;
+export type GitResult = SpawnSyncReturns<string>;
+
+export interface GitOptions {
+  cwd?: string | undefined;
+  index?: GitIndexPath | undefined;
+  input?: string | undefined;
+  allowFailure?: boolean | undefined;
+}
+
+export interface ActivationState { active: LayerName[] }
+export interface AddResult { updated: number; added: number }
+export interface FileChange { status: string; path: RepositoryPath }
+export interface LayerStatus {
+  name: LayerName;
+  active: boolean;
+  staged: FileChange[];
+  modified: FileChange[];
+}
+export interface GitLayerStatus { layers: LayerStatus[] }
+
 const gitExe = process.env.GIT_LAYER_GIT || 'git';
-const split = text => text.split('\0').filter(Boolean);
+const split = (text: string): string[] => text.split('\0').filter(Boolean);
 const begin = '# >>> git-layer-lab';
 const end = '# <<< git-layer-lab';
 
-export function runGit(args, { cwd, index, input, allowFailure = false } = {}) {
+export function runGit(args: readonly string[], { cwd, index, input, allowFailure = false }: GitOptions = {}): GitResult {
   const env = { ...process.env };
   delete env.GIT_INDEX_FILE;
   if (index) env.GIT_INDEX_FILE = index;
@@ -23,24 +48,35 @@ export function runGit(args, { cwd, index, input, allowFailure = false } = {}) {
 }
 
 export class GitLayer {
+  declare cwd: string;
+  declare root: string;
+  declare gitDir: string;
+  declare store: string;
+  declare stateFile: string;
+  declare state: ActivationState;
+
   constructor(cwd = process.cwd()) {
     this.cwd = path.resolve(cwd);
     const roots = runGit(['rev-parse', '--show-toplevel', '--absolute-git-dir'], { cwd: this.cwd }).stdout.trim().split(/\r?\n/);
-    [this.root, this.gitDir] = roots;
+    const [root, gitDir] = roots;
+    if (root === undefined || gitDir === undefined) throw new Error('Git não informou os diretórios do repositório.');
+    this.root = root;
+    this.gitDir = gitDir;
     this.store = path.join(this.gitDir, 'git-layer-lab');
     this.stateFile = path.join(this.store, 'state.json');
+    // This local document is produced by save(); external state edits are outside the lab contract.
     this.state = fs.existsSync(this.stateFile)
-      ? JSON.parse(fs.readFileSync(this.stateFile, 'utf8')) : { active: [] };
+      ? JSON.parse(fs.readFileSync(this.stateFile, 'utf8')) as ActivationState : { active: [] };
   }
 
-  git(args, options = {}) { return runGit(args, { cwd: this.root, ...options }); }
-  ref(name) { return `refs/heads/layer/${name}`; }
-  names() {
+  git(args: readonly string[], options: GitOptions = {}): GitResult { return runGit(args, { cwd: this.root, ...options }); }
+  ref(name: LayerName): LayerRef { return `refs/heads/layer/${name}`; }
+  names(): LayerName[] {
     return this.git(['for-each-ref', '--format=%(refname:strip=3)', 'refs/heads/layer/']).stdout.trim().split(/\r?\n/).filter(Boolean);
   }
-  tip(name) { return this.git(['rev-parse', '--verify', this.ref(name)]).stdout.trim(); }
-  indexPath(name) { return path.join(this.store, 'indexes', Buffer.from(name).toString('base64url')); }
-  index(name) {
+  tip(name: LayerName): GitObjectId { return this.git(['rev-parse', '--verify', this.ref(name)]).stdout.trim(); }
+  indexPath(name: LayerName): GitIndexPath { return path.join(this.store, 'indexes', Buffer.from(name).toString('base64url')); }
+  index(name: LayerName): GitIndexPath {
     const index = this.indexPath(name);
     if (!fs.existsSync(index)) {
       fs.mkdirSync(path.dirname(index), { recursive: true });
@@ -48,16 +84,16 @@ export class GitLayer {
     }
     return index;
   }
-  save() {
+  save(): void {
     fs.mkdirSync(this.store, { recursive: true });
     fs.writeFileSync(this.stateFile, JSON.stringify(this.state) + '\n');
   }
-  active(name) { return this.state.active.includes(name); }
-  requireActive(name) {
+  active(name: LayerName): boolean { return this.state.active.includes(name); }
+  requireActive(name: LayerName): void {
     this.tip(name);
     if (!this.active(name)) throw new Error(`Layer ${name} está inativa; execute on ${name}.`);
   }
-  treeFiles(ref) {
+  treeFiles(ref: string): RepositoryPath[] {
     const result = this.git(['ls-tree', '-r', '--name-only', '-z', ref], { allowFailure: true });
     if (result.status !== 0) {
       // An unborn conventional branch has no tree yet.
@@ -66,12 +102,12 @@ export class GitLayer {
     }
     return split(result.stdout);
   }
-  indexFiles(index) { return split(this.git(['ls-files', '--cached', '-z'], { index }).stdout); }
-  owned(name) {
+  indexFiles(index?: GitIndexPath): RepositoryPath[] { return split(this.git(['ls-files', '--cached', '-z'], { index }).stdout); }
+  owned(name: LayerName): Set<RepositoryPath> {
     return new Set([...this.treeFiles(this.ref(name)), ...this.indexFiles(this.index(name))]);
   }
-  syncExclude() {
-    const owned = new Set();
+  syncExclude(): void {
+    const owned = new Set<RepositoryPath>();
     for (const name of this.names()) for (const file of this.owned(name)) owned.add(file);
     const exclude = this.git(['rev-parse', '--git-path', 'info/exclude']).stdout.trim();
     const file = path.resolve(this.root, exclude);
@@ -89,7 +125,7 @@ export class GitLayer {
     if (old !== next) fs.writeFileSync(file, next);
   }
 
-  create(name) {
+  create(name: LayerName | undefined): GitObjectId {
     if (!name) throw new Error('Informe o nome da Layer.');
     this.git(['check-ref-format', this.ref(name)]);
     const exists = this.git(['show-ref', '--verify', '--quiet', this.ref(name)], { allowFailure: true });
@@ -102,7 +138,7 @@ export class GitLayer {
     return oid;
   }
 
-  on(name) {
+  on(name: LayerName): void {
     this.tip(name);
     if (this.active(name)) return;
     this.syncExclude();
@@ -111,13 +147,13 @@ export class GitLayer {
     this.save();
   }
 
-  async off(name) {
+  async off(name: LayerName): Promise<void> {
     this.tip(name);
     if (!this.active(name)) return;
     const index = this.index(name);
     const staged = this.git(['diff', '--cached', '--quiet', this.ref(name)], { index, allowFailure: true });
     const modified = this.git(['diff', '--quiet'], { index, allowFailure: true });
-    if (staged.status > 1 || modified.status > 1) throw new Error((staged.stderr + modified.stderr).trim());
+    if ((staged.status !== null && staged.status > 1) || (modified.status !== null && modified.status > 1)) throw new Error((staged.stderr + modified.stderr).trim());
     if (staged.status !== 0 || modified.status !== 0) throw new Error(`Layer ${name} tem alterações; prepare e faça commit antes de off.`);
     const files = this.indexFiles(index);
     for (let i = 0; i < files.length; i += 64) {
@@ -127,7 +163,7 @@ export class GitLayer {
     this.save();
   }
 
-  add(name, paths = ['.']) {
+  add(name: LayerName, paths: readonly RepositoryPath[] = ['.']): AddResult {
     this.requireActive(name);
     const scopes = paths.map(p => {
       const absolute = path.resolve(this.cwd, p);
@@ -135,7 +171,7 @@ export class GitLayer {
       if (relative === '..' || relative.startsWith('../') || path.isAbsolute(relative)) throw new Error(`Caminho fora do repositório: ${p}`);
       return relative;
     });
-    const selected = file => scopes.some(p => !p || p === file || file.startsWith(p + '/'));
+    const selected = (file: RepositoryPath): boolean => scopes.some(p => !p || p === file || file.startsWith(p + '/'));
     const index = this.index(name);
     const indexed = new Set(this.indexFiles(index));
     const own = new Set([...this.treeFiles(this.ref(name)), ...indexed]);
@@ -144,7 +180,7 @@ export class GitLayer {
     const tracked = [...own].filter(p => selected(p) && (indexed.has(p) || fs.existsSync(path.join(this.root, p))));
     const free = split(this.git(['ls-files', '--others', '--exclude-standard', '--full-name', '-z', '--', ...paths], { cwd: this.cwd }).stdout)
       .filter(p => !reserved.has(p) && !own.has(p));
-    const stage = (files, force) => {
+    const stage = (files: readonly RepositoryPath[], force: boolean): void => {
       if (files.length) this.git(['add', '-A', ...(force ? ['-f'] : []), '--pathspec-from-file=-', '--pathspec-file-nul'], {
         index, input: files.join('\0') + '\0',
       });
@@ -155,7 +191,7 @@ export class GitLayer {
     return { updated: tracked.length, added: free.length };
   }
 
-  commit(name, message) {
+  commit(name: LayerName, message: string): GitObjectId {
     if (!message?.trim()) throw new Error('A mensagem de commit não pode ser vazia.');
     const parent = this.tip(name);
     const index = this.index(name);
@@ -168,15 +204,20 @@ export class GitLayer {
     return oid;
   }
 
-  changes(name, staged) {
+  changes(name: LayerName, staged: boolean): FileChange[] {
     const args = ['diff', ...(staged ? ['--cached', this.ref(name)] : []), '--name-status', '--no-renames', '-z'];
     const fields = split(this.git(args, { index: this.index(name) }).stdout);
-    const changes = [];
-    for (let i = 0; i < fields.length; i += 2) changes.push({ status: fields[i], path: fields[i + 1] });
+    const changes: FileChange[] = [];
+    for (let i = 0; i < fields.length; i += 2) {
+      const status = fields[i];
+      const file = fields[i + 1];
+      if (status === undefined || file === undefined) throw new Error('Resposta incompleta de git diff --name-status -z.');
+      changes.push({ status, path: file });
+    }
     return changes;
   }
-  status() {
+  status(): GitLayerStatus {
     return { layers: this.names().map(name => ({ name, active: this.active(name), staged: this.changes(name, true), modified: this.active(name) ? this.changes(name, false) : [] })) };
   }
-  log(name, args = []) { this.tip(name); return this.git(['--no-pager', 'log', this.ref(name), ...args]).stdout; }
+  log(name: LayerName, args: readonly string[] = []): string { this.tip(name); return this.git(['--no-pager', 'log', this.ref(name), ...args]).stdout; }
 }

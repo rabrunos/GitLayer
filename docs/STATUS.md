@@ -1,19 +1,22 @@
-# Estado do laboratório
+# Estado do laboratório — TypeScript
 
-A reconstrução de 07/11/2026 substituiu a implementação anterior por um Core e uma CLI em JavaScript, sem dependências npm ou build obrigatório. Layers são branches reais `layer/*`, com índices nativos e commits independentes; HEAD e índice convencionais permanecem selecionados. Não há modo de edição, desktop, engine transacional ou migração.
+A base experimental iniciada em 07/11/2026 foi migrada integralmente de JavaScript para TypeScript ESM estrito. O ponto de partida foi `b4051c01ed09a42705439f18d6ca6c4a1f3f849b`, sem alterações locais rastreadas. A migração conserva a arquitetura funcional: Layers são branches reais `layer/*`, com índices nativos e commits independentes; HEAD e índice convencionais permanecem selecionados.
 
-A [validação da cópia nova](TESTS.md) concluiu **14/14 PASS**, zero falhas ou skips, com instalação pelo lockfile, sintaxe e status limpo. O commit interativo foi verificado em terminal real, inclusive cancelamento sem perder staging.
+A extração continua usando `checkout-index` em lote com oito workers nativos do Git. A remoção continua assíncrona em lotes de 64 arquivos, somente para Layers limpas. Seleção de origem no add, exclusão local, staging, commit interativo e cancelamento conservam os fluxos anteriores. Não há cache próprio, modo de edição, desktop, journaling ou engine de recuperação.
 
-A [campanha final](BENCHMARKS.md) concluiu **15/15 amostras verificadas**. Para 10.000 arquivos de 256 bytes em 100 diretórios compartilhados, as medianas de ativação/desativação/reativação foram **2,591/1,622/2,425 s** nos comandos completos e **4,488/2,072/4,210 s** incluindo a conferência externa. Na pasta exclusiva, ativação/reativação com conferência tiveram medianas **5,278/5,284 s**. A meta de cinco segundos não foi atingida em todos os cenários. O add inicial de 10.000 arquivos ainda levou cerca de 33,5–33,7 s.
+Oito arquivos `.mjs` foram retirados: sete foram migrados para `.ts`, e o checker de sintaxe foi substituído por `tsc --noEmit`. A medição adicional de inicialização também está em TypeScript. Há uma única base de implementação, sem JavaScript gerado ou mantido em paralelo. TypeScript `7.0.2` e `@types/node` `22.20.5` são dependências de desenvolvimento; a CLI tem zero dependências externas de runtime e não exige build.
 
-A extração usa oito workers nativos do Git; a remoção usa operações assíncronas em lotes de 64. Não há cache próprio de materialização. Fontes, resultados brutos e custos iniciais estão versionados, sem depender de arquivos privados. Consulte [README](../README.md), [arquitetura](ARCHITECTURE.md), [limitações](LIMITATIONS.md) e [remoções](REMOVED.md).
+Use Node 22.18+ ou 24+ (a série 23 exige 23.6+) e o checkout fora de `node_modules`. Os launchers mantêm `git layer` no Windows e no shell. A [migração](TYPESCRIPT.md) descreve os tipos, a configuração estrita e os limites da execução nativa.
 
-A base partiu de `25a4ee5d4a810d458872a9f6e3cf0c8c0feb956e`, preservado no histórico, e foi iniciada em `experimental/minimal-core`. O adendo autorizou a integração normal e publicação na main sem força. Perfis, demonstrações e conteúdo local desconhecido foram preservados; os antigos builds e dependências identificados foram removidos. Os resultados acima pertencem exclusivamente à reconstrução atual.
+As evidências de cada campanha são identificadas separadamente em [testes](TESTS.md) e [benchmarks](BENCHMARKS.md). Os JSONs JavaScript anteriores foram preservados. As medições incluem todos os arquivos, o observador independente, HEAD e índice convencional; não se afirma desempenho a frio ou garantia universal de cinco segundos.
 
 ```powershell
+npm.cmd ci --ignore-scripts --no-audit --no-fund
 npm.cmd run check
 npm.cmd test
 npm.cmd run benchmark
+npm.cmd run benchmark:alternatives
+npm.cmd run benchmark:parallel
 ```
 
-Use somente repositórios descartáveis. As execuções são locais, no ambiente Windows documentado; não se atribuem resultados a CI remoto ou às campanhas históricas.
+Use somente repositórios descartáveis. Perfis, demonstrações e conteúdo local ignorado ou desconhecido foram preservados. Nenhuma configuração global do Git, instalação do Git ou PATH permanente foi alterado. O histórico continua linear e sem publicação forçada.

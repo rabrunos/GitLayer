@@ -3,14 +3,41 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { performance } from 'node:perf_hooks';
-import { prepare, elapsed, environment, inBatches } from './benchmark.mjs';
-import { projectRoot, gitExe } from '../tests/helpers.mjs';
+import { prepare, elapsed, environment, inBatches, type BenchmarkSample, type Timing } from './benchmark.ts';
+import { projectRoot, gitExe } from '../tests/helpers.ts';
 
-async function main() {
+type RemovalMode = 'sync' | 'async';
+type Phase = 'probe' | 'confirmation';
+interface ParallelSample {
+  phase: Phase;
+  repetition: number;
+  workers: number;
+  removalMode: RemovalMode;
+  checkout: Timing;
+  removal: Timing;
+  verified: boolean;
+}
+interface ParallelReport {
+  schema: number;
+  environment: ReturnType<typeof environment>;
+  count: number;
+  layout: 'distributed';
+  samples: ParallelSample[];
+  method: Record<string, string>;
+  preparation?: BenchmarkSample;
+  git?: string;
+  readTreeIndexMs?: number;
+  selectedWorker?: number;
+  completed?: boolean;
+  failed?: string;
+  retainedFixture?: string;
+}
+
+async function main(): Promise<void> {
   const count = Number(process.env.GIT_LAYER_COMPARE_COUNT || 10000);
   assert.ok(Number.isInteger(count) && count > 0);
-  const output = path.resolve(process.argv[2] || path.join(projectRoot, 'docs', 'parallel-comparison.json'));
-  const report = {
+  const output = path.resolve(process.argv[2] || path.join(projectRoot, 'docs', 'parallel-comparison-typescript.json'));
+  const report: ParallelReport = {
     schema: 1, environment: environment(), count, layout: 'distributed', samples: [],
     method: {
       primary: 'verifiedMs: complete command followed by verification of all file contents/absences, other origins, HEAD and conventional-index bytes.',
@@ -32,7 +59,7 @@ async function main() {
   try {
     const index = path.join(f.root, '.git', 'parallel-comparison-index');
     const env = { ...f.env, GIT_INDEX_FILE: index };
-    const git = args => {
+    const git = (args: string[]): void => {
       const result = spawnSync(gitExe, args, { cwd: f.root, env, encoding: 'utf8', windowsHide: true, maxBuffer: 64 * 1024 * 1024 });
       if (result.error) throw result.error;
       assert.equal(result.status, 0, `git ${args.join(' ')}: ${result.stderr}`);
@@ -40,7 +67,7 @@ async function main() {
     report.readTreeIndexMs = elapsed(() => git(['read-tree', 'layer/scripts'])).ms;
     checkpoint();
     console.log(JSON.stringify({ phase: 'prepared', preparation }));
-    const measure = async (action, present) => {
+    const measure = async (action: () => void | Promise<void>, present: boolean): Promise<Timing> => {
       const start = performance.now();
       await action();
       const completed = performance.now();
@@ -48,7 +75,7 @@ async function main() {
       const verified = performance.now();
       return { commandMs: completed - start, verifiedMs: verified - start, verificationMs: verified - completed };
     };
-    const execute = async (workers, phase, repetition, removalMode) => {
+    const execute = async (workers: number, phase: Phase, repetition: number, removalMode: RemovalMode): Promise<void> => {
       console.log(JSON.stringify({ phase, repetition, workers, removalMode, state: 'starting' }));
       const checkout = await measure(() => git(['-c', `checkout.workers=${workers}`, '-c', 'checkout.thresholdForParallelism=0', 'checkout-index', '--all', '--force', '--index']), true);
       const removal = await measure(async () => {
@@ -63,7 +90,9 @@ async function main() {
     await execute(1, 'probe', 1, 'sync');
     await execute(4, 'probe', 1, 'async');
     await execute(8, 'probe', 1, 'sync');
-    report.selectedWorker = [...report.samples].sort((a, b) => a.checkout.commandMs - b.checkout.commandMs)[0].workers;
+    const best = [...report.samples].sort((a, b) => a.checkout.commandMs - b.checkout.commandMs)[0];
+    assert.ok(best);
+    report.selectedWorker = best.workers;
     checkpoint();
     for (let repetition = 1; repetition <= 3; repetition++) {
       await execute(report.selectedWorker, 'confirmation', repetition, repetition === 2 ? 'sync' : 'async');
@@ -72,7 +101,7 @@ async function main() {
     checkpoint();
     f.cleanup();
   } catch (error) {
-    report.failed = error.message;
+    report.failed = error instanceof Error ? error.message : String(error);
     report.retainedFixture = path.basename(path.dirname(f.root));
     checkpoint();
     throw error;
@@ -80,4 +109,4 @@ async function main() {
   console.log(`Raw parallel samples: ${output}`);
 }
 
-main().catch(error => { console.error(error); process.exitCode = 1; });
+main().catch((error: unknown) => { console.error(error); process.exitCode = 1; });

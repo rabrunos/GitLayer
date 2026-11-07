@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, delimiter, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,8 +9,38 @@ import { fileURLToPath } from 'node:url';
 export const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const gitExe = process.env.GIT_LAYER_GIT || (process.platform === 'win32' ? 'C:/Program Files/Git/cmd/git.exe' : 'git');
 
+export interface FixtureCommandOptions {
+  cwd?: string;
+  input?: string;
+  ok?: boolean;
+}
+
+export interface FixtureCommandResult {
+  status: number | null;
+  stdout: string;
+  stderr: string;
+}
+
+export interface FixtureCommand {
+  (args: string[], options: FixtureCommandOptions & { ok: false }): FixtureCommandResult;
+  (args: string[], options?: FixtureCommandOptions & { ok?: true }): string;
+}
+
+export interface Fixture {
+  root: string;
+  env: NodeJS.ProcessEnv;
+  git: FixtureCommand;
+  layer: FixtureCommand;
+  write(path: string, text: string): void;
+  read(path: string): string;
+  files(ref: string): string[];
+  head(): string;
+  mainIndex(): Buffer;
+  cleanup(): void;
+}
+
 // Every write and removal belongs to a newly created fixture; no user repository is opened.
-export function fixture() {
+export function fixture(): Fixture {
   const container = mkdtempSync(join(tmpdir(), 'GitLayer-minimal-test-'));
   const token = randomUUID();
   writeFileSync(join(container, '.fixture-owner'), token);
@@ -31,7 +61,9 @@ export function fixture() {
     GIT_TERMINAL_PROMPT: '0', GIT_PAGER: 'cat', GIT_EDITOR: 'false',
     GIT_LAYER_GIT: gitExe,
   });
-  function git(args, options = {}) {
+  function git(args: string[], options: FixtureCommandOptions & { ok: false }): FixtureCommandResult;
+  function git(args: string[], options?: FixtureCommandOptions & { ok?: true }): string;
+  function git(args: string[], options: FixtureCommandOptions = {}): string | FixtureCommandResult {
     const result = spawnSync(gitExe, args, {
       cwd: options.cwd || root, env, input: options.input,
       encoding: 'utf8', windowsHide: true, maxBuffer: 64 * 1024 * 1024,
@@ -42,14 +74,20 @@ export function fixture() {
     assert.equal(result.status, 0, `git ${args.join(' ')} failed:\n${output.stdout}\n${output.stderr}`);
     return output.stdout;
   }
-  function write(path, text) {
+  function layer(args: string[], options: FixtureCommandOptions & { ok: false }): FixtureCommandResult;
+  function layer(args: string[], options?: FixtureCommandOptions & { ok?: true }): string;
+  function layer(args: string[], options: FixtureCommandOptions = {}): string | FixtureCommandResult {
+    if (options.ok === false) return git(['layer', ...args], { ...options, ok: false });
+    return git(['layer', ...args], { ...options, ok: true });
+  }
+  function write(path: string, text: string): void {
     const target = join(root, path);
     mkdirSync(dirname(target), { recursive: true });
     writeFileSync(target, text);
   }
-  const result = {
+  const result: Fixture = {
     root, env, git,
-    layer: (args, options) => git(['layer', ...args], options),
+    layer,
     write,
     read: path => readFileSync(join(root, path), 'utf8'),
     files: ref => git(['ls-tree', '-r', '--name-only', '-z', ref]).split('\0').filter(Boolean).sort(),

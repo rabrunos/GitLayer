@@ -2,30 +2,32 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import test from 'node:test';
-import { fixture } from './helpers.mjs';
+import { fixture, type Fixture } from './helpers.ts';
+import type { FileChange, GitLayerStatus, LayerStatus } from '../src/core.ts';
 
-function inRepo(run) {
+function inRepo(run: (f: Fixture) => void): void {
   const f = fixture();
   try { run(f); }
   catch (error) { console.error(`Fixture retained for inspection: ${f.root}`); throw error; }
   f.cleanup();
 }
-function state(f, name) {
-  const layers = JSON.parse(f.layer(['status', '--json'])).layers;
+function state(f: Fixture, name: string): LayerStatus {
+  // The CLI serializes the typed Core status; functional assertions below check its contents.
+  const { layers } = JSON.parse(f.layer(['status', '--json'])) as GitLayerStatus;
   const item = layers.find(layer => layer.name === name);
   assert.ok(item, `Layer ${name} appears in status`);
   return item;
 }
-const paths = entries => entries.map(entry => entry.path).sort();
-function snapshot(f) {
+const paths = (entries: FileChange[]): string[] => entries.map(entry => entry.path).sort();
+function snapshot(f: Fixture) {
   return { head: f.head(), branch: f.git(['symbolic-ref', 'HEAD']).trim(), index: f.mainIndex() };
 }
-function unchangedMain(f, before) {
+function unchangedMain(f: Fixture, before: ReturnType<typeof snapshot>): void {
   assert.equal(f.head(), before.head);
   assert.equal(f.git(['symbolic-ref', 'HEAD']).trim(), before.branch);
   assert.deepEqual(f.mainIndex(), before.index, 'Layer commands preserve bytes of the main index');
 }
-function seed(f, name, files) {
+function seed(f: Fixture, name: string, files: Record<string, string>): void {
   f.layer(['create', name]);
   f.layer(['on', name]);
   for (const [path, text] of Object.entries(files)) f.write(path, text);
@@ -33,10 +35,10 @@ function seed(f, name, files) {
   f.layer(['commit', name, '-m', `Initial ${name} files`]);
 }
 
-// T10 is the separately reproducible scripts/benchmark.mjs, not a timing assertion here.
+// T10 is the separately reproducible scripts/benchmark.ts, not a timing assertion here.
 test('T01: three real Git branches start inactive with independent roots', () => inRepo(f => {
   const before = snapshot(f);
-  const oids = [];
+  const oids: string[] = [];
   for (const name of ['scripts', 'agents', 'tools']) {
     f.layer(['create', name]);
     const ref = `refs/heads/layer/${name}`;
@@ -140,7 +142,7 @@ test('T06: explicit files stage only selected literal paths', () => inRepo(f => 
 }));
 
 test('T07: native log/show/trees prove independent Layer ancestry and main commits', () => inRepo(f => {
-  const first = new Map();
+  const first = new Map<string, string>();
   for (const name of ['scripts', 'agents', 'tools']) {
     seed(f, name, { [`shared/${name}.txt`]: `${name} first\n` });
     first.set(name, f.git(['rev-parse', `layer/${name}`]).trim());

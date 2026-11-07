@@ -6,7 +6,7 @@ Laboratório experimental mínimo: branches Git independentes cujos arquivos pod
 
 ## Executar no Windows
 
-Requer Git oficial disponível no PATH e Node.js 22 ou posterior. Não há dependências npm nem etapa de build.
+Requer Git oficial disponível no PATH e Node.js 22.18+ ou 24+; a série 23 exige 23.6+. A CLI executa TypeScript nativamente, sem dependências externas de runtime nem etapa de build. Use o checkout fora de `node_modules`. Para desenvolver e verificar tipos, execute `npm.cmd ci --ignore-scripts --no-audit --no-fund` (TypeScript e tipos oficiais do Node são dependências de desenvolvimento).
 
 Na raiz deste checkout, disponibilize o comando somente na sessão atual:
 
@@ -68,6 +68,6 @@ npm.cmd run benchmark:alternatives
 npm.cmd run benchmark:parallel
 ```
 
-Os 14 testes da cópia nova passaram. Foram concluídas 15 amostras de benchmark: com 10.000 arquivos em diretórios compartilhados, as medianas da CLI foram 2,59 s para ativar, 1,62 s para desativar e 2,42 s para reativar. O relatório inclui conferência integral, custos iniciais e os cenários que ultrapassaram cinco segundos. Os scripts `benchmark:alternatives` e `benchmark:parallel` são comparações opcionais.
+A suíte contém 14 cenários funcionais, executados em fixtures descartáveis por `node --test`. A campanha principal mede 15 amostras, separando preparação, primeira ativação, desativação, reativação e conferência de todos os arquivos. Os scripts `benchmark:alternatives` e `benchmark:parallel` conservam os comparadores anteriores; `benchmark:startup` compara a inicialização com um checkout JavaScript informado como argumento. Os relatórios TypeScript usam arquivos separados dos JSONs JavaScript históricos.
 
-Consulte [estado e validação](docs/STATUS.md), [arquitetura](docs/ARCHITECTURE.md), [benchmarks](docs/BENCHMARKS.md) e [remoções](docs/REMOVED.md). A implementação mínima é a nova base do projeto. A implementação anterior permanece no histórico Git, sem necessidade de conservar código morto. Resultados antigos não certificam esta versão.
+Consulte [estado e validação](docs/STATUS.md), [arquitetura](docs/ARCHITECTURE.md), [benchmarks](docs/BENCHMARKS.md), [migração TypeScript](docs/TYPESCRIPT.md) e [remoções](docs/REMOVED.md). A implementação mínima é a nova base do projeto. A implementação anterior permanece no histórico Git, sem necessidade de conservar código morto. Resultados JavaScript históricos não certificam a versão TypeScript.

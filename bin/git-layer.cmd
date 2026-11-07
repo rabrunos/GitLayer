@@ -1,2 +1,2 @@
 @echo off
-node "%~dp0..\src\cli.mjs" %*
+node "%~dp0..\src\cli.ts" %*

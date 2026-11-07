@@ -1,6 +1,6 @@
 # GitLayer — instruções do laboratório mínimo
 
-A fase experimental iniciada em 07/11/2026 substitui a arquitetura anterior. O produto é um coordenador pequeno de Git oficial, escrito em JavaScript ESM, com Node.js 22 ou posterior e sem dependências npm. Leia [arquitetura](docs/ARCHITECTURE.md), [limitações](docs/LIMITATIONS.md) e [estado](docs/STATUS.md) antes de alterar o contrato ou afirmar resultados.
+A fase experimental iniciada em 07/11/2026 substitui a arquitetura anterior. O produto é um coordenador pequeno de Git oficial, escrito em TypeScript ESM estrito, com execução nativa no Node.js 22.18+ (ou 24+) e sem dependências externas de runtime. Leia [arquitetura](docs/ARCHITECTURE.md), [limitações](docs/LIMITATIONS.md) e [estado](docs/STATUS.md) antes de alterar o contrato ou afirmar resultados.
 
 ## Contrato atual
 
